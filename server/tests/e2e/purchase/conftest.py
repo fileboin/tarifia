@@ -5,8 +5,8 @@ from typing import Any
 
 from httpx import AsyncClient
 
-from polar.kit.db.postgres import AsyncSession
-from polar.models import Organization, Product
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.models import Organization, Product
 from tests.e2e.infra import DrainFn, StripeSimulator
 
 BUYER_EMAIL = "buyer@example.com"

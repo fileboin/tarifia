@@ -1,7 +1,7 @@
 'use client'
 
 import GetStartedButton from '@/components/Auth/GetStartedButton'
-import { Button } from '@polar-sh/orbit'
+import { Button } from '@tarifia-sh/orbit'
 import { motion } from 'motion/react'
 import Link from 'next/link'
 import { ComponentType, PropsWithChildren, ReactNode } from 'react'
@@ -45,7 +45,7 @@ export const FeaturePageHeader = ({
         {title}
       </motion.h1>
       <motion.p
-        className="dark:text-polar-300 max-w-2xl text-2xl text-balance text-gray-500"
+        className="dark:text-tarifia-300 max-w-2xl text-2xl text-balance text-gray-500"
         variants={itemVariants}
       >
         {description}
@@ -74,7 +74,7 @@ export const FeaturePageGraphic = ({
 }) => {
   return (
     <motion.div
-      className="dark:bg-polar-900 flex w-full items-center justify-center rounded-sm bg-gray-50 p-8 md:p-16"
+      className="dark:bg-tarifia-900 flex w-full items-center justify-center rounded-sm bg-gray-50 p-8 md:p-16"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8, delay: 0.4 }}
@@ -89,7 +89,7 @@ export const FeaturePageGraphic = ({
 export const FeaturePageIntro = ({ children }: PropsWithChildren) => {
   return (
     <motion.div
-      className="dark:text-polar-200 mx-auto max-w-3xl text-lg leading-relaxed text-gray-700 md:text-xl"
+      className="dark:text-tarifia-200 mx-auto max-w-3xl text-lg leading-relaxed text-gray-700 md:text-xl"
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -119,7 +119,7 @@ export const FeatureSection = ({
         {title}
       </motion.h2>
       <motion.div
-        className="dark:text-polar-300 flex flex-col gap-y-5 text-lg leading-relaxed text-gray-600 md:text-xl [&_strong]:font-medium [&_strong]:text-gray-900 dark:[&_strong]:text-white"
+        className="dark:text-tarifia-300 flex flex-col gap-y-5 text-lg leading-relaxed text-gray-600 md:text-xl [&_strong]:font-medium [&_strong]:text-gray-900 dark:[&_strong]:text-white"
         variants={itemVariants}
       >
         {children}
@@ -153,14 +153,14 @@ export const FeatureSplit = ({
           {title}
         </motion.h2>
         <motion.p
-          className="dark:text-polar-300 text-lg leading-relaxed text-gray-600 md:text-xl"
+          className="dark:text-tarifia-300 text-lg leading-relaxed text-gray-600 md:text-xl"
           variants={itemVariants}
         >
           {description}
         </motion.p>
       </div>
       <motion.ul
-        className="dark:divide-polar-700 flex flex-col divide-y divide-gray-200"
+        className="dark:divide-tarifia-700 flex flex-col divide-y divide-gray-200"
         variants={containerVariants}
       >
         {bullets.map((b, i) => (
@@ -172,7 +172,7 @@ export const FeatureSplit = ({
             <span className="text-lg text-gray-900 dark:text-white">
               {b.title}
             </span>
-            <span className="dark:text-polar-400 text-lg text-gray-500">
+            <span className="dark:text-tarifia-400 text-lg text-gray-500">
               {b.description}
             </span>
           </motion.li>
@@ -208,7 +208,7 @@ export const FeatureRichList = ({
         </motion.h2>
         {description ? (
           <motion.p
-            className="dark:text-polar-300 text-lg leading-relaxed text-gray-600 md:text-xl"
+            className="dark:text-tarifia-300 text-lg leading-relaxed text-gray-600 md:text-xl"
             variants={itemVariants}
           >
             {description}
@@ -216,7 +216,7 @@ export const FeatureRichList = ({
         ) : null}
       </div>
       <motion.ul
-        className="dark:divide-polar-700 dark:border-polar-700 flex flex-col divide-y divide-gray-200 border-y border-gray-200"
+        className="dark:divide-tarifia-700 dark:border-tarifia-700 flex flex-col divide-y divide-gray-200 border-y border-gray-200"
         variants={containerVariants}
       >
         {items.map((it, i) => (
@@ -228,7 +228,7 @@ export const FeatureRichList = ({
             <span className="text-lg text-gray-900 dark:text-white">
               {it.title}
             </span>
-            <span className="dark:text-polar-400 text-lg leading-relaxed text-gray-500">
+            <span className="dark:text-tarifia-400 text-lg leading-relaxed text-gray-500">
               {it.description}
             </span>
           </motion.li>
@@ -256,13 +256,13 @@ export const FeatureCardGrid = ({ cards }: { cards: FeatureCard[] }) => {
       {cards.map((c, i) => (
         <motion.div
           key={i}
-          className="dark:border-polar-700 flex flex-col gap-y-6 border-gray-300"
+          className="dark:border-tarifia-700 flex flex-col gap-y-6 border-gray-300"
           variants={itemVariants}
         >
-          <div className="dark:text-polar-100 text-gray-900">{c.icon}</div>
+          <div className="dark:text-tarifia-100 text-gray-900">{c.icon}</div>
           <div className="flex flex-col gap-y-2">
             <h3 className="text-xl">{c.title}</h3>
-            <p className="dark:text-polar-400 text-lg text-gray-500">
+            <p className="dark:text-tarifia-400 text-lg text-gray-500">
               {c.description}
             </p>
           </div>
@@ -281,7 +281,7 @@ export const FeatureCTA = ({
 }) => {
   return (
     <motion.div
-      className="dark:border-polar-700 flex flex-col items-center gap-y-8 border-t border-gray-300 pt-16 text-center"
+      className="dark:border-tarifia-700 flex flex-col items-center gap-y-8 border-t border-gray-300 pt-16 text-center"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
@@ -291,7 +291,7 @@ export const FeatureCTA = ({
         {title}
       </motion.h2>
       <motion.p
-        className="dark:text-polar-400 max-w-xl text-lg text-balance text-gray-500"
+        className="dark:text-tarifia-400 max-w-xl text-lg text-balance text-gray-500"
         variants={itemVariants}
       >
         {description}

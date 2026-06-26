@@ -1,5 +1,5 @@
-import { Client, schemas, unwrap } from '@polar-sh/client'
-import type { StatusColor } from '@polar-sh/orbit'
+import { Client, schemas, unwrap } from '@tarifia-sh/client'
+import type { StatusColor } from '@tarifia-sh/orbit'
 import { notFound } from 'next/navigation'
 import { cache } from 'react'
 

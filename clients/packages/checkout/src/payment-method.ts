@@ -1,7 +1,7 @@
-const POLAR_PAYMENT_METHOD_EVENT = 'POLAR_PAYMENT_METHOD'
+const TARIFIA_PAYMENT_METHOD_EVENT = 'TARIFIA_PAYMENT_METHOD'
 const EMBED_PATH = '/embed/payment-method'
 
-const REDIRECT_STATUS_PARAM = 'polar_payment_method_status'
+const REDIRECT_STATUS_PARAM = 'tarifia_payment_method_status'
 
 /**
  * Message sent to the parent window when the embedded payment method
@@ -96,14 +96,14 @@ const isEmbedPaymentMethodMessage = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   message: any,
 ): message is EmbedPaymentMethodMessage => {
-  return message.type === POLAR_PAYMENT_METHOD_EVENT
+  return message.type === TARIFIA_PAYMENT_METHOD_EVENT
 }
 
 interface EmbedPaymentMethodCreateOptions {
   /**
    * A short-lived session token returned by
    * `POST /v1/customer-sessions`. Pass whatever the API returned —
-   * the SDK detects the prefix (`polar_cst_` vs `polar_mst_`) and
+   * the SDK detects the prefix (`tarifia_cst_` vs `tarifia_mst_`) and
    * routes the request to the right endpoint internally.
    */
   sessionToken: string
@@ -135,7 +135,7 @@ interface EmbedPaymentMethodCreateInlineOptions {
   /**
    * A short-lived session token returned by
    * `POST /v1/customer-sessions`. Pass whatever the API returned —
-   * the SDK detects the prefix (`polar_cst_` vs `polar_mst_`) and
+   * the SDK detects the prefix (`tarifia_cst_` vs `tarifia_mst_`) and
    * routes the request to the right endpoint internally.
    */
   sessionToken: string
@@ -168,7 +168,7 @@ interface EmbedPaymentMethodCreateInlineOptions {
 const resolveEmbedBaseURL = (): string => {
   const origins = // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore - Defined at build time by tsup
-    (__POLAR_CHECKOUT_EMBED_SCRIPT_ALLOWED_ORIGINS__ as string).split(',')
+    (__TARIFIA_CHECKOUT_EMBED_SCRIPT_ALLOWED_ORIGINS__ as string).split(',')
 
   if (
     typeof window !== 'undefined' &&
@@ -182,7 +182,7 @@ const resolveEmbedBaseURL = (): string => {
 const buildIframeAllow = (): string => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore - Defined at build time by tsup
-  const origins = (__POLAR_CHECKOUT_EMBED_SCRIPT_ALLOWED_ORIGINS__ as string)
+  const origins = (__TARIFIA_CHECKOUT_EMBED_SCRIPT_ALLOWED_ORIGINS__ as string)
     .split(',')
     .join(' ')
   return `payment 'self' ${origins}; publickey-credentials-get 'self' ${origins};`
@@ -221,7 +221,7 @@ class EmbedPaymentMethod {
   /**
    * Send a message from the iframe to the parent window.
    *
-   * Used internally by the Polar-hosted iframe page; not normally called
+   * Used internally by the Tarifia-hosted iframe page; not normally called
    * by SDK consumers.
    */
   public static postMessage(
@@ -229,7 +229,7 @@ class EmbedPaymentMethod {
     targetOrigin: string,
   ): void {
     window.parent.postMessage(
-      { ...message, type: POLAR_PAYMENT_METHOD_EVENT },
+      { ...message, type: TARIFIA_PAYMENT_METHOD_EVENT },
       targetOrigin,
     )
   }
@@ -239,8 +239,8 @@ class EmbedPaymentMethod {
    *
    * @example
    * ```ts
-   * const embed = await PolarEmbedPaymentMethod.create({
-   *   sessionToken: 'polar_cst_xxx',
+   * const embed = await TarifiaEmbedPaymentMethod.create({
+   *   sessionToken: 'tarifia_cst_xxx',
    *   theme: 'dark',
    * })
    *
@@ -257,18 +257,18 @@ class EmbedPaymentMethod {
 
     const styleSheet = document.createElement('style')
     styleSheet.innerText = `
-      .polar-loader-spinner {
+      .tarifia-loader-spinner {
         width: 20px;
         aspect-ratio: 1;
         border-radius: 50%;
         background: ${theme === 'dark' ? '#000' : '#fff'};
         box-shadow: 0 0 0 0 ${theme === 'dark' ? '#fff' : '#000'};
-        animation: polar-loader-spinner-animation 1s infinite;
+        animation: tarifia-loader-spinner-animation 1s infinite;
       }
-      @keyframes polar-loader-spinner-animation {
+      @keyframes tarifia-loader-spinner-animation {
         100% {box-shadow: 0 0 0 30px #0000}
       }
-      body.polar-no-scroll {
+      body.tarifia-no-scroll {
         overflow: hidden;
       }
     `
@@ -283,10 +283,10 @@ class EmbedPaymentMethod {
     loader.style.colorScheme = 'auto'
 
     const spinner = document.createElement('div')
-    spinner.className = 'polar-loader-spinner'
+    spinner.className = 'tarifia-loader-spinner'
     loader.appendChild(spinner)
 
-    document.body.classList.add('polar-no-scroll')
+    document.body.classList.add('tarifia-no-scroll')
     document.body.appendChild(loader)
 
     const embedURL = new URL(EMBED_PATH, resolveEmbedBaseURL())
@@ -381,22 +381,22 @@ class EmbedPaymentMethod {
 
   /**
    * Initialize click triggers on elements marked with the
-   * `data-polar-payment-method` attribute. The attribute value is the
+   * `data-tarifia-payment-method` attribute. The attribute value is the
    * customer session token. Theme can be set via
-   * `data-polar-payment-method-theme="dark"`.
+   * `data-tarifia-payment-method-theme="dark"`.
    *
    * @example
    * ```html
    * <button
-   *   data-polar-payment-method="polar_cst_xxx"
-   *   data-polar-payment-method-theme="dark"
+   *   data-tarifia-payment-method="tarifia_cst_xxx"
+   *   data-tarifia-payment-method-theme="dark"
    * >
    *   Add payment method
    * </button>
    * ```
    */
   public static init(): void {
-    const elements = document.querySelectorAll('[data-polar-payment-method]')
+    const elements = document.querySelectorAll('[data-tarifia-payment-method]')
     elements.forEach((element) => {
       element.removeEventListener(
         'click',
@@ -432,7 +432,7 @@ class EmbedPaymentMethod {
     window.removeEventListener('message', this.windowMessageListener)
     this.iframe.remove()
     if (this.mode === 'modal') {
-      document.body.classList.remove('polar-no-scroll')
+      document.body.classList.remove('tarifia-no-scroll')
     }
   }
 
@@ -499,28 +499,28 @@ class EmbedPaymentMethod {
     e.preventDefault()
     let element = e.target as HTMLElement
 
-    while (!element.hasAttribute('data-polar-payment-method')) {
+    while (!element.hasAttribute('data-tarifia-payment-method')) {
       if (!element.parentElement) {
         return
       }
       element = element.parentElement
     }
 
-    const token = element.getAttribute('data-polar-payment-method')
+    const token = element.getAttribute('data-tarifia-payment-method')
     if (!token) {
       return
     }
-    const theme = element.getAttribute('data-polar-payment-method-theme') as
+    const theme = element.getAttribute('data-tarifia-payment-method-theme') as
       | 'light'
       | 'dark'
       | null
     const setAsDefaultAttr = element.getAttribute(
-      'data-polar-payment-method-set-as-default',
+      'data-tarifia-payment-method-set-as-default',
     )
     const returnUrl = element.getAttribute(
-      'data-polar-payment-method-return-url',
+      'data-tarifia-payment-method-return-url',
     )
-    const locale = element.getAttribute('data-polar-payment-method-locale')
+    const locale = element.getAttribute('data-tarifia-payment-method-locale')
     EmbedPaymentMethod.create({
       sessionToken: token,
       theme: theme ?? undefined,
@@ -574,7 +574,7 @@ class EmbedPaymentMethod {
     if (
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore - Defined at build time by tsup
-      !__POLAR_CHECKOUT_EMBED_SCRIPT_ALLOWED_ORIGINS__
+      !__TARIFIA_CHECKOUT_EMBED_SCRIPT_ALLOWED_ORIGINS__
         .split(',')
         .includes(origin)
     ) {
@@ -623,17 +623,17 @@ class EmbedPaymentMethod {
 }
 
 declare global {
-  interface PolarWindow {
+  interface TarifiaWindow {
     EmbedPaymentMethod: typeof EmbedPaymentMethod
   }
   interface Window {
-    Polar: Partial<PolarWindow>
+    Tarifia: Partial<TarifiaWindow>
   }
 }
 
 if (typeof window !== 'undefined') {
-  window.Polar = {
-    ...(window.Polar ?? {}),
+  window.Tarifia = {
+    ...(window.Tarifia ?? {}),
     EmbedPaymentMethod,
   }
 }
@@ -648,6 +648,6 @@ if (typeof document !== 'undefined') {
 }
 
 export {
-  EmbedPaymentMethod as PolarEmbedPaymentMethod,
+  EmbedPaymentMethod as TarifiaEmbedPaymentMethod,
   REDIRECT_STATUS_PARAM as EMBED_PAYMENT_METHOD_REDIRECT_STATUS_PARAM,
 }

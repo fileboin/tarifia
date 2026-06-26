@@ -1,6 +1,6 @@
 import AmountLabel from '@/components/Shared/AmountLabel'
-import { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
+import { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
 import { useMemo } from 'react'
 import { getCustomerSubscriptionBasePrice } from './pricing'
 
@@ -22,7 +22,7 @@ export const CustomerSubscriptionHeader = ({
       <div className="flex flex-col gap-y-1">
         <div className="flex flex-row items-baseline gap-x-6">
           <h3 className="truncate text-xl">{subscription.product.name}</h3>
-          <div className="dark:text-polar-500 text-xl text-gray-500">
+          <div className="dark:text-tarifia-500 text-xl text-gray-500">
             {subscription.amount && subscription.currency ? (
               <AmountLabel
                 amount={subscription.amount}
@@ -42,7 +42,7 @@ export const CustomerSubscriptionHeader = ({
   return (
     <div className="flex flex-row items-baseline gap-x-6">
       <h3 className="truncate text-xl">{subscription.product.name}</h3>
-      <div className="dark:text-polar-500 text-xl text-gray-500">
+      <div className="dark:text-tarifia-500 text-xl text-gray-500">
         {subscription.amount && subscription.currency ? (
           <span className="flex flex-row justify-end gap-x-1">
             {subscriptionBasePrice &&

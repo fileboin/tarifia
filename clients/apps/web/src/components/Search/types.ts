@@ -1,4 +1,4 @@
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 
 type SearchResultItem = schemas['SearchResults']['results'][number]
 

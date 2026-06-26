@@ -9,9 +9,9 @@ import pytest
 import pytest_asyncio
 from httpx import AsyncClient
 
-from polar.kit.db.postgres import AsyncSession
-from polar.models import Organization, Product
-from polar.models.discount import DiscountDuration, DiscountPercentage, DiscountType
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.models import Organization, Product
+from tarifia.models.discount import DiscountDuration, DiscountPercentage, DiscountType
 from tests.e2e.conftest import E2E_AUTH
 from tests.e2e.infra import DrainFn, EmailCapture, StripeSimulator
 from tests.e2e.purchase.conftest import BUYER_EMAIL, complete_purchase

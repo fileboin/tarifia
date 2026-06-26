@@ -1,11 +1,11 @@
 import pytest
 from pytest_mock import MockerFixture
 
-from polar.feedback.repository import FeedbackRepository
-from polar.feedback.tasks import feedback_reply_in_plain
-from polar.models import Feedback, Organization, User
-from polar.models.feedback import FeedbackStatus, FeedbackType
-from polar.postgres import AsyncSession
+from tarifia.feedback.repository import FeedbackRepository
+from tarifia.feedback.tasks import feedback_reply_in_plain
+from tarifia.models import Feedback, Organization, User
+from tarifia.models.feedback import FeedbackStatus, FeedbackType
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 
 
@@ -36,9 +36,9 @@ class TestFeedbackReplyInPlain:
         organization: Organization,
     ) -> None:
         feedback = await _create_question(save_fixture, user, organization)
-        mocker.patch("polar.feedback.tasks.plain_service.enabled", new=True)
+        mocker.patch("tarifia.feedback.tasks.plain_service.enabled", new=True)
         create_thread_mock = mocker.patch(
-            "polar.feedback.tasks.plain_service.create_feedback_thread",
+            "tarifia.feedback.tasks.plain_service.create_feedback_thread",
             return_value="https://app.plain.com/workspace/w/thread/th_123",
         )
 
@@ -67,9 +67,9 @@ class TestFeedbackReplyInPlain:
         feedback.support_thread_url = "https://app.plain.com/workspace/w/thread/th_old"
         await save_fixture(feedback)
 
-        mocker.patch("polar.feedback.tasks.plain_service.enabled", new=True)
+        mocker.patch("tarifia.feedback.tasks.plain_service.enabled", new=True)
         create_thread_mock = mocker.patch(
-            "polar.feedback.tasks.plain_service.create_feedback_thread",
+            "tarifia.feedback.tasks.plain_service.create_feedback_thread",
         )
 
         await feedback_reply_in_plain(feedback.id)

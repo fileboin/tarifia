@@ -2,10 +2,10 @@
 
 import { useCustomerCustomerMeters } from '@/hooks/queries/customerPortal'
 import Search from '@mui/icons-material/Search'
-import { Client } from '@polar-sh/client'
-import { DataTable } from '@polar-sh/orbit'
-import { Input } from '@polar-sh/orbit'
-import { Tabs, TabsContent } from '@polar-sh/orbit'
+import { Client } from '@tarifia-sh/client'
+import { DataTable } from '@tarifia-sh/orbit'
+import { Input } from '@tarifia-sh/orbit'
+import { Tabs, TabsContent } from '@tarifia-sh/orbit'
 import { useMemo, useState } from 'react'
 import FormattedUnits from '../Meter/FormattedUnits'
 export interface CustomerUsageProps {
@@ -54,7 +54,7 @@ export const CustomerUsage = ({ api }: CustomerUsageProps) => {
                     return (
                       <div className="flex items-center gap-2">
                         <div className="relative h-3 w-3">
-                          <div className="dark:border-polar-700 absolute h-full w-full rounded-full border-2 border-gray-200" />
+                          <div className="dark:border-tarifia-700 absolute h-full w-full rounded-full border-2 border-gray-200" />
                           <div
                             className="absolute h-full w-full rounded-full border-2 border-blue-500"
                             style={{

@@ -4,7 +4,7 @@ import { DashboardBody } from '@/components/Layout/DashboardLayout'
 import AIValidationResult from '@/components/Organization/AIValidationResult'
 import { Section, SectionDescription } from '@/components/Settings/Section'
 import { usePostHog } from '@/hooks/posthog'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { useEffect } from 'react'
 
 interface Props {

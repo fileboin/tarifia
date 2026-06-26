@@ -3,17 +3,17 @@
 import { useAuth } from '@/hooks'
 import { useUpdateUser } from '@/hooks/queries'
 import { useMonthDigitTypeahead } from '@/hooks/useMonthDigitTypeahead'
-import { enums, schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import CountryPicker from '@polar-sh/ui/components/atoms/CountryPicker'
-import { Input } from '@polar-sh/orbit'
+import { enums, schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import CountryPicker from '@tarifia-sh/ui/components/atoms/CountryPicker'
+import { Input } from '@tarifia-sh/orbit'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
 import {
   Form,
   FormControl,
@@ -21,7 +21,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { useCallback, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from '../Toast/use-toast'
@@ -149,7 +149,7 @@ const PersonalInformationSettings = () => {
     <Form {...form}>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="dark:ring-polar-700 flex w-full flex-col gap-y-6 overflow-hidden rounded-2xl bg-transparent p-5 ring-1 ring-gray-200 dark:ring-1"
+        className="dark:ring-tarifia-700 flex w-full flex-col gap-y-6 overflow-hidden rounded-2xl bg-transparent p-5 ring-1 ring-gray-200 dark:ring-1"
       >
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <FormField

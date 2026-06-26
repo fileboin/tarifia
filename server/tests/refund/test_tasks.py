@@ -4,16 +4,16 @@ from unittest.mock import MagicMock
 import pytest
 from pytest_mock import MockerFixture
 
-from polar.email.schemas import ChargebackPreventionRefundEmail
-from polar.kit.currency import format_currency
-from polar.models import Customer, Organization, Product, User
-from polar.models.refund import RefundReason
-from polar.models.user_organization import (
+from tarifia.email.schemas import ChargebackPreventionRefundEmail
+from tarifia.kit.currency import format_currency
+from tarifia.models import Customer, Organization, Product, User
+from tarifia.models.refund import RefundReason
+from tarifia.models.user_organization import (
     OrganizationNotificationSettings,
     OrganizationRole,
     UserOrganization,
 )
-from polar.refund.tasks import send_chargeback_prevention_notice
+from tarifia.refund.tasks import send_chargeback_prevention_notice
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_order_and_payment,
@@ -24,7 +24,7 @@ from tests.fixtures.random_objects import (
 
 @pytest.fixture(autouse=True)
 def enqueue_email_template_mock(mocker: MockerFixture) -> MagicMock:
-    return mocker.patch("polar.refund.tasks.enqueue_email_template")
+    return mocker.patch("tarifia.refund.tasks.enqueue_email_template")
 
 
 async def _add_member(
@@ -142,7 +142,7 @@ class TestSendChargebackPreventionNotice:
             subtotal_amount=1000,
             tax_amount=250,
         )
-        order.invoice_number = "POLAR-2026-00042"
+        order.invoice_number = "TARIFIA-2026-00042"
         await save_fixture(order)
 
         refund = await create_refund(
@@ -161,7 +161,7 @@ class TestSendChargebackPreventionNotice:
         email = call.args[0]
         assert isinstance(email, ChargebackPreventionRefundEmail)
         assert email.props.email == owner.email
-        assert email.props.order_number == "POLAR-2026-00042"
+        assert email.props.order_number == "TARIFIA-2026-00042"
         assert email.props.customer_name == customer.display_name
         assert email.props.amount == refund.total_amount
         assert email.props.formatted_amount == format_currency(
@@ -169,7 +169,7 @@ class TestSendChargebackPreventionNotice:
         )
         assert call.kwargs["to_email_addr"] == owner.email
         assert (
-            call.kwargs["subject"] == "Chargeback prevented for order POLAR-2026-00042"
+            call.kwargs["subject"] == "Chargeback prevented for order TARIFIA-2026-00042"
         )
 
     async def test_order_number_falls_back_to_id(

@@ -2,10 +2,10 @@
 
 import { useAuth } from '@/hooks'
 import { useCreateOrganization } from '@/hooks/queries'
-import { schemas } from '@polar-sh/client'
-import { Box } from '@polar-sh/orbit/Box'
-import { Button } from '@polar-sh/orbit'
-import { Form } from '@polar-sh/ui/components/ui/form'
+import { schemas } from '@tarifia-sh/client'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Button } from '@tarifia-sh/orbit'
+import { Form } from '@tarifia-sh/ui/components/ui/form'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
@@ -109,7 +109,7 @@ export function SandboxStep() {
   return (
     <OnboardingShell
       title="Create a sandbox organization"
-      subtitle="Set up a test organization to explore Polar with mock payments."
+      subtitle="Set up a test organization to explore Tarifia with mock payments."
       apiStep="sandbox"
     >
       <Form {...form}>

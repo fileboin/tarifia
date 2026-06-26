@@ -7,22 +7,22 @@ import stripe as stripe_lib
 from dramatiq import Retry
 from pytest_mock import MockerFixture
 
-from polar.config import settings
-from polar.kit.db.postgres import AsyncSession
-from polar.kit.utils import utc_now
-from polar.models import Organization, Product
-from polar.models.order import OrderBillingReasonInternal, OrderStatus
-from polar.models.payment import PaymentStatus, PaymentTrigger
-from polar.models.subscription import SubscriptionStatus
-from polar.order.repository import OrderRepository
-from polar.order.service import order as order_service
-from polar.order.tasks import (
+from tarifia.config import settings
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.kit.utils import utc_now
+from tarifia.models import Organization, Product
+from tarifia.models.order import OrderBillingReasonInternal, OrderStatus
+from tarifia.models.payment import PaymentStatus, PaymentTrigger
+from tarifia.models.subscription import SubscriptionStatus
+from tarifia.order.repository import OrderRepository
+from tarifia.order.service import order as order_service
+from tarifia.order.tasks import (
     OrderDoesNotExist,
     process_dunning,
     process_dunning_order,
     trigger_payment,
 )
-from polar.subscription.repository import SubscriptionRepository
+from tarifia.subscription.repository import SubscriptionRepository
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_customer,
@@ -54,7 +54,7 @@ class TestProcessDunning:
         order.next_payment_attempt_at = past_time
         await save_fixture(order)
 
-        enqueue_job_mock = mocker.patch("polar.order.tasks.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.order.tasks.enqueue_job")
 
         # When
         await process_dunning()
@@ -84,7 +84,7 @@ class TestProcessDunning:
         order.next_payment_attempt_at = future_time
         await save_fixture(order)
 
-        enqueue_job_mock = mocker.patch("polar.order.tasks.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.order.tasks.enqueue_job")
 
         # When
         await process_dunning()
@@ -121,7 +121,7 @@ class TestProcessDunning:
         order2.next_payment_attempt_at = past_time
         await save_fixture(order2)
 
-        enqueue_job_mock = mocker.patch("polar.order.tasks.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.order.tasks.enqueue_job")
 
         # When
         await process_dunning()
@@ -142,7 +142,7 @@ class TestProcessDunningOrder:
         mocker: MockerFixture,
     ) -> None:
         # Given
-        log_mock = mocker.patch("polar.order.service.log")
+        log_mock = mocker.patch("tarifia.order.service.log")
         customer = await create_customer(save_fixture, organization=organization)
         order = await create_order(
             save_fixture,
@@ -203,7 +203,7 @@ class TestProcessDunningOrder:
         mocker: MockerFixture,
     ) -> None:
         # Given
-        log_mock = mocker.patch("polar.order.service.log")
+        log_mock = mocker.patch("tarifia.order.service.log")
         customer = await create_customer(save_fixture, organization=organization)
         subscription = await create_subscription(
             save_fixture,
@@ -261,7 +261,7 @@ class TestProcessDunningOrder:
             billing_reason=OrderBillingReasonInternal.subscription_cycle,
         )
 
-        enqueue_job_mock = mocker.patch("polar.order.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.order.service.enqueue_job")
 
         # When
         await process_dunning_order(order.id)
@@ -320,7 +320,7 @@ class TestProcessDunningOrder:
         assert result_order.status == OrderStatus.paid
         assert result_order.next_payment_attempt_at is None
 
-        from polar.subscription.repository import SubscriptionRepository
+        from tarifia.subscription.repository import SubscriptionRepository
 
         subscription_repo = SubscriptionRepository.from_session(session)
         updated_subscription = await subscription_repo.get_by_id(subscription.id)
@@ -455,7 +455,7 @@ class TestTriggerPayment:
 
         # Mock the Stripe service instead of the order service
         mock_create_payment_intent = mocker.patch(
-            "polar.order.service.stripe_service.create_payment_intent",
+            "tarifia.order.service.stripe_service.create_payment_intent",
             return_value=MagicMock(status="succeeded", id="pi_test_success"),
         )
 
@@ -489,7 +489,7 @@ class TestTriggerPayment:
             code="card_declined",
         )
         mock_create_payment_intent = mocker.patch(
-            "polar.order.service.stripe_service.create_payment_intent",
+            "tarifia.order.service.stripe_service.create_payment_intent",
             side_effect=card_error,
         )
 
@@ -520,12 +520,12 @@ class TestTriggerPayment:
         # Mock Stripe service to raise APIConnectionError
         api_error = stripe_lib.APIConnectionError("Network error")
         mock_create_payment_intent = mocker.patch(
-            "polar.order.service.stripe_service.create_payment_intent",
+            "tarifia.order.service.stripe_service.create_payment_intent",
             side_effect=api_error,
         )
 
         # Mock can_retry to return True
-        mocker.patch("polar.order.tasks.can_retry", return_value=True)
+        mocker.patch("tarifia.order.tasks.can_retry", return_value=True)
 
         # When/Then - should raise Retry exception
         with pytest.raises(Retry):  # Retry exception
@@ -603,7 +603,7 @@ class TestTriggerPayment:
         )
 
         mock_create_payment_intent = mocker.patch(
-            "polar.order.service.stripe_service.create_payment_intent",
+            "tarifia.order.service.stripe_service.create_payment_intent",
             return_value=MagicMock(status="succeeded", id="pi_test_success"),
         )
 
@@ -636,7 +636,7 @@ class TestTriggerPayment:
         )
 
         mock_create_payment_intent = mocker.patch(
-            "polar.order.service.stripe_service.create_payment_intent",
+            "tarifia.order.service.stripe_service.create_payment_intent",
             return_value=MagicMock(status="succeeded", id="pi_test_success"),
         )
 

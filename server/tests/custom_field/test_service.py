@@ -1,13 +1,13 @@
 import pytest
 import pytest_asyncio
 
-from polar.auth.models import AuthSubject
-from polar.custom_field.schemas import CustomFieldUpdateText
-from polar.custom_field.service import custom_field as custom_field_service
-from polar.models import Customer, Order, Organization, Product, User, UserOrganization
-from polar.models.custom_field import CustomFieldText, CustomFieldType
-from polar.order.repository import OrderRepository
-from polar.postgres import AsyncSession
+from tarifia.auth.models import AuthSubject
+from tarifia.custom_field.schemas import CustomFieldUpdateText
+from tarifia.custom_field.service import custom_field as custom_field_service
+from tarifia.models import Customer, Order, Organization, Product, User, UserOrganization
+from tarifia.models.custom_field import CustomFieldText, CustomFieldType
+from tarifia.order.repository import OrderRepository
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_custom_field, create_order
 

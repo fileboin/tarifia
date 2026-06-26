@@ -3,7 +3,7 @@ import {
   useSlackIntegration,
   useSlackIntegrations,
 } from '@/hooks/queries'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import {
   Alert,
   Checkbox,
@@ -15,8 +15,8 @@ import {
   SelectValue,
   Text,
   TextArea,
-} from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
+} from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
 import {
   FormControl,
   FormDescription,
@@ -24,7 +24,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { useEffect, useMemo, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
@@ -393,7 +393,7 @@ const SlackConnectedBanner = ({
         isShown={showConfirm}
         hide={() => setShowConfirm(false)}
         title="Disconnect Slack workspace"
-        description="This removes the Slack integration from Polar. Existing channels stay in Slack but Polar can no longer manage them."
+        description="This removes the Slack integration from Tarifia. Existing channels stay in Slack but Tarifia can no longer manage them."
         onConfirm={onDisconnect}
         destructive
         destructiveText="Disconnect"

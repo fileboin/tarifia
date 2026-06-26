@@ -1,7 +1,7 @@
 """Tests for the support-case URL helpers — notably the open-redirect guard on
 ``return_to``."""
 
-from polar.backoffice.support_cases.urls import append_return_to, is_safe_return_to
+from tarifia.backoffice.support_cases.urls import append_return_to, is_safe_return_to
 
 
 class TestIsSafeReturnTo:

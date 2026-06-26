@@ -8,14 +8,14 @@ import structlog
 import typer
 from sqlalchemy import select
 
-from polar.kit.db.postgres import create_async_sessionmaker
-from polar.models import Transaction
-from polar.models.transaction import TransactionType
-from polar.postgres import create_async_engine
-from polar.transaction.service.balance import (
+from tarifia.kit.db.postgres import create_async_sessionmaker
+from tarifia.models import Transaction
+from tarifia.models.transaction import TransactionType
+from tarifia.postgres import create_async_engine
+from tarifia.transaction.service.balance import (
     balance_transaction as balance_transaction_service,
 )
-from polar.transaction.service.refund import (
+from tarifia.transaction.service.refund import (
     refund_transaction as refund_transaction_service,
 )
 

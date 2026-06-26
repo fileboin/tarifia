@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { Box } from '@polar-sh/orbit/Box'
-import { Input } from '@polar-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Input } from '@tarifia-sh/orbit'
 import { Search, Mail } from 'lucide-react'
 import {
   Example,

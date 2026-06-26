@@ -1,4 +1,4 @@
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { twMerge } from 'tailwind-merge'
 
 const getEventSourceStyle = (source: schemas['Event']['source']) => {

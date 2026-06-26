@@ -2,17 +2,17 @@ import { SeatsPage } from '@/components/Landing/features/SeatsPage'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Seats — Polar',
+  title: 'Seats — Tarifia',
   description:
     'Pricing that scales with the team. Sell seat-based products with assignable seats, claim links, and automatic proration.',
   keywords:
     'seat-based pricing, team subscriptions, per-seat billing, volume discounts, graduated pricing',
   openGraph: {
-    siteName: 'Polar',
+    siteName: 'Tarifia',
     type: 'website',
     images: [
       {
-        url: 'https://polar.sh/assets/brand/polar_og.jpg',
+        url: 'https://tarifia.sh/assets/brand/tarifia_og.jpg',
         width: 1200,
         height: 630,
       },
@@ -22,10 +22,10 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     images: [
       {
-        url: 'https://polar.sh/assets/brand/polar_og.jpg',
+        url: 'https://tarifia.sh/assets/brand/tarifia_og.jpg',
         width: 1200,
         height: 630,
-        alt: 'Polar',
+        alt: 'Tarifia',
       },
     ],
   },

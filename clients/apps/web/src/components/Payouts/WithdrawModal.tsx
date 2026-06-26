@@ -2,16 +2,16 @@ import { extractApiErrorMessage } from '@/utils/api/errors'
 import { api } from '@/utils/client'
 import { usePayouts } from '@/hooks/queries/payouts'
 import ArrowOutwardOutlined from '@mui/icons-material/ArrowOutwardOutlined'
-import { isValidationError, schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
-import { Button } from '@polar-sh/orbit'
-import FormattedDateTime from '@polar-sh/ui/components/atoms/FormattedDateTime'
+import { isValidationError, schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
+import { Button } from '@tarifia-sh/orbit'
+import FormattedDateTime from '@tarifia-sh/ui/components/atoms/FormattedDateTime'
 import Link from 'next/link'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { Modal } from '@polar-sh/orbit'
+import { Modal } from '@tarifia-sh/orbit'
 import { DetailRow } from '../Shared/DetailRow'
 import { toast } from '../Toast/use-toast'
-import { Spinner as SpinnerNoMargin } from '@polar-sh/orbit'
+import { Spinner as SpinnerNoMargin } from '@tarifia-sh/orbit'
 
 interface WithdrawModalProps {
   organization: schemas['Organization']
@@ -146,7 +146,7 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
               </p>
               <p>
                 <Link
-                  href="https://polar.sh/docs/merchant-of-record/account-reviews"
+                  href="https://tarifia.sh/docs/merchant-of-record/account-reviews"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -192,7 +192,7 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
               <div className="flex flex-col gap-8">
                 <div className="flex flex-col gap-2">
                   <h1 className="text-2xl">Withdraw your balance</h1>
-                  <p className="dark:text-polar-500 text-gray-500">
+                  <p className="dark:text-tarifia-500 text-gray-500">
                     You&apos;re about to withdraw your balance to your bank
                     account.
                   </p>

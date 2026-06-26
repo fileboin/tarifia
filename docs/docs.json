@@ -7,7 +7,7 @@
   "appearance": {
     "default": "system"
   },
-  "name": "Polar",
+  "name": "Tarifia",
   "description": "Payments & Billing with 6 lines of code. Open Source & Global Merchant of Record.",
   "colors": {
     "primary": "#000",
@@ -620,23 +620,23 @@
   "logo": {
     "light": "./logo/light.png",
     "dark": "./logo/dark.png",
-    "href": "https://polar.sh"
+    "href": "https://tarifia.sh"
   },
   "navbar": {
     "links": [
       {
         "label": "llms-full.txt",
-        "href": "https://polar.sh/docs/llms-full.txt"
+        "href": "https://tarifia.sh/docs/llms-full.txt"
       },
       {
         "label": "Contact support",
-        "href": "https://polar.sh/docs/support"
+        "href": "https://tarifia.sh/docs/support"
       }
     ],
     "primary": {
       "type": "button",
       "label": "Dashboard",
-      "href": "https://polar.sh"
+      "href": "https://tarifia.sh"
     }
   },
   "contextual": {
@@ -644,9 +644,9 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/polar_sh",
-      "github": "https://github.com/polarsource/polar",
-      "discord": "https://dub.sh/polar-discord"
+      "x": "https://x.com/tarifia_sh",
+      "github": "https://github.com/tarifiasource/tarifia",
+      "discord": "https://dub.sh/tarifia-discord"
     }
   },
   "redirects": [
@@ -687,15 +687,15 @@
       "destination": "/suppport"
     },
     {
-      "source": "/documentation/welcome-to-polar",
+      "source": "/documentation/welcome-to-tarifia",
       "destination": "/introduction"
     },
     {
-      "source": "/documentation/tools/polar-migrate",
+      "source": "/documentation/tools/tarifia-migrate",
       "destination": "/migrate"
     },
     {
-      "source": "/documentation/tools/polar-init",
+      "source": "/documentation/tools/tarifia-init",
       "destination": "/introduction#quickstart-from-cli"
     },
     {
@@ -847,15 +847,15 @@
       "destination": "/features/finance/payouts"
     },
     {
-      "source": "/documentation/integrations/polar-for-raycast",
+      "source": "/documentation/integrations/tarifia-for-raycast",
       "destination": "/features/integrations/raycast"
     },
     {
-      "source": "/documentation/integrations/polar-for-framer",
+      "source": "/documentation/integrations/tarifia-for-framer",
       "destination": "/features/integrations/framer"
     },
     {
-      "source": "/documentation/integrations/polar-for-zapier",
+      "source": "/documentation/integrations/tarifia-for-zapier",
       "destination": "/features/integrations/zapier"
     },
     {
@@ -871,7 +871,7 @@
       "destination": "/integrate/sandbox"
     },
     {
-      "source": "/documentation/integration-guides/authenticating-with-polar",
+      "source": "/documentation/integration-guides/authenticating-with-tarifia",
       "destination": "/integrate/authentication"
     },
     {
@@ -899,63 +899,63 @@
       "destination": "/integrate/sdk/go"
     },
     {
-      "source": "/documentation/adapters/polar-shnextjs",
+      "source": "/documentation/adapters/tarifia-shnextjs",
       "destination": "/integrate/sdk/adapters/nextjs"
     },
     {
-      "source": "/documentation/adapters/polar-shastro",
+      "source": "/documentation/adapters/tarifia-shastro",
       "destination": "/integrate/sdk/adapters/astro"
     },
     {
-      "source": "/documentation/adapters/polar-shremix",
+      "source": "/documentation/adapters/tarifia-shremix",
       "destination": "/integrate/sdk/adapters/remix"
     },
     {
-      "source": "/documentation/adapters/polar-shsveltekit",
+      "source": "/documentation/adapters/tarifia-shsveltekit",
       "destination": "/integrate/sdk/adapters/sveltekit"
     },
     {
-      "source": "/documentation/adapters/polar-shdeno",
+      "source": "/documentation/adapters/tarifia-shdeno",
       "destination": "/integrate/sdk/adapters/deno"
     },
     {
-      "source": "/documentation/adapters/polar-shelysia",
+      "source": "/documentation/adapters/tarifia-shelysia",
       "destination": "/integrate/sdk/adapters/elysia"
     },
     {
-      "source": "/documentation/adapters/polar-shexpress",
+      "source": "/documentation/adapters/tarifia-shexpress",
       "destination": "/integrate/sdk/adapters/express"
     },
     {
-      "source": "/documentation/adapters/polar-shfastify",
+      "source": "/documentation/adapters/tarifia-shfastify",
       "destination": "/integrate/sdk/adapters/fastify"
     },
     {
-      "source": "/documentation/adapters/polar-shhono",
+      "source": "/documentation/adapters/tarifia-shhono",
       "destination": "/integrate/sdk/adapters/hono"
     },
     {
-      "source": "/documentation/polar-as-merchant-of-record/tax",
+      "source": "/documentation/tarifia-as-merchant-of-record/tax",
       "destination": "/merchant-of-record/introduction"
     },
     {
-      "source": "/documentation/polar-as-merchant-of-record/fees",
+      "source": "/documentation/tarifia-as-merchant-of-record/fees",
       "destination": "/merchant-of-record/fees"
     },
     {
-      "source": "/documentation/polar-as-merchant-of-record/supported-countries",
+      "source": "/documentation/tarifia-as-merchant-of-record/supported-countries",
       "destination": "/merchant-of-record/supported-countries"
     },
     {
-      "source": "/documentation/polar-as-merchant-of-record/acceptable-products-use",
+      "source": "/documentation/tarifia-as-merchant-of-record/acceptable-products-use",
       "destination": "/merchant-of-record/acceptable-use"
     },
     {
       "source": "/merchant-of-record/acceptable-use",
-      "destination": "https://polar.sh/legal/acceptable-use-policy"
+      "destination": "https://tarifia.sh/legal/acceptable-use-policy"
     },
     {
-      "source": "/documentation/polar-as-merchant-of-record/account-reviews",
+      "source": "/documentation/tarifia-as-merchant-of-record/account-reviews",
       "destination": "/merchant-of-record/account-reviews"
     },
     {
@@ -1084,11 +1084,11 @@
     },
     {
       "source": "/features/integrations/evendeals",
-      "destination": "https://www.evendeals.com/integrations/polar"
+      "destination": "https://www.evendeals.com/integrations/tarifia"
     },
     {
       "source": "/features/integrations/refgrow",
-      "destination": "https://refgrow.com/polar-affiliate-software"
+      "destination": "https://refgrow.com/tarifia-affiliate-software"
     }
   ]
 }

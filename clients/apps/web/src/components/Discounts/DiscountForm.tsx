@@ -2,27 +2,27 @@
 
 import AutorenewOutlined from '@mui/icons-material/AutorenewOutlined'
 import ClearOutlined from '@mui/icons-material/ClearOutlined'
-import { SegmentedControl } from '@polar-sh/orbit'
+import { SegmentedControl } from '@tarifia-sh/orbit'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@polar-sh/ui/components/atoms/Accordion'
-import { Button } from '@polar-sh/orbit'
-import { Input } from '@polar-sh/orbit'
-import MoneyInput from '@polar-sh/ui/components/atoms/MoneyInput'
-import PercentageInput from '@polar-sh/ui/components/atoms/PercentageInput'
+} from '@tarifia-sh/ui/components/atoms/Accordion'
+import { Button } from '@tarifia-sh/orbit'
+import { Input } from '@tarifia-sh/orbit'
+import MoneyInput from '@tarifia-sh/ui/components/atoms/MoneyInput'
+import PercentageInput from '@tarifia-sh/ui/components/atoms/PercentageInput'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
 
-import { schemas } from '@polar-sh/client'
-import DateTimePicker from '@polar-sh/ui/components/atoms/DateTimePicker'
+import { schemas } from '@tarifia-sh/client'
+import DateTimePicker from '@tarifia-sh/ui/components/atoms/DateTimePicker'
 import {
   FormControl,
   FormDescription,
@@ -30,7 +30,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import React, { useCallback, useMemo } from 'react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { CurrencySelector } from '../CurrencySelector'
@@ -231,7 +231,7 @@ const DiscountForm: React.FC<DiscountFormProps> = ({
                             currency={field.currency}
                             onChange={amountField.onChange}
                             preSlot={
-                              <span className="dark:text-polar-500 px-3 text-sm text-gray-500">
+                              <span className="dark:text-tarifia-500 px-3 text-sm text-gray-500">
                                 {field.currency.toUpperCase()}
                               </span>
                             }
@@ -279,7 +279,7 @@ const DiscountForm: React.FC<DiscountFormProps> = ({
       <Accordion type="single" collapsible className="flex flex-col gap-y-6">
         <AccordionItem
           value="form-input-recurring"
-          className="dark:border-polar-700 rounded-xl border border-gray-200 px-4"
+          className="dark:border-tarifia-700 rounded-xl border border-gray-200 px-4"
         >
           <AccordionTrigger className="hover:no-underline">
             Recurring options
@@ -362,7 +362,7 @@ const DiscountForm: React.FC<DiscountFormProps> = ({
       <Accordion type="single" collapsible className="flex flex-col gap-y-6">
         <AccordionItem
           value="form-input-restrictions"
-          className="dark:border-polar-700 rounded-xl border border-gray-200 px-4"
+          className="dark:border-tarifia-700 rounded-xl border border-gray-200 px-4"
         >
           <AccordionTrigger className="hover:no-underline">
             Restrictions

@@ -1,8 +1,8 @@
 import pytest
 from httpx import AsyncClient
 
-from polar.kit.visibility import Visibility
-from polar.models import Organization, Product
+from tarifia.kit.visibility import Visibility
+from tarifia.models import Organization, Product
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_benefit, set_product_benefits
 

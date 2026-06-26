@@ -8,18 +8,18 @@ import structlog
 import typer
 from sqlalchemy import select
 
-from polar import tasks  # noqa: F401
-from polar.event.service import event as event_service
-from polar.event.system import (
+from tarifia import tasks  # noqa: F401
+from tarifia.event.service import event as event_service
+from tarifia.event.system import (
     BalanceCreditOrderMetadata,
     SystemEvent,
     build_system_event,
 )
-from polar.kit.db.postgres import create_async_sessionmaker
-from polar.models import Customer, Event, Organization
-from polar.postgres import create_async_engine
-from polar.redis import create_redis
-from polar.worker import JobQueueManager
+from tarifia.kit.db.postgres import create_async_sessionmaker
+from tarifia.models import Customer, Event, Organization
+from tarifia.postgres import create_async_engine
+from tarifia.redis import create_redis
+from tarifia.worker import JobQueueManager
 from scripts.helper import typer_async
 
 log = structlog.get_logger()

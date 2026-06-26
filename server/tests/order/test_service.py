@@ -12,11 +12,11 @@ from pydantic import BaseModel
 from pytest_mock import MockerFixture
 from sqlalchemy.orm import joinedload
 
-from polar.auth.models import AuthSubject
-from polar.checkout.eventstream import CheckoutEvent
-from polar.config import settings
-from polar.email.schemas import OrderConfirmationEmail
-from polar.enums import (
+from tarifia.auth.models import AuthSubject
+from tarifia.checkout.eventstream import CheckoutEvent
+from tarifia.config import settings
+from tarifia.email.schemas import OrderConfirmationEmail
+from tarifia.enums import (
     InvoiceNumbering,
     PaymentMode,
     PaymentProcessor,
@@ -25,24 +25,24 @@ from polar.enums import (
     TaxBehaviorOption,
     TaxProcessor,
 )
-from polar.event.system import SystemEvent
-from polar.exceptions import PolarRequestValidationError
-from polar.integrations.stripe.service import StripeService
-from polar.invoice.service import invoice as invoice_service
-from polar.kit.address import (
+from tarifia.event.system import SystemEvent
+from tarifia.exceptions import TarifiaRequestValidationError
+from tarifia.integrations.stripe.service import StripeService
+from tarifia.invoice.service import invoice as invoice_service
+from tarifia.kit.address import (
     Address,
     AddressDict,
     AddressInput,
     CountryAlpha2,
     CountryAlpha2Input,
 )
-from polar.kit.currency import get_maximum_currency_amount
-from polar.kit.db.postgres import AsyncSession
-from polar.kit.math import polar_round
-from polar.kit.pagination import PaginationParams
-from polar.kit.utils import utc_now
-from polar.kit.visibility import Visibility
-from polar.models import (
+from tarifia.kit.currency import get_maximum_currency_amount
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.kit.math import tarifia_round
+from tarifia.kit.pagination import PaginationParams
+from tarifia.kit.utils import utc_now
+from tarifia.kit.visibility import Visibility
+from tarifia.models import (
     Account,
     BillingEntry,
     Customer,
@@ -56,21 +56,21 @@ from polar.models import (
     User,
     UserOrganization,
 )
-from polar.models.billing_entry import BillingEntryDirection, BillingEntryType
-from polar.models.checkout import CheckoutStatus
-from polar.models.custom_field import CustomFieldType
-from polar.models.customer import CustomerType
-from polar.models.discount import DiscountDuration, DiscountType
-from polar.models.order import OrderBillingReasonInternal, OrderStatus
-from polar.models.organization import Organization, OrganizationStatus
-from polar.models.payment import PaymentStatus, PaymentTrigger
-from polar.models.product import ProductBillingType
-from polar.models.subscription import SubscriptionStatus
-from polar.models.transaction import PlatformFeeType, TransactionType
-from polar.models.wallet import WalletType
-from polar.models.webhook_endpoint import WebhookEventType
-from polar.order.schemas import OrderCreate, OrderUpdate
-from polar.order.service import (
+from tarifia.models.billing_entry import BillingEntryDirection, BillingEntryType
+from tarifia.models.checkout import CheckoutStatus
+from tarifia.models.custom_field import CustomFieldType
+from tarifia.models.customer import CustomerType
+from tarifia.models.discount import DiscountDuration, DiscountType
+from tarifia.models.order import OrderBillingReasonInternal, OrderStatus
+from tarifia.models.organization import Organization, OrganizationStatus
+from tarifia.models.payment import PaymentStatus, PaymentTrigger
+from tarifia.models.product import ProductBillingType
+from tarifia.models.subscription import SubscriptionStatus
+from tarifia.models.transaction import PlatformFeeType, TransactionType
+from tarifia.models.wallet import WalletType
+from tarifia.models.webhook_endpoint import WebhookEventType
+from tarifia.order.schemas import OrderCreate, OrderUpdate
+from tarifia.order.service import (
     ManualRetryLimitExceeded,
     MissingCheckoutCustomer,
     MissingInvoiceBillingDetails,
@@ -87,11 +87,11 @@ from polar.order.service import (
     RecurringProduct,
     SubscriptionNotTrialing,
 )
-from polar.order.service import order as order_service
-from polar.product.guard import is_fixed_price, is_seat_price, is_static_price
-from polar.product.price_set import PriceSet
-from polar.subscription.service import SubscriptionService
-from polar.tax.calculation import (
+from tarifia.order.service import order as order_service
+from tarifia.product.guard import is_fixed_price, is_seat_price, is_static_price
+from tarifia.product.price_set import PriceSet
+from tarifia.subscription.service import SubscriptionService
+from tarifia.tax.calculation import (
     CalculationExpiredError,
     TaxabilityReason,
     TaxCalculation,
@@ -99,13 +99,13 @@ from polar.tax.calculation import (
     TaxCalculationService,
     get_tax_behavior_from_option,
 )
-from polar.tax.tax_id import TaxID
-from polar.transaction.service.balance import PaymentTransactionForChargeDoesNotExist
-from polar.transaction.service.payment import (
+from tarifia.tax.tax_id import TaxID
+from tarifia.transaction.service.balance import PaymentTransactionForChargeDoesNotExist
+from tarifia.transaction.service.payment import (
     payment_transaction as payment_transaction_service,
 )
-from polar.transaction.service.platform_fee import PlatformFeeTransactionService
-from polar.wallet.service import wallet as wallet_service
+from tarifia.transaction.service.platform_fee import PlatformFeeTransactionService
+from tarifia.wallet.service import wallet as wallet_service
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.events import get_all_by_name
@@ -158,7 +158,7 @@ def build_stripe_payment_intent(
 @pytest.fixture(autouse=True)
 def stripe_service_mock(mocker: MockerFixture, customer: Customer) -> MagicMock:
     mock = MagicMock(spec=StripeService)
-    mocker.patch("polar.order.service.stripe_service", new=mock)
+    mocker.patch("tarifia.order.service.stripe_service", new=mock)
 
     mock.get_customer.return_value = SimpleNamespace(
         id=customer.stripe_customer_id,
@@ -172,17 +172,17 @@ def stripe_service_mock(mocker: MockerFixture, customer: Customer) -> MagicMock:
 
 @pytest.fixture
 def enqueue_job_mock(mocker: MockerFixture) -> MagicMock:
-    return mocker.patch("polar.order.service.enqueue_job")
+    return mocker.patch("tarifia.order.service.enqueue_job")
 
 
 @pytest.fixture
 def enqueue_email_mock(mocker: MockerFixture) -> MagicMock:
-    return mocker.patch("polar.order.service.enqueue_email_template", autospec=True)
+    return mocker.patch("tarifia.order.service.enqueue_email_template", autospec=True)
 
 
 @pytest.fixture
 def publish_checkout_event_mock(mocker: MockerFixture) -> AsyncMock:
-    return mocker.patch("polar.order.service.publish_checkout_event")
+    return mocker.patch("tarifia.order.service.publish_checkout_event")
 
 
 @pytest.fixture
@@ -195,7 +195,7 @@ def event_creation_time() -> tuple[datetime, int]:
 @pytest.fixture(autouse=True)
 def tax_service_mock(mocker: MockerFixture) -> MagicMock:
     mock = mocker.patch(
-        "polar.order.service.tax_calculation_service", spec=TaxCalculationService
+        "tarifia.order.service.tax_calculation_service", spec=TaxCalculationService
     )
     mock.record.return_value = ("TAX_TRANSACTION_ID", TaxProcessor.numeral)
     return mock
@@ -213,7 +213,7 @@ def calculate_tax_mock(tax_service_mock: MagicMock) -> AsyncMock:
         tax_ids: list[TaxID],
         tax_exempted: bool,
     ) -> tuple[TaxCalculation, TaxProcessor]:
-        tax_amount = polar_round(amount * 0.20)
+        tax_amount = tarifia_round(amount * 0.20)
         return (
             {
                 "processor_id": "TAX_PROCESSOR_ID",
@@ -511,7 +511,7 @@ class TestUpdate:
             billing_address=Address.model_validate(set_address),
         )
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await order_service.update(
                 session,
                 order,
@@ -1802,7 +1802,7 @@ class TestCreateSubscriptionOrder:
         reset to start fresh for the new period.
         """
         subscription_service_mock = mocker.patch(
-            "polar.order.service.subscription_service", spec=SubscriptionService
+            "tarifia.order.service.subscription_service", spec=SubscriptionService
         )
 
         subscription = await create_active_subscription(
@@ -1852,7 +1852,7 @@ class TestCreateSubscriptionOrder:
         were resetting meters mid-cycle without re-applying benefit credits.
         """
         subscription_service_mock = mocker.patch(
-            "polar.order.service.subscription_service", spec=SubscriptionService
+            "tarifia.order.service.subscription_service", spec=SubscriptionService
         )
 
         subscription = await create_active_subscription(
@@ -2375,7 +2375,7 @@ class TestCreateOrderBalance:
         )
 
         create_balance_from_charge_mock = mocker.patch(
-            "polar.order.service.balance_transaction_service.create_balance_from_charge"
+            "tarifia.order.service.balance_transaction_service.create_balance_from_charge"
         )
         create_balance_from_charge_mock.return_value = (
             Transaction(type=TransactionType.balance, amount=-order.net_amount),
@@ -2387,7 +2387,7 @@ class TestCreateOrderBalance:
         )
 
         platform_fee_transaction_service_mock = mocker.patch(
-            "polar.order.service.platform_fee_transaction_service",
+            "tarifia.order.service.platform_fee_transaction_service",
             spec=PlatformFeeTransactionService,
         )
         platform_fee_transaction_service_mock.create_fees_reversal_balances.return_value = [
@@ -2470,7 +2470,7 @@ class TestSendConfirmationEmail:
         organization: Organization,
     ) -> None:
         create_order_invoice_mock = mocker.patch(
-            "polar.order.service.invoice_service.create_order_invoice",
+            "tarifia.order.service.invoice_service.create_order_invoice",
             new_callable=AsyncMock,
         )
         order = await create_order(
@@ -2499,12 +2499,12 @@ class TestSendConfirmationEmail:
         organization: Organization,
     ) -> None:
         create_order_invoice_mock = mocker.patch(
-            "polar.order.service.invoice_service.create_order_invoice",
+            "tarifia.order.service.invoice_service.create_order_invoice",
             new_callable=AsyncMock,
             return_value="invoices/mock-invoice.pdf",
         )
         get_order_invoice_url_mock = mocker.patch(
-            "polar.order.service.invoice_service.get_order_invoice_url",
+            "tarifia.order.service.invoice_service.get_order_invoice_url",
             new_callable=AsyncMock,
             return_value=("https://mock-s3/invoices/mock-invoice.pdf", utc_now()),
         )
@@ -2536,7 +2536,7 @@ class TestSendConfirmationEmail:
         organization: Organization,
     ) -> None:
         mocker.patch(
-            "polar.order.service.invoice_service.create_order_invoice",
+            "tarifia.order.service.invoice_service.create_order_invoice",
             new_callable=AsyncMock,
         )
         public_benefit = await create_benefit(
@@ -2712,7 +2712,7 @@ class TestGenerateInvoice:
         customer: Customer,
     ) -> None:
         mocker.patch(
-            "polar.order.service.invoice_service.create_order_invoice",
+            "tarifia.order.service.invoice_service.create_order_invoice",
             new_callable=AsyncMock,
             return_value="invoices/generated.pdf",
         )
@@ -2740,7 +2740,7 @@ class TestGenerateInvoice:
         customer: Customer,
     ) -> None:
         create_order_invoice_mock = mocker.patch(
-            "polar.order.service.invoice_service.create_order_invoice",
+            "tarifia.order.service.invoice_service.create_order_invoice",
             new_callable=AsyncMock,
         )
         order = await create_order(
@@ -2857,7 +2857,7 @@ class TestHandlePayment:
     ) -> None:
         # Create a customer with a billing address so that _calculate_tax
         # will actually invoke tax_calculation_service.calculate and produce a non-zero amount.
-        # The mocked calculate returns polar_round(amount * 0.20), so for net_amount=1000 → 200.
+        # The mocked calculate returns tarifia_round(amount * 0.20), so for net_amount=1000 → 200.
         customer_with_address = await create_customer(
             save_fixture,
             organization=organization,
@@ -2948,7 +2948,7 @@ class TestHandlePaymentFailure:
         await save_fixture(order)
 
         mock_mark_past_due = mocker.patch(
-            "polar.subscription.service.subscription.mark_past_due"
+            "tarifia.subscription.service.subscription.mark_past_due"
         )
         mock_mark_past_due.return_value = subscription
 
@@ -2990,12 +2990,12 @@ class TestHandlePaymentFailure:
         await save_fixture(order)
 
         mock_mark_past_due = mocker.patch(
-            "polar.subscription.service.subscription.mark_past_due"
+            "tarifia.subscription.service.subscription.mark_past_due"
         )
         mock_mark_past_due.return_value = subscription
 
         mock_enqueue_benefits_grants = mocker.patch(
-            "polar.subscription.service.subscription.enqueue_benefits_grants"
+            "tarifia.subscription.service.subscription.enqueue_benefits_grants"
         )
 
         await order_service.handle_payment_failure(session, order)
@@ -3032,7 +3032,7 @@ class TestHandlePaymentFailure:
         await save_fixture(order)
 
         mock_mark_past_due = mocker.patch(
-            "polar.subscription.service.subscription.mark_past_due"
+            "tarifia.subscription.service.subscription.mark_past_due"
         )
 
         # When
@@ -3068,7 +3068,7 @@ class TestHandlePaymentFailure:
         await save_fixture(order)
 
         mock_mark_past_due = mocker.patch(
-            "polar.subscription.service.subscription.mark_past_due"
+            "tarifia.subscription.service.subscription.mark_past_due"
         )
 
         # When
@@ -3099,7 +3099,7 @@ class TestHandlePaymentFailure:
         await save_fixture(order)
 
         mock_mark_past_due = mocker.patch(
-            "polar.subscription.service.subscription.mark_past_due"
+            "tarifia.subscription.service.subscription.mark_past_due"
         )
 
         # When
@@ -3151,7 +3151,7 @@ class TestHandlePaymentFailure:
             )
 
         mock_mark_past_due = mocker.patch(
-            "polar.subscription.service.subscription.mark_past_due"
+            "tarifia.subscription.service.subscription.mark_past_due"
         )
 
         # When
@@ -3206,7 +3206,7 @@ class TestHandlePaymentFailure:
             )
 
         mock_mark_past_due = mocker.patch(
-            "polar.subscription.service.subscription.mark_past_due"
+            "tarifia.subscription.service.subscription.mark_past_due"
         )
 
         # When
@@ -3261,9 +3261,9 @@ class TestHandlePaymentFailure:
             )
 
         mock_mark_past_due = mocker.patch(
-            "polar.subscription.service.subscription.mark_past_due"
+            "tarifia.subscription.service.subscription.mark_past_due"
         )
-        mock_revoke = mocker.patch("polar.subscription.service.subscription.revoke")
+        mock_revoke = mocker.patch("tarifia.subscription.service.subscription.revoke")
 
         # When
         result_order = await order_service.handle_payment_failure(session, order)
@@ -3311,9 +3311,9 @@ class TestHandlePaymentFailure:
             )
 
         mock_mark_past_due = mocker.patch(
-            "polar.subscription.service.subscription.mark_past_due"
+            "tarifia.subscription.service.subscription.mark_past_due"
         )
-        mock_revoke = mocker.patch("polar.subscription.service.subscription.revoke")
+        mock_revoke = mocker.patch("tarifia.subscription.service.subscription.revoke")
 
         # When
         result_order = await order_service.handle_payment_failure(session, order)
@@ -3366,7 +3366,7 @@ class TestHandlePaymentFailure:
         )
 
         mock_mark_past_due = mocker.patch(
-            "polar.subscription.service.subscription.mark_past_due"
+            "tarifia.subscription.service.subscription.mark_past_due"
         )
 
         # When
@@ -3412,7 +3412,7 @@ class TestHandlePaymentFailure:
         order.next_payment_attempt_at = utc_now() - timedelta(days=1)  # Past due
         await save_fixture(order)
 
-        mock_revoke = mocker.patch("polar.subscription.service.subscription.revoke")
+        mock_revoke = mocker.patch("tarifia.subscription.service.subscription.revoke")
 
         # When
         result_order = await order_service.handle_payment_failure(session, order)
@@ -3448,7 +3448,7 @@ class TestHandlePaymentFailure:
         order.next_payment_attempt_at = utc_now() - timedelta(days=1)  # Past due
         await save_fixture(order)
 
-        mock_revoke = mocker.patch("polar.subscription.service.subscription.revoke")
+        mock_revoke = mocker.patch("tarifia.subscription.service.subscription.revoke")
 
         # When
         result_order = await order_service.handle_payment_failure(session, order)
@@ -3541,12 +3541,12 @@ class TestHandlePaymentFailure:
             return sub
 
         mock_mark_past_due = mocker.patch(
-            "polar.subscription.service.subscription.mark_past_due",
+            "tarifia.subscription.service.subscription.mark_past_due",
             side_effect=mark_past_due_side_effect,
         )
 
         mock_enqueue_benefits_grants = mocker.patch(
-            "polar.subscription.service.subscription.enqueue_benefits_grants"
+            "tarifia.subscription.service.subscription.enqueue_benefits_grants"
         )
 
         # When
@@ -3596,7 +3596,7 @@ class TestHandlePaymentFailure:
         )
 
         mock_mark_past_due = mocker.patch(
-            "polar.subscription.service.subscription.mark_past_due"
+            "tarifia.subscription.service.subscription.mark_past_due"
         )
         mock_mark_past_due.return_value = subscription
 
@@ -3649,7 +3649,7 @@ class TestHandlePaymentFailure:
             order=order,
         )
 
-        mock_revoke = mocker.patch("polar.subscription.service.subscription.revoke")
+        mock_revoke = mocker.patch("tarifia.subscription.service.subscription.revoke")
 
         # When
         result_order = await order_service.handle_payment_failure(session, order)
@@ -3673,7 +3673,7 @@ class TestProcessDunningOrder:
     ) -> None:
         """Test that process_dunning_order logs warning for orders without subscription"""
         # Given
-        log_mock = mocker.patch("polar.order.service.log")
+        log_mock = mocker.patch("tarifia.order.service.log")
         order = await create_order(
             save_fixture,
             product=product,
@@ -3735,7 +3735,7 @@ class TestProcessDunningOrder:
     ) -> None:
         """Test that process_dunning_order logs warning for subscriptions without payment method"""
         # Given
-        log_mock = mocker.patch("polar.order.service.log")
+        log_mock = mocker.patch("tarifia.order.service.log")
         order = await create_order(
             save_fixture,
             product=product,
@@ -3769,7 +3769,7 @@ class TestProcessDunningOrder:
     ) -> None:
         """Test that process_dunning_order logs warning for subscriptions with a soft deleted payment method"""
         # Given
-        log_mock = mocker.patch("polar.order.service.log")
+        log_mock = mocker.patch("tarifia.order.service.log")
         order = await create_order(
             save_fixture,
             product=product,
@@ -4365,7 +4365,7 @@ class TestTriggerPayment:
         stripe_service_mock.create_payment_intent.side_effect = invalid_request_error
 
         delete_mock = mocker.patch(
-            "polar.order.service.payment_method_service.delete", new=AsyncMock()
+            "tarifia.order.service.payment_method_service.delete", new=AsyncMock()
         )
 
         # When/Then
@@ -4402,7 +4402,7 @@ class TestTriggerPayment:
         stripe_service_mock.create_payment_intent.side_effect = invalid_request_error
 
         delete_mock = mocker.patch(
-            "polar.order.service.payment_method_service.delete", new=AsyncMock()
+            "tarifia.order.service.payment_method_service.delete", new=AsyncMock()
         )
 
         # When/Then - should re-raise the original error, not catch it
@@ -4538,7 +4538,7 @@ class TestTriggerPayment:
 
         descriptor = call_kwargs["statement_descriptor_suffix"]
         assert descriptor.endswith(" TRIAL OVER")
-        from polar.config import settings
+        from tarifia.config import settings
 
         assert len(descriptor) <= settings.stripe_descriptor_suffix_max_length
         assert descriptor.startswith(organization.slug[:4])
@@ -4845,7 +4845,7 @@ class TestProcessRetryPayment:
         )
         await save_fixture(order)
 
-        from polar.order.service import OrderNotEligibleForRetry
+        from tarifia.order.service import OrderNotEligibleForRetry
 
         with pytest.raises(OrderNotEligibleForRetry):
             await order_service.process_retry_payment(
@@ -4927,7 +4927,7 @@ class TestProcessRetryPayment:
         organization: Organization,
     ) -> None:
         """Test that manual retry is rejected when the limit is exceeded."""
-        from polar.config import settings
+        from tarifia.config import settings
 
         subscription = await create_subscription(
             save_fixture, customer=customer, product=product
@@ -5399,7 +5399,7 @@ class TestCreateDraftOrder:
             customer_id=customer.id,
             product_id=uuid.uuid4(),
         )
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await order_service.create_draft_order(
                 session, off_session_organization, payload
             )
@@ -5416,7 +5416,7 @@ class TestCreateDraftOrder:
             customer_id=customer.id,
             product_id=product.id,
         )
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await order_service.create_draft_order(
                 session, off_session_organization, payload
             )
@@ -5438,7 +5438,7 @@ class TestCreateDraftOrder:
             customer_id=customer.id,
             product_id=product.id,
         )
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await order_service.create_draft_order(
                 session, off_session_organization, payload
             )
@@ -5453,7 +5453,7 @@ class TestCreateDraftOrder:
             customer_id=uuid.uuid4(),
             product_id=product_one_time.id,
         )
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await order_service.create_draft_order(
                 session, off_session_organization, payload
             )
@@ -5567,7 +5567,7 @@ class TestCreateDraftOrder:
             product_id=product_one_time.id,
             currency="gbp",
         )
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await order_service.create_draft_order(
                 session, off_session_organization, payload
             )
@@ -5585,7 +5585,7 @@ class TestCreateDraftOrder:
             customer_id=customer.id,
             product_id=product_one_time_custom_price.id,
         )
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await order_service.create_draft_order(
                 session, off_session_organization, payload
             )
@@ -5687,7 +5687,7 @@ class TestCreateDraftOrder:
             product_id=product_one_time.id,
             amount=10,
         )
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await order_service.create_draft_order(
                 session, off_session_organization, payload
             )
@@ -5706,7 +5706,7 @@ class TestCreateDraftOrder:
             product_id=product_one_time.id,
             amount=get_maximum_currency_amount("usd") + 1,
         )
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await order_service.create_draft_order(
                 session, off_session_organization, payload
             )
@@ -5765,7 +5765,7 @@ class TestCreateDraftOrder:
             product_id=product.id,
             custom_field_data={"level": "not-a-number"},
         )
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await order_service.create_draft_order(
                 session, off_session_organization, payload
             )
@@ -5793,7 +5793,7 @@ class TestCreateDraftOrder:
             customer_id=customer.id,
             product_id=product_one_time.id,
         )
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await order_service.create_draft_order(
                 session, off_session_organization, payload
             )
@@ -5838,7 +5838,7 @@ class TestFinalizeOrder:
         )
         original_invoice_number = order.invoice_number
         mocker.patch(
-            "polar.order.repository.OrderRepository.start_finalization",
+            "tarifia.order.repository.OrderRepository.start_finalization",
             new=AsyncMock(return_value=False),
         )
 
@@ -6056,7 +6056,7 @@ class TestFinalizeOrder:
             return settled
 
         upsert_mock = mocker.patch(
-            "polar.order.service.payment_service.upsert_from_stripe_charge",
+            "tarifia.order.service.payment_service.upsert_from_stripe_charge",
             new=AsyncMock(return_value=MagicMock()),
         )
         handle_payment_mock = mocker.patch.object(
@@ -6124,7 +6124,7 @@ class TestFinalizeOrder:
             return settled
 
         mocker.patch(
-            "polar.order.service.payment_service.upsert_from_stripe_charge",
+            "tarifia.order.service.payment_service.upsert_from_stripe_charge",
             new=AsyncMock(return_value=MagicMock()),
         )
         mocker.patch.object(

@@ -1,22 +1,22 @@
-import type { schemas } from '@polar-sh/client'
+import type { schemas } from '@tarifia-sh/client'
 
-import { Input } from '@polar-sh/orbit'
+import { Input } from '@tarifia-sh/orbit'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
-import { TextArea } from '@polar-sh/orbit'
-import { Checkbox } from '@polar-sh/ui/components/ui/checkbox'
+} from '@tarifia-sh/orbit'
+import { TextArea } from '@tarifia-sh/orbit'
+import { Checkbox } from '@tarifia-sh/ui/components/ui/checkbox'
 import {
   FormControl,
   FormDescription,
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import type { MarkdownToJSX } from 'markdown-to-jsx'
 import Markdown from 'markdown-to-jsx'
 import type { ControllerRenderProps } from 'react-hook-form'

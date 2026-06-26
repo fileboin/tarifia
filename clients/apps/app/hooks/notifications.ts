@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useListNotifications } from './polar/notifications'
+import { useListNotifications } from './tarifia/notifications'
 
 export const useNotificationsBadge = () => {
   const [showBadge, setShowBadge] = useState(false)

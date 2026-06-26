@@ -1,8 +1,8 @@
 import { useUpdateMember } from '@/hooks/queries/members'
 import { setValidationErrors } from '@/utils/api/errors'
-import { isValidationError, schemas } from '@polar-sh/client'
-import { Button, Input, Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
+import { isValidationError, schemas } from '@tarifia-sh/client'
+import { Button, Input, Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
 import {
   Form,
   FormControl,
@@ -11,7 +11,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { useForm } from 'react-hook-form'
 import { MemberSeats } from './MemberSeats'
 import { toast } from '../Toast/use-toast'

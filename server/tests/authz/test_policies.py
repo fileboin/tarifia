@@ -1,12 +1,12 @@
 import pytest
 
-from polar.auth.models import AuthSubject
-from polar.authz.policies import finance as finance_policy
-from polar.authz.policies import members
-from polar.authz.policies import organization as org_policy
-from polar.models import Organization, User
-from polar.models.user_organization import OrganizationRole, UserOrganization
-from polar.postgres import AsyncSession
+from tarifia.auth.models import AuthSubject
+from tarifia.authz.policies import finance as finance_policy
+from tarifia.authz.policies import members
+from tarifia.authz.policies import organization as org_policy
+from tarifia.models import Organization, User
+from tarifia.models.user_organization import OrganizationRole, UserOrganization
+from tarifia.postgres import AsyncSession
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 

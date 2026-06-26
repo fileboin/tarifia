@@ -1,5 +1,5 @@
 import AddPhotoAlternateOutlined from '@mui/icons-material/AddPhotoAlternateOutlined'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { ReactNode, useCallback, useState } from 'react'
 import { FileRejection } from 'react-dropzone'
 import { twMerge } from 'tailwind-merge'
@@ -18,15 +18,15 @@ const DropzoneView = ({
       className={twMerge(
         'flex aspect-video w-full cursor-pointer items-center justify-center rounded-2xl border border-transparent px-4',
         isDragActive
-          ? 'dark:border-polar-700 dark:bg-polar-950 border-blue-100 bg-blue-50'
-          : 'dark:border-polar-700 bg-gray-100 dark:bg-transparent',
+          ? 'dark:border-tarifia-700 dark:bg-tarifia-950 border-blue-100 bg-blue-50'
+          : 'dark:border-tarifia-700 bg-gray-100 dark:bg-transparent',
       )}
     >
-      <div className="dark:text-polar-500 text-center text-gray-500">
+      <div className="dark:text-tarifia-500 text-center text-gray-500">
         <div className="mb-4">
           <AddPhotoAlternateOutlined fontSize="medium" />
         </div>
-        <p className="dark:text-polar-200 text-xs font-medium text-gray-700">
+        <p className="dark:text-tarifia-200 text-xs font-medium text-gray-700">
           {isDragActive ? "Drop it like it's hot" : 'Add product media'}
         </p>
         <p className="mt-2 text-xs">

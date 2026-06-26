@@ -1,6 +1,6 @@
 import { useDiscordGuild } from '@/hooks/queries'
 import { getBotDiscordAuthorizeURL } from '@/utils/auth'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import {
   Button,
   Checkbox,
@@ -14,7 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
   TextArea,
-} from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
 import {
   FormControl,
   FormDescription,
@@ -22,7 +22,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { XIcon } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import React, { useMemo } from 'react'
@@ -113,7 +113,7 @@ const BenefitForm = ({
             <FormItem>
               <div className="flex flex-row items-center justify-between">
                 <FormLabel>Description</FormLabel>
-                <span className="dark:text-polar-400 text-sm text-gray-400">
+                <span className="dark:text-tarifia-400 text-sm text-gray-400">
                   {field.value?.length ?? 0} / 42
                 </span>
               </div>
@@ -178,7 +178,7 @@ const CustomBenefitForm = ({}: CustomBenefitFormProps) => {
           <FormItem>
             <div className="flex flex-row items-center justify-between">
               <FormLabel>Private note</FormLabel>
-              <span className="dark:text-polar-500 text-sm text-gray-500">
+              <span className="dark:text-tarifia-500 text-sm text-gray-500">
                 Markdown Format
               </span>
             </div>
@@ -283,11 +283,11 @@ const DiscordBenefitForm = () => {
   }, [pathname, description])
 
   const { data: discordGuild } = useDiscordGuild(guildToken)
-  const polarBotRolePosition = useMemo(() => {
+  const tarifiaBotRolePosition = useMemo(() => {
     if (!discordGuild) {
       return undefined
     }
-    return discordGuild.roles.find(({ is_polar_bot }) => is_polar_bot)?.position
+    return discordGuild.roles.find(({ is_tarifia_bot }) => is_tarifia_bot)?.position
   }, [discordGuild])
 
   return (
@@ -335,9 +335,9 @@ const DiscordBenefitForm = () => {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
-                          {polarBotRolePosition &&
+                          {tarifiaBotRolePosition &&
                             discordGuild.roles.map((role, index) =>
-                              role.is_polar_bot ? (
+                              role.is_tarifia_bot ? (
                                 <React.Fragment key={role.id}>
                                   {index > 0 && ( // Don't show it if it's already first
                                     <>
@@ -361,7 +361,7 @@ const DiscordBenefitForm = () => {
                                   key={role.id}
                                   value={role.id}
                                   disabled={
-                                    role.position > polarBotRolePosition
+                                    role.position > tarifiaBotRolePosition
                                   }
                                 >
                                   <div className="flex items-center gap-2">
@@ -379,7 +379,7 @@ const DiscordBenefitForm = () => {
                     </Select>
                   </FormControl>
                   <FormDescription>
-                    To grant a specific role, our Polar bot role should be above
+                    To grant a specific role, our Tarifia bot role should be above
                     it in the hierarchy list. You can do so from{' '}
                     <span className="font-medium">Server Settings</span> →{' '}
                     <span className="font-medium">Roles</span> in Discord.

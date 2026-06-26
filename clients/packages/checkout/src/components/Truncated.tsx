@@ -5,7 +5,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@polar-sh/ui/components/ui/tooltip'
+} from '@tarifia-sh/ui/components/ui/tooltip'
 import { useEffect, useId, useRef, useState } from 'react'
 
 export interface Props {

@@ -14,10 +14,10 @@ from datetime import UTC, datetime
 
 import pytest
 
-from polar.backoffice.organizations_v2.endpoints import count_test_sales
-from polar.models import Account, UserOrganization
-from polar.models.order import OrderStatus
-from polar.postgres import AsyncSession
+from tarifia.backoffice.organizations_v2.endpoints import count_test_sales
+from tarifia.models import Account, UserOrganization
+from tarifia.models.order import OrderStatus
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_customer,

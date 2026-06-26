@@ -29,7 +29,7 @@ export const CreditsPage = () => {
       <FeaturePageGraphic graphic={CreditArc} />
 
       <FeaturePageIntro>
-        Customers prepay for usage and Polar deducts from the balance as events
+        Customers prepay for usage and Tarifia deducts from the balance as events
         arrive. When the balance reaches zero, the meter falls back to your
         metered price or stops, depending on how you configure it.
       </FeaturePageIntro>
@@ -134,7 +134,7 @@ export const CreditsPage = () => {
 
       <FeatureSection title="Enforcement is yours">
         <p>
-          Polar deliberately stops short of blocking usage on its own. When a
+          Tarifia deliberately stops short of blocking usage on its own. When a
           balance hits zero, the API surfaces the empty state and your
           application decides what happens next.
         </p>
@@ -145,14 +145,14 @@ export const CreditsPage = () => {
           customer tops up. Those are product decisions, not billing ones.
         </p>
         <p>
-          Polar&apos;s job is to keep the balance accurate and the API current,
+          Tarifia&apos;s job is to keep the balance accurate and the API current,
           so the rule you write in your code can rely on the number it reads.
         </p>
       </FeatureSection>
 
       <FeatureCTA
         title="Add a Credits benefit"
-        description="Attach credits to a product and Polar handles the bookkeeping."
+        description="Attach credits to a product and Tarifia handles the bookkeeping."
       />
     </FeaturePageLayout>
   )

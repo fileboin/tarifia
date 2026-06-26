@@ -1,6 +1,6 @@
-import { Truncated } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
-import { Text } from '@polar-sh/orbit'
+import { Truncated } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Text } from '@tarifia-sh/orbit'
 import type { PropRow } from '@/components/docs'
 import { Example, PageHeader, PropsTable, Section } from '@/components/docs'
 

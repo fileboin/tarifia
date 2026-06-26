@@ -1,7 +1,7 @@
 import pytest
 from sqlalchemy import select
 
-from polar.models import (
+from tarifia.models import (
     Benefit,
     Customer,
     Downloadable,
@@ -10,10 +10,10 @@ from polar.models import (
     Organization,
     Product,
 )
-from polar.models.benefit import BenefitType
-from polar.models.downloadable import DownloadableStatus
-from polar.models.subscription import SubscriptionStatus
-from polar.postgres import AsyncSession
+from tarifia.models.benefit import BenefitType
+from tarifia.models.downloadable import DownloadableStatus
+from tarifia.models.subscription import SubscriptionStatus
+from tarifia.postgres import AsyncSession
 from scripts.backfill_member_downloadables import run_backfill
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (

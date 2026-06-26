@@ -1,5 +1,5 @@
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
 import { MarginPulse } from './graphics/MarginPulse'
 import { SectionHeader } from './SectionHeader'
 
@@ -71,7 +71,7 @@ export const CostInsights = () => {
     >
       <SectionHeader
         title="Your power users cost you money"
-        description="Polar breaks down LLM spend customer by customer, so you catch the ones bleeding your margins before they bleed your runway."
+        description="Tarifia breaks down LLM spend customer by customer, so you catch the ones bleeding your margins before they bleed your runway."
       />
 
       <Box

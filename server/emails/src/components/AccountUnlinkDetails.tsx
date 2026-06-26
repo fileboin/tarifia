@@ -35,9 +35,9 @@ export function AccountUnlinkDetails({
                   </Text>{' '}
                   at{' '}
                   <Link
-                    href={`https://polar.com/dashboard/${org}/finance/account`}
+                    href={`https://tarifia.com/dashboard/${org}/finance/account`}
                   >
-                    https://polar.com/dashboard/{org}/finance/account
+                    https://tarifia.com/dashboard/{org}/finance/account
                   </Link>
                 </li>
               ))}

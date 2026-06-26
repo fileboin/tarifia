@@ -4,13 +4,13 @@ from typing import Any
 import pytest
 from pydantic import TypeAdapter
 
-from polar.customer.repository import CustomerRepository
-from polar.customer.schemas.customer import CustomerResponse as Customer
-from polar.customer.schemas.state import CustomerState
-from polar.models import Organization
-from polar.models.customer import Customer as CustomerModel
-from polar.models.customer import CustomerType
-from polar.postgres import AsyncSession
+from tarifia.customer.repository import CustomerRepository
+from tarifia.customer.schemas.customer import CustomerResponse as Customer
+from tarifia.customer.schemas.state import CustomerState
+from tarifia.models import Organization
+from tarifia.models.customer import Customer as CustomerModel
+from tarifia.models.customer import CustomerType
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_customer
 

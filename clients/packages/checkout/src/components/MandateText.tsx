@@ -2,7 +2,7 @@ import {
   DEFAULT_LOCALE,
   useTranslations,
   type AcceptedLocale,
-} from '@polar-sh/i18n'
+} from '@tarifia-sh/i18n'
 
 const BUYER_TERMS_PLACEHOLDER = '{buyerTermsLink}'
 
@@ -38,12 +38,12 @@ export const MandateText = ({
   const [prefix, suffix] = mandate.split(BUYER_TERMS_PLACEHOLDER)
 
   return (
-    <p className="dark:text-polar-500 text-center text-xs text-gray-500">
+    <p className="dark:text-tarifia-500 text-center text-xs text-gray-500">
       {prefix}
       {suffix !== undefined && (
         <>
           <a
-            href="https://polar.sh/legal/checkout-buyer-terms"
+            href="https://tarifia.sh/legal/checkout-buyer-terms"
             target="_blank"
             rel="noreferrer"
             className="underline"

@@ -1,5 +1,5 @@
-import type { Client } from '@polar-sh/client'
-import type { AcceptedLocale } from '@polar-sh/i18n'
+import type { Client } from '@tarifia-sh/client'
+import type { AcceptedLocale } from '@tarifia-sh/i18n'
 import { render } from '@testing-library/react'
 import { useEffect } from 'react'
 import { vi } from 'vitest'

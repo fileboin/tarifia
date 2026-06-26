@@ -1,12 +1,12 @@
 'use client'
 
-import type { schemas } from '@polar-sh/client'
+import type { schemas } from '@tarifia-sh/client'
 
 import {
   DEFAULT_LOCALE,
   useTranslations,
   type AcceptedLocale,
-} from '@polar-sh/i18n'
+} from '@tarifia-sh/i18n'
 import type {
   ConfirmationToken,
   Stripe,
@@ -82,7 +82,7 @@ export const CheckoutFormProvider = ({
       } else {
         if (error) {
           switch (error.error) {
-            case 'PolarRequestValidationError':
+            case 'TarifiaRequestValidationError':
             case 'RequestValidationError':
               setValidationErrors(error.detail, setError)
               break
@@ -114,7 +114,7 @@ export const CheckoutFormProvider = ({
 
       if (error) {
         switch (error.error) {
-          case 'PolarRequestValidationError':
+          case 'TarifiaRequestValidationError':
           case 'RequestValidationError':
             setValidationErrors(error.detail, setError)
             break

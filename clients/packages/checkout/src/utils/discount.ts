@@ -1,6 +1,6 @@
-import type { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
-import type { AcceptedLocale } from '@polar-sh/i18n'
+import type { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
+import type { AcceptedLocale } from '@tarifia-sh/i18n'
 
 type CheckoutDiscount =
   | schemas['CheckoutDiscountPercentageOnceForeverDuration']

@@ -23,7 +23,7 @@ Switch a subscription to a different recurring product — the standard upgrade 
 
 ```bash cURL
 curl --request PATCH \
-  --url https://api.polar.sh/v1/subscriptions/{subscription_id} \
+  --url https://api.tarifia.sh/v1/subscriptions/{subscription_id} \
   --header 'Authorization: Bearer <TOKEN>' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -33,7 +33,7 @@ curl --request PATCH \
 ```
 
 ```py Python
-polar.subscriptions.update(
+tarifia.subscriptions.update(
     id="<subscription_id>",
     subscription_update={
         "product_id": "<new_product_id>",
@@ -52,7 +52,7 @@ For [seat-based subscriptions](/features/seat-based-pricing), update how many se
 
 ```bash cURL
 curl --request PATCH \
-  --url https://api.polar.sh/v1/subscriptions/{subscription_id} \
+  --url https://api.tarifia.sh/v1/subscriptions/{subscription_id} \
   --header 'Authorization: Bearer <TOKEN>' \
   --header 'Content-Type: application/json' \
   --data '{ "seats": 25, "proration_behavior": "invoice" }'
@@ -64,7 +64,7 @@ Attach a [discount](/features/discounts) to an active subscription, or remove th
 
 ```bash cURL
 curl --request PATCH \
-  --url https://api.polar.sh/v1/subscriptions/{subscription_id} \
+  --url https://api.tarifia.sh/v1/subscriptions/{subscription_id} \
   --header 'Authorization: Bearer <TOKEN>' \
   --header 'Content-Type: application/json' \
   --data '{ "discount_id": "<discount_id>" }'
@@ -79,7 +79,7 @@ You can add, extend, or end a [trial](/features/subscriptions/trials) on any sub
 
 ```bash cURL
 curl --request PATCH \
-  --url https://api.polar.sh/v1/subscriptions/{subscription_id} \
+  --url https://api.tarifia.sh/v1/subscriptions/{subscription_id} \
   --header 'Authorization: Bearer <TOKEN>' \
   --header 'Content-Type: application/json' \
   --data '{ "trial_end": "2026-06-01T00:00:00Z" }'
@@ -91,7 +91,7 @@ If you need to move a subscription's renewal date — for example, to align seve
 
 ```bash cURL
 curl --request PATCH \
-  --url https://api.polar.sh/v1/subscriptions/{subscription_id} \
+  --url https://api.tarifia.sh/v1/subscriptions/{subscription_id} \
   --header 'Authorization: Bearer <TOKEN>' \
   --header 'Content-Type: application/json' \
   --data '{ "current_billing_period_end": "2026-07-15T00:00:00Z" }'
@@ -99,7 +99,7 @@ curl --request PATCH \
 
 ## Cancel or revoke
 
-Polar distinguishes between **canceling** and **revoking** a subscription. Both end the customer's access eventually — the difference is when.
+Tarifia distinguishes between **canceling** and **revoking** a subscription. Both end the customer's access eventually — the difference is when.
 
 ### Cancel at period end
 
@@ -113,7 +113,7 @@ This is the gentler option and the one customers trigger themselves from the [Cu
 
 ```bash cURL
 curl --request PATCH \
-  --url https://api.polar.sh/v1/subscriptions/{subscription_id} \
+  --url https://api.tarifia.sh/v1/subscriptions/{subscription_id} \
   --header 'Authorization: Bearer <TOKEN>' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -139,7 +139,7 @@ Use this when access needs to stop immediately — a terms-of-service violation,
 
 ```bash cURL
 curl --request DELETE \
-  --url https://api.polar.sh/v1/subscriptions/{subscription_id} \
+  --url https://api.tarifia.sh/v1/subscriptions/{subscription_id} \
   --header 'Authorization: Bearer <TOKEN>'
 ```
 
@@ -154,7 +154,7 @@ If a subscription is set to cancel at period end and hasn't ended yet, you (or t
 
 ```bash cURL
 curl --request PATCH \
-  --url https://api.polar.sh/v1/subscriptions/{subscription_id} \
+  --url https://api.tarifia.sh/v1/subscriptions/{subscription_id} \
   --header 'Authorization: Bearer <TOKEN>' \
   --header 'Content-Type: application/json' \
   --data '{ "cancel_at_period_end": false }'

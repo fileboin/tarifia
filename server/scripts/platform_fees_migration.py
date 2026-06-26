@@ -7,11 +7,11 @@ import structlog
 import typer
 from sqlalchemy import select
 
-from polar.kit.db.postgres import create_async_sessionmaker
-from polar.models import IssueReward, Pledge, Transaction
-from polar.models.transaction import TransactionType
-from polar.postgres import create_async_engine
-from polar.transaction.service.platform_fee import (
+from tarifia.kit.db.postgres import create_async_sessionmaker
+from tarifia.models import IssueReward, Pledge, Transaction
+from tarifia.models.transaction import TransactionType
+from tarifia.postgres import create_async_engine
+from tarifia.transaction.service.platform_fee import (
     platform_fee_transaction as platform_fee_transaction_service,
 )
 
@@ -86,8 +86,8 @@ async def platform_fees_migration(
                     )
                     assert issue_reward is not None
                     share_amount = issue_reward.get_share_amount(pledge)
-                    polar_fee = share_amount - abs(incoming.amount)
-                    polar_fee_percentage = (polar_fee / share_amount) * 100
+                    tarifia_fee = share_amount - abs(incoming.amount)
+                    tarifia_fee_percentage = (tarifia_fee / share_amount) * 100
 
                     outgoing.amount = -share_amount
                     outgoing.account_amount = -share_amount
@@ -96,8 +96,8 @@ async def platform_fees_migration(
                     incoming.account_currency = outgoing.currency
 
                 else:
-                    polar_fee = payment.amount - abs(incoming.amount)
-                    polar_fee_percentage = (polar_fee / abs(payment.amount)) * 100
+                    tarifia_fee = payment.amount - abs(incoming.amount)
+                    tarifia_fee_percentage = (tarifia_fee / abs(payment.amount)) * 100
 
                     outgoing.amount = -payment.amount
                     outgoing.account_amount = -payment.amount
@@ -115,11 +115,11 @@ async def platform_fees_migration(
                     outgoing_reversal.created_at = outgoing.created_at
                     incoming_reversal.created_at = incoming.created_at
 
-                    outgoing_reversal.amount = -polar_fee
-                    outgoing_reversal.account_amount = -polar_fee
+                    outgoing_reversal.amount = -tarifia_fee
+                    outgoing_reversal.account_amount = -tarifia_fee
                     outgoing_reversal.account_currency = payment.currency
-                    incoming_reversal.amount = polar_fee
-                    incoming_reversal.account_amount = polar_fee
+                    incoming_reversal.amount = tarifia_fee
+                    incoming_reversal.account_amount = tarifia_fee
                     incoming_reversal.account_currency = payment.currency
 
                     outgoing_reversal.processor = outgoing.processor
@@ -141,8 +141,8 @@ async def platform_fees_migration(
                     actual_percentage = abs(
                         outgoing_reversal.amount / outgoing.amount * 100
                     )
-                    assert actual_percentage == polar_fee_percentage, (
-                        f"Nope: {actual_percentage} != {polar_fee_percentage}"
+                    assert actual_percentage == tarifia_fee_percentage, (
+                        f"Nope: {actual_percentage} != {tarifia_fee_percentage}"
                     )
 
                     typer.echo(

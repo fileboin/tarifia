@@ -1,7 +1,7 @@
 'use client'
 
 import CloseOutlined from '@mui/icons-material/CloseOutlined'
-import { Tabs, TabsList, TabsTrigger } from '@polar-sh/orbit'
+import { Tabs, TabsList, TabsTrigger } from '@tarifia-sh/orbit'
 import React from 'react'
 import { CurrencySelector } from '../../../CurrencySelector'
 
@@ -60,7 +60,7 @@ export const CurrencyTabs: React.FC<CurrencyTabsProps> = ({
                           onRemoveCurrency(currency)
                         }
                       }}
-                      className="dark:text-polar-400 dark:hover:text-polar-200 cursor-pointer items-center justify-center text-gray-400 hover:text-gray-600"
+                      className="dark:text-tarifia-400 dark:hover:text-tarifia-200 cursor-pointer items-center justify-center text-gray-400 hover:text-gray-600"
                     >
                       <CloseOutlined fontSize="inherit" />
                     </span>

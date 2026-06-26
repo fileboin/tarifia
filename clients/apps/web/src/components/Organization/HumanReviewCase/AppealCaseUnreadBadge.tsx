@@ -1,6 +1,6 @@
 'use client'
 
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { motion } from 'motion/react'
 import React from 'react'
 import { useAppealCaseUnreadCount } from './appealCaseUnread'

@@ -7,13 +7,13 @@ import stripe as stripe_lib
 from httpx import AsyncClient
 from pytest_mock import MockerFixture
 
-from polar.integrations.stripe.service import StripeService
-from polar.kit.utils import utc_now
-from polar.kit.visibility import Visibility
-from polar.models import Customer, Organization, Product
-from polar.models.order import OrderStatus
-from polar.models.payment import PaymentStatus
-from polar.postgres import AsyncSession
+from tarifia.integrations.stripe.service import StripeService
+from tarifia.kit.utils import utc_now
+from tarifia.kit.visibility import Visibility
+from tarifia.models import Customer, Organization, Product
+from tarifia.models.order import OrderStatus
+from tarifia.models.payment import PaymentStatus
+from tarifia.postgres import AsyncSession
 from tests.fixtures.auth import CUSTOMER_AUTH_SUBJECT
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
@@ -28,7 +28,7 @@ from tests.fixtures.random_objects import (
 @pytest.fixture(autouse=True)
 def stripe_service_mock(mocker: MockerFixture) -> MagicMock:
     mock = MagicMock(spec=StripeService)
-    mocker.patch("polar.order.service.stripe_service", new=mock)
+    mocker.patch("tarifia.order.service.stripe_service", new=mock)
     return mock
 
 
@@ -536,7 +536,7 @@ class TestGetOrderReceipt:
         order.receipt_number = "RCPT-FOO-0001"
         await save_fixture(order)
 
-        enqueue_mock = mocker.patch("polar.receipt.service.enqueue_job")
+        enqueue_mock = mocker.patch("tarifia.receipt.service.enqueue_job")
 
         response = await client.get(f"/v1/customer-portal/orders/{order.id}/receipt")
 
@@ -557,7 +557,7 @@ class TestGetOrderReceipt:
         order.receipt_path = f"{order.organization_id}/{order.id}/receipt.pdf"
         await save_fixture(order)
 
-        s3_mock = mocker.patch("polar.receipt.service.S3Service")
+        s3_mock = mocker.patch("tarifia.receipt.service.S3Service")
         s3_mock.return_value.generate_presigned_download_url.return_value = (
             "https://example.com/signed-url",
             datetime(2030, 1, 1, tzinfo=UTC),

@@ -12,14 +12,14 @@ import {
   getAPIParams,
   serializeSearchParams,
 } from '@/utils/datatable'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import {
   DataTable,
   DataTableColumnDef,
   DataTableColumnHeader,
-} from '@polar-sh/orbit'
-import FormattedDateTime from '@polar-sh/ui/components/atoms/FormattedDateTime'
-import { Input } from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
+import FormattedDateTime from '@tarifia-sh/ui/components/atoms/FormattedDateTime'
+import { Input } from '@tarifia-sh/orbit'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
@@ -211,7 +211,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
               <div className="overflow-hidden text-ellipsis">
                 {customerName || customerEmail}
                 {showBillingName && (
-                  <span className="dark:text-polar-500 ml-2 text-gray-500">
+                  <span className="dark:text-tarifia-500 ml-2 text-gray-500">
                     {customerBillingName}
                   </span>
                 )}

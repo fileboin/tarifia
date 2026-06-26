@@ -2,12 +2,12 @@ from datetime import timedelta
 
 import pytest
 
-from polar.checkout.repository import CheckoutRepository
-from polar.kit.utils import utc_now
-from polar.models import Organization, Product
-from polar.models.checkout import CheckoutStatus
-from polar.models.discount import DiscountDuration, DiscountType
-from polar.postgres import AsyncSession
+from tarifia.checkout.repository import CheckoutRepository
+from tarifia.kit.utils import utc_now
+from tarifia.models import Organization, Product
+from tarifia.models.checkout import CheckoutStatus
+from tarifia.models.discount import DiscountDuration, DiscountType
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_checkout, create_discount
 

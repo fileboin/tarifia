@@ -1,12 +1,12 @@
 'use client'
 
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
-} from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
 
 const PRORATION_BEHAVIOR_LABELS: Record<
   schemas['SubscriptionProrationBehavior'],

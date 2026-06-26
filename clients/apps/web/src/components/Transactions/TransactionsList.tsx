@@ -5,16 +5,16 @@ import {
 } from '@/utils/datatable'
 import { isTransaction, platformFeesDisplayNames } from '@/utils/transaction'
 import { ISODuration } from '@/utils/duration'
-import { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
+import { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
 import {
   DataTable,
   DataTableColumnDef,
   DataTableColumnHeader,
   ReactQueryLoading,
-} from '@polar-sh/orbit'
-import FormattedDateTime from '@polar-sh/ui/components/atoms/FormattedDateTime'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
+import FormattedDateTime from '@tarifia-sh/ui/components/atoms/FormattedDateTime'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@tarifia-sh/orbit'
 import TransactionMeta from './TransactionMeta'
 import { TransactionAvailabilityStatus } from './TransactionAvailabilityStatus'
 
@@ -127,7 +127,7 @@ const TransactionsList = ({
                 </TooltipTrigger>
                 <TooltipContent className="flex flex-col gap-1.5">
                   <div className="flex justify-between gap-6">
-                    <span className="dark:text-polar-400 text-gray-500">
+                    <span className="dark:text-tarifia-400 text-gray-500">
                       Presentment amount
                     </span>
                     <span>
@@ -140,7 +140,7 @@ const TransactionsList = ({
                     </span>
                   </div>
                   <div className="flex justify-between gap-6">
-                    <span className="dark:text-polar-400 text-gray-500 uppercase">
+                    <span className="dark:text-tarifia-400 text-gray-500 uppercase">
                       FX (
                       {paymentTransaction.presentment_currency ??
                         paymentTransaction.currency}{' '}
@@ -226,7 +226,7 @@ const TransactionsList = ({
                 </TooltipTrigger>
                 <TooltipContent className="flex flex-col gap-1.5">
                   <div className="flex justify-between gap-6">
-                    <span className="dark:text-polar-400 text-gray-500">
+                    <span className="dark:text-tarifia-400 text-gray-500">
                       Presentment amount
                     </span>
                     <span>
@@ -238,7 +238,7 @@ const TransactionsList = ({
                     </span>
                   </div>
                   <div className="flex justify-between gap-6">
-                    <span className="dark:text-polar-400 text-gray-500 uppercase">
+                    <span className="dark:text-tarifia-400 text-gray-500 uppercase">
                       FX (
                       {paymentTransaction.presentment_currency ??
                         paymentTransaction.currency}{' '}

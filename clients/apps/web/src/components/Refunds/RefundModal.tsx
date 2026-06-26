@@ -1,17 +1,17 @@
 import { useCreateRefund } from '@/hooks/queries'
 import { extractApiErrorMessage } from '@/utils/api/errors'
-import { enums, schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
-import { Button } from '@polar-sh/orbit'
-import MoneyInput from '@polar-sh/ui/components/atoms/MoneyInput'
+import { enums, schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
+import { Button } from '@tarifia-sh/orbit'
+import MoneyInput from '@tarifia-sh/ui/components/atoms/MoneyInput'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
-import { Checkbox } from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
+import { Checkbox } from '@tarifia-sh/orbit'
 import {
   Form,
   FormControl,
@@ -19,7 +19,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { useForm, useWatch } from 'react-hook-form'
 import { toast } from '../Toast/use-toast'
 import { RefundReasonDisplay } from './utils'
@@ -88,7 +88,7 @@ export const RefundModal = ({ order, hide }: RefundModalProps) => {
   return (
     <div className="flex flex-col gap-8 overflow-y-auto px-8 py-12">
       <h2 className="text-xl">Refund Order</h2>
-      <p className="dark:text-polar-500 text-gray-500">
+      <p className="dark:text-tarifia-500 text-gray-500">
         You can refund in part or full. Your customer will see it on their bank
         statement in 5-10 days.
       </p>
@@ -128,7 +128,7 @@ export const RefundModal = ({ order, hide }: RefundModalProps) => {
                             shouldDirty: true,
                           })
                         }
-                        className="dark:text-polar-400 dark:hover:text-polar-200 text-xs text-gray-500 underline hover:text-gray-900"
+                        className="dark:text-tarifia-400 dark:hover:text-tarifia-200 text-xs text-gray-500 underline hover:text-gray-900"
                       >
                         Refund fully
                       </button>
@@ -142,9 +142,9 @@ export const RefundModal = ({ order, hide }: RefundModalProps) => {
                     />
                   </FormControl>
                   {amount > 0 && amount <= maximumRefundAmount && (
-                    <p className="dark:text-polar-400 text-xs text-gray-500">
+                    <p className="dark:text-tarifia-400 text-xs text-gray-500">
                       Customer will be refunded{' '}
-                      <span className="dark:text-polar-200 font-medium text-gray-900">
+                      <span className="dark:text-tarifia-200 font-medium text-gray-900">
                         {formatCurrency('compact')(
                           previewTotal,
                           order.currency,
@@ -216,14 +216,14 @@ export const RefundModal = ({ order, hide }: RefundModalProps) => {
               />
             )}
           </div>
-          <div className="dark:text-polar-500 dark:bg-polar-800 space-y-1.5 rounded-xl bg-gray-50 p-3 text-sm text-gray-500">
+          <div className="dark:text-tarifia-500 dark:bg-tarifia-800 space-y-1.5 rounded-xl bg-gray-50 p-3 text-sm text-gray-500">
             <p>
               The original payment processing fees stay deducted from your
               balance. No additional fees are charged for the refund itself.
             </p>
             <p>
               <a
-                href="https://polar.sh/docs/features/refunds"
+                href="https://tarifia.sh/docs/features/refunds"
                 className="underline hover:no-underline"
                 target="_blank"
                 rel="noreferrer noopener"

@@ -4,9 +4,9 @@ import {
   SyntaxHighlighterClient,
   SyntaxHighlighterProvider,
 } from '@/components/SyntaxHighlighterShiki/SyntaxHighlighterClient'
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
-import { Button } from '@polar-sh/orbit'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Button } from '@tarifia-sh/orbit'
 import { SectionHeader } from './SectionHeader'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -17,15 +17,15 @@ const CASES = [
     id: 'completions',
     file: 'completions.ts',
     title: 'AI completions',
-    desc: 'Wrap any model from the Vercel AI SDK with the Polar LLMStrategy. Token usage is metered and billed automatically on every call.',
+    desc: 'Wrap any model from the Vercel AI SDK with the Tarifia LLMStrategy. Token usage is metered and billed automatically on every call.',
     docsHref:
       '/docs/features/usage-based-billing/ingestion-strategies/llm-strategy',
-    snippet: `import { Ingestion } from '@polar-sh/ingestion'
-import { LLMStrategy } from '@polar-sh/ingestion/strategies/LLM'
+    snippet: `import { Ingestion } from '@tarifia-sh/ingestion'
+import { LLMStrategy } from '@tarifia-sh/ingestion/strategies/LLM'
 import { generateText } from 'ai'
 import { openai } from '@ai-sdk/openai'
 
-const llm = Ingestion({ accessToken: process.env.POLAR_ACCESS_TOKEN })
+const llm = Ingestion({ accessToken: process.env.TARIFIA_ACCESS_TOKEN })
   .strategy(new LLMStrategy(openai('gpt-4o')))
   .ingest('openai-usage')
 
@@ -40,7 +40,7 @@ const { text } = await generateText({
     title: 'Autonomous agents',
     desc: 'Charge per agent run with step-level granularity. Price success and failure differently, retry without double-billing, settle at end of run.',
     docsHref: '/docs/features/usage-based-billing/event-ingestion',
-    snippet: `await polar.events.ingest({
+    snippet: `await tarifia.events.ingest({
   events: [{
     name: 'agent.run.completed',
     externalCustomerId: org.id,
@@ -64,7 +64,7 @@ const { text } = await generateText({
     title: 'GPU & compute',
     desc: 'Meter fine-tuning jobs, hosted inference, and training runs by the second. One event per job, billed at whatever rate you set.',
     docsHref: '/docs/features/usage-based-billing/meters',
-    snippet: `await polar.events.ingest({
+    snippet: `await tarifia.events.ingest({
   events: [{
     name: 'gpu.runtime',
     externalCustomerId: team.id,
@@ -90,7 +90,7 @@ export const UseCases = () => {
       >
         <SectionHeader
           title="Turn any AI workload into revenue"
-          description="From token-metered APIs to autonomous agents and GPU workloads. Polar fits how modern AI products actually charge."
+          description="From token-metered APIs to autonomous agents and GPU workloads. Tarifia fits how modern AI products actually charge."
         />
 
         <Box
@@ -101,7 +101,7 @@ export const UseCases = () => {
           borderColor="border-primary"
           backgroundColor="background-secondary"
         >
-          <div className="dark:border-polar-700 flex overflow-x-auto border-b border-gray-200 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="dark:border-tarifia-700 flex overflow-x-auto border-b border-gray-200 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {CASES.map((c) => {
               const isActive = c.id === activeId
               return (
@@ -110,10 +110,10 @@ export const UseCases = () => {
                   onClick={() => setActiveId(c.id)}
                   className={twMerge(
                     'shrink-0 border-r px-5 py-3 font-mono text-xs transition-colors',
-                    'dark:border-polar-700 border-gray-200',
+                    'dark:border-tarifia-700 border-gray-200',
                     isActive
-                      ? 'dark:bg-polar-800 bg-white text-gray-900 dark:text-white'
-                      : 'dark:text-polar-500 dark:hover:text-polar-200 text-gray-500 hover:text-gray-900',
+                      ? 'dark:bg-tarifia-800 bg-white text-gray-900 dark:text-white'
+                      : 'dark:text-tarifia-500 dark:hover:text-tarifia-200 text-gray-500 hover:text-gray-900',
                   )}
                 >
                   {c.file}
@@ -143,14 +143,14 @@ export const UseCases = () => {
               </Box>
               <Box display="block" paddingTop="xs">
                 <Link href={active.docsHref}>
-                  <Button className="dark:hover:bg-polar-50 rounded-full border-none bg-black hover:bg-gray-900 dark:bg-white dark:text-black">
+                  <Button className="dark:hover:bg-tarifia-50 rounded-full border-none bg-black hover:bg-gray-900 dark:bg-white dark:text-black">
                     Read the docs
                   </Button>
                 </Link>
               </Box>
             </Box>
 
-            <div className="dark:bg-polar-950 flex-1 overflow-x-auto bg-white p-6 font-mono text-xs leading-relaxed">
+            <div className="dark:bg-tarifia-950 flex-1 overflow-x-auto bg-white p-6 font-mono text-xs leading-relaxed">
               <SyntaxHighlighterClient
                 lang="typescript"
                 code={active.snippet}

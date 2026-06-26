@@ -2,15 +2,15 @@ import { useNotifications, useNotificationsMarkRead } from '@/hooks/queries'
 import { useOutsideClick } from '@/utils/useOutsideClick'
 import BoltOutlined from '@mui/icons-material/BoltOutlined'
 import ShoppingBagOutlined from '@mui/icons-material/ShoppingBagOutlined'
-import { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
-import { Button } from '@polar-sh/orbit'
-import PolarTimeAgo from '@polar-sh/ui/components/atoms/PolarTimeAgo'
+import { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
+import { Button } from '@tarifia-sh/orbit'
+import TarifiaTimeAgo from '@tarifia-sh/ui/components/atoms/TarifiaTimeAgo'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@polar-sh/ui/components/ui/popover'
+} from '@tarifia-sh/ui/components/ui/popover'
 import Link from 'next/link'
 import { useMemo, useRef, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
@@ -89,7 +89,7 @@ export const NotificationsPopover = () => {
             aria-hidden="true"
           />
           {showBadge && (
-            <div className="dark:border-polar-700 bg-blue absolute top-1 right-1 h-1.5 w-1.5 rounded-full" />
+            <div className="dark:border-tarifia-700 bg-blue absolute top-1 right-1 h-1.5 w-1.5 rounded-full" />
           )}
         </PopoverTrigger>
       </Button>
@@ -115,7 +115,7 @@ const List = ({
   return (
     <div className="h-full max-h-[800px] space-y-5 overflow-x-scroll">
       {notifications.length === 0 && (
-        <div className="dark:text-polar-400 flex w-full flex-row items-center justify-center p-4 text-center text-sm text-black/60">
+        <div className="dark:text-tarifia-400 flex w-full flex-row items-center justify-center p-4 text-center text-sm text-black/60">
           You don&apos;t have any notifications
         </div>
       )}
@@ -146,8 +146,8 @@ const Item = ({
       <Icon classes={twMerge('mt-1 p-1', iconClasses)} icon={children.icon} />
       <div>
         <div>{children.text}</div>
-        <div className="dark:text-polar-300 text-gray-500">
-          <PolarTimeAgo date={new Date(n.created_at)} />
+        <div className="dark:text-tarifia-300 text-gray-500">
+          <TarifiaTimeAgo date={new Date(n.created_at)} />
         </div>
       </div>
     </div>

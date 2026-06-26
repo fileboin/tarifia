@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   title: 'Pricing',
   description: 'Transparent pricing for every stage of growth',
   keywords:
-    'pricing, price, usage billing, polar, pricing, pricing for polar, pricing for polar, pricing for polar',
+    'pricing, price, usage billing, tarifia, pricing, pricing for tarifia, pricing for tarifia, pricing for tarifia',
   openGraph: {
-    siteName: 'Polar',
+    siteName: 'Tarifia',
     type: 'website',
     images: [
       {
-        url: 'https://polar.sh/assets/brand/polar_og.jpg',
+        url: 'https://tarifia.sh/assets/brand/tarifia_og.jpg',
         width: 1200,
         height: 630,
       },
@@ -21,10 +21,10 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     images: [
       {
-        url: 'https://polar.sh/assets/brand/polar_og.jpg',
+        url: 'https://tarifia.sh/assets/brand/tarifia_og.jpg',
         width: 1200,
         height: 630,
-        alt: 'Polar',
+        alt: 'Tarifia',
       },
     ],
   },

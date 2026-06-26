@@ -1,11 +1,11 @@
 import pytest
 from sqlalchemy import select
 
-from polar.auth.models import AuthSubject
-from polar.customer_session.service import customer_session as customer_session_service
-from polar.models import Member, Organization, User, UserOrganization
-from polar.models.member import MemberRole
-from polar.postgres import AsyncSession
+from tarifia.auth.models import AuthSubject
+from tarifia.customer_session.service import customer_session as customer_session_service
+from tarifia.models import Member, Organization, User, UserOrganization
+from tarifia.models.member import MemberRole
+from tarifia.postgres import AsyncSession
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_customer
@@ -39,7 +39,7 @@ class TestCreateGracefulFallback:
             email="no-member@example.com",
         )
 
-        from polar.customer_session.schemas import CustomerSessionCustomerIDCreate
+        from tarifia.customer_session.schemas import CustomerSessionCustomerIDCreate
 
         create_schema = CustomerSessionCustomerIDCreate(
             customer_id=customer.id,
@@ -84,8 +84,8 @@ class TestCreateGracefulFallback:
             email="legacy@example.com",
         )
 
-        from polar.customer_session.schemas import CustomerSessionCustomerIDCreate
-        from polar.models import CustomerSession
+        from tarifia.customer_session.schemas import CustomerSessionCustomerIDCreate
+        from tarifia.models import CustomerSession
 
         create_schema = CustomerSessionCustomerIDCreate(
             customer_id=customer.id,

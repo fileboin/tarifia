@@ -1,4 +1,4 @@
-import { enums, schemas } from '@polar-sh/client'
+import { enums, schemas } from '@tarifia-sh/client'
 import { Download, Flag, Gauge, Key, Loader } from 'lucide-react'
 import { twMerge } from 'tailwind-merge'
 import GitHubIcon from '../Icons/GitHubIcon'

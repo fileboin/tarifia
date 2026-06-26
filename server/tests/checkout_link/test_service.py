@@ -4,19 +4,19 @@ import pytest
 import pytest_asyncio
 from pydantic import HttpUrl
 
-from polar.auth.models import AuthSubject
-from polar.checkout_link.schemas import (
+from tarifia.auth.models import AuthSubject
+from tarifia.checkout_link.schemas import (
     CheckoutLinkCreateProducts,
     CheckoutLinkUpdate,
 )
-from polar.checkout_link.service import checkout_link as checkout_link_service
-from polar.enums import PaymentProcessor, SubscriptionRecurringInterval
-from polar.exceptions import PolarRequestValidationError
-from polar.kit.pagination import PaginationParams
-from polar.models import Discount, Organization, Product, User, UserOrganization
-from polar.models.checkout_link import CheckoutLink
-from polar.models.product_price import ProductPriceFixed
-from polar.postgres import AsyncSession
+from tarifia.checkout_link.service import checkout_link as checkout_link_service
+from tarifia.enums import PaymentProcessor, SubscriptionRecurringInterval
+from tarifia.exceptions import TarifiaRequestValidationError
+from tarifia.kit.pagination import PaginationParams
+from tarifia.models import Discount, Organization, Product, User, UserOrganization
+from tarifia.models.checkout_link import CheckoutLink
+from tarifia.models.product_price import ProductPriceFixed
+from tarifia.postgres import AsyncSession
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
@@ -104,7 +104,7 @@ class TestCreate:
     async def test_not_existing_product(
         self, session: AsyncSession, auth_subject: AuthSubject[User]
     ) -> None:
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await checkout_link_service.create(
                 session,
                 CheckoutLinkCreateProducts(
@@ -124,7 +124,7 @@ class TestCreate:
         auth_subject: AuthSubject[User | Organization],
         product_one_time: Product,
     ) -> None:
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await checkout_link_service.create(
                 session,
                 CheckoutLinkCreateProducts(
@@ -149,7 +149,7 @@ class TestCreate:
         product_one_time.is_archived = True
         await save_fixture(product_one_time)
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await checkout_link_service.create(
                 session,
                 CheckoutLinkCreateProducts(
@@ -178,7 +178,7 @@ class TestCreate:
         )
         await save_fixture(user_organization)
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await checkout_link_service.create(
                 session,
                 CheckoutLinkCreateProducts(
@@ -275,7 +275,7 @@ class TestCreateSeats:
         user_organization: UserOrganization,
         product_one_time: Product,
     ) -> None:
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await checkout_link_service.create(
                 session,
                 CheckoutLinkCreateProducts(
@@ -295,7 +295,7 @@ class TestCreateSeats:
         product_seat_based_2_to_20: Product,
         product_one_time: Product,
     ) -> None:
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await checkout_link_service.create(
                 session,
                 CheckoutLinkCreateProducts(
@@ -314,7 +314,7 @@ class TestCreateSeats:
         user_organization: UserOrganization,
         product_seat_based_2_to_20: Product,
     ) -> None:
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await checkout_link_service.create(
                 session,
                 CheckoutLinkCreateProducts(
@@ -333,7 +333,7 @@ class TestCreateSeats:
         user_organization: UserOrganization,
         product_seat_based_2_to_20: Product,
     ) -> None:
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await checkout_link_service.create(
                 session,
                 CheckoutLinkCreateProducts(
@@ -442,7 +442,7 @@ class TestUpdate:
         )
         await save_fixture(user_organization)
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await checkout_link_service.update(
                 session,
                 checkout_link,
@@ -464,7 +464,7 @@ class TestUpdate:
         product: Product,
         product_one_time: Product,
     ) -> None:
-        from polar.kit.trial import TrialInterval
+        from tarifia.kit.trial import TrialInterval
 
         checkout_link_with_trial = await create_checkout_link(
             save_fixture,
@@ -521,7 +521,7 @@ class TestUpdate:
             save_fixture, products=[product_seat_based_2_to_20]
         )
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await checkout_link_service.update(
                 session,
                 checkout_link,

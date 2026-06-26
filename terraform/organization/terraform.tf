@@ -1,6 +1,6 @@
 terraform {
   cloud {
-    organization = "polar-sh"
+    organization = "tarifia-sh"
     workspaces {
       name = "organization"
     }

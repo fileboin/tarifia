@@ -1,5 +1,5 @@
 locals {
-  function_name = "polar-${var.environment}-worker-${var.name}"
+  function_name = "tarifia-${var.environment}-worker-${var.name}"
   in_vpc        = length(var.subnet_ids) > 0
 }
 
@@ -106,7 +106,7 @@ resource "aws_lambda_function" "task" {
     variables = merge(
       var.environment_variables,
       var.secret_environment_variables,
-      { POLAR_DATABASE_POOL_SIZE = "1" },
+      { TARIFIA_DATABASE_POOL_SIZE = "1" },
       { SERVICE_NAME = local.function_name },
     )
   }

@@ -1,14 +1,14 @@
 'use client'
 
-import { Modal } from '@polar-sh/orbit'
+import { Modal } from '@tarifia-sh/orbit'
 import { useModal } from '@/components/Modal/useModal'
 import { MetricDashboardEditorContent } from '@/components/DashboardOverview/MetricSelectorModal'
 import {
   useCreateMetricDashboard,
   useMetricDashboards,
 } from '@/hooks/queries/metrics'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
 import AddOutlined from '@mui/icons-material/AddOutlined'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
@@ -44,7 +44,7 @@ export function DashboardsListSidebar({
   }, [pathname])
 
   return (
-    <div className="dark:divide-polar-800 flex h-full flex-col divide-y divide-gray-200">
+    <div className="dark:divide-tarifia-800 flex h-full flex-col divide-y divide-gray-200">
       <div className="flex flex-row items-center justify-between gap-6 px-4 py-4">
         <span className="font-medium text-gray-900 dark:text-white">
           Dashboards
@@ -54,7 +54,7 @@ export function DashboardsListSidebar({
         </Button>
       </div>
 
-      <div className="dark:divide-polar-800 flex grow flex-col divide-y divide-gray-100 overflow-y-auto">
+      <div className="dark:divide-tarifia-800 flex grow flex-col divide-y divide-gray-100 overflow-y-auto">
         {customDashboards && customDashboards.length > 0 && (
           <>
             {[...customDashboards]
@@ -71,15 +71,15 @@ export function DashboardsListSidebar({
                   key={dashboard.id}
                   href={`${basePath}/${dashboard.id}`}
                   className={twMerge(
-                    'dark:hover:bg-polar-800 flex cursor-pointer flex-col gap-y-0.5 px-4 py-3 hover:bg-gray-100',
+                    'dark:hover:bg-tarifia-800 flex cursor-pointer flex-col gap-y-0.5 px-4 py-3 hover:bg-gray-100',
                     selectedSlug === dashboard.id &&
-                      'dark:bg-polar-800 bg-gray-100',
+                      'dark:bg-tarifia-800 bg-gray-100',
                   )}
                 >
                   <span className="text-sm font-medium text-gray-900 dark:text-white">
                     {dashboard.name}
                   </span>
-                  <span className="dark:text-polar-400 text-sm text-gray-500">
+                  <span className="dark:text-tarifia-400 text-sm text-gray-500">
                     {dashboard.metrics.length === 0
                       ? 'No metrics'
                       : `${dashboard.metrics.length} metric${dashboard.metrics.length === 1 ? '' : 's'}`}
@@ -94,9 +94,9 @@ export function DashboardsListSidebar({
             key={dashboard.slug}
             href={`${basePath}/${dashboard.slug}`}
             className={twMerge(
-              'dark:hover:bg-polar-800 flex cursor-pointer flex-col gap-y-0.5 px-4 py-3 hover:bg-gray-100',
+              'dark:hover:bg-tarifia-800 flex cursor-pointer flex-col gap-y-0.5 px-4 py-3 hover:bg-gray-100',
               selectedSlug === dashboard.slug &&
-                'dark:bg-polar-800 bg-gray-100',
+                'dark:bg-tarifia-800 bg-gray-100',
             )}
           >
             <span className="text-sm font-medium text-gray-900 dark:text-white">

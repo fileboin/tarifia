@@ -8,8 +8,8 @@ import {
 import { useToast } from '@/components/Toast/use-toast'
 import { useUpdateEventType } from '@/hooks/queries/event_types'
 import { apiErrorToast, setValidationErrors } from '@/utils/api/errors'
-import { Button } from '@polar-sh/orbit'
-import { Input } from '@polar-sh/orbit'
+import { Button } from '@tarifia-sh/orbit'
+import { Input } from '@tarifia-sh/orbit'
 import {
   Form,
   FormControl,
@@ -18,7 +18,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { useCallback } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 
@@ -82,7 +82,7 @@ export const EditEventTypeModal = ({
       <div className="flex flex-col gap-y-6 overflow-y-auto px-8 py-10">
         <div>
           <h2 className="text-xl">Edit Event Type</h2>
-          <p className="dark:text-polar-500 mt-2 text-sm text-gray-500">
+          <p className="dark:text-tarifia-500 mt-2 text-sm text-gray-500">
             {/* eslint-disable-next-line react/no-unescaped-entities */}
             Update the display label for event type "{eventName}"
           </p>
@@ -159,21 +159,21 @@ export const EditEventTypeModal = ({
           </Form>
         </div>
 
-        <div className="dark:border-polar-700 border-t border-gray-200 pt-6">
+        <div className="dark:border-tarifia-700 border-t border-gray-200 pt-6">
           <div className="flex flex-col gap-y-2">
             <h3>Ingesting Events</h3>
-            <p className="dark:text-polar-500 text-sm text-gray-500">
+            <p className="dark:text-tarifia-500 text-sm text-gray-500">
               {labelPropertySelector
                 ? 'To ingest events with dynamic labels, include the property in metadata.'
                 : 'To ingest events with this label, use the following event name.'}
             </p>
           </div>
-          <Well className="dark:bg-polar-800 mt-4 rounded-lg bg-gray-50 p-4 text-sm">
+          <Well className="dark:bg-tarifia-800 mt-4 rounded-lg bg-gray-50 p-4 text-sm">
             <SyntaxHighlighterClient
               lang="typescript"
               code={
                 labelPropertySelector
-                  ? `await polar.events.ingest({
+                  ? `await tarifia.events.ingest({
   events: [{
     name: "${eventName}",
     customerId: "<value>",
@@ -183,7 +183,7 @@ export const EditEventTypeModal = ({
     },
   }],
 });`
-                  : `await polar.events.ingest({
+                  : `await tarifia.events.ingest({
   events: [{
     name: "${eventName}",
     customerId: "<value>",

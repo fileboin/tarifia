@@ -6,10 +6,10 @@ from uuid import UUID
 import pytest
 from sqlalchemy import select
 
-from polar.event.repository import EventRepository
-from polar.kit.db.postgres import AsyncSession
-from polar.models import Account, Event, Organization
-from polar.models.event import EventSource
+from tarifia.event.repository import EventRepository
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.models import Account, Event, Organization
+from tarifia.models.event import EventSource
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_organization
 

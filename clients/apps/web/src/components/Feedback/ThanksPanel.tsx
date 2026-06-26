@@ -1,5 +1,5 @@
-import { schemas } from '@polar-sh/client'
-import { Alert } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Alert } from '@tarifia-sh/orbit'
 
 const messages: Record<schemas['FeedbackType'], string> = {
   feedback:

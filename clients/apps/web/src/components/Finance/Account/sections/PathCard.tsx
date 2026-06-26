@@ -1,9 +1,9 @@
 'use client'
 
-import { schemas } from '@polar-sh/client'
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
-import { Pill } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Pill } from '@tarifia-sh/orbit'
 import { ExternalLinkIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
@@ -99,7 +99,7 @@ const Inner = ({
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="dark:text-polar-300 dark:hover:text-polar-100 inline-flex items-baseline gap-x-1 text-gray-700 underline underline-offset-2 hover:text-gray-900"
+            className="dark:text-tarifia-300 dark:hover:text-tarifia-100 inline-flex items-baseline gap-x-1 text-gray-700 underline underline-offset-2 hover:text-gray-900"
           >
             Learn more
             <ExternalLinkIcon className="h-3 w-3 translate-y-0.5" />

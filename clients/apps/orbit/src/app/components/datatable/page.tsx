@@ -1,6 +1,6 @@
 'use client'
 
-import { Text } from '@polar-sh/orbit'
+import { Text } from '@tarifia-sh/orbit'
 import type { PropRow } from '@/components/docs'
 import {
   Example,

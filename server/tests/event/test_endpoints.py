@@ -7,10 +7,10 @@ import pytest
 import pytest_asyncio
 from httpx import AsyncClient
 
-from polar.integrations.tinybird.client import TinybirdClient
-from polar.kit.utils import utc_now
-from polar.meter.filter import Filter, FilterClause, FilterConjunction, FilterOperator
-from polar.models import Event, Organization, UserOrganization
+from tarifia.integrations.tinybird.client import TinybirdClient
+from tarifia.kit.utils import utc_now
+from tarifia.meter.filter import Filter, FilterClause, FilterConjunction, FilterOperator
+from tarifia.models import Event, Organization, UserOrganization
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_event

@@ -24,7 +24,7 @@ locals {
   db_password = render_postgres.db.connection_info.password
 
   # Read replica connection info
-  read_replica = [for r in render_postgres.db.read_replicas : r if r.name == "polar-read"][0]
+  read_replica = [for r in render_postgres.db.read_replicas : r if r.name == "tarifia-read"][0]
 
   # Redis connection info
   redis_host = render_redis.redis.id
@@ -35,8 +35,8 @@ locals {
 # Project and Environments
 # ============================================================================
 
-resource "render_project" "polar" {
-  name = "Polar"
+resource "render_project" "tarifia" {
+  name = "Tarifia"
   environments = {
     "Production" : {
       id               = "evm-cj3pgodiuie55pmjh2l0"
@@ -62,9 +62,9 @@ resource "render_project" "polar" {
 # =============================================================================
 
 resource "render_postgres" "db" {
-  environment_id = render_project.polar.environments["Production"].id
+  environment_id = render_project.tarifia.environments["Production"].id
   name           = "db"
-  database_name  = "polar_cpit"
+  database_name  = "tarifia_cpit"
   plan           = "pro_64gb"
   region         = "ohio"
   version        = "15"
@@ -73,8 +73,8 @@ resource "render_postgres" "db" {
   high_availability_enabled = false
 
   read_replicas = [
-    { name = "polar-read" },
-    { name = "polar-replica" }
+    { name = "tarifia-read" },
+    { name = "tarifia-replica" }
   ]
 
   lifecycle {
@@ -86,7 +86,7 @@ resource "render_postgres" "db" {
     ]
   }
 
-  depends_on = [render_registry_credential.ghcr, render_project.polar]
+  depends_on = [render_registry_credential.ghcr, render_project.tarifia]
 }
 
 import {
@@ -99,7 +99,7 @@ import {
 # =============================================================================
 
 resource "render_redis" "redis" {
-  environment_id    = render_project.polar.environments["Production"].id
+  environment_id    = render_project.tarifia.environments["Production"].id
   name              = "redis"
   plan              = "standard"
   region            = "ohio"
@@ -108,7 +108,7 @@ resource "render_redis" "redis" {
   # Empty IP allow list means only private network connections
   ip_allow_list = []
 
-  depends_on = [render_registry_credential.ghcr, render_project.polar]
+  depends_on = [render_registry_credential.ghcr, render_project.tarifia]
 }
 
 # =============================================================================
@@ -134,15 +134,15 @@ module "production" {
   source = "../modules/render_service"
 
   environment            = "production"
-  render_environment_id  = render_project.polar.environments["Production"].id
+  render_environment_id  = render_project.tarifia.environments["Production"].id
   registry_credential_id = render_registry_credential.ghcr.id
 
   api_service_config = {
-    postgres_database      = "polar_cpit_p9lf"
-    postgres_read_database = "polar_cpit_p9lf"
-    allowed_hosts          = "[\"polar.sh\", \"backoffice.polar.sh\"]"
-    cors_origins           = "[\"https://polar.sh\", \"https://github.com\", \"https://docs.polar.sh\"]"
-    custom_domains         = [{ name = "api.polar.sh" }, { name = "api-alt.polar.sh" }, { name = "buy.polar.sh" }, { name = "backoffice.polar.sh" }]
+    postgres_database      = "tarifia_cpit_p9lf"
+    postgres_read_database = "tarifia_cpit_p9lf"
+    allowed_hosts          = "[\"tarifia.sh\", \"backoffice.tarifia.sh\"]"
+    cors_origins           = "[\"https://tarifia.sh\", \"https://github.com\", \"https://docs.tarifia.sh\"]"
+    custom_domains         = [{ name = "api.tarifia.sh" }, { name = "api-alt.tarifia.sh" }, { name = "buy.tarifia.sh" }, { name = "backoffice.tarifia.sh" }]
     plan                   = "pro_plus"
     web_concurrency        = "6"
   }
@@ -171,34 +171,34 @@ module "production" {
 
   workers = {
     "scheduler" = {
-      start_command      = "uv run python -m polar.worker.scheduler"
+      start_command      = "uv run python -m tarifia.worker.scheduler"
       plan               = "standard"
       dramatiq_prom_port = "10000"
     }
     "worker" = {
-      start_command      = "uv run dramatiq polar.worker.run -p 2 -t 8 --queues low_priority"
-      custom_domains     = [{ name = "worker.polar.sh" }]
+      start_command      = "uv run dramatiq tarifia.worker.run -p 2 -t 8 --queues low_priority"
+      custom_domains     = [{ name = "worker.tarifia.sh" }]
       dramatiq_prom_port = "10000"
     }
     "worker-medium-priority" = {
-      start_command      = "uv run dramatiq polar.worker.run -p 2 -t 4 --queues medium_priority"
+      start_command      = "uv run dramatiq tarifia.worker.run -p 2 -t 4 --queues medium_priority"
       dramatiq_prom_port = "10001"
     }
     "worker-high-priority" = {
-      start_command      = "uv run dramatiq polar.worker.run -p 2 -t 4 --queues high_priority"
+      start_command      = "uv run dramatiq tarifia.worker.run -p 2 -t 4 --queues high_priority"
       dramatiq_prom_port = "10001"
     }
     "worker-webhook" = {
-      start_command      = "uv run dramatiq polar.worker.run -p 1 -t 16 --queues webhooks"
+      start_command      = "uv run dramatiq tarifia.worker.run -p 1 -t 16 --queues webhooks"
       dramatiq_prom_port = "10001"
       database_pool_size = "16"
     }
     "worker-tinybird" = {
-      start_command      = "uv run dramatiq polar.worker.run -p 4 -t 32 --queues tinybird"
+      start_command      = "uv run dramatiq tarifia.worker.run -p 4 -t 32 --queues tinybird"
       dramatiq_prom_port = "10002"
     }
     "worker-invoices-receipts" = {
-      start_command      = "uv run dramatiq polar.worker.run -p 1 -t 3 --queues invoices_and_receipts"
+      start_command      = "uv run dramatiq tarifia.worker.run -p 1 -t 3 --queues invoices_and_receipts"
       plan               = "standard"
       dramatiq_prom_port = "10003"
     }
@@ -218,23 +218,23 @@ module "production" {
   }
 
   backend_config = {
-    base_url                             = "https://api.polar.sh"
-    backoffice_host                      = "backoffice.polar.sh"
-    checkout_link_host                   = "buy.polar.sh"
-    user_session_cookie_domain           = "polar.sh"
-    authentication_session_cookie_domain = "polar.sh"
-    oauth2_session_state_cookie_domain   = "polar.sh"
+    base_url                             = "https://api.tarifia.sh"
+    backoffice_host                      = "backoffice.tarifia.sh"
+    checkout_link_host                   = "buy.tarifia.sh"
+    user_session_cookie_domain           = "tarifia.sh"
+    authentication_session_cookie_domain = "tarifia.sh"
+    oauth2_session_state_cookie_domain   = "tarifia.sh"
     debug                                = "0"
     email_sender                         = "resend"
-    email_from_name                      = "Polar"
-    email_from_domain                    = "notifications.polar.sh"
-    frontend_base_url                    = "https://polar.sh"
-    checkout_base_url                    = "https://buy.polar.sh/{client_secret}"
+    email_from_name                      = "Tarifia"
+    email_from_domain                    = "notifications.tarifia.sh"
+    frontend_base_url                    = "https://tarifia.sh"
+    checkout_base_url                    = "https://buy.tarifia.sh/{client_secret}"
     jwks_path                            = "/etc/secrets/jwks.json"
     log_level                            = "INFO"
     testing                              = "0"
-    auth_cookie_domain                   = "polar.sh"
-    invoices_additional_info             = "[support@polar.sh](mailto:support@polar.sh)"
+    auth_cookie_domain                   = "tarifia.sh"
+    invoices_additional_info             = "[support@tarifia.sh](mailto:support@tarifia.sh)"
     invoices_vat_numbers = jsonencode({
       # EU One Stop Shop (OSS) registration
       AT = "EU372061545"
@@ -322,11 +322,11 @@ module "production" {
     region                        = "us-east-2"
     signature_version             = "v4"
     files_presign_ttl             = "3600"
-    files_public_bucket_name      = "polar-public-files"
-    customer_invoices_bucket_name = "polar-customer-invoices"
-    customer_receipts_bucket_name = "polar-customer-receipts"
-    payout_invoices_bucket_name   = "polar-payout-invoices"
-    logs_bucket_name              = "polar-production-logs"
+    files_public_bucket_name      = "tarifia-public-files"
+    customer_invoices_bucket_name = "tarifia-customer-invoices"
+    customer_receipts_bucket_name = "tarifia-customer-receipts"
+    payout_invoices_bucket_name   = "tarifia-payout-invoices"
+    logs_bucket_name              = "tarifia-production-logs"
   }
 
   aws_s3_secrets = {
@@ -376,16 +376,16 @@ module "production" {
   }
 
   memory_profile_config = {
-    s3_bucket_name = "polar-production-logs"
+    s3_bucket_name = "tarifia-production-logs"
   }
 
-  polar_self_config = {
-    access_token     = var.polar_access_token
-    webhook_secret   = var.polar_webhook_secret
-    organization_id  = var.polar_organization_id
-    free_product_id  = var.polar_free_product_id
-    scale_product_id = var.polar_scale_product_id
-    api_url          = "https://api.polar.sh"
+  tarifia_self_config = {
+    access_token     = var.tarifia_access_token
+    webhook_secret   = var.tarifia_webhook_secret
+    organization_id  = var.tarifia_organization_id
+    free_product_id  = var.tarifia_free_product_id
+    scale_product_id = var.tarifia_scale_product_id
+    api_url          = "https://api.tarifia.sh"
   }
 
   tinybird_config = {
@@ -398,7 +398,7 @@ module "production" {
     workspace           = var.tinybird_workspace
   }
 
-  depends_on = [render_registry_credential.ghcr, render_project.polar, render_postgres.db, render_redis.redis]
+  depends_on = [render_registry_credential.ghcr, render_project.tarifia, render_postgres.db, render_redis.redis]
 }
 
 # =============================================================================
@@ -409,12 +409,12 @@ module "tailscale_router" {
   source = "../modules/tailscale_router"
 
   environment            = "production"
-  render_environment_id  = render_project.polar.environments["Production"].id
+  render_environment_id  = render_project.tarifia.environments["Production"].id
   registry_credential_id = render_registry_credential.ghcr.id
   tailscale_authkey      = var.tailscale_authkey
   advertise_routes       = var.tailscale_advertise_routes
 
-  depends_on = [render_registry_credential.ghcr, render_project.polar]
+  depends_on = [render_registry_credential.ghcr, render_project.tarifia]
 }
 
 # =============================================================================
@@ -428,7 +428,7 @@ import {
 
 resource "cloudflare_dns_record" "api" {
   zone_id = "22bcd1b07ec25452aab472486bc8df94"
-  name    = "api.polar.sh"
+  name    = "api.tarifia.sh"
   type    = "CNAME"
   content = replace(module.production.api_service_url, "https://", "")
   proxied = true
@@ -437,7 +437,7 @@ resource "cloudflare_dns_record" "api" {
 
 resource "cloudflare_dns_record" "api_alt" {
   zone_id = "22bcd1b07ec25452aab472486bc8df94"
-  name    = "api-alt.polar.sh"
+  name    = "api-alt.tarifia.sh"
   type    = "CNAME"
   content = replace(module.production.api_service_url, "https://", "")
   proxied = false
@@ -446,7 +446,7 @@ resource "cloudflare_dns_record" "api_alt" {
 
 resource "cloudflare_dns_record" "buy" {
   zone_id = "22bcd1b07ec25452aab472486bc8df94"
-  name    = "buy.polar.sh"
+  name    = "buy.tarifia.sh"
   type    = "CNAME"
   content = replace(module.production.api_service_url, "https://", "")
   proxied = true
@@ -455,7 +455,7 @@ resource "cloudflare_dns_record" "buy" {
 
 resource "cloudflare_dns_record" "backoffice" {
   zone_id = "22bcd1b07ec25452aab472486bc8df94"
-  name    = "backoffice.polar.sh"
+  name    = "backoffice.tarifia.sh"
   type    = "CNAME"
   content = replace(module.production.api_service_url, "https://", "")
   proxied = true
@@ -464,7 +464,7 @@ resource "cloudflare_dns_record" "backoffice" {
 
 resource "cloudflare_dns_record" "worker" {
   zone_id = "22bcd1b07ec25452aab472486bc8df94"
-  name    = "worker.polar.sh"
+  name    = "worker.tarifia.sh"
   type    = "CNAME"
   content = replace(module.production.worker_urls["worker"], "https://", "")
   proxied = false

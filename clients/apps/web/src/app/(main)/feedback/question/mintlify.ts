@@ -11,7 +11,7 @@ export type MintlifyPageContent = {
   content: string
 }
 
-const MINTLIFY_DOMAIN = 'polar'
+const MINTLIFY_DOMAIN = 'tarifia'
 
 const EXCLUDED_PATH_PREFIXES = ['changelog', 'guides']
 

@@ -1,26 +1,26 @@
 'use client'
 
-import { InlineModal, InlineModalHeader } from '@polar-sh/orbit'
+import { InlineModal, InlineModalHeader } from '@tarifia-sh/orbit'
 import { useModal } from '@/components/Modal/useModal'
 import {
   useDeleteOrganizationAccessToken,
   useOrganizationAccessTokens,
   useUpdateOrganizationAccessToken,
 } from '@/hooks/queries'
-import { enums, schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import CopyToClipboardInput from '@polar-sh/ui/components/atoms/CopyToClipboardInput'
-import FormattedDateTime from '@polar-sh/ui/components/atoms/FormattedDateTime'
-import { Input } from '@polar-sh/orbit'
-import { ListGroup } from '@polar-sh/orbit'
+import { enums, schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import CopyToClipboardInput from '@tarifia-sh/ui/components/atoms/CopyToClipboardInput'
+import FormattedDateTime from '@tarifia-sh/ui/components/atoms/FormattedDateTime'
+import { Input } from '@tarifia-sh/orbit'
+import { ListGroup } from '@tarifia-sh/orbit'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
-import Banner from '@polar-sh/ui/components/molecules/Banner'
+} from '@tarifia-sh/orbit'
+import Banner from '@tarifia-sh/ui/components/molecules/Banner'
 import {
   Form,
   FormControl,
@@ -28,7 +28,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { useCallback, useState } from 'react'
 import { useForm, useFormContext } from 'react-hook-form'
 import { ConfirmModal } from '../Modal/ConfirmModal'
@@ -242,7 +242,7 @@ const AccessTokenItem = ({
           <div className="gap-y flex flex-col">
             <h3 className="text-md">{token.comment}</h3>
             {!minimal && (
-              <p className="dark:text-polar-400 text-sm text-gray-500">
+              <p className="dark:text-tarifia-400 text-sm text-gray-500">
                 {token.expires_at ? (
                   new Date(token.expires_at) < new Date() ? (
                     <span className="text-red-500 dark:text-red-400">
@@ -282,7 +282,7 @@ const AccessTokenItem = ({
             )}
           </div>
         </div>{' '}
-        <div className="dark:text-polar-400 flex flex-row items-center gap-2 text-gray-500">
+        <div className="dark:text-tarifia-400 flex flex-row items-center gap-2 text-gray-500">
           <Button onClick={showUpdateModal} size="sm">
             Update
           </Button>
@@ -383,7 +383,7 @@ const OrganizationAccessTokensSettings = ({
               return (
                 <div
                   key={token.id}
-                  className="dark:ring-polar-700 dark:bg-polar-800 w-full rounded-2xl bg-transparent p-5 ring-1 ring-gray-200"
+                  className="dark:ring-tarifia-700 dark:bg-tarifia-800 w-full rounded-2xl bg-transparent p-5 ring-1 ring-gray-200"
                 >
                   <AccessTokenItem
                     token={token}
@@ -432,7 +432,7 @@ const OrganizationAccessTokensSettings = ({
           })
         ) : (
           <ListGroup.Item>
-            <p className="dark:text-polar-400 text-sm text-gray-500">
+            <p className="dark:text-tarifia-400 text-sm text-gray-500">
               You don&rsquo;t have any active organization access tokens.
             </p>
           </ListGroup.Item>

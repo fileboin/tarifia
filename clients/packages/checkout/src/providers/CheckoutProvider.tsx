@@ -7,7 +7,7 @@ import {
   type Client,
   type operations,
   type schemas,
-} from '@polar-sh/client'
+} from '@tarifia-sh/client'
 
 import {
   createContext,
@@ -53,7 +53,7 @@ type APIError<T extends keyof operations> = {
 }
 
 type ValidationError = {
-  error: 'PolarRequestValidationError' | 'RequestValidationError'
+  error: 'TarifiaRequestValidationError' | 'RequestValidationError'
   detail: { input: unknown; loc: string[]; msg: string; type: string }[]
 }
 
@@ -194,12 +194,12 @@ export const CheckoutProvider = ({
 
       switch (server) {
         case 'sandbox': {
-          return 'https://sandbox-api.polar.sh'
+          return 'https://sandbox-api.tarifia.sh'
         }
 
         case 'production':
         case undefined: {
-          return 'https://api.polar.sh'
+          return 'https://api.tarifia.sh'
         }
 
         default:

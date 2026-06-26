@@ -1,12 +1,12 @@
 import pytest
 from sqlalchemy import select
 
-from polar.auth.models import AuthSubject
-from polar.event.repository import EventRepository
-from polar.event.schemas import EventCreateExternalCustomer, EventsIngest
-from polar.event.service import event as event_service
-from polar.kit.db.postgres import AsyncSession
-from polar.models import Account, Event, Organization
+from tarifia.auth.models import AuthSubject
+from tarifia.event.repository import EventRepository
+from tarifia.event.schemas import EventCreateExternalCustomer, EventsIngest
+from tarifia.event.service import event as event_service
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.models import Account, Event, Organization
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (

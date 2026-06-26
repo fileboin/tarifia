@@ -42,12 +42,12 @@ clients/
 │   │       └── ui/             # shadcn/ui base components
 │   ├── client/                 # Generated API client
 │   ├── checkout/               # Checkout package
-│   └── orbit/                  # Polar's design system containing components, design tokens, etc.
+│   └── orbit/                  # Tarifia's design system containing components, design tokens, etc.
 ```
 
 ## UI Authoring Rule (READ FIRST)
 
-**All new UI must be authored with `<Box />` from `@polar-sh/orbit/Box`.**
+**All new UI must be authored with `<Box />` from `@tarifia-sh/orbit/Box`.**
 
 `<div>` + Tailwind classes is **deprecated** for layout, spacing, color, borders, radius,
 shadow, flex, grid, position, and other visual concerns. Box is a polymorphic, fully
@@ -63,7 +63,7 @@ arbitrary values for things the design system already defines.
 - Never use raw color hex/oklch, raw px spacing, or `dark:` variants — use the tokens.
 - Never reach for `className` on Box for properties that have a typed Box prop (padding,
   background, radius, etc.). The typed prop wins.
-- Use `<Text />` from `@polar-sh/orbit` for typography rather than tailwind text classes.
+- Use `<Text />` from `@tarifia-sh/orbit` for typography rather than tailwind text classes.
 - Tailwind is only acceptable for: third-party component overrides where a className is the
   only API, one-off animations not yet expressible via Orbit, or temporary glue while
   migrating a legacy file.
@@ -91,10 +91,10 @@ native display so semantics aren't broken. Pass an explicit `display` (e.g.
 ### Importing
 
 ```tsx
-import { Box } from '@polar-sh/orbit/Box'
+import { Box } from '@tarifia-sh/orbit/Box'
 ```
 
-`Box` is exposed as a deep import (`@polar-sh/orbit/Box`), not from the package root.
+`Box` is exposed as a deep import (`@tarifia-sh/orbit/Box`), not from the package root.
 
 ### Polymorphism via `as`
 
@@ -463,7 +463,7 @@ grid properties under short, Chakra-style prop names; every other Box prop (`gap
 `padding`, color, responsive objects, …) is inherited.
 
 ```tsx
-import { Grid } from '@polar-sh/orbit'
+import { Grid } from '@tarifia-sh/orbit'
 
 <Grid templateColumns="repeat(3, 1fr)" gap="m">
   …
@@ -483,7 +483,7 @@ Prop names: `templateColumns`, `templateRows`, `templateAreas`, `autoFlow`, `aut
 Use `GridItem` for children that need to span or be placed explicitly:
 
 ```tsx
-import { Grid, GridItem } from '@polar-sh/orbit'
+import { Grid, GridItem } from '@tarifia-sh/orbit'
 ;<Grid templateColumns="repeat(4, 1fr)" gap="m">
   <GridItem colSpan={2}>Spans two columns</GridItem>
   <GridItem colStart={3} colEnd={5} rowSpan={2}>
@@ -501,11 +501,11 @@ import { Grid, GridItem } from '@polar-sh/orbit'
 Use these instead of hand-rolled tailwind components:
 
 ```tsx
-import { Text } from '@polar-sh/orbit' // typography (variant-driven)
-import { Button, Grid } from '@polar-sh/orbit'
-import { Avatar, SegmentedControl } from '@polar-sh/orbit'
-import { Alert } from '@polar-sh/orbit' // tinted callout (info/warning/danger/success)
-import { ButtonGroup } from '@polar-sh/orbit' // one or two primary/ghost actions
+import { Text } from '@tarifia-sh/orbit' // typography (variant-driven)
+import { Button, Grid } from '@tarifia-sh/orbit'
+import { Avatar, SegmentedControl } from '@tarifia-sh/orbit'
+import { Alert } from '@tarifia-sh/orbit' // tinted callout (info/warning/danger/success)
+import { ButtonGroup } from '@tarifia-sh/orbit' // one or two primary/ghost actions
 ```
 
 `Alert` takes a `variant` (`info` | `warning` | `danger` | `success`, default `info`), a
@@ -524,7 +524,7 @@ These patterns exist throughout the codebase but **must not be used in new code*
 
 - `<div className="…">` for layout/spacing/color
 - `dark:` variants — Orbit color tokens auto-resolve
-- Hard-coded color names like `bg-blue-500`, `text-gray-500`, `dark:bg-polar-800`
+- Hard-coded color names like `bg-blue-500`, `text-gray-500`, `dark:bg-tarifia-800`
 - `rounded-xl`, `shadow-lg`, `p-4`, `gap-2` etc. — use Box props with tokens
 
 When editing a legacy file, migrate the file (or the immediate component) to Box rather
@@ -610,20 +610,20 @@ const MyForm = () => {
 
 ```tsx
 // Orbit (preferred — design-system primitives)
-import { Box } from '@polar-sh/orbit/Box'
-import { Text, Button, Avatar, SegmentedControl } from '@polar-sh/orbit'
-import { DataTable, Select } from '@polar-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Text, Button, Avatar, SegmentedControl } from '@tarifia-sh/orbit'
+import { DataTable, Select } from '@tarifia-sh/orbit'
 
-// Legacy @polar-sh/ui (use only when an Orbit equivalent doesn't exist)
-import { Card } from '@polar-sh/ui/components/atoms/Card'
-import { Status } from '@polar-sh/ui/components/atoms/Status'
+// Legacy @tarifia-sh/ui (use only when an Orbit equivalent doesn't exist)
+import { Card } from '@tarifia-sh/ui/components/atoms/Card'
+import { Status } from '@tarifia-sh/ui/components/atoms/Status'
 import {
   Tabs,
   TabsList,
   TabsTrigger,
   TabsContent,
-} from '@polar-sh/ui/components/atoms/Tabs'
-import { Banner } from '@polar-sh/ui/components/molecules/Banner'
+} from '@tarifia-sh/ui/components/atoms/Tabs'
+import { Banner } from '@tarifia-sh/ui/components/molecules/Banner'
 ```
 
 ## Common Patterns

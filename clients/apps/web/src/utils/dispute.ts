@@ -1,5 +1,5 @@
-import { schemas } from '@polar-sh/client'
-import type { StatusColor } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import type { StatusColor } from '@tarifia-sh/orbit'
 
 export const DisputeStatusDisplayTitle: Record<
   schemas['DisputeStatus'],

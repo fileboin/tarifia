@@ -1,7 +1,7 @@
 import pytest
 
-from polar.enums import TaxBehavior
-from polar.models import Customer, Product
+from tarifia.enums import TaxBehavior
+from tarifia.models import Customer, Product
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_order
 

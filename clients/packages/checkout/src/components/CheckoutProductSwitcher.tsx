@@ -1,17 +1,17 @@
 'use client'
 
-import type { schemas } from '@polar-sh/client'
+import type { schemas } from '@tarifia-sh/client'
 import {
   DEFAULT_LOCALE,
   useTranslations,
   type AcceptedLocale,
-} from '@polar-sh/i18n'
+} from '@tarifia-sh/i18n'
 import {
   RadioGroup,
   RadioGroupItem,
-} from '@polar-sh/ui/components/ui/radio-group'
-import { ThemingPresetProps } from '@polar-sh/ui/hooks/theming'
-import { cn } from '@polar-sh/ui/lib/utils'
+} from '@tarifia-sh/ui/components/ui/radio-group'
+import { ThemingPresetProps } from '@tarifia-sh/ui/hooks/theming'
+import { cn } from '@tarifia-sh/ui/lib/utils'
 import { useCallback, useMemo } from 'react'
 import type { ProductCheckoutPublic } from '../guards'
 import { isLegacyRecurringProductPrice } from '../guards'
@@ -299,7 +299,7 @@ const CheckoutProductSwitcher = ({
     <RadioGroup
       value={`${selectedProduct.id}:${selectedPrice.id}`}
       onValueChange={selectProduct}
-      className="dark:border-polar-700 dark:divide-polar-700 gap-0 divide-y divide-gray-200 overflow-hidden rounded-xl border border-gray-200"
+      className="dark:border-tarifia-700 dark:divide-tarifia-700 gap-0 divide-y divide-gray-200 overflow-hidden rounded-xl border border-gray-200"
     >
       {items.map((item) => (
         <label
@@ -308,18 +308,18 @@ const CheckoutProductSwitcher = ({
             'flex cursor-pointer items-center gap-x-3 px-4 py-3 transition-colors',
             item.isSelected
               ? 'bg-blue-50/50 dark:bg-blue-950/20'
-              : 'dark:hover:bg-polar-800 hover:bg-gray-50',
+              : 'dark:hover:bg-tarifia-800 hover:bg-gray-50',
           )}
           htmlFor={`product-${item.key}`}
         >
           <RadioGroupItem value={item.value} id={`product-${item.key}`} />
           <div className="min-w-0 flex-1">
             <span className="line-clamp-2 text-sm">{item.productName}</span>
-            <span className="dark:text-polar-500 block text-xs text-gray-500">
+            <span className="dark:text-tarifia-500 block text-xs text-gray-500">
               {getDescription(item.product, item.price)}
             </span>
           </div>
-          <span className="dark:text-polar-400 shrink-0 text-sm text-gray-500">
+          <span className="dark:text-tarifia-400 shrink-0 text-sm text-gray-500">
             <CheckoutProductSwitcherItemPrice
               isSelected={item.isSelected}
               product={item.product}

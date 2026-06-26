@@ -1,21 +1,21 @@
 'use client'
 
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
-import ShadowBox from '@polar-sh/ui/components/atoms/ShadowBox'
+} from '@tarifia-sh/orbit'
+import ShadowBox from '@tarifia-sh/ui/components/atoms/ShadowBox'
 import {
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { PlusIcon, TrashIcon, XIcon } from 'lucide-react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'

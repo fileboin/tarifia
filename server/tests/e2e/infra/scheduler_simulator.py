@@ -27,11 +27,11 @@ from datetime import datetime
 
 from sqlalchemy import func
 
-from polar.kit.db.postgres import AsyncSession
-from polar.kit.utils import utc_now
-from polar.models import Subscription
-from polar.subscription.scheduler import SubscriptionJobStore
-from polar.worker import JobQueueManager
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.kit.utils import utc_now
+from tarifia.models import Subscription
+from tarifia.subscription.scheduler import SubscriptionJobStore
+from tarifia.worker import JobQueueManager
 from tests.e2e.infra.task_drain import DrainFn, DrainResult
 
 

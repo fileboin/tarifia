@@ -9,8 +9,8 @@ import {
 } from '@/components/Events/eventTableUtils'
 import { useEventHierarchyStats } from '@/hooks/queries/events'
 import { fromISODate } from '@/utils/metrics'
-import { schemas } from '@polar-sh/client'
-import FormattedInterval from '@polar-sh/ui/components/atoms/FormattedInterval'
+import { schemas } from '@tarifia-sh/client'
+import FormattedInterval from '@tarifia-sh/ui/components/atoms/FormattedInterval'
 import { endOfDay, subMonths } from 'date-fns'
 import { parseAsString, useQueryState } from 'nuqs'
 import { useEffect, useMemo, useRef } from 'react'
@@ -118,7 +118,7 @@ export default function CostsEventsTable({
           }
           className="flex flex-col gap-y-2"
         >
-          <span className="dark:text-polar-500 text-gray-500">
+          <span className="dark:text-tarifia-500 text-gray-500">
             {group.type === 'empty-range' ? (
               <FormattedInterval
                 startDatetime={group.endDate}
@@ -132,8 +132,8 @@ export default function CostsEventsTable({
             )}
           </span>
           {group.type === 'empty-range' ? (
-            <div className="dark:border-polar-700 flex flex-col items-center justify-center rounded-2xl border border-gray-200 p-6">
-              <p className="dark:text-polar-500 text-sm text-gray-500">
+            <div className="dark:border-tarifia-700 flex flex-col items-center justify-center rounded-2xl border border-gray-200 p-6">
+              <p className="dark:text-tarifia-500 text-sm text-gray-500">
                 No events
               </p>
             </div>
@@ -174,9 +174,9 @@ export default function CostsEventsTable({
       <div ref={sentinelRef} />
     </div>
   ) : (
-    <div className="dark:border-polar-700 flex min-h-96 w-full flex-col items-center justify-center gap-4 rounded-4xl border border-gray-200 p-8 text-center md:p-24">
+    <div className="dark:border-tarifia-700 flex min-h-96 w-full flex-col items-center justify-center gap-4 rounded-4xl border border-gray-200 p-8 text-center md:p-24">
       <h1 className="text-2xl font-normal">No events found</h1>
-      <p className="dark:text-polar-500 text-gray-500">
+      <p className="dark:text-tarifia-500 text-gray-500">
         There are no events matching these filters
       </p>
     </div>

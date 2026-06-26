@@ -9,7 +9,7 @@ Create Date: 2026-06-26 12:00:00.000000
 from alembic import op
 from sqlalchemy import text
 
-# Polar Custom Imports
+# Tarifia Custom Imports
 
 # revision identifiers, used by Alembic.
 revision = "e7118c4ae5d8"

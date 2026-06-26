@@ -2,12 +2,12 @@ import { useMetrics } from '@/hooks/queries'
 import { OrganizationContext } from '@/providers/maintainerOrganization'
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUp from '@mui/icons-material/KeyboardArrowUp'
-import { formatCurrency } from '@polar-sh/currency'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@polar-sh/orbit'
+import { formatCurrency } from '@tarifia-sh/currency'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@tarifia-sh/orbit'
 import { endOfMonth, format, startOfMonth, subMonths } from 'date-fns'
 import { useContext } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { Spinner } from '@polar-sh/orbit'
+import { Spinner } from '@tarifia-sh/orbit'
 import { WidgetContainer } from './WidgetContainer'
 
 interface RevenueWidgetProps {
@@ -34,7 +34,7 @@ const RevenueWidget = ({ className }: RevenueWidgetProps) => {
     <WidgetContainer
       title="Revenue"
       action={
-        <span className="dark:text-polar-500 text-gray-500">Last 3 Months</span>
+        <span className="dark:text-tarifia-500 text-gray-500">Last 3 Months</span>
       }
       className={className}
     >
@@ -58,7 +58,7 @@ const RevenueWidget = ({ className }: RevenueWidgetProps) => {
               <Tooltip>
                 <TooltipTrigger className="relative min-h-48 flex-1 overflow-hidden rounded-lg bg-[repeating-linear-gradient(-45deg,rgba(0,0,0,0.08),rgba(0,0,0,0.08)_2px,transparent_2px,transparent_8px)] dark:bg-[repeating-linear-gradient(45deg,rgba(255,255,255,0.04),rgba(255,255,255,0.04)_2px,transparent_2px,transparent_8px)]">
                   {revenueMetrics.isLoading ? (
-                    <div className="dark:bg-polar-700 flex h-full w-full items-center justify-center rounded-lg bg-gray-200">
+                    <div className="dark:bg-tarifia-700 flex h-full w-full items-center justify-center rounded-lg bg-gray-200">
                       <Spinner />
                     </div>
                   ) : (
@@ -67,7 +67,7 @@ const RevenueWidget = ({ className }: RevenueWidgetProps) => {
                         'absolute bottom-0 w-full rounded-lg',
                         index === array.length - 1
                           ? 'bg-indigo-400 dark:bg-indigo-700'
-                          : 'dark:bg-polar-700 bg-gray-400',
+                          : 'dark:bg-tarifia-700 bg-gray-400',
                       )}
                       style={{
                         height: `${((period.revenue ?? 0) / maxRevenue) * 100}%`,
@@ -87,7 +87,7 @@ const RevenueWidget = ({ className }: RevenueWidgetProps) => {
                   {format(period.timestamp, 'MMMM')}
                 </span>
                 <div className="flex flex-row items-center justify-between gap-x-2">
-                  <span className="dark:text-polar-500 text-sm text-gray-500">
+                  <span className="dark:text-tarifia-500 text-sm text-gray-500">
                     {formatCurrency('statistics')(period.revenue ?? 0, 'usd')}
                   </span>
                   {!isTrendFlat ? (

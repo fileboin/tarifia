@@ -2,10 +2,10 @@
 
 import AddOutlined from '@mui/icons-material/AddOutlined'
 import CloseOutlined from '@mui/icons-material/CloseOutlined'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { Input } from '@polar-sh/orbit'
-import { FormField } from '@polar-sh/ui/components/ui/form'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { Input } from '@tarifia-sh/orbit'
+import { FormField } from '@tarifia-sh/ui/components/ui/form'
 import { useFormContext } from 'react-hook-form'
 
 const SOCIAL_PLATFORM_DOMAINS: Record<string, string> = {
@@ -119,7 +119,7 @@ export const SocialLinksField = ({ required }: Props) => {
                       onClick={() => {
                         field.onChange(socials.filter((_, i) => i !== index))
                       }}
-                      className="dark:text-polar-400 text-gray-400 hover:text-gray-600"
+                      className="dark:text-tarifia-400 text-gray-400 hover:text-gray-600"
                     >
                       <CloseOutlined fontSize="small" />
                     </Button>

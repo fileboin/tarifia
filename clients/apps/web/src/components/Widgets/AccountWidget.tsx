@@ -2,9 +2,9 @@ import { useOrganizationAccount, useTransactionsSummary } from '@/hooks/queries'
 import { usePayouts } from '@/hooks/queries/payouts'
 import { OrganizationContext } from '@/providers/maintainerOrganization'
 import { PayoutStatus } from '@/components/Payouts/PayoutStatus'
-import { ClientResponseError } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
-import { Card } from '@polar-sh/ui/components/atoms/Card'
+import { ClientResponseError } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
+import { Card } from '@tarifia-sh/ui/components/atoms/Card'
 import { useContext } from 'react'
 import { WidgetContainer } from './WidgetContainer'
 
@@ -46,9 +46,9 @@ export const AccountWidget = ({ className }: AccountWidgetProps) => {
           {allPayouts.map((payout, i) => (
             <Card
               key={i}
-              className="dark:bg-polar-800 flex flex-col gap-y-1 rounded-xl border-none bg-gray-50 px-4 py-4"
+              className="dark:bg-tarifia-800 flex flex-col gap-y-1 rounded-xl border-none bg-gray-50 px-4 py-4"
             >
-              <div className="dark:text-polar-400 flex flex-row items-baseline justify-between text-sm text-gray-700">
+              <div className="dark:text-tarifia-400 flex flex-row items-baseline justify-between text-sm text-gray-700">
                 <span>
                   {new Date(payout.created_at).toLocaleDateString('en-US', {
                     month: 'long',
@@ -68,9 +68,9 @@ export const AccountWidget = ({ className }: AccountWidgetProps) => {
           ))}
         </div>
       ) : (
-        <div className="dark:bg-polar-800 mb-6 flex flex-1 flex-col items-center justify-center gap-y-2 rounded-lg bg-gray-50 p-8 text-center">
+        <div className="dark:bg-tarifia-800 mb-6 flex flex-1 flex-col items-center justify-center gap-y-2 rounded-lg bg-gray-50 p-8 text-center">
           <h3>No payouts yet</h3>
-          <p className="dark:text-polar-500 text-sm text-gray-500">
+          <p className="dark:text-tarifia-500 text-sm text-gray-500">
             You may only withdraw funds above $10.
           </p>
         </div>

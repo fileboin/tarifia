@@ -1,14 +1,14 @@
 'use client'
 
-import { type schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
+import { type schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
 import {
   DEFAULT_LOCALE,
   useTranslations,
   type AcceptedLocale,
-} from '@polar-sh/i18n'
-import { Button } from '@polar-sh/orbit'
-import { Input } from '@polar-sh/orbit'
+} from '@tarifia-sh/i18n'
+import { Button } from '@tarifia-sh/orbit'
+import { Input } from '@tarifia-sh/orbit'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { getSeatPrice, type ProductCheckoutPublic } from '../guards'
 import { ErrorResponse } from '../providers/CheckoutProvider'
@@ -38,7 +38,7 @@ const CheckoutSeatSelector = ({
 
   const getErrorMessage = useCallback(
     (error: ErrorResponse<'checkouts:client_update'> | null): string => {
-      if (error && error.error === 'PolarRequestValidationError') {
+      if (error && error.error === 'TarifiaRequestValidationError') {
         return error.detail[0]?.msg
       }
 
@@ -190,14 +190,14 @@ const CheckoutSeatSelector = ({
               {displaySeats}
             </span>
           ) : (
-            <div className="dark:border-polar-700 flex items-center gap-0 rounded-lg border border-gray-200">
+            <div className="dark:border-tarifia-700 flex items-center gap-0 rounded-lg border border-gray-200">
               <button
                 type="button"
                 onClick={() => handleUpdateSeats(displaySeats - 1)}
                 disabled={
                   displaySeats <= minimumSeats || isUpdating || isEditing
                 }
-                className="dark:text-polar-400 dark:hover:bg-polar-800 flex h-7 w-7 cursor-pointer items-center justify-center rounded-l-lg leading-none text-gray-500 transition-colors hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40"
+                className="dark:text-tarifia-400 dark:hover:bg-tarifia-800 flex h-7 w-7 cursor-pointer items-center justify-center rounded-l-lg leading-none text-gray-500 transition-colors hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40"
                 aria-label="Decrease seats"
               >
                 <svg
@@ -229,7 +229,7 @@ const CheckoutSeatSelector = ({
                   type="button"
                   onClick={handleSeatClick}
                   disabled={isUpdating}
-                  className="dark:border-polar-700 dark:hover:bg-polar-800 h-7 w-10 cursor-pointer border-x border-gray-200 text-center text-sm font-medium tabular-nums transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="dark:border-tarifia-700 dark:hover:bg-tarifia-800 h-7 w-10 cursor-pointer border-x border-gray-200 text-center text-sm font-medium tabular-nums transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
                   aria-label="Click to edit seat count"
                   title="Click to edit"
                 >
@@ -244,7 +244,7 @@ const CheckoutSeatSelector = ({
                   isUpdating ||
                   isEditing
                 }
-                className="dark:text-polar-400 dark:hover:bg-polar-800 flex h-7 w-7 cursor-pointer items-center justify-center rounded-r-lg leading-none text-gray-500 transition-colors hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40"
+                className="dark:text-tarifia-400 dark:hover:bg-tarifia-800 flex h-7 w-7 cursor-pointer items-center justify-center rounded-r-lg leading-none text-gray-500 transition-colors hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40"
                 aria-label="Increase seats"
               >
                 <svg
@@ -262,7 +262,7 @@ const CheckoutSeatSelector = ({
           )}
         </div>
         {!isFixedSeats && seatLimitText && (
-          <p className="dark:text-polar-400 text-xs text-gray-500">
+          <p className="dark:text-tarifia-400 text-xs text-gray-500">
             {seatLimitText}
           </p>
         )}
@@ -336,7 +336,7 @@ const CheckoutSeatSelector = ({
                 type="button"
                 onClick={handleSeatClick}
                 disabled={isUpdating}
-                className="dark:hover:bg-polar-800 group relative min-w-[3.5rem] rounded-xl px-3 py-1.5 text-center text-2xl font-light text-gray-900 tabular-nums transition-all hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50 dark:text-white"
+                className="dark:hover:bg-tarifia-800 group relative min-w-[3.5rem] rounded-xl px-3 py-1.5 text-center text-2xl font-light text-gray-900 tabular-nums transition-all hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50 dark:text-white"
                 aria-label="Click to edit seat count"
                 title="Click to edit"
               >
@@ -372,7 +372,7 @@ const CheckoutSeatSelector = ({
           </div>
         )}
         {!isFixedSeats && seatLimitText && (
-          <p className="dark:text-polar-400 text-xs text-gray-500">
+          <p className="dark:text-tarifia-400 text-xs text-gray-500">
             {seatLimitText}
           </p>
         )}

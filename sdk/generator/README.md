@@ -1,8 +1,8 @@
-# Polar SDK Generator
+# Tarifia SDK Generator
 
-This project is the internal code generator for the Polar SDK. It is not intended to be used by external users, but rather as a tool for generating the SDK code from the OpenAPI specification.
+This project is the internal code generator for the Tarifia SDK. It is not intended to be used by external users, but rather as a tool for generating the SDK code from the OpenAPI specification.
 
-It's highly tailored to the needs of the Polar SDK and is not designed to be a general-purpose code generator.
+It's highly tailored to the needs of the Tarifia SDK and is not designed to be a general-purpose code generator.
 
 ## Structure
 

@@ -3,9 +3,9 @@ from functools import partial
 
 import pytest
 
-from polar.enums import PayoutAccountType
-from polar.kit.utils import utc_now
-from polar.models import (
+from tarifia.enums import PayoutAccountType
+from tarifia.kit.utils import utc_now
+from tarifia.models import (
     Account,
     Organization,
     Payout,
@@ -13,15 +13,15 @@ from polar.models import (
     Transaction,
     User,
 )
-from polar.models.transaction import Processor, TransactionType
-from polar.postgres import AsyncSession
-from polar.transaction.service.payout import (
+from tarifia.models.transaction import Processor, TransactionType
+from tarifia.postgres import AsyncSession
+from tarifia.transaction.service.payout import (
     payout_transaction as payout_transaction_service,
 )
-from polar.transaction.service.platform_fee import (
+from tarifia.transaction.service.platform_fee import (
     platform_fee_transaction as platform_fee_transaction_service,
 )
-from polar.transaction.service.transaction import transaction as transaction_service
+from tarifia.transaction.service.transaction import transaction as transaction_service
 from tests.fixtures import random_objects as ro
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_account, create_payout_account

@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 const PARAGRAPHS = [
   'Event-based usage billing. Checkouts that convert. Realtime metrics. Worldwide tax handled.',
-  `Polar is the financial layer for a new generation of intelligent software.`,
+  `Tarifia is the financial layer for a new generation of intelligent software.`,
 ]
 
 export const Vision = () => {
@@ -35,7 +35,7 @@ export const Vision = () => {
           const wordProgress = i / total
           const filled = progress > wordProgress
           words[i].classList.toggle('text-gray-300', !filled)
-          words[i].classList.toggle('dark:text-polar-700', !filled)
+          words[i].classList.toggle('dark:text-tarifia-700', !filled)
         }
 
         if (barRef.current) {
@@ -53,7 +53,7 @@ export const Vision = () => {
     <div ref={wrapperRef} style={{ height: '300vh' }}>
       <div className="sticky top-0 flex h-screen items-center justify-center">
         <div className="flex flex-row gap-x-6 px-4 md:gap-x-24 md:px-0">
-          <div className="dark:bg-polar-700 w-px self-stretch bg-gray-200">
+          <div className="dark:bg-tarifia-700 w-px self-stretch bg-gray-200">
             <div
               ref={barRef}
               className="w-full bg-black dark:bg-white"
@@ -74,7 +74,7 @@ export const Vision = () => {
                       ref={(el) => {
                         if (el) wordsRef.current[idx] = el
                       }}
-                      className="dark:text-polar-700 inline-block text-gray-300 transition-colors duration-200"
+                      className="dark:text-tarifia-700 inline-block text-gray-300 transition-colors duration-200"
                     >
                       {word}
                       &nbsp;

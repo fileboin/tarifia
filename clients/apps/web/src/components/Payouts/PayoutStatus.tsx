@@ -1,6 +1,6 @@
-import { schemas } from '@polar-sh/client'
-import { Status, type StatusColor } from '@polar-sh/orbit'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Status, type StatusColor } from '@tarifia-sh/orbit'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@tarifia-sh/orbit'
 
 const PayoutStatusDisplayTitle: Record<schemas['PayoutStatus'], string> = {
   succeeded: 'Succeeded',

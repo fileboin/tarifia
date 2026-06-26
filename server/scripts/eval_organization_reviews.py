@@ -35,19 +35,19 @@ import structlog
 import typer
 from sqlalchemy.ext.asyncio import create_async_engine
 
-from polar.kit.db.postgres import create_async_sessionmaker
-from polar.organization_review.eval.dataset import (
+from tarifia.kit.db.postgres import create_async_sessionmaker
+from tarifia.organization_review.eval.dataset import (
     DEFAULT_DATASET_PATH,
     DEFAULT_TOTAL,
     EvalDataset,
     extract_dataset,
     extract_voting_dataset,
 )
-from polar.organization_review.eval.evaluators import (
+from tarifia.organization_review.eval.evaluators import (
     VerdictMatch,
 )
-from polar.organization_review.eval.optimize import run_optimization
-from polar.organization_review.eval.task import create_review_task
+from tarifia.organization_review.eval.optimize import run_optimization
+from tarifia.organization_review.eval.task import create_review_task
 
 log = structlog.get_logger(__name__)
 
@@ -208,7 +208,7 @@ async def run(
     Re-runs the analyzer on each case and checks whether the
     verdict matches the expected output.
     """
-    from polar.organization_review.policy import fetch_policy_content
+    from tarifia.organization_review.policy import fetch_policy_content
 
     policy_override: str | None = None
     if policy == "default":

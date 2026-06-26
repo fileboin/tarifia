@@ -6,13 +6,13 @@ from uuid import uuid4
 
 import pytest
 
-from polar.backoffice.support_cases.queries import (
+from tarifia.backoffice.support_cases.queries import (
     Row,
     cases_statement,
     open_case_organization_ids,
 )
-from polar.models import Customer, Organization, Product, User
-from polar.models.support_case import (
+from tarifia.models import Customer, Organization, Product, User
+from tarifia.models.support_case import (
     SupportCaseAudience,
     SupportCaseMessage,
     SupportCaseMessageAuthorKind,
@@ -21,7 +21,7 @@ from polar.models.support_case import (
     SupportCaseParticipantKind,
     SupportCaseType,
 )
-from polar.postgres import AsyncSession
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_appeal_case,

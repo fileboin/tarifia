@@ -1,15 +1,15 @@
 ---
 name: local-environment
-description: Local development environment management for Polar using Docker
+description: Local development environment management for Tarifia using Docker
 license: MIT
 metadata:
-  author: polar
+  author: tarifia
   version: "1.0.0"
 ---
 
 # Local Environment Skill
 
-This skill enables Claude to help manage the Polar local development environment using Docker. Use this when the user needs to start, stop, debug, or understand the local development stack.
+This skill enables Claude to help manage the Tarifia local development environment using Docker. Use this when the user needs to start, stop, debug, or understand the local development stack.
 
 ## Instance Auto-Detection
 
@@ -68,10 +68,10 @@ For manually started instances: `Port = Base Port + (Instance × 100)`
 | 1 | 8100 | 3100 | 5532 | 6479 | 9100 |
 | 2 | 8200 | 3200 | 5632 | 6579 | 9200 |
 
-Shared infra (db/redis/minio/tinybird) runs under the `polar-shared` project
+Shared infra (db/redis/minio/tinybird) runs under the `tarifia-shared` project
 without host port mappings — reach it via `dev docker exec <service>` or
-`docker exec polar-shared-<service>-1`. The per-instance database is named
-`polar_dev_<N>`, not `polar`.
+`docker exec tarifia-shared-<service>-1`. The per-instance database is named
+`tarifia_dev_<N>`, not `tarifia`.
 
 ## Rules Index
 

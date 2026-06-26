@@ -3,18 +3,18 @@ from typing import Any, Literal
 
 import pytest
 
-from polar.auth.models import AuthSubject, User
-from polar.checkout.schemas import CheckoutUpdatePublic
-from polar.checkout.service import checkout as checkout_service
-from polar.discount.schemas import (
+from tarifia.auth.models import AuthSubject, User
+from tarifia.checkout.schemas import CheckoutUpdatePublic
+from tarifia.checkout.service import checkout as checkout_service
+from tarifia.discount.schemas import (
     DiscountFixedCreate,
     DiscountUpdate,
 )
-from polar.discount.service import discount as discount_service
-from polar.exceptions import PolarRequestValidationError
-from polar.kit.currency import PresentmentCurrency
-from polar.kit.utils import utc_now
-from polar.models import (
+from tarifia.discount.service import discount as discount_service
+from tarifia.exceptions import TarifiaRequestValidationError
+from tarifia.kit.currency import PresentmentCurrency
+from tarifia.kit.utils import utc_now
+from tarifia.models import (
     Checkout,
     Discount,
     DiscountRedemption,
@@ -22,13 +22,13 @@ from polar.models import (
     Product,
     UserOrganization,
 )
-from polar.models.discount import (
+from tarifia.models.discount import (
     DiscountDuration,
     DiscountFixed,
     DiscountPercentage,
     DiscountType,
 )
-from polar.postgres import AsyncSession
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_checkout, create_discount
 
@@ -93,7 +93,7 @@ class TestUpdate:
             organization=organization,
         )
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await discount_service.update(
                 session,
                 discount,
@@ -119,7 +119,7 @@ class TestUpdate:
             organization=organization,
         )
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await discount_service.update(
                 session,
                 discount,
@@ -170,7 +170,7 @@ class TestUpdate:
         )
         await session.refresh(discount, ["organization", "redemptions_count"])
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await discount_service.update(
                 session,
                 discount,
@@ -397,7 +397,7 @@ class TestUpdate:
             code="OTHER",
         )
 
-        with pytest.raises(PolarRequestValidationError) as exc_info:
+        with pytest.raises(TarifiaRequestValidationError) as exc_info:
             await discount_service.update(
                 session,
                 discount_to_update,

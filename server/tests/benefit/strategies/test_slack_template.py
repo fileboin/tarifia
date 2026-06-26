@@ -1,6 +1,6 @@
 import pytest
 
-from polar.benefit.strategies.slack_shared_channel.template import (
+from tarifia.benefit.strategies.slack_shared_channel.template import (
     InvalidTemplateError,
     TemplateContext,
     render_channel_name,

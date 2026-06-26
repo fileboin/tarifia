@@ -1,7 +1,7 @@
-import { Box } from '@polar-sh/orbit/Box'
+import { Box } from '@tarifia-sh/orbit/Box'
 import { PageHeader, Section, Prose, Example } from '@/components/docs'
-import { Text } from '@polar-sh/orbit'
-import type { ShadowToken } from '@polar-sh/orbit/theme'
+import { Text } from '@tarifia-sh/orbit'
+import type { ShadowToken } from '@tarifia-sh/orbit/theme'
 
 const SHADOWS: { token: ShadowToken; note: string }[] = [
   { token: 'none', note: 'Flat, no elevation' },

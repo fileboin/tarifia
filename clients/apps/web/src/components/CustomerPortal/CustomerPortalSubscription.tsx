@@ -7,12 +7,12 @@ import {
   usePortalAuthenticatedUser,
 } from '@/hooks/queries/customerPortal'
 import { hasBillingPermission } from '@/utils/customerPortal'
-import { Client, schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
-import { Button } from '@polar-sh/orbit'
-import { DataTable } from '@polar-sh/orbit'
+import { Client, schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
+import { Button } from '@tarifia-sh/orbit'
+import { DataTable } from '@tarifia-sh/orbit'
 import { useState } from 'react'
-import FormattedDateTime from '@polar-sh/ui/components/atoms/FormattedDateTime'
+import FormattedDateTime from '@tarifia-sh/ui/components/atoms/FormattedDateTime'
 import { ConfirmModal } from '../Modal/ConfirmModal'
 import { useModal } from '../Modal/useModal'
 import { DownloadInvoicePortal } from '../Orders/DownloadInvoice'
@@ -231,7 +231,7 @@ const CustomerPortalSubscription = ({
                   accessorKey: 'amount',
                   header: 'Amount',
                   cell: ({ row }) => (
-                    <span className="dark:text-polar-500 text-sm text-gray-500">
+                    <span className="dark:text-tarifia-500 text-sm text-gray-500">
                       {formatCurrency('compact')(
                         row.original.total_amount,
                         row.original.currency,

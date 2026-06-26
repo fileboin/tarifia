@@ -14,8 +14,8 @@ import freezegun
 import pytest
 from httpx import AsyncClient
 
-from polar.kit.db.postgres import AsyncSession
-from polar.models import Organization, Product
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.models import Organization, Product
 from tests.e2e.conftest import E2E_AUTH
 from tests.e2e.infra import DrainFn, SchedulerSimulator, StripeSimulator
 from tests.e2e.purchase.conftest import complete_purchase

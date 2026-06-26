@@ -2,7 +2,7 @@
 
 import { IdentityVerificationStatusContent } from '@/components/Identity/IdentityVerificationStatusContent'
 import { useStartIdentityVerification } from '@/hooks/identityVerification'
-import { Box } from '@polar-sh/orbit/Box'
+import { Box } from '@tarifia-sh/orbit/Box'
 
 const IdentityVerificationSettings = () => {
   const { start, identityVerificationStatus } = useStartIdentityVerification()

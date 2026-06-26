@@ -2,7 +2,7 @@
 
 import { OrderStatus } from '@/components/Orders/OrderStatus'
 import { useOrders } from '@/hooks/queries/orders'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 
 const BILLING_REASON_LABELS: Record<schemas['OrderBillingReason'], string> = {
   purchase: 'Purchase',
@@ -10,10 +10,10 @@ const BILLING_REASON_LABELS: Record<schemas['OrderBillingReason'], string> = {
   subscription_cycle: 'Renewal',
   subscription_update: 'Plan Change',
 }
-import { formatCurrency } from '@polar-sh/currency'
-import FormattedDateTime from '@polar-sh/ui/components/atoms/FormattedDateTime'
-import { DataTable } from '@polar-sh/orbit'
-import { Button } from '@polar-sh/orbit'
+import { formatCurrency } from '@tarifia-sh/currency'
+import FormattedDateTime from '@tarifia-sh/ui/components/atoms/FormattedDateTime'
+import { DataTable } from '@tarifia-sh/orbit'
+import { Button } from '@tarifia-sh/orbit'
 import Link from 'next/link'
 
 interface SubscriptionOrdersSectionProps {
@@ -52,7 +52,7 @@ const SubscriptionOrdersSection = ({
             header: 'Date',
             accessorKey: 'created_at',
             cell: ({ row: { original } }) => (
-              <span className="dark:text-polar-500 text-sm text-gray-500">
+              <span className="dark:text-tarifia-500 text-sm text-gray-500">
                 <FormattedDateTime datetime={original.created_at} />
               </span>
             ),

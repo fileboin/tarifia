@@ -20,11 +20,11 @@ from rich.progress import Progress
 from sqlalchemy import and_, or_, select
 from sqlalchemy.orm import contains_eager
 
-from polar.kit.currency import _get_currency_decimal_factor
-from polar.kit.db.postgres import AsyncSession, create_async_sessionmaker
-from polar.models import Order, Refund, Transaction
-from polar.models.transaction import TransactionType
-from polar.postgres import create_async_engine
+from tarifia.kit.currency import _get_currency_decimal_factor
+from tarifia.kit.db.postgres import AsyncSession, create_async_sessionmaker
+from tarifia.models import Order, Refund, Transaction
+from tarifia.models.transaction import TransactionType
+from tarifia.postgres import create_async_engine
 
 cli = typer.Typer()
 

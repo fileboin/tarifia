@@ -2,9 +2,9 @@ from typing import Any, Literal
 
 import pytest
 
-from polar.auth.models import Anonymous, AuthSubject, Subject
-from polar.auth.scope import Scope
-from polar.models import Customer, Member, Organization, User
+from tarifia.auth.models import Anonymous, AuthSubject, Subject
+from tarifia.auth.scope import Scope
+from tarifia.models import Customer, Member, Organization, User
 
 
 class AuthSubjectFixture:
@@ -106,7 +106,7 @@ def auth_subject(
     if isinstance(subject, User):
         from unittest.mock import MagicMock
 
-        from polar.models import UserSession
+        from tarifia.models import UserSession
 
         session = MagicMock(spec=UserSession)
 

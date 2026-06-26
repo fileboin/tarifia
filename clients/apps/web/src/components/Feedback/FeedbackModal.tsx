@@ -1,5 +1,5 @@
-import { InlineModal, InlineModalHeader } from '@polar-sh/orbit'
-import { schemas } from '@polar-sh/client'
+import { InlineModal, InlineModalHeader } from '@tarifia-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
 import { useState } from 'react'
 import { collectClientContext } from './clientContext'
 import { FeedbackForm } from './FeedbackForm'
@@ -97,7 +97,7 @@ export const FeedbackModal = ({
       modalContent={
         <>
           <InlineModalHeader hide={handleHide}>
-            <h2 className="text-xl">Reach out to Polar</h2>
+            <h2 className="text-xl">Reach out to Tarifia</h2>
           </InlineModalHeader>
           <div className="flex min-h-0 flex-1 flex-col px-8">
             {renderContent()}

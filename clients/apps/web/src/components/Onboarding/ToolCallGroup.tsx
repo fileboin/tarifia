@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
-import { Box } from '@polar-sh/orbit/Box'
+import { Box } from '@tarifia-sh/orbit/Box'
 import { DynamicToolUIPart } from 'ai'
 import { useState } from 'react'
 import LogoIcon from '../Brand/logos/LogoIcon'
@@ -37,12 +37,12 @@ function ensureJSONArgument<T>(callback: (a: T | undefined) => string) {
 }
 
 const TOOL_LABELS = {
-  polar_products_list: {
+  tarifia_products_list: {
     input: () => 'Listing products…',
     output: () => 'Products found.',
     error: () => 'Error listing products.',
   },
-  polar_products_create: {
+  tarifia_products_create: {
     input: ensureJSONArgument((input?: { body: { name?: string } }) =>
       input?.body?.name
         ? `Creating product "${input.body.name}"`
@@ -55,17 +55,17 @@ const TOOL_LABELS = {
     ),
     error: () => 'Error creating product.',
   },
-  polar_products_update_benefits: {
+  tarifia_products_update_benefits: {
     input: () => 'Assigning benefits to product…',
     output: () => 'Assigned benefits to product.',
     error: () => 'Error assigning benefits.',
   },
-  polar_benefits_list: {
+  tarifia_benefits_list: {
     input: () => 'Listing benefits…',
     output: () => 'Benefits found.',
     error: () => 'Error listing benefits.',
   },
-  polar_benefits_create: {
+  tarifia_benefits_create: {
     input: ensureJSONArgument((input?: { body: { description?: string } }) =>
       input?.body?.description
         ? `Creating benefit "${input.body.description}"`
@@ -78,7 +78,7 @@ const TOOL_LABELS = {
     ),
     error: () => 'Error creating benefit.',
   },
-  polar_benefits_update: {
+  tarifia_benefits_update: {
     input: ensureJSONArgument((input?: { body: { description?: string } }) =>
       input?.body?.description
         ? `Updating benefit "${input.body.description}"`
@@ -91,12 +91,12 @@ const TOOL_LABELS = {
     ),
     error: () => 'Error updating benefit.',
   },
-  polar_meters_list: {
+  tarifia_meters_list: {
     input: () => 'Listing meters…',
     output: () => 'Meters found.',
     error: () => 'Error listing meters.',
   },
-  polar_meters_create: {
+  tarifia_meters_create: {
     input: ensureJSONArgument((input?: { body: { name?: string } }) =>
       input?.body?.name
         ? `Creating meter "${input.body.name}"`
@@ -109,7 +109,7 @@ const TOOL_LABELS = {
     ),
     error: () => 'Error creating meter.',
   },
-  polar_meters_update: {
+  tarifia_meters_update: {
     input: ensureJSONArgument((input?: { body: { name?: string } }) =>
       input?.body?.name
         ? `Updating meter "${input.body.name}"`
@@ -172,7 +172,7 @@ export const ToolCallGroup = ({
     const label = getToolLabel(part)
 
     return (
-      <p className="dark:text-polar-500 not-prose flex items-center gap-1 text-gray-500">
+      <p className="dark:text-tarifia-500 not-prose flex items-center gap-1 text-gray-500">
         <LogoIcon size={24} className="-ml-1.5" />
         {label}
       </p>
@@ -187,7 +187,7 @@ export const ToolCallGroup = ({
       <Box flexDirection="column" gap="s">
         <button
           onClick={() => setExpanded(false)}
-          className="dark:text-polar-500 flex items-center gap-1 text-left text-gray-500 hover:text-gray-700 dark:hover:text-gray-400"
+          className="dark:text-tarifia-500 flex items-center gap-1 text-left text-gray-500 hover:text-gray-700 dark:hover:text-gray-400"
         >
           <LogoIcon size={24} className="-ml-1.5" />
           <Box as="span">
@@ -209,7 +209,7 @@ export const ToolCallGroup = ({
             return (
               <p
                 key={`${messageId}-tool-${index}`}
-                className="dark:text-polar-500 flex items-center gap-1 text-sm text-gray-500"
+                className="dark:text-tarifia-500 flex items-center gap-1 text-sm text-gray-500"
               >
                 {label}
               </p>
@@ -223,7 +223,7 @@ export const ToolCallGroup = ({
   return (
     <button
       onClick={() => setExpanded(true)}
-      className="dark:text-polar-500 not-prose flex items-center gap-1 text-left text-gray-500 hover:text-gray-700 dark:hover:text-gray-400"
+      className="dark:text-tarifia-500 not-prose flex items-center gap-1 text-left text-gray-500 hover:text-gray-700 dark:hover:text-gray-400"
       disabled={!isComplete}
     >
       <LogoIcon size={24} className="-ml-1.5" />

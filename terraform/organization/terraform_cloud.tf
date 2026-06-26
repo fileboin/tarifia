@@ -1,12 +1,12 @@
 locals {
   terraform_cloud = {
-    organization = "polar-sh"
+    organization = "tarifia-sh"
     role_name    = "terraform-cloud"
 
     workspaces = {
       production = {
         project   = "Production"
-        workspace = "polar"
+        workspace = "tarifia"
       }
       sandbox = {
         project   = "sandbox"

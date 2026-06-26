@@ -3,8 +3,8 @@ from typing import Literal
 import typer
 from sqlalchemy import select, update
 
-from polar.enums import TaxProcessor
-from polar.models import Checkout, Order, Transaction, WalletTransaction
+from tarifia.enums import TaxProcessor
+from tarifia.models import Checkout, Order, Transaction, WalletTransaction
 from scripts.helper import (
     configure_script_logging,
     limit_bindparam,

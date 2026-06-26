@@ -1,7 +1,7 @@
 import { useCustomerBenefitGrantUpdate } from '@/hooks/queries/customerPortal'
 import { getQueryClient } from '@/utils/api/query'
 import { markdownOptions } from '@/utils/markdown'
-import { Client, schemas } from '@polar-sh/client'
+import { Client, schemas } from '@tarifia-sh/client'
 import {
   Button,
   Input,
@@ -11,15 +11,15 @@ import {
   SelectTrigger,
   SelectValue,
   Text,
-} from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
+} from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
 import {
   DEFAULT_LOCALE,
   useTranslations,
   type AcceptedLocale,
   type TranslationKey,
-} from '@polar-sh/i18n'
-import ShadowBox from '@polar-sh/ui/components/atoms/ShadowBox'
+} from '@tarifia-sh/i18n'
+import ShadowBox from '@tarifia-sh/ui/components/atoms/ShadowBox'
 import Markdown from 'markdown-to-jsx'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
@@ -58,8 +58,8 @@ const BenefitGrantCustom = ({
     return null
   }
   return (
-    <ShadowBox className="dark:bg-polar-800 bg-white p-6 lg:rounded-3xl">
-      <div className="prose dark:prose-invert prose-headings:font-medium prose-headings:text-black prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg prose-h4:text-sm prose-h5:text-sm prose-h6:text-sm dark:prose-headings:text-white dark:text-polar-300 prose-p:text-sm leading-normal text-gray-800 [&>*>*:first-child]:mt-0">
+    <ShadowBox className="dark:bg-tarifia-800 bg-white p-6 lg:rounded-3xl">
+      <div className="prose dark:prose-invert prose-headings:font-medium prose-headings:text-black prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg prose-h4:text-sm prose-h5:text-sm prose-h6:text-sm dark:prose-headings:text-white dark:text-tarifia-300 prose-p:text-sm leading-normal text-gray-800 [&>*>*:first-child]:mt-0">
         <Markdown options={markdownOptions}>{note}</Markdown>
       </div>
     </ShadowBox>
@@ -510,13 +510,13 @@ export const BenefitGrant = ({
     <div className="flex w-full flex-col gap-4">
       <div className="flex flex-row items-center gap-x-4">
         <div className="flex flex-row items-center gap-x-2 text-xs text-gray-500 dark:text-white">
-          <span className="dark:bg-polar-700 flex h-8 w-8 flex-row items-center justify-center rounded-full bg-gray-50 text-sm">
+          <span className="dark:bg-tarifia-700 flex h-8 w-8 flex-row items-center justify-center rounded-full bg-gray-50 text-sm">
             {resolveBenefitIcon(benefit.type, 'h-3 w-3')}
           </span>
         </div>
         <div className="flex flex-col">
           <h3 className="text-sm font-medium">{benefit.description}</h3>
-          <p className="dark:text-polar-500 flex flex-row gap-x-1 truncate text-sm text-gray-500">
+          <p className="dark:text-tarifia-500 flex flex-row gap-x-1 truncate text-sm text-gray-500">
             {t(benefitTypeTranslationKeys[benefit.type])}
           </p>
         </div>

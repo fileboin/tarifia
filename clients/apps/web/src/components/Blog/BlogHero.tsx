@@ -14,7 +14,7 @@ export function BlogHero({ title, description, publishDate }: BlogHeroProps) {
         <p className="max-w-2xl text-xl text-balance">{description}</p>
       )}
       {publishDate && (
-        <p className="dark:text-polar-500 text-gray-500">
+        <p className="dark:text-tarifia-500 text-gray-500">
           {new Date(publishDate).toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',

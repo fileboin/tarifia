@@ -1,4 +1,4 @@
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { PropsWithChildren, createContext } from 'react'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type

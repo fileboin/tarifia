@@ -3,12 +3,12 @@ from decimal import Decimal
 import pytest
 import pytest_asyncio
 
-from polar.billing_entry.service import billing_entry as billing_entry_service
-from polar.enums import SubscriptionProrationBehavior, SubscriptionRecurringInterval
-from polar.event.system import SystemEvent
-from polar.meter.aggregation import AggregationFunction, PropertyAggregation
-from polar.meter.filter import Filter, FilterConjunction
-from polar.models import (
+from tarifia.billing_entry.service import billing_entry as billing_entry_service
+from tarifia.enums import SubscriptionProrationBehavior, SubscriptionRecurringInterval
+from tarifia.event.system import SystemEvent
+from tarifia.meter.aggregation import AggregationFunction, PropertyAggregation
+from tarifia.meter.filter import Filter, FilterConjunction
+from tarifia.models import (
     BillingEntry,
     Customer,
     Meter,
@@ -20,11 +20,11 @@ from polar.models import (
     ProductPriceSeatUnit,
     Subscription,
 )
-from polar.models.billing_entry import BillingEntryDirection, BillingEntryType
-from polar.models.event import EventSource
-from polar.models.subscription_product_price import SubscriptionProductPrice
-from polar.postgres import AsyncSession
-from polar.product.guard import (
+from tarifia.models.billing_entry import BillingEntryDirection, BillingEntryType
+from tarifia.models.event import EventSource
+from tarifia.models.subscription_product_price import SubscriptionProductPrice
+from tarifia.postgres import AsyncSession
+from tarifia.product.guard import (
     StaticPrice,
     is_custom_price,
     is_fixed_price,

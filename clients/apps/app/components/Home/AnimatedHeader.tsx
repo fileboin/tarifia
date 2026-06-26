@@ -1,6 +1,6 @@
 import { NotificationBadge } from '@/components/Notifications/NotificationBadge'
 import { Box } from '@/components/Shared/Box'
-import PolarLogo from '@/components/Shared/PolarLogo'
+import TarifiaLogo from '@/components/Shared/TarifiaLogo'
 import { Touchable } from '@/components/Shared/Touchable'
 import { useTheme } from '@/design-system/useTheme'
 import { useHomeHeaderHeight } from '@/hooks/useHomeHeaderHeight'
@@ -160,7 +160,7 @@ export const AnimatedHeader: FC = () => {
           rOpacityContainer,
         ]}
       >
-        <PolarLogo size={36} />
+        <TarifiaLogo size={36} />
         <Box flexDirection="row" gap="spacing-20">
           <NotificationBadge />
           <Link href="/settings" asChild>

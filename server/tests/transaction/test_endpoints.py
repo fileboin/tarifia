@@ -3,9 +3,9 @@ import uuid
 import pytest
 from httpx import AsyncClient
 
-from polar.auth.models import AuthSubject
-from polar.models import Account, Organization, Transaction, User, UserOrganization
-from polar.models.user_organization import OrganizationRole
+from tarifia.auth.models import AuthSubject
+from tarifia.models import Account, Organization, Transaction, User, UserOrganization
+from tarifia.models.user_organization import OrganizationRole
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.transaction.conftest import create_transaction

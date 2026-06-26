@@ -5,15 +5,15 @@ import pytest
 from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from polar.auth.scope import Scope
-from polar.models import (
+from tarifia.auth.scope import Scope
+from tarifia.models import (
     Customer,
     CustomerSeat,
     Order,
     Subscription,
     UserOrganization,
 )
-from polar.models.customer_seat import SeatStatus
+from tarifia.models.customer_seat import SeatStatus
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (

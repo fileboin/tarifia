@@ -1,14 +1,14 @@
 import pytest
 
-from polar.models import Customer, Organization, Product
-from polar.models.payment import (
+from tarifia.models import Customer, Organization, Product
+from tarifia.models.payment import (
     DUNNING_COUNTING_TRIGGERS,
     DUNNING_NON_COUNTING_TRIGGERS,
     PaymentStatus,
     PaymentTrigger,
 )
-from polar.payment.repository import PaymentRepository
-from polar.postgres import AsyncSession
+from tarifia.payment.repository import PaymentRepository
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_order, create_payment
 

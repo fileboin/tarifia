@@ -7,10 +7,10 @@ import PaymentStatus from '@/components/PaymentStatus/PaymentStatus'
 import { ProductListItem } from '@/components/Products/ProductListItem'
 import { useCustomer } from '@/hooks/queries/customers'
 import { usePayments } from '@/hooks/queries/payments'
-import { schemas } from '@polar-sh/client'
-import { DataTable, Truncated, type DataTableColumnDef } from '@polar-sh/orbit'
-import FormattedDateTime from '@polar-sh/ui/components/atoms/FormattedDateTime'
-import { List } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { DataTable, Truncated, type DataTableColumnDef } from '@tarifia-sh/orbit'
+import FormattedDateTime from '@tarifia-sh/ui/components/atoms/FormattedDateTime'
+import { List } from '@tarifia-sh/orbit'
 import React from 'react'
 
 interface ClientPageProps {
@@ -37,7 +37,7 @@ const ClientPage: React.FC<ClientPageProps> = ({ organization, checkout }) => {
           <div className="flex flex-row items-center gap-4">
             <h2 className="text-xl font-normal">Checkout</h2>
           </div>
-          <span className="dark:text-polar-500 font-mono text-sm text-gray-500">
+          <span className="dark:text-tarifia-500 font-mono text-sm text-gray-500">
             {checkout.id}
           </span>
         </div>

@@ -18,10 +18,10 @@ if ! [[ "$name" =~ ^[a-z0-9_]+$ ]]; then
 fi
 
 worktree_dir=".worktrees/$name"
-db_name="polar_dev_$name"
+db_name="tarifia_dev_$name"
 host="localhost"
-user="polar"
-password="polar"
+user="tarifia"
+password="tarifia"
 
 # Create git worktree
 echo "Creating git worktree in $worktree_dir"

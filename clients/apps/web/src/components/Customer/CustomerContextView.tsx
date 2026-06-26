@@ -3,13 +3,13 @@
 import { StatisticCard } from '@/components/Shared/StatisticCard'
 import { useMetrics } from '@/hooks/queries/metrics'
 import { buildCustomerDashboardPath } from '@/utils/customer'
-import { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
-import { Avatar } from '@polar-sh/orbit'
-import { Button } from '@polar-sh/orbit'
-import FormattedDateTime from '@polar-sh/ui/components/atoms/FormattedDateTime'
-import { Pill } from '@polar-sh/orbit'
-import ShadowBox from '@polar-sh/ui/components/atoms/ShadowBox'
+import { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
+import { Avatar } from '@tarifia-sh/orbit'
+import { Button } from '@tarifia-sh/orbit'
+import FormattedDateTime from '@tarifia-sh/ui/components/atoms/FormattedDateTime'
+import { Pill } from '@tarifia-sh/orbit'
+import ShadowBox from '@tarifia-sh/ui/components/atoms/ShadowBox'
 import Link from 'next/link'
 import { DetailRow } from '../Shared/DetailRow'
 import { useSubscriptions } from '@/hooks/queries'
@@ -58,7 +58,7 @@ export const CustomerContextView = ({
               </Pill>
             )}
 
-            <div className="dark:text-polar-500 flex flex-row items-center gap-1 text-sm text-gray-500">
+            <div className="dark:text-tarifia-500 flex flex-row items-center gap-1 text-sm text-gray-500">
               {customer.email}
             </div>
           </div>
@@ -156,7 +156,7 @@ type ContextCardProps = PropsWithChildren & {}
 
 const ContextCard = (props: ContextCardProps) => {
   return (
-    <ShadowBox className="dark:border-polar-800 flex flex-col gap-4 border-gray-200 bg-white p-6 md:shadow-xs lg:rounded-2xl">
+    <ShadowBox className="dark:border-tarifia-800 flex flex-col gap-4 border-gray-200 bg-white p-6 md:shadow-xs lg:rounded-2xl">
       {props.children}
     </ShadowBox>
   )
@@ -228,7 +228,7 @@ const SubscriptionRow = ({
   return (
     <Link
       href={`/dashboard/${organization.slug}/sales/subscriptions/${subscription.id}`}
-      className="dark:hover:bg-polar-800 -mx-4 flex flex-row items-center justify-between gap-3 rounded-lg px-4 py-2 hover:bg-gray-100"
+      className="dark:hover:bg-tarifia-800 -mx-4 flex flex-row items-center justify-between gap-3 rounded-lg px-4 py-2 hover:bg-gray-100"
     >
       <div className="flex flex-row items-center gap-4 overflow-hidden">
         <span
@@ -240,7 +240,7 @@ const SubscriptionRow = ({
           }
         />
         <span className="truncate text-sm">{subscription.product.name}</span>
-        <span className="dark:text-polar-500 text-sm text-gray-500">
+        <span className="dark:text-tarifia-500 text-sm text-gray-500">
           {subscription.status === 'active'
             ? formatInterval(
                 subscription.recurring_interval,
@@ -250,7 +250,7 @@ const SubscriptionRow = ({
         </span>
       </div>
       {formattedPrice && (
-        <span className="dark:text-polar-400 shrink-0 text-sm text-gray-500">
+        <span className="dark:text-tarifia-400 shrink-0 text-sm text-gray-500">
           {formattedPrice}
         </span>
       )}

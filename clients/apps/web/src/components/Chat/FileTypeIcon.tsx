@@ -10,7 +10,7 @@ import React from 'react'
 import { twMerge } from 'tailwind-merge'
 import { getExtension } from './fileUtils'
 
-const DEFAULT_CLASS = 'dark:text-polar-400 h-4 w-4 shrink-0 text-gray-500'
+const DEFAULT_CLASS = 'dark:text-tarifia-400 h-4 w-4 shrink-0 text-gray-500'
 
 interface Props {
   name: string

@@ -3,9 +3,9 @@
 import { useOrganization, useUpdateOrganization } from '@/hooks/queries'
 import { useAutoSave } from '@/hooks/useAutoSave'
 import { extractApiErrorMessage, setValidationErrors } from '@/utils/api/errors'
-import { isValidationError, schemas } from '@polar-sh/client'
-import { Switch } from '@polar-sh/orbit'
-import { Form, FormField } from '@polar-sh/ui/components/ui/form'
+import { isValidationError, schemas } from '@tarifia-sh/client'
+import { Switch } from '@tarifia-sh/orbit'
+import { Form, FormField } from '@tarifia-sh/ui/components/ui/form'
 import { useCallback, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { ConfirmModal } from '../Modal/ConfirmModal'
@@ -89,7 +89,7 @@ export default function FeatureSettings({
               <>
                 Show{' '}
                 <a
-                  href="https://polar.sh/docs/features/checkout/localization"
+                  href="https://tarifia.sh/docs/features/checkout/localization"
                   target="_blank"
                   className="underline"
                   rel="noreferrer noopener"
@@ -154,7 +154,7 @@ export default function FeatureSettings({
           <p className="text-sm">
             Please review the{' '}
             <a
-              href="https://polar.sh/docs/guides/seat-based-pricing"
+              href="https://tarifia.sh/docs/guides/seat-based-pricing"
               target="_blank"
               className="underline"
               rel="noreferrer noopener"

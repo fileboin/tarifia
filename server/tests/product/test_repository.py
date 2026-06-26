@@ -1,10 +1,10 @@
 import pytest
 
-from polar.kit.currency import PresentmentCurrency
-from polar.models import Organization
-from polar.models.product_price import ProductPriceSource
-from polar.postgres import AsyncSession
-from polar.product.repository import ProductRepository
+from tarifia.kit.currency import PresentmentCurrency
+from tarifia.models import Organization
+from tarifia.models.product_price import ProductPriceSource
+from tarifia.postgres import AsyncSession
+from tarifia.product.repository import ProductRepository
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_product, create_product_price_fixed
 

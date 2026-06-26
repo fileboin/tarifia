@@ -9,15 +9,15 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 
-from polar.models.organization import Organization, OrganizationStatus
-from polar.models.organization_review import OrganizationReview
-from polar.organization.repository import (
+from tarifia.models.organization import Organization, OrganizationStatus
+from tarifia.models.organization_review import OrganizationReview
+from tarifia.organization.repository import (
     OrganizationReviewRepository as OrgReviewRepository,
 )
-from polar.organization_review.repository import (
+from tarifia.organization_review.repository import (
     OrganizationReviewRepository as AgentReviewRepository,
 )
-from polar.organization_review.schemas import (
+from tarifia.organization_review.schemas import (
     ActorType,
     AgentReviewResult,
     DataSnapshot,
@@ -36,12 +36,12 @@ from polar.organization_review.schemas import (
     RiskLevel,
     UsageInfo,
 )
-from polar.organization_review.tasks import (
+from tarifia.organization_review.tasks import (
     _run_agent_debounce_key,
     review_appeal,
     run_review_agent,
 )
-from polar.postgres import AsyncSession
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 
 # Access the unwrapped async function to bypass the actor decorator
@@ -136,11 +136,11 @@ class TestRunReviewAgentSubmission:
 
         with (
             patch(
-                "polar.organization_review.tasks.AsyncSessionMaker",
+                "tarifia.organization_review.tasks.AsyncSessionMaker",
                 return_value=_mock_session_maker(session),
             ),
             patch(
-                "polar.organization_review.tasks.run_organization_review",
+                "tarifia.organization_review.tasks.run_organization_review",
                 new_callable=AsyncMock,
                 return_value=agent_result,
             ),
@@ -196,11 +196,11 @@ class TestRunReviewAgentSubmission:
 
         with (
             patch(
-                "polar.organization_review.tasks.AsyncSessionMaker",
+                "tarifia.organization_review.tasks.AsyncSessionMaker",
                 return_value=_mock_session_maker(session),
             ),
             patch(
-                "polar.organization_review.tasks.run_organization_review",
+                "tarifia.organization_review.tasks.run_organization_review",
                 new_callable=AsyncMock,
                 return_value=agent_result,
             ),
@@ -257,11 +257,11 @@ class TestRunReviewAgentSubmission:
 
         with (
             patch(
-                "polar.organization_review.tasks.AsyncSessionMaker",
+                "tarifia.organization_review.tasks.AsyncSessionMaker",
                 return_value=_mock_session_maker(session),
             ),
             patch(
-                "polar.organization_review.tasks.run_organization_review",
+                "tarifia.organization_review.tasks.run_organization_review",
                 new_callable=AsyncMock,
                 return_value=agent_result,
             ),
@@ -318,11 +318,11 @@ class TestRunReviewAgentSubmission:
 
         with (
             patch(
-                "polar.organization_review.tasks.AsyncSessionMaker",
+                "tarifia.organization_review.tasks.AsyncSessionMaker",
                 return_value=_mock_session_maker(session),
             ),
             patch(
-                "polar.organization_review.tasks.run_organization_review",
+                "tarifia.organization_review.tasks.run_organization_review",
                 new_callable=AsyncMock,
                 return_value=agent_result,
             ),
@@ -362,11 +362,11 @@ class TestRunReviewAgentSubmission:
 
         with (
             patch(
-                "polar.organization_review.tasks.AsyncSessionMaker",
+                "tarifia.organization_review.tasks.AsyncSessionMaker",
                 return_value=_mock_session_maker(session),
             ),
             patch(
-                "polar.organization_review.tasks.run_organization_review",
+                "tarifia.organization_review.tasks.run_organization_review",
                 new_callable=AsyncMock,
                 return_value=agent_result,
             ),
@@ -415,11 +415,11 @@ class TestRunReviewAgentSubmission:
 
         with (
             patch(
-                "polar.organization_review.tasks.AsyncSessionMaker",
+                "tarifia.organization_review.tasks.AsyncSessionMaker",
                 return_value=_mock_session_maker(session),
             ),
             patch(
-                "polar.organization_review.tasks.run_organization_review",
+                "tarifia.organization_review.tasks.run_organization_review",
                 new_callable=AsyncMock,
                 return_value=agent_result,
             ),
@@ -478,20 +478,20 @@ class TestReviewAppeal:
 
         with (
             patch(
-                "polar.organization_review.tasks.AsyncSessionMaker",
+                "tarifia.organization_review.tasks.AsyncSessionMaker",
                 return_value=_mock_session_maker(session),
             ),
             patch(
-                "polar.organization_review.tasks.run_organization_review",
+                "tarifia.organization_review.tasks.run_organization_review",
                 new_callable=AsyncMock,
                 return_value=agent_result,
             ),
             patch(
-                "polar.organization_review.tasks.organization_service.approve_appeal",
+                "tarifia.organization_review.tasks.organization_service.approve_appeal",
                 approve_mock,
             ),
             patch(
-                "polar.organization_review.tasks.organization_service.deny_appeal",
+                "tarifia.organization_review.tasks.organization_service.deny_appeal",
                 deny_mock,
             ),
         ):
@@ -530,20 +530,20 @@ class TestReviewAppeal:
 
         with (
             patch(
-                "polar.organization_review.tasks.AsyncSessionMaker",
+                "tarifia.organization_review.tasks.AsyncSessionMaker",
                 return_value=_mock_session_maker(session),
             ),
             patch(
-                "polar.organization_review.tasks.run_organization_review",
+                "tarifia.organization_review.tasks.run_organization_review",
                 new_callable=AsyncMock,
                 return_value=agent_result,
             ),
             patch(
-                "polar.organization_review.tasks.organization_service.approve_appeal",
+                "tarifia.organization_review.tasks.organization_service.approve_appeal",
                 approve_mock,
             ),
             patch(
-                "polar.organization_review.tasks.organization_service.deny_appeal",
+                "tarifia.organization_review.tasks.organization_service.deny_appeal",
                 deny_mock,
             ),
         ):
@@ -573,11 +573,11 @@ class TestReviewAppeal:
         run_mock = AsyncMock()
         with (
             patch(
-                "polar.organization_review.tasks.AsyncSessionMaker",
+                "tarifia.organization_review.tasks.AsyncSessionMaker",
                 return_value=_mock_session_maker(session),
             ),
             patch(
-                "polar.organization_review.tasks.run_organization_review",
+                "tarifia.organization_review.tasks.run_organization_review",
                 run_mock,
             ),
         ):
@@ -607,11 +607,11 @@ class TestRunReviewAgentProductChanged:
 
         with (
             patch(
-                "polar.organization_review.tasks.AsyncSessionMaker",
+                "tarifia.organization_review.tasks.AsyncSessionMaker",
                 return_value=_mock_session_maker(session),
             ),
             patch(
-                "polar.organization_review.tasks.run_organization_review",
+                "tarifia.organization_review.tasks.run_organization_review",
                 new_callable=AsyncMock,
                 return_value=agent_result,
             ),
@@ -643,11 +643,11 @@ class TestRunReviewAgentProductChanged:
 
         with (
             patch(
-                "polar.organization_review.tasks.AsyncSessionMaker",
+                "tarifia.organization_review.tasks.AsyncSessionMaker",
                 return_value=_mock_session_maker(session),
             ),
             patch(
-                "polar.organization_review.tasks.run_organization_review",
+                "tarifia.organization_review.tasks.run_organization_review",
                 new_callable=AsyncMock,
                 return_value=agent_result,
             ),
@@ -680,11 +680,11 @@ class TestRunReviewAgentProductChanged:
         run_review_mock = AsyncMock()
         with (
             patch(
-                "polar.organization_review.tasks.AsyncSessionMaker",
+                "tarifia.organization_review.tasks.AsyncSessionMaker",
                 return_value=_mock_session_maker(session),
             ),
             patch(
-                "polar.organization_review.tasks.run_organization_review",
+                "tarifia.organization_review.tasks.run_organization_review",
                 run_review_mock,
             ),
         ):

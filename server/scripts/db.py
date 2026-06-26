@@ -9,7 +9,7 @@ from sqlalchemy import create_engine, text
 from sqlalchemy.exc import OperationalError
 from sqlalchemy_utils import create_database, database_exists, drop_database
 
-from polar.config import settings
+from tarifia.config import settings
 
 cli = typer.Typer()
 

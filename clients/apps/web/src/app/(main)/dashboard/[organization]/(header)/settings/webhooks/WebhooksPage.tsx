@@ -4,7 +4,7 @@ import AccessRestricted from '@/components/Finance/AccessRestricted'
 import { DashboardBody } from '@/components/Layout/DashboardLayout'
 import WebhookSettings from '@/components/Settings/Webhook/WebhookSettings'
 import { useHasPermission } from '@/hooks/permissions'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 
 export default function ClientPage({
   organization: org,

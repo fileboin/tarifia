@@ -1,11 +1,11 @@
 'use client'
 
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
 import type {
   BackgroundColorToken,
   TextColorToken,
-} from '@polar-sh/orbit/theme'
+} from '@tarifia-sh/orbit/theme'
 import { motion } from 'motion/react'
 import type { LucideIcon } from 'lucide-react'
 import type { ReactNode } from 'react'

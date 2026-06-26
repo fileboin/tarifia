@@ -21,7 +21,7 @@ export const MerchantOfRecordPage = () => {
     <FeaturePageLayout>
       <FeaturePageHeader
         title="Sell globally, without the tax compliance"
-        description="Polar as your Merchant of Record."
+        description="Tarifia as your Merchant of Record."
         docsHref="/docs/merchant-of-record/introduction"
       />
 
@@ -29,7 +29,7 @@ export const MerchantOfRecordPage = () => {
 
       <FeaturePageIntro>
         Most jurisdictions tax digital sales, and the rules differ country by
-        country. Polar takes the role of reseller for those sales, which moves
+        country. Tarifia takes the role of reseller for those sales, which moves
         the international tax liability off your balance sheet onto ours.
       </FeaturePageIntro>
 
@@ -42,7 +42,7 @@ export const MerchantOfRecordPage = () => {
           international sale is also still yours.
         </p>
         <p>
-          A Merchant of Record sits one layer higher. Polar buys the digital
+          A Merchant of Record sits one layer higher. Tarifia buys the digital
           good from you and resells it to your customer, which makes us the
           merchant for that specific sale. As a consequence, international sales
           tax (VAT, GST, US Sales Tax, and the rest) is owed by us, not you.
@@ -85,7 +85,7 @@ export const MerchantOfRecordPage = () => {
 
       <FeatureRichList
         title="What we cover"
-        description="Tax compliance is more than charging the right rate at checkout. Polar takes the full chain, from the moment money is captured to the moment it's remitted."
+        description="Tax compliance is more than charging the right rate at checkout. Tarifia takes the full chain, from the moment money is captured to the moment it's remitted."
         items={[
           {
             title: 'Capture',
@@ -117,7 +117,7 @@ export const MerchantOfRecordPage = () => {
 
       <FeatureCTA
         title="Sell internationally"
-        description="Polar takes the international tax exposure as your Merchant of Record."
+        description="Tarifia takes the international tax exposure as your Merchant of Record."
       />
     </FeaturePageLayout>
   )

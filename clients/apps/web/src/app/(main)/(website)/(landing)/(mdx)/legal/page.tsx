@@ -9,11 +9,11 @@ export const metadata: Metadata = {
   keywords:
     'legal, privacy, tos, terms of service, merchant of record, saas, digital products, platform, developer, open source, funding, open source, economy',
   openGraph: {
-    siteName: 'Polar',
+    siteName: 'Tarifia',
     type: 'website',
     images: [
       {
-        url: 'https://polar.sh/assets/brand/polar_og.jpg',
+        url: 'https://tarifia.sh/assets/brand/tarifia_og.jpg',
         width: 1200,
         height: 630,
       },
@@ -23,10 +23,10 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     images: [
       {
-        url: 'https://polar.sh/assets/brand/polar_og.jpg',
+        url: 'https://tarifia.sh/assets/brand/tarifia_og.jpg',
         width: 1200,
         height: 630,
-        alt: 'Polar',
+        alt: 'Tarifia',
       },
     ],
   },
@@ -35,12 +35,12 @@ export const metadata: Metadata = {
 const resourceLinks = [
   {
     title: 'Master Services Terms',
-    description: 'Core contractual terms for using Polar as a platform.',
+    description: 'Core contractual terms for using Tarifia as a platform.',
     href: '/legal/master-services-terms',
   },
   {
     title: 'Acceptable Use Policy',
-    description: 'Rules and restrictions for using Polar services.',
+    description: 'Rules and restrictions for using Tarifia services.',
     href: '/legal/acceptable-use-policy',
   },
   {
@@ -56,17 +56,17 @@ const resourceLinks = [
   {
     title: 'Sub-processors',
     description:
-      'Third-party service providers and affiliates supporting the delivery and operation of the Polar platform.',
+      'Third-party service providers and affiliates supporting the delivery and operation of the Tarifia platform.',
     href: '/legal/sub-processors',
   },
   {
     title: 'Payment Processor Partners',
-    description: 'Information about payment partners used by Polar.',
+    description: 'Information about payment partners used by Tarifia.',
     href: '/legal/payment-processor-partners',
   },
   {
     title: 'Privacy Policy',
-    description: 'How Polar collects, uses, and protects personal data.',
+    description: 'How Tarifia collects, uses, and protects personal data.',
     href: '/legal/privacy-policy',
   },
 ]
@@ -80,13 +80,13 @@ export default function Legal() {
           {resourceLinks.map((link) => (
             <Link
               key={link.title + link.description}
-              className="dark:hover:bg-polar-900 dark:border-polar-700 flex w-full cursor-pointer flex-col gap-6 border border-gray-300 p-6 transition-colors duration-200 hover:bg-gray-100"
+              className="dark:hover:bg-tarifia-900 dark:border-tarifia-700 flex w-full cursor-pointer flex-col gap-6 border border-gray-300 p-6 transition-colors duration-200 hover:bg-gray-100"
               href={link.href}
             >
               <ArrowOutwardOutlined fontSize="inherit" />
               <div className="flex flex-col gap-2">
                 <h3 className="font-mono text-xl">{link.title}</h3>
-                <p className="dark:text-polar-500 font-sm text-gray-500">
+                <p className="dark:text-tarifia-500 font-sm text-gray-500">
                   {link.description}
                 </p>
               </div>

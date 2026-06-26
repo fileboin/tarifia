@@ -1,19 +1,19 @@
-import { enums, schemas } from '@polar-sh/client'
-import { Input } from '@polar-sh/orbit'
+import { enums, schemas } from '@tarifia-sh/client'
+import { Input } from '@tarifia-sh/orbit'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import Link from 'next/link'
 import { useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
@@ -189,7 +189,7 @@ export const FieldEvents = () => {
               renderOptionSuffix={(event) => (
                 <Link
                   className="text-xs text-blue-400"
-                  href={`https://polar.sh/docs/api-reference/webhooks/${event}`}
+                  href={`https://tarifia.sh/docs/api-reference/webhooks/${event}`}
                   target="_blank"
                 >
                   Schema

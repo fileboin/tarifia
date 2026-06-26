@@ -15,18 +15,18 @@ import {
 } from '@/utils/datatable'
 import { getChartRangeParams } from '@/utils/metrics'
 import FileDownloadOutlined from '@mui/icons-material/FileDownloadOutlined'
-import { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
-import { Truncated } from '@polar-sh/orbit'
-import { Avatar } from '@polar-sh/orbit'
-import { Button } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
+import { Truncated } from '@tarifia-sh/orbit'
+import { Avatar } from '@tarifia-sh/orbit'
+import { Button } from '@tarifia-sh/orbit'
 import {
   DataTable,
   DataTableColumnDef,
   DataTableColumnHeader,
-} from '@polar-sh/orbit'
-import FormattedDateTime from '@polar-sh/ui/components/atoms/FormattedDateTime'
-import { Status } from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
+import FormattedDateTime from '@tarifia-sh/ui/components/atoms/FormattedDateTime'
+import { Status } from '@tarifia-sh/orbit'
 import { RowSelectionState } from '@tanstack/react-table'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
@@ -150,7 +150,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
               <span>
                 {customer.name || customer.email || '—'}
                 {showBillingName && (
-                  <span className="dark:text-polar-500 ml-2 text-gray-500">
+                  <span className="dark:text-tarifia-500 ml-2 text-gray-500">
                     {customer.billing_name}
                   </span>
                 )}

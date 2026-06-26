@@ -3,9 +3,9 @@ import os
 
 import pytest
 
-from polar.email.react import render_email_template
-from polar.models.order import OrderBillingReasonInternal
-from polar.notifications.notification import (
+from tarifia.email.react import render_email_template
+from tarifia.models.order import OrderBillingReasonInternal
+from tarifia.notifications.notification import (
     MaintainerAccountCreditsGrantedNotificationPayload,
     MaintainerNewPaidSubscriptionNotificationPayload,
     MaintainerNewProductSaleNotificationPayload,
@@ -18,8 +18,8 @@ async def check_diff(notification: NotificationPayloadBase) -> None:
     body = render_email_template(notification.to_email())
     expected = f"{subject}\n<hr>\n{body}"
 
-    # Run with `POLAR_TEST_RECORD=1 pytest` to produce new golden files :-)
-    record = os.environ.get("POLAR_TEST_RECORD", False) == "1"
+    # Run with `TARIFIA_TEST_RECORD=1 pytest` to produce new golden files :-)
+    record = os.environ.get("TARIFIA_TEST_RECORD", False) == "1"
 
     name = inspect.stack()[1].function
 
@@ -68,7 +68,7 @@ async def test_MaintainerNewPaidSubscriptionNotification_every_6_months() -> Non
 @pytest.mark.asyncio
 async def test_MaintainerNewProductSaleNotification() -> None:
     n = MaintainerNewProductSaleNotificationPayload(
-        customer_email="birk@polar.sh",
+        customer_email="birk@tarifia.sh",
         customer_name="Birk",
         billing_address_country="US",
         billing_address_city="San Francisco",

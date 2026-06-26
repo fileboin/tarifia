@@ -3,12 +3,12 @@ from uuid import uuid4
 
 import pytest
 
-from polar.organization_review.agent import (
+from tarifia.organization_review.agent import (
     _collect_webhook_host,
     _pick_unknown_webhook_host,
     _same_registrable_domain,
 )
-from polar.organization_review.schemas import (
+from tarifia.organization_review.schemas import (
     IntegrationData,
     SetupData,
     WebsiteData,
@@ -134,7 +134,7 @@ class TestCollectWebhookHost:
         org = _make_org("https://example.com")
         setup = _make_setup(webhook_domains=["example.com"])  # same domain → skip
         with patch(
-            "polar.organization_review.agent.collect_website_data",
+            "tarifia.organization_review.agent.collect_website_data",
             new_callable=AsyncMock,
         ) as fetch:
             result = await _collect_webhook_host(org, setup)
@@ -147,7 +147,7 @@ class TestCollectWebhookHost:
         setup = _make_setup(webhook_domains=["api.different.com"])
         data = WebsiteData(base_url="https://api.different.com/")
         with patch(
-            "polar.organization_review.agent.collect_website_data",
+            "tarifia.organization_review.agent.collect_website_data",
             new=AsyncMock(return_value=data),
         ) as fetch:
             result = await _collect_webhook_host(org, setup)
@@ -164,7 +164,7 @@ class TestCollectWebhookHost:
         org = _make_org("https://example.com")
         setup = _make_setup(webhook_domains=["api.different.com"])
         with patch(
-            "polar.organization_review.agent.collect_website_data",
+            "tarifia.organization_review.agent.collect_website_data",
             new=AsyncMock(side_effect=RuntimeError("network down")),
         ):
             result = await _collect_webhook_host(org, setup)

@@ -2,7 +2,7 @@
 
 import { MetricGroup } from '@/components/Metrics/dashboards/MetricGroup'
 import { SubscriptionMetricsTaxAlert } from '@/components/Metrics/SubscriptionMetricsTaxAlert'
-import { Modal } from '@polar-sh/orbit'
+import { Modal } from '@tarifia-sh/orbit'
 import { useMetrics } from '@/hooks/queries'
 import { useChartRange } from '@/hooks/useChartRange'
 import {
@@ -12,9 +12,9 @@ import {
   DEFAULT_OVERVIEW_METRICS,
   getChartRangeParams,
 } from '@/utils/metrics'
-import { schemas } from '@polar-sh/client'
-import { SegmentedControl } from '@polar-sh/orbit'
-import { Button } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { SegmentedControl } from '@tarifia-sh/orbit'
+import { Button } from '@tarifia-sh/orbit'
 import { Settings2 } from 'lucide-react'
 import React from 'react'
 import {

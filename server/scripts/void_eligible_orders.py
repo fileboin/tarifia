@@ -23,18 +23,18 @@ from rich.progress import Progress, SpinnerColumn, TextColumn
 from rich.table import Table
 from sqlalchemy import Select, func, or_, select
 
-from polar.kit.db.postgres import AsyncSession, create_async_sessionmaker
-from polar.models import (
+from tarifia.kit.db.postgres import AsyncSession, create_async_sessionmaker
+from tarifia.models import (
     Customer,
     Order,
     Organization,
 )
-from polar.models.organization import OrganizationStatus
-from polar.order.repository import OrderRepository
-from polar.order.service import OrderService
-from polar.postgres import create_async_engine
-from polar.redis import create_redis
-from polar.worker._enqueue import JobQueueManager
+from tarifia.models.organization import OrganizationStatus
+from tarifia.order.repository import OrderRepository
+from tarifia.order.service import OrderService
+from tarifia.postgres import create_async_engine
+from tarifia.redis import create_redis
+from tarifia.worker._enqueue import JobQueueManager
 
 cli = typer.Typer()
 

@@ -12,14 +12,14 @@ from functools import partial
 
 import pytest
 
-from polar.kit.utils import utc_now
-from polar.locker import Locker
-from polar.models import Account, Organization, User
-from polar.models.organization import OrganizationStatus
-from polar.models.payout import PayoutStatus
-from polar.payout.service import payout as payout_service
-from polar.postgres import AsyncSession
-from polar.transaction.service.transaction import transaction as transaction_service
+from tarifia.kit.utils import utc_now
+from tarifia.locker import Locker
+from tarifia.models import Account, Organization, User
+from tarifia.models.organization import OrganizationStatus
+from tarifia.models.payout import PayoutStatus
+from tarifia.payout.service import payout as payout_service
+from tarifia.postgres import AsyncSession
+from tarifia.transaction.service.transaction import transaction as transaction_service
 from tests.fixtures import random_objects as ro
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_payout_account

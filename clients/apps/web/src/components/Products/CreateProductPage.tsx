@@ -13,9 +13,9 @@ import {
   ProductEditOrCreateForm,
   productToCreateForm,
 } from '@/utils/product'
-import { isValidationError, schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { Form } from '@polar-sh/ui/components/ui/form'
+import { isValidationError, schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { Form } from '@tarifia-sh/ui/components/ui/form'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useCallback, useMemo, useState } from 'react'
@@ -219,7 +219,7 @@ export const CreateProductPage = ({
         ) : undefined
       }
     >
-      <div className="dark:border-polar-700 dark:divide-polar-700 flex flex-col divide-y divide-gray-200 rounded-4xl border border-gray-200">
+      <div className="dark:border-tarifia-700 dark:divide-tarifia-700 flex flex-col divide-y divide-gray-200 rounded-4xl border border-gray-200">
         <Form {...form}>
           <form
             onSubmit={handleSubmit(onSubmit, onInvalid)}

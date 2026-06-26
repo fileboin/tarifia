@@ -1,5 +1,5 @@
 import { getPublicServerURL } from '@/utils/api'
-import { Client, operations, schemas } from '@polar-sh/client'
+import { Client, operations, schemas } from '@tarifia-sh/client'
 import { redirect } from 'next/navigation'
 
 export const getGitHubAuthorizeLoginURL = (): string => {

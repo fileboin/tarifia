@@ -1,7 +1,7 @@
 'use client'
 
 import { fromISODate, toISODate } from '@/utils/metrics'
-import { getMetricsRangeDates } from '@polar-sh/client'
+import { getMetricsRangeDates } from '@tarifia-sh/client'
 import {
   createParser,
   parseAsArrayOf,

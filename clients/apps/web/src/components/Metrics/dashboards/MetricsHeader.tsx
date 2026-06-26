@@ -5,7 +5,7 @@ import IntervalPicker, {
   getNextValidInterval,
 } from '@/components/Metrics/IntervalPicker'
 import ProductSelect from '@/components/Products/ProductSelect'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { useCallback, useMemo } from 'react'
 import { useMetricsFilters } from './useMetricsFilters'
 

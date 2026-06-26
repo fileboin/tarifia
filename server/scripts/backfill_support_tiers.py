@@ -3,18 +3,18 @@ from collections import defaultdict
 from dataclasses import dataclass, field
 
 import typer
-from polar_sdk import Polar
-from polar_sdk.models import Benefit, BenefitGrant
+from tarifia_sdk import Tarifia
+from tarifia_sdk.models import Benefit, BenefitGrant
 
-from polar.config import settings
-from polar.integrations.polar.service import polar_self as polar_self_service
-from polar.kit.db.postgres import (
+from tarifia.config import settings
+from tarifia.integrations.tarifia.service import tarifia_self as tarifia_self_service
+from tarifia.kit.db.postgres import (
     AsyncSessionMaker,
     create_async_sessionmaker,
 )
-from polar.models.organization import SupportTier
-from polar.organization.repository import OrganizationRepository
-from polar.postgres import create_async_engine
+from tarifia.models.organization import SupportTier
+from tarifia.organization.repository import OrganizationRepository
+from tarifia.postgres import create_async_engine
 
 from .helper import configure_script_logging, typer_async
 
@@ -88,10 +88,10 @@ def resolve_tiers(
     return resolved, result
 
 
-async def _list_support_benefits(sdk: Polar) -> list[Benefit]:
+async def _list_support_benefits(sdk: Tarifia) -> list[Benefit]:
     benefits: list[Benefit] = []
     response = await sdk.benefits.list_async(
-        organization_id=settings.POLAR_ORGANIZATION_ID,
+        organization_id=settings.TARIFIA_ORGANIZATION_ID,
         metadata={"type": "support"},
         page=1,
         limit=100,
@@ -102,7 +102,7 @@ async def _list_support_benefits(sdk: Polar) -> list[Benefit]:
     return benefits
 
 
-async def _list_benefit_grants(sdk: Polar, benefit_id: str) -> list[BenefitGrant]:
+async def _list_benefit_grants(sdk: Tarifia, benefit_id: str) -> list[BenefitGrant]:
     grants: list[BenefitGrant] = []
     response = await sdk.benefits.grants_async(
         id=benefit_id,
@@ -117,7 +117,7 @@ async def _list_benefit_grants(sdk: Polar, benefit_id: str) -> list[BenefitGrant
 
 
 def _benefit_tier(benefit: Benefit) -> SupportTier | None:
-    level, _, _, _ = polar_self_service._extract_support(
+    level, _, _, _ = tarifia_self_service._extract_support(
         benefit.metadata or {}, benefit.id
     )
     return SupportTier.from_level(level)
@@ -128,11 +128,11 @@ async def run_backfill(
     sessionmaker: AsyncSessionMaker,
     dry_run: bool = False,
 ) -> BackfillResult:
-    sdk = Polar(
-        access_token=settings.POLAR_ACCESS_TOKEN,
-        server_url=settings.POLAR_API_URL,
+    sdk = Tarifia(
+        access_token=settings.TARIFIA_ACCESS_TOKEN,
+        server_url=settings.TARIFIA_API_URL,
     )
-    self_org_external_id = settings.POLAR_ORGANIZATION_ID
+    self_org_external_id = settings.TARIFIA_ORGANIZATION_ID
 
     typer.echo("Loading support benefits...")
     support_benefits = await _list_support_benefits(sdk)
@@ -143,7 +143,7 @@ async def run_backfill(
     grants: list[BenefitGrant] = []
     for benefit in support_benefits:
         grants.extend(await _list_benefit_grants(sdk, benefit.id))
-    # Defensively skip the Polar org's own customer if it ever holds a grant.
+    # Defensively skip the Tarifia org's own customer if it ever holds a grant.
     grants = [
         grant for grant in grants if grant.customer.external_id != self_org_external_id
     ]
@@ -181,7 +181,7 @@ async def backfill(
         True, help="Print what would be set without writing to the database"
     ),
 ) -> None:
-    """Backfill Organization.support_tier from active Polar support grants.
+    """Backfill Organization.support_tier from active Tarifia support grants.
 
     The benefit-grant webhook only fires on future grant changes, so existing
     paying orgs need this one-off pass. It reads from the support benefits'
@@ -190,9 +190,9 @@ async def backfill(
     """
     configure_script_logging()
 
-    if not settings.POLAR_SELF_ENABLED:
+    if not settings.TARIFIA_SELF_ENABLED:
         typer.echo(
-            "POLAR_ACCESS_TOKEN, POLAR_ORGANIZATION_ID, or POLAR_FREE_PRODUCT_ID "
+            "TARIFIA_ACCESS_TOKEN, TARIFIA_ORGANIZATION_ID, or TARIFIA_FREE_PRODUCT_ID "
             "is not configured, aborting."
         )
         raise typer.Exit(1)

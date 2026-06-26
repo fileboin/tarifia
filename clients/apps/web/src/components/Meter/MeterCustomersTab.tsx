@@ -2,15 +2,15 @@
 
 import { useCustomerMeters } from '@/hooks/queries/customerMeters'
 import { getAPIParams } from '@/utils/datatable'
-import { schemas } from '@polar-sh/client'
-import { Avatar } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Avatar } from '@tarifia-sh/orbit'
 import {
   DataTable,
   DataTableColumnHeader,
   DataTablePaginationState,
   DataTableSortingState,
-} from '@polar-sh/orbit'
-import FormattedDateTime from '@polar-sh/ui/components/atoms/FormattedDateTime'
+} from '@tarifia-sh/orbit'
+import FormattedDateTime from '@tarifia-sh/ui/components/atoms/FormattedDateTime'
 import Link from 'next/link'
 import { useState } from 'react'
 import FormattedUnits from './FormattedUnits'
@@ -67,13 +67,13 @@ const MeterCustomersTab = ({
               className="flex items-center gap-x-3"
             >
               <Avatar
-                className="dark:bg-polar-900 text-xxs h-8 w-8 bg-white"
+                className="dark:bg-tarifia-900 text-xxs h-8 w-8 bg-white"
                 name={customer.name ?? customer.email ?? '—'}
                 avatar_url={customer.avatar_url ?? null}
               />
               <div className="flex flex-col">
                 <span className="text-xs">{customer.name ?? '—'}</span>
-                <span className="dark:text-polar-500 text-xxs text-gray-500">
+                <span className="dark:text-tarifia-500 text-xxs text-gray-500">
                   {customer.email ?? '—'}
                 </span>
               </div>

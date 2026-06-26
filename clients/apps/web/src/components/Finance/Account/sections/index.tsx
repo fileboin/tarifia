@@ -1,4 +1,4 @@
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { EmailSection } from './EmailSection'
 import { IdentityVerificationSection } from './IdentityVerificationSection'
 import { PayoutAccountSection } from './PayoutAccountSection'

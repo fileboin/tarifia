@@ -5,7 +5,7 @@ import ChangePlanPage from './ChangePlanPage'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Change plan', // " | Polar is added by the template"
+    title: 'Change plan', // " | Tarifia is added by the template"
   }
 }
 

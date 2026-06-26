@@ -8,7 +8,7 @@ import { MetricsHeader } from '@/components/Metrics/dashboards/MetricsHeader'
 import { getServerSideAPI } from '@/utils/client/serverside'
 import { METRIC_GROUPS } from '@/utils/metrics'
 import { getOrganizationBySlugOrNotFound } from '@/utils/organization'
-import { unwrap } from '@polar-sh/client'
+import { unwrap } from '@tarifia-sh/client'
 
 export default async function Layout(props: {
   params: Promise<{ organization: string }>

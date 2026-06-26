@@ -11,12 +11,12 @@ from rich.progress import Progress
 from sqlalchemy import func, select
 from sqlalchemy.util.typing import TypedDict
 
-from polar import tasks  # noqa: F401
-from polar.kit.db.postgres import create_async_sessionmaker
-from polar.models import Benefit, BenefitGrant
-from polar.postgres import create_async_engine
-from polar.redis import create_redis
-from polar.worker import JobQueueManager
+from tarifia import tasks  # noqa: F401
+from tarifia.kit.db.postgres import create_async_sessionmaker
+from tarifia.models import Benefit, BenefitGrant
+from tarifia.postgres import create_async_engine
+from tarifia.redis import create_redis
+from tarifia.worker import JobQueueManager
 
 cli = typer.Typer()
 

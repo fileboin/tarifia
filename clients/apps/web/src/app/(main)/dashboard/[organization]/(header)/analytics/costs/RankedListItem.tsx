@@ -1,6 +1,6 @@
 'use client'
 
-import { List, ListItem } from '@polar-sh/orbit'
+import { List, ListItem } from '@tarifia-sh/orbit'
 import { ReactNode } from 'react'
 
 interface RankedListItemProps {
@@ -28,20 +28,20 @@ export const RankedListItem = ({
       onSelect={onSelect}
     >
       <div className="flex items-center gap-4">
-        <span className="dark:text-polar-500 shrink-0 text-xs text-gray-400 tabular-nums">
+        <span className="dark:text-tarifia-500 shrink-0 text-xs text-gray-400 tabular-nums">
           {rank}
         </span>
         {label}
         <div className="flex shrink-0 items-center gap-3">{stats}</div>
       </div>
       <div className="flex items-center gap-3">
-        <div className="dark:bg-polar-700 relative h-1 flex-1 overflow-hidden rounded-full bg-gray-100">
+        <div className="dark:bg-tarifia-700 relative h-1 flex-1 overflow-hidden rounded-full bg-gray-100">
           <div
             className="absolute inset-y-0 left-0 rounded-full bg-black transition-all dark:bg-white"
             style={{ width: `${sharePct}%` }}
           />
         </div>
-        <span className="dark:text-polar-500 w-9 shrink-0 text-right text-xs text-gray-400 tabular-nums">
+        <span className="dark:text-tarifia-500 w-9 shrink-0 text-right text-xs text-gray-400 tabular-nums">
           {sharePct}%
         </span>
       </div>

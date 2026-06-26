@@ -1,5 +1,5 @@
-import { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
+import { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
 import { useMemo } from 'react'
 
 interface AmountLabelProps {

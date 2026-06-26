@@ -1,6 +1,6 @@
 import LogoIcon from '@/components/Brand/logos/LogoIcon'
-import { schemas } from '@polar-sh/client'
-import { Avatar } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Avatar } from '@tarifia-sh/orbit'
 import React from 'react'
 
 interface Props {
@@ -20,7 +20,7 @@ export const MessageAvatar = ({ organization, fromMerchant }: Props) => {
   }
 
   return (
-    <div className="dark:bg-polar-50 dark:text-polar-900 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gray-900 text-white">
+    <div className="dark:bg-tarifia-50 dark:text-tarifia-900 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gray-900 text-white">
       <LogoIcon className="h-6 w-6" />
     </div>
   )

@@ -7,38 +7,38 @@ from pydantic import HttpUrl, ValidationError
 from pytest_mock import MockerFixture
 from sqlalchemy import update
 
-from polar.auth.models import AuthSubject
-from polar.config import settings
-from polar.dispute.dispute_case import dispute_case as dispute_case_service
-from polar.enums import (
+from tarifia.auth.models import AuthSubject
+from tarifia.config import settings
+from tarifia.dispute.dispute_case import dispute_case as dispute_case_service
+from tarifia.enums import (
     InvoiceNumbering,
     PayoutAccountType,
     SubscriptionProrationBehavior,
     SubscriptionRecurringInterval,
 )
-from polar.exceptions import PolarRequestValidationError
-from polar.kit.http import UrlReachability
-from polar.models import Customer, Organization, Product, User, UserOrganization
-from polar.models.account import Account
-from polar.models.benefit import BenefitType
-from polar.models.member import MemberRole
-from polar.models.order import OrderStatus
-from polar.models.organization import (
+from tarifia.exceptions import TarifiaRequestValidationError
+from tarifia.kit.http import UrlReachability
+from tarifia.models import Customer, Organization, Product, User, UserOrganization
+from tarifia.models.account import Account
+from tarifia.models.benefit import BenefitType
+from tarifia.models.member import MemberRole
+from tarifia.models.order import OrderStatus
+from tarifia.models.organization import (
     STATUS_CAPABILITIES,
     InvalidStatusTransitionError,
     OrganizationStatus,
     OrganizationSubscriptionSettings,
     SnoozeType,
 )
-from polar.models.organization import (
+from tarifia.models.organization import (
     OrganizationDetails as OrganizationDetailsDict,
 )
-from polar.models.organization_access_token import OrganizationAccessToken
-from polar.models.organization_review import OrganizationReview
-from polar.models.user import IdentityVerificationStatus
-from polar.models.user_organization import OrganizationRole
-from polar.organization.repository import OrganizationRepository
-from polar.organization.schemas import (
+from tarifia.models.organization_access_token import OrganizationAccessToken
+from tarifia.models.organization_review import OrganizationReview
+from tarifia.models.user import IdentityVerificationStatus
+from tarifia.models.user_organization import OrganizationRole
+from tarifia.organization.repository import OrganizationRepository
+from tarifia.organization.schemas import (
     LegacyOrganizationStatus,
     OrganizationCreate,
     OrganizationDetails,
@@ -54,13 +54,13 @@ from polar.organization.schemas import (
     OrganizationSocialPlatforms,
     OrganizationUpdate,
 )
-from polar.organization.service import OrganizationError
-from polar.organization.service import organization as organization_service
-from polar.organization_review.appeal_case import appeal_case as appeal_case_service
-from polar.organization_review.schemas import ReviewContext, ReviewVerdict
-from polar.postgres import AsyncSession
-from polar.support_case.repository import SupportCaseMessageRepository
-from polar.user_organization.service import (
+from tarifia.organization.service import OrganizationError
+from tarifia.organization.service import organization as organization_service
+from tarifia.organization_review.appeal_case import appeal_case as appeal_case_service
+from tarifia.organization_review.schemas import ReviewContext, ReviewVerdict
+from tarifia.postgres import AsyncSession
+from tarifia.support_case.repository import SupportCaseMessageRepository
+from tarifia.user_organization.service import (
     user_organization as user_organization_service,
 )
 from tests.fixtures.auth import AuthSubjectFixture
@@ -87,7 +87,7 @@ class TestCreate:
             "",
             "a",
             "ab",
-            "Polar Software Inc 🌀",
+            "Tarifia Software Inc 🌀",
             "slug/with/slashes",
             *settings.ORGANIZATION_SLUG_RESERVED_KEYWORDS,
         ],
@@ -109,7 +109,7 @@ class TestCreate:
         session: AsyncSession,
         organization: Organization,
     ) -> None:
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await organization_service.create(
                 session,
                 OrganizationCreate(name=organization.name, slug=organization.slug),
@@ -135,7 +135,7 @@ class TestCreate:
             OrganizationRepository, "slug_exists", new=AsyncMock(return_value=False)
         )
 
-        with pytest.raises(PolarRequestValidationError) as exc_info:
+        with pytest.raises(TarifiaRequestValidationError) as exc_info:
             await organization_service.create(
                 session,
                 OrganizationCreate(name=organization.name, slug=organization.slug),
@@ -143,7 +143,7 @@ class TestCreate:
             )
 
     @pytest.mark.auth
-    @pytest.mark.parametrize("slug", ["polar-software-inc", "slug-with-dashes"])
+    @pytest.mark.parametrize("slug", ["tarifia-software-inc", "slug-with-dashes"])
     async def test_valid(
         self,
         slug: str,
@@ -151,7 +151,7 @@ class TestCreate:
         auth_subject: AuthSubject[User],
         session: AsyncSession,
     ) -> None:
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         organization = await organization_service.create(
             session,
@@ -177,17 +177,17 @@ class TestCreate:
         )
 
     @pytest.mark.auth
-    async def test_enqueues_polar_self_customer_with_owner(
+    async def test_enqueues_tarifia_self_customer_with_owner(
         self,
         mocker: MockerFixture,
         auth_subject: AuthSubject[User],
         session: AsyncSession,
     ) -> None:
         create_customer_mock = mocker.patch(
-            "polar.organization.service.polar_self_service.enqueue_create_customer"
+            "tarifia.organization.service.tarifia_self_service.enqueue_create_customer"
         )
         add_member_mock = mocker.patch(
-            "polar.organization.service.polar_self_service.enqueue_add_member"
+            "tarifia.organization.service.tarifia_self_service.enqueue_add_member"
         )
 
         organization = await organization_service.create(
@@ -258,7 +258,7 @@ class TestCreate:
         session: AsyncSession,
     ) -> None:
         mocker.patch(
-            "polar.organization.service.settings.is_sandbox", return_value=True
+            "tarifia.organization.service.settings.is_sandbox", return_value=True
         )
 
         organization = await organization_service.create(
@@ -281,7 +281,7 @@ class TestCreate:
         session: AsyncSession,
     ) -> None:
         mocker.patch(
-            "polar.organization.service.settings.is_sandbox", return_value=False
+            "tarifia.organization.service.settings.is_sandbox", return_value=False
         )
 
         organization = await organization_service.create(
@@ -305,7 +305,7 @@ class TestUpdateReviewSubmission:
         session: AsyncSession,
         organization: Organization,
     ) -> None:
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         organization.status = OrganizationStatus.CREATED
         session.add(organization)
@@ -342,7 +342,7 @@ class TestUpdateReviewSubmission:
         session: AsyncSession,
         organization: Organization,
     ) -> None:
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
         organization.status = OrganizationStatus.CREATED
         session.add(organization)
         await session.flush()
@@ -355,7 +355,7 @@ class TestUpdateReviewSubmission:
                 socials=[
                     OrganizationSocialLink(
                         platform=cast(OrganizationSocialPlatforms, "x"),
-                        url=cast(HttpUrl, "https://x.com/polar"),
+                        url=cast(HttpUrl, "https://x.com/tarifia"),
                     )
                 ],
                 details=OrganizationDetails(
@@ -397,7 +397,7 @@ class TestUpdateReviewSubmission:
             ),
         )
 
-        with pytest.raises(PolarRequestValidationError) as exc_info:
+        with pytest.raises(TarifiaRequestValidationError) as exc_info:
             await organization_service.submit_for_review(session, organization)
 
         error_locations = {tuple(error["loc"]) for error in exc_info.value.errors()}
@@ -424,13 +424,13 @@ class TestUpdateReviewSubmission:
                 socials=[
                     OrganizationSocialLink(
                         platform=cast(OrganizationSocialPlatforms, "x"),
-                        url=cast(HttpUrl, "https://x.com/polar"),
+                        url=cast(HttpUrl, "https://x.com/tarifia"),
                     )
                 ],
             ),
         )
 
-        with pytest.raises(PolarRequestValidationError) as exc_info:
+        with pytest.raises(TarifiaRequestValidationError) as exc_info:
             await organization_service.submit_for_review(session, organization)
 
         error_locations = {tuple(error["loc"]) for error in exc_info.value.errors()}
@@ -623,7 +623,7 @@ class TestCheckReviewThreshold:
         organization.total_balance = None
 
         mocker.patch(
-            "polar.organization.service.transaction_service.get_transactions_sum",
+            "tarifia.organization.service.transaction_service.get_transactions_sum",
             return_value=7500,
         )
 
@@ -647,7 +647,7 @@ class TestCheckReviewThreshold:
         organization.next_review_threshold = 10000
 
         transaction_sum_mock = mocker.patch(
-            "polar.organization.service.transaction_service.get_transactions_sum",
+            "tarifia.organization.service.transaction_service.get_transactions_sum",
             return_value=5000,
         )
 
@@ -673,7 +673,7 @@ class TestCheckReviewThreshold:
         organization.next_review_threshold = 0
 
         transaction_sum_mock = mocker.patch(
-            "polar.organization.service.transaction_service.get_transactions_sum",
+            "tarifia.organization.service.transaction_service.get_transactions_sum",
             return_value=5000,
         )
 
@@ -699,10 +699,10 @@ class TestCheckReviewThreshold:
         organization.next_review_threshold = 1000
 
         transaction_sum_mock = mocker.patch(
-            "polar.organization.service.transaction_service.get_transactions_sum",
+            "tarifia.organization.service.transaction_service.get_transactions_sum",
             return_value=5000,
         )
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         # When
         result = await organization_service.check_review_threshold(
@@ -729,7 +729,7 @@ class TestCheckReviewThreshold:
         organization.total_balance = None
 
         mocker.patch(
-            "polar.organization.service.transaction_service.get_transactions_sum",
+            "tarifia.organization.service.transaction_service.get_transactions_sum",
             return_value=0,
         )
 
@@ -756,7 +756,7 @@ class TestCheckReviewThreshold:
         organization.next_review_threshold = 1000
 
         mocker.patch(
-            "polar.organization.service.transaction_service.get_transactions_sum",
+            "tarifia.organization.service.transaction_service.get_transactions_sum",
             return_value=5000,
         )
 
@@ -781,10 +781,10 @@ class TestCheckReviewThreshold:
         organization.next_review_threshold = 1000
 
         mocker.patch(
-            "polar.organization.service.transaction_service.get_transactions_sum",
+            "tarifia.organization.service.transaction_service.get_transactions_sum",
             return_value=5000,
         )
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         result = await organization_service.check_review_threshold(
             session, organization
@@ -814,7 +814,7 @@ class TestCheckReviewThreshold:
         organization.next_review_threshold = 1000
 
         mocker.patch(
-            "polar.organization.service.transaction_service.get_transactions_sum",
+            "tarifia.organization.service.transaction_service.get_transactions_sum",
             return_value=5000,
         )
 
@@ -838,7 +838,7 @@ class TestCheckReviewThreshold:
         organization.next_review_threshold = 1000
 
         mocker.patch(
-            "polar.organization.service.transaction_service.get_transactions_sum",
+            "tarifia.organization.service.transaction_service.get_transactions_sum",
             return_value=5000,
         )
 
@@ -862,10 +862,10 @@ class TestCheckReviewThreshold:
         organization.next_review_threshold = 0
 
         mocker.patch(
-            "polar.organization.service.transaction_service.get_transactions_sum",
+            "tarifia.organization.service.transaction_service.get_transactions_sum",
             return_value=5000,
         )
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         result = await organization_service.check_review_threshold(
             session, organization
@@ -885,13 +885,13 @@ class TestCheckReviewThreshold:
         organization.status = OrganizationStatus.ACTIVE
         organization.next_review_threshold = 0
         mocker.patch(
-            "polar.organization.service.settings.is_sandbox", return_value=True
+            "tarifia.organization.service.settings.is_sandbox", return_value=True
         )
         mocker.patch(
-            "polar.organization.service.transaction_service.get_transactions_sum",
+            "tarifia.organization.service.transaction_service.get_transactions_sum",
             return_value=5000,
         )
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         result = await organization_service.check_review_threshold(
             session, organization
@@ -963,7 +963,7 @@ class TestConfirmOrganizationReviewed:
         organization: Organization,
     ) -> None:
         organization.status = OrganizationStatus.REVIEW
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         result = await organization_service.confirm_organization_reviewed(
             session, organization, 15000
@@ -1084,7 +1084,7 @@ class TestHandleOngoingReviewVerdict:
         organization.next_review_threshold = 50_000
         organization.initially_reviewed_at = datetime(2025, 1, 1, 12, 0, tzinfo=UTC)
 
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         # When: verdict is DENY
         result = await organization_service.handle_ongoing_review_verdict(
@@ -1165,7 +1165,7 @@ class TestHandleOngoingReviewVerdict:
         organization.next_review_threshold = 50_000
         organization.initially_reviewed_at = datetime(2025, 1, 1, 12, 0, tzinfo=UTC)
 
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         # When: verdict is APPROVE but status is ACTIVE (not REVIEW)
         result = await organization_service.handle_ongoing_review_verdict(
@@ -1200,7 +1200,7 @@ class TestDenyOrganization:
         organization: Organization,
     ) -> None:
         organization.status = OrganizationStatus.REVIEW
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         await organization_service.deny_organization(session, organization)
 
@@ -1230,7 +1230,7 @@ class TestBlockOrganization:
         organization: Organization,
     ) -> None:
         organization.status = OrganizationStatus.REVIEW
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         await organization_service.block_organization(session, organization)
 
@@ -1523,7 +1523,7 @@ class TestSetOrganizationUnderReview:
         # Given organization active
         organization.status = OrganizationStatus.ACTIVE
 
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         # When
         result = await organization_service.set_organization_under_review(
@@ -1545,7 +1545,7 @@ class TestSetOrganizationUnderReview:
         # Given an offboarding organization
         organization.status = OrganizationStatus.OFFBOARDING
 
-        mocker.patch("polar.organization.service.enqueue_job")
+        mocker.patch("tarifia.organization.service.enqueue_job")
 
         # When reverting it to review
         result = await organization_service.set_organization_under_review(
@@ -1628,7 +1628,7 @@ async def _setup_passing_org(
 ) -> None:
     organization.email = "support@example.com"
     organization.website = "https://example.com"
-    organization.socials = [{"platform": "x", "url": "https://x.com/polar"}]
+    organization.socials = [{"platform": "x", "url": "https://x.com/tarifia"}]
     organization.details = {
         "product_description": "Subscription SaaS for software teams and agencies."
     }
@@ -1687,7 +1687,7 @@ class TestGetReviewState:
         # Default to reachable so existing tests don't make outbound requests.
         # Individual tests can re-patch via `mocker.patch(...)` to override.
         return mocker.patch(
-            "polar.organization.service.check_url_reachable",
+            "tarifia.organization.service.check_url_reachable",
             new=AsyncMock(return_value=UrlReachability(reachable=True, status=200)),
         )
 
@@ -1906,7 +1906,7 @@ class TestGetReviewState:
         session: AsyncSession,
         organization: Organization,
     ) -> None:
-        organization.socials = [{"platform": "x", "url": "https://x.com/polar"}]
+        organization.socials = [{"platform": "x", "url": "https://x.com/tarifia"}]
         await save_fixture(organization)
 
         state = await organization_service.get_review_state(session, organization)
@@ -2053,7 +2053,7 @@ class TestGetReviewState:
         organization.website = "https://example.com"
         await save_fixture(organization)
         mocker.patch(
-            "polar.organization.service.check_url_reachable",
+            "tarifia.organization.service.check_url_reachable",
             new=AsyncMock(
                 return_value=UrlReachability(reachable=False, error="DNS failed")
             ),
@@ -2580,7 +2580,7 @@ class TestSubmitAppeal:
         )
         await save_fixture(review)
 
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         appeal_reason = "We selling templates and not consultancy services"
         result = await organization_service.submit_appeal(
@@ -2669,7 +2669,7 @@ class TestSubmitAppeal:
         )
         await save_fixture(review)
 
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         await organization_service.submit_appeal(
             session, organization, "Please review again"
@@ -2972,7 +2972,7 @@ class TestCheckCanDelete:
         customer: Customer,
     ) -> None:
         """Organization with paid active subscriptions cannot be immediately deleted."""
-        from polar.models.subscription import SubscriptionStatus
+        from tarifia.models.subscription import SubscriptionStatus
         from tests.fixtures.random_objects import create_subscription
 
         await create_subscription(
@@ -2995,7 +2995,7 @@ class TestCheckCanDelete:
         customer: Customer,
     ) -> None:
         """Organization with only free active subscriptions can be deleted."""
-        from polar.models.subscription import SubscriptionStatus
+        from tarifia.models.subscription import SubscriptionStatus
         from tests.fixtures.random_objects import create_product, create_subscription
 
         free_product = await create_product(
@@ -3025,8 +3025,8 @@ class TestCheckCanDelete:
         customer: Customer,
     ) -> None:
         """Organization with subscriptions made free by a forever discount can be deleted."""
-        from polar.models.discount import DiscountDuration, DiscountType
-        from polar.models.subscription import SubscriptionStatus
+        from tarifia.models.discount import DiscountDuration, DiscountType
+        from tarifia.models.subscription import SubscriptionStatus
         from tests.fixtures.random_objects import create_discount, create_subscription
 
         discount = await create_discount(
@@ -3058,8 +3058,8 @@ class TestCheckCanDelete:
         customer: Customer,
     ) -> None:
         """Subscription with a 100% off once discount still blocks deletion."""
-        from polar.models.discount import DiscountDuration, DiscountType
-        from polar.models.subscription import SubscriptionStatus
+        from tarifia.models.discount import DiscountDuration, DiscountType
+        from tarifia.models.subscription import SubscriptionStatus
         from tests.fixtures.random_objects import create_discount, create_subscription
 
         discount = await create_discount(
@@ -3091,7 +3091,7 @@ class TestCheckCanDelete:
         customer: Customer,
     ) -> None:
         """Organization with canceled subscriptions can be deleted."""
-        from polar.models.subscription import SubscriptionStatus
+        from tarifia.models.subscription import SubscriptionStatus
         from tests.fixtures.random_objects import create_subscription
 
         await create_subscription(
@@ -3118,7 +3118,7 @@ class TestRequestDeletion:
         organization: Organization,
     ) -> None:
         """Organization with no activity is immediately deleted."""
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         result = await organization_service.request_deletion(
             session, auth_subject, organization
@@ -3142,7 +3142,7 @@ class TestRequestDeletion:
         """Organization with orders creates support ticket."""
         await create_order(save_fixture, customer=customer)
 
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         result = await organization_service.request_deletion(
             session, auth_subject, organization
@@ -3173,7 +3173,7 @@ class TestRequestDeletion:
             save_fixture, organization, user, type=PayoutAccountType.stripe
         )
         payout_account_delete_mock = mocker.patch(
-            "polar.organization.service.payout_account_service.delete",
+            "tarifia.organization.service.payout_account_service.delete",
             return_value=None,
         )
 
@@ -3200,11 +3200,11 @@ class TestRequestDeletion:
             save_fixture, organization, user, type=PayoutAccountType.stripe
         )
         mocker.patch(
-            "polar.organization.service.payout_account_service.delete",
+            "tarifia.organization.service.payout_account_service.delete",
             side_effect=Exception("Stripe API error"),
         )
 
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         result = await organization_service.request_deletion(
             session, auth_subject, organization
@@ -3220,14 +3220,14 @@ class TestRequestDeletion:
 
 @pytest.mark.asyncio
 class TestSoftDeleteOrganization:
-    async def test_enqueues_polar_self_customer_deletion(
+    async def test_enqueues_tarifia_self_customer_deletion(
         self,
         mocker: MockerFixture,
         session: AsyncSession,
         organization: Organization,
     ) -> None:
         enqueue_delete_customer_mock = mocker.patch(
-            "polar.organization.service.polar_self_service.enqueue_delete_customer"
+            "tarifia.organization.service.tarifia_self_service.enqueue_delete_customer"
         )
 
         await organization_service.soft_delete_organization(session, organization)
@@ -3244,7 +3244,7 @@ class TestSoftDeleteOrganization:
         organization: Organization,
         user: User,
     ) -> None:
-        mocker.patch("polar.organization.service.polar_self_service")
+        mocker.patch("tarifia.organization.service.tarifia_self_service")
         review = OrganizationReview(
             organization_id=organization.id,
             verdict=OrganizationReview.Verdict.FAIL,
@@ -3282,7 +3282,7 @@ class TestSoftDeleteOrganization:
     ) -> None:
         # Disputes are live financial matters — they must outlive the merchant
         # deleting their account.
-        mocker.patch("polar.organization.service.polar_self_service")
+        mocker.patch("tarifia.organization.service.tarifia_self_service")
         order = await create_order(save_fixture, customer=customer, product=product)
         payment = await create_payment(save_fixture, organization, order=order)
         dispute = await create_dispute(save_fixture, order, payment)
@@ -3328,7 +3328,7 @@ class TestSoftDeleteOrganization:
         assert result.website != "https://test.com"
         assert result.bio != "Test bio"
 
-        # Avatar should be set to Polar logo
+        # Avatar should be set to Tarifia logo
         assert result.avatar_url is not None
         assert "avatars.githubusercontent.com" in result.avatar_url
 
@@ -3402,7 +3402,7 @@ class TestSoftDeleteOrganization:
     ) -> None:
         # Backoffice/erasure deletions scrub the slug as PII rather than
         # archiving it for reuse, leaving no recoverable trace of the original.
-        mocker.patch("polar.organization.service.polar_self_service")
+        mocker.patch("tarifia.organization.service.tarifia_self_service")
         original_slug = organization.slug
 
         result = await organization_service.soft_delete_organization(
@@ -3452,7 +3452,7 @@ class TestUpdateSeatBasedPricing:
         }
         await save_fixture(organization)
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await organization_service.update(
                 session,
                 organization,
@@ -3475,7 +3475,7 @@ class TestUpdateSeatBasedPricing:
         }
         await save_fixture(organization)
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await organization_service.update(
                 session,
                 organization,
@@ -3617,7 +3617,7 @@ class TestUpdateFeatureSettings:
         save_fixture: SaveFixture,
         organization: Organization,
     ) -> None:
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
         organization.feature_settings = {}
         await save_fixture(organization)
 
@@ -3669,7 +3669,7 @@ class TestResetProrationBehavior:
         }
         await save_fixture(organization)
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await organization_service.update(
                 session,
                 organization,
@@ -3777,7 +3777,7 @@ class TestSetOrganizationOffboarding:
         organization: Organization,
     ) -> None:
         organization.status = OrganizationStatus.REVIEW
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         await organization_service.set_organization_offboarding(session, organization)
 
@@ -3796,7 +3796,7 @@ class TestSetOrganizationOffboarded:
         organization: Organization,
     ) -> None:
         organization.status = OrganizationStatus.OFFBOARDING
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         result = await organization_service.set_organization_offboarded(
             session, organization
@@ -3962,7 +3962,7 @@ class TestUnsnoozeOrganization:
         organization.status = OrganizationStatus.SNOOZED
         organization.snoozed_until = datetime.now(UTC) + timedelta(days=7)
         organization.snooze_type = SnoozeType.NEXT_SALE
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         result = await organization_service.unsnooze_organization(session, organization)
 
@@ -3998,7 +3998,7 @@ class TestUnsnoozeExpiredOrganizations:
         organization.snoozed_until = datetime.now(UTC) - timedelta(hours=1)
         organization.snooze_type = SnoozeType.TIME_BASED
         await save_fixture(organization)
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         result = await organization_service.unsnooze_expired_organizations(session)
 
@@ -4059,7 +4059,7 @@ class TestUnsnoozeExpiredOrganizations:
             "get_expired_time_based_snoozes",
             return_value=[organization],
         )
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         result = await organization_service.unsnooze_expired_organizations(session)
 
@@ -4102,7 +4102,7 @@ class TestOffboardExpiredOrganizations:
             status=OrderStatus.paid,
             created_at=datetime.now(UTC) - timedelta(days=121),
         )
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         result = await organization_service.offboard_expired_organizations(session)
 
@@ -4203,7 +4203,7 @@ class TestOffboardExpiredOrganizations:
             status=OrderStatus.refunded,
             created_at=datetime.now(UTC) - timedelta(days=1),
         )
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         result = await organization_service.offboard_expired_organizations(session)
 
@@ -4223,7 +4223,7 @@ class TestOffboardExpiredOrganizations:
         await self._make_offboarding(
             save_fixture, organization, status_updated_days_ago=121
         )
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         result = await organization_service.offboard_expired_organizations(session)
 
@@ -4363,7 +4363,7 @@ class TestSetPayoutAccount:
         organization.payout_account = old_payout_account
         await save_fixture(organization)
 
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         await organization_service.set_payout_account(
             session, organization, new_payout_account
@@ -4391,7 +4391,7 @@ class TestSetPayoutAccount:
         organization.payout_account = payout_account
         await save_fixture(organization)
 
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         await organization_service.set_payout_account(
             session, organization, payout_account
@@ -4549,7 +4549,7 @@ class TestStatusTransitions:
     ) -> None:
         organization.status = current
         organization.initially_reviewed_at = datetime(2025, 1, 1, 12, 0, tzinfo=UTC)
-        mocker.patch("polar.organization.service.enqueue_job")
+        mocker.patch("tarifia.organization.service.enqueue_job")
 
         result = await organization_service.backoffice_approve(
             session,
@@ -4574,7 +4574,7 @@ class TestStatusTransitions:
     ) -> None:
         organization.status = OrganizationStatus.DENIED
         organization.initially_reviewed_at = datetime(2025, 1, 1, 12, 0, tzinfo=UTC)
-        mocker.patch("polar.organization.service.enqueue_job")
+        mocker.patch("tarifia.organization.service.enqueue_job")
 
         result = await organization_service.backoffice_approve(
             session,
@@ -4621,7 +4621,7 @@ class TestStatusTransitions:
 
         await create_payout_account(save_fixture, organization, user)
 
-        mocker.patch("polar.organization.service.enqueue_job")
+        mocker.patch("tarifia.organization.service.enqueue_job")
 
         result = await organization_service.backoffice_approve(
             session,
@@ -4787,12 +4787,12 @@ class TestSetCapability:
             "payouts",
             False,
             reason="Manual ops hold",
-            admin_email="ops@polar.sh",
+            admin_email="ops@tarifia.sh",
         )
 
         assert organization.internal_notes is not None
         assert (
-            "Capability 'payouts' disabled by ops@polar.sh"
+            "Capability 'payouts' disabled by ops@tarifia.sh"
             in organization.internal_notes
         )
         assert "Reason: Manual ops hold" in organization.internal_notes
@@ -4944,7 +4944,7 @@ class TestAddUser:
             (OrganizationRole.member, MemberRole.member),
         ],
     )
-    async def test_mirrors_org_role_to_polar_self_member_role(
+    async def test_mirrors_org_role_to_tarifia_self_member_role(
         self,
         mocker: MockerFixture,
         session: AsyncSession,
@@ -4954,7 +4954,7 @@ class TestAddUser:
         expected_member_role: MemberRole,
     ) -> None:
         add_member_mock = mocker.patch(
-            "polar.organization.service.polar_self_service.enqueue_add_member"
+            "tarifia.organization.service.tarifia_self_service.enqueue_add_member"
         )
 
         await organization_service.add_user(

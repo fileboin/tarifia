@@ -1,4 +1,4 @@
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { describe, expect, it } from 'vitest'
 import {
   CurrentPlanContext,

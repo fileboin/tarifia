@@ -1,4 +1,4 @@
-import { Footer, Intro, Text, WrapperPolar } from '../components/foundation'
+import { Footer, Intro, Text, WrapperTarifia } from '../components/foundation'
 import type { schemas } from '../types'
 
 export function NotificationNewSubscription({
@@ -30,7 +30,7 @@ export function NotificationNewSubscription({
       : 'free')
 
   return (
-    <WrapperPolar preview={`New ${tier_name} subscriber`}>
+    <WrapperTarifia preview={`New ${tier_name} subscriber`}>
       <Intro headline="Congratulations!">
         {formattedName} is now subscribing to{' '}
         <Text as="span" weight="bold">
@@ -39,7 +39,7 @@ export function NotificationNewSubscription({
         for {priceDisplay}.
       </Intro>
       <Footer email={null} />
-    </WrapperPolar>
+    </WrapperTarifia>
   )
 }
 

@@ -9,53 +9,53 @@
   "redirects": [
     {
       "source": "/docs",
-      "destination": "https://polar.sh/docs",
-      "has": [{ "type": "host", "value": "sandbox.polar.sh" }],
+      "destination": "https://tarifia.sh/docs",
+      "has": [{ "type": "host", "value": "sandbox.tarifia.sh" }],
       "permanent": true
     },
     {
       "source": "/docs/:path+",
-      "destination": "https://polar.sh/docs/:path+",
-      "has": [{ "type": "host", "value": "sandbox.polar.sh" }],
+      "destination": "https://tarifia.sh/docs/:path+",
+      "has": [{ "type": "host", "value": "sandbox.tarifia.sh" }],
       "permanent": true
     }
   ],
   "rewrites": [
     {
       "source": "/_mintlify/api/:path+",
-      "destination": "https://polar.mintlify.app/_mintlify/api/:path+"
+      "destination": "https://tarifia.mintlify.app/_mintlify/api/:path+"
     },
     {
       "source": "/api/request",
-      "destination": "https://polar.mintlify.app/_mintlify/api/request"
+      "destination": "https://tarifia.mintlify.app/_mintlify/api/request"
     },
     {
       "source": "/docs",
-      "destination": "https://polar.mintlify.dev/docs"
+      "destination": "https://tarifia.mintlify.dev/docs"
     },
     {
       "source": "/docs/llms.txt",
-      "destination": "https://polar.mintlify.app/llms.txt"
+      "destination": "https://tarifia.mintlify.app/llms.txt"
     },
     {
       "source": "/docs/llms-full.txt",
-      "destination": "https://polar.mintlify.app/llms-full.txt"
+      "destination": "https://tarifia.mintlify.app/llms-full.txt"
     },
     {
       "source": "/docs/sitemap.xml",
-      "destination": "https://polar.mintlify.app/sitemap.xml"
+      "destination": "https://tarifia.mintlify.app/sitemap.xml"
     },
     {
       "source": "/docs/robots.txt",
-      "destination": "https://polar.mintlify.app/robots.txt"
+      "destination": "https://tarifia.mintlify.app/robots.txt"
     },
     {
       "source": "/docs/:path*",
-      "destination": "https://polar.mintlify.dev/docs/:path*"
+      "destination": "https://tarifia.mintlify.dev/docs/:path*"
     },
     {
       "source": "/mintlify-assets/:path+",
-      "destination": "https://polar.mintlify.app/mintlify-assets/:path+"
+      "destination": "https://tarifia.mintlify.app/mintlify-assets/:path+"
     },
     {
       "source": "/ingest/static/(.*)",

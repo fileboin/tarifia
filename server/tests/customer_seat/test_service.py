@@ -4,8 +4,8 @@ from unittest.mock import patch
 
 import pytest
 
-from polar.auth.models import AuthSubject
-from polar.customer_seat.service import (
+from tarifia.auth.models import AuthSubject
+from tarifia.customer_seat.service import (
     CustomerNotFound,
     FeatureNotEnabled,
     InvalidInvitationToken,
@@ -17,9 +17,9 @@ from polar.customer_seat.service import (
     SeatNotPending,
     seat_service,
 )
-from polar.enums import SubscriptionRecurringInterval
-from polar.kit.utils import utc_now
-from polar.models import (
+from tarifia.enums import SubscriptionRecurringInterval
+from tarifia.kit.utils import utc_now
+from tarifia.models import (
     Account,
     Customer,
     Organization,
@@ -28,9 +28,9 @@ from polar.models import (
     User,
     UserOrganization,
 )
-from polar.models.customer_seat import CustomerSeat, SeatStatus
-from polar.models.webhook_endpoint import WebhookEventType
-from polar.postgres import AsyncSession
+from tarifia.models.customer_seat import CustomerSeat, SeatStatus
+from tarifia.models.webhook_endpoint import WebhookEventType
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_account,
@@ -413,7 +413,7 @@ class TestAssignSeat:
             email="test@example.com",
         )
 
-        with patch("polar.webhook.service.webhook.send") as mock_send:
+        with patch("tarifia.webhook.service.webhook.send") as mock_send:
             mock_send.return_value = []
             seat = await seat_service.assign_seat(
                 session, subscription_with_seats, email="test@example.com"
@@ -466,7 +466,7 @@ class TestAssignSeat:
         )
 
         with patch(
-            "polar.customer_seat.service.send_seat_invitation_email"
+            "tarifia.customer_seat.service.send_seat_invitation_email"
         ) as mock_email:
             await seat_service.assign_seat(
                 session,
@@ -490,7 +490,7 @@ class TestAssignSeat:
             email="test@example.com",
         )
 
-        with patch("polar.webhook.service.webhook.send") as mock_send:
+        with patch("tarifia.webhook.service.webhook.send") as mock_send:
             mock_send.return_value = []
             seat = await seat_service.assign_seat(
                 session,
@@ -518,7 +518,7 @@ class TestAssignSeat:
             email="test@example.com",
         )
 
-        with patch("polar.customer_seat.service.enqueue_job") as mock_enqueue:
+        with patch("tarifia.customer_seat.service.enqueue_job") as mock_enqueue:
             seat = await seat_service.assign_seat(
                 session,
                 subscription_with_seats,
@@ -628,7 +628,7 @@ class TestAssignSeat:
             email="test@example.com",
         )
 
-        with patch("polar.customer_seat.service.eventstream_publish") as mock_publish:
+        with patch("tarifia.customer_seat.service.eventstream_publish") as mock_publish:
             seat = await seat_service.assign_seat(
                 session,
                 subscription_with_seats,
@@ -705,7 +705,7 @@ class TestAssignSeat:
         provided, no individual Customer should be created for the seat holder.
         The seat holder is represented as a Member under the billing customer.
         """
-        from polar.customer.repository import CustomerRepository
+        from tarifia.customer.repository import CustomerRepository
 
         organization = await create_organization(
             save_fixture,
@@ -730,7 +730,7 @@ class TestAssignSeat:
             save_fixture, product=product, customer=billing_customer, seats=5
         )
 
-        with patch("polar.customer_seat.service.send_seat_invitation_email"):
+        with patch("tarifia.customer_seat.service.send_seat_invitation_email"):
             seat = await seat_service.assign_seat(
                 session, subscription, email="seat@example.com"
             )
@@ -960,7 +960,7 @@ class TestAssignSeat:
         not when assigning seats. This test verifies seat assignment preserves the
         existing customer type.
         """
-        from polar.models.customer import CustomerType
+        from tarifia.models.customer import CustomerType
 
         organization = await create_organization(
             save_fixture,
@@ -990,7 +990,7 @@ class TestAssignSeat:
         )
 
         # Assign a seat (mock email sending)
-        with patch("polar.customer_seat.service.send_seat_invitation_email"):
+        with patch("tarifia.customer_seat.service.send_seat_invitation_email"):
             await seat_service.assign_seat(
                 session, subscription, email="seat@example.com"
             )
@@ -1825,7 +1825,7 @@ class TestClaimSeat:
 
         assert seat_pending.invitation_token is not None
 
-        with patch("polar.webhook.service.webhook.send") as mock_send:
+        with patch("tarifia.webhook.service.webhook.send") as mock_send:
             mock_send.return_value = []
             seat, _ = await seat_service.claim_seat(
                 session, seat_pending.invitation_token
@@ -1888,7 +1888,7 @@ class TestClaimSeat:
         assert claimed_seat.invitation_token is None
         assert session_token is not None
         assert len(session_token) > 0
-        assert session_token.startswith("polar_mst_")
+        assert session_token.startswith("tarifia_mst_")
 
 
 class TestRevokeSeat:
@@ -1931,7 +1931,7 @@ class TestRevokeSeat:
     async def test_revoke_seat_sends_webhook(
         self, session: AsyncSession, customer_seat_claimed: CustomerSeat
     ) -> None:
-        with patch("polar.webhook.service.webhook.send") as mock_send:
+        with patch("tarifia.webhook.service.webhook.send") as mock_send:
             mock_send.return_value = []
             seat = await seat_service.revoke_seat(session, customer_seat_claimed)
 
@@ -2148,7 +2148,7 @@ class TestResendInvitation:
         original_token = seat.invitation_token
 
         with patch(
-            "polar.customer_seat.service.send_seat_invitation_email"
+            "tarifia.customer_seat.service.send_seat_invitation_email"
         ) as mock_send_email:
             result_seat = await seat_service.resend_invitation(session, seat)
 
@@ -2333,7 +2333,7 @@ class TestResendInvitation:
         await session.refresh(seat.subscription.product, ["organization"])
 
         with patch(
-            "polar.customer_seat.service.send_seat_invitation_email"
+            "tarifia.customer_seat.service.send_seat_invitation_email"
         ) as mock_send_email:
             result_seat = await seat_service.resend_invitation(session, seat)
 
@@ -2369,7 +2369,7 @@ class TestBenefitGranting:
 
         assert seat.invitation_token is not None
 
-        with patch("polar.customer_seat.service.enqueue_job") as mock_enqueue_job:
+        with patch("tarifia.customer_seat.service.enqueue_job") as mock_enqueue_job:
             claimed_seat, _ = await seat_service.claim_seat(
                 session, seat.invitation_token
             )
@@ -2393,7 +2393,7 @@ class TestBenefitGranting:
         original_member_id = customer_seat_claimed.member_id
         assert original_customer_id is not None
 
-        with patch("polar.customer_seat.service.enqueue_job") as mock_enqueue_job:
+        with patch("tarifia.customer_seat.service.enqueue_job") as mock_enqueue_job:
             seat = await seat_service.revoke_seat(session, customer_seat_claimed)
             assert seat.subscription is not None
 
@@ -2413,7 +2413,7 @@ class TestBenefitGranting:
         """Test that revoking a pending seat (no customer) doesn't enqueue revocation."""
         assert customer_seat_pending.customer_id is None
 
-        with patch("polar.customer_seat.service.enqueue_job") as mock_enqueue_job:
+        with patch("tarifia.customer_seat.service.enqueue_job") as mock_enqueue_job:
             await seat_service.revoke_seat(session, customer_seat_pending)
 
             mock_enqueue_job.assert_not_called()
@@ -2440,7 +2440,7 @@ class TestBenefitGranting:
 
         assert seat.invitation_token is not None
 
-        with patch("polar.customer_seat.service.eventstream_publish") as mock_publish:
+        with patch("tarifia.customer_seat.service.eventstream_publish") as mock_publish:
             claimed_seat, _ = await seat_service.claim_seat(
                 session, seat.invitation_token
             )
@@ -2637,7 +2637,7 @@ class TestRevokeAllSeatsForSubscription:
         await session.refresh(subscription_with_seats, ["product"])
         await session.refresh(subscription_with_seats.product, ["organization"])
 
-        with patch("polar.customer_seat.service.enqueue_job") as mock_enqueue_job:
+        with patch("tarifia.customer_seat.service.enqueue_job") as mock_enqueue_job:
             revoked_count = await seat_service.revoke_all_seats_for_subscription(
                 session, subscription_with_seats
             )
@@ -2724,7 +2724,7 @@ class TestAssignSeatToDeletedMember:
         await seat_service.revoke_seat(session, seat)
 
         # Step 3: Soft delete the member
-        from polar.member.repository import MemberRepository
+        from tarifia.member.repository import MemberRepository
 
         member_repository = MemberRepository.from_session(session)
         member = await member_repository.get_by_id(original_member_id)
@@ -2812,7 +2812,7 @@ class TestUpdateProductBenefitsGrants:
 
         session.expunge_all()
 
-        with patch("polar.customer_seat.service.enqueue_job") as enqueue_job_mock:
+        with patch("tarifia.customer_seat.service.enqueue_job") as enqueue_job_mock:
             await seat_service.update_product_benefits_grants(session, product)
 
             assert enqueue_job_mock.call_count == 2
@@ -2836,7 +2836,7 @@ class TestUpdateProductBenefitsGrants:
     ) -> None:
         """When product benefits are updated, claimed seat members
         on orders should get benefit grant jobs enqueued."""
-        from polar.models.order import OrderStatus
+        from tarifia.models.order import OrderStatus
 
         organization.feature_settings = {
             **organization.feature_settings,
@@ -2873,7 +2873,7 @@ class TestUpdateProductBenefitsGrants:
 
         session.expunge_all()
 
-        with patch("polar.customer_seat.service.enqueue_job") as enqueue_job_mock:
+        with patch("tarifia.customer_seat.service.enqueue_job") as enqueue_job_mock:
             await seat_service.update_product_benefits_grants(session, product)
 
             assert enqueue_job_mock.call_count == 1
@@ -2928,7 +2928,7 @@ class TestUpdateProductBenefitsGrants:
 
         session.expunge_all()
 
-        with patch("polar.customer_seat.service.enqueue_job") as enqueue_job_mock:
+        with patch("tarifia.customer_seat.service.enqueue_job") as enqueue_job_mock:
             await seat_service.update_product_benefits_grants(session, product)
 
             enqueue_job_mock.assert_not_called()
@@ -2983,7 +2983,7 @@ class TestUpdateProductBenefitsGrants:
 
         session.expunge_all()
 
-        with patch("polar.customer_seat.service.enqueue_job") as enqueue_job_mock:
+        with patch("tarifia.customer_seat.service.enqueue_job") as enqueue_job_mock:
             await seat_service.update_product_benefits_grants(session, product)
 
             assert enqueue_job_mock.call_count == 1

@@ -1,12 +1,12 @@
 import { DataTableSortingState } from '@/utils/datatable'
-import { schemas } from '@polar-sh/client'
-import { Avatar } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Avatar } from '@tarifia-sh/orbit'
 import {
   DataTable,
   DataTableColumnDef,
   DataTableColumnHeader,
-} from '@polar-sh/orbit'
-import { Status } from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
+import { Status } from '@tarifia-sh/orbit'
 import {
   OnChangeFn,
   PaginationState,
@@ -59,7 +59,7 @@ export const LicenseKeysList = ({
             />
             <div className="flex flex-col">
               <span className="text-sm">{licenseKey.customer.name}</span>
-              <span className="dark:text-polar-500 text-xs text-gray-500">
+              <span className="dark:text-tarifia-500 text-xs text-gray-500">
                 {licenseKey.customer.email ?? '—'}
               </span>
             </div>

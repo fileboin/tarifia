@@ -2,8 +2,8 @@
 
 import { usePayoutAccountSetup } from '@/hooks/usePayoutAccountSetup'
 import { api } from '@/utils/client'
-import { schemas, unwrap } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
+import { schemas, unwrap } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
 import { ArrowRight, CheckIcon, ExternalLink } from 'lucide-react'
 import { useCallback, useState } from 'react'
 
@@ -64,12 +64,12 @@ export default function PayoutAccountStep({
 
     if (isStripe) {
       return (
-        <div className="dark:bg-polar-800 rounded-2xl border bg-white p-8 text-center">
-          <span className="dark:bg-polar-700 mb-3 inline-flex h-8 w-8 items-center justify-center rounded-full bg-gray-100">
-            <CheckIcon className="dark:text-polar-400 h-4 w-4 text-gray-500" />
+        <div className="dark:bg-tarifia-800 rounded-2xl border bg-white p-8 text-center">
+          <span className="dark:bg-tarifia-700 mb-3 inline-flex h-8 w-8 items-center justify-center rounded-full bg-gray-100">
+            <CheckIcon className="dark:text-tarifia-400 h-4 w-4 text-gray-500" />
           </span>
           <h4 className="mb-2 font-medium">Account setup complete</h4>
-          <p className="dark:text-polar-400 mx-auto mb-6 max-w-sm text-sm text-balance text-gray-600">
+          <p className="dark:text-tarifia-400 mx-auto mb-6 max-w-sm text-sm text-balance text-gray-600">
             Your Stripe payout account is configured and ready to receive
             payouts.
           </p>
@@ -86,12 +86,12 @@ export default function PayoutAccountStep({
     }
 
     return (
-      <div className="dark:bg-polar-800 rounded-2xl border bg-white p-8 text-center">
+      <div className="dark:bg-tarifia-800 rounded-2xl border bg-white p-8 text-center">
         <h4 className="mb-2 font-medium">Manual payouts</h4>
-        <p className="dark:text-polar-400 mx-auto max-w-sm text-sm text-balance text-gray-600">
+        <p className="dark:text-tarifia-400 mx-auto max-w-sm text-sm text-balance text-gray-600">
           You&apos;re receiving manual payouts.{' '}
           <a
-            href="mailto:support@polar.sh"
+            href="mailto:support@tarifia.sh"
             className="underline hover:no-underline"
           >
             Reach out to support
@@ -104,9 +104,9 @@ export default function PayoutAccountStep({
 
   return (
     <>
-      <div className="dark:bg-polar-800 rounded-2xl border bg-white p-8 text-center">
+      <div className="dark:bg-tarifia-800 rounded-2xl border bg-white p-8 text-center">
         <h4 className="mb-2 font-medium">Connect payout account</h4>
-        <p className="dark:text-polar-400 mx-auto mb-6 max-w-sm text-sm text-balance text-gray-600">
+        <p className="dark:text-tarifia-400 mx-auto mb-6 max-w-sm text-sm text-balance text-gray-600">
           Connect or create a Stripe account to receive payments from your
           customers.
         </p>

@@ -6,8 +6,8 @@ import { isImpersonating } from '@/utils/impersonation'
 import ArrowOutwardOutlined from '@mui/icons-material/ArrowOutwardOutlined'
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown'
 import Search from '@mui/icons-material/Search'
-import { schemas } from '@polar-sh/client'
-import { Avatar } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Avatar } from '@tarifia-sh/orbit'
 import {
   Sidebar,
   SidebarContent,
@@ -18,21 +18,21 @@ import {
   SidebarMenuItem,
   SidebarTrigger,
   useSidebar,
-} from '@polar-sh/ui/components/atoms/Sidebar'
+} from '@tarifia-sh/ui/components/atoms/Sidebar'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@polar-sh/ui/components/ui/dropdown-menu'
-import { Separator } from '@polar-sh/ui/components/ui/separator'
+} from '@tarifia-sh/ui/components/ui/dropdown-menu'
+import { Separator } from '@tarifia-sh/ui/components/ui/separator'
 import { motion } from 'motion/react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { PolarLogotype } from '../Public/PolarLogotype'
+import { TarifiaLogotype } from '../Public/TarifiaLogotype'
 import {
   AccountNavigation,
   OrganizationNavigation,
@@ -91,7 +91,7 @@ export const DashboardSidebar = ({
             : 'flex-row items-center justify-between',
         )}
       >
-        <PolarLogotype
+        <TarifiaLogotype
           size={32}
           href={organization ? `/dashboard/${organization.slug}` : '/dashboard'}
         />
@@ -114,20 +114,20 @@ export const DashboardSidebar = ({
               onClick={() => setSearchOpen(true)}
               className={twMerge(
                 'flex cursor-pointer items-center gap-4 rounded-lg border px-2 py-2 text-sm transition-colors',
-                'dark:bg-polar-950 dark:border-polar-800 dark:hover:bg-polar-900 border-gray-200 bg-white hover:bg-gray-50',
+                'dark:bg-tarifia-950 dark:border-tarifia-800 dark:hover:bg-tarifia-900 border-gray-200 bg-white hover:bg-gray-50',
                 isCollapsed && 'justify-center px-2',
               )}
             >
               <Search
-                className="dark:text-polar-500 text-gray-500"
+                className="dark:text-tarifia-500 text-gray-500"
                 fontSize="inherit"
               />
               {!isCollapsed && (
                 <>
-                  <span className="dark:text-polar-500 flex-1 text-left text-gray-500">
+                  <span className="dark:text-tarifia-500 flex-1 text-left text-gray-500">
                     Search...
                   </span>
-                  <kbd className="dark:border-polar-700 dark:bg-polar-800 dark:text-polar-400 pointer-events-none inline-flex h-5 items-center gap-1 rounded border border-gray-200 bg-gray-100 px-1.5 font-mono text-[11px] text-gray-600 select-none">
+                  <kbd className="dark:border-tarifia-700 dark:bg-tarifia-800 dark:text-tarifia-400 pointer-events-none inline-flex h-5 items-center gap-1 rounded border border-gray-200 bg-gray-100 px-1.5 font-mono text-[11px] text-gray-600 select-none">
                     <span className="text-sm">⌘</span>K
                   </kbd>
                 </>
@@ -155,9 +155,9 @@ export const DashboardSidebar = ({
       </SidebarContent>
       <SidebarFooter>
         {isOnFreePlan && !isCollapsed && (
-          <div className="dark:bg-polar-900 dark:border-polar-700 flex flex-col gap-y-2 rounded-sm border border-gray-100 bg-white p-4">
-            <h3 className="text-sm">Introducing Polar Plans</h3>
-            <p className="dark:text-polar-500 text-sm text-gray-500">
+          <div className="dark:bg-tarifia-900 dark:border-tarifia-700 flex flex-col gap-y-2 rounded-sm border border-gray-100 bg-white p-4">
+            <h3 className="text-sm">Introducing Tarifia Plans</h3>
+            <p className="dark:text-tarifia-500 text-sm text-gray-500">
               Get a lower fee with our subscription plans
             </p>
             <Link
@@ -175,10 +175,10 @@ export const DashboardSidebar = ({
         <Link
           className={twMerge(
             'flex flex-row items-center rounded-lg border border-transparent text-sm transition-colors dark:border-transparent',
-            'dark:text-polar-500 dark:hover:text-polar-200 text-gray-500 hover:text-black',
-            isCollapsed && '!dark:text-polar-600',
+            'dark:text-tarifia-500 dark:hover:text-tarifia-200 text-gray-500 hover:text-black',
+            isCollapsed && '!dark:text-tarifia-600',
           )}
-          href="https://polar.sh/docs"
+          href="https://tarifia.sh/docs"
           target="_blank"
         >
           <ArrowOutwardOutlined className="ml-2" fontSize="inherit" />
@@ -248,7 +248,7 @@ export const DashboardSidebar = ({
                   {!CONFIG.IS_SANDBOX && (
                     <DropdownMenuItem
                       onClick={() =>
-                        router.push('https://sandbox.polar.sh/start')
+                        router.push('https://sandbox.tarifia.sh/start')
                       }
                     >
                       Go to Sandbox

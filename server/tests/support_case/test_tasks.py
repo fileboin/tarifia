@@ -6,21 +6,21 @@ from collections.abc import AsyncIterator, Sequence
 import pytest
 from pytest_mock import MockerFixture
 
-from polar.models import (
+from tarifia.models import (
     Customer,
     Organization,
     Product,
     UserOrganization,
 )
-from polar.models.support_case import (
+from tarifia.models.support_case import (
     SupportCase,
     SupportCaseAudience,
     SupportCaseMessage,
     SupportCaseMessageAuthorKind,
     SupportCaseMessageType,
 )
-from polar.postgres import AsyncSession
-from polar.support_case.tasks import notify_organization_of_new_message
+from tarifia.postgres import AsyncSession
+from tarifia.support_case.tasks import notify_organization_of_new_message
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_appeal_case,
@@ -72,9 +72,9 @@ class TestNotifyOrganization:
             author_kind=SupportCaseMessageAuthorKind.platform,
             audience=[SupportCaseAudience.merchant],
         )
-        enqueue = mocker.patch("polar.support_case.tasks.enqueue_email_template")
+        enqueue = mocker.patch("tarifia.support_case.tasks.enqueue_email_template")
         mocker.patch(
-            "polar.support_case.tasks.AsyncSessionMaker",
+            "tarifia.support_case.tasks.AsyncSessionMaker",
             return_value=_session_maker(session),
         )
 
@@ -106,9 +106,9 @@ class TestNotifyOrganization:
             author_kind=SupportCaseMessageAuthorKind.platform,
             audience=[SupportCaseAudience.merchant],
         )
-        enqueue = mocker.patch("polar.support_case.tasks.enqueue_email_template")
+        enqueue = mocker.patch("tarifia.support_case.tasks.enqueue_email_template")
         mocker.patch(
-            "polar.support_case.tasks.AsyncSessionMaker",
+            "tarifia.support_case.tasks.AsyncSessionMaker",
             return_value=_session_maker(session),
         )
 
@@ -131,9 +131,9 @@ class TestNotifyOrganization:
             author_kind=SupportCaseMessageAuthorKind.merchant,
             audience=[SupportCaseAudience.merchant],
         )
-        enqueue = mocker.patch("polar.support_case.tasks.enqueue_email_template")
+        enqueue = mocker.patch("tarifia.support_case.tasks.enqueue_email_template")
         mocker.patch(
-            "polar.support_case.tasks.AsyncSessionMaker",
+            "tarifia.support_case.tasks.AsyncSessionMaker",
             return_value=_session_maker(session),
         )
 

@@ -6,15 +6,15 @@ import typer
 from rich.progress import Progress
 from sqlalchemy import func, select, tuple_
 
-from polar.config import settings
-from polar.integrations.tinybird.client import (
+from tarifia.config import settings
+from tarifia.integrations.tinybird.client import (
     TinybirdClient,
     TinybirdPayloadTooLargeError,
 )
-from polar.integrations.tinybird.service import _event_to_tinybird
-from polar.kit.db.postgres import create_async_engine as _create_async_engine
-from polar.kit.db.postgres import create_async_sessionmaker
-from polar.models import Event
+from tarifia.integrations.tinybird.service import _event_to_tinybird
+from tarifia.kit.db.postgres import create_async_engine as _create_async_engine
+from tarifia.kit.db.postgres import create_async_sessionmaker
+from tarifia.models import Event
 
 from .helper import configure_script_logging, typer_async
 

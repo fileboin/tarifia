@@ -4,7 +4,7 @@ import { Platform } from 'react-native'
 
 // ⚠️ Changing this to a different group would make existing sessions unreadable
 const SECURE_STORE_OPTIONS: SecureStore.SecureStoreOptions = {
-  accessGroup: '55U3YA3QTA.com.polarsource.Polar',
+  accessGroup: '55U3YA3QTA.com.tarifiasource.Tarifia',
   keychainAccessible: SecureStore.AFTER_FIRST_UNLOCK,
 }
 

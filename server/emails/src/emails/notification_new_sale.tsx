@@ -1,4 +1,4 @@
-import { Button, Footer, Text, WrapperPolar } from '../components/foundation'
+import { Button, Footer, Text, WrapperTarifia } from '../components/foundation'
 import SaleSummary from '../components/SaleSummary'
 import type { schemas } from '../types'
 
@@ -31,7 +31,7 @@ export function NotificationNewSale({
     addressParts.length > 0 ? addressParts.join(', ') : null
 
   return (
-    <WrapperPolar
+    <WrapperTarifia
       preview={`${displayName} placed an order for ${product_name}`}
     >
       <Text variant="lead">
@@ -52,7 +52,7 @@ export function NotificationNewSale({
         formatted_address_country={formatted_address_country}
       />
       <Footer email={null} />
-    </WrapperPolar>
+    </WrapperTarifia>
   )
 }
 
@@ -71,7 +71,7 @@ NotificationNewSale.PreviewProps = {
   order_id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
   order_date: '2024-11-05T20:41:00Z',
   order_url:
-    'https://polar.sh/dashboard/acme-inc/sales/a1b2c3d4-e5f6-7890-abcd-ef1234567890',
+    'https://tarifia.sh/dashboard/acme-inc/sales/a1b2c3d4-e5f6-7890-abcd-ef1234567890',
   organization_name: 'Acme Inc.',
   organization_slug: 'acme-inc',
   billing_reason: 'purchase',

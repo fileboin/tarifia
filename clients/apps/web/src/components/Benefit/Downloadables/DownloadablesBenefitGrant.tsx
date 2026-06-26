@@ -1,15 +1,15 @@
 import { useCustomerDownloadables } from '@/hooks/queries/customerPortal'
 import ArrowDownward from '@mui/icons-material/ArrowDownward'
 import MoreVertOutlined from '@mui/icons-material/MoreVertOutlined'
-import { Client, schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { Pill } from '@polar-sh/orbit'
+import { Client, schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { Pill } from '@tarifia-sh/orbit'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@polar-sh/ui/components/ui/dropdown-menu'
+} from '@tarifia-sh/ui/components/ui/dropdown-menu'
 import { useCallback, useMemo } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { FilePreview } from './FileList/FileListItem'
@@ -34,7 +34,7 @@ const DownloadableItem = ({
   return (
     <div
       className={twMerge(
-        'dark:bg-polar-800 flex w-full flex-row items-center justify-between gap-x-6 rounded-2xl bg-gray-50 px-4 py-3',
+        'dark:bg-tarifia-800 flex w-full flex-row items-center justify-between gap-x-6 rounded-2xl bg-gray-50 px-4 py-3',
         className,
       )}
     >
@@ -45,7 +45,7 @@ const DownloadableItem = ({
             {downloadable.file.name}
           </span>
           <div className="flex flex-row items-center gap-x-2 text-xs">
-            <span className="dark:text-polar-500 text-gray-500">
+            <span className="dark:text-tarifia-500 text-gray-500">
               {downloadable.file.size_readable}
             </span>
             {historic && (
@@ -72,7 +72,7 @@ const DownloadableItem = ({
             </DropdownMenuTrigger>
             <DropdownMenuContent
               align="end"
-              className="dark:bg-polar-800 bg-gray-50 shadow-lg"
+              className="dark:bg-tarifia-800 bg-gray-50 shadow-lg"
             >
               {downloadable.file.checksum_sha256_hex && (
                 <DropdownMenuItem onClick={onCopySHA}>

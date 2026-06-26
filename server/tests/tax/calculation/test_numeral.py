@@ -3,11 +3,11 @@ import uuid
 import pytest
 import respx
 
-from polar.enums import TaxBehavior
-from polar.kit.address import Address, CountryAlpha2
-from polar.tax.calculation import TaxCode
-from polar.tax.calculation.base import TaxabilityReason
-from polar.tax.calculation.numeral import numeral_tax_service
+from tarifia.enums import TaxBehavior
+from tarifia.kit.address import Address, CountryAlpha2
+from tarifia.tax.calculation import TaxCode
+from tarifia.tax.calculation.base import TaxabilityReason
+from tarifia.tax.calculation.numeral import numeral_tax_service
 
 
 @pytest.fixture

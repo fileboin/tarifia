@@ -1,6 +1,6 @@
 'use client'
 
-import { Switch } from '@polar-sh/orbit'
+import { Switch } from '@tarifia-sh/orbit'
 import { AnimatePresence, motion } from 'motion/react'
 import { memo, useEffect, useRef, useState } from 'react'
 
@@ -82,7 +82,7 @@ const FlagRow = memo(
         <motion.div
           animate={isGranted ? { scale: [1, 1.3, 1] } : {}}
           transition={{ duration: 0.2 }}
-          className={`h-1.5 w-1.5 shrink-0 rounded-full transition-colors duration-300 ${isGranted ? 'bg-emerald-500' : 'dark:bg-polar-600 bg-gray-200'}`}
+          className={`h-1.5 w-1.5 shrink-0 rounded-full transition-colors duration-300 ${isGranted ? 'bg-emerald-500' : 'dark:bg-tarifia-600 bg-gray-200'}`}
         />
         <span className="truncate font-mono text-xs">{label}</span>
       </div>
@@ -145,9 +145,9 @@ export const ProductGrantsFeed = () => {
       transition={{ duration: 1.2, delay: 0.2 }}
       viewport={{ once: true }}
     >
-      <div className="dark:border-polar-700 flex h-full flex-col overflow-hidden rounded-2xl border border-gray-200">
+      <div className="dark:border-tarifia-700 flex h-full flex-col overflow-hidden rounded-2xl border border-gray-200">
         {/* Header */}
-        <div className="dark:border-polar-800 flex items-center justify-between border-b border-gray-100 px-4 py-3">
+        <div className="dark:border-tarifia-800 flex items-center justify-between border-b border-gray-100 px-4 py-3">
           <div className="flex items-center gap-x-4">
             <span className="font-mono text-sm">Benefits Engine</span>
           </div>
@@ -165,14 +165,14 @@ export const ProductGrantsFeed = () => {
               transition={{ duration: 0.3, ease: 'easeOut' }}
               className="flex items-center gap-x-3 rounded-xl py-2.5"
             >
-              <div className="dark:bg-polar-700 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gray-200">
+              <div className="dark:bg-tarifia-700 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gray-200">
                 <span className="font-mono text-[9px] text-gray-500 dark:text-gray-400">
                   {sub.user.slice(-2)}
                 </span>
               </div>
               <div className="flex min-w-0 flex-1 flex-col gap-y-0.5">
                 <span className="font-mono text-sm">{sub.user}</span>
-                <span className="dark:text-polar-500 font-mono text-sm text-gray-400">
+                <span className="dark:text-tarifia-500 font-mono text-sm text-gray-400">
                   Subscribed
                 </span>
               </div>
@@ -186,10 +186,10 @@ export const ProductGrantsFeed = () => {
 
           {/* Section label */}
           <div className="flex items-center gap-x-2">
-            <span className="dark:text-polar-500 text-xxs font-mono tracking-widest text-gray-500 uppercase">
+            <span className="dark:text-tarifia-500 text-xxs font-mono tracking-widest text-gray-500 uppercase">
               Granted automatically
             </span>
-            <div className="dark:bg-polar-700 h-px flex-1 bg-gray-100" />
+            <div className="dark:bg-tarifia-700 h-px flex-1 bg-gray-100" />
           </div>
 
           {/* Feature flag list — no container re-key, each row animates independently */}

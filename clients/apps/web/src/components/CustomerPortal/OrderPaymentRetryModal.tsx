@@ -2,14 +2,14 @@
 
 import { toast } from '@/components/Toast/use-toast'
 import { useCustomerPaymentMethods } from '@/hooks/queries/customerPortal'
-import { type Client, schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { ThemingPresetProps } from '@polar-sh/ui/hooks/theming'
+import { type Client, schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { ThemingPresetProps } from '@tarifia-sh/ui/hooks/theming'
 import { Elements, ElementsConsumer } from '@stripe/react-stripe-js'
 import { Stripe } from '@stripe/stripe-js'
 import { useEffect, useMemo, useState } from 'react'
-import { loadPolarStripe } from '@/utils/stripe'
-import { Modal } from '@polar-sh/orbit'
+import { loadTarifiaStripe } from '@/utils/stripe'
+import { Modal } from '@tarifia-sh/orbit'
 import { OrderPaymentRetry } from './OrderPaymentRetry'
 import { SavedCardsSelector } from './SavedCardsSelector'
 
@@ -41,7 +41,7 @@ export const OrderPaymentRetryModal = ({
     (pm): pm is schemas['PaymentMethodCard'] => pm.type === 'card',
   )
 
-  const stripePromise = useMemo(() => loadPolarStripe(), [])
+  const stripePromise = useMemo(() => loadTarifiaStripe(), [])
 
   // Resolve Stripe instance for saved payment methods that may require 3DS authentication
   const [stripe, setStripe] = useState<Stripe | null>(null)

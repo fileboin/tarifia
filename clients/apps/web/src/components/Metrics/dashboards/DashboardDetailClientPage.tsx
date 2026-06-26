@@ -2,7 +2,7 @@
 
 import { useMetricDashboards, useMetrics } from '@/hooks/queries/metrics'
 import { fromISODate, toISODate } from '@/utils/metrics'
-import { getMetricsRangeDates, schemas } from '@polar-sh/client'
+import { getMetricsRangeDates, schemas } from '@tarifia-sh/client'
 import {
   createParser,
   parseAsArrayOf,
@@ -76,11 +76,11 @@ export default function DashboardDetailClientPage({
 
   if (dashboard.metrics.length === 0) {
     return (
-      <div className="dark:border-polar-700 flex flex-col items-center justify-center rounded-2xl border border-gray-200 py-16 text-center">
+      <div className="dark:border-tarifia-700 flex flex-col items-center justify-center rounded-2xl border border-gray-200 py-16 text-center">
         <p className="text-lg font-medium text-gray-900 dark:text-white">
           No metrics in this dashboard
         </p>
-        <p className="dark:text-polar-400 mt-2 text-sm text-gray-500">
+        <p className="dark:text-tarifia-400 mt-2 text-sm text-gray-500">
           Edit this dashboard to add metrics.
         </p>
       </div>

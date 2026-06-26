@@ -4,14 +4,14 @@ import {
   DEFAULT_LOCALE,
   isAcceptedLocale,
   type AcceptedLocale,
-} from '@polar-sh/i18n'
-import { unwrap, UnauthorizedResponseError } from '@polar-sh/client'
+} from '@tarifia-sh/i18n'
+import { unwrap, UnauthorizedResponseError } from '@tarifia-sh/client'
 import type { Metadata } from 'next'
 import { EmbedError } from './EmbedError'
 import { PaymentMethodEmbed } from './PaymentMethodEmbed'
 
 export const metadata: Metadata = {
-  title: 'Add payment method | Polar',
+  title: 'Add payment method | Tarifia',
   robots: { index: false, follow: false },
 }
 
@@ -24,7 +24,7 @@ interface SearchParams {
   set_default?: string
   locale?: string
   redirect_status?: string
-  polar_setup_intent?: string
+  tarifia_setup_intent?: string
 }
 
 const resolveLocale = (locale: string | undefined): AcceptedLocale =>
@@ -70,7 +70,7 @@ export default async function Page(props: {
     set_default,
     locale: localeParam,
     redirect_status,
-    polar_setup_intent,
+    tarifia_setup_intent,
   } = await props.searchParams
 
   const locale = resolveLocale(localeParam)
@@ -126,7 +126,7 @@ export default async function Page(props: {
         address: customer.billing_address ?? null,
       }}
       redirectStatus={redirect_status}
-      setupIntentId={polar_setup_intent}
+      setupIntentId={tarifia_setup_intent}
     />
   )
 }

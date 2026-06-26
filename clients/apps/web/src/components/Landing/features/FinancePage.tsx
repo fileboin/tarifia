@@ -52,7 +52,7 @@ export const FinancePage = () => {
           your customer base is global.
         </p>
         <p>
-          Payouts are deliberately manual. Polar never sweeps your balance
+          Payouts are deliberately manual. Tarifia never sweeps your balance
           automatically, so you control when money moves to your connected
           account.
         </p>
@@ -103,7 +103,7 @@ export const FinancePage = () => {
           {
             title: 'Multi-currency settlement',
             description:
-              'Customers pay in their currency. Polar settles to USD on your account.',
+              'Customers pay in their currency. Tarifia settles to USD on your account.',
           },
           {
             title: 'Currency thresholds',
@@ -140,7 +140,7 @@ export const FinancePage = () => {
           {
             title: 'Disputes',
             description:
-              '$15 per dispute. Polar may proactively refund up to 60 days after purchase to keep this number down.',
+              '$15 per dispute. Tarifia may proactively refund up to 60 days after purchase to keep this number down.',
           },
         ]}
       />

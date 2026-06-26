@@ -1,5 +1,5 @@
-from polar.models import Account, User
-from polar.postgres import AsyncSession
+from tarifia.models import Account, User
+from tarifia.postgres import AsyncSession
 
 
 def generate_account(

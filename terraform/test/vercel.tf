@@ -1,21 +1,21 @@
 # =============================================================================
-# Vercel — Test frontend (test.polar.sh)
+# Vercel — Test frontend (test.tarifia.sh)
 # =============================================================================
 
 import {
-  to = module.vercel.cloudflare_dns_record.this["test.polar.sh"]
+  to = module.vercel.cloudflare_dns_record.this["test.tarifia.sh"]
   id = "22bcd1b07ec25452aab472486bc8df94/7eee3c07157a8904f30fc3fd27b7ba27"
 }
 
 module "vercel" {
   source = "../modules/vercel"
 
-  name     = "polar-test"
-  git_repo = "polarsource/polar"
+  name     = "tarifia-test"
+  git_repo = "tarifiasource/tarifia"
 
   domains = [
     {
-      name = "test.polar.sh"
+      name = "test.tarifia.sh"
       dns = {
         zone_id = "22bcd1b07ec25452aab472486bc8df94"
         content = "9b3437429d7388f1.vercel-dns-016.com"
@@ -25,20 +25,20 @@ module "vercel" {
   ]
 
   config = {
-    next_public_api_url                             = "https://test-api.polar.sh"
-    next_public_backoffice_url                      = "https://test-api.polar.sh/backoffice"
+    next_public_api_url                             = "https://test-api.tarifia.sh"
+    next_public_backoffice_url                      = "https://test-api.tarifia.sh/backoffice"
     next_public_sentry_dsn                          = var.next_public_sentry_dsn
     next_public_posthog_token                       = var.next_public_posthog_token
     next_public_apple_domain_association            = var.next_public_apple_domain_association
-    next_public_checkout_embed_script_src           = "https://cdn.jsdelivr.net/npm/@polar-sh/checkout@0.1/dist/embed.global.js"
+    next_public_checkout_embed_script_src           = "https://cdn.jsdelivr.net/npm/@tarifia-sh/checkout@0.1/dist/embed.global.js"
     next_public_stripe_payment_method_configuration = var.next_public_stripe_payment_method_configuration
     s3_public_images_bucket_protocol                = "https"
-    s3_public_images_bucket_hostname                = "polar-test-public-files.s3.amazonaws.com"
+    s3_public_images_bucket_hostname                = "tarifia-test-public-files.s3.amazonaws.com"
     s3_public_images_bucket_port                    = null
     s3_public_images_bucket_pathname                = "/product_media/**"
-    s3_upload_origins                               = "https://polar-test-files.s3.amazonaws.com https://polar-test-files.s3.us-east-2.amazonaws.com https://polar-test-public-files.s3.amazonaws.com https://polar-test-public-files.s3.us-east-2.amazonaws.com"
-    polar_checkout_embed_script_allowed_origins     = "https://polar.sh,https://sandbox.polar.sh,https://test.polar.sh"
-    polar_openapi_schema_url                        = "https://api.polar.sh/openapi.json"
+    s3_upload_origins                               = "https://tarifia-test-files.s3.amazonaws.com https://tarifia-test-files.s3.us-east-2.amazonaws.com https://tarifia-test-public-files.s3.amazonaws.com https://tarifia-test-public-files.s3.us-east-2.amazonaws.com"
+    tarifia_checkout_embed_script_allowed_origins     = "https://tarifia.sh,https://sandbox.tarifia.sh,https://test.tarifia.sh"
+    tarifia_openapi_schema_url                        = "https://api.tarifia.sh/openapi.json"
     enable_experimental_corepack                    = "1"
   }
 
@@ -47,16 +47,16 @@ module "vercel" {
     mintlify_assistant_api_key  = var.mintlify_assistant_api_key
     gram_api_key                = var.gram_api_key
     sentry_auth_token           = var.sentry_auth_token
-    polar_preview_access_token  = var.polar_preview_access_token
+    tarifia_preview_access_token  = var.tarifia_preview_access_token
   }
 
   # Environment-specific or target-varies-by-env.
   environment_variables = [
-    { key = "NEXT_PUBLIC_FRONTEND_BASE_URL", value = "https://test.polar.sh" },
+    { key = "NEXT_PUBLIC_FRONTEND_BASE_URL", value = "https://test.tarifia.sh" },
     { key = "NEXT_PUBLIC_ENVIRONMENT", value = "test" },
-    { key = "POLAR_AUTH_COOKIE_KEY", value = "polar_test_session" },
-    { key = "NEXT_PUBLIC_PRODUCT_LINK_BASE_URL", value = "https://test.polar.sh/api/checkout?price=" },
-    { key = "POLAR_PREVIEW_BACKEND_HOST", value = "", target = ["preview"] },
+    { key = "TARIFIA_AUTH_COOKIE_KEY", value = "tarifia_test_session" },
+    { key = "NEXT_PUBLIC_PRODUCT_LINK_BASE_URL", value = "https://test.tarifia.sh/api/checkout?price=" },
+    { key = "TARIFIA_PREVIEW_BACKEND_HOST", value = "", target = ["preview"] },
     { key = "NEXT_PUBLIC_STRIPE_KEY", value = var.stripe_publishable_key, target = ["production", "development"] },
     { key = "NEXT_PUBLIC_STRIPE_KEY", value = var.stripe_publishable_key_preview, target = ["preview"], sensitive = true },
     { key = "MCP_OAUTH2_CLIENT_ID", value = var.mcp_oauth2_client_id, target = ["production", "preview", "development"] },

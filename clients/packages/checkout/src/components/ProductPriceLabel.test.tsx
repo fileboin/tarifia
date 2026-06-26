@@ -1,4 +1,4 @@
-import type { schemas } from '@polar-sh/client'
+import type { schemas } from '@tarifia-sh/client'
 import { render } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import {

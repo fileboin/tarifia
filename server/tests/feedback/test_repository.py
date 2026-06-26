@@ -1,10 +1,10 @@
 import pytest
 
-from polar.feedback.repository import FeedbackRepository
-from polar.kit.utils import utc_now
-from polar.models import Feedback, Organization, User
-from polar.models.feedback import FeedbackStatus, FeedbackType
-from polar.postgres import AsyncSession
+from tarifia.feedback.repository import FeedbackRepository
+from tarifia.kit.utils import utc_now
+from tarifia.models import Feedback, Organization, User
+from tarifia.models.feedback import FeedbackStatus, FeedbackType
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 
 

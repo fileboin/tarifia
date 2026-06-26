@@ -4,7 +4,7 @@ import {
   Heading,
   List,
   Text,
-  WrapperPolar,
+  WrapperTarifia,
 } from '../components/foundation'
 import InfoBox from '../components/InfoBox'
 import SecurityFaqNote from '../components/SecurityFaqNote'
@@ -18,7 +18,7 @@ export function OAuth2LeakedClient({
   client_name,
 }: schemas['OAuth2LeakedClientProps']) {
   return (
-    <WrapperPolar
+    <WrapperTarifia
       preview={`Important security notice: Your OAuth2 ${
         token_type === 'client_secret'
           ? 'Client Secret'
@@ -64,7 +64,7 @@ export function OAuth2LeakedClient({
       </InfoBox>
       <SecurityFaqNote />
       <Footer email={email} />
-    </WrapperPolar>
+    </WrapperTarifia>
   )
 }
 

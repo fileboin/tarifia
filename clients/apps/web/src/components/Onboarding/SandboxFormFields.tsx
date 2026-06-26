@@ -1,16 +1,16 @@
 'use client'
 
-import { schemas } from '@polar-sh/client'
-import { Box } from '@polar-sh/orbit/Box'
-import { Input } from '@polar-sh/orbit'
-import { Checkbox } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Input } from '@tarifia-sh/orbit'
+import { Checkbox } from '@tarifia-sh/orbit'
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { useEffect } from 'react'
 import { type UseFormReturn, useFormContext, useWatch } from 'react-hook-form'
 import slugify from 'slugify'
@@ -73,7 +73,7 @@ function SlugPreview({
       gap="xs"
       color="text-tertiary"
     >
-      <Box as="span">polar.sh/</Box>
+      <Box as="span">tarifia.sh/</Box>
       {editingSlug ? (
         <input
           value={orgSlug}
@@ -90,7 +90,7 @@ function SlugPreview({
             onEditSlug()
           }}
           onBlur={() => setEditingSlug(false)}
-          className="dark:text-polar-300 rounded border-none bg-transparent p-0 text-xs text-gray-600 outline-none"
+          className="dark:text-tarifia-300 rounded border-none bg-transparent p-0 text-xs text-gray-600 outline-none"
           style={{ width: `${Math.max(orgSlug.length, 8)}ch` }}
           autoFocus
         />
@@ -98,7 +98,7 @@ function SlugPreview({
         <button
           type="button"
           onClick={() => setEditingSlug(true)}
-          className="dark:text-polar-300 dark:hover:text-polar-200 text-gray-600 underline decoration-dotted hover:text-gray-800"
+          className="dark:text-tarifia-300 dark:hover:text-tarifia-200 text-gray-600 underline decoration-dotted hover:text-gray-800"
         >
           {orgSlug || 'your-slug'}
         </button>
@@ -172,9 +172,9 @@ export function SandboxFormFields({
               />
               <Box as="label" htmlFor="terms">
                 <p className="cursor-pointer text-sm leading-snug font-medium">
-                  I agree to Polar&apos;s{' '}
+                  I agree to Tarifia&apos;s{' '}
                   <a
-                    href="https://polar.sh/legal/terms"
+                    href="https://tarifia.sh/legal/terms"
                     className="text-gray-900 underline dark:text-white"
                     target="_blank"
                     rel="noreferrer"
@@ -183,7 +183,7 @@ export function SandboxFormFields({
                   </a>
                   ,{' '}
                   <a
-                    href="https://polar.sh/legal/privacy"
+                    href="https://tarifia.sh/legal/privacy"
                     className="text-gray-900 underline dark:text-white"
                     target="_blank"
                     rel="noreferrer"
@@ -192,7 +192,7 @@ export function SandboxFormFields({
                   </a>{' '}
                   &amp;{' '}
                   <a
-                    href="https://polar.sh/docs/merchant-of-record/account-reviews"
+                    href="https://tarifia.sh/docs/merchant-of-record/account-reviews"
                     className="text-gray-900 underline dark:text-white"
                     target="_blank"
                     rel="noreferrer"

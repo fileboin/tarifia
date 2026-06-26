@@ -1,9 +1,9 @@
 'use client'
 
 import { CreateCustomerModal } from '@/components/Customer/CreateCustomerModal'
-import { InlineModal } from '@polar-sh/orbit'
+import { InlineModal } from '@tarifia-sh/orbit'
 import { useModal } from '@/components/Modal/useModal'
-import { Spinner } from '@polar-sh/orbit'
+import { Spinner } from '@tarifia-sh/orbit'
 import { useCustomers } from '@/hooks/queries'
 import { useInViewport } from '@/hooks/utils'
 import { getServerURL } from '@/utils/api'
@@ -15,16 +15,16 @@ import CheckOutlined from '@mui/icons-material/CheckOutlined'
 import FilterList from '@mui/icons-material/FilterList'
 import MoreVert from '@mui/icons-material/MoreVert'
 import Search from '@mui/icons-material/Search'
-import { schemas } from '@polar-sh/client'
-import { Avatar } from '@polar-sh/orbit'
-import { Button } from '@polar-sh/orbit'
-import { Input } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Avatar } from '@tarifia-sh/orbit'
+import { Button } from '@tarifia-sh/orbit'
+import { Input } from '@tarifia-sh/orbit'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@polar-sh/ui/components/ui/dropdown-menu'
+} from '@tarifia-sh/ui/components/ui/dropdown-menu'
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { parseAsString, parseAsStringLiteral, useQueryState } from 'nuqs'
@@ -124,7 +124,7 @@ export const CustomerListSidebar: React.FC<CustomerListSidebarProps> = ({
 
   return (
     <>
-      <div className="dark:divide-polar-800 flex h-full flex-col divide-y divide-gray-200">
+      <div className="dark:divide-tarifia-800 flex h-full flex-col divide-y divide-gray-200">
         <div className="flex flex-row items-center justify-between gap-6 px-4 py-4">
           <div>Customers</div>
           <div className="flex flex-row items-center gap-4">
@@ -197,10 +197,10 @@ export const CustomerListSidebar: React.FC<CustomerListSidebarProps> = ({
         </div>
         <div className="flex flex-row items-center gap-3 px-4 py-2">
           <div className="flex flex-1 flex-row items-center gap-3">
-            <div className="dark:bg-polar-800 flex h-8 w-8 items-center justify-center rounded-full bg-gray-100">
+            <div className="dark:bg-tarifia-800 flex h-8 w-8 items-center justify-center rounded-full bg-gray-100">
               <Search
                 fontSize="inherit"
-                className="dark:text-polar-500 text-gray-500"
+                className="dark:text-tarifia-500 text-gray-500"
               />
             </div>
             <Input
@@ -211,7 +211,7 @@ export const CustomerListSidebar: React.FC<CustomerListSidebarProps> = ({
             />
           </div>
         </div>
-        <div className="dark:divide-polar-800 flex h-full grow flex-col divide-y divide-gray-50 overflow-y-auto">
+        <div className="dark:divide-tarifia-800 flex h-full grow flex-col divide-y divide-gray-50 overflow-y-auto">
           {customers.map((customer) => {
             const showBillingName =
               !!customer.billing_name &&
@@ -224,9 +224,9 @@ export const CustomerListSidebar: React.FC<CustomerListSidebarProps> = ({
                   `/dashboard/${organization.slug}/customers/${customer.id}`,
                 )}
                 className={twMerge(
-                  'dark:hover:bg-polar-800 cursor-pointer hover:bg-gray-100',
+                  'dark:hover:bg-tarifia-800 cursor-pointer hover:bg-gray-100',
                   selectedCustomerId === customer.id &&
-                    'dark:bg-polar-800 bg-gray-100',
+                    'dark:bg-tarifia-800 bg-gray-100',
                 )}
               >
                 <div className="flex flex-row items-center gap-3 px-4 py-3">
@@ -239,13 +239,13 @@ export const CustomerListSidebar: React.FC<CustomerListSidebarProps> = ({
                     <div className="w-full truncate text-sm">
                       {customer.name ?? customer.email ?? '—'}
                       {showBillingName && (
-                        <span className="dark:text-polar-500 ml-1 text-gray-500">
+                        <span className="dark:text-tarifia-500 ml-1 text-gray-500">
                           {customer.billing_name}
                         </span>
                       )}
                     </div>
                     {(customer.email || customer.type === 'individual') && (
-                      <div className="dark:text-polar-500 w-full truncate text-xs text-gray-500">
+                      <div className="dark:text-tarifia-500 w-full truncate text-xs text-gray-500">
                         {customer.email ?? '—'}
                       </div>
                     )}

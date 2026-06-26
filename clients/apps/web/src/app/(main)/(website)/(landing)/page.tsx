@@ -1,16 +1,16 @@
 import { Metadata } from 'next'
 import LandingPage from '../../../../components/Landing/LandingPage'
 export const metadata: Metadata = {
-  title: 'Polar — A billing platform for the intelligence era',
+  title: 'Tarifia — A billing platform for the intelligence era',
   description: 'A billing platform for the intelligence era',
   keywords:
     'monetization, merchant of record, saas, digital products, platform, developer, open source, funding, open source, economy',
   openGraph: {
-    siteName: 'Polar',
+    siteName: 'Tarifia',
     type: 'website',
     images: [
       {
-        url: 'https://polar.sh/assets/brand/polar_og.jpg',
+        url: 'https://tarifia.sh/assets/brand/tarifia_og.jpg',
         width: 1200,
         height: 630,
       },
@@ -20,10 +20,10 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     images: [
       {
-        url: 'https://polar.sh/assets/brand/polar_og.jpg',
+        url: 'https://tarifia.sh/assets/brand/tarifia_og.jpg',
         width: 1200,
         height: 630,
-        alt: 'Polar',
+        alt: 'Tarifia',
       },
     ],
   },

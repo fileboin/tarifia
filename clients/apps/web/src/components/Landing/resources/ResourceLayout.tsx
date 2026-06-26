@@ -26,7 +26,7 @@ export const ResourceLayout = ({
       <main>
         <div className="mx-auto flex w-full max-w-6xl flex-col px-2 md:px-0">
           {/* Content Card */}
-          <div className="dark:md:bg-polar-900 dark:border-polar-700 flex flex-col gap-y-8 border-gray-200 md:gap-y-12 md:rounded-lg md:border md:bg-white md:p-24 md:px-16 md:shadow-xs">
+          <div className="dark:md:bg-tarifia-900 dark:border-tarifia-700 flex flex-col gap-y-8 border-gray-200 md:gap-y-12 md:rounded-lg md:border md:bg-white md:p-24 md:px-16 md:shadow-xs">
             {/* Top Section */}
             <div className="flex flex-col">
               <div className="flex flex-col gap-y-8 lg:items-center">
@@ -36,12 +36,12 @@ export const ResourceLayout = ({
               </div>
             </div>
             {toc && (
-              <div className="dark:divide-polar-700 divide-y divide-gray-200">
+              <div className="dark:divide-tarifia-700 divide-y divide-gray-200">
                 {toc.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className="dark:hover:bg-polar-800 flex w-full cursor-pointer items-center gap-3 py-3 pr-3 transition-colors duration-200 hover:bg-gray-100"
+                    className="dark:hover:bg-tarifia-800 flex w-full cursor-pointer items-center gap-3 py-3 pr-3 transition-colors duration-200 hover:bg-gray-100"
                   >
                     <ArrowDownwardOutlined fontSize="inherit" />
                     <span>{item.title}</span>
@@ -69,12 +69,12 @@ export const ResourceSection = ({
 }>) => {
   return (
     <section id={id} className="grid grid-cols-1 md:grid-cols-3 md:gap-8">
-      <div className="dark:border-polar-700 dark:bg-polar-950 dark:md:bg-polar-900 sticky top-0 flex h-fit flex-col border-gray-200 bg-white py-4 text-lg md:col-span-1 md:border-t md:text-base">
+      <div className="dark:border-tarifia-700 dark:bg-tarifia-950 dark:md:bg-tarifia-900 sticky top-0 flex h-fit flex-col border-gray-200 bg-white py-4 text-lg md:col-span-1 md:border-t md:text-base">
         <h2>{title}</h2>
       </div>
       <div
         className={twMerge(
-          'dark:border-polar-700 flex flex-col gap-y-6 border-t border-gray-200 pt-4 md:col-span-2',
+          'dark:border-tarifia-700 flex flex-col gap-y-6 border-t border-gray-200 pt-4 md:col-span-2',
           className,
         )}
       >

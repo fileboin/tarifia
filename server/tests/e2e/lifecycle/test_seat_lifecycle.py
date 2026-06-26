@@ -18,9 +18,9 @@ import freezegun
 import pytest
 from httpx import AsyncClient
 
-from polar.kit.db.postgres import AsyncSession
-from polar.models import Organization, Product
-from polar.models.billing_entry import (
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.models import Organization, Product
+from tarifia.models.billing_entry import (
     BillingEntryDirection,
     BillingEntryType,
 )

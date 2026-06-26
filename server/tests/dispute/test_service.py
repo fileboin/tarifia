@@ -5,20 +5,20 @@ from unittest.mock import MagicMock
 import pytest
 from pytest_mock import MockerFixture
 
-from polar.benefit.grant.service import BenefitGrantService
-from polar.dispute.dispute_case import dispute_case as dispute_case_service
-from polar.dispute.service import DisputePaymentNotFoundError
-from polar.dispute.service import dispute as dispute_service
-from polar.enums import PaymentProcessor, TaxProcessor
-from polar.integrations.chargeback_stop.types import ChargebackStopAlert
-from polar.models import Customer, Organization, Product
-from polar.models.dispute import DisputeAlertProcessor, DisputeStatus
-from polar.models.support_case import DisputeSupportCase, SupportCaseMessageType
-from polar.postgres import AsyncSession
-from polar.refund.service import RefundService
-from polar.support_case.repository import SupportCaseMessageRepository
-from polar.tax.calculation.base import AlreadyRevertedError
-from polar.transaction.service.dispute import DisputeTransactionService
+from tarifia.benefit.grant.service import BenefitGrantService
+from tarifia.dispute.dispute_case import dispute_case as dispute_case_service
+from tarifia.dispute.service import DisputePaymentNotFoundError
+from tarifia.dispute.service import dispute as dispute_service
+from tarifia.enums import PaymentProcessor, TaxProcessor
+from tarifia.integrations.chargeback_stop.types import ChargebackStopAlert
+from tarifia.models import Customer, Organization, Product
+from tarifia.models.dispute import DisputeAlertProcessor, DisputeStatus
+from tarifia.models.support_case import DisputeSupportCase, SupportCaseMessageType
+from tarifia.postgres import AsyncSession
+from tarifia.refund.service import RefundService
+from tarifia.support_case.repository import SupportCaseMessageRepository
+from tarifia.tax.calculation.base import AlreadyRevertedError
+from tarifia.transaction.service.dispute import DisputeTransactionService
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_active_subscription,
@@ -37,20 +37,20 @@ from tests.fixtures.stripe import (
 @pytest.fixture
 def dispute_transaction_service_mock(mocker: MockerFixture) -> MagicMock:
     return mocker.patch(
-        "polar.dispute.service.dispute_transaction_service",
+        "tarifia.dispute.service.dispute_transaction_service",
         spec=DisputeTransactionService,
     )
 
 
 @pytest.fixture
 def refund_service_mock(mocker: MockerFixture) -> MagicMock:
-    return mocker.patch("polar.dispute.service.refund_service", spec=RefundService)
+    return mocker.patch("tarifia.dispute.service.refund_service", spec=RefundService)
 
 
 @pytest.fixture
 def benefit_grant_service_mock(mocker: MockerFixture) -> MagicMock:
     return mocker.patch(
-        "polar.dispute.service.benefit_grant_service", spec=BenefitGrantService
+        "tarifia.dispute.service.benefit_grant_service", spec=BenefitGrantService
     )
 
 
@@ -545,7 +545,7 @@ class TestUpsertFromStripe:
         )
 
         mocker.patch(
-            "polar.refund.service.tax_calculation_service.revert",
+            "tarifia.refund.service.tax_calculation_service.revert",
             side_effect=AlreadyRevertedError(),
         )
 
@@ -1018,7 +1018,7 @@ class TestUpsertFromChargebackStop:
             id=payment_intent_id, latest_charge=charge_id
         )
         mocker.patch(
-            "polar.dispute.service.stripe_service.get_payment_intent",
+            "tarifia.dispute.service.stripe_service.get_payment_intent",
             return_value=payment_intent,
         )
 
@@ -1063,7 +1063,7 @@ class TestUpsertFromChargebackStop:
             id=payment_intent_id, latest_charge=charge_id
         )
         mocker.patch(
-            "polar.dispute.service.stripe_service.get_payment_intent",
+            "tarifia.dispute.service.stripe_service.get_payment_intent",
             return_value=payment_intent,
         )
 
@@ -1108,7 +1108,7 @@ class TestUpsertFromChargebackStop:
             id=payment_intent_id, latest_charge=charge_id
         )
         mocker.patch(
-            "polar.dispute.service.stripe_service.get_payment_intent",
+            "tarifia.dispute.service.stripe_service.get_payment_intent",
             return_value=payment_intent,
         )
 
@@ -1152,7 +1152,7 @@ class TestUpsertFromChargebackStop:
             id=payment_intent_id, latest_charge=charge_id
         )
         mocker.patch(
-            "polar.dispute.service.stripe_service.get_payment_intent",
+            "tarifia.dispute.service.stripe_service.get_payment_intent",
             return_value=payment_intent,
         )
 
@@ -1197,7 +1197,7 @@ class TestUpsertFromChargebackStop:
             id=payment_intent_id, latest_charge=charge_id
         )
         mocker.patch(
-            "polar.dispute.service.stripe_service.get_payment_intent",
+            "tarifia.dispute.service.stripe_service.get_payment_intent",
             return_value=payment_intent,
         )
 

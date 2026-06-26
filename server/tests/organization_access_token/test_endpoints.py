@@ -3,11 +3,11 @@ from datetime import timedelta
 import pytest
 from httpx import AsyncClient
 
-from polar.auth.scope import Scope
-from polar.config import settings
-from polar.kit.crypto import get_token_hash
-from polar.kit.utils import utc_now
-from polar.models import Organization, OrganizationAccessToken, UserOrganization
+from tarifia.auth.scope import Scope
+from tarifia.config import settings
+from tarifia.kit.crypto import get_token_hash
+from tarifia.kit.utils import utc_now
+from tarifia.models import Organization, OrganizationAccessToken, UserOrganization
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 
@@ -21,7 +21,7 @@ async def _build_oat(
 ) -> OrganizationAccessToken:
     token = OrganizationAccessToken(
         comment=comment,
-        token=get_token_hash("polar_oat_test", secret=settings.SECRET),
+        token=get_token_hash("tarifia_oat_test", secret=settings.SECRET),
         organization=organization,
         expires_at=utc_now() + timedelta(days=1),
         scope=" ".join(s.value for s in scopes),

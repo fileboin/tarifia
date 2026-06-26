@@ -2,8 +2,8 @@
 
 import { useCustomerUpdateSubscription } from '@/hooks/queries/customerPortal'
 import { setValidationErrors } from '@/utils/api/errors'
-import { Client, isValidationError, schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
+import { Client, isValidationError, schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
 import { MinusIcon, PlusIcon } from 'lucide-react'
 import { useCallback, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
@@ -143,7 +143,7 @@ export const CustomerSeatQuantityManager = ({
               <MinusIcon className="h-4 w-4" />
             </Button>
 
-            <span className="dark:text-polar-200 flex h-8 min-w-8 items-center justify-center px-2 font-medium">
+            <span className="dark:text-tarifia-200 flex h-8 min-w-8 items-center justify-center px-2 font-medium">
               {seats}
             </span>
 
@@ -163,7 +163,7 @@ export const CustomerSeatQuantityManager = ({
       {hasChanges && (
         <div className="mt-4 flex flex-col gap-3">
           {invoicingMessage && (
-            <span className="dark:text-polar-500 text-sm text-gray-500">
+            <span className="dark:text-tarifia-500 text-sm text-gray-500">
               {invoicingMessage}
             </span>
           )}

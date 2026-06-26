@@ -1,7 +1,7 @@
 import typer
 from sqlalchemy import select, update
 
-from polar.models import Benefit
+from tarifia.models import Benefit
 from scripts.helper import (
     configure_script_logging,
     limit_bindparam,

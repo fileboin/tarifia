@@ -6,15 +6,15 @@ import { Text } from '@/components/Shared/Text'
 import { Touchable } from '@/components/Shared/Touchable'
 import { SubscriptionRow } from '@/components/Subscriptions/SubscriptionRow'
 import { useTheme } from '@/design-system/useTheme'
-import { useProducts } from '@/hooks/polar/products'
+import { useProducts } from '@/hooks/tarifia/products'
 import {
   useSubscription,
   useUpdateSubscription,
-} from '@/hooks/polar/subscriptions'
+} from '@/hooks/tarifia/subscriptions'
 import { OrganizationContext } from '@/providers/OrganizationProvider'
 import { hasLegacyRecurringPrices } from '@/utils/price'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router'
 import React, { useCallback, useContext, useEffect, useMemo } from 'react'
 import { useForm, UseFormReturn } from 'react-hook-form'

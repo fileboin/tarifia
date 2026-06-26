@@ -11,34 +11,34 @@ import typer
 from sqlalchemy import select
 from sqlalchemy.orm import joinedload
 
-from polar import tasks  # noqa: F401
-from polar.billing_entry.repository import BillingEntryRepository
-from polar.event.service import event as event_service
-from polar.event.system import (
+from tarifia import tasks  # noqa: F401
+from tarifia.billing_entry.repository import BillingEntryRepository
+from tarifia.event.service import event as event_service
+from tarifia.event.system import (
     SubscriptionCycledMetadata,
     SystemEvent,
     build_system_event,
 )
-from polar.kit.db.postgres import create_async_sessionmaker
-from polar.kit.utils import utc_now
-from polar.models import Customer, Subscription
-from polar.models.billing_entry import (
+from tarifia.kit.db.postgres import create_async_sessionmaker
+from tarifia.kit.utils import utc_now
+from tarifia.models import Customer, Subscription
+from tarifia.models.billing_entry import (
     BillingEntry,
     BillingEntryDirection,
     BillingEntryType,
 )
-from polar.models.order import OrderBillingReasonInternal
-from polar.models.subscription import SubscriptionStatus
-from polar.models.subscription_product_price import SubscriptionProductPrice
-from polar.payment_method.repository import PaymentMethodRepository
-from polar.postgres import create_async_engine
-from polar.product.guard import is_recurring_product, is_seat_price, is_static_price
-from polar.product.price_set import PriceSet
-from polar.product.repository import ProductRepository
-from polar.redis import create_redis
-from polar.subscription.repository import SubscriptionRepository
-from polar.subscription.service import subscription as subscription_service
-from polar.worker import JobQueueManager, enqueue_job
+from tarifia.models.order import OrderBillingReasonInternal
+from tarifia.models.subscription import SubscriptionStatus
+from tarifia.models.subscription_product_price import SubscriptionProductPrice
+from tarifia.payment_method.repository import PaymentMethodRepository
+from tarifia.postgres import create_async_engine
+from tarifia.product.guard import is_recurring_product, is_seat_price, is_static_price
+from tarifia.product.price_set import PriceSet
+from tarifia.product.repository import ProductRepository
+from tarifia.redis import create_redis
+from tarifia.subscription.repository import SubscriptionRepository
+from tarifia.subscription.service import subscription as subscription_service
+from tarifia.worker import JobQueueManager, enqueue_job
 
 cli = typer.Typer()
 

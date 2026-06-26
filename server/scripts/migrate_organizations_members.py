@@ -55,12 +55,12 @@ from sqlalchemy import String, func, or_, select, update
 from sqlalchemy.engine import CursorResult
 from sqlalchemy.orm import aliased, joinedload
 
-from polar.kit.db.postgres import create_async_sessionmaker
-from polar.models import Organization
-from polar.models.benefit_grant import BenefitGrant
-from polar.models.organization import OrganizationStatus
-from polar.organization.repository import OrganizationRepository
-from polar.organization.tasks import (
+from tarifia.kit.db.postgres import create_async_sessionmaker
+from tarifia.models import Organization
+from tarifia.models.benefit_grant import BenefitGrant
+from tarifia.models.organization import OrganizationStatus
+from tarifia.organization.repository import OrganizationRepository
+from tarifia.organization.tasks import (
     _backfill_benefit_grants,
     _backfill_owner_members,
     _backfill_seats,
@@ -68,7 +68,7 @@ from polar.organization.tasks import (
     _prepare_benefit_grants,
     _prepare_seats,
 )
-from polar.postgres import AsyncSession, create_async_engine
+from tarifia.postgres import AsyncSession, create_async_engine
 
 cli = typer.Typer()
 
@@ -596,7 +596,7 @@ async def find_deleted_oneoff_grants(
 
     When eager_load=True, the customer and benefit relationships are loaded.
     """
-    from polar.models import Benefit
+    from tarifia.models import Benefit
 
     sibling = aliased(BenefitGrant)
     sibling_exists = (
@@ -649,8 +649,8 @@ async def restore_oneoff_grant_batch(
 
     Returns (grants_restored, license_keys_restored).
     """
-    from polar.kit.utils import utc_now
-    from polar.models.license_key import LicenseKey, LicenseKeyStatus
+    from tarifia.kit.utils import utc_now
+    from tarifia.models.license_key import LicenseKey, LicenseKeyStatus
 
     # Re-fetch with qualifying filters so the function is safe
     # regardless of what IDs are passed in.
@@ -845,7 +845,7 @@ async def restore_oneoff_grants(
 
 async def _backfill_license_keys(session: AsyncSession) -> int:
     """Backfill member_id on license keys using the grant's properties->>'license_key_id'."""
-    from polar.models.license_key import LicenseKey
+    from tarifia.models.license_key import LicenseKey
 
     lk_subq = (
         select(
@@ -879,7 +879,7 @@ async def _backfill_downloadables(session: AsyncSession) -> int:
 
     Uses DISTINCT ON to pick the most recently granted grant.
     """
-    from polar.models.downloadable import Downloadable
+    from tarifia.models.downloadable import Downloadable
 
     dl_subq = (
         select(
@@ -931,8 +931,8 @@ async def backfill_benefit_records(
     Downloadables are matched via (customer_id, benefit_id) with DISTINCT ON
     to pick the most recently granted grant.
     """
-    from polar.models.downloadable import Downloadable
-    from polar.models.license_key import LicenseKey
+    from tarifia.models.downloadable import Downloadable
+    from tarifia.models.license_key import LicenseKey
 
     engine = create_async_engine("script")
     sessionmaker = create_async_sessionmaker(engine)

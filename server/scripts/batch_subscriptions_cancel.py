@@ -10,16 +10,16 @@ from pydantic import UUID4
 from rich.progress import Progress
 from sqlalchemy import func, select
 
-from polar import tasks  # noqa: F401
-from polar.kit.db.postgres import create_async_sessionmaker
-from polar.models import Customer, Subscription
-from polar.organization.repository import OrganizationRepository
-from polar.postgres import create_async_engine
-from polar.redis import create_redis
-from polar.subscription.repository import SubscriptionRepository
-from polar.subscription.service import SubscriptionUpdateContext
-from polar.subscription.service import subscription as subscription_service
-from polar.worker import JobQueueManager
+from tarifia import tasks  # noqa: F401
+from tarifia.kit.db.postgres import create_async_sessionmaker
+from tarifia.models import Customer, Subscription
+from tarifia.organization.repository import OrganizationRepository
+from tarifia.postgres import create_async_engine
+from tarifia.redis import create_redis
+from tarifia.subscription.repository import SubscriptionRepository
+from tarifia.subscription.service import SubscriptionUpdateContext
+from tarifia.subscription.service import subscription as subscription_service
+from tarifia.worker import JobQueueManager
 
 cli = typer.Typer()
 

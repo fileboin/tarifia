@@ -1,14 +1,14 @@
 'use client'
 
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import {
   Avatar,
   Button,
   Checkbox,
   SegmentedControl,
   Text,
-} from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
+} from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
 import { useEffect, useState } from 'react'
 import CreateOrganizationForm from './components/CreateOrganizationForm'
 
@@ -49,7 +49,7 @@ const OrganizationSelector = ({
   )
 
   // Offer creation only when the user has no organization yet — in either flow
-  // (e.g. a first-time user discovering Polar through a third-party app).
+  // (e.g. a first-time user discovering Tarifia through a third-party app).
   const showCreate = allOrganizations.length === 0
 
   // "All" is always valid; "specific" (and single-select) requires a selection.

@@ -1,10 +1,10 @@
 'use client'
 
 import { usePostHog } from '@/hooks/posthog'
-import { Button } from '@polar-sh/orbit'
-import { Switch } from '@polar-sh/orbit'
+import { Button } from '@tarifia-sh/orbit'
+import { Switch } from '@tarifia-sh/orbit'
 import { useState } from 'react'
-import { InlineModalHeader } from '@polar-sh/orbit'
+import { InlineModalHeader } from '@tarifia-sh/orbit'
 import { cookieConsentGiven } from './CookieConsent'
 
 interface CookiePreferencesModalProps {
@@ -33,7 +33,7 @@ export const CookiePreferencesModal = ({
       </InlineModalHeader>
 
       <div className="flex flex-1 flex-col gap-y-8 overflow-y-auto p-8">
-        <p className="dark:text-polar-400 text-sm text-gray-500">
+        <p className="dark:text-tarifia-400 text-sm text-gray-500">
           Manage your cookie preferences below. You can update these at any
           time.
         </p>
@@ -46,7 +46,7 @@ export const CookiePreferencesModal = ({
           />
           <CookieCategory
             title="Analytics"
-            description="Help us understand how you use Polar so we can improve it."
+            description="Help us understand how you use Tarifia so we can improve it."
             enabled={analyticsEnabled}
             onToggle={() => setAnalyticsEnabled((v) => !v)}
           />
@@ -79,15 +79,15 @@ const CookieCategory = ({
   onToggle,
 }: CookieCategoryProps) => {
   return (
-    <div className="dark:bg-polar-800 flex items-center justify-between gap-x-4 rounded-2xl bg-gray-50 p-4">
+    <div className="dark:bg-tarifia-800 flex items-center justify-between gap-x-4 rounded-2xl bg-gray-50 p-4">
       <div className="flex flex-col gap-y-0.5">
         <span className="text-sm font-medium">{title}</span>
-        <span className="dark:text-polar-400 text-xs text-gray-500">
+        <span className="dark:text-tarifia-400 text-xs text-gray-500">
           {description}
         </span>
       </div>
       {locked ? (
-        <span className="dark:text-polar-500 shrink-0 text-xs text-gray-400">
+        <span className="dark:text-tarifia-500 shrink-0 text-xs text-gray-400">
           Always on
         </span>
       ) : (

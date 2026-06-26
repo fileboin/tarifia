@@ -1,13 +1,13 @@
 ---
-title: "Releasing @polar-sh/checkout"
-description: "Step-by-step guide for releasing a new version of the @polar-sh/checkout npm package"
+title: "Releasing @tarifia-sh/checkout"
+description: "Step-by-step guide for releasing a new version of the @tarifia-sh/checkout npm package"
 ---
 
-The `@polar-sh/checkout` package lives in `clients/packages/checkout/` inside the main `polarsource/polar` monorepo and is published to npm via [Changesets](https://github.com/changesets/changesets).
+The `@tarifia-sh/checkout` package lives in `clients/packages/checkout/` inside the main `tarifiasource/tarifia` monorepo and is published to npm via [Changesets](https://github.com/changesets/changesets).
 
 ## Prerequisites
 
-- Access to the `polarsource/polar` repository
+- Access to the `tarifiasource/tarifia` repository
 - `pnpm` installed (check the version in `clients/package.json`)
 - Your changes to `clients/packages/checkout/` are ready on a branch
 
@@ -25,7 +25,7 @@ pnpm changeset
 
 The CLI will prompt you to:
 
-1. **Select the package** — choose `@polar-sh/checkout`
+1. **Select the package** — choose `@tarifia-sh/checkout`
 2. **Choose the bump type** — `patch` for bug fixes, `minor` for new features, `major` for breaking changes
 3. **Write a summary** — describe the change in one sentence (this ends up in the CHANGELOG)
 
@@ -51,12 +51,12 @@ Review and merge the "Version Packages" PR. On merge, the action runs the publis
 turbo run build lint test --filter='./packages/*' && changeset publish
 ```
 
-This builds, lints, and tests all packages, then publishes `@polar-sh/checkout` to npm with provenance.
+This builds, lints, and tests all packages, then publishes `@tarifia-sh/checkout` to npm with provenance.
 
 </Steps>
 
 ## Notes
 
-- The changeset config lives at `clients/.changeset/config.json`. The default access is `restricted`, but `@polar-sh/checkout` overrides this via `publishConfig.access: "public"` in its own `package.json` — so it publishes publicly to npm.
+- The changeset config lives at `clients/.changeset/config.json`. The default access is `restricted`, but `@tarifia-sh/checkout` overrides this via `publishConfig.access: "public"` in its own `package.json` — so it publishes publicly to npm.
 - You do **not** need to manually run `npm publish` or bump the version yourself.
 - If multiple changesets accumulate before the "Version Packages" PR is merged, they are all batched into a single release.

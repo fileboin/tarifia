@@ -7,24 +7,24 @@ import pytest
 from pydantic import ValidationError
 from pytest_mock import MockerFixture
 
-from polar.auth.models import AuthSubject
-from polar.benefit.strategies import (
+from tarifia.auth.models import AuthSubject
+from tarifia.benefit.strategies import (
     BenefitActionRequiredError,
     BenefitPropertiesValidationError,
     BenefitRetriableError,
 )
-from polar.benefit.strategies.slack_shared_channel.properties import (
+from tarifia.benefit.strategies.slack_shared_channel.properties import (
     BenefitGrantSlackSharedChannelProperties,
     BenefitSlackSharedChannelProperties,
 )
-from polar.benefit.strategies.slack_shared_channel.schemas import (
+from tarifia.benefit.strategies.slack_shared_channel.schemas import (
     BenefitSlackSharedChannelCreateProperties,
 )
-from polar.benefit.strategies.slack_shared_channel.service import (
+from tarifia.benefit.strategies.slack_shared_channel.service import (
     BenefitSlackSharedChannelService,
 )
-from polar.locker import Locker
-from polar.models import (
+from tarifia.locker import Locker
+from tarifia.models import (
     Benefit,
     Customer,
     Organization,
@@ -32,9 +32,9 @@ from polar.models import (
     User,
     UserOrganization,
 )
-from polar.models.benefit import BenefitType
-from polar.postgres import AsyncSession
-from polar.redis import Redis
+from tarifia.models.benefit import BenefitType
+from tarifia.postgres import AsyncSession
+from tarifia.redis import Redis
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_benefit, create_benefit_grant
 

@@ -1,12 +1,12 @@
 import pytest
 from httpx import AsyncClient
 
-from polar.auth.scope import Scope
-from polar.models import User
-from polar.models.organization import Organization
-from polar.models.user_organization import UserOrganization
-from polar.models.webhook_delivery import WebhookDelivery
-from polar.models.webhook_endpoint import WebhookEndpoint
+from tarifia.auth.scope import Scope
+from tarifia.models import User
+from tarifia.models.organization import Organization
+from tarifia.models.user_organization import UserOrganization
+from tarifia.models.webhook_delivery import WebhookDelivery
+from tarifia.models.webhook_endpoint import WebhookEndpoint
 from tests.fixtures.auth import AuthSubjectFixture
 
 

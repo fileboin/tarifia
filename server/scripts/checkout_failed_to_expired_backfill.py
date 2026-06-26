@@ -1,8 +1,8 @@
 import typer
 from sqlalchemy import select, update
 
-from polar.models import Checkout
-from polar.models.checkout import CheckoutStatus
+from tarifia.models import Checkout
+from tarifia.models.checkout import CheckoutStatus
 from scripts.helper import (
     configure_script_logging,
     limit_bindparam,

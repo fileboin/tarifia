@@ -3,13 +3,13 @@ export default {
     footer: {
       poweredBy: 'Obsługiwane przez',
       merchantOfRecord:
-        'To zamówienie jest przetwarzane przez naszego sprzedawcę formalnego (Merchant of Record), firmę Polar, która zajmuje się również obsługą zapytań dotyczących zamówień i zwrotów.',
+        'To zamówienie jest przetwarzane przez naszego sprzedawcę formalnego (Merchant of Record), firmę Tarifia, która zajmuje się również obsługą zapytań dotyczących zamówień i zwrotów.',
       mandateSubscriptionTrial:
-        'Klikając „{buttonLabel}," upoważniasz Polar Software, Inc., naszego sprzedawcę internetowego i podmiot rozliczający, do obciążenia wybranej metody płatności kwotą pokazana powyżej po zakończeniu okresu próbnego oraz w każdym kolejnym dniu rozliczeniowym, aż do anulowania, oraz zgadzasz się na warunki {buyerTermsLink}. Możesz anulować w dowolnym momencie przed końcem okresu próbnego, aby uniknąć obciążenia.',
+        'Klikając „{buttonLabel}," upoważniasz Tarifia Software, Inc., naszego sprzedawcę internetowego i podmiot rozliczający, do obciążenia wybranej metody płatności kwotą pokazana powyżej po zakończeniu okresu próbnego oraz w każdym kolejnym dniu rozliczeniowym, aż do anulowania, oraz zgadzasz się na warunki {buyerTermsLink}. Możesz anulować w dowolnym momencie przed końcem okresu próbnego, aby uniknąć obciążenia.',
       mandateSubscription:
-        'Klikając „{buttonLabel}," upoważniasz Polar Software, Inc., naszego sprzedawcę internetowego i podmiot rozliczający, do natychmiastowego obciążenia wybranej metody płatności kwotą pokazana powyżej oraz do obciążania tą samą kwotą w każdym kolejnym dniu rozliczeniowym, aż do anulowania, oraz zgadzasz się na warunki {buyerTermsLink}.',
+        'Klikając „{buttonLabel}," upoważniasz Tarifia Software, Inc., naszego sprzedawcę internetowego i podmiot rozliczający, do natychmiastowego obciążenia wybranej metody płatności kwotą pokazana powyżej oraz do obciążania tą samą kwotą w każdym kolejnym dniu rozliczeniowym, aż do anulowania, oraz zgadzasz się na warunki {buyerTermsLink}.',
       mandateOneTime:
-        'Klikając „{buttonLabel}," upoważniasz Polar Software, Inc., naszego sprzedawcę internetowego i podmiot rozliczający, do obciążenia wybranej metody płatności kwotą pokazana powyżej oraz zgadzasz się na warunki {buyerTermsLink}. Jest to jednorazowa opłata.',
+        'Klikając „{buttonLabel}," upoważniasz Tarifia Software, Inc., naszego sprzedawcę internetowego i podmiot rozliczający, do obciążenia wybranej metody płatności kwotą pokazana powyżej oraz zgadzasz się na warunki {buyerTermsLink}. Jest to jednorazowa opłata.',
       buyerTermsLink: 'Warunki zakupu',
     },
     form: {

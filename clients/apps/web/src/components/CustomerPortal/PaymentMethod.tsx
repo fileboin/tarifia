@@ -3,9 +3,9 @@ import {
   useCustomerPortalCustomer,
   useDeleteCustomerPaymentMethod,
 } from '@/hooks/queries/customerPortal'
-import type { Client, operations, schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { Status } from '@polar-sh/orbit'
+import type { Client, operations, schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { Status } from '@tarifia-sh/orbit'
 import { X } from 'lucide-react'
 import { PaymentMethodDisplay } from '../PaymentMethodDisplay'
 

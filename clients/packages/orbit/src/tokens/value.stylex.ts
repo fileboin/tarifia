@@ -4,7 +4,7 @@
 // color, not "secondary text". Semantic (decision) tokens in semantics.stylex.ts
 // reference these; never consume them directly in components.
 //
-// The neutral ramps (`gray*` light, `polar*` dark) are the canonical Polar
+// The neutral ramps (`gray*` light, `tarifia*` dark) are the canonical Tarifia
 // scale, kept in lockstep with apps/web/src/styles/globals.css `@theme`. Treat
 // that file and this one as the same ramp expressed in two systems.
 //
@@ -33,18 +33,18 @@ export const palette = stylex.defineVars({
   gray900: 'oklch(0.21 0.034 264.665)',
   gray950: 'oklch(0.13 0.028 261.692)',
 
-  // Dark-mode neutrals (the Polar dark ramp).
-  polar50: 'hsl(233, 4%, 85%)',
-  polar100: 'hsl(233, 4%, 79%)',
-  polar200: 'hsl(233, 4%, 68%)',
-  polar300: 'hsl(233, 4%, 62%)',
-  polar400: 'hsl(233, 4%, 52%)',
-  polar500: 'hsl(233, 4%, 46%)',
-  polar600: 'hsl(233, 4%, 22%)',
-  polar700: 'hsl(233, 4%, 12%)',
-  polar800: 'hsl(233, 4%, 9.5%)',
-  polar900: 'hsl(233, 4%, 6.5%)',
-  polar950: 'hsl(233, 4%, 3.5%)',
+  // Dark-mode neutrals (the Tarifia dark ramp).
+  tarifia50: 'hsl(233, 4%, 85%)',
+  tarifia100: 'hsl(233, 4%, 79%)',
+  tarifia200: 'hsl(233, 4%, 68%)',
+  tarifia300: 'hsl(233, 4%, 62%)',
+  tarifia400: 'hsl(233, 4%, 52%)',
+  tarifia500: 'hsl(233, 4%, 46%)',
+  tarifia600: 'hsl(233, 4%, 22%)',
+  tarifia700: 'hsl(233, 4%, 12%)',
+  tarifia800: 'hsl(233, 4%, 9.5%)',
+  tarifia900: 'hsl(233, 4%, 6.5%)',
+  tarifia950: 'hsl(233, 4%, 3.5%)',
 
   // Emerald — success.
   emerald50: 'oklch(0.979 0.021 166.113)',

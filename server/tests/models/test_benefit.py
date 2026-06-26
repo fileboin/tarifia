@@ -1,7 +1,7 @@
 import pytest
 
-from polar.kit.visibility import Visibility
-from polar.models.benefit import BenefitType
+from tarifia.kit.visibility import Visibility
+from tarifia.models.benefit import BenefitType
 
 
 class TestBenefitTypeVisibility:

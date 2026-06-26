@@ -1,6 +1,6 @@
 import { useSlackWorkspaceUsers } from '@/hooks/queries'
 import ExpandMoreOutlined from '@mui/icons-material/ExpandMoreOutlined'
-import { Button } from '@polar-sh/orbit'
+import { Button } from '@tarifia-sh/orbit'
 import {
   Command,
   CommandEmpty,
@@ -8,12 +8,12 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '@polar-sh/ui/components/ui/command'
+} from '@tarifia-sh/ui/components/ui/command'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@polar-sh/ui/components/ui/popover'
+} from '@tarifia-sh/ui/components/ui/popover'
 import { CheckIcon, XIcon } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
@@ -65,7 +65,7 @@ export const SlackTeamInviteesSelect = ({
             role="combobox"
             aria-expanded={open}
             disabled={isLoading}
-            className="ring-offset-background placeholder:text-muted-foreground focus:ring-ring dark:bg-polar-800 dark:hover:bg-polar-700 dark:border-polar-700 dark:hover:border-polar-700 flex h-10 w-full! flex-row items-center justify-between gap-x-2 rounded-xl border border-gray-200 bg-white px-3 py-2 font-sans text-sm font-normal shadow-xs transition-colors hover:border-gray-300 hover:bg-white focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
+            className="ring-offset-background placeholder:text-muted-foreground focus:ring-ring dark:bg-tarifia-800 dark:hover:bg-tarifia-700 dark:border-tarifia-700 dark:hover:border-tarifia-700 flex h-10 w-full! flex-row items-center justify-between gap-x-2 rounded-xl border border-gray-200 bg-white px-3 py-2 font-sans text-sm font-normal shadow-xs transition-colors hover:border-gray-300 hover:bg-white focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
             wrapperClassNames="justify-between w-full"
           >
             <div className="overflow-hidden text-ellipsis whitespace-nowrap">
@@ -93,11 +93,11 @@ export const SlackTeamInviteesSelect = ({
                       key={user.id}
                       value={`${user.real_name ?? ''} ${user.name} ${user.id}`}
                       onSelect={() => toggle(user.id)}
-                      className="dark:data-[selected=true]:bg-polar-800 flex flex-row items-center justify-between data-[selected=true]:bg-gray-100 data-[selected=true]:text-black dark:data-[selected=true]:text-white"
+                      className="dark:data-[selected=true]:bg-tarifia-800 flex flex-row items-center justify-between data-[selected=true]:bg-gray-100 data-[selected=true]:text-black dark:data-[selected=true]:text-white"
                     >
                       <div className="flex flex-col">
                         <span>{user.real_name || user.name}</span>
-                        <span className="dark:text-polar-400 text-xs text-gray-500">
+                        <span className="dark:text-tarifia-400 text-xs text-gray-500">
                           @{user.name}
                           {user.is_admin ? ' · admin' : ''}
                         </span>
@@ -125,7 +125,7 @@ export const SlackTeamInviteesSelect = ({
             return (
               <div
                 key={id}
-                className="dark:bg-polar-800 flex items-center gap-1 rounded-md bg-gray-100 px-2 py-1 text-xs"
+                className="dark:bg-tarifia-800 flex items-center gap-1 rounded-md bg-gray-100 px-2 py-1 text-xs"
               >
                 <span>{name}</span>
                 <button

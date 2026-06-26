@@ -9,7 +9,7 @@ from alembic import op
 import sqlalchemy as sa
 ${imports if imports else ""}
 
-# Polar Custom Imports
+# Tarifia Custom Imports
 
 # revision identifiers, used by Alembic.
 revision = ${repr(up_revision)}

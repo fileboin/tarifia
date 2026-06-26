@@ -13,32 +13,32 @@ from freezegun import freeze_time
 from pytest_mock import MockerFixture
 from sqlalchemy.util.typing import TypeAlias
 
-from polar.auth.models import AuthSubject
-from polar.billing_entry.repository import BillingEntryRepository
-from polar.checkout.eventstream import CheckoutEvent
-from polar.customer_seat.repository import CustomerSeatRepository
-from polar.email.schemas import SubscriptionRevokedEmail
-from polar.enums import (
+from tarifia.auth.models import AuthSubject
+from tarifia.billing_entry.repository import BillingEntryRepository
+from tarifia.checkout.eventstream import CheckoutEvent
+from tarifia.customer_seat.repository import CustomerSeatRepository
+from tarifia.email.schemas import SubscriptionRevokedEmail
+from tarifia.enums import (
     PaymentProcessor,
     SubscriptionProrationBehavior,
     SubscriptionRecurringInterval,
     TaxBehavior,
 )
-from polar.event.repository import EventRepository
-from polar.event.system import SystemEvent
-from polar.exceptions import (
+from tarifia.event.repository import EventRepository
+from tarifia.event.system import SystemEvent
+from tarifia.exceptions import (
     BadRequest,
-    PolarRequestValidationError,
+    TarifiaRequestValidationError,
     ResourceUnavailable,
 )
-from polar.kit.currency import PresentmentCurrency
-from polar.kit.pagination import PaginationParams
-from polar.kit.trial import TrialInterval
-from polar.kit.utils import utc_now
-from polar.locker import Locker
-from polar.meter.aggregation import AggregationFunction, PropertyAggregation
-from polar.meter.filter import Filter, FilterConjunction
-from polar.models import (
+from tarifia.kit.currency import PresentmentCurrency
+from tarifia.kit.pagination import PaginationParams
+from tarifia.kit.trial import TrialInterval
+from tarifia.kit.utils import utc_now
+from tarifia.locker import Locker
+from tarifia.meter.aggregation import AggregationFunction, PropertyAggregation
+from tarifia.meter.filter import Filter, FilterConjunction
+from tarifia.models import (
     Benefit,
     BillingEntry,
     Customer,
@@ -52,36 +52,36 @@ from polar.models import (
     User,
     UserOrganization,
 )
-from polar.models.billing_entry import BillingEntryDirection, BillingEntryType
-from polar.models.checkout import CheckoutStatus
-from polar.models.customer import CustomerType
-from polar.models.customer_seat import SeatStatus
-from polar.models.discount import DiscountDuration, DiscountType
-from polar.models.order import OrderBillingReasonInternal, OrderStatus
-from polar.models.product_price import ProductPriceAmountType, ProductPriceSeatUnit
-from polar.models.subscription import SubscriptionStatus
-from polar.models.webhook_endpoint import WebhookEventType
-from polar.order.repository import OrderRepository
-from polar.order.service import PaymentFailed, PaymentFailedReason
-from polar.order.service import order as order_service
-from polar.postgres import AsyncSession
-from polar.product.guard import (
+from tarifia.models.billing_entry import BillingEntryDirection, BillingEntryType
+from tarifia.models.checkout import CheckoutStatus
+from tarifia.models.customer import CustomerType
+from tarifia.models.customer_seat import SeatStatus
+from tarifia.models.discount import DiscountDuration, DiscountType
+from tarifia.models.order import OrderBillingReasonInternal, OrderStatus
+from tarifia.models.product_price import ProductPriceAmountType, ProductPriceSeatUnit
+from tarifia.models.subscription import SubscriptionStatus
+from tarifia.models.webhook_endpoint import WebhookEventType
+from tarifia.order.repository import OrderRepository
+from tarifia.order.service import PaymentFailed, PaymentFailedReason
+from tarifia.order.service import order as order_service
+from tarifia.postgres import AsyncSession
+from tarifia.product.guard import (
     MeteredPrice,
     is_fixed_price,
     is_metered_price,
     is_seat_price,
     is_static_price,
 )
-from polar.product.price_set import PriceSet
-from polar.subscription.repository import SubscriptionUpdateRepository
-from polar.subscription.schemas import (
+from tarifia.product.price_set import PriceSet
+from tarifia.subscription.repository import SubscriptionUpdateRepository
+from tarifia.subscription.schemas import (
     SubscriptionCreateCustomer,
     SubscriptionCreateExternalCustomer,
     SubscriptionUpdateBase,
     SubscriptionUpdateBillingPeriod,
     SubscriptionUpdateSeats,
 )
-from polar.subscription.service import (
+from tarifia.subscription.service import (
     AboveMaximumSeats,
     AlreadyCanceledSubscription,
     BelowMinimumSeats,
@@ -92,8 +92,8 @@ from polar.subscription.service import (
     SeatsAlreadyAssigned,
     SubscriptionUpdateContext,
 )
-from polar.subscription.service import subscription as subscription_service
-from polar.subscription.update import generate_subscription_update
+from tarifia.subscription.service import subscription as subscription_service
+from tarifia.subscription.update import generate_subscription_update
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.events import get_all_by_name
@@ -200,7 +200,7 @@ def subscription_hooks(mocker: MockerFixture) -> Hooks:
 
 @pytest.fixture
 def publish_checkout_event_mock(mocker: MockerFixture) -> AsyncMock:
-    return mocker.patch("polar.subscription.service.publish_checkout_event")
+    return mocker.patch("tarifia.subscription.service.publish_checkout_event")
 
 
 @pytest.fixture
@@ -210,17 +210,17 @@ def enqueue_benefits_grants_mock(mocker: MockerFixture) -> MagicMock:
 
 @pytest.fixture
 def enqueue_job_mock(mocker: MockerFixture) -> MagicMock:
-    return mocker.patch("polar.subscription.service.enqueue_job")
+    return mocker.patch("tarifia.subscription.service.enqueue_job")
 
 
 @pytest.fixture
 def enqueue_email_mock(mocker: MockerFixture) -> MagicMock:
-    return mocker.patch("polar.subscription.service.enqueue_email_template")
+    return mocker.patch("tarifia.subscription.service.enqueue_email_template")
 
 
 @pytest.fixture
 def webhook_service_send_mock(mocker: MockerFixture) -> AsyncMock:
-    return mocker.patch("polar.subscription.service.webhook_service.send")
+    return mocker.patch("tarifia.subscription.service.webhook_service.send")
 
 
 @pytest.fixture
@@ -243,7 +243,7 @@ class TestCreate:
             customer_id=uuid.uuid4(),
         )
 
-        with pytest.raises(PolarRequestValidationError) as exc_info:
+        with pytest.raises(TarifiaRequestValidationError) as exc_info:
             await subscription_service.create(
                 session, subscription_create, auth_subject
             )
@@ -268,7 +268,7 @@ class TestCreate:
             customer_id=customer.id,
         )
 
-        with pytest.raises(PolarRequestValidationError) as exc_info:
+        with pytest.raises(TarifiaRequestValidationError) as exc_info:
             await subscription_service.create(
                 session, subscription_create, auth_subject
             )
@@ -293,7 +293,7 @@ class TestCreate:
             customer_id=customer.id,
         )
 
-        with pytest.raises(PolarRequestValidationError) as exc_info:
+        with pytest.raises(TarifiaRequestValidationError) as exc_info:
             await subscription_service.create(
                 session, subscription_create, auth_subject
             )
@@ -320,7 +320,7 @@ class TestCreate:
             customer_id=uuid.uuid4(),
         )
 
-        with pytest.raises(PolarRequestValidationError) as exc_info:
+        with pytest.raises(TarifiaRequestValidationError) as exc_info:
             await subscription_service.create(
                 session, subscription_create, auth_subject
             )
@@ -344,7 +344,7 @@ class TestCreate:
             external_customer_id="nonexistent",
         )
 
-        with pytest.raises(PolarRequestValidationError) as exc_info:
+        with pytest.raises(TarifiaRequestValidationError) as exc_info:
             await subscription_service.create(
                 session, subscription_create, auth_subject
             )
@@ -484,7 +484,7 @@ class TestCreate:
             customer_id=customer.id,
         )
 
-        with pytest.raises(PolarRequestValidationError) as exc_info:
+        with pytest.raises(TarifiaRequestValidationError) as exc_info:
             await subscription_service.create(
                 session, subscription_create, auth_subject
             )
@@ -534,7 +534,7 @@ class TestCreate:
             customer_id=customer.id,
         )
 
-        with pytest.raises(PolarRequestValidationError) as exc_info:
+        with pytest.raises(TarifiaRequestValidationError) as exc_info:
             await subscription_service.create(
                 session, subscription_create, auth_subject
             )
@@ -2204,7 +2204,7 @@ class TestEnqueueBenefitsGrants:
         benefits: list[Benefit],
         subscription: Subscription,
     ) -> None:
-        enqueue_job_mock = mocker.patch("polar.subscription.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.subscription.service.enqueue_job")
 
         product = await set_product_benefits(
             save_fixture,
@@ -2233,7 +2233,7 @@ class TestEnqueueBenefitsGrants:
         benefits: list[Benefit],
         subscription: Subscription,
     ) -> None:
-        enqueue_job_mock = mocker.patch("polar.subscription.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.subscription.service.enqueue_job")
 
         product = await set_product_benefits(
             save_fixture,
@@ -2278,7 +2278,7 @@ class TestEnqueueBenefitsGrants:
         benefits: list[Benefit],
         subscription: Subscription,
     ) -> None:
-        enqueue_job_mock = mocker.patch("polar.subscription.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.subscription.service.enqueue_job")
 
         product = await set_product_benefits(
             save_fixture,
@@ -2312,7 +2312,7 @@ class TestEnqueueBenefitsGrants:
         save_fixture: SaveFixture,
         organization: Organization,
     ) -> None:
-        enqueue_job_mock = mocker.patch("polar.subscription.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.subscription.service.enqueue_job")
 
         product = await create_product(
             save_fixture,
@@ -2343,7 +2343,7 @@ class TestEnqueueBenefitsGrants:
     ) -> None:
         from tests.fixtures.random_objects import create_customer
 
-        enqueue_job_mock = mocker.patch("polar.subscription.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.subscription.service.enqueue_job")
 
         product = await create_product(
             save_fixture,
@@ -3518,7 +3518,7 @@ class TestUpdateProduct:
             revoked_at=utc_now(),
         )
 
-        enqueue_job_mock = mocker.patch("polar.customer_seat.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.customer_seat.service.enqueue_job")
 
         async with SubscriptionUpdateContext(
             session, subscription, subscription_service
@@ -3561,7 +3561,7 @@ class TestUpdateProduct:
         )
         assert len(subscription.prices) == 1
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             async with SubscriptionUpdateContext(
                 session, subscription, subscription_service
             ) as ctx:
@@ -3647,7 +3647,7 @@ class TestUpdateProduct:
             seats=2,
         )
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             async with SubscriptionUpdateContext(
                 session, subscription, subscription_service
             ) as ctx:
@@ -4181,7 +4181,7 @@ class TestUpdateProduct:
             prices=[("seat", 1500, "usd")],
         )
 
-        with pytest.raises(PolarRequestValidationError) as exc_info:
+        with pytest.raises(TarifiaRequestValidationError) as exc_info:
             async with SubscriptionUpdateContext(
                 session, subscription, subscription_service
             ) as ctx:
@@ -4219,7 +4219,7 @@ class TestUpdateDiscount:
             discount=discount_percentage_50,
         )
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             async with SubscriptionUpdateContext(
                 session, subscription, subscription_service
             ) as ctx:
@@ -4243,7 +4243,7 @@ class TestUpdateDiscount:
             discount=discount_percentage_50,
         )
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             async with SubscriptionUpdateContext(
                 session, subscription, subscription_service
             ) as ctx:
@@ -4431,7 +4431,7 @@ class TestUpdateTrial:
             customer=customer,
         )
 
-        with pytest.raises(PolarRequestValidationError) as exc_info:
+        with pytest.raises(TarifiaRequestValidationError) as exc_info:
             async with SubscriptionUpdateContext(
                 session, subscription, subscription_service
             ) as ctx:
@@ -4498,7 +4498,7 @@ class TestUpdateTrial:
         assert subscription.current_period_end is not None
         trial_end_before_period = subscription.current_period_end - timedelta(days=1)
 
-        with pytest.raises(PolarRequestValidationError) as exc_info:
+        with pytest.raises(TarifiaRequestValidationError) as exc_info:
             async with SubscriptionUpdateContext(
                 session, subscription, subscription_service
             ) as ctx:
@@ -6634,7 +6634,7 @@ class TestEnqueueBenefitsGrantsGracePeriod:
         subscription.past_due_at = utc_now() - timedelta(days=2)
         await save_fixture(subscription)
 
-        enqueue_job_mock = mocker.patch("polar.subscription.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.subscription.service.enqueue_job")
         await subscription_service.enqueue_benefits_grants(session, subscription)
         enqueue_job_mock.assert_not_called()
 
@@ -6660,7 +6660,7 @@ class TestEnqueueBenefitsGrantsGracePeriod:
         subscription.past_due_at = utc_now() - timedelta(days=8)
         await save_fixture(subscription)
 
-        enqueue_job_mock = mocker.patch("polar.subscription.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.subscription.service.enqueue_job")
 
         await subscription_service.enqueue_benefits_grants(session, subscription)
         enqueue_job_mock.assert_called_once_with(
@@ -6694,7 +6694,7 @@ class TestEnqueueBenefitsGrantsGracePeriod:
         subscription.past_due_at = utc_now() - timedelta(minutes=1)
         await save_fixture(subscription)
 
-        enqueue_job_mock = mocker.patch("polar.subscription.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.subscription.service.enqueue_job")
 
         await subscription_service.enqueue_benefits_grants(session, subscription)
         enqueue_job_mock.assert_called_once_with(
@@ -6727,7 +6727,7 @@ class TestEnqueueBenefitsGrantsGracePeriod:
         subscription.status = SubscriptionStatus.canceled
         await save_fixture(subscription)
 
-        enqueue_job_mock = mocker.patch("polar.subscription.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.subscription.service.enqueue_job")
         await subscription_service.enqueue_benefits_grants(session, subscription)
         enqueue_job_mock.assert_called_once_with(
             "benefit.enqueue_benefits_grants",
@@ -6951,7 +6951,7 @@ class TestClearPendingUpdate:
         )
 
         # When/Then: Should raise validation error
-        with pytest.raises(PolarRequestValidationError) as exc_info:
+        with pytest.raises(TarifiaRequestValidationError) as exc_info:
             async with SubscriptionUpdateContext(
                 session, subscription, subscription_service
             ) as ctx:

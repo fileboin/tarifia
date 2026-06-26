@@ -1,15 +1,15 @@
 'use client'
 
-import { enums, schemas } from '@polar-sh/client'
-import { METER_UNIT_DISPLAY_NAMES } from '@polar-sh/ui/lib/meterUnit'
+import { enums, schemas } from '@tarifia-sh/client'
+import { METER_UNIT_DISPLAY_NAMES } from '@tarifia-sh/ui/lib/meterUnit'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
-import { Input } from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
+import { Input } from '@tarifia-sh/orbit'
 import {
   FormControl,
   FormDescription,
@@ -17,8 +17,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@polar-sh/orbit'
+} from '@tarifia-sh/ui/components/ui/form'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@tarifia-sh/orbit'
 import { InfoIcon } from 'lucide-react'
 import { useFormContext } from 'react-hook-form'
 
@@ -38,7 +38,7 @@ const MeterFormUnit = () => {
                 Unit
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <InfoIcon className="dark:text-polar-400 h-3.5 w-3.5 text-gray-400" />
+                    <InfoIcon className="dark:text-tarifia-400 h-3.5 w-3.5 text-gray-400" />
                   </TooltipTrigger>
                   <TooltipContent className="max-w-xs">
                     Controls how prices are formatted for display. For example,
@@ -86,7 +86,7 @@ const MeterFormUnit = () => {
                     Unit label
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <InfoIcon className="dark:text-polar-400 h-3.5 w-3.5 text-gray-400" />
+                        <InfoIcon className="dark:text-tarifia-400 h-3.5 w-3.5 text-gray-400" />
                       </TooltipTrigger>
                       <TooltipContent className="max-w-xs">
                         The singular name shown after the price, e.g.
@@ -121,7 +121,7 @@ const MeterFormUnit = () => {
                     Unit Multiplier
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <InfoIcon className="dark:text-polar-400 h-3.5 w-3.5 text-gray-400" />
+                        <InfoIcon className="dark:text-tarifia-400 h-3.5 w-3.5 text-gray-400" />
                       </TooltipTrigger>
                       <TooltipContent className="max-w-xs">
                         Scales how the price is displayed. For example, a

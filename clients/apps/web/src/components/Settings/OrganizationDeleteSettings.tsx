@@ -2,8 +2,8 @@
 
 import { useDeleteOrganization } from '@/hooks/queries'
 import { api } from '@/utils/client'
-import { schemas, unwrap } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
+import { schemas, unwrap } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
 import { useRouter } from 'next/navigation'
 import { useCallback, useState } from 'react'
 import { ConfirmModal } from '../Modal/ConfirmModal'
@@ -99,7 +99,7 @@ export default function OrganizationDeleteSettings({
         title="Delete Organization"
         description={`Are you sure you want to delete "${organization.name}"? This action cannot be undone.`}
         body={
-          <div className="dark:text-polar-400 text-sm text-gray-600">
+          <div className="dark:text-tarifia-400 text-sm text-gray-600">
             <p className="mb-2">When you delete an organization:</p>
             <ul className="list-inside list-disc space-y-1">
               <li>

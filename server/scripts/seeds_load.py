@@ -12,31 +12,31 @@ import typer
 from sqlalchemy import select
 from sqlalchemy.orm import joinedload, selectinload
 
-import polar.tasks  # noqa: F401
-from polar.auth.models import AuthSubject
-from polar.auth.scope import Scope
-from polar.benefit.service import benefit as benefit_service
-from polar.benefit.strategies.custom.schemas import BenefitCustomCreate
-from polar.benefit.strategies.downloadables.schemas import BenefitDownloadablesCreate
-from polar.benefit.strategies.feature_flag.schemas import (
+import tarifia.tasks  # noqa: F401
+from tarifia.auth.models import AuthSubject
+from tarifia.auth.scope import Scope
+from tarifia.benefit.service import benefit as benefit_service
+from tarifia.benefit.strategies.custom.schemas import BenefitCustomCreate
+from tarifia.benefit.strategies.downloadables.schemas import BenefitDownloadablesCreate
+from tarifia.benefit.strategies.feature_flag.schemas import (
     BenefitFeatureFlagCreate,
     BenefitFeatureFlagCreateProperties,
 )
 
 # Import tasks to register all dramatiq actors
-from polar.benefit.strategies.license_keys.schemas import BenefitLicenseKeysCreate
-from polar.checkout_link.schemas import CheckoutLinkCreateProducts
-from polar.checkout_link.service import checkout_link as checkout_link_service
-from polar.config import settings
-from polar.customer.schemas.customer import (
+from tarifia.benefit.strategies.license_keys.schemas import BenefitLicenseKeysCreate
+from tarifia.checkout_link.schemas import CheckoutLinkCreateProducts
+from tarifia.checkout_link.service import checkout_link as checkout_link_service
+from tarifia.config import settings
+from tarifia.customer.schemas.customer import (
     CustomerIndividualCreate,
     CustomerTeamCreate,
 )
-from polar.customer.service import customer as customer_service
-from polar.discount.schemas import DiscountPercentageCreate
-from polar.discount.service import discount as discount_service
-from polar.dispute.dispute_case import dispute_case as dispute_case_service
-from polar.enums import (
+from tarifia.customer.service import customer as customer_service
+from tarifia.discount.schemas import DiscountPercentageCreate
+from tarifia.discount.service import discount as discount_service
+from tarifia.dispute.dispute_case import dispute_case as dispute_case_service
+from tarifia.enums import (
     PaymentProcessor,
     PayoutAccountType,
     SubscriptionProrationBehavior,
@@ -44,61 +44,61 @@ from polar.enums import (
     TaxBehavior,
     TaxBehaviorOption,
 )
-from polar.event.repository import EventRepository
-from polar.event.system import SystemEvent as SystemEventEnum
-from polar.event_type.repository import EventTypeRepository
-from polar.integrations.tinybird.service import ingest_events as tinybird_ingest_events
-from polar.kit.crypto import generate_token, generate_token_hash_pair
-from polar.kit.currency import PresentmentCurrency
-from polar.kit.db.postgres import create_async_sessionmaker
-from polar.kit.utils import generate_uuid, utc_now
-from polar.kit.visibility import Visibility
-from polar.member.schemas import MemberOwnerCreate
-from polar.meter.aggregation import CountAggregation
-from polar.meter.filter import Filter, FilterClause, FilterConjunction, FilterOperator
-from polar.meter.schemas import MeterCreate
-from polar.meter.service import meter as meter_service
-from polar.models.benefit import BenefitType
-from polar.models.customer import Customer
-from polar.models.customer_seat import CustomerSeat, SeatStatus
-from polar.models.discount import DiscountDuration, DiscountType
-from polar.models.event import Event as EventModel
-from polar.models.file import File, FileServiceTypes
-from polar.models.member import Member, MemberRole
-from polar.models.organization import (
+from tarifia.event.repository import EventRepository
+from tarifia.event.system import SystemEvent as SystemEventEnum
+from tarifia.event_type.repository import EventTypeRepository
+from tarifia.integrations.tinybird.service import ingest_events as tinybird_ingest_events
+from tarifia.kit.crypto import generate_token, generate_token_hash_pair
+from tarifia.kit.currency import PresentmentCurrency
+from tarifia.kit.db.postgres import create_async_sessionmaker
+from tarifia.kit.utils import generate_uuid, utc_now
+from tarifia.kit.visibility import Visibility
+from tarifia.member.schemas import MemberOwnerCreate
+from tarifia.meter.aggregation import CountAggregation
+from tarifia.meter.filter import Filter, FilterClause, FilterConjunction, FilterOperator
+from tarifia.meter.schemas import MeterCreate
+from tarifia.meter.service import meter as meter_service
+from tarifia.models.benefit import BenefitType
+from tarifia.models.customer import Customer
+from tarifia.models.customer_seat import CustomerSeat, SeatStatus
+from tarifia.models.discount import DiscountDuration, DiscountType
+from tarifia.models.event import Event as EventModel
+from tarifia.models.file import File, FileServiceTypes
+from tarifia.models.member import Member, MemberRole
+from tarifia.models.organization import (
     Organization,
     OrganizationCustomerEmailSettings,
     OrganizationDetails,
     OrganizationStatus,
 )
-from polar.models.organization_access_token import OrganizationAccessToken
-from polar.models.organization_review import OrganizationReview
-from polar.models.payout_account import PayoutAccount
-from polar.models.product import Product
-from polar.models.product_price import (
+from tarifia.models.organization_access_token import OrganizationAccessToken
+from tarifia.models.organization_review import OrganizationReview
+from tarifia.models.payout_account import PayoutAccount
+from tarifia.models.product import Product
+from tarifia.models.product_price import (
     ProductPriceAmountType,
     ProductPriceFixed,
     ProductPriceSeatUnit,
 )
-from polar.models.subscription import Subscription, SubscriptionStatus
-from polar.models.subscription_product_price import SubscriptionProductPrice
-from polar.models.support_case import (
+from tarifia.models.subscription import Subscription, SubscriptionStatus
+from tarifia.models.subscription_product_price import SubscriptionProductPrice
+from tarifia.models.support_case import (
     SupportCaseAudience,
     SupportCaseMessageAuthorKind,
 )
-from polar.models.user import IdentityVerificationStatus, User
-from polar.models.user_organization import UserOrganization
-from polar.models.webhook_endpoint import (
+from tarifia.models.user import IdentityVerificationStatus, User
+from tarifia.models.user_organization import UserOrganization
+from tarifia.models.webhook_endpoint import (
     WebhookEndpoint,
     WebhookEventType,
     WebhookFormat,
 )
-from polar.oauth2.constants import WEBHOOK_SECRET_PREFIX
-from polar.organization.schemas import OrganizationCreate
-from polar.organization.service import organization as organization_service
-from polar.organization_review.appeal_case import appeal_case as appeal_case_service
-from polar.postgres import AsyncSession, create_async_engine
-from polar.product.schemas import (
+from tarifia.oauth2.constants import WEBHOOK_SECRET_PREFIX
+from tarifia.organization.schemas import OrganizationCreate
+from tarifia.organization.service import organization as organization_service
+from tarifia.organization_review.appeal_case import appeal_case as appeal_case_service
+from tarifia.postgres import AsyncSession, create_async_engine
+from tarifia.product.schemas import (
     ProductCreate,
     ProductCreateOneTime,
     ProductCreateRecurring,
@@ -108,17 +108,17 @@ from polar.product.schemas import (
     ProductPriceSeatTier,
     ProductPriceSeatTiers,
 )
-from polar.product.service import product as product_service
-from polar.redis import Redis, create_redis
-from polar.support_case.service import support_case as support_case_service
-from polar.user.repository import UserRepository
-from polar.user.service import user as user_service
-from polar.worker import JobQueueManager
-from scripts.seed_polar_for_polar import (
-    BENEFITS as POLAR_SELF_BENEFITS,
+from tarifia.product.service import product as product_service
+from tarifia.redis import Redis, create_redis
+from tarifia.support_case.service import support_case as support_case_service
+from tarifia.user.repository import UserRepository
+from tarifia.user.service import user as user_service
+from tarifia.worker import JobQueueManager
+from scripts.seed_tarifia_for_tarifia import (
+    BENEFITS as TARIFIA_SELF_BENEFITS,
 )
-from scripts.seed_polar_for_polar import (
-    PRODUCTS as POLAR_SELF_PRODUCTS,
+from scripts.seed_tarifia_for_tarifia import (
+    PRODUCTS as TARIFIA_SELF_PRODUCTS,
 )
 from tests.fixtures.database import save_fixture_factory
 from tests.fixtures.random_objects import (
@@ -916,19 +916,19 @@ def _build_user_cost_span_events(
     return events
 
 
-async def _seed_polar_self_billing_catalog(
+async def _seed_tarifia_self_billing_catalog(
     session: AsyncSession,
     redis: Redis,
     organization: Organization,
     auth_subject: AuthSubject[User],
 ) -> None:
-    """Materialize the Polar self-billing benefits and tier products in the DB.
+    """Materialize the Tarifia self-billing benefits and tier products in the DB.
 
-    Mirrors ``scripts.seed_polar_for_polar`` but writes directly via the service layer
+    Mirrors ``scripts.seed_tarifia_for_tarifia`` but writes directly via the service layer
     instead of going through the public HTTP API.
     """
     benefits_by_description: dict[str, Any] = {}
-    for benefit_data in POLAR_SELF_BENEFITS:
+    for benefit_data in TARIFIA_SELF_BENEFITS:
         description = benefit_data["description"]
         metadata = benefit_data["metadata"]
         assert isinstance(description, str)
@@ -947,7 +947,7 @@ async def _seed_polar_self_billing_catalog(
         )
         benefits_by_description[description] = benefit
 
-    for product_data in POLAR_SELF_PRODUCTS:
+    for product_data in TARIFIA_SELF_PRODUCTS:
         name = product_data["name"]
         description = product_data.get("description")
         metadata = product_data["metadata"]
@@ -999,20 +999,20 @@ async def _seed_polar_self_billing_catalog(
             )
 
 
-async def _subscribe_seeded_orgs_to_polar_self(
+async def _subscribe_seeded_orgs_to_tarifia_self(
     session: AsyncSession,
 ) -> int:
-    """Add every other seeded org as a team customer of the Polar self org.
+    """Add every other seeded org as a team customer of the Tarifia self org.
 
-    The free plan is subscriptionless, so no Polar subscription is created here —
+    The free plan is subscriptionless, so no Tarifia subscription is created here —
     customers default to the synthesized free plan until they pick a paid one.
     """
-    polar_self_org = (
+    tarifia_self_org = (
         await session.execute(
-            select(Organization).where(Organization.slug == POLAR_ORG_SLUG)
+            select(Organization).where(Organization.slug == TARIFIA_ORG_SLUG)
         )
     ).scalar_one_or_none()
-    if polar_self_org is None:
+    if tarifia_self_org is None:
         return 0
 
     other_orgs = (
@@ -1020,7 +1020,7 @@ async def _subscribe_seeded_orgs_to_polar_self(
             await session.execute(
                 select(Organization)
                 .where(
-                    Organization.id != polar_self_org.id,
+                    Organization.id != tarifia_self_org.id,
                     Organization.deleted_at.is_(None),
                     Organization.status != OrganizationStatus.BLOCKED,
                 )
@@ -1032,7 +1032,7 @@ async def _subscribe_seeded_orgs_to_polar_self(
     )
 
     auth_subject: AuthSubject[Organization] = AuthSubject(
-        subject=polar_self_org, scopes=set(), session=None
+        subject=tarifia_self_org, scopes=set(), session=None
     )
 
     subscribed = 0
@@ -1518,13 +1518,13 @@ async def create_seed_data(
         {
             "name": "Admin Org",
             "slug": "admin-org",
-            "email": "admin@polar.sh",
-            "website": "https://polar.sh",
-            "bio": "The admin organization of Polar",
+            "email": "admin@tarifia.sh",
+            "website": "https://tarifia.sh",
+            "bio": "The admin organization of Tarifia",
             "status": OrganizationStatus.ACTIVE,
             "is_admin": True,
             "details": {
-                "about": "Polar is an open source payment infrastructure platform for developers",
+                "about": "Tarifia is an open source payment infrastructure platform for developers",
                 "switching": False,
                 "switching_from": None,
                 "product_description": "SaaS platform for payment infrastructure",
@@ -1540,14 +1540,14 @@ async def create_seed_data(
             ],
         },
         {
-            "name": "Polar",
-            "slug": "polar",
-            "email": "admin@polar.sh",
-            "website": "https://polar.sh",
+            "name": "Tarifia",
+            "slug": "tarifia",
+            "email": "admin@tarifia.sh",
+            "website": "https://tarifia.sh",
             "bio": "Open source payment infrastructure for developers",
             "status": OrganizationStatus.ACTIVE,
             "details": {
-                "about": "Polar is an open source payment infrastructure platform for developers",
+                "about": "Tarifia is an open source payment infrastructure platform for developers",
                 "switching": False,
                 "switching_from": None,
                 "product_description": "SaaS platform with usage-based billing for event ingestion",
@@ -1575,7 +1575,7 @@ async def create_seed_data(
         {
             "name": "SeatBased Members Corp",
             "slug": "seatbased-members-corp",
-            "email": "admin@polar.sh",
+            "email": "admin@tarifia.sh",
             "website": "https://seatbased-members.com",
             "bio": "Organization with seat-based pricing and members model enabled",
             "status": OrganizationStatus.ACTIVE,
@@ -1601,7 +1601,7 @@ async def create_seed_data(
             ],
             "seat_based_customers": [
                 {
-                    "email": "customer-with-members@polar.sh",
+                    "email": "customer-with-members@tarifia.sh",
                     "name": "Customer With Members Inc",
                     "seats_purchased": 5,
                     "seats_allocated": 2,
@@ -1611,7 +1611,7 @@ async def create_seed_data(
         {
             "name": "SeatBased Only Corp",
             "slug": "seatbased-only-corp",
-            "email": "admin@polar.sh",
+            "email": "admin@tarifia.sh",
             "website": "https://seatbased-only.com",
             "bio": "Organization with seat-based pricing but members model disabled",
             "status": OrganizationStatus.ACTIVE,
@@ -1637,7 +1637,7 @@ async def create_seed_data(
             ],
             "seat_based_customers": [
                 {
-                    "email": "customer-no-members@polar.sh",
+                    "email": "customer-no-members@tarifia.sh",
                     "name": "Customer Without Members Inc",
                     "seats_purchased": 5,
                     "seats_allocated": 2,
@@ -1803,8 +1803,8 @@ async def create_seed_data(
                 auth_subject=auth_subject,
             )
 
-        # Create meter for Polar organization
-        if org_data["slug"] == "polar":
+        # Create meter for Tarifia organization
+        if org_data["slug"] == "tarifia":
             meter_create = MeterCreate(
                 name="Events Ingested",
                 filter=Filter(
@@ -1826,7 +1826,7 @@ async def create_seed_data(
                 auth_subject=auth_subject,
             )
 
-            await _seed_polar_self_billing_catalog(
+            await _seed_tarifia_self_billing_catalog(
                 session=session,
                 redis=redis,
                 organization=organization,
@@ -1954,7 +1954,7 @@ async def create_seed_data(
                     auth_subject=auth_subject,
                 )
                 e2e_checkout_link.client_secret = (
-                    "polar_cl_e2e_seed_checkout_link_subscription"
+                    "tarifia_cl_e2e_seed_checkout_link_subscription"
                 )
                 session.add(e2e_checkout_link)
                 await session.flush()
@@ -1990,7 +1990,7 @@ async def create_seed_data(
         seeded_customers = []
         for i in range(num_customers):
             # customer_email = f"customer_{org_data['slug']}_{i + 1}@example.com"
-            customer_email = f"customer_{org_data['slug']}_{i + 1}@polar.sh"
+            customer_email = f"customer_{org_data['slug']}_{i + 1}@tarifia.sh"
             customer = await customer_service.create(
                 session=session,
                 customer_create=CustomerIndividualCreate(
@@ -2269,9 +2269,9 @@ async def create_seed_data(
             update_dict={"is_admin": user.is_admin or org_data.get("is_admin", False)},
         )
 
-    subscribed = await _subscribe_seeded_orgs_to_polar_self(session)
+    subscribed = await _subscribe_seeded_orgs_to_tarifia_self(session)
     if subscribed:
-        print(f"Subscribed {subscribed} organization(s) to the Polar self free plan")
+        print(f"Subscribed {subscribed} organization(s) to the Tarifia self free plan")
 
     await create_support_cases_seed(session)
 
@@ -2280,8 +2280,8 @@ async def create_seed_data(
     print("Created 3 organizations with users, products, benefits, and customers")
 
 
-POLAR_ORG_SLUG = "polar"
-TOKEN_COMMENT = "Polar self-integration (dev seed)"
+TARIFIA_ORG_SLUG = "tarifia"
+TOKEN_COMMENT = "Tarifia self-integration (dev seed)"
 TOKEN_SCOPES = " ".join(
     [
         Scope.customers_read,
@@ -2304,8 +2304,8 @@ TOKEN_SCOPES = " ".join(
     ]
 )
 
-WEBHOOK_NAME = "Polar self-integration (dev seed)"
-WEBHOOK_URL = "http://127.0.0.1:8000/v1/integrations/polar/webhook"
+WEBHOOK_NAME = "Tarifia self-integration (dev seed)"
+WEBHOOK_URL = "http://127.0.0.1:8000/v1/integrations/tarifia/webhook"
 WEBHOOK_EVENTS: list[WebhookEventType] = [
     WebhookEventType.benefit_grant_created,
     WebhookEventType.benefit_grant_updated,
@@ -2314,8 +2314,8 @@ WEBHOOK_EVENTS: list[WebhookEventType] = [
     WebhookEventType.order_created,
 ]
 SERVER_ENV_PATH = Path(__file__).resolve().parent.parent / ".env"
-WEBHOOK_SECRET_ENV_KEY = "POLAR_POLAR_WEBHOOK_SECRET"
-SCALE_PRODUCT_NAME = str(POLAR_SELF_PRODUCTS[-1]["name"])
+WEBHOOK_SECRET_ENV_KEY = "TARIFIA_TARIFIA_WEBHOOK_SECRET"
+SCALE_PRODUCT_NAME = str(TARIFIA_SELF_PRODUCTS[-1]["name"])
 
 
 def _write_webhook_secret_to_env(secret: str) -> None:
@@ -2351,7 +2351,7 @@ async def create_single_org_seed(
 
     user, _created = await user_service.get_by_email_or_create(
         session=session,
-        email=f"{slug}@polar.sh",
+        email=f"{slug}@tarifia.sh",
     )
     user_repository = UserRepository.from_session(session)
     await user_repository.update(
@@ -2370,7 +2370,7 @@ async def create_single_org_seed(
         create_schema=OrganizationCreate(name=name, slug=slug),
         auth_subject=auth_subject,
     )
-    organization.email = f"{slug}@polar.sh"
+    organization.email = f"{slug}@tarifia.sh"
     organization.bio = f"Seeded organization: {name}"
     organization.set_status(OrganizationStatus.ACTIVE)
     organization.details_submitted_at = utc_now()
@@ -2460,7 +2460,7 @@ async def create_single_org_seed(
 
     num_customers = random.randint(5, 10)
     for i in range(num_customers):
-        customer_email = f"customer_{slug}_{i + 1}@polar.sh"
+        customer_email = f"customer_{slug}_{i + 1}@tarifia.sh"
         customer = await customer_service.create(
             session=session,
             customer_create=CustomerIndividualCreate(
@@ -2539,9 +2539,9 @@ def seeds_load(
     asyncio.run(run())
 
 
-@cli.command(name="polar-self-env")
-def polar_self_env() -> None:
-    """Output Polar self-integration env vars for the seeded Polar org."""
+@cli.command(name="tarifia-self-env")
+def tarifia_self_env() -> None:
+    """Output Tarifia self-integration env vars for the seeded Tarifia org."""
 
     async def run() -> None:
         engine = create_async_engine("script")
@@ -2549,7 +2549,7 @@ def polar_self_env() -> None:
         async with sessionmaker() as session:
             org = (
                 await session.execute(
-                    select(Organization).where(Organization.slug == POLAR_ORG_SLUG)
+                    select(Organization).where(Organization.slug == TARIFIA_ORG_SLUG)
                 )
             ).scalar_one_or_none()
             if org is None:
@@ -2584,7 +2584,7 @@ def polar_self_env() -> None:
 
             token, token_hash = generate_token_hash_pair(
                 secret=settings.SECRET,
-                prefix="polar_oat_",
+                prefix="tarifia_oat_",
             )
             oat = OrganizationAccessToken(
                 organization_id=org.id,
@@ -2625,11 +2625,11 @@ def polar_self_env() -> None:
 
             _write_webhook_secret_to_env(webhook_secret)
 
-            print(f"POLAR_POLAR_ORGANIZATION_ID={org.id}")
-            print(f"POLAR_POLAR_SCALE_PRODUCT_ID={scale_product.id}")
-            print(f"POLAR_POLAR_ACCESS_TOKEN={token}")
+            print(f"TARIFIA_TARIFIA_ORGANIZATION_ID={org.id}")
+            print(f"TARIFIA_TARIFIA_SCALE_PRODUCT_ID={scale_product.id}")
+            print(f"TARIFIA_TARIFIA_ACCESS_TOKEN={token}")
             print(f"{WEBHOOK_SECRET_ENV_KEY}={webhook_secret}")
-            print("POLAR_POLAR_API_URL=http://127.0.0.1:8000")
+            print("TARIFIA_TARIFIA_API_URL=http://127.0.0.1:8000")
 
         await engine.dispose()
 

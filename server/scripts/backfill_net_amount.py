@@ -4,14 +4,14 @@ from functools import wraps
 import typer
 from sqlalchemy import BigInteger, Case, Integer, func, select, update
 
-from polar.models import (
+from tarifia.models import (
     Checkout,
     Discount,
     Order,
     OrderItem,
     Subscription,
 )
-from polar.models.discount import DiscountFixed, DiscountPercentage, DiscountType
+from tarifia.models.discount import DiscountFixed, DiscountPercentage, DiscountType
 from scripts.helper import (
     configure_script_logging,
     limit_bindparam,

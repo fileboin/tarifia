@@ -1,5 +1,5 @@
 import { api, createClientSideAPI } from '@/utils/client'
-import { schemas, unwrap } from '@polar-sh/client'
+import { schemas, unwrap } from '@tarifia-sh/client'
 import {
   type UseQueryResult,
   useMutation,

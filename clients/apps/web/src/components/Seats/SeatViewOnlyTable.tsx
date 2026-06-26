@@ -1,7 +1,7 @@
 'use client'
 
-import { DataTable } from '@polar-sh/orbit'
-import { Status } from '@polar-sh/orbit'
+import { DataTable } from '@tarifia-sh/orbit'
+import { Status } from '@tarifia-sh/orbit'
 import { seatStatusDisplayConfig } from './seatStatus'
 
 interface CustomerSeat {

@@ -5,13 +5,13 @@ emits a second, lazy query — which fails under async as a greenlet IO error.
 
 import pytest
 
-from polar.models import Customer, Organization, Product
-from polar.models.support_case import (
+from tarifia.models import Customer, Organization, Product
+from tarifia.models.support_case import (
     DisputeSupportCase,
     ReviewAppealSupportCase,
 )
-from polar.postgres import AsyncSession
-from polar.support_case.repository import SupportCaseRepository
+from tarifia.postgres import AsyncSession
+from tarifia.support_case.repository import SupportCaseRepository
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_appeal_case,

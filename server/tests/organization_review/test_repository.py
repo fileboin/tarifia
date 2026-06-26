@@ -2,18 +2,18 @@ from datetime import UTC, datetime
 
 import pytest
 
-from polar.models.account import Account
-from polar.models.organization import Organization
-from polar.models.payment import PaymentStatus
-from polar.models.product import Product
-from polar.models.product_price import ProductPriceSource
-from polar.models.user import User
-from polar.organization_review.report import (
+from tarifia.models.account import Account
+from tarifia.models.organization import Organization
+from tarifia.models.payment import PaymentStatus
+from tarifia.models.product import Product
+from tarifia.models.product_price import ProductPriceSource
+from tarifia.models.user import User
+from tarifia.organization_review.report import (
     AgentReportV2,
     AnyAgentReport,
 )
-from polar.organization_review.repository import OrganizationReviewRepository
-from polar.organization_review.schemas import (
+from tarifia.organization_review.repository import OrganizationReviewRepository
+from tarifia.organization_review.schemas import (
     ActorType,
     DataSnapshot,
     DecisionType,
@@ -31,7 +31,7 @@ from polar.organization_review.schemas import (
     RiskLevel,
     UsageInfo,
 )
-from polar.postgres import AsyncSession
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_checkout,

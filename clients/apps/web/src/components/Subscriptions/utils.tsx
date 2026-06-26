@@ -1,5 +1,5 @@
-import { schemas } from '@polar-sh/client'
-import type { PillColor } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import type { PillColor } from '@tarifia-sh/orbit'
 import { useMemo } from 'react'
 import { twMerge } from 'tailwind-merge'
 
@@ -39,7 +39,7 @@ const STATUS_BORDER_COLOR: Record<PillColor, string> = {
   yellow: 'border-yellow-500',
   red: 'border-red-500',
   blue: 'border-blue-500',
-  gray: 'dark:border-polar-500 border-gray-500',
+  gray: 'dark:border-tarifia-500 border-gray-500',
   purple: 'border-purple-500',
 }
 

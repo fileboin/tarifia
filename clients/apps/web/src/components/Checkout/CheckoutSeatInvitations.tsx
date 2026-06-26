@@ -2,10 +2,10 @@
 
 import { useAssignSeatFromCheckout } from '@/hooks/queries'
 import { validateEmail } from '@/utils/validation'
-import { getSeatPrice } from '@polar-sh/checkout/guards'
-import type { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { Input } from '@polar-sh/orbit'
+import { getSeatPrice } from '@tarifia-sh/checkout/guards'
+import type { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { Input } from '@tarifia-sh/orbit'
 import { MailCheckIcon, PlusIcon, XIcon } from 'lucide-react'
 import { useState } from 'react'
 import { Well, WellContent, WellHeader } from '../Shared/Well'
@@ -145,10 +145,10 @@ const SeatInvitationsPanel = ({
   const canSend = validEmails > 0 && !isSending
 
   return (
-    <Well className="dark:border-polar-700 dark:bg-polar-800 w-full border border-gray-200 bg-white">
+    <Well className="dark:border-tarifia-700 dark:bg-tarifia-800 w-full border border-gray-200 bg-white">
       <WellHeader className="gap-y-2 pb-4 text-center">
         <h2 className="text-xl font-medium">Invite your team</h2>
-        <p className="dark:text-polar-500 text-sm text-gray-500">
+        <p className="dark:text-tarifia-500 text-sm text-gray-500">
           You&apos;ve claimed your seat. Invite{' '}
           {remainingSeats === 1
             ? 'one more team member'
@@ -192,7 +192,7 @@ const SeatInvitationsPanel = ({
                     size="icon"
                     onClick={() => removeEmailInput(input.id)}
                     disabled={isSending}
-                    className="dark:text-polar-500 dark:hover:text-polar-400 mt-0.5 text-gray-500 hover:text-gray-600"
+                    className="dark:text-tarifia-500 dark:hover:text-tarifia-400 mt-0.5 text-gray-500 hover:text-gray-600"
                   >
                     <XIcon className="h-5 w-5" />
                   </Button>
@@ -227,7 +227,7 @@ const SeatInvitationsPanel = ({
         )}
 
         {sentCount > 0 && (
-          <p className="dark:text-polar-500 mx-auto max-w-xs text-center text-xs text-pretty text-gray-500">
+          <p className="dark:text-tarifia-500 mx-auto max-w-xs text-center text-xs text-pretty text-gray-500">
             Successfully assigned{' '}
             {sentCount === 1 ? 'one seat' : `${sentCount} seats`}.
             {availableSeats > 0 && (

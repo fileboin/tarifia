@@ -1,9 +1,9 @@
 import { useToast } from '@/components/Toast/use-toast'
 import { useInviteOrganizationMember } from '@/hooks/queries/org'
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
-import { Button } from '@polar-sh/orbit'
-import { Input } from '@polar-sh/orbit'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Button } from '@tarifia-sh/orbit'
+import { Input } from '@tarifia-sh/orbit'
 import { useState } from 'react'
 
 export function InviteMemberModal({

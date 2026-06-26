@@ -1,11 +1,11 @@
 import { formatHumanFriendlyScalar } from '@/utils/formatters'
-import { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
+import { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
 import {
   Card,
   CardContent,
   CardHeader,
-} from '@polar-sh/ui/components/atoms/Card'
+} from '@tarifia-sh/ui/components/atoms/Card'
 
 export interface MiniMetricBoxProps {
   title?: string
@@ -21,7 +21,7 @@ export const MiniMetricChartBox = ({
   return (
     <Card className="rounded-2xl">
       <CardHeader className="pb-2">
-        <span className="dark:text-polar-500 text-gray-500">
+        <span className="dark:text-tarifia-500 text-gray-500">
           {title ?? metric?.display_name}
         </span>
       </CardHeader>

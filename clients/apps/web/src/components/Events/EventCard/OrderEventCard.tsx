@@ -1,8 +1,8 @@
 import { useOrder } from '@/hooks/queries/orders'
 import { OrganizationContext } from '@/providers/maintainerOrganization'
-import { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
-import { Status, type StatusColor } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
+import { Status, type StatusColor } from '@tarifia-sh/orbit'
 import Link from 'next/link'
 import { useContext, useMemo } from 'react'
 import { EventCardBase } from './EventCardBase'
@@ -77,13 +77,13 @@ export const OrderEventCard = ({ event }: OrderEventCardProps) => {
               <span className="">{order.product?.name}</span>
             </div>
             {billingReason && (
-              <span className="dark:text-polar-500 text-gray-500">
+              <span className="dark:text-tarifia-500 text-gray-500">
                 {billingReason}
               </span>
             )}
           </div>
           <div className="flex flex-row items-center gap-x-4">
-            <span className="dark:text-polar-500 text-gray-500">
+            <span className="dark:text-tarifia-500 text-gray-500">
               {contextValue}
             </span>
             {status ? (

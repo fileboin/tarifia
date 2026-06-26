@@ -1,10 +1,10 @@
 import pytest
 from pydantic import TypeAdapter
 
-from polar.customer_portal.schemas.organization import CustomerProduct
-from polar.kit.visibility import Visibility
-from polar.models import Organization
-from polar.product.schemas import Product
+from tarifia.customer_portal.schemas.organization import CustomerProduct
+from tarifia.kit.visibility import Visibility
+from tarifia.models import Organization
+from tarifia.product.schemas import Product
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_benefit,

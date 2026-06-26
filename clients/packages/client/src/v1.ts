@@ -137,7 +137,7 @@ export interface paths {
      * Disconnect Oauth Account
      * @description Disconnect an OAuth account (GitHub or Google) from the authenticated user.
      *
-     *     This allows users to unlink their OAuth provider while keeping their Polar account.
+     *     This allows users to unlink their OAuth provider while keeping their Tarifia account.
      *     They can still authenticate using other methods (email magic link or other OAuth providers).
      *
      *     Note: You cannot disconnect your last authentication method if your email is not verified.
@@ -1123,7 +1123,7 @@ export interface paths {
      * List Available Plans
      * @description List the plans this organization can subscribe to.
      *
-     *     The free plan is synthesized (no underlying Polar product); selecting it in
+     *     The free plan is synthesized (no underlying Tarifia product); selecting it in
      *     the UI cancels the active subscription instead of creating one.
      *
      *     **Scopes**: `organizations:read` `organizations:write`
@@ -1146,7 +1146,7 @@ export interface paths {
     }
     /**
      * Get Organization Subscription
-     * @description Get the current Polar subscription for this organization.
+     * @description Get the current Tarifia subscription for this organization.
      *
      *     Returns a synthesized free-plan representation when the organization has no
      *     active paid subscription. Grandfathered orgs get the "Early Member" variant.
@@ -1157,7 +1157,7 @@ export interface paths {
     put?: never
     /**
      * Start Subscription Checkout
-     * @description Create a Polar checkout session for an initial paid subscription.
+     * @description Create a Tarifia checkout session for an initial paid subscription.
      *
      *     **Scopes**: `organizations:write`
      */
@@ -1224,7 +1224,7 @@ export interface paths {
     }
     /**
      * List Organization Orders
-     * @description List Polar orders billed to this organization.
+     * @description List Tarifia orders billed to this organization.
      *
      *     **Scopes**: `organizations:read` `organizations:write`
      */
@@ -1246,7 +1246,7 @@ export interface paths {
     }
     /**
      * Get Organization Billing Details
-     * @description Get the billing name, address, and tax ID used on Polar invoices.
+     * @description Get the billing name, address, and tax ID used on Tarifia invoices.
      *
      *     **Scopes**: `organizations:write`
      */
@@ -1258,7 +1258,7 @@ export interface paths {
     head?: never
     /**
      * Update Organization Billing Details
-     * @description Update the billing name, address, and tax ID used on Polar invoices.
+     * @description Update the billing name, address, and tax ID used on Tarifia invoices.
      *
      *     **Scopes**: `organizations:write`
      */
@@ -1274,7 +1274,7 @@ export interface paths {
     }
     /**
      * List Organization Payment Methods
-     * @description List the saved payment methods used to pay Polar invoices.
+     * @description List the saved payment methods used to pay Tarifia invoices.
      *
      *     **Scopes**: `organizations:write`
      */
@@ -1298,7 +1298,7 @@ export interface paths {
     put?: never
     /**
      * Create Organization Customer Session
-     * @description Create a customer session token bound to this org's Polar billing
+     * @description Create a customer session token bound to this org's Tarifia billing
      *     customer. The returned token authenticates against
      *     `/v1/customer-portal/customers/me/*` for the duration of its TTL.
      *
@@ -1323,7 +1323,7 @@ export interface paths {
     post?: never
     /**
      * Delete Organization Payment Method
-     * @description Delete a saved payment method used to pay Polar invoices.
+     * @description Delete a saved payment method used to pay Tarifia invoices.
      *
      *     **Scopes**: `organizations:write`
      */
@@ -1344,7 +1344,7 @@ export interface paths {
     put?: never
     /**
      * Set Default Organization Payment Method
-     * @description Set the default payment method used to pay Polar invoices.
+     * @description Set the default payment method used to pay Tarifia invoices.
      *
      *     **Scopes**: `organizations:write`
      */
@@ -1364,7 +1364,7 @@ export interface paths {
     }
     /**
      * Get Organization Order Invoice
-     * @description Get the invoice URL for a Polar order belonging to this organization.
+     * @description Get the invoice URL for a Tarifia order belonging to this organization.
      *
      *     **Scopes**: `organizations:read` `organizations:write`
      */
@@ -1386,7 +1386,7 @@ export interface paths {
     }
     /**
      * List Organization Benefit Grants
-     * @description List Slack shared channel benefit grants attached to this org's Polar
+     * @description List Slack shared channel benefit grants attached to this org's Tarifia
      *     subscription.
      *
      *     **Scopes**: `organizations:write`
@@ -7289,7 +7289,7 @@ export interface components {
     }
     /**
      * BalanceCreditOrderEvent
-     * @description An event created by Polar when an order is paid via customer balance.
+     * @description An event created by Tarifia when an order is paid via customer balance.
      */
     BalanceCreditOrderEvent: {
       /**
@@ -7313,7 +7313,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -7351,7 +7351,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -7387,7 +7387,7 @@ export interface components {
     }
     /**
      * BalanceDisputeEvent
-     * @description An event created by Polar when an order is disputed.
+     * @description An event created by Tarifia when an order is disputed.
      */
     BalanceDisputeEvent: {
       /**
@@ -7411,7 +7411,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -7449,7 +7449,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -7495,7 +7495,7 @@ export interface components {
     }
     /**
      * BalanceDisputeReversalEvent
-     * @description An event created by Polar when a dispute is won and funds are reinstated.
+     * @description An event created by Tarifia when a dispute is won and funds are reinstated.
      */
     BalanceDisputeReversalEvent: {
       /**
@@ -7519,7 +7519,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -7557,7 +7557,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -7570,7 +7570,7 @@ export interface components {
     }
     /**
      * BalanceOrderEvent
-     * @description An event created by Polar when an order is paid.
+     * @description An event created by Tarifia when an order is paid.
      */
     BalanceOrderEvent: {
       /**
@@ -7594,7 +7594,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -7632,7 +7632,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -7676,7 +7676,7 @@ export interface components {
     }
     /**
      * BalanceRefundEvent
-     * @description An event created by Polar when an order is refunded.
+     * @description An event created by Tarifia when an order is refunded.
      */
     BalanceRefundEvent: {
       /**
@@ -7700,7 +7700,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -7738,7 +7738,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -7786,7 +7786,7 @@ export interface components {
     }
     /**
      * BalanceRefundReversalEvent
-     * @description An event created by Polar when a refund is reverted.
+     * @description An event created by Tarifia when a refund is reverted.
      */
     BalanceRefundReversalEvent: {
       /**
@@ -7810,7 +7810,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -7848,7 +7848,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -8092,7 +8092,7 @@ export interface components {
     }
     /**
      * BenefitCycledEvent
-     * @description An event created by Polar when a benefit is cycled.
+     * @description An event created by Tarifia when a benefit is cycled.
      */
     BenefitCycledEvent: {
       /**
@@ -8116,7 +8116,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -8154,7 +8154,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -8923,7 +8923,7 @@ export interface components {
       /**
        * Repository Owner
        * @description The owner of the repository.
-       * @example polarsource
+       * @example tarifiasource
        */
       repository_owner: string
       /**
@@ -8947,7 +8947,7 @@ export interface components {
       /**
        * Repository Owner
        * @description The owner of the repository.
-       * @example polarsource
+       * @example tarifiasource
        */
       repository_owner: string
       /**
@@ -9024,7 +9024,7 @@ export interface components {
       /**
        * Repository Owner
        * @description The owner of the repository.
-       * @example polarsource
+       * @example tarifiasource
        */
       repository_owner: string
       /**
@@ -9867,7 +9867,7 @@ export interface components {
       | components['schemas']['BenefitGrantSlackSharedChannelWebhook']
     /**
      * BenefitGrantedEvent
-     * @description An event created by Polar when a benefit is granted to a customer.
+     * @description An event created by Tarifia when a benefit is granted to a customer.
      */
     BenefitGrantedEvent: {
       /**
@@ -9891,7 +9891,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -9929,7 +9929,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -10472,7 +10472,7 @@ export interface components {
     }
     /**
      * BenefitRevokedEvent
-     * @description An event created by Polar when a benefit is revoked from a customer.
+     * @description An event created by Tarifia when a benefit is revoked from a customer.
      */
     BenefitRevokedEvent: {
       /**
@@ -10496,7 +10496,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -10534,7 +10534,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -10645,7 +10645,7 @@ export interface components {
       /**
        * Slack Integration Id
        * Format: uuid4
-       * @description Polar Slack integration to use for this benefit.
+       * @description Tarifia Slack integration to use for this benefit.
        */
       slack_integration_id: string
       /** Channel Name Template */
@@ -10670,7 +10670,7 @@ export interface components {
       /**
        * Slack Integration Id
        * Format: uuid4
-       * @description Polar Slack integration linked to this benefit.
+       * @description Tarifia Slack integration linked to this benefit.
        */
       slack_integration_id: string
       /**
@@ -10859,7 +10859,7 @@ export interface components {
       | 'slack_shared_channel'
     /**
      * BenefitUpdatedEvent
-     * @description An event created by Polar when a benefit is updated.
+     * @description An event created by Tarifia when a benefit is updated.
      */
     BenefitUpdatedEvent: {
       /**
@@ -10883,7 +10883,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -10921,7 +10921,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -11389,7 +11389,7 @@ export interface components {
       metadata: components['schemas']['MetadataOutputType']
       /**
        * External Customer Id
-       * @description ID of the customer in your system. If a matching customer exists on Polar, the resulting order will be linked to this customer. Otherwise, a new customer will be created with this external ID set.
+       * @description ID of the customer in your system. If a matching customer exists on Tarifia, the resulting order will be linked to this customer. Otherwise, a new customer will be created with this external ID set.
        */
       external_customer_id: string | null
       /**
@@ -11511,7 +11511,7 @@ export interface components {
     CheckoutCreate: components['schemas']['CheckoutProductsCreate']
     /**
      * CheckoutCreatedEvent
-     * @description An event created by Polar when a checkout is created.
+     * @description An event created by Tarifia when a checkout is created.
      */
     CheckoutCreatedEvent: {
       /**
@@ -11535,7 +11535,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -11573,7 +11573,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -12387,7 +12387,7 @@ export interface components {
       is_business_customer: boolean
       /**
        * External Customer Id
-       * @description ID of the customer in your system. If a matching customer exists on Polar, the resulting order will be linked to this customer. Otherwise, a new customer will be created with this external ID set.
+       * @description ID of the customer in your system. If a matching customer exists on Tarifia, the resulting order will be linked to this customer. Otherwise, a new customer will be created with this external ID set.
        */
       external_customer_id?: string | null
       /** Customer Name */
@@ -12435,7 +12435,7 @@ export interface components {
       return_url?: string | null
       /**
        * Embed Origin
-       * @description If you plan to embed the checkout session, set this to the Origin of the embedding page. It'll allow the Polar iframe to communicate with the parent page.
+       * @description If you plan to embed the checkout session, set this to the Origin of the embedding page. It'll allow the Tarifia iframe to communicate with the parent page.
        */
       embed_origin?: string | null
       /** Locale */
@@ -12624,7 +12624,7 @@ export interface components {
       is_business_customer: boolean
       /**
        * External Customer Id
-       * @description ID of the customer in your system. If a matching customer exists on Polar, the resulting order will be linked to this customer. Otherwise, a new customer will be created with this external ID set.
+       * @description ID of the customer in your system. If a matching customer exists on Tarifia, the resulting order will be linked to this customer. Otherwise, a new customer will be created with this external ID set.
        */
       external_customer_id?: string | null
       /** Customer Name */
@@ -12672,7 +12672,7 @@ export interface components {
       return_url?: string | null
       /**
        * Embed Origin
-       * @description If you plan to embed the checkout session, set this to the Origin of the embedding page. It'll allow the Polar iframe to communicate with the parent page.
+       * @description If you plan to embed the checkout session, set this to the Origin of the embedding page. It'll allow the Tarifia iframe to communicate with the parent page.
        */
       embed_origin?: string | null
       /** Locale */
@@ -12778,7 +12778,7 @@ export interface components {
       is_business_customer: boolean
       /**
        * External Customer Id
-       * @description ID of the customer in your system. If a matching customer exists on Polar, the resulting order will be linked to this customer. Otherwise, a new customer will be created with this external ID set.
+       * @description ID of the customer in your system. If a matching customer exists on Tarifia, the resulting order will be linked to this customer. Otherwise, a new customer will be created with this external ID set.
        */
       external_customer_id?: string | null
       /** Customer Name */
@@ -12826,7 +12826,7 @@ export interface components {
       return_url?: string | null
       /**
        * Embed Origin
-       * @description If you plan to embed the checkout session, set this to the Origin of the embedding page. It'll allow the Polar iframe to communicate with the parent page.
+       * @description If you plan to embed the checkout session, set this to the Origin of the embedding page. It'll allow the Tarifia iframe to communicate with the parent page.
        */
       embed_origin?: string | null
       /** Locale */
@@ -13521,7 +13521,7 @@ export interface components {
       return_url?: string | null
       /**
        * Embed Origin
-       * @description If you plan to embed the checkout session, set this to the Origin of the embedding page. It'll allow the Polar iframe to communicate with the parent page.
+       * @description If you plan to embed the checkout session, set this to the Origin of the embedding page. It'll allow the Tarifia iframe to communicate with the parent page.
        */
       embed_origin?: string | null
     }
@@ -15366,7 +15366,7 @@ export interface components {
       | components['schemas']['CustomerTeamCreate']
     /**
      * CustomerCreatedEvent
-     * @description An event created by Polar when a customer is created.
+     * @description An event created by Tarifia when a customer is created.
      */
     CustomerCreatedEvent: {
       /**
@@ -15390,7 +15390,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -15428,7 +15428,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -15559,7 +15559,7 @@ export interface components {
     }
     /**
      * CustomerDeletedEvent
-     * @description An event created by Polar when a customer is deleted.
+     * @description An event created by Tarifia when a customer is deleted.
      */
     CustomerDeletedEvent: {
       /**
@@ -15583,7 +15583,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -15621,7 +15621,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -17128,7 +17128,7 @@ export interface components {
     CustomerStat: {
       /**
        * Customer Id
-       * @description Polar customer ID.
+       * @description Tarifia customer ID.
        */
       customer_id: string | null
       /**
@@ -18253,7 +18253,7 @@ export interface components {
     }
     /**
      * CustomerUpdatedEvent
-     * @description An event created by Polar when a customer is updated.
+     * @description An event created by Tarifia when a customer is updated.
      */
     CustomerUpdatedEvent: {
       /**
@@ -18277,7 +18277,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -18315,7 +18315,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -18422,8 +18422,8 @@ export interface components {
       name: string
       /** Position */
       position: number
-      /** Is Polar Bot */
-      is_polar_bot: boolean
+      /** Is Tarifia Bot */
+      is_tarifia_bot: boolean
       /**
        * Color
        * Format: color
@@ -19621,11 +19621,11 @@ export interface components {
       external_id?: string | null
       /**
        * Parent Id
-       * @description The ID of the parent event. Can be either a Polar event ID (UUID) or an external event ID.
+       * @description The ID of the parent event. Can be either a Tarifia event ID (UUID) or an external event ID.
        */
       parent_id?: string | null
       /**
-       * @description Key-value object allowing you to store additional information about the event. Some keys like `_llm` are structured data that are handled specially by Polar.
+       * @description Key-value object allowing you to store additional information about the event. Some keys like `_llm` are structured data that are handled specially by Tarifia.
        *
        *     The key must be a string with a maximum length of **40 characters**.
        *     The value must be either:
@@ -19641,7 +19641,7 @@ export interface components {
       /**
        * Customer Id
        * Format: uuid4
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string
       /**
@@ -19675,11 +19675,11 @@ export interface components {
       external_id?: string | null
       /**
        * Parent Id
-       * @description The ID of the parent event. Can be either a Polar event ID (UUID) or an external event ID.
+       * @description The ID of the parent event. Can be either a Tarifia event ID (UUID) or an external event ID.
        */
       parent_id?: string | null
       /**
-       * @description Key-value object allowing you to store additional information about the event. Some keys like `_llm` are structured data that are handled specially by Polar.
+       * @description Key-value object allowing you to store additional information about the event. Some keys like `_llm` are structured data that are handled specially by Tarifia.
        *
        *     The key must be a string with a maximum length of **40 characters**.
        *     The value must be either:
@@ -19724,7 +19724,7 @@ export interface components {
        * @description The name of the event.
        */
       name: string
-      /** @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API. */
+      /** @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API. */
       source: components['schemas']['EventSource']
       /**
        * Occurrences
@@ -21759,7 +21759,7 @@ export interface components {
     }
     /**
      * MeterCreditEvent
-     * @description An event created by Polar when credits are added to a customer meter.
+     * @description An event created by Tarifia when credits are added to a customer meter.
      */
     MeterCreditEvent: {
       /**
@@ -21783,7 +21783,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -21821,7 +21821,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -21869,7 +21869,7 @@ export interface components {
     }
     /**
      * MeterResetEvent
-     * @description An event created by Polar when a customer meter is reset.
+     * @description An event created by Tarifia when a customer meter is reset.
      */
     MeterResetEvent: {
       /**
@@ -21893,7 +21893,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -21931,7 +21931,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -23264,7 +23264,7 @@ export interface components {
     }
     /**
      * OrderPaidEvent
-     * @description An event created by Polar when an order is paid.
+     * @description An event created by Tarifia when an order is paid.
      */
     OrderPaidEvent: {
       /**
@@ -23288,7 +23288,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -23326,7 +23326,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -23444,7 +23444,7 @@ export interface components {
     }
     /**
      * OrderRefundedEvent
-     * @description An event created by Polar when an order is refunded.
+     * @description An event created by Tarifia when an order is refunded.
      */
     OrderRefundedEvent: {
       /**
@@ -23468,7 +23468,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -23506,7 +23506,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -23720,7 +23720,7 @@ export interface components {
     }
     /**
      * OrderVoidedEvent
-     * @description An event created by Polar when an order is voided.
+     * @description An event created by Tarifia when an order is voided.
      */
     OrderVoidedEvent: {
       /**
@@ -23744,7 +23744,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -23782,7 +23782,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -24433,7 +24433,7 @@ export interface components {
     OrganizationCheckoutRequest: {
       /**
        * Product Id
-       * @description Polar product ID to subscribe to.
+       * @description Tarifia product ID to subscribe to.
        */
       product_id: string
       /** Success Url */
@@ -24495,7 +24495,7 @@ export interface components {
        * @description Link to social profiles.
        */
       socials?: components['schemas']['OrganizationSocialLink'][] | null
-      /** @description Additional, private, business details Polar needs about active organizations for compliance (KYC). */
+      /** @description Additional, private, business details Tarifia needs about active organizations for compliance (KYC). */
       details?: components['schemas']['OrganizationDetails'] | null
       /** @description Two-letter country code (ISO 3166-1 alpha-2). */
       country?:
@@ -24804,7 +24804,7 @@ export interface components {
     OrganizationCustomerSession: {
       /**
        * Token
-       * @description Short-lived customer session token bound to this organization's mirrored Polar billing customer. Authenticates against `/v1/customer-portal/customers/me/*` for the duration of its TTL.
+       * @description Short-lived customer session token bound to this organization's mirrored Tarifia billing customer. Authenticates against `/v1/customer-portal/customers/me/*` for the duration of its TTL.
        */
       token: string
     }
@@ -24864,7 +24864,7 @@ export interface components {
       /**
        * Intended Use
        * @deprecated
-       * @description How the organization will integrate and use Polar.
+       * @description How the organization will integrate and use Tarifia.
        */
       intended_use?: string | null
       /**
@@ -24965,7 +24965,7 @@ export interface components {
      * OrganizationFeatureSettingsUpdate
      * @description Feature settings that organizations can update themselves.
      *
-     *     Other feature settings are managed by Polar staff: they're ignored if
+     *     Other feature settings are managed by Tarifia staff: they're ignored if
      *     provided and keep their current value.
      */
     OrganizationFeatureSettingsUpdate: {
@@ -25529,7 +25529,7 @@ export interface components {
     OrganizationPlan: {
       /**
        * Product Id
-       * @description Polar product ID. Null for the synthesized free plan, which has no underlying Polar product.
+       * @description Tarifia product ID. Null for the synthesized free plan, which has no underlying Tarifia product.
        */
       product_id?: string | null
       /** Name */
@@ -25852,7 +25852,7 @@ export interface components {
     OrganizationSubscription: {
       /**
        * Subscription Id
-       * @description Polar subscription ID. Null when the organization has no active subscription and is on the free plan.
+       * @description Tarifia subscription ID. Null when the organization has no active subscription and is on the free plan.
        */
       subscription_id?: string | null
       /** Status */
@@ -25891,12 +25891,12 @@ export interface components {
         | null
       /**
        * Startup Program Status
-       * @description Polar Startup Program status for this organization. Derived from the organization's Startup Program discount: 'invited' when the discount exists and hasn't been redeemed, 'consumed' once it has. Null when the feature is disabled or the organization hasn't been invited.
+       * @description Tarifia Startup Program status for this organization. Derived from the organization's Startup Program discount: 'invited' when the discount exists and hasn't been redeemed, 'consumed' once it has. Null when the feature is disabled or the organization hasn't been invited.
        */
       startup_program_status?: string | null
       /**
        * Startup Program Scale Product Id
-       * @description Polar product id of the Scale plan, against which the Startup Program discount applies. Null when the feature is disabled.
+       * @description Tarifia product id of the Scale plan, against which the Startup Program discount applies. Null when the feature is disabled.
        */
       startup_program_scale_product_id?: string | null
     }
@@ -25972,7 +25972,7 @@ export interface components {
     OrganizationSubscriptionUpdate: {
       /**
        * Product Id
-       * @description Polar product ID to switch the plan to.
+       * @description Tarifia product ID to switch the plan to.
        */
       product_id: string
     }
@@ -25997,7 +25997,7 @@ export interface components {
        * @description Links to social profiles.
        */
       socials?: components['schemas']['OrganizationSocialLink'][] | null
-      /** @description Additional, private, business details Polar needs about active organizations for compliance (KYC). */
+      /** @description Additional, private, business details Tarifia needs about active organizations for compliance (KYC). */
       details?: components['schemas']['OrganizationDetails'] | null
       /** @description Two-letter country code (ISO 3166-1 alpha-2). */
       country?:
@@ -27134,7 +27134,7 @@ export interface components {
     }
     /**
      * PlatformFeeType
-     * @description Type of fees applied by Polar, and billed to the users.
+     * @description Type of fees applied by Tarifia, and billed to the users.
      * @enum {string}
      */
     PlatformFeeType:
@@ -27160,14 +27160,14 @@ export interface components {
       | 'disputed'
       | 'charge_disputed'
       | 'cancelled'
-    /** PolarSelfPaymentMethodInUse */
-    PolarSelfPaymentMethodInUse: {
+    /** TarifiaSelfPaymentMethodInUse */
+    TarifiaSelfPaymentMethodInUse: {
       /**
        * Error
-       * @example PolarSelfPaymentMethodInUse
+       * @example TarifiaSelfPaymentMethodInUse
        * @constant
        */
-      error: 'PolarSelfPaymentMethodInUse'
+      error: 'TarifiaSelfPaymentMethodInUse'
       /** Detail */
       detail: string
     }
@@ -29757,7 +29757,7 @@ export interface components {
     }
     /**
      * SubscriptionBillingPeriodUpdatedEvent
-     * @description An event created by Polar when a subscription billing period is updated.
+     * @description An event created by Tarifia when a subscription billing period is updated.
      */
     SubscriptionBillingPeriodUpdatedEvent: {
       /**
@@ -29781,7 +29781,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -29819,7 +29819,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -29868,7 +29868,7 @@ export interface components {
        *
        *     **IMPORTANT:**
        *     Do not use this to store internal notes! It's intended to be input
-       *     from the customer and is therefore also available in their Polar
+       *     from the customer and is therefore also available in their Tarifia
        *     purchases library.
        *
        *     Only set this in case your own service is requesting the reason from the
@@ -29886,7 +29886,7 @@ export interface components {
     }
     /**
      * SubscriptionCanceledEvent
-     * @description An event created by Polar when a subscription is canceled.
+     * @description An event created by Tarifia when a subscription is canceled.
      */
     SubscriptionCanceledEvent: {
       /**
@@ -29910,7 +29910,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -29948,7 +29948,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -30119,13 +30119,13 @@ export interface components {
       product_id: string
       /**
        * External Customer Id
-       * @description The ID of the customer in your system to create the subscription for. It must already exist in Polar.
+       * @description The ID of the customer in your system to create the subscription for. It must already exist in Tarifia.
        */
       external_customer_id: string
     }
     /**
      * SubscriptionCreatedEvent
-     * @description An event created by Polar when a subscription is created.
+     * @description An event created by Tarifia when a subscription is created.
      */
     SubscriptionCreatedEvent: {
       /**
@@ -30149,7 +30149,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -30187,7 +30187,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -30301,7 +30301,7 @@ export interface components {
     }
     /**
      * SubscriptionCycledEvent
-     * @description An event created by Polar when a subscription is cycled.
+     * @description An event created by Tarifia when a subscription is cycled.
      */
     SubscriptionCycledEvent: {
       /**
@@ -30325,7 +30325,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -30363,7 +30363,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -30452,7 +30452,7 @@ export interface components {
     }
     /**
      * SubscriptionPastDueEvent
-     * @description An event created by Polar when a subscription becomes past due.
+     * @description An event created by Tarifia when a subscription becomes past due.
      */
     SubscriptionPastDueEvent: {
       /**
@@ -30476,7 +30476,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -30514,7 +30514,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -30544,7 +30544,7 @@ export interface components {
     }
     /**
      * SubscriptionProductUpdatedEvent
-     * @description An event created by Polar when a subscription changes the product.
+     * @description An event created by Tarifia when a subscription changes the product.
      */
     SubscriptionProductUpdatedEvent: {
       /**
@@ -30568,7 +30568,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -30606,7 +30606,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -30637,7 +30637,7 @@ export interface components {
       | 'reset'
     /**
      * SubscriptionReactivatedEvent
-     * @description An event created by Polar when a past due subscription is recovered.
+     * @description An event created by Tarifia when a past due subscription is recovered.
      */
     SubscriptionReactivatedEvent: {
       /**
@@ -30661,7 +30661,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -30699,7 +30699,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -30754,7 +30754,7 @@ export interface components {
        *
        *     **IMPORTANT:**
        *     Do not use this to store internal notes! It's intended to be input
-       *     from the customer and is therefore also available in their Polar
+       *     from the customer and is therefore also available in their Tarifia
        *     purchases library.
        *
        *     Only set this in case your own service is requesting the reason from the
@@ -30771,7 +30771,7 @@ export interface components {
     }
     /**
      * SubscriptionRevokedEvent
-     * @description An event created by Polar when a subscription is revoked from a customer.
+     * @description An event created by Tarifia when a subscription is revoked from a customer.
      */
     SubscriptionRevokedEvent: {
       /**
@@ -30795,7 +30795,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -30833,7 +30833,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -30861,7 +30861,7 @@ export interface components {
     }
     /**
      * SubscriptionSeatsUpdatedEvent
-     * @description An event created by Polar when a the seats on a subscription is changed.
+     * @description An event created by Tarifia when a the seats on a subscription is changed.
      */
     SubscriptionSeatsUpdatedEvent: {
       /**
@@ -30885,7 +30885,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -30923,7 +30923,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -30982,7 +30982,7 @@ export interface components {
       | 'unpaid'
     /**
      * SubscriptionUncanceledEvent
-     * @description An event created by Polar when a subscription cancellation is reversed.
+     * @description An event created by Tarifia when a subscription cancellation is reversed.
      */
     SubscriptionUncanceledEvent: {
       /**
@@ -31006,7 +31006,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -31044,7 +31044,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -31121,7 +31121,7 @@ export interface components {
     }
     /**
      * SubscriptionUpdateClearedEvent
-     * @description An event created by Polar when a pending subscription update is cleared without being applied.
+     * @description An event created by Tarifia when a pending subscription update is cleared without being applied.
      */
     SubscriptionUpdateClearedEvent: {
       /**
@@ -31145,7 +31145,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -31183,7 +31183,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -31213,7 +31213,7 @@ export interface components {
     }
     /**
      * SubscriptionUpdatedEvent
-     * @description An event created by Polar when a subscription is updated.
+     * @description An event created by Tarifia when a subscription is updated.
      */
     SubscriptionUpdatedEvent: {
       /**
@@ -31237,7 +31237,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -31275,7 +31275,7 @@ export interface components {
       label: string
       /**
        * Source
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API.
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API.
        * @constant
        */
       source: 'system'
@@ -31681,7 +31681,7 @@ export interface components {
       | 'mu_tan'
     /**
      * TaxJurisdiction
-     * @description Aggregated tax remitted by Polar for a single jurisdiction.
+     * @description Aggregated tax remitted by Tarifia for a single jurisdiction.
      *
      *     US and Canadian jurisdictions are reported at the state/province level;
      *     every other country is aggregated at the country level.
@@ -31711,7 +31711,7 @@ export interface components {
       currency: string
       /**
        * Tax Amount
-       * @description Net tax remitted by Polar in this jurisdiction, in the currency's minor unit. Refunds and disputes are netted out.
+       * @description Net tax remitted by Tarifia in this jurisdiction, in the currency's minor unit. Refunds and disputes are netted out.
        */
       tax_amount: number
       /**
@@ -31743,7 +31743,7 @@ export interface components {
       | '-country'
     /**
      * TaxSummary
-     * @description Aggregated tax remitted by Polar across all jurisdictions.
+     * @description Aggregated tax remitted by Tarifia across all jurisdictions.
      *
      *     Totals span the full filtered dataset, independent of the pagination
      *     applied to the jurisdiction breakdown.
@@ -31756,7 +31756,7 @@ export interface components {
       currency: string
       /**
        * Tax Amount
-       * @description Net tax remitted by Polar across all jurisdictions, in the currency's minor unit. Refunds and disputes are netted out.
+       * @description Net tax remitted by Tarifia across all jurisdictions, in the currency's minor unit. Refunds and disputes are netted out.
        */
       tax_amount: number
       /**
@@ -32156,7 +32156,7 @@ export interface components {
       organization_id: string
       /**
        * Customer Id
-       * @description ID of the customer in your Polar organization associated with the event.
+       * @description ID of the customer in your Tarifia organization associated with the event.
        */
       customer_id: string | null
       /** @description The customer associated with the event. */
@@ -32198,7 +32198,7 @@ export interface components {
        */
       name: string
       /**
-       * @description The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API. (enum property replaced by openapi-typescript)
+       * @description The source of the event. `system` events are created by Tarifia. `user` events are the one you create through our ingestion API. (enum property replaced by openapi-typescript)
        * @enum {string}
        */
       source: 'user'
@@ -32641,7 +32641,7 @@ export interface components {
       name: string
       /**
        * Customer Id
-       * @description Polar customer ID.
+       * @description Tarifia customer ID.
        */
       customer_id: string | null
       /**
@@ -33177,7 +33177,7 @@ export interface components {
       /**
        * Secret
        * @description The secret used to sign the webhook events.
-       * @example polar_whs_ovyN6cPrTv56AApvzCaJno08SSmGJmgbWilb33N2JuK
+       * @example tarifia_whs_ovyN6cPrTv56AApvzCaJno08SSmGJmgbWilb33N2JuK
        */
       secret: string
       /**
@@ -36553,7 +36553,7 @@ export interface operations {
           [name: string]: unknown
         }
         content: {
-          'application/json': components['schemas']['PolarSelfPaymentMethodInUse']
+          'application/json': components['schemas']['TarifiaSelfPaymentMethodInUse']
         }
       }
       /** @description Organization or payment method not found. */

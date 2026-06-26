@@ -3,12 +3,12 @@ from datetime import timedelta
 import pytest
 from pydantic import HttpUrl
 
-from polar.kit.utils import utc_now
-from polar.member_session.service import member_session
-from polar.models import Member, Organization
-from polar.models.member import MemberRole
-from polar.models.member_session import MEMBER_SESSION_TOKEN_PREFIX, MemberSession
-from polar.postgres import AsyncSession
+from tarifia.kit.utils import utc_now
+from tarifia.member_session.service import member_session
+from tarifia.models import Member, Organization
+from tarifia.models.member import MemberRole
+from tarifia.models.member_session import MEMBER_SESSION_TOKEN_PREFIX, MemberSession
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_customer
 

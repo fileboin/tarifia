@@ -12,17 +12,17 @@ from alembic_utils.replaceable_entity import registry as entities_registry
 from sqlalchemy.schema import CreateSequence
 from sqlalchemy_utils import create_database, database_exists, drop_database
 
-from polar.auth.models import AuthSubject
-from polar.auth.scope import Scope
-from polar.config import settings
-from polar.enums import SubscriptionRecurringInterval
-from polar.integrations.tinybird.client import TinybirdClient
-from polar.integrations.tinybird.service import DATASOURCE_EVENTS, _event_to_tinybird
-from polar.kit.db.postgres import create_async_engine, create_async_sessionmaker
-from polar.kit.time_queries import TimeInterval
-from polar.metrics.schemas import MetricsResponse
-from polar.metrics.service import metrics as metrics_service
-from polar.models import (
+from tarifia.auth.models import AuthSubject
+from tarifia.auth.scope import Scope
+from tarifia.config import settings
+from tarifia.enums import SubscriptionRecurringInterval
+from tarifia.integrations.tinybird.client import TinybirdClient
+from tarifia.integrations.tinybird.service import DATASOURCE_EVENTS, _event_to_tinybird
+from tarifia.kit.db.postgres import create_async_engine, create_async_sessionmaker
+from tarifia.kit.time_queries import TimeInterval
+from tarifia.metrics.schemas import MetricsResponse
+from tarifia.metrics.service import metrics as metrics_service
+from tarifia.models import (
     Customer,
     Discount,
     Event,
@@ -34,14 +34,14 @@ from polar.models import (
     User,
     UserOrganization,
 )
-from polar.models.checkout import CheckoutStatus
-from polar.models.customer_seat import SeatStatus
-from polar.models.discount import DiscountDuration, DiscountType
-from polar.models.event import EventSource
-from polar.models.order import OrderStatus
-from polar.models.product import ProductBillingType
-from polar.models.subscription import SubscriptionStatus
-from polar.postgres import AsyncSession
+from tarifia.models.checkout import CheckoutStatus
+from tarifia.models.customer_seat import SeatStatus
+from tarifia.models.discount import DiscountDuration, DiscountType
+from tarifia.models.event import EventSource
+from tarifia.models.order import OrderStatus
+from tarifia.models.product import ProductBillingType
+from tarifia.models.subscription import SubscriptionStatus
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture, get_database_url, save_fixture_factory
 from tests.fixtures.random_objects import (
     create_account,
@@ -2386,8 +2386,8 @@ async def metrics_harness(
 
     from unittest.mock import patch
 
-    from polar.integrations.tinybird import service as tinybird_service
-    from polar.metrics import queries_tinybird
+    from tarifia.integrations.tinybird import service as tinybird_service
+    from tarifia.metrics import queries_tinybird
 
     events: list[Event] = []
     organizations: dict[str, OrganizationContext] = {}
@@ -5434,7 +5434,7 @@ class TestCheckoutMetrics:
     - Before cutoff: all checkouts counted using created_at (historical behavior)
     - After cutoff: only checkouts with opened_at are counted
 
-    See: https://github.com/polarsource/polar/pull/9071
+    See: https://github.com/tarifiasource/tarifia/pull/9071
     """
 
     @pytest.mark.parametrize("auth", ["user", "org"])

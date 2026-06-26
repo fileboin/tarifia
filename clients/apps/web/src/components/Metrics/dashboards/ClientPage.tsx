@@ -3,8 +3,8 @@
 import { SubscriptionMetricsTaxAlert } from '@/components/Metrics/SubscriptionMetricsTaxAlert'
 import { useMetrics } from '@/hooks/queries'
 import { fromISODate, METRIC_GROUPS, toISODate } from '@/utils/metrics'
-import { getMetricsRangeDates, type schemas } from '@polar-sh/client'
-import { Box } from '@polar-sh/orbit/Box'
+import { getMetricsRangeDates, type schemas } from '@tarifia-sh/client'
+import { Box } from '@tarifia-sh/orbit/Box'
 import {
   createParser,
   parseAsArrayOf,

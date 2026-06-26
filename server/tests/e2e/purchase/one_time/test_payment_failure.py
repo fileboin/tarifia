@@ -8,8 +8,8 @@ should return to open status so the customer can retry.
 import pytest
 from httpx import AsyncClient
 
-from polar.kit.db.postgres import AsyncSession
-from polar.models import Organization, Product
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.models import Organization, Product
 from tests.e2e.conftest import E2E_AUTH
 from tests.e2e.infra import DrainFn, StripeSimulator
 from tests.e2e.infra.stripe_simulator import simulate_webhook

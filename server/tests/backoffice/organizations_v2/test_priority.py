@@ -13,14 +13,14 @@ from uuid import uuid4
 
 import pytest
 
-from polar.backoffice.organizations_v2.priority import (
+from tarifia.backoffice.organizations_v2.priority import (
     AGING_DAILY_PTS,
     AGING_MAX_PTS,
     HELD_PAYOUT_PTS,
     compute,
 )
-from polar.models.organization import SupportTier
-from polar.organization_review.schemas import PaymentMetrics
+from tarifia.models.organization import SupportTier
+from tarifia.organization_review.schemas import PaymentMetrics
 
 
 def _metrics(

@@ -1,13 +1,13 @@
 'use client'
 
-import { Modal } from '@polar-sh/orbit'
+import { Modal } from '@tarifia-sh/orbit'
 import { markdownOptions } from '@/utils/markdown'
-import { AcceptedLocale, useTranslations } from '@polar-sh/i18n'
+import { AcceptedLocale, useTranslations } from '@tarifia-sh/i18n'
 import Markdown from 'markdown-to-jsx'
 import { useEffect, useRef, useState } from 'react'
 
 const proseClassName =
-  'prose dark:prose-invert prose-headings:mt-4 prose-headings:font-medium prose-headings:text-black prose-h1:text-xl prose-h2:text-lg prose-h3:text-md dark:prose-headings:text-white dark:text-polar-300 leading-normal text-gray-800'
+  'prose dark:prose-invert prose-headings:mt-4 prose-headings:font-medium prose-headings:text-black prose-h1:text-xl prose-h2:text-lg prose-h3:text-md dark:prose-headings:text-white dark:text-tarifia-300 leading-normal text-gray-800'
 
 export const CheckoutProductDescription = ({
   description,
@@ -40,7 +40,7 @@ export const CheckoutProductDescription = ({
 
   return (
     <>
-      <hr className="dark:border-polar-700 border-gray-200" />
+      <hr className="dark:border-tarifia-700 border-gray-200" />
       <div className="flex flex-col gap-y-2">
         <div
           ref={textRef}
@@ -52,7 +52,7 @@ export const CheckoutProductDescription = ({
         {isClamped && (
           <button
             onClick={() => setIsModalOpen(true)}
-            className="dark:text-polar-300 dark:hover:text-polar-200 cursor-pointer self-start text-sm text-gray-500 hover:text-gray-700 md:hidden"
+            className="dark:text-tarifia-300 dark:hover:text-tarifia-200 cursor-pointer self-start text-sm text-gray-500 hover:text-gray-700 md:hidden"
           >
             {t('checkout.productDescription.readMore')}
           </button>

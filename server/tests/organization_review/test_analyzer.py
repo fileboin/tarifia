@@ -12,9 +12,9 @@ from pydantic_ai.exceptions import (
 from pydantic_ai.models.test import TestModel
 from pytest_mock import MockerFixture
 
-from polar.config import settings
-from polar.organization_review.analyzer import ReviewAnalyzer, _render_scraped_site
-from polar.organization_review.schemas import (
+from tarifia.config import settings
+from tarifia.organization_review.analyzer import ReviewAnalyzer, _render_scraped_site
+from tarifia.organization_review.schemas import (
     DataSnapshot,
     HistoryData,
     OrganizationData,
@@ -144,7 +144,7 @@ def _stub_analyzer_io(
     """
     mocker.patch.object(review_analyzer, "_build_prompt", return_value="test-prompt")
     mocker.patch(
-        "polar.organization_review.analyzer.fetch_policy_content",
+        "tarifia.organization_review.analyzer.fetch_policy_content",
         return_value="test-policy",
     )
     mocker.patch.object(

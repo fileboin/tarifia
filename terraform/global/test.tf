@@ -2,13 +2,13 @@
 
 data "tfe_project" "test" {
   name         = "test"
-  organization = "polar-sh"
+  organization = "tarifia-sh"
 }
 
 resource "tfe_variable_set" "test" {
   name              = "Test Settings"
   description       = "Variables specific to the test environment"
-  organization      = "polar-sh"
+  organization      = "tarifia-sh"
   parent_project_id = data.tfe_project.test.id
 }
 
@@ -308,7 +308,7 @@ resource "tfe_variable" "tinybird_read_token_test" {
 resource "tfe_variable" "plain_default_tier_external_id_test" {
   key             = "plain_default_tier_external_id"
   category        = "terraform"
-  description     = "Default Plain tier external ID used as a fallback for the polar-self support benefit for test"
+  description     = "Default Plain tier external ID used as a fallback for the tarifia-self support benefit for test"
   sensitive       = false
   variable_set_id = tfe_variable_set.test.id
 }
@@ -342,26 +342,26 @@ resource "tfe_variable" "customer_portal_url_overrides_test" {
   }
 }
 
-resource "tfe_variable" "polar_access_token_test" {
-  key             = "polar_access_token"
+resource "tfe_variable" "tarifia_access_token_test" {
+  key             = "tarifia_access_token"
   category        = "terraform"
-  description     = "Polar API access token"
+  description     = "Tarifia API access token"
   sensitive       = true
   variable_set_id = tfe_variable_set.test.id
 }
 
-resource "tfe_variable" "polar_webhook_secret_test" {
-  key             = "polar_webhook_secret"
+resource "tfe_variable" "tarifia_webhook_secret_test" {
+  key             = "tarifia_webhook_secret"
   category        = "terraform"
-  description     = "Polar webhook secret"
+  description     = "Tarifia webhook secret"
   sensitive       = true
   variable_set_id = tfe_variable_set.test.id
 }
 
-resource "tfe_variable" "polar_organization_id_test" {
-  key             = "polar_organization_id"
+resource "tfe_variable" "tarifia_organization_id_test" {
+  key             = "tarifia_organization_id"
   category        = "terraform"
-  description     = "Polar organization ID"
+  description     = "Tarifia organization ID"
   variable_set_id = tfe_variable_set.test.id
 
   lifecycle {
@@ -369,10 +369,10 @@ resource "tfe_variable" "polar_organization_id_test" {
   }
 }
 
-resource "tfe_variable" "polar_free_product_id_test" {
-  key             = "polar_free_product_id"
+resource "tfe_variable" "tarifia_free_product_id_test" {
+  key             = "tarifia_free_product_id"
   category        = "terraform"
-  description     = "Polar free-tier product ID"
+  description     = "Tarifia free-tier product ID"
   variable_set_id = tfe_variable_set.test.id
 
   lifecycle {
@@ -380,10 +380,10 @@ resource "tfe_variable" "polar_free_product_id_test" {
   }
 }
 
-resource "tfe_variable" "polar_scale_product_id_test" {
-  key             = "polar_scale_product_id"
+resource "tfe_variable" "tarifia_scale_product_id_test" {
+  key             = "tarifia_scale_product_id"
   category        = "terraform"
-  description     = "Polar Scale-tier product ID for test"
+  description     = "Tarifia Scale-tier product ID for test"
   variable_set_id = tfe_variable_set.test.id
 }
 
@@ -420,10 +420,10 @@ resource "tfe_variable" "vercel_sentry_auth_token_test" {
   variable_set_id = tfe_variable_set.test.id
 }
 
-resource "tfe_variable" "vercel_polar_preview_access_token_test" {
-  key             = "polar_preview_access_token"
+resource "tfe_variable" "vercel_tarifia_preview_access_token_test" {
+  key             = "tarifia_preview_access_token"
   category        = "terraform"
-  description     = "Polar preview access token for the Vercel test frontend"
+  description     = "Tarifia preview access token for the Vercel test frontend"
   sensitive       = true
   variable_set_id = tfe_variable_set.test.id
 }

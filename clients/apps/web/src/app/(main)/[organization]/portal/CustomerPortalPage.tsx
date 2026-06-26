@@ -1,11 +1,11 @@
 import { getServerSideAPI } from '@/utils/client/serverside'
 import { getBrowserLocale } from '@/utils/i18n'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import {
   type AcceptedLocale,
   DEFAULT_LOCALE,
   isAcceptedLocale,
-} from '@polar-sh/i18n'
+} from '@tarifia-sh/i18n'
 import { headers } from 'next/headers'
 import { Navigation } from './Navigation'
 

@@ -3,12 +3,12 @@ from dataclasses import dataclass, field
 
 import pytest_asyncio
 
-from polar.integrations.tinybird.client import TinybirdClient
-from polar.integrations.tinybird.schemas import TinybirdEvent
-from polar.integrations.tinybird.service import DATASOURCE_EVENTS, _event_to_tinybird
-from polar.kit.db.models import Model
-from polar.models import Event
-from polar.postgres import AsyncSession
+from tarifia.integrations.tinybird.client import TinybirdClient
+from tarifia.integrations.tinybird.schemas import TinybirdEvent
+from tarifia.integrations.tinybird.service import DATASOURCE_EVENTS, _event_to_tinybird
+from tarifia.kit.db.models import Model
+from tarifia.models import Event
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture, save_fixture_factory
 
 

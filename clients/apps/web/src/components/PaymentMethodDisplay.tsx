@@ -1,5 +1,5 @@
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
 import { Wallet } from 'lucide-react'
 import CreditCardBrandIcon from './CreditCardBrandIcon'
 
@@ -36,7 +36,7 @@ export const PaymentMethodDisplay = ({
         <CreditCardBrandIcon
           width="3.5em"
           brand={card.brand}
-          className="dark:border-polar-700 rounded-lg border border-gray-200"
+          className="dark:border-tarifia-700 rounded-lg border border-gray-200"
         />
         <Box flexDirection="column">
           <Text>{`${capitalize(card.brand)} •••• ${card.last4}`}</Text>

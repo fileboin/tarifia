@@ -1,16 +1,16 @@
 import Foundation
 
 enum WidgetTokenStore {
-    private static let accessGroup = "55U3YA3QTA.com.polarsource.Polar"
-    private static let appGroup = "group.com.polarsource.Polar"
+    private static let accessGroup = "55U3YA3QTA.com.tarifiasource.Tarifia"
+    private static let appGroup = "group.com.tarifiasource.Tarifia"
 
     private static let writeService = "app:no-auth"
     private static let readServices = ["app:no-auth", "app:auth", "app"]
 
     private static let clientID =
-        "polar_ci_yZLBGwoWZVsOdfN5CODRwVSTlJfwJhXqwg65e2CuNMZ"
+        "tarifia_ci_yZLBGwoWZVsOdfN5CODRwVSTlJfwJhXqwg65e2CuNMZ"
     private static let tokenEndpoint =
-        URL(string: "https://api.polar.sh/v1/oauth2/token")!
+        URL(string: "https://api.tarifia.sh/v1/oauth2/token")!
 
     private static let accessTokenKey = "session"
     private static let refreshTokenKey = "session_refresh_token"

@@ -5,13 +5,13 @@ import pytest
 from pytest_mock import MockerFixture
 from sqlalchemy.exc import IntegrityError
 
-from polar.auth.models import AuthSubject
-from polar.enums import SubscriptionRecurringInterval
-from polar.exceptions import NotPermitted, PolarRequestValidationError
-from polar.kit.pagination import PaginationParams
-from polar.member.repository import MemberRepository
-from polar.member.service import member_service
-from polar.models import (
+from tarifia.auth.models import AuthSubject
+from tarifia.enums import SubscriptionRecurringInterval
+from tarifia.exceptions import NotPermitted, TarifiaRequestValidationError
+from tarifia.kit.pagination import PaginationParams
+from tarifia.member.repository import MemberRepository
+from tarifia.member.service import member_service
+from tarifia.models import (
     Customer,
     CustomerSeat,
     Member,
@@ -19,10 +19,10 @@ from polar.models import (
     User,
     UserOrganization,
 )
-from polar.models.customer import CustomerType
-from polar.models.customer_seat import SeatStatus
-from polar.models.member import MemberRole
-from polar.postgres import AsyncSession
+from tarifia.models.customer import CustomerType
+from tarifia.models.customer_seat import SeatStatus
+from tarifia.models.member import MemberRole
+from tarifia.postgres import AsyncSession
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
@@ -639,7 +639,7 @@ class TestUpdate:
         organization: Organization,
     ) -> None:
         """Test that cannot change role when member is the only owner."""
-        from polar.exceptions import PolarRequestValidationError
+        from tarifia.exceptions import TarifiaRequestValidationError
 
         customer = await create_customer(
             save_fixture,
@@ -656,7 +656,7 @@ class TestUpdate:
         )
         await save_fixture(owner)
 
-        with pytest.raises(PolarRequestValidationError) as exc_info:
+        with pytest.raises(TarifiaRequestValidationError) as exc_info:
             await member_service.update(session, owner, role=MemberRole.member)
 
         assert "must have exactly one owner" in str(exc_info.value).lower()
@@ -669,7 +669,7 @@ class TestUpdate:
         organization: Organization,
     ) -> None:
         """Test that cannot promote member to owner when an owner already exists."""
-        from polar.exceptions import PolarRequestValidationError
+        from tarifia.exceptions import TarifiaRequestValidationError
 
         customer = await create_customer(
             save_fixture,
@@ -695,7 +695,7 @@ class TestUpdate:
         )
         await save_fixture(member)
 
-        with pytest.raises(PolarRequestValidationError) as exc_info:
+        with pytest.raises(TarifiaRequestValidationError) as exc_info:
             await member_service.update(session, member, role=MemberRole.owner)
 
         assert "only the owner can transfer ownership" in str(exc_info.value).lower()
@@ -868,7 +868,7 @@ class TestUpdateEmail:
             role=MemberRole.member,
         )
 
-        with pytest.raises(PolarRequestValidationError) as exc_info:
+        with pytest.raises(TarifiaRequestValidationError) as exc_info:
             await member_service.update(session, member, email="TAKEN@example.com")
 
         assert "already exists" in str(exc_info.value).lower()
@@ -898,7 +898,7 @@ class TestUpdateEmail:
             role=MemberRole.owner,
         )
 
-        with pytest.raises(PolarRequestValidationError) as exc_info:
+        with pytest.raises(TarifiaRequestValidationError) as exc_info:
             await member_service.update(session, owner, email="new@example.com")
 
         assert "individual customer" in str(exc_info.value).lower()
@@ -1080,7 +1080,7 @@ class TestDelete:
         organization: Organization,
     ) -> None:
         """Test that deleting a member enqueues a job to revoke their seats."""
-        enqueue_job_mock: MagicMock = mocker.patch("polar.member.service.enqueue_job")
+        enqueue_job_mock: MagicMock = mocker.patch("tarifia.member.service.enqueue_job")
 
         customer = await create_customer(
             save_fixture,
@@ -1126,7 +1126,7 @@ class TestDelete:
         organization: Organization,
     ) -> None:
         """Test that the only owner cannot be deleted."""
-        from polar.exceptions import PolarRequestValidationError
+        from tarifia.exceptions import TarifiaRequestValidationError
 
         customer = await create_customer(
             save_fixture,
@@ -1143,7 +1143,7 @@ class TestDelete:
         )
         await save_fixture(owner)
 
-        with pytest.raises(PolarRequestValidationError) as exc_info:
+        with pytest.raises(TarifiaRequestValidationError) as exc_info:
             await member_service.delete(session, owner)
 
         assert "only owner" in str(exc_info.value).lower()
@@ -1158,7 +1158,7 @@ class TestDeleteByCustomer:
         session: AsyncSession,
         organization: Organization,
     ) -> None:
-        enqueue_job_mock: MagicMock = mocker.patch("polar.member.service.enqueue_job")
+        enqueue_job_mock: MagicMock = mocker.patch("tarifia.member.service.enqueue_job")
 
         customer = await create_customer(
             save_fixture,
@@ -1204,7 +1204,7 @@ class TestDeleteByCustomer:
         organization: Organization,
     ) -> None:
         enqueue_member_mock: MagicMock = mocker.patch(
-            "polar.benefit.grant.service.BenefitGrantService"
+            "tarifia.benefit.grant.service.BenefitGrantService"
             ".enqueue_member_grant_deletions"
         )
 

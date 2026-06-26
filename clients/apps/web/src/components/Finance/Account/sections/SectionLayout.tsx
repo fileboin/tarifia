@@ -1,7 +1,7 @@
 'use client'
 
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
 import type { ReactNode } from 'react'
 
 interface Props {

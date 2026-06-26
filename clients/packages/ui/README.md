@@ -1,9 +1,9 @@
-# @polar-sh/ui
+# @tarifia-sh/ui
 
-This is the UI library for the Polar project.
+This is the UI library for the Tarifia project.
 
 > [!NOTE]
-> This is a private library for the Polar project. You probably shouldn't use it directly in your own projects.
+> This is a private library for the Tarifia project. You probably shouldn't use it directly in your own projects.
 
 ## Structure
 

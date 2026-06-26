@@ -1,10 +1,10 @@
 'use client'
 
 import { DashboardBody } from '@/components/Layout/DashboardLayout'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { AIProductChat } from './AIProductChat'
 import Link from 'next/link'
-import { Button } from '@polar-sh/orbit'
+import { Button } from '@tarifia-sh/orbit'
 import { ArrowLeftIcon } from 'lucide-react'
 
 export default function AIProductPage({

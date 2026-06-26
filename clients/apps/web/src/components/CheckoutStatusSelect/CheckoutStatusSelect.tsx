@@ -1,5 +1,5 @@
 import { CheckoutStatusDisplayTitle } from '@/utils/checkout'
-import { enums } from '@polar-sh/client'
+import { enums } from '@tarifia-sh/client'
 import {
   Select,
   SelectContent,
@@ -7,7 +7,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
 import React from 'react'
 
 interface CheckoutStatusSelectProps {

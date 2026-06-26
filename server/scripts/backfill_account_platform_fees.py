@@ -4,8 +4,8 @@ from functools import wraps
 import typer
 from sqlalchemy import or_, select, update
 
-from polar.config import settings
-from polar.models import Account
+from tarifia.config import settings
+from tarifia.models import Account
 from scripts.helper import (
     configure_script_logging,
     limit_bindparam,

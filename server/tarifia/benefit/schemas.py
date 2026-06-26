@@ -1,0 +1,217 @@
+from typing import Annotated
+
+from pydantic import UUID4, Discriminator
+
+from tarifia.benefit.strategies.custom.properties import BenefitGrantCustomProperties
+from tarifia.benefit.strategies.discord.properties import BenefitGrantDiscordProperties
+from tarifia.benefit.strategies.downloadables.properties import (
+    BenefitGrantDownloadablesProperties,
+)
+from tarifia.benefit.strategies.feature_flag.properties import (
+    BenefitGrantFeatureFlagProperties,
+)
+from tarifia.benefit.strategies.github_repository.properties import (
+    BenefitGrantGitHubRepositoryProperties,
+)
+from tarifia.benefit.strategies.license_keys.properties import (
+    BenefitGrantLicenseKeysProperties,
+)
+from tarifia.benefit.strategies.meter_credit.properties import (
+    BenefitGrantMeterCreditProperties,
+)
+from tarifia.benefit.strategies.slack_shared_channel.properties import (
+    BenefitGrantSlackSharedChannelProperties,
+)
+from tarifia.customer.schemas.customer import CustomerResponse as Customer
+from tarifia.kit.schemas import (
+    ClassName,
+    MergeJSONSchema,
+    SelectorWidget,
+    SetSchemaReference,
+)
+from tarifia.member.schemas import Member
+from tarifia.models.benefit import BenefitType
+
+from .strategies import BenefitGrantProperties
+from .strategies.base.schemas import BenefitGrantBase, BenefitPublicBase
+from .strategies.custom.schemas import (
+    BenefitCustom,
+    BenefitCustomCreate,
+    BenefitCustomUpdate,
+)
+from .strategies.discord.schemas import (
+    BenefitDiscord,
+    BenefitDiscordCreate,
+    BenefitDiscordUpdate,
+)
+from .strategies.downloadables.schemas import (
+    BenefitDownloadables,
+    BenefitDownloadablesCreate,
+    BenefitDownloadablesUpdate,
+)
+from .strategies.feature_flag.schemas import (
+    BenefitFeatureFlag,
+    BenefitFeatureFlagCreate,
+    BenefitFeatureFlagUpdate,
+)
+from .strategies.github_repository.schemas import (
+    BenefitGitHubRepository,
+    BenefitGitHubRepositoryCreate,
+    BenefitGitHubRepositoryUpdate,
+)
+from .strategies.license_keys.schemas import (
+    BenefitLicenseKeys,
+    BenefitLicenseKeysCreate,
+    BenefitLicenseKeysUpdate,
+)
+from .strategies.meter_credit.schemas import (
+    BenefitMeterCredit,
+    BenefitMeterCreditCreate,
+    BenefitMeterCreditUpdate,
+)
+from .strategies.slack_shared_channel.schemas import (
+    BenefitSlackSharedChannel,
+    BenefitSlackSharedChannelCreate,
+    BenefitSlackSharedChannelUpdate,
+)
+
+BENEFIT_DESCRIPTION_MIN_LENGTH = 3
+BENEFIT_DESCRIPTION_MAX_LENGTH = 42
+
+BenefitID = Annotated[
+    UUID4,
+    MergeJSONSchema({"description": "The benefit ID."}),
+    SelectorWidget("/v1/benefits", "Benefit", "description"),
+]
+
+
+BenefitCreate = Annotated[
+    BenefitCustomCreate
+    | BenefitDiscordCreate
+    | BenefitGitHubRepositoryCreate
+    | BenefitDownloadablesCreate
+    | BenefitLicenseKeysCreate
+    | BenefitMeterCreditCreate
+    | BenefitFeatureFlagCreate
+    | BenefitSlackSharedChannelCreate,
+    Discriminator("type"),
+    SetSchemaReference("BenefitCreate"),
+]
+
+
+BenefitUpdate = (
+    BenefitCustomUpdate
+    | BenefitDiscordUpdate
+    | BenefitGitHubRepositoryUpdate
+    | BenefitDownloadablesUpdate
+    | BenefitLicenseKeysUpdate
+    | BenefitMeterCreditUpdate
+    | BenefitFeatureFlagUpdate
+    | BenefitSlackSharedChannelUpdate
+)
+
+
+Benefit = Annotated[
+    BenefitCustom
+    | BenefitDiscord
+    | BenefitGitHubRepository
+    | BenefitDownloadables
+    | BenefitLicenseKeys
+    | BenefitMeterCredit
+    | BenefitFeatureFlag
+    | BenefitSlackSharedChannel,
+    Discriminator("type"),
+    SetSchemaReference("Benefit"),
+    MergeJSONSchema({"title": "Benefit"}),
+    ClassName("Benefit"),
+]
+
+benefit_schema_map: dict[BenefitType, type[Benefit]] = {
+    BenefitType.discord: BenefitDiscord,
+    BenefitType.custom: BenefitCustom,
+    BenefitType.github_repository: BenefitGitHubRepository,
+    BenefitType.downloadables: BenefitDownloadables,
+    BenefitType.license_keys: BenefitLicenseKeys,
+    BenefitType.meter_credit: BenefitMeterCredit,
+    BenefitType.feature_flag: BenefitFeatureFlag,
+    BenefitType.slack_shared_channel: BenefitSlackSharedChannel,
+}
+
+
+class BenefitGrant(BenefitGrantBase):
+    customer: Customer
+    member: Member | None = None
+    benefit: "Benefit"
+    properties: BenefitGrantProperties
+
+
+class BenefitGrantWebhookBase(BenefitGrantBase):
+    customer: Customer
+    member: Member | None = None
+
+
+class BenefitGrantDiscordWebhook(BenefitGrantWebhookBase):
+    benefit: BenefitDiscord
+    properties: BenefitGrantDiscordProperties
+    previous_properties: BenefitGrantDiscordProperties | None = None
+
+
+class BenefitGrantCustomWebhook(BenefitGrantWebhookBase):
+    benefit: BenefitCustom
+    properties: BenefitGrantCustomProperties
+    previous_properties: BenefitGrantCustomProperties | None = None
+
+
+class BenefitGrantGitHubRepositoryWebhook(BenefitGrantWebhookBase):
+    benefit: BenefitGitHubRepository
+    properties: BenefitGrantGitHubRepositoryProperties
+    previous_properties: BenefitGrantGitHubRepositoryProperties | None = None
+
+
+class BenefitGrantDownloadablesWebhook(BenefitGrantWebhookBase):
+    benefit: BenefitDownloadables
+    properties: BenefitGrantDownloadablesProperties
+    previous_properties: BenefitGrantDownloadablesProperties | None = None
+
+
+class BenefitGrantLicenseKeysWebhook(BenefitGrantWebhookBase):
+    benefit: BenefitLicenseKeys
+    properties: BenefitGrantLicenseKeysProperties
+    previous_properties: BenefitGrantLicenseKeysProperties | None = None
+
+
+class BenefitGrantMeterCreditWebhook(BenefitGrantWebhookBase):
+    benefit: BenefitMeterCredit
+    properties: BenefitGrantMeterCreditProperties
+    previous_properties: BenefitGrantMeterCreditProperties | None = None
+
+
+class BenefitGrantFeatureFlagWebhook(BenefitGrantWebhookBase):
+    benefit: BenefitFeatureFlag
+    properties: BenefitGrantFeatureFlagProperties
+    previous_properties: BenefitGrantFeatureFlagProperties | None = None
+
+
+class BenefitGrantSlackSharedChannelWebhook(BenefitGrantWebhookBase):
+    benefit: BenefitSlackSharedChannel
+    properties: BenefitGrantSlackSharedChannelProperties
+    previous_properties: BenefitGrantSlackSharedChannelProperties | None = None
+
+
+BenefitGrantWebhook = Annotated[
+    BenefitGrantDiscordWebhook
+    | BenefitGrantCustomWebhook
+    | BenefitGrantGitHubRepositoryWebhook
+    | BenefitGrantDownloadablesWebhook
+    | BenefitGrantLicenseKeysWebhook
+    | BenefitGrantMeterCreditWebhook
+    | BenefitGrantFeatureFlagWebhook
+    | BenefitGrantSlackSharedChannelWebhook,
+    SetSchemaReference("BenefitGrantWebhook"),
+    MergeJSONSchema({"title": "BenefitGrantWebhook"}),
+    ClassName("BenefitGrantWebhook"),
+]
+
+
+# Properties that are public (when embedding products benefits in storefront and checkout)
+class BenefitPublic(BenefitPublicBase): ...

@@ -6,8 +6,8 @@ import {
   useUpdateOrganizationBenefitGrant,
   type OrganizationBenefitGrant,
 } from '@/hooks/queries/billing'
-import { Button, Input, Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
+import { Button, Input, Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
 import { useState } from 'react'
 import { Section, SectionDescription } from '../Section'
 
@@ -141,7 +141,7 @@ export const BillingBenefitGrants = ({
       <Box flexDirection="column" rowGap="l">
         <SectionDescription
           title="Slack channel"
-          description="Shared Slack Connect channel with the Polar team, included in your plan"
+          description="Shared Slack Connect channel with the Tarifia team, included in your plan"
         />
         {grants.map((grant) => (
           <Box

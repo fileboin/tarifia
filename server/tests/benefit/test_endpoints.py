@@ -5,9 +5,9 @@ import pytest
 import pytest_asyncio
 from httpx import AsyncClient
 
-from polar.auth.scope import Scope
-from polar.kit.visibility import Visibility
-from polar.models import (
+from tarifia.auth.scope import Scope
+from tarifia.kit.visibility import Visibility
+from tarifia.models import (
     Benefit,
     Customer,
     Member,
@@ -15,7 +15,7 @@ from polar.models import (
     Subscription,
     UserOrganization,
 )
-from polar.models.benefit import BenefitType
+from tarifia.models.benefit import BenefitType
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_benefit, create_benefit_grant

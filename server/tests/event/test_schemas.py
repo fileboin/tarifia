@@ -4,10 +4,10 @@ from typing import Any, get_args, get_type_hints
 import pytest
 from pydantic import ValidationError
 
-from polar.event.schemas import EventCreateCustomer, EventCreateExternalCustomer
-from polar.event.schemas import SystemEvent as SystemEventUnion
-from polar.event.system import SYSTEM_EVENT_LABELS
-from polar.event.system import SystemEvent as SystemEventEnum
+from tarifia.event.schemas import EventCreateCustomer, EventCreateExternalCustomer
+from tarifia.event.schemas import SystemEvent as SystemEventUnion
+from tarifia.event.system import SYSTEM_EVENT_LABELS
+from tarifia.event.system import SystemEvent as SystemEventEnum
 
 
 @pytest.mark.parametrize(

@@ -3,7 +3,7 @@ import json
 import httpx
 import pytest
 
-from polar.integrations.slack.client import BASE_URL, SlackClient
+from tarifia.integrations.slack.client import BASE_URL, SlackClient
 
 
 @pytest.mark.asyncio

@@ -1,6 +1,6 @@
-import { schemas } from '@polar-sh/client'
-import { Button, Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
+import { schemas } from '@tarifia-sh/client'
+import { Button, Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
 import { AlertTriangleIcon } from 'lucide-react'
 import Link from 'next/link'
 

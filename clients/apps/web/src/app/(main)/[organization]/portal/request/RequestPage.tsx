@@ -2,25 +2,25 @@
 
 import { useCustomerPortalSessionRequest } from '@/hooks/queries/customerPortal'
 import { setValidationErrors } from '@/utils/api/errors'
-import { Button } from '@polar-sh/orbit'
-import { Input } from '@polar-sh/orbit'
-import ShadowBox from '@polar-sh/ui/components/atoms/ShadowBox'
+import { Button } from '@tarifia-sh/orbit'
+import { Input } from '@tarifia-sh/orbit'
+import ShadowBox from '@tarifia-sh/ui/components/atoms/ShadowBox'
 import { useRouter } from 'next/navigation'
 
 import { api } from '@/utils/client'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
-import { Label } from '@polar-sh/ui/components/ui/label'
+} from '@tarifia-sh/ui/components/ui/form'
+import { Label } from '@tarifia-sh/ui/components/ui/label'
 import {
   RadioGroup,
   RadioGroupItem,
-} from '@polar-sh/ui/components/ui/radio-group'
+} from '@tarifia-sh/ui/components/ui/radio-group'
 import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -95,7 +95,7 @@ const ClientPage = ({
             <h2 className="text-2xl text-black dark:text-white">
               Select an account
             </h2>
-            <p className="dark:text-polar-400 text-gray-500">
+            <p className="dark:text-tarifia-400 text-gray-500">
               Multiple accounts are associated with this email. Please select
               the account you want to access.
             </p>
@@ -108,7 +108,7 @@ const ClientPage = ({
             {customers.map((customer) => (
               <div
                 key={customer.id}
-                className="dark:hover:bg-polar-800 flex items-center space-x-3 rounded-lg border p-4 hover:bg-gray-50"
+                className="dark:hover:bg-tarifia-800 flex items-center space-x-3 rounded-lg border p-4 hover:bg-gray-50"
               >
                 <RadioGroupItem value={customer.id} id={customer.id} />
                 <Label
@@ -152,7 +152,7 @@ const ClientPage = ({
       <div className="flex w-full flex-col gap-y-6 md:max-w-sm">
         <div className="flex flex-col gap-4">
           <h2 className="text-2xl text-black dark:text-white">Sign in</h2>
-          <p className="dark:text-polar-400 text-gray-500">
+          <p className="dark:text-tarifia-400 text-gray-500">
             Enter your email address to access your purchases. A verification
             code will be sent to you.
           </p>

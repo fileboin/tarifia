@@ -1,9 +1,9 @@
 'use client'
 
 import { useCustomerBenefitGrants } from '@/hooks/queries/customerPortal'
-import { Client } from '@polar-sh/client'
-import { Input } from '@polar-sh/orbit'
-import { List, ListItem } from '@polar-sh/orbit'
+import { Client } from '@tarifia-sh/client'
+import { Input } from '@tarifia-sh/orbit'
+import { List, ListItem } from '@tarifia-sh/orbit'
 import { Loader2, Search } from 'lucide-react'
 import { useCallback, useState } from 'react'
 import { BenefitGrant } from '../Benefit/BenefitGrant'
@@ -68,7 +68,7 @@ export const CustomerPortalGrantsComplex = ({
       {/* Grants list with loading overlay */}
       <div className="relative">
         {grants.length === 0 && !isLoading ? (
-          <div className="dark:border-polar-700 dark:text-polar-500 rounded-xl border border-gray-200 py-8 text-center text-sm text-gray-500">
+          <div className="dark:border-tarifia-700 dark:text-tarifia-500 rounded-xl border border-gray-200 py-8 text-center text-sm text-gray-500">
             No benefit grants found
           </div>
         ) : (
@@ -89,7 +89,7 @@ export const CustomerPortalGrantsComplex = ({
         {/* Loading overlay */}
         {(isLoading || isFetching) && (
           <div className="absolute inset-0 flex items-center justify-center rounded-xl bg-white/50 dark:bg-black/50">
-            <Loader2 className="dark:text-polar-500 h-5 w-5 animate-spin text-gray-500" />
+            <Loader2 className="dark:text-tarifia-500 h-5 w-5 animate-spin text-gray-500" />
           </div>
         )}
       </div>

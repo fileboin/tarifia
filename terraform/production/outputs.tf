@@ -1,16 +1,16 @@
 output "render_project_id" {
-  description = "The project ID for the Polar Render project. Used for the render_project data source."
-  value       = render_project.polar.id
+  description = "The project ID for the Tarifia Render project. Used for the render_project data source."
+  value       = render_project.tarifia.id
 }
 
 output "sandbox_environment_id" {
-  description = "The Sandbox environment ID within the Polar project."
-  value       = render_project.polar.environments["Sandbox"].id
+  description = "The Sandbox environment ID within the Tarifia project."
+  value       = render_project.tarifia.environments["Sandbox"].id
 }
 
 output "test_environment_id" {
-  description = "The Test environment ID within the Polar project."
-  value       = render_project.polar.environments["Test"].id
+  description = "The Test environment ID within the Tarifia project."
+  value       = render_project.tarifia.environments["Test"].id
 }
 
 output "postgres_id" {

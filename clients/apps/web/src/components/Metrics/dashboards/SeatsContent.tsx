@@ -2,7 +2,7 @@
 
 import MetricChartBox from '@/components/Metrics/MetricChartBox'
 import { ParsedMetricsResponse } from '@/hooks/queries'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { useRef, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 
@@ -42,7 +42,7 @@ function MetricSection({
   return (
     <div className="flex flex-col gap-y-3">
       <h3 className="text-lg font-medium">{title}</h3>
-      <div className="dark:border-polar-700 flex flex-col overflow-hidden rounded-2xl border border-gray-200">
+      <div className="dark:border-tarifia-700 flex flex-col overflow-hidden rounded-2xl border border-gray-200">
         <div className="grid grid-cols-1 flex-col [clip-path:inset(1px_1px_1px_1px)] md:grid-cols-2 lg:grid-cols-3">
           {metricKeys.map((metricKey, index) => (
             <MetricChartBox
@@ -65,7 +65,7 @@ function MetricSection({
               className={twMerge(
                 'rounded-none! bg-transparent dark:bg-transparent',
                 index === 0 && 'lg:col-span-2',
-                'dark:border-polar-700 border-t-0 border-r border-b border-l-0 border-gray-200 shadow-none',
+                'dark:border-tarifia-700 border-t-0 border-r border-b border-l-0 border-gray-200 shadow-none',
               )}
             />
           ))}

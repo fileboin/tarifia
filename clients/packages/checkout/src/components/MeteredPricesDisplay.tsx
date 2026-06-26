@@ -4,7 +4,7 @@ import {
   DEFAULT_LOCALE,
   useTranslations,
   type AcceptedLocale,
-} from '@polar-sh/i18n'
+} from '@tarifia-sh/i18n'
 import { useMemo } from 'react'
 import { ProductCheckoutPublic } from '../guards'
 import { getMeteredPrices } from '../utils/product'
@@ -63,7 +63,7 @@ const MeteredPricesDisplay = ({
       {meteredPrices.map((price) => (
         <div
           key={price.id}
-          className="dark:text-polar-100 flex flex-row items-center gap-x-2 text-sm text-gray-600"
+          className="dark:text-tarifia-100 flex flex-row items-center gap-x-2 text-sm text-gray-600"
         >
           <GaugeIcon className="h-4 w-4" />
           <ProductPriceLabel product={product} price={price} locale={locale} />

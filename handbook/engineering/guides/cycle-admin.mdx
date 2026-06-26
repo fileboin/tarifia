@@ -1,11 +1,11 @@
 ---
-title: "Polar Cycle"
-description: "How to configure Polar Cycle, the Slack bot that announces PRs and rotates the primary reviewer"
+title: "Tarifia Cycle"
+description: "How to configure Tarifia Cycle, the Slack bot that announces PRs and rotates the primary reviewer"
 ---
 
-Polar Cycle is the small Slack bot that posts PR threads in `#pull-requests` and picks a primary reviewer whenever a team is requested for review. It runs on Vercel at [polar-cycle.vercel.app](https://polar-cycle.vercel.app), with a tiny admin UI for the bits we need to tweak day to day.
+Tarifia Cycle is the small Slack bot that posts PR threads in `#pull-requests` and picks a primary reviewer whenever a team is requested for review. It runs on Vercel at [tarifia-cycle.vercel.app](https://tarifia-cycle.vercel.app), with a tiny admin UI for the bits we need to tweak day to day.
 
-This guide covers what the admin panel does and the most common tasks you will run from it. The implementation lives in [`polarsource/cycle`](https://github.com/polarsource/cycle).
+This guide covers what the admin panel does and the most common tasks you will run from it. The implementation lives in [`tarifiasource/cycle`](https://github.com/tarifiasource/cycle).
 
 ## What Cycle does
 
@@ -34,11 +34,11 @@ Cycle stores its state in Upstash Redis. There is no Postgres, no migrations —
 
 ### Open the admin
 
-Go to [polar-cycle.vercel.app/admin](https://polar-cycle.vercel.app/admin).
+Go to [tarifia-cycle.vercel.app/admin](https://tarifia-cycle.vercel.app/admin).
 
 ### Sign in with GitHub
 
-Click **Sign in with GitHub**. You must be a member of `@polarsource` — Cycle calls the GitHub API with your token to verify org membership before issuing a session. Anyone in the org can sign in and edit configuration; there are no further role checks.
+Click **Sign in with GitHub**. You must be a member of `@tarifiasource` — Cycle calls the GitHub API with your token to verify org membership before issuing a session. Anyone in the org can sign in and edit configuration; there are no further role checks.
 
 Sessions are signed cookies that last 7 days. Use **Sign out** in the top right to clear yours.
 
@@ -56,11 +56,11 @@ There is exactly one channel for the whole bot. Changing it affects every repo C
 
 ### Repositories
 
-A newline-separated list of `owner/repo` slugs that Cycle should listen to (e.g. `polarsource/polar`). Cycle ignores webhooks for any repo not in this list, so adding a new repo here is the switch that turns Cycle on for it.
+A newline-separated list of `owner/repo` slugs that Cycle should listen to (e.g. `tarifiasource/tarifia`). Cycle ignores webhooks for any repo not in this list, so adding a new repo here is the switch that turns Cycle on for it.
 
 <Note>
   Webhooks are configured at the GitHub App level (separately from this panel). If you add a
-  brand-new repo and Cycle is not posting anything, double-check that the **Polar Cycle** GitHub App
+  brand-new repo and Cycle is not posting anything, double-check that the **Tarifia Cycle** GitHub App
   is installed on it. The repo list here is a filter, not a subscription.
 </Note>
 
@@ -100,7 +100,7 @@ While excluded, the user will not be picked as primary reviewer for any PR. They
 
 ### Adding a new repo to the rotation
 
-1. Make sure the **Polar Cycle** GitHub App is installed on the repo (org admins can do this).
+1. Make sure the **Tarifia Cycle** GitHub App is installed on the repo (org admins can do this).
 2. Open the admin panel and add `owner/repo` on a new line under **Repositories**.
 3. Save. The next opened PR in that repo should produce a Slack thread.
 
@@ -123,7 +123,7 @@ They are missing from the **GitHub → Slack mapping** table, or the mapped Slac
 
 ## Reference
 
-- Source: [`polarsource/cycle`](https://github.com/polarsource/cycle)
-- Admin URL: https://polar-cycle.vercel.app/admin
+- Source: [`tarifiasource/cycle`](https://github.com/tarifiasource/cycle)
+- Admin URL: https://tarifia-cycle.vercel.app/admin
 - Storage: Upstash Redis (configured via Vercel env vars)
-- Auth: GitHub OAuth, restricted to `@polarsource` org members, signed-cookie sessions (7-day TTL)
+- Auth: GitHub OAuth, restricted to `@tarifiasource` org members, signed-cookie sessions (7-day TTL)

@@ -1,11 +1,11 @@
 'use client'
 
 import { useSubscriptions } from '@/hooks/queries'
-import { Modal } from '@polar-sh/orbit'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import FormattedDateTime from '@polar-sh/ui/components/atoms/FormattedDateTime'
-import FormattedInterval from '@polar-sh/ui/components/atoms/FormattedInterval'
+import { Modal } from '@tarifia-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import FormattedDateTime from '@tarifia-sh/ui/components/atoms/FormattedDateTime'
+import FormattedInterval from '@tarifia-sh/ui/components/atoms/FormattedInterval'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useState } from 'react'
@@ -66,14 +66,14 @@ export function CancellationReasonModal({
                 {Array.from({ length: 3 }).map((_, i) => (
                   <div
                     key={i}
-                    className="dark:bg-polar-700 h-14 animate-pulse rounded-lg bg-gray-100"
+                    className="dark:bg-tarifia-700 h-14 animate-pulse rounded-lg bg-gray-100"
                   />
                 ))}
               </div>
             )}
 
             {resolvedTotalCount === 0 ? (
-              <div className="dark:text-polar-400 text-center text-sm text-gray-500">
+              <div className="dark:text-tarifia-400 text-center text-sm text-gray-500">
                 No &ldquo;{REASON_LABELS[reason]}&rdquo; cancellations
               </div>
             ) : (
@@ -89,7 +89,7 @@ export function CancellationReasonModal({
 
           {maxPage > 1 && (
             <div className="flex items-center justify-between">
-              <span className="dark:text-polar-400 text-xs text-gray-500">
+              <span className="dark:text-tarifia-400 text-xs text-gray-500">
                 Page {page} of {maxPage}
               </span>
               <div className="flex gap-2">
@@ -128,7 +128,7 @@ function SubscriptionRow({
   const { organization } = useParams<{ organization: string }>()
 
   return (
-    <div className="dark:border-polar-700 flex flex-col gap-1 rounded-lg border border-gray-200 px-3 py-2">
+    <div className="dark:border-tarifia-700 flex flex-col gap-1 rounded-lg border border-gray-200 px-3 py-2">
       <div className="flex items-center justify-between gap-2">
         <div className="flex flex-col gap-0.5 overflow-hidden">
           <Link
@@ -140,7 +140,7 @@ function SubscriptionRow({
           {subscription.customer.name && (
             <Link
               href={`/dashboard/${organization}/customers/${subscription.customer.id}`}
-              className="dark:text-polar-400 truncate text-xs text-gray-500 hover:underline"
+              className="dark:text-tarifia-400 truncate text-xs text-gray-500 hover:underline"
             >
               {subscription.customer.email}
             </Link>
@@ -149,19 +149,19 @@ function SubscriptionRow({
         <div className="flex flex-col items-end gap-0.5">
           <Link
             href={`/dashboard/${organization}/sales/subscriptions/${subscription.id}`}
-            className="dark:text-polar-400 text-xs text-gray-500 hover:underline"
+            className="dark:text-tarifia-400 text-xs text-gray-500 hover:underline"
           >
             {subscription.product.name}
           </Link>
           {subscription.canceled_at && (
-            <span className="dark:text-polar-400 text-xs text-gray-500">
+            <span className="dark:text-tarifia-400 text-xs text-gray-500">
               <FormattedDateTime datetime={subscription.canceled_at} />
             </span>
           )}
         </div>
       </div>
       {showComment && subscription.customer_cancellation_comment && (
-        <div className="dark:bg-polar-800 dark:text-polar-400 mt-1 rounded bg-gray-50 px-2 py-1.5 text-xs text-gray-600">
+        <div className="dark:bg-tarifia-800 dark:text-tarifia-400 mt-1 rounded bg-gray-50 px-2 py-1.5 text-xs text-gray-600">
           {subscription.customer_cancellation_comment}
         </div>
       )}

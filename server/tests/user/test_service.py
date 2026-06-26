@@ -3,19 +3,19 @@ import stripe as stripe_lib
 from pytest_mock import MockerFixture
 from sqlalchemy import select
 
-from polar.kit.utils import utc_now
-from polar.models import (
+from tarifia.kit.utils import utc_now
+from tarifia.models import (
     NotificationRecipient,
     OAuthAccount,
     Organization,
     User,
     UserOrganization,
 )
-from polar.models.user import IdentityVerificationStatus, OAuthPlatform
-from polar.models.user_organization import OrganizationRole
-from polar.postgres import AsyncSession
-from polar.user.schemas import UserDeletionBlockedReason, UserUpdate
-from polar.user.service import user as user_service
+from tarifia.models.user import IdentityVerificationStatus, OAuthPlatform
+from tarifia.models.user_organization import OrganizationRole
+from tarifia.postgres import AsyncSession
+from tarifia.user.schemas import UserDeletionBlockedReason, UserUpdate
+from tarifia.user.service import user as user_service
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_notification_recipient,
@@ -105,7 +105,7 @@ class TestUpdate:
         await save_fixture(user)
 
         enqueue_mock = mocker.patch(
-            "polar.user.service.polar_self_service.enqueue_update_member"
+            "tarifia.user.service.tarifia_self_service.enqueue_update_member"
         )
 
         await user_service.update(
@@ -132,7 +132,7 @@ class TestUpdate:
         await save_fixture(user)
 
         enqueue_mock = mocker.patch(
-            "polar.user.service.polar_self_service.enqueue_update_member"
+            "tarifia.user.service.tarifia_self_service.enqueue_update_member"
         )
 
         await user_service.update(
@@ -155,7 +155,7 @@ class TestUpdate:
         await save_fixture(user)
 
         enqueue_mock = mocker.patch(
-            "polar.user.service.polar_self_service.enqueue_update_member"
+            "tarifia.user.service.tarifia_self_service.enqueue_update_member"
         )
 
         await user_service.update(
@@ -181,7 +181,7 @@ class TestRequestDeletion:
         assert result.blocked_reasons == []
         assert user.deleted_at is not None
         assert user.email != original_email
-        assert user.email.endswith("@anonymized.polar.sh")
+        assert user.email.endswith("@anonymized.tarifia.sh")
 
     async def test_blocked_with_active_organization(
         self,
@@ -217,7 +217,7 @@ class TestRequestDeletion:
 
         assert result.deleted is True
         assert user.email != original_email
-        assert user.email.endswith("@anonymized.polar.sh")
+        assert user.email.endswith("@anonymized.tarifia.sh")
         assert user.avatar_url is None
         assert user.meta == {}
         assert user.deleted_at is not None
@@ -318,7 +318,7 @@ class TestIdentityVerificationVerified:
         await create_payout_account(save_fixture, organization_second, user)
 
         maybe_activate_mock = mocker.patch(
-            "polar.user.service.organization_service.maybe_activate",
+            "tarifia.user.service.organization_service.maybe_activate",
             new_callable=mocker.AsyncMock,
         )
 

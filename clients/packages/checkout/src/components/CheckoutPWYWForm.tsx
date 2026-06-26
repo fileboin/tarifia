@@ -1,18 +1,18 @@
-import type { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
+import type { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
 import {
   DEFAULT_LOCALE,
   useTranslations,
   type AcceptedLocale,
-} from '@polar-sh/i18n'
-import MoneyInput from '@polar-sh/ui/components/atoms/MoneyInput'
+} from '@tarifia-sh/i18n'
+import MoneyInput from '@tarifia-sh/ui/components/atoms/MoneyInput'
 import {
   Form,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { useCallback, useEffect, useRef } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import useDebouncedCallback from '../hooks/debounce'

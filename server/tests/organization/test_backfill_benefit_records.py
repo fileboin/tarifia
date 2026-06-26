@@ -2,16 +2,16 @@ import uuid
 
 import pytest
 
-from polar.enums import SubscriptionRecurringInterval
-from polar.kit.db.postgres import AsyncSession
-from polar.kit.utils import utc_now
-from polar.models import Account, User
-from polar.models.benefit import BenefitType
-from polar.models.downloadable import Downloadable, DownloadableStatus
-from polar.models.file import File, FileServiceTypes
-from polar.models.license_key import LicenseKey
-from polar.models.member import MemberRole
-from polar.models.subscription import SubscriptionStatus
+from tarifia.enums import SubscriptionRecurringInterval
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.kit.utils import utc_now
+from tarifia.models import Account, User
+from tarifia.models.benefit import BenefitType
+from tarifia.models.downloadable import Downloadable, DownloadableStatus
+from tarifia.models.file import File, FileServiceTypes
+from tarifia.models.license_key import LicenseKey
+from tarifia.models.member import MemberRole
+from tarifia.models.subscription import SubscriptionStatus
 from scripts.migrate_organizations_members import (
     _backfill_downloadables,
     _backfill_license_keys,
@@ -72,7 +72,7 @@ class TestBackfillLicenseKeys:
             organization_id=organization.id,
             customer_id=customer.id,
             benefit_id=benefit.id,
-            key="POLAR-TEST-KEY-001",
+            key="TARIFIA-TEST-KEY-001",
         )
         await save_fixture(license_key)
         lk_id = license_key.id
@@ -138,7 +138,7 @@ class TestBackfillLicenseKeys:
             customer_id=customer.id,
             benefit_id=benefit.id,
             member_id=member.id,
-            key="POLAR-ALREADY-LINKED",
+            key="TARIFIA-ALREADY-LINKED",
         )
         await save_fixture(license_key)
         lk_id = license_key.id
@@ -194,7 +194,7 @@ class TestBackfillLicenseKeys:
             organization_id=organization.id,
             customer_id=customer.id,
             benefit_id=benefit.id,
-            key="POLAR-NO-MEMBER-GRANT",
+            key="TARIFIA-NO-MEMBER-GRANT",
         )
         await save_fixture(license_key)
         lk_id = license_key.id
@@ -258,7 +258,7 @@ class TestBackfillLicenseKeys:
             organization_id=organization.id,
             customer_id=customer.id,
             benefit_id=benefit.id,
-            key="POLAR-DELETED-GRANT",
+            key="TARIFIA-DELETED-GRANT",
         )
         await save_fixture(license_key)
         lk_id = license_key.id
@@ -325,7 +325,7 @@ class TestBackfillLicenseKeys:
             organization_id=organization.id,
             customer_id=customer.id,
             benefit_id=benefit.id,
-            key="POLAR-IDEMPOTENT",
+            key="TARIFIA-IDEMPOTENT",
         )
         await save_fixture(license_key)
         lk_id = license_key.id
@@ -394,7 +394,7 @@ class TestBackfillLicenseKeys:
                 organization_id=organization.id,
                 customer_id=customer.id,
                 benefit_id=benefit.id,
-                key=f"POLAR-MULTI-{i}",
+                key=f"TARIFIA-MULTI-{i}",
             )
             await save_fixture(lk)
             lk_ids.append(lk.id)

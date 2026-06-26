@@ -3,15 +3,15 @@
 import { usePortalAuthenticatedUser } from '@/hooks/queries/customerPortal'
 import { createClientSideAPI } from '@/utils/client'
 import { hasBillingPermission } from '@/utils/customerPortal'
-import { Client, schemas } from '@polar-sh/client'
-import { type AcceptedLocale } from '@polar-sh/i18n'
+import { Client, schemas } from '@tarifia-sh/client'
+import { type AcceptedLocale } from '@tarifia-sh/i18n'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
 import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { twMerge } from 'tailwind-merge'
@@ -87,7 +87,7 @@ const NavigationContent = ({
           <span
             className={twMerge(
               authenticatedUser?.name
-                ? 'dark:text-polar-500 text-gray-500'
+                ? 'dark:text-tarifia-500 text-gray-500'
                 : null,
             )}
           >
@@ -100,9 +100,9 @@ const NavigationContent = ({
               key={link.href}
               href={buildPath(link.href)}
               className={twMerge(
-                'dark:text-polar-500 dark:hover:bg-polar-800 rounded-lg border border-transparent px-3 py-1.5 text-sm font-medium text-gray-500 transition-colors duration-75 hover:bg-gray-100',
+                'dark:text-tarifia-500 dark:hover:bg-tarifia-800 rounded-lg border border-transparent px-3 py-1.5 text-sm font-medium text-gray-500 transition-colors duration-75 hover:bg-gray-100',
                 link.isActive(currentPath) &&
-                  'dark:bg-polar-800 dark:border-polar-700 bg-gray-100 text-black dark:text-white',
+                  'dark:bg-tarifia-800 dark:border-tarifia-700 bg-gray-100 text-black dark:text-white',
               )}
               prefetch
             >

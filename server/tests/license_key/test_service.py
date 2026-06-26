@@ -4,18 +4,18 @@ from uuid import UUID
 import pytest
 from sqlalchemy import delete, func, select
 
-from polar.config import settings
-from polar.exceptions import NotPermitted
-from polar.kit.db.postgres import (
+from tarifia.config import settings
+from tarifia.exceptions import NotPermitted
+from tarifia.kit.db.postgres import (
     AsyncSessionMaker,
     create_async_engine,
     create_async_sessionmaker,
 )
-from polar.license_key.repository import LicenseKeyRepository
-from polar.license_key.schemas import LicenseKeyActivate
-from polar.license_key.service import license_key as license_key_service
-from polar.models import Account, LicenseKey, LicenseKeyActivation, Organization, User
-from polar.models.license_key import LicenseKeyStatus
+from tarifia.license_key.repository import LicenseKeyRepository
+from tarifia.license_key.schemas import LicenseKeyActivate
+from tarifia.license_key.service import license_key as license_key_service
+from tarifia.models import Account, LicenseKey, LicenseKeyActivation, Organization, User
+from tarifia.models.license_key import LicenseKeyStatus
 from tests.fixtures.database import get_database_url, save_fixture_factory
 from tests.fixtures.random_objects import (
     create_account,

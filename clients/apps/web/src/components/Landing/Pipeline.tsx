@@ -1,7 +1,7 @@
 'use client'
 
-import { Avatar, Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
+import { Avatar, Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
 import Link from 'next/link'
 
 interface Aspect {
@@ -227,14 +227,14 @@ export const Pipeline = () => {
 
           <ArrowDown />
 
-          {/* Polar */}
+          {/* Tarifia */}
           <Box flexDirection="column" rowGap="s">
             <Box
               paddingVertical="m"
               justifyContent="center"
               backgroundColor="background-secondary"
             >
-              <Text variant="body">Polar</Text>
+              <Text variant="body">Tarifia</Text>
             </Box>
             {GROUPS.map((group, groupIndex) => (
               <Box

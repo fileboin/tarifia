@@ -1,5 +1,5 @@
-import { PolarEmbedCheckout } from '@polar-sh/checkout/embed'
-import type { schemas } from '@polar-sh/client'
+import { TarifiaEmbedCheckout } from '@tarifia-sh/checkout/embed'
+import type { schemas } from '@tarifia-sh/client'
 import { useRouter } from 'next/navigation'
 import { useCallback } from 'react'
 
@@ -15,7 +15,7 @@ export const useCheckoutConfirmedRedirect = (
       customerSessionToken: string | null | undefined,
     ) => {
       if (checkout.embed_origin) {
-        PolarEmbedCheckout.postMessage(
+        TarifiaEmbedCheckout.postMessage(
           {
             event: 'confirmed',
           },
@@ -67,7 +67,7 @@ export const useCheckoutConfirmedRedirect = (
       }
 
       if (checkout.embed_origin) {
-        PolarEmbedCheckout.postMessage(
+        TarifiaEmbedCheckout.postMessage(
           {
             event: 'success',
             successURL: parsedURL.toString(),

@@ -1,8 +1,8 @@
 import LogoType from '@/components/Brand/logos/LogoType'
 import { CONFIG } from '@/utils/config'
 import { getAuthenticatedUser } from '@/utils/user'
-import { Button } from '@polar-sh/orbit'
-import ShadowBox from '@polar-sh/ui/components/atoms/ShadowBox'
+import { Button } from '@tarifia-sh/orbit'
+import ShadowBox from '@tarifia-sh/ui/components/atoms/ShadowBox'
 import { Metadata } from 'next'
 import Link from 'next/link'
 
@@ -24,7 +24,7 @@ export default async function Page(props: {
     const loginHref = `/auth?${new URLSearchParams({ return_to: returnTo })}`
 
     return (
-      <div className="dark:bg-polar-950 flex h-screen w-full grow items-center justify-center bg-white px-4">
+      <div className="dark:bg-tarifia-950 flex h-screen w-full grow items-center justify-center bg-white px-4">
         <ShadowBox className="flex w-full max-w-7xl flex-col items-center gap-12 md:px-32 md:py-24">
           <div className="flex w-full flex-col items-center gap-y-6 md:max-w-md">
             <div className="flex flex-col items-center gap-4 text-center">
@@ -34,13 +34,13 @@ export default async function Page(props: {
                 Log in to confirm your email change
               </h2>
 
-              <p className="dark:text-polar-500 text-center text-gray-500">
+              <p className="dark:text-tarifia-500 text-center text-gray-500">
                 For security reasons, you need to be logged in to confirm your
                 email change. Use your current email to log in, not the new one
                 you&apos;re changing to.
               </p>
 
-              <p className="dark:text-polar-500 text-center text-gray-500">
+              <p className="dark:text-tarifia-500 text-center text-gray-500">
                 You&apos;ll be redirected back here to complete the update.
               </p>
             </div>
@@ -60,7 +60,7 @@ export default async function Page(props: {
 
   return (
     <form
-      className="dark:bg-polar-950 flex h-screen w-full grow items-center justify-center bg-white px-4"
+      className="dark:bg-tarifia-950 flex h-screen w-full grow items-center justify-center bg-white px-4"
       method="POST"
       action={`${CONFIG.BASE_URL}/v1/email-update/verify?${urlSearchParams.toString()}`}
     >
@@ -73,7 +73,7 @@ export default async function Page(props: {
               Confirm your new email
             </h2>
 
-            <p className="dark:text-polar-500 text-center text-gray-500">
+            <p className="dark:text-tarifia-500 text-center text-gray-500">
               After confirming, you will no longer be able to use your old email
               to log in or receive notifications.
             </p>

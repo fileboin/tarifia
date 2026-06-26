@@ -1,13 +1,13 @@
 'use client'
 
-import { Box } from '@polar-sh/orbit/Box'
-import { Checkbox } from '@polar-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Checkbox } from '@tarifia-sh/orbit'
 import {
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { Control, FieldValues, Path, PathValue } from 'react-hook-form'
 
 interface TermsCheckboxProps<T extends FieldValues> {
@@ -44,9 +44,9 @@ export function TermsCheckbox<T extends FieldValues>({
               <Box flexDirection="column" rowGap="xs">
                 <Box as="label" htmlFor="terms">
                   <p className="cursor-pointer text-sm leading-snug font-medium">
-                    I agree to Polar&apos;s{' '}
+                    I agree to Tarifia&apos;s{' '}
                     <a
-                      href="https://polar.sh/legal/master-services-terms"
+                      href="https://tarifia.sh/legal/master-services-terms"
                       className="text-gray-900 underline dark:text-white"
                       target="_blank"
                       rel="noreferrer"
@@ -55,7 +55,7 @@ export function TermsCheckbox<T extends FieldValues>({
                     </a>
                     ,{' '}
                     <a
-                      href="https://polar.sh/legal/privacy-policy"
+                      href="https://tarifia.sh/legal/privacy-policy"
                       className="text-gray-900 underline dark:text-white"
                       target="_blank"
                       rel="noreferrer"
@@ -64,7 +64,7 @@ export function TermsCheckbox<T extends FieldValues>({
                     </a>{' '}
                     &amp;{' '}
                     <a
-                      href="https://polar.sh/legal/acceptable-use-policy"
+                      href="https://tarifia.sh/legal/acceptable-use-policy"
                       className="text-gray-900 underline dark:text-white"
                       target="_blank"
                       rel="noreferrer"

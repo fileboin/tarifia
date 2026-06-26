@@ -2,7 +2,7 @@ import {
   ScrollFade,
   type ScrollFadeHandle,
 } from '@/components/Shared/ScrollFade'
-import { Box } from '@polar-sh/orbit/Box'
+import { Box } from '@tarifia-sh/orbit/Box'
 import React, { Fragment, useEffect, useState } from 'react'
 import { ChatBubble } from './ChatBubble'
 import {

@@ -11,9 +11,9 @@ from pytest_mock import MockerFixture
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy_utils import create_database, database_exists, drop_database
 
-from polar.config import settings
-from polar.kit.db.postgres import create_async_engine
-from polar.models import Model
+from tarifia.config import settings
+from tarifia.kit.db.postgres import create_async_engine
+from tarifia.models import Model
 
 
 def get_database_url(worker_id: str, driver: str = "asyncpg") -> str:

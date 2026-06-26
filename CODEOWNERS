@@ -1,13 +1,13 @@
 # Global code owners
-* @polarsource/engineering
+* @tarifiasource/engineering
 
 # Backend
-server/** @frankie567 @polarsource/engineering
-server/polar/metrics/** @Yopi @pieterbeulque
+server/** @frankie567 @tarifiasource/engineering
+server/tarifia/metrics/** @Yopi @pieterbeulque
 server/tests/metrics/** @Yopi @pieterbeulque
-server/polar/organization_review/** @psincraian
+server/tarifia/organization_review/** @psincraian
 server/tests/organization_review/** @psincraian
-server/polar/customer_seat/** @psincraian
+server/tarifia/customer_seat/** @psincraian
 server/tests/customer_seat/** @psincraian
 server/tests/e2e/** @psincraian
 

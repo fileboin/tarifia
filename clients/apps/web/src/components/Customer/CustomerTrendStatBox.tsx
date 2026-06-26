@@ -3,9 +3,9 @@ import {
   StatisticCardProps,
 } from '@/components/Shared/StatisticCard'
 import { formatHumanFriendlyScalar, formatPercentage } from '@/utils/formatters'
-import { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@tarifia-sh/orbit'
 import { ArrowDownRight, ArrowUpRight } from 'lucide-react'
 import { PropsWithChildren, useMemo } from 'react'
 
@@ -64,7 +64,7 @@ export const CustomerTrendStatBox = ({
                         ? trendUpIsBad
                           ? 'text-emerald-500'
                           : 'text-red-500'
-                        : 'dark:text-polar-500 text-gray-500'
+                        : 'dark:text-tarifia-500 text-gray-500'
                   }`}
                 >
                   {trend.direction === 'up' ? (
@@ -77,7 +77,7 @@ export const CustomerTrendStatBox = ({
               </div>
             </TooltipTrigger>
             <TooltipContent className="flex flex-col gap-1">
-              <span className="dark:text-polar-500 font-sans text-sm text-gray-500">
+              <span className="dark:text-tarifia-500 font-sans text-sm text-gray-500">
                 Previous Period
               </span>
               <span>{formatter?.(trend.previousValue, 'usd')}</span>

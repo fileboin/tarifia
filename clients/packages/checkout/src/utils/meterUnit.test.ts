@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { getMeterUnitFormat, type MeterUnit } from '@polar-sh/ui/lib/meterUnit'
+import { getMeterUnitFormat, type MeterUnit } from '@tarifia-sh/ui/lib/meterUnit'
 
 describe('getMeterUnitFormat', () => {
   describe('scalar', () => {

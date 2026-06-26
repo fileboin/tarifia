@@ -1,4 +1,4 @@
-import type { schemas } from '@polar-sh/client'
+import type { schemas } from '@tarifia-sh/client'
 import { render, screen } from '@testing-library/react'
 import type { PropsWithChildren } from 'react'
 import type { ControllerRenderProps } from 'react-hook-form'

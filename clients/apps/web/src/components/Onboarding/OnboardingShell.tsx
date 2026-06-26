@@ -2,7 +2,7 @@
 
 import { useAuth } from '@/hooks'
 import { CONFIG } from '@/utils/config'
-import { Box } from '@polar-sh/orbit/Box'
+import { Box } from '@tarifia-sh/orbit/Box'
 import { motion } from 'motion/react'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
@@ -56,7 +56,7 @@ export function OnboardingShell({
         {hadOrgs && (
           <Link
             href="/dashboard"
-            className="dark:hover:text-polar-200 text-sm hover:text-gray-900"
+            className="dark:hover:text-tarifia-200 text-sm hover:text-gray-900"
           >
             Back to dashboard
           </Link>
@@ -64,14 +64,14 @@ export function OnboardingShell({
 
         <Link
           href="/dashboard/account/preferences"
-          className="dark:hover:text-polar-200 text-sm hover:text-gray-900"
+          className="dark:hover:text-tarifia-200 text-sm hover:text-gray-900"
         >
           User settings
         </Link>
 
         <a
           href={`${CONFIG.BASE_URL}/v1/auth/logout`}
-          className="dark:hover:text-polar-200 text-sm hover:text-gray-900"
+          className="dark:hover:text-tarifia-200 text-sm hover:text-gray-900"
         >
           Log out
         </a>
@@ -101,7 +101,7 @@ export function OnboardingShell({
                     <button
                       type="button"
                       onClick={() => router.push(STEP_ROUTES[currentIndex - 1])}
-                      className="dark:text-polar-400 dark:hover:text-polar-200 absolute left-0 text-gray-400 hover:text-gray-900"
+                      className="dark:text-tarifia-400 dark:hover:text-tarifia-200 absolute left-0 text-gray-400 hover:text-gray-900"
                     >
                       <ArrowLeft size={20} />
                     </button>
@@ -134,7 +134,7 @@ export function OnboardingShell({
                   {title}
                 </h1>
                 {subtitle && (
-                  <p className="dark:text-polar-400 text-sm text-gray-500">
+                  <p className="dark:text-tarifia-400 text-sm text-gray-500">
                     {subtitle}
                   </p>
                 )}

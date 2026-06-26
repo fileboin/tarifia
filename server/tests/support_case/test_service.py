@@ -1,18 +1,18 @@
 import pytest
 
-from polar.auth.models import AuthSubject
-from polar.models import Organization, User
-from polar.models.support_case import (
+from tarifia.auth.models import AuthSubject
+from tarifia.models import Organization, User
+from tarifia.models.support_case import (
     SupportCaseAudience,
     SupportCaseMessageAuthorKind,
     SupportCaseMessageType,
     SupportCaseParticipant,
     SupportCaseParticipantKind,
 )
-from polar.models.user_organization import OrganizationRole, UserOrganization
-from polar.postgres import AsyncSession
-from polar.support_case.repository import SupportCaseParticipantRepository
-from polar.support_case.service import support_case as support_case_service
+from tarifia.models.user_organization import OrganizationRole, UserOrganization
+from tarifia.postgres import AsyncSession
+from tarifia.support_case.repository import SupportCaseParticipantRepository
+from tarifia.support_case.service import support_case as support_case_service
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (

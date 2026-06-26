@@ -1,12 +1,12 @@
 import pytest
 
-from polar.enums import PayoutAccountType
-from polar.kit.utils import utc_now
-from polar.models import Organization, User
-from polar.models.payout import PayoutStatus
-from polar.models.transaction import TransactionType
-from polar.payout.repository import PayoutRepository
-from polar.postgres import AsyncSession
+from tarifia.enums import PayoutAccountType
+from tarifia.kit.utils import utc_now
+from tarifia.models import Organization, User
+from tarifia.models.payout import PayoutStatus
+from tarifia.models.transaction import TransactionType
+from tarifia.payout.repository import PayoutRepository
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_account,

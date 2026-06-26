@@ -1,10 +1,10 @@
 import pytest
 from pydantic import ValidationError
 
-from polar.enums import SubscriptionProrationBehavior
-from polar.kit.currency import PresentmentCurrency
-from polar.models.organization import OrganizationSubscriptionSettings
-from polar.organization.schemas import OrganizationCreate, OrganizationUpdate
+from tarifia.enums import SubscriptionProrationBehavior
+from tarifia.kit.currency import PresentmentCurrency
+from tarifia.models.organization import OrganizationSubscriptionSettings
+from tarifia.organization.schemas import OrganizationCreate, OrganizationUpdate
 
 
 def test_reset_proration_behavior_accepted_in_schema() -> None:

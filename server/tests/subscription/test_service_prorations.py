@@ -11,10 +11,10 @@ import pytest
 from dateutil.relativedelta import relativedelta
 from pytest_mock import MockerFixture
 
-from polar.billing_entry.repository import BillingEntryRepository
-from polar.enums import SubscriptionProrationBehavior, SubscriptionRecurringInterval
-from polar.event.system import SystemEvent
-from polar.models import (
+from tarifia.billing_entry.repository import BillingEntryRepository
+from tarifia.enums import SubscriptionProrationBehavior, SubscriptionRecurringInterval
+from tarifia.event.system import SystemEvent
+from tarifia.models import (
     BillingEntry,
     Customer,
     Discount,
@@ -24,18 +24,18 @@ from polar.models import (
     Product,
     Subscription,
 )
-from polar.models.billing_entry import BillingEntryDirection, BillingEntryType
-from polar.models.discount import DiscountDuration, DiscountType
-from polar.models.product_price import SeatTierType
-from polar.models.subscription import SubscriptionStatus
-from polar.postgres import AsyncSession
-from polar.product.guard import (
+from tarifia.models.billing_entry import BillingEntryDirection, BillingEntryType
+from tarifia.models.discount import DiscountDuration, DiscountType
+from tarifia.models.product_price import SeatTierType
+from tarifia.models.subscription import SubscriptionStatus
+from tarifia.postgres import AsyncSession
+from tarifia.product.guard import (
     is_fixed_price,
     is_seat_price,
 )
-from polar.subscription.repository import SubscriptionUpdateRepository
-from polar.subscription.service import SubscriptionUpdateContext
-from polar.subscription.service import subscription as subscription_service
+from tarifia.subscription.repository import SubscriptionUpdateRepository
+from tarifia.subscription.service import SubscriptionUpdateContext
+from tarifia.subscription.service import subscription as subscription_service
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.events import get_all_by_name
 from tests.fixtures.random_objects import (

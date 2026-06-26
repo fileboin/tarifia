@@ -1,5 +1,5 @@
 import { StaticImage } from '@/components/Image/StaticImage'
-import { Box } from '@polar-sh/orbit/Box'
+import { Box } from '@tarifia-sh/orbit/Box'
 import { SectionHeader } from './SectionHeader'
 
 export const Dashboard = () => {
@@ -30,7 +30,7 @@ export const Dashboard = () => {
       >
         <StaticImage
           src="/assets/landing/dashboard.jpg"
-          alt="Polar dashboard"
+          alt="Tarifia dashboard"
           width={3840}
           height={2160}
           className="relative z-10 h-auto w-full"

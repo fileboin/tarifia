@@ -5,17 +5,17 @@ import { useMetrics, useUpdateProduct } from '@/hooks/queries'
 import { apiErrorToast } from '@/utils/api/errors'
 import { getChartRangeParams } from '@/utils/metrics'
 import MoreVert from '@mui/icons-material/MoreVert'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { Status, type StatusColor } from '@polar-sh/orbit'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { Status, type StatusColor } from '@tarifia-sh/orbit'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@tarifia-sh/orbit'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@polar-sh/ui/components/ui/dropdown-menu'
+} from '@tarifia-sh/ui/components/ui/dropdown-menu'
 import { useRouter } from 'next/navigation'
 import { useCallback } from 'react'
 import { DashboardBody } from '../../Layout/DashboardLayout'

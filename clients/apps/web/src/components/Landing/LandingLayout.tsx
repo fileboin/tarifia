@@ -1,12 +1,12 @@
 'use client'
 
-import { PolarLogotype } from '@/components/Layout/Public/PolarLogotype'
+import { TarifiaLogotype } from '@/components/Layout/Public/TarifiaLogotype'
 import Footer from '@/components/Organization/Footer'
 import { usePostHog } from '@/hooks/posthog'
 import ArrowForward from '@mui/icons-material/ArrowForward'
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
-import { Button } from '@polar-sh/orbit'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Button } from '@tarifia-sh/orbit'
 import {
   Sidebar,
   SidebarContent,
@@ -14,7 +14,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
   useSidebar,
-} from '@polar-sh/ui/components/atoms/Sidebar'
+} from '@tarifia-sh/ui/components/atoms/Sidebar'
 import { motion } from 'motion/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -22,7 +22,7 @@ import { ComponentProps, PropsWithChildren, useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { AuthModal } from '../Auth/AuthModal'
 import GetStartedButton from '../Auth/GetStartedButton'
-import { Modal } from '@polar-sh/orbit'
+import { Modal } from '@tarifia-sh/orbit'
 import { useModal } from '../Modal/useModal'
 import { NavPopover, NavPopoverSection } from './NavPopover'
 
@@ -42,7 +42,7 @@ const StartupProgramBanner = () => (
       backgroundColor="background-secondary"
       color="text-primary"
     >
-      <Text color="inherit">Introducing the Polar Startup Program</Text>
+      <Text color="inherit">Introducing the Tarifia Startup Program</Text>
       <ArrowForward fontSize="inherit" />
     </Box>
   </Link>
@@ -55,13 +55,13 @@ export default function Layout({ children }: PropsWithChildren) {
         <StartupProgramBanner />
         <LandingPageDesktopNavigation />
       </div>
-      <div className="dark:bg-polar-950 relative flex flex-col overflow-x-clip bg-white px-0 md:w-full md:flex-1 md:items-center md:px-4">
+      <div className="dark:bg-tarifia-950 relative flex flex-col overflow-x-clip bg-white px-0 md:w-full md:flex-1 md:items-center md:px-4">
         <div className="flex flex-col gap-y-2 md:w-full">
           <SidebarProvider className="absolute inset-0 flex flex-col items-start md:hidden">
             <LandingPageTopbar />
             <LandingPageMobileNavigation />
           </SidebarProvider>
-          <div className="dark:bg-polar-950 relative flex flex-col px-4 pt-32 md:w-full md:px-0 md:pt-0">
+          <div className="dark:bg-tarifia-950 relative flex flex-col px-4 pt-32 md:w-full md:px-0 md:pt-0">
             {children}
           </div>
           <LandingPageFooter />
@@ -120,7 +120,7 @@ const NavLink = ({
       prefetch
       onClick={handleClick}
       className={twMerge(
-        'dark:text-polar-500 -m-1 flex items-center gap-x-2 p-1 text-gray-500 transition-colors hover:text-black dark:hover:text-white',
+        'dark:text-tarifia-500 -m-1 flex items-center gap-x-2 p-1 text-gray-500 transition-colors hover:text-black dark:hover:text-white',
         isActive && 'text-black dark:text-white',
         className,
       )}
@@ -146,7 +146,7 @@ const mobileNavigationItems: NavigationItem[] = [
   },
   {
     title: 'Documentation',
-    href: 'https://polar.sh/docs',
+    href: 'https://tarifia.sh/docs',
     target: '_blank',
   },
   {
@@ -163,12 +163,12 @@ const mobileNavigationItems: NavigationItem[] = [
   },
   {
     title: 'Open Source',
-    href: 'https://github.com/polarsource',
+    href: 'https://github.com/tarifiasource',
     target: '_blank',
   },
   {
-    title: 'Polar on X',
-    href: 'https://x.com/polar_sh',
+    title: 'Tarifia on X',
+    href: 'https://x.com/tarifia_sh',
     target: '_blank',
   },
 ]
@@ -190,7 +190,7 @@ const LandingPageMobileNavigation = () => {
       <Sidebar className="md:hidden">
         <SidebarHeader className="p-4">
           <Link href="/">
-            <PolarLogotype logoVariant="icon" />
+            <TarifiaLogotype logoVariant="icon" />
           </Link>
         </SidebarHeader>
         <SidebarContent className="flex flex-col gap-y-6 px-6 py-2">
@@ -338,7 +338,7 @@ const LandingPageDesktopNavigation = () => {
           href: '/docs/features/products',
           label: 'Documentation Portal',
           target: '_blank',
-          subtitle: 'Get started with Polar',
+          subtitle: 'Get started with Tarifia',
         },
         {
           href: '/docs/features/products',
@@ -375,13 +375,13 @@ const LandingPageDesktopNavigation = () => {
   return (
     <div
       className={twMerge(
-        'dark:text-polar-50 dark:bg-polar-950 hidden w-full flex-col items-center gap-12 border-b border-transparent bg-white py-6 transition-colors md:flex',
-        isScrolled && 'dark:border-polar-800 border-gray-200',
+        'dark:text-tarifia-50 dark:bg-tarifia-950 hidden w-full flex-col items-center gap-12 border-b border-transparent bg-white py-6 transition-colors md:flex',
+        isScrolled && 'dark:border-tarifia-800 border-gray-200',
       )}
     >
       <div className="relative flex w-full flex-row items-center justify-between lg:max-w-7xl">
         <Link href="/">
-          <PolarLogotype logoVariant="logotype" size={100} />
+          <TarifiaLogotype logoVariant="logotype" size={100} />
         </Link>
 
         <ul className="absolute left-1/2 mx-auto flex -translate-x-1/2 flex-row gap-x-8 font-medium">
@@ -431,7 +431,7 @@ const LandingPageDesktopNavigation = () => {
 const LandingPageTopbar = () => {
   return (
     <div className="z-30 flex w-full flex-row items-center justify-between px-6 py-6 md:hidden md:px-12">
-      <PolarLogotype
+      <TarifiaLogotype
         className="mt-1 ml-2 md:hidden"
         logoVariant="logotype"
         size={100}

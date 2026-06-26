@@ -1,6 +1,6 @@
 'use client'
 
-import { InlineModal } from '@polar-sh/orbit'
+import { InlineModal } from '@tarifia-sh/orbit'
 import { useModal } from '@/components/Modal/useModal'
 import { useOrganizationSSE } from '@/hooks/sse'
 import { setValidationErrors } from '@/utils/api/errors'
@@ -11,18 +11,18 @@ import {
   isValidationError,
   type Client,
   type schemas,
-} from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import CountryPicker from '@polar-sh/ui/components/atoms/CountryPicker'
-import CountryStatePicker from '@polar-sh/ui/components/atoms/CountryStatePicker'
+} from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import CountryPicker from '@tarifia-sh/ui/components/atoms/CountryPicker'
+import CountryStatePicker from '@tarifia-sh/ui/components/atoms/CountryStatePicker'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@polar-sh/ui/components/atoms/DropdownMenu'
-import { Input } from '@polar-sh/orbit'
-import { buttonVariants } from '@polar-sh/orbit/ui/button'
+} from '@tarifia-sh/ui/components/atoms/DropdownMenu'
+import { Input } from '@tarifia-sh/orbit'
+import { buttonVariants } from '@tarifia-sh/orbit/ui/button'
 import {
   Form,
   FormControl,
@@ -30,7 +30,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import EventEmitter from 'eventemitter3'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'

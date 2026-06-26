@@ -1,4 +1,4 @@
-import type { schemas } from '@polar-sh/client'
+import type { schemas } from '@tarifia-sh/client'
 import { renderHook } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { useCheckoutConfirmedRedirect } from './checkout'
@@ -6,8 +6,8 @@ import { useCheckoutConfirmedRedirect } from './checkout'
 const postMessageMock = vi.fn()
 const pushMock = vi.fn()
 
-vi.mock('@polar-sh/checkout/embed', () => ({
-  PolarEmbedCheckout: {
+vi.mock('@tarifia-sh/checkout/embed', () => ({
+  TarifiaEmbedCheckout: {
     postMessage: (...args: unknown[]) => postMessageMock(...args),
   },
 }))
@@ -25,7 +25,7 @@ afterEach(() => {
   vi.clearAllMocks()
 })
 
-const CHECKOUT_URL = 'https://polar.sh/checkout/cs_test'
+const CHECKOUT_URL = 'https://tarifia.sh/checkout/cs_test'
 const EMBED_ORIGIN = 'https://beppe.com'
 
 const baseCheckout = (

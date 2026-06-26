@@ -2,16 +2,16 @@
 
 import { useUpdateSubscription } from '@/hooks/queries'
 import { setValidationErrors } from '@/utils/api/errors'
-import { isValidationError, schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
+import { isValidationError, schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
-import { TextArea } from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
+import { TextArea } from '@tarifia-sh/orbit'
 import {
   Form,
   FormControl,
@@ -20,7 +20,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from '../Toast/use-toast'
@@ -194,7 +194,7 @@ const CancelSubscriptionModal = ({
                           className={
                             field.value
                               ? ''
-                              : 'dark:text-polar-500 text-gray-400'
+                              : 'dark:text-tarifia-500 text-gray-400'
                           }
                         >
                           <SelectValue placeholder="Select customer cancellation reason" />

@@ -2,15 +2,15 @@
 
 import {
   EMBED_PAYMENT_METHOD_REDIRECT_STATUS_PARAM,
-  PolarEmbedPaymentMethod,
-} from '@polar-sh/checkout/payment-method'
-import { createClient, schemas } from '@polar-sh/client'
+  TarifiaEmbedPaymentMethod,
+} from '@tarifia-sh/checkout/payment-method'
+import { createClient, schemas } from '@tarifia-sh/client'
 import {
   DEFAULT_LOCALE,
   useTranslations,
   type AcceptedLocale,
-} from '@polar-sh/i18n'
-import { getThemePreset } from '@polar-sh/ui/hooks/theming'
+} from '@tarifia-sh/i18n'
+import { getThemePreset } from '@tarifia-sh/ui/hooks/theming'
 import { X } from 'lucide-react'
 import { useCallback, useEffect, useMemo } from 'react'
 import {
@@ -53,7 +53,7 @@ export const PaymentMethodEmbed = ({
   )
 
   useEffect(() => {
-    PolarEmbedPaymentMethod.postMessage({ event: 'loaded' }, embedOrigin)
+    TarifiaEmbedPaymentMethod.postMessage({ event: 'loaded' }, embedOrigin)
   }, [embedOrigin])
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export const PaymentMethodEmbed = ({
 
     const observer = new ResizeObserver((entries) => {
       const height = entries[0]?.contentRect.height ?? 0
-      PolarEmbedPaymentMethod.postMessage(
+      TarifiaEmbedPaymentMethod.postMessage(
         { event: 'resize', height },
         embedOrigin,
       )
@@ -71,11 +71,11 @@ export const PaymentMethodEmbed = ({
   }, [mode, embedOrigin])
 
   const handleClose = useCallback(() => {
-    PolarEmbedPaymentMethod.postMessage({ event: 'close' }, embedOrigin)
+    TarifiaEmbedPaymentMethod.postMessage({ event: 'close' }, embedOrigin)
   }, [embedOrigin])
 
   const handleProcessingStart = useCallback(() => {
-    PolarEmbedPaymentMethod.postMessage({ event: 'confirmed' }, embedOrigin)
+    TarifiaEmbedPaymentMethod.postMessage({ event: 'confirmed' }, embedOrigin)
   }, [embedOrigin])
 
   const navigateBackIfStandalone = useCallback(
@@ -90,7 +90,7 @@ export const PaymentMethodEmbed = ({
 
   const handleSuccess = useCallback(
     (paymentMethod: schemas['CustomerPaymentMethod']) => {
-      PolarEmbedPaymentMethod.postMessage(
+      TarifiaEmbedPaymentMethod.postMessage(
         { event: 'success', paymentMethodId: paymentMethod.id },
         embedOrigin,
       )
@@ -100,7 +100,7 @@ export const PaymentMethodEmbed = ({
   )
 
   const handleProcessingError = useCallback(() => {
-    PolarEmbedPaymentMethod.postMessage(
+    TarifiaEmbedPaymentMethod.postMessage(
       { event: 'error', code: 'processing_failed' },
       embedOrigin,
     )
@@ -111,12 +111,12 @@ export const PaymentMethodEmbed = ({
     if (mode !== 'modal') return
 
     const handleOutsideClick = (event: MouseEvent) => {
-      const content = document.getElementById('polar-embed-content')
+      const content = document.getElementById('tarifia-embed-content')
       if (content && !content.contains(event.target as Node)) {
         handleClose()
       }
     }
-    const layout = document.getElementById('polar-embed-layout')
+    const layout = document.getElementById('tarifia-embed-layout')
     layout?.addEventListener('click', handleOutsideClick)
     return () => layout?.removeEventListener('click', handleOutsideClick)
   }, [mode, handleClose])
@@ -153,12 +153,12 @@ export const PaymentMethodEmbed = ({
   return (
     <div
       className={theme === 'dark' ? 'dark' : 'light'}
-      id="polar-embed-layout"
+      id="tarifia-embed-layout"
     >
       <div className="flex h-full w-full items-center justify-center p-0 md:p-12 dark:text-white">
         <div
-          className="dark:bg-polar-900 h-full w-full max-w-lg overflow-y-auto rounded-none bg-white p-8 md:h-auto md:rounded-2xl"
-          id="polar-embed-content"
+          className="dark:bg-tarifia-900 h-full w-full max-w-lg overflow-y-auto rounded-none bg-white p-8 md:h-auto md:rounded-2xl"
+          id="tarifia-embed-content"
         >
           <div className="mb-6 flex items-center justify-between">
             <h2 className="text-lg font-medium">
@@ -170,7 +170,7 @@ export const PaymentMethodEmbed = ({
       </div>
       <button
         type="button"
-        className="dark:bg-polar-950 fixed top-2 right-2 cursor-pointer rounded-full bg-white p-2 shadow-xl md:top-4 md:right-4 dark:text-white"
+        className="dark:bg-tarifia-950 fixed top-2 right-2 cursor-pointer rounded-full bg-white p-2 shadow-xl md:top-4 md:right-4 dark:text-white"
         onClick={handleClose}
         aria-label={t('embedPaymentMethod.close')}
       >

@@ -1,9 +1,9 @@
 import uuid
 from typing import Any
 
-from polar_sdk.models import BenefitGrant
+from tarifia_sdk.models import BenefitGrant
 
-from polar.models.organization import SupportTier
+from tarifia.models.organization import SupportTier
 from scripts.backfill_support_tiers import resolve_tiers
 
 ORG_ID = uuid.UUID("00000000-0000-0000-0000-00000000000a")

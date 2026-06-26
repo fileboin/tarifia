@@ -1,0 +1,262 @@
+import uuid
+from collections.abc import Sequence
+from enum import StrEnum
+from typing import Any
+
+from sqlalchemy import Select, UnaryExpression, asc, desc, select
+from sqlalchemy.orm import contains_eager, joinedload, selectinload
+
+from tarifia.auth.models import AuthSubject, Customer, Member
+from tarifia.exceptions import TarifiaError
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.kit.pagination import PaginationParams, paginate
+from tarifia.kit.services import ResourceServiceReader
+from tarifia.kit.sorting import Sorting
+from tarifia.kit.visibility import Visibility
+from tarifia.models import (
+    Organization,
+    Product,
+    Subscription,
+    SubscriptionMeter,
+)
+from tarifia.models.subscription import CustomerCancellationReason
+from tarifia.subscription.service import SubscriptionUpdateContext
+from tarifia.subscription.service import subscription as subscription_service
+
+from ..schemas.subscription import (
+    CustomerSubscriptionUpdate,
+    CustomerSubscriptionUpdateClear,
+    CustomerSubscriptionUpdateProduct,
+    CustomerSubscriptionUpdateSeats,
+)
+from ..utils import get_customer_id
+
+
+class CustomerSubscriptionError(TarifiaError): ...
+
+
+class UpdateSubscriptionPlanNotAllowed(CustomerSubscriptionError):
+    def __init__(self) -> None:
+        super().__init__("Updating subscription plan is not allowed.", 403)
+
+
+class UpdateSubscriptionSeatsNotAllowed(CustomerSubscriptionError):
+    def __init__(self) -> None:
+        super().__init__("Updating subscription seats is not allowed.", 403)
+
+
+class CustomerSubscriptionSortProperty(StrEnum):
+    started_at = "started_at"
+    amount = "amount"
+    status = "status"
+    organization = "organization"
+    product = "product"
+
+
+class CustomerSubscriptionService(ResourceServiceReader[Subscription]):
+    async def list(
+        self,
+        session: AsyncSession,
+        auth_subject: AuthSubject[Customer | Member],
+        *,
+        product_id: Sequence[uuid.UUID] | None = None,
+        active: bool | None = None,
+        query: str | None = None,
+        pagination: PaginationParams,
+        sorting: list[Sorting[CustomerSubscriptionSortProperty]] = [
+            (CustomerSubscriptionSortProperty.started_at, True)
+        ],
+    ) -> tuple[Sequence[Subscription], int]:
+        statement = self._get_readable_subscription_statement(auth_subject).where(
+            Subscription.started_at.is_not(None)
+        )
+
+        statement = (
+            statement.join(Product, onclause=Subscription.product_id == Product.id)
+            .join(Organization, onclause=Product.organization_id == Organization.id)
+            .options(
+                joinedload(Subscription.customer).joinedload(Customer.organization),
+                contains_eager(Subscription.product).options(
+                    selectinload(Product.product_medias),
+                    contains_eager(Product.organization),
+                ),
+                selectinload(Subscription.meters).joinedload(SubscriptionMeter.meter),
+                joinedload(Subscription.pending_update),
+            )
+        )
+
+        if product_id is not None:
+            statement = statement.where(Subscription.product_id.in_(product_id))
+
+        if active is not None:
+            if active:
+                statement = statement.where(Subscription.active.is_(True))
+            else:
+                statement = statement.where(Subscription.revoked.is_(True))
+
+        if query is not None:
+            statement = statement.where(Product.name.icontains(query, autoescape=True))
+
+        order_by_clauses: list[UnaryExpression[Any]] = []
+        for criterion, is_desc in sorting:
+            clause_function = desc if is_desc else asc
+            if criterion == CustomerSubscriptionSortProperty.started_at:
+                order_by_clauses.append(clause_function(Subscription.started_at))
+            elif criterion == CustomerSubscriptionSortProperty.amount:
+                order_by_clauses.append(clause_function(Subscription.amount))
+            elif criterion == CustomerSubscriptionSortProperty.status:
+                order_by_clauses.append(clause_function(Subscription.status))
+            elif criterion == CustomerSubscriptionSortProperty.organization:
+                order_by_clauses.append(clause_function(Organization.slug))
+            elif criterion == CustomerSubscriptionSortProperty.product:
+                order_by_clauses.append(clause_function(Product.name))
+        statement = statement.order_by(*order_by_clauses)
+
+        return await paginate(session, statement, pagination=pagination)
+
+    async def get_by_id(
+        self,
+        session: AsyncSession,
+        auth_subject: AuthSubject[Customer | Member],
+        id: uuid.UUID,
+        *,
+        for_update: bool = False,
+    ) -> Subscription | None:
+        statement = (
+            self._get_readable_subscription_statement(auth_subject)
+            .where(Subscription.id == id)
+            .options(
+                joinedload(Subscription.customer),
+                joinedload(Subscription.organization),
+                joinedload(Subscription.product).options(
+                    selectinload(Product.product_medias),
+                    joinedload(Product.organization),
+                ),
+                selectinload(Subscription.meters).joinedload(SubscriptionMeter.meter),
+                joinedload(Subscription.pending_update),
+            )
+        )
+
+        if for_update:
+            statement = statement.with_for_update(of=Subscription)
+
+        result = await session.execute(statement)
+        return result.scalar_one_or_none()
+
+    async def update(
+        self,
+        session: AsyncSession,
+        subscription: Subscription,
+        *,
+        updates: CustomerSubscriptionUpdate,
+    ) -> Subscription:
+        organization = subscription.product.organization
+        if isinstance(updates, CustomerSubscriptionUpdateProduct):
+            if not organization.customer_portal_subscription_update_plan:
+                raise UpdateSubscriptionPlanNotAllowed()
+
+            return await self.update_product(
+                session,
+                subscription,
+                product_id=updates.product_id,
+            )
+
+        if isinstance(updates, CustomerSubscriptionUpdateSeats):
+            if not organization.customer_portal_subscription_update_seats:
+                raise UpdateSubscriptionSeatsNotAllowed()
+
+            async with SubscriptionUpdateContext(
+                session, subscription, subscription_service
+            ) as ctx:
+                return await subscription_service.update_seats(
+                    session,
+                    ctx,
+                    subscription,
+                    seats=updates.seats,
+                    proration_behavior=updates.proration_behavior,
+                )
+
+        if isinstance(updates, CustomerSubscriptionUpdateClear):
+            async with SubscriptionUpdateContext(
+                session, subscription, subscription_service
+            ) as ctx:
+                return await subscription_service.clear_pending_update(
+                    session, ctx, subscription
+                )
+
+        cancel = updates.cancel_at_period_end is True
+        uncancel = updates.cancel_at_period_end is False
+        if not (cancel or uncancel):
+            return subscription
+
+        if cancel:
+            return await self.cancel(
+                session,
+                subscription,
+                reason=updates.cancellation_reason,
+                comment=updates.cancellation_comment,
+            )
+
+        return await self.uncancel(session, subscription)
+
+    async def update_product(
+        self,
+        session: AsyncSession,
+        subscription: Subscription,
+        *,
+        product_id: uuid.UUID,
+    ) -> Subscription:
+        async with SubscriptionUpdateContext(
+            session, subscription, subscription_service
+        ) as ctx:
+            return await subscription_service.update_product(
+                session,
+                ctx,
+                subscription,
+                product_id=product_id,
+                allowed_visibilities=frozenset({Visibility.public}),
+            )
+
+    async def uncancel(
+        self,
+        session: AsyncSession,
+        subscription: Subscription,
+    ) -> Subscription:
+        async with SubscriptionUpdateContext(
+            session, subscription, subscription_service
+        ) as ctx:
+            return await subscription_service.uncancel(
+                session,
+                ctx,
+                subscription,
+            )
+
+    async def cancel(
+        self,
+        session: AsyncSession,
+        subscription: Subscription,
+        *,
+        reason: CustomerCancellationReason | None = None,
+        comment: str | None = None,
+    ) -> Subscription:
+        async with SubscriptionUpdateContext(
+            session, subscription, subscription_service
+        ) as ctx:
+            return await subscription_service.cancel(
+                session,
+                ctx,
+                subscription,
+                customer_reason=reason,
+                customer_comment=comment,
+            )
+
+    def _get_readable_subscription_statement(
+        self, auth_subject: AuthSubject[Customer | Member]
+    ) -> Select[tuple[Subscription]]:
+        return select(Subscription).where(
+            Subscription.is_deleted.is_(False),
+            Subscription.customer_id == get_customer_id(auth_subject),
+        )
+
+
+customer_subscription = CustomerSubscriptionService(Subscription)

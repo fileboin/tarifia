@@ -4,16 +4,16 @@ import { useUserSSE } from '@/hooks/sse'
 import { getGitHubRepositoryBenefitAuthorizeURL } from '@/utils/auth'
 import { defaultApiUrl } from '@/utils/domain'
 import RefreshOutlined from '@mui/icons-material/RefreshOutlined'
-import { enums, schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { Combobox } from '@polar-sh/ui/components/atoms/Combobox'
+import { enums, schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { Combobox } from '@tarifia-sh/ui/components/atoms/Combobox'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
 import {
   FormControl,
   FormDescription,
@@ -21,7 +21,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { usePathname } from 'next/navigation'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
@@ -297,7 +297,7 @@ export const GitHubRepositoryBenefitForm = ({
                           <span className="text-muted-foreground">
                             {r.repository_owner}
                           </span>
-                          <span className="text-polar-500">/</span>
+                          <span className="text-tarifia-500">/</span>
                           <span className="font-medium">
                             {r.repository_name}
                           </span>
@@ -345,7 +345,7 @@ export const GitHubRepositoryBenefitForm = ({
         >
           Click here
         </Button>{' '}
-        to install it on Polar.
+        to install it on Tarifia.
       </FormDescription>
 
       {/* For error messages */}

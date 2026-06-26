@@ -4,9 +4,9 @@ import { DetailRow } from '@/components/Shared/DetailRow'
 import { useProduct } from '@/hooks/queries'
 import { useSubscriptionChargePreview } from '@/hooks/queries/subscriptions'
 import { isFreePrice, isSeatBasedPrice } from '@/utils/product'
-import { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
-import ShadowBox from '@polar-sh/ui/components/atoms/ShadowBox'
+import { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
+import ShadowBox from '@tarifia-sh/ui/components/atoms/ShadowBox'
 import { useMemo } from 'react'
 
 const UpcomingChargeCard = ({
@@ -83,7 +83,7 @@ const UpcomingChargeCard = ({
   }
 
   return (
-    <ShadowBox className="dark:divide-polar-700 flex flex-col divide-y divide-gray-200 border-gray-200 bg-transparent p-0 md:rounded-3xl!">
+    <ShadowBox className="dark:divide-tarifia-700 flex flex-col divide-y divide-gray-200 border-gray-200 bg-transparent p-0 md:rounded-3xl!">
       <div className="flex flex-col gap-6 p-8">
         <div className="items-center justify-between space-y-1.5 sm:flex sm:space-y-0">
           <h3 className="text-lg font-medium">{headerTitle}</h3>
@@ -156,11 +156,11 @@ const UpcomingChargeCard = ({
             </>
           )}
 
-          <div className="dark:border-polar-700 mt-2 border-t border-gray-200 pt-2">
+          <div className="dark:border-tarifia-700 mt-2 border-t border-gray-200 pt-2">
             {isFetching ? (
               <div className="flex items-center justify-between">
                 <span className="font-medium">Total</span>
-                <span className="dark:text-polar-500 animate-pulse text-gray-500">
+                <span className="dark:text-tarifia-500 animate-pulse text-gray-500">
                   Loading…
                 </span>
               </div>
@@ -174,8 +174,8 @@ const UpcomingChargeCard = ({
                         chargePreview.subtotal_amount,
                         subscription.currency,
                       )}
-                      valueClassName="dark:text-polar-500 text-gray-500"
-                      labelClassName="dark:text-polar-500 text-gray-500"
+                      valueClassName="dark:text-tarifia-500 text-gray-500"
+                      labelClassName="dark:text-tarifia-500 text-gray-500"
                     />
                   )}
 
@@ -186,8 +186,8 @@ const UpcomingChargeCard = ({
                         -1 * chargePreview.discount_amount,
                         subscription.currency,
                       )}
-                      valueClassName="dark:text-polar-500 text-gray-500"
-                      labelClassName="dark:text-polar-500 text-gray-500"
+                      valueClassName="dark:text-tarifia-500 text-gray-500"
+                      labelClassName="dark:text-tarifia-500 text-gray-500"
                     />
                   )}
 
@@ -198,8 +198,8 @@ const UpcomingChargeCard = ({
                         chargePreview.tax_amount,
                         subscription.currency,
                       )}
-                      valueClassName="dark:text-polar-500 text-gray-500"
-                      labelClassName="dark:text-polar-500 text-gray-500"
+                      valueClassName="dark:text-tarifia-500 text-gray-500"
+                      labelClassName="dark:text-tarifia-500 text-gray-500"
                     />
                   )}
 

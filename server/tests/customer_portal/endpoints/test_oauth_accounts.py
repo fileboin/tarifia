@@ -4,17 +4,17 @@ import pytest
 from httpx import AsyncClient
 from sqlalchemy import select
 
-from polar.config import settings
-from polar.kit import jwt
-from polar.models import (
+from tarifia.config import settings
+from tarifia.kit import jwt
+from tarifia.models import (
     Customer,
     CustomerSession,
     Member,
     MemberSession,
     Organization,
 )
-from polar.models.customer import CustomerOAuthPlatform
-from polar.postgres import AsyncSession
+from tarifia.models.customer import CustomerOAuthPlatform
+from tarifia.postgres import AsyncSession
 from tests.fixtures.auth import CUSTOMER_AUTH_SUBJECT, MEMBER_AUTH_SUBJECT
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_customer

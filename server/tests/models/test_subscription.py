@@ -1,8 +1,8 @@
 import pytest
 
-from polar.enums import TaxBehavior
-from polar.models import Order, Subscription
-from polar.models.subscription_product_price import SubscriptionProductPrice
+from tarifia.enums import TaxBehavior
+from tarifia.models import Order, Subscription
+from tarifia.models.subscription_product_price import SubscriptionProductPrice
 
 
 def _prices(*amounts: int) -> list[SubscriptionProductPrice]:

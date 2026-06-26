@@ -12,12 +12,12 @@ from rich.progress import Progress
 from sqlalchemy import CursorResult, literal, or_, select
 from sqlalchemy.dialects.postgresql import insert
 
-from polar.config import settings
-from polar.event.repository import EventRepository
-from polar.kit.db.postgres import AsyncSession, create_async_sessionmaker
-from polar.kit.db.postgres import create_async_engine as _create_async_engine
-from polar.meter.repository import MeterRepository
-from polar.models import Event, Meter, MeterEvent
+from tarifia.config import settings
+from tarifia.event.repository import EventRepository
+from tarifia.kit.db.postgres import AsyncSession, create_async_sessionmaker
+from tarifia.kit.db.postgres import create_async_engine as _create_async_engine
+from tarifia.meter.repository import MeterRepository
+from tarifia.models import Event, Meter, MeterEvent
 
 cli = typer.Typer()
 

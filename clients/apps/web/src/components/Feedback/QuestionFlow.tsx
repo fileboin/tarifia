@@ -1,10 +1,10 @@
 'use client'
 
 import { useChat } from '@ai-sdk/react'
-import { schemas } from '@polar-sh/client'
-import { Box } from '@polar-sh/orbit/Box'
-import { Button } from '@polar-sh/orbit'
-import { TextArea } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Button } from '@tarifia-sh/orbit'
+import { TextArea } from '@tarifia-sh/orbit'
 import { DefaultChatTransport, type UIMessage } from 'ai'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
@@ -178,14 +178,14 @@ export const QuestionFlow = ({
           <div className="prose prose-sm dark:prose-invert">
             <p>
               Looks like a human teammate can take this further. If you want,
-              you can hand this off to the Polar team. Add anything else
+              you can hand this off to the Tarifia team. Add anything else
               you&rsquo;d like to share below and click Send.
             </p>
           </div>
         )}
         {isStreaming && (
           <Box alignItems="center" columnGap="s" color="text-tertiary">
-            <span className="dark:bg-polar-400 h-2 w-2 animate-pulse rounded-full bg-gray-400" />
+            <span className="dark:bg-tarifia-400 h-2 w-2 animate-pulse rounded-full bg-gray-400" />
             <span className="text-sm">{streamingStatus}</span>
           </Box>
         )}

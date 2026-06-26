@@ -2,10 +2,10 @@ import { useInfiniteEvents } from '@/hooks/queries/events'
 import { buildCustomerDashboardPath } from '@/utils/customer'
 import KeyboardArrowDownOutlined from '@mui/icons-material/KeyboardArrowDownOutlined'
 import KeyboardArrowRightOutlined from '@mui/icons-material/KeyboardArrowRightOutlined'
-import { schemas } from '@polar-sh/client'
-import { Avatar } from '@polar-sh/orbit'
-import { Button } from '@polar-sh/orbit'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Avatar } from '@tarifia-sh/orbit'
+import { Button } from '@tarifia-sh/orbit'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@tarifia-sh/orbit'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import type { ReactNode } from 'react'
@@ -111,10 +111,10 @@ export const EventRow = ({
     >
       <div
         className={twMerge(
-          'dark:bg-polar-800 dark:border-polar-700 dark:group-hover:bg-polar-700 flex flex-col rounded-xl border border-gray-200 bg-white font-mono text-sm transition-colors duration-150 group-hover:bg-gray-50',
+          'dark:bg-tarifia-800 dark:border-tarifia-700 dark:group-hover:bg-tarifia-700 flex flex-col rounded-xl border border-gray-200 bg-white font-mono text-sm transition-colors duration-150 group-hover:bg-gray-50',
           isExpanded &&
             renderChildren &&
-            'dark:border-polar-700 dark:group-hover:border-polar-600 border-b-2 border-gray-100',
+            'dark:border-tarifia-700 dark:group-hover:border-tarifia-600 border-b-2 border-gray-100',
           isExpanded &&
             (hasChildren || depth > 0) &&
             'rounded-none group-last:rounded-b-xl!',
@@ -124,7 +124,7 @@ export const EventRow = ({
         <div className="flex flex-row items-center justify-between p-3 select-none">
           <div className="flex flex-row items-center gap-x-4">
             {depth === 0 ? (
-              <div className="dark:bg-polar-700 dark:hover:bg-polar-600 flex flex-row items-center justify-center rounded-sm border border-gray-200 bg-gray-100 p-1 transition-colors duration-150 hover:bg-gray-200 dark:border-white/5">
+              <div className="dark:bg-tarifia-700 dark:hover:bg-tarifia-600 flex flex-row items-center justify-center rounded-sm border border-gray-200 bg-gray-100 p-1 transition-colors duration-150 hover:bg-gray-200 dark:border-white/5">
                 {isExpanded ? (
                   <KeyboardArrowDownOutlined fontSize="inherit" />
                 ) : (
@@ -133,20 +133,20 @@ export const EventRow = ({
               </div>
             ) : (
               <div className="flex w-6 flex-col items-center justify-center">
-                <div className="dark:bg-polar-500 size-1.5 rounded-full bg-gray-300" />
+                <div className="dark:bg-tarifia-500 size-1.5 rounded-full bg-gray-300" />
               </div>
             )}
             <div className="flex flex-row items-center gap-x-4">
               <span className="text-xs">{event.label}</span>
               <EventSourceBadge source={event.source} />
               {event.child_count > 0 && (
-                <span className="dark:text-polar-500 dark:bg-polar-700 text-xxs rounded-md bg-gray-100 px-2 py-1 text-gray-500 capitalize">
+                <span className="dark:text-tarifia-500 dark:bg-tarifia-700 text-xxs rounded-md bg-gray-100 px-2 py-1 text-gray-500 capitalize">
                   {event.child_count}{' '}
                   {event.child_count === 1 ? 'child' : 'children'}
                 </span>
               )}
             </div>
-            <span className="dark:text-polar-500 text-xs text-gray-500 capitalize">
+            <span className="dark:text-tarifia-500 text-xs text-gray-500 capitalize">
               {formattedTimestamp}
             </span>
           </div>
@@ -210,7 +210,7 @@ export const EventRow = ({
                       <span className="text-xs">
                         {event.customer?.name ?? '—'}
                       </span>
-                      <span className="dark:text-polar-500 text-xxs font-mono text-gray-500">
+                      <span className="dark:text-tarifia-500 text-xxs font-mono text-gray-500">
                         {event.customer?.email}
                       </span>
                     </div>
@@ -231,7 +231,7 @@ export const EventRow = ({
                     />
                     <div className="flex flex-col">
                       <span className="text-xs">Anonymous</span>
-                      <span className="dark:text-polar-500 text-xxs font-mono text-gray-500">
+                      <span className="dark:text-tarifia-500 text-xxs font-mono text-gray-500">
                         {event.external_customer_id}
                       </span>
                     </div>
@@ -264,7 +264,7 @@ export const EventRow = ({
           ))}
           {hasNextPage && (
             <Button
-              className="dark:bg-polar-800 dark:hover:bg-polar-700 dark:border-polar-700 w-full rounded-none rounded-b-xl! border border-t-0! border-gray-200 bg-gray-50 text-xs"
+              className="dark:bg-tarifia-800 dark:hover:bg-tarifia-700 dark:border-tarifia-700 w-full rounded-none rounded-b-xl! border border-t-0! border-gray-200 bg-gray-50 text-xs"
               variant="ghost"
               onClick={(e) => {
                 e.stopPropagation()

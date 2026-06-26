@@ -4,7 +4,7 @@ from unittest.mock import MagicMock
 
 from starlette.datastructures import FormData
 
-from polar.backoffice.tasks.forms import (
+from tarifia.backoffice.tasks.forms import (
     _get_function_arguments,
     build_enqueue_task_form_class,
 )

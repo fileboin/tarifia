@@ -6,16 +6,16 @@ import pytest_asyncio
 from dateutil.relativedelta import relativedelta
 from httpx import AsyncClient
 
-from polar.auth.models import AuthSubject
-from polar.benefit.strategies.license_keys.schemas import (
+from tarifia.auth.models import AuthSubject
+from tarifia.benefit.strategies.license_keys.schemas import (
     BenefitLicenseKeyActivationCreateProperties,
     BenefitLicenseKeysCreateProperties,
 )
-from polar.kit.pagination import PaginationParams
-from polar.kit.utils import generate_uuid, utc_now
-from polar.license_key.repository import LicenseKeyRepository
-from polar.license_key.service import license_key as license_key_service
-from polar.models import (
+from tarifia.kit.pagination import PaginationParams
+from tarifia.kit.utils import generate_uuid, utc_now
+from tarifia.license_key.repository import LicenseKeyRepository
+from tarifia.license_key.service import license_key as license_key_service
+from tarifia.models import (
     Customer,
     LicenseKey,
     Organization,
@@ -23,9 +23,9 @@ from polar.models import (
     User,
     UserOrganization,
 )
-from polar.models.license_key import LicenseKeyStatus
-from polar.postgres import AsyncSession
-from polar.redis import Redis
+from tarifia.models.license_key import LicenseKeyStatus
+from tarifia.postgres import AsyncSession
+from tarifia.redis import Redis
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.license_key import TestLicenseKey

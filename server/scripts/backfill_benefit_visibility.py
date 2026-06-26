@@ -12,8 +12,8 @@ the filter, so the script can be safely re-run or resumed.
 import typer
 from sqlalchemy import select, update
 
-from polar.kit.visibility import Visibility
-from polar.models import Benefit
+from tarifia.kit.visibility import Visibility
+from tarifia.models import Benefit
 from scripts.helper import (
     configure_script_logging,
     limit_bindparam,

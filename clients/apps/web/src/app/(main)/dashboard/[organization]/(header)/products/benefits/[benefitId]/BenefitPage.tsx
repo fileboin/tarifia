@@ -10,22 +10,22 @@ import {
 } from '@/components/Benefit/utils'
 import { MasterDetailLayoutContent } from '@/components/Layout/MasterDetailLayout'
 import { ConfirmModal } from '@/components/Modal/ConfirmModal'
-import { Button, InlineModal, Status, Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
+import { Button, InlineModal, Status, Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
 import { useModal } from '@/components/Modal/useModal'
 import { useToast } from '@/components/Toast/use-toast'
 import { useDeleteBenefit } from '@/hooks/queries'
 import { extractApiErrorMessage } from '@/utils/api/errors'
 import { usePushRouteWithoutCache } from '@/utils/router'
 import MoreVertOutlined from '@mui/icons-material/MoreVertOutlined'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@polar-sh/ui/components/ui/dropdown-menu'
+} from '@tarifia-sh/ui/components/ui/dropdown-menu'
 import { parseAsString, useQueryState } from 'nuqs'
 import { useCallback, useEffect, useRef } from 'react'
 
@@ -173,7 +173,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
               </DropdownMenuTrigger>
               <DropdownMenuContent
                 align="end"
-                className="dark:bg-polar-800 bg-gray-50 shadow-lg"
+                className="dark:bg-tarifia-800 bg-gray-50 shadow-lg"
               >
                 <DropdownMenuItem onClick={copyBenefitId}>
                   Copy ID

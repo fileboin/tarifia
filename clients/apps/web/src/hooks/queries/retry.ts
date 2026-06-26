@@ -2,7 +2,7 @@ import {
   ClientResponseError,
   NotFoundResponseError,
   UnauthorizedResponseError,
-} from '@polar-sh/client'
+} from '@tarifia-sh/client'
 
 const authenticatingRetry = (
   failureCount: number,

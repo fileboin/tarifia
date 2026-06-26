@@ -31,7 +31,7 @@ if (typeof window !== 'undefined' && CONFIG.POSTHOG_TOKEN) {
   })
 }
 
-export function PolarPostHogProvider({
+export function TarifiaPostHogProvider({
   children,
 }: {
   children: React.ReactNode
@@ -57,7 +57,7 @@ const isForcedDarkPath = (pathname: string): boolean =>
     (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
   )
 
-export function PolarThemeProvider({
+export function TarifiaThemeProvider({
   children,
   forceTheme,
 }: {
@@ -82,7 +82,7 @@ export function PolarThemeProvider({
   )
 }
 
-export function PolarQueryClientProvider({
+export function TarifiaQueryClientProvider({
   children,
 }: {
   children: React.ReactNode
@@ -94,6 +94,6 @@ export function PolarQueryClientProvider({
   )
 }
 
-export function PolarNuqsProvider({ children }: PropsWithChildren) {
+export function TarifiaNuqsProvider({ children }: PropsWithChildren) {
   return <NuqsAdapter>{children}</NuqsAdapter>
 }

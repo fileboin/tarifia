@@ -1,0 +1,352 @@
+from collections.abc import Sequence
+from typing import TYPE_CHECKING, cast
+from uuid import UUID
+
+from sqlalchemy import CursorResult, Select, case, select, update
+from sqlalchemy.orm import joinedload, selectinload
+
+from tarifia.auth.models import (
+    AuthSubject,
+    Member,
+    User,
+    is_customer,
+    is_member,
+    is_organization,
+    is_user,
+)
+from tarifia.auth.permission import OrganizationPermission
+from tarifia.authz.repository import select_accessible_org_ids
+from tarifia.authz.types import AccessibleOrganizationID
+from tarifia.kit.repository import (
+    Options,
+    RepositoryBase,
+    RepositorySoftDeletionIDMixin,
+    RepositorySoftDeletionMixin,
+    RepositorySortingMixin,
+    SortingClause,
+)
+from tarifia.kit.utils import utc_now
+from tarifia.models import (
+    Customer,
+    Discount,
+    Order,
+    OrderItem,
+    Organization,
+    Product,
+    ProductPrice,
+    Subscription,
+)
+from tarifia.models.order import OrderStatus
+from tarifia.models.subscription import SubscriptionStatus
+
+from .sorting import OrderSortProperty
+
+if TYPE_CHECKING:
+    from sqlalchemy.orm.strategy_options import _AbstractLoad
+
+
+class OrderRepository(
+    RepositorySortingMixin[Order, OrderSortProperty],
+    RepositorySoftDeletionIDMixin[Order, UUID],
+    RepositorySoftDeletionMixin[Order],
+    RepositoryBase[Order],
+):
+    model = Order
+
+    async def get_all_by_customer(
+        self,
+        customer_id: UUID,
+        *,
+        status: OrderStatus | None = None,
+        options: Options = (),
+    ) -> Sequence[Order]:
+        statement = (
+            self.get_base_statement()
+            .where(Order.customer_id == customer_id)
+            .options(*options)
+        )
+        if status is not None:
+            statement = statement.where(Order.status == status)
+        return await self.get_all(statement)
+
+    async def get_all_by_subscription(
+        self,
+        subscription_id: UUID,
+        *,
+        status: OrderStatus | None = None,
+        options: Options = (),
+    ) -> Sequence[Order]:
+        statement = (
+            self.get_base_statement()
+            .where(Order.subscription_id == subscription_id)
+            .options(*options)
+        )
+        if status is not None:
+            statement = statement.where(Order.status == status)
+        return await self.get_all(statement)
+
+    async def get_by_stripe_invoice_id(
+        self, stripe_invoice_id: str, *, options: Options = ()
+    ) -> Order | None:
+        statement = (
+            self.get_base_statement()
+            .where(Order.stripe_invoice_id == stripe_invoice_id)
+            .options(*options)
+        )
+        return await self.get_one_or_none(statement)
+
+    async def get_earliest_by_checkout_id(
+        self, checkout_id: UUID, *, options: Options = ()
+    ) -> Order | None:
+        statement = (
+            self.get_base_statement()
+            .where(Order.checkout_id == checkout_id)
+            .order_by(Order.created_at.asc())
+            .limit(1)
+            .options(*options)
+        )
+        return await self.get_one_or_none(statement)
+
+    async def get_readable_by_id(
+        self,
+        auth_subject: AuthSubject[User | Organization | Customer | Member],
+        id: UUID,
+        *,
+        options: Options = (),
+    ) -> Order | None:
+        statement = (
+            self.get_readable_statement(auth_subject)
+            .where(Order.id == id)
+            .options(*options)
+        )
+        return await self.get_one_or_none(statement)
+
+    async def get_earliest_readable_by_checkout_id(
+        self,
+        auth_subject: AuthSubject[User | Organization | Customer | Member],
+        checkout_id: UUID,
+        *,
+        options: Options = (),
+    ) -> Order | None:
+        statement = (
+            self.get_readable_statement(auth_subject)
+            .where(Order.checkout_id == checkout_id)
+            .order_by(Order.created_at.asc())
+            .limit(1)
+            .options(*options)
+        )
+        return await self.get_one_or_none(statement)
+
+    async def lock_for_receipt_allocation(self, order_id: UUID) -> str | None:
+        """Lock the Order row and return its current ``receipt_number``.
+
+        Returns the scalar value rather than the ORM instance so the caller
+        sees the fresh, lock-protected number — the identity map would
+        otherwise hand back a stale cached ``Order``. Raises if the order
+        does not exist.
+        """
+        statement = (
+            select(Order.receipt_number)
+            .where(Order.id == order_id)
+            .with_for_update(of=Order)
+        )
+        result = await self.session.execute(statement)
+        return result.scalar_one()
+
+    async def get_due_dunning_orders(self, *, options: Options = ()) -> Sequence[Order]:
+        """Get orders that are due for dunning retry based on next_payment_attempt_at.
+
+        Skips orders for organizations whose ``subscription_renewals`` capability
+        is disabled — recurring billing pause covers both cycle and dunning.
+        """
+
+        statement = (
+            self.get_base_statement()
+            .join(Organization, Organization.id == Order.organization_id)
+            .where(
+                Order.next_payment_attempt_at.is_not(None),
+                Order.next_payment_attempt_at <= utc_now(),
+                Order.is_void.is_(False),
+                Organization.is_deleted.is_(False),
+                Organization.can_renew_subscriptions.is_(True),
+            )
+            .order_by(Order.next_payment_attempt_at.asc())
+            .options(*options)
+        )
+        return await self.get_all(statement)
+
+    async def get_pending_orders_for_past_due_subscriptions(
+        self, customer_id: UUID
+    ) -> Sequence[Order]:
+        """Get pending subscription orders where the subscription is past_due
+        and still within the dunning window (past_due_deadline not yet expired)."""
+        statement = (
+            self.get_base_statement()
+            .join(Subscription, Order.subscription_id == Subscription.id)
+            .where(
+                Order.customer_id == customer_id,
+                Order.status == OrderStatus.pending,
+                Order.subscription_id.is_not(None),
+                Subscription.status == SubscriptionStatus.past_due,
+                Subscription.canceled_at.is_(None),
+                Subscription.past_due_deadline.is_not(None),
+                Subscription.past_due_deadline > utc_now(),
+            )
+            .options(joinedload(Order.subscription))
+        )
+        return await self.get_all(statement)
+
+    async def get_latest_by_customer_ids(
+        self,
+        customer_ids: Sequence[UUID],
+        *,
+        limit: int,
+        options: Options = (),
+    ) -> Sequence[Order]:
+        statement = (
+            self.get_base_statement()
+            .join(Customer, onclause=Customer.id == Order.customer_id)
+            .join(Product, onclause=Product.id == Order.product_id, isouter=True)
+            .where(Order.customer_id.in_(customer_ids))
+            .order_by(Order.created_at.desc())
+            .limit(limit)
+            .options(*options)
+        )
+        return await self.get_all(statement)
+
+    async def get_pending_orders_for_subscription(
+        self, subscription_id: UUID, *, options: Options = ()
+    ) -> Sequence[Order]:
+        """Get pending orders for a specific subscription."""
+        statement = (
+            self.get_base_statement()
+            .where(
+                Order.subscription_id == subscription_id,
+                Order.status == OrderStatus.pending,
+            )
+            .options(joinedload(Order.subscription), *options)
+        )
+        return await self.get_all(statement)
+
+    async def acquire_payment_lock_by_id(self, order_id: UUID) -> bool:
+        """
+        Internal method to acquire a payment lock by order ID.
+        This is the original acquire_payment_lock logic.
+
+        Returns:
+            True if lock was acquired, False if already locked
+        """
+        statement = (
+            update(Order)
+            .where(Order.id == order_id, Order.payment_lock_acquired_at.is_(None))
+            .values(payment_lock_acquired_at=utc_now())
+        )
+
+        # https://github.com/sqlalchemy/sqlalchemy/commit/67f62aac5b49b6d048ca39019e5bd123d3c9cfb2
+        result = cast(CursorResult[Order], await self.session.execute(statement))
+        return result.rowcount > 0
+
+    async def release_payment_lock(self, order: Order, *, flush: bool = False) -> Order:
+        """Release a payment lock for an order."""
+        return await self.update(
+            order, update_dict={"payment_lock_acquired_at": None}, flush=flush
+        )
+
+    async def start_finalization(self, order_id: UUID) -> bool:
+        """
+        Atomically transition a draft order to `pending` so it can be charged.
+
+        Used to claim a draft order for finalization: only one concurrent
+        request wins the transition, so two finalize calls can't both proceed
+        (and consume two invoice numbers / race the order status).
+
+        Returns:
+            True if this call transitioned the order from draft to pending,
+            False if it was no longer a draft (already claimed / non-draft).
+        """
+        statement = (
+            update(Order)
+            .where(Order.id == order_id, Order.status == OrderStatus.draft)
+            .values(status=OrderStatus.pending)
+        )
+        result = cast(CursorResult[Order], await self.session.execute(statement))
+        return result.rowcount > 0
+
+    def get_statement_by_org_ids(
+        self, org_ids: set[AccessibleOrganizationID]
+    ) -> Select[tuple[Order]]:
+        return self.get_base_statement().where(Order.organization_id.in_(org_ids))
+
+    def get_readable_statement(
+        self, auth_subject: AuthSubject[User | Organization | Customer | Member]
+    ) -> Select[tuple[Order]]:
+        statement = self.get_base_statement()
+
+        if is_user(auth_subject):
+            statement = statement.where(
+                Order.organization_id.in_(
+                    select_accessible_org_ids(
+                        auth_subject, permission=OrganizationPermission.sales_read
+                    )
+                )
+            )
+        elif is_organization(auth_subject):
+            statement = statement.where(
+                Order.organization_id == auth_subject.subject.id,
+            )
+        elif is_customer(auth_subject):
+            customer = auth_subject.subject
+            statement = statement.where(
+                Order.customer_id == customer.id,
+                Order.is_deleted.is_(False),
+            )
+        elif is_member(auth_subject):
+            member = auth_subject.subject
+            statement = statement.where(
+                Order.customer_id == member.customer_id,
+                Order.is_deleted.is_(False),
+            )
+
+        return statement
+
+    def get_eager_options(
+        self,
+        *,
+        customer_load: "_AbstractLoad | None" = None,
+        product_load: "_AbstractLoad | None" = None,
+        discount_load: "_AbstractLoad | None" = None,
+    ) -> Options:
+        return (
+            customer_load if customer_load else joinedload(Order.customer),
+            joinedload(Order.organization),
+            discount_load if discount_load else joinedload(Order.discount),
+            product_load if product_load else joinedload(Order.product),
+            joinedload(Order.subscription).joinedload(Subscription.customer),
+            selectinload(Order.items)
+            .joinedload(OrderItem.product_price)
+            .joinedload(ProductPrice.product),
+        )
+
+    def get_sorting_clause(self, property: OrderSortProperty) -> SortingClause:
+        match property:
+            case OrderSortProperty.created_at:
+                return Order.created_at
+            case OrderSortProperty.status:
+                return case(
+                    (Order.status == OrderStatus.pending, 1),
+                    (Order.status == OrderStatus.paid, 2),
+                    (Order.status == OrderStatus.refunded, 3),
+                    (Order.status == OrderStatus.partially_refunded, 4),
+                )
+            case OrderSortProperty.invoice_number:
+                return Order.invoice_number
+            case OrderSortProperty.amount | OrderSortProperty.net_amount:
+                return Order.net_amount
+            case OrderSortProperty.customer:
+                return Customer.email
+            case OrderSortProperty.product:
+                return Product.name
+            case OrderSortProperty.discount:
+                return Discount.name
+            case OrderSortProperty.subscription:
+                return Order.subscription_id

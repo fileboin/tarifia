@@ -116,7 +116,7 @@ wheels = [
 ]
 
 [[package]]
-name = "polar-sdk"
+name = "tarifia-sdk"
 source = { editable = "." }
 dependencies = [
     { name = "adaptix" },

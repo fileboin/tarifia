@@ -1,6 +1,6 @@
 'use client'
 
-import { Spinner } from '@polar-sh/orbit'
+import { Spinner } from '@tarifia-sh/orbit'
 import { useMetersInfinite } from '@/hooks/queries/meters'
 import { useInViewport } from '@/hooks/utils'
 import AddOutlined from '@mui/icons-material/AddOutlined'
@@ -9,22 +9,22 @@ import ArrowUpward from '@mui/icons-material/ArrowUpward'
 import CheckOutlined from '@mui/icons-material/CheckOutlined'
 import FilterList from '@mui/icons-material/FilterList'
 import Search from '@mui/icons-material/Search'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { Input } from '@polar-sh/orbit'
-import { Status } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { Input } from '@tarifia-sh/orbit'
+import { Status } from '@tarifia-sh/orbit'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@polar-sh/ui/components/ui/dropdown-menu'
+} from '@tarifia-sh/ui/components/ui/dropdown-menu'
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { parseAsStringLiteral, useQueryState } from 'nuqs'
 import React, { useEffect, useMemo } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { METER_UNIT_DISPLAY_NAMES } from '@polar-sh/ui/lib/meterUnit'
+import { METER_UNIT_DISPLAY_NAMES } from '@tarifia-sh/ui/lib/meterUnit'
 
 interface MeterListSidebarProps {
   organization: schemas['Organization']
@@ -86,7 +86,7 @@ export const MeterListSidebar: React.FC<MeterListSidebarProps> = ({
   }, [inViewport, hasNextPage, isFetchingNextPage, fetchNextPage])
 
   return (
-    <div className="dark:divide-polar-800 flex h-full flex-col divide-y divide-gray-200">
+    <div className="dark:divide-tarifia-800 flex h-full flex-col divide-y divide-gray-200">
       <div className="flex flex-row items-center justify-between gap-6 px-4 py-4">
         <div>Meters</div>
         <div className="flex flex-row items-center gap-4">
@@ -150,10 +150,10 @@ export const MeterListSidebar: React.FC<MeterListSidebarProps> = ({
         </div>
       </div>
       <div className="flex flex-row items-center gap-3 px-4 py-2">
-        <div className="dark:bg-polar-800 flex h-8 w-8 items-center justify-center rounded-full bg-gray-100">
+        <div className="dark:bg-tarifia-800 flex h-8 w-8 items-center justify-center rounded-full bg-gray-100">
           <Search
             fontSize="inherit"
-            className="dark:text-polar-500 text-gray-500"
+            className="dark:text-tarifia-500 text-gray-500"
           />
         </div>
         <Input
@@ -163,7 +163,7 @@ export const MeterListSidebar: React.FC<MeterListSidebarProps> = ({
           onChange={(e) => setQuery(e.target.value)}
         />
       </div>
-      <div className="dark:divide-polar-800 flex h-full grow flex-col divide-y divide-gray-50 overflow-y-auto">
+      <div className="dark:divide-tarifia-800 flex h-full grow flex-col divide-y divide-gray-50 overflow-y-auto">
         {meters.map((meter) => {
           const queryString = searchParams.toString()
           const meterHref = `/dashboard/${organization.slug}/products/meters/${meter.id}${queryString ? `?${queryString}` : ''}`
@@ -173,8 +173,8 @@ export const MeterListSidebar: React.FC<MeterListSidebarProps> = ({
               key={meter.id}
               href={meterHref}
               className={twMerge(
-                'dark:hover:bg-polar-800 cursor-pointer hover:bg-gray-100',
-                selectedMeterId === meter.id && 'dark:bg-polar-800 bg-gray-100',
+                'dark:hover:bg-tarifia-800 cursor-pointer hover:bg-gray-100',
+                selectedMeterId === meter.id && 'dark:bg-tarifia-800 bg-gray-100',
               )}
             >
               <div className="flex min-w-0 flex-col gap-y-1 px-6 py-2">
@@ -185,7 +185,7 @@ export const MeterListSidebar: React.FC<MeterListSidebarProps> = ({
 
                   <div className="truncate text-sm">{meter.name}</div>
                 </div>
-                <div className="dark:text-polar-500 w-full truncate text-xs text-gray-500 capitalize">
+                <div className="dark:text-tarifia-500 w-full truncate text-xs text-gray-500 capitalize">
                   {METER_UNIT_DISPLAY_NAMES[meter.unit]}
                 </div>
               </div>

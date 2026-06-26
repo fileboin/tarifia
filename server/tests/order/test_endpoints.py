@@ -7,11 +7,11 @@ import pytest_asyncio
 from httpx import AsyncClient
 from pytest_mock import MockerFixture
 
-from polar.auth.models import AuthSubject
-from polar.auth.scope import Scope
-from polar.models import Customer, Order, Organization, Product, User, UserOrganization
-from polar.models.order import OrderStatus
-from polar.order.service import PaymentFailed, PaymentFailedReason
+from tarifia.auth.models import AuthSubject
+from tarifia.auth.scope import Scope
+from tarifia.models import Customer, Order, Organization, Product, User, UserOrganization
+from tarifia.models.order import OrderStatus
+from tarifia.order.service import PaymentFailed, PaymentFailedReason
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_order
@@ -257,7 +257,7 @@ class TestExportOrders:
         assert response.headers["content-type"] == "text/csv; charset=utf-8"
         assert (
             response.headers["content-disposition"]
-            == 'attachment; filename="polar-orders.csv"'
+            == 'attachment; filename="tarifia-orders.csv"'
         )
 
         # Should only have header row since user is not a member
@@ -283,7 +283,7 @@ class TestExportOrders:
         assert response.headers["content-type"] == "text/csv; charset=utf-8"
         assert (
             response.headers["content-disposition"]
-            == 'attachment; filename="polar-orders.csv"'
+            == 'attachment; filename="tarifia-orders.csv"'
         )
 
         csv_lines = response.text.strip().split("\r\n")
@@ -496,7 +496,7 @@ class TestGetOrderReceipt:
         order.receipt_number = "RCPT-FOO-0001"
         await save_fixture(order)
 
-        enqueue_mock = mocker.patch("polar.receipt.service.enqueue_job")
+        enqueue_mock = mocker.patch("tarifia.receipt.service.enqueue_job")
 
         response = await client.get(f"/v1/orders/{order.id}/receipt")
 
@@ -517,7 +517,7 @@ class TestGetOrderReceipt:
         order.receipt_path = f"{order.organization_id}/{order.id}/receipt.pdf"
         await save_fixture(order)
 
-        s3_mock = mocker.patch("polar.receipt.service.S3Service")
+        s3_mock = mocker.patch("tarifia.receipt.service.S3Service")
         s3_mock.return_value.generate_presigned_download_url.return_value = (
             "https://example.com/signed-url",
             datetime(2030, 1, 1, tzinfo=UTC),
@@ -706,7 +706,7 @@ class TestFinalizeOrderEndpoint:
         )
         # A PaymentFailed from the service must map to 402.
         mocker.patch(
-            "polar.order.endpoints.order_service.finalize_order",
+            "tarifia.order.endpoints.order_service.finalize_order",
             new=AsyncMock(side_effect=PaymentFailed(PaymentFailedReason.card_error)),
         )
         response = await client.post(f"/v1/orders/{order.id}/finalize", json={})

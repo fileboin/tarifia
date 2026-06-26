@@ -1,17 +1,17 @@
-import { PolarVsLemonSqueezyPage } from '@/components/Landing/comparison/PolarLemonSqueezyPage'
+import { TarifiaVsLemonSqueezyPage } from '@/components/Landing/comparison/TarifiaLemonSqueezyPage'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Polar vs Lemon Squeezy',
-  description: 'Comparing Polar and Lemon Squeezy',
+  title: 'Tarifia vs Lemon Squeezy',
+  description: 'Comparing Tarifia and Lemon Squeezy',
   keywords:
-    'polar vs lemon squeezy, lemon squeezy, polar, comparison, pricing, pricing for polar, pricing for polar, pricing for polar',
+    'tarifia vs lemon squeezy, lemon squeezy, tarifia, comparison, pricing, pricing for tarifia, pricing for tarifia, pricing for tarifia',
   openGraph: {
-    siteName: 'Polar',
+    siteName: 'Tarifia',
     type: 'website',
     images: [
       {
-        url: 'https://polar.sh/assets/brand/polar_og.jpg',
+        url: 'https://tarifia.sh/assets/brand/tarifia_og.jpg',
         width: 1200,
         height: 630,
       },
@@ -21,15 +21,15 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     images: [
       {
-        url: 'https://polar.sh/assets/brand/polar_og.jpg',
+        url: 'https://tarifia.sh/assets/brand/tarifia_og.jpg',
         width: 1200,
         height: 630,
-        alt: 'Polar',
+        alt: 'Tarifia',
       },
     ],
   },
 }
 
 export default function Page() {
-  return <PolarVsLemonSqueezyPage />
+  return <TarifiaVsLemonSqueezyPage />
 }

@@ -9,11 +9,11 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from polar.auth.models import AuthSubject
-from polar.auth.scope import READ_ONLY_SCOPES, Scope
-from polar.authz.dependencies import WebUserAuthorizer
-from polar.models import User, UserSession
-from polar.oauth2.exceptions import InsufficientScopeError
+from tarifia.auth.models import AuthSubject
+from tarifia.auth.scope import READ_ONLY_SCOPES, Scope
+from tarifia.authz.dependencies import WebUserAuthorizer
+from tarifia.models import User, UserSession
+from tarifia.oauth2.exceptions import InsufficientScopeError
 
 
 def _auth_subject(scopes: set[Scope]) -> AuthSubject[User]:

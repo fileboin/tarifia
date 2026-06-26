@@ -1,14 +1,14 @@
 'use client'
 
-import { enums, schemas } from '@polar-sh/client'
+import { enums, schemas } from '@tarifia-sh/client'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
-import { Input } from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
+import { Input } from '@tarifia-sh/orbit'
 import {
   FormControl,
   FormDescription,
@@ -16,7 +16,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { useFormContext } from 'react-hook-form'
 
 type AggregationFunction =

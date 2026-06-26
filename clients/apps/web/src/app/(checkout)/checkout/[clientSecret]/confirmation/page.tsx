@@ -8,7 +8,7 @@ import {
   NotFoundResponseError,
   createClient,
   unwrap,
-} from '@polar-sh/client'
+} from '@tarifia-sh/client'
 import { notFound, redirect } from 'next/navigation'
 
 export default async function Page(props: {

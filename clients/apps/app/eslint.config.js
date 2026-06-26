@@ -20,7 +20,7 @@ module.exports = defineConfig([
   },
   {
     plugins: {
-      '@polar': {
+      '@tarifia': {
         rules: {
           'no-view': noViewRule,
           'no-text': noTextRule,
@@ -37,17 +37,17 @@ module.exports = defineConfig([
       },
     },
     rules: {
-      '@polar/no-view': 'error',
-      '@polar/no-text': 'error',
-      '@polar/no-stylesheet-create': 'error',
-      '@polar/no-image': 'error',
-      '@polar/no-flatlist': 'error',
-      '@polar/no-touchable': 'error',
-      '@polar/no-jsx-logical-and': 'error',
-      '@polar/no-restyle-use-theme': 'error',
-      '@polar/no-hardcoded-spacing': 'error',
-      '@polar/no-hardcoded-colors': 'error',
-      '@polar/no-hardcoded-dimensions': 'error',
+      '@tarifia/no-view': 'error',
+      '@tarifia/no-text': 'error',
+      '@tarifia/no-stylesheet-create': 'error',
+      '@tarifia/no-image': 'error',
+      '@tarifia/no-flatlist': 'error',
+      '@tarifia/no-touchable': 'error',
+      '@tarifia/no-jsx-logical-and': 'error',
+      '@tarifia/no-restyle-use-theme': 'error',
+      '@tarifia/no-hardcoded-spacing': 'error',
+      '@tarifia/no-hardcoded-colors': 'error',
+      '@tarifia/no-hardcoded-dimensions': 'error',
     },
   },
   {

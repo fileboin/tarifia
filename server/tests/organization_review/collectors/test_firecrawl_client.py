@@ -4,9 +4,9 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 
-from polar.config import settings
-from polar.organization_review.collectors import firecrawl_client
-from polar.organization_review.collectors.firecrawl_client import (
+from tarifia.config import settings
+from tarifia.organization_review.collectors import firecrawl_client
+from tarifia.organization_review.collectors.firecrawl_client import (
     ScrapeResult,
     scrape_markdown,
 )

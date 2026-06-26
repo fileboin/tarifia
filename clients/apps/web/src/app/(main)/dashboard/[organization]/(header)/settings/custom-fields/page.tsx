@@ -1,13 +1,13 @@
 import { getServerSideAPI } from '@/utils/client/serverside'
 import { DataTableSearchParams, parseSearchParams } from '@/utils/datatable'
 import { getOrganizationBySlugOrNotFound } from '@/utils/organization'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { Metadata } from 'next'
 import CustomFieldsPage from './CustomFieldsPage'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Custom Fields', // " | Polar is added by the template"
+    title: 'Custom Fields', // " | Tarifia is added by the template"
   }
 }
 

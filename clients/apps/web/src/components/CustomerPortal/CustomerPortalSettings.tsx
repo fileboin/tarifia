@@ -7,11 +7,11 @@ import {
   useCustomerPortalCustomer,
 } from '@/hooks/queries/customerPortal'
 import { createClientSideAPI } from '@/utils/client'
-import { PolarEmbedPaymentMethod } from '@polar-sh/checkout/payment-method'
-import { usePaymentMethodRedirectResult } from '@polar-sh/checkout/react/payment-method'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { Separator } from '@polar-sh/ui/components/ui/separator'
+import { TarifiaEmbedPaymentMethod } from '@tarifia-sh/checkout/payment-method'
+import { usePaymentMethodRedirectResult } from '@tarifia-sh/checkout/react/payment-method'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { Separator } from '@tarifia-sh/ui/components/ui/separator'
 import { useQueryClient } from '@tanstack/react-query'
 import { useTheme } from 'next-themes'
 import { useRouter } from 'next/navigation'
@@ -62,7 +62,7 @@ export const CustomerPortalSettings = ({
 
   const onAddPaymentMethod = async () => {
     if (!customerSessionToken) return
-    const embed = await PolarEmbedPaymentMethod.create({
+    const embed = await TarifiaEmbedPaymentMethod.create({
       sessionToken: customerSessionToken,
       theme: theme.resolvedTheme === 'dark' ? 'dark' : 'light',
     })
@@ -86,7 +86,7 @@ export const CustomerPortalSettings = ({
         const url = URL.createObjectURL(blob)
         const a = document.createElement('a')
         a.href = url
-        a.download = `polar-customer-export-${customer?.id ?? 'data'}.json`
+        a.download = `tarifia-customer-export-${customer?.id ?? 'data'}.json`
         document.body.appendChild(a)
         a.click()
         document.body.removeChild(a)
@@ -104,11 +104,11 @@ export const CustomerPortalSettings = ({
   return (
     <div className="flex flex-col gap-y-8">
       <h3 className="text-2xl">Billing Settings</h3>
-      <Well className="dark:bg-polar-900 flex flex-col gap-y-6 bg-gray-50">
+      <Well className="dark:bg-tarifia-900 flex flex-col gap-y-6 bg-gray-50">
         <WellHeader className="flex-row items-start justify-between">
           <div className="flex flex-col gap-y-2">
             <h3 className="text-xl">Payment Methods</h3>
-            <p className="dark:text-polar-500 text-gray-500">
+            <p className="dark:text-tarifia-500 text-gray-500">
               Methods used for subscriptions & one-time purchases
             </p>
           </div>
@@ -126,16 +126,16 @@ export const CustomerPortalSettings = ({
           ))}
         </WellContent>
       </Well>
-      <Well className="dark:bg-polar-900 flex flex-col gap-y-6 bg-gray-50">
+      <Well className="dark:bg-tarifia-900 flex flex-col gap-y-6 bg-gray-50">
         <WellHeader className="flex-row items-center justify-between">
           <div className="flex flex-col gap-y-2">
             <h3 className="text-xl">Billing Details</h3>
-            <p className="dark:text-polar-500 text-gray-500">
+            <p className="dark:text-tarifia-500 text-gray-500">
               Update your billing details
             </p>
           </div>
         </WellHeader>
-        <Separator className="dark:bg-polar-700" />
+        <Separator className="dark:bg-tarifia-700" />
         <WellContent>
           <EditBillingDetails
             onSuccess={() => {
@@ -150,16 +150,16 @@ export const CustomerPortalSettings = ({
         customer.email &&
         organization.customer_portal_settings.customer?.allow_email_change ===
           true && (
-          <Well className="dark:bg-polar-900 flex flex-col gap-y-6 bg-gray-50">
+          <Well className="dark:bg-tarifia-900 flex flex-col gap-y-6 bg-gray-50">
             <WellHeader className="flex-row items-center justify-between">
               <div className="flex flex-col gap-y-2">
                 <h3 className="text-xl">Email Address</h3>
-                <p className="dark:text-polar-500 text-gray-500">
+                <p className="dark:text-tarifia-500 text-gray-500">
                   Change the email associated with your account
                 </p>
               </div>
             </WellHeader>
-            <Separator className="dark:bg-polar-700" />
+            <Separator className="dark:bg-tarifia-700" />
             <WellContent>
               <ChangeEmailForm customer={customer} />
             </WellContent>
@@ -168,17 +168,17 @@ export const CustomerPortalSettings = ({
 
       {customer.type === 'team' &&
         organization.organization_features?.member_model_enabled && (
-          <Well className="dark:bg-polar-900 flex flex-col gap-y-6 bg-gray-50">
+          <Well className="dark:bg-tarifia-900 flex flex-col gap-y-6 bg-gray-50">
             <WellHeader className="flex-row items-start justify-between">
               <div className="flex flex-col gap-y-2">
                 <h3 className="text-xl">Billing Managers</h3>
-                <p className="dark:text-polar-500 text-gray-500">
+                <p className="dark:text-tarifia-500 text-gray-500">
                   Billing Managers can manage billing details, payment methods,
                   and subscriptions.
                 </p>
               </div>
             </WellHeader>
-            <Separator className="dark:bg-polar-700" />
+            <Separator className="dark:bg-tarifia-700" />
             <WellContent>
               <CustomerPortalTeamSection
                 api={api}
@@ -188,11 +188,11 @@ export const CustomerPortalSettings = ({
           </Well>
         )}
 
-      <Well className="dark:bg-polar-900 flex flex-col gap-y-6 bg-gray-50">
+      <Well className="dark:bg-tarifia-900 flex flex-col gap-y-6 bg-gray-50">
         <WellHeader className="flex-row items-start justify-between">
           <div className="flex flex-col gap-y-2">
             <h3 className="text-xl">Privacy</h3>
-            <p className="dark:text-polar-500 text-gray-500">
+            <p className="dark:text-tarifia-500 text-gray-500">
               Download a copy of all your personal data
             </p>
           </div>

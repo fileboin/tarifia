@@ -2,15 +2,15 @@ import uuid
 
 import pytest
 
-from polar.benefit.grant.scope import (
+from tarifia.benefit.grant.scope import (
     CustomerDoesntHaveOwnerMember,
     MemberIdRequired,
     MemberNotFound,
     resolve_member,
 )
-from polar.models import Account, Member
-from polar.models.member import MemberRole
-from polar.postgres import AsyncSession
+from tarifia.models import Account, Member
+from tarifia.models.member import MemberRole
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_customer, create_organization
 

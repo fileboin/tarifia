@@ -1,8 +1,8 @@
 'use client'
 
 import { type ScrollFadeHandle } from '@/components/Shared/ScrollFade'
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
 import { Paperclip } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
@@ -84,7 +84,7 @@ export const Chat = ({
       className={twMerge('relative', className)}
     >
       {dropEnabled && isDragging && (
-        <div className="dark:border-polar-600 dark:bg-polar-800/90 dark:text-polar-50 pointer-events-none absolute inset-0 z-10 flex items-center justify-center gap-2 rounded-[inherit] border-2 border-dashed border-gray-300 bg-white/90 text-sm font-medium text-gray-700">
+        <div className="dark:border-tarifia-600 dark:bg-tarifia-800/90 dark:text-tarifia-50 pointer-events-none absolute inset-0 z-10 flex items-center justify-center gap-2 rounded-[inherit] border-2 border-dashed border-gray-300 bg-white/90 text-sm font-medium text-gray-700">
           <Paperclip className="h-4 w-4" />
           Drop to attach
         </div>

@@ -33,25 +33,25 @@ from rich.console import Console
 from rich.table import Table
 from sqlalchemy import Select, select
 
-from polar.kit.db.postgres import create_async_sessionmaker
-from polar.models import Organization
-from polar.models.organization_review import OrganizationReview
-from polar.models.organization_review_feedback import OrganizationReviewFeedback
-from polar.models.support_case import (
+from tarifia.kit.db.postgres import create_async_sessionmaker
+from tarifia.models import Organization
+from tarifia.models.organization_review import OrganizationReview
+from tarifia.models.organization_review_feedback import OrganizationReviewFeedback
+from tarifia.models.support_case import (
     ReviewAppealSupportCase,
     SupportCase,
     SupportCaseMessageAuthorKind,
     SupportCaseType,
 )
-from polar.organization_review.appeal_case import appeal_case as appeal_case_service
-from polar.organization_review.schemas import (
+from tarifia.organization_review.appeal_case import appeal_case as appeal_case_service
+from tarifia.organization_review.schemas import (
     ActorType,
     DecisionType,
     ReviewContext,
 )
-from polar.postgres import create_async_engine
-from polar.support_case.repository import SupportCaseMessageRepository
-from polar.support_case.service import support_case as support_case_service
+from tarifia.postgres import create_async_engine
+from tarifia.support_case.repository import SupportCaseMessageRepository
+from tarifia.support_case.service import support_case as support_case_service
 from scripts.helper import configure_script_console_logging, typer_async
 
 cli = typer.Typer()

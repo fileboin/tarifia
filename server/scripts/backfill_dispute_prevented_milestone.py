@@ -34,10 +34,10 @@ from rich.console import Console
 from rich.table import Table
 from sqlalchemy import Select, func, select
 
-from polar.kit.db.postgres import create_async_sessionmaker
-from polar.models import Dispute, Order, Organization
-from polar.models.dispute import DisputeStatus
-from polar.models.support_case import (
+from tarifia.kit.db.postgres import create_async_sessionmaker
+from tarifia.models import Dispute, Order, Organization
+from tarifia.models.dispute import DisputeStatus
+from tarifia.models.support_case import (
     DisputeSupportCase,
     SupportCase,
     SupportCaseAudience,
@@ -46,7 +46,7 @@ from polar.models.support_case import (
     SupportCaseMessageType,
     SupportCaseType,
 )
-from polar.postgres import create_async_engine
+from tarifia.postgres import create_async_engine
 from scripts.helper import configure_script_console_logging, typer_async
 
 cli = typer.Typer()

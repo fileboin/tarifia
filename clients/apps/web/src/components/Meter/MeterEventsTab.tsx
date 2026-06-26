@@ -1,8 +1,8 @@
 'use client'
 
 import { useInfiniteEvents } from '@/hooks/queries/events'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
 import { useMemo } from 'react'
 import { Events } from '../Events/Events'
 

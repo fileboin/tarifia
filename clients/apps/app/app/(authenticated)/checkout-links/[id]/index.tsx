@@ -16,8 +16,8 @@ import { useTheme } from '@/design-system/useTheme'
 import {
   useCheckoutLink,
   useCheckoutLinkUpdate,
-} from '@/hooks/polar/checkout_links'
-import { useInfiniteProducts } from '@/hooks/polar/products'
+} from '@/hooks/tarifia/checkout_links'
+import { useInfiniteProducts } from '@/hooks/tarifia/products'
 import { OrganizationContext } from '@/providers/OrganizationProvider'
 import { useToast } from '@/providers/ToastProvider'
 import { Stack, useLocalSearchParams } from 'expo-router'

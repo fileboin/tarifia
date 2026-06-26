@@ -11,11 +11,11 @@ import {
 } from '@/utils/api/errors'
 import { getDiscountDisplay } from '@/utils/discount'
 import ClearOutlined from '@mui/icons-material/ClearOutlined'
-import { isValidationError, schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { Combobox } from '@polar-sh/ui/components/atoms/Combobox'
-import { Input } from '@polar-sh/orbit'
-import { Switch } from '@polar-sh/orbit'
+import { isValidationError, schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { Combobox } from '@tarifia-sh/ui/components/atoms/Combobox'
+import { Input } from '@tarifia-sh/orbit'
+import { Switch } from '@tarifia-sh/orbit'
 import {
   Form,
   FormControl,
@@ -24,7 +24,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { XIcon } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form'

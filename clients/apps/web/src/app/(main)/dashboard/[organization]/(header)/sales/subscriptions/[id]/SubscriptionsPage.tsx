@@ -3,7 +3,7 @@
 import { CustomerContextView } from '@/components/Customer/CustomerContextView'
 import CustomFieldValue from '@/components/CustomFields/CustomFieldValue'
 import { DashboardBody } from '@/components/Layout/DashboardLayout'
-import { InlineModal } from '@polar-sh/orbit'
+import { InlineModal } from '@tarifia-sh/orbit'
 import { useModal } from '@/components/Modal/useModal'
 import { SeatViewOnlyTable } from '@/components/Seats/SeatViewOnlyTable'
 import { DetailRow } from '@/components/Shared/DetailRow'
@@ -21,15 +21,15 @@ import {
 import { extractApiErrorMessage } from '@/utils/api/errors'
 import { useOrganizationSeats } from '@/hooks/queries/seats'
 import SubscriptionOrdersSection from '@/components/Subscriptions/SubscriptionOrdersSection'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@polar-sh/ui/components/atoms/DropdownMenu'
-import ShadowBox from '@polar-sh/ui/components/atoms/ShadowBox'
+} from '@tarifia-sh/ui/components/atoms/DropdownMenu'
+import ShadowBox from '@tarifia-sh/ui/components/atoms/ShadowBox'
 import { ArrowUpRightIcon, MoreVertical } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
@@ -147,7 +147,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
         />
       }
     >
-      <ShadowBox className="dark:divide-polar-700 flex flex-col divide-y divide-gray-200 border-gray-200 bg-transparent p-0 md:rounded-3xl!">
+      <ShadowBox className="dark:divide-tarifia-700 flex flex-col divide-y divide-gray-200 border-gray-200 bg-transparent p-0 md:rounded-3xl!">
         <div className="flex flex-col gap-6 p-8">
           <div className="flex flex-col gap-2">
             <DetailRow
@@ -212,7 +212,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
           <div className="flex flex-col gap-6 p-8">
             <div className="flex flex-col gap-y-2">
               <h3 className="text-lg">Seats</h3>
-              <p className="dark:text-polar-500 text-sm text-gray-500">
+              <p className="dark:text-tarifia-500 text-sm text-gray-500">
                 {availableSeats} of {totalSeats} seats available
               </p>
             </div>
@@ -225,7 +225,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
             )}
 
             {!isLoadingSeats && seats.length === 0 && (
-              <p className="dark:text-polar-500 text-sm text-gray-500">
+              <p className="dark:text-tarifia-500 text-sm text-gray-500">
                 No seats have been assigned yet.
               </p>
             )}

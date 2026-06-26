@@ -5,24 +5,24 @@ from unittest.mock import MagicMock
 import pytest
 from pytest_mock import MockerFixture
 
-from polar.auth.models import AuthSubject
-from polar.auth.scope import Scope
-from polar.checkout.eventstream import CheckoutEvent
-from polar.exceptions import PolarRequestValidationError, ResourceNotFound
-from polar.kit.utils import utc_now
-from polar.models import (
+from tarifia.auth.models import AuthSubject
+from tarifia.auth.scope import Scope
+from tarifia.checkout.eventstream import CheckoutEvent
+from tarifia.exceptions import TarifiaRequestValidationError, ResourceNotFound
+from tarifia.kit.utils import utc_now
+from tarifia.models import (
     Organization,
     Product,
     WebhookDelivery,
     WebhookEndpoint,
     WebhookEvent,
 )
-from polar.models.webhook_endpoint import WebhookEventType, WebhookFormat
-from polar.postgres import AsyncSession
-from polar.webhook.schemas import HttpsUrl, WebhookEndpointCreate, WebhookEndpointUpdate
-from polar.webhook.service import EventDoesNotExist, EventNotSuccessul
-from polar.webhook.service import webhook as webhook_service
-from polar.webhook.webhooks import WebhookCheckoutUpdatedPayload
+from tarifia.models.webhook_endpoint import WebhookEventType, WebhookFormat
+from tarifia.postgres import AsyncSession
+from tarifia.webhook.schemas import HttpsUrl, WebhookEndpointCreate, WebhookEndpointUpdate
+from tarifia.webhook.service import EventDoesNotExist, EventNotSuccessul
+from tarifia.webhook.service import webhook as webhook_service
+from tarifia.webhook.webhooks import WebhookCheckoutUpdatedPayload
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_checkout
@@ -30,7 +30,7 @@ from tests.fixtures.random_objects import create_checkout
 
 @pytest.fixture
 def enqueue_job_mock(mocker: MockerFixture) -> MagicMock:
-    return mocker.patch("polar.webhook.service.enqueue_job")
+    return mocker.patch("tarifia.webhook.service.enqueue_job")
 
 
 webhook_url = cast(HttpsUrl, "https://example.com/hook")
@@ -51,7 +51,7 @@ class TestCreateEndpoint:
             organization_id=uuid.uuid4(),
         )
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await webhook_service.create_endpoint(session, auth_subject, create_schema)
 
     @pytest.mark.auth(
@@ -199,7 +199,7 @@ class TestOnEventSuccess:
         webhook_endpoint_organization: WebhookEndpoint,
     ) -> None:
         publish_checkout_event_mock = mocker.patch(
-            "polar.webhook.service.publish_checkout_event"
+            "tarifia.webhook.service.publish_checkout_event"
         )
         checkout = await create_checkout(save_fixture, products=[product])
         timestamp = utc_now()

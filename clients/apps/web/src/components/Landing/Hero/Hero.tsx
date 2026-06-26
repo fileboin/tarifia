@@ -1,8 +1,8 @@
 'use client'
 
 import GetStartedButton from '@/components/Auth/GetStartedButton'
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
 import { motion } from 'motion/react'
 
 const containerVariants = {
@@ -37,7 +37,7 @@ export const Hero = () => {
         </Text>
       </Box>
       <motion.p
-        className="dark:text-polar-500 max-w-2xl text-center text-2xl leading-relaxed! text-balance text-gray-500"
+        className="dark:text-tarifia-500 max-w-2xl text-center text-2xl leading-relaxed! text-balance text-gray-500"
         variants={itemVariants}
       >
         A billing platform for the intelligence era

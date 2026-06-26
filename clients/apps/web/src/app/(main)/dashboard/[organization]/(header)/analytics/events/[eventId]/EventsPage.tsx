@@ -4,16 +4,16 @@ import { CustomerContextView } from '@/components/Customer/CustomerContextView'
 import { EventRow } from '@/components/Events/EventRow'
 import { DashboardBody } from '@/components/Layout/DashboardLayout'
 import { useEventTypes } from '@/hooks/queries/event_types'
-import { Avatar } from '@polar-sh/orbit'
+import { Avatar } from '@tarifia-sh/orbit'
 import {
   useEvent,
   useEventVarianceStats,
   useInfiniteEvents,
 } from '@/hooks/queries/events'
 import KeyboardArrowUpOutlined from '@mui/icons-material/KeyboardArrowUpOutlined'
-import { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
-import { Button } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
+import { Button } from '@tarifia-sh/orbit'
 import { AlertTriangle } from 'lucide-react'
 import Link from 'next/link'
 import React, { useMemo } from 'react'
@@ -136,7 +136,7 @@ export default function EventDetailPage({
           <div className="flex flex-row items-center justify-between gap-x-4">
             <h3 className="text-4xl">{event.label}</h3>
             {'_cost' in event.metadata && event.metadata._cost && (
-              <h3 className="dark:text-polar-500 font-mono text-4xl text-gray-400">
+              <h3 className="dark:text-tarifia-500 font-mono text-4xl text-gray-400">
                 {formatCurrency('subcent')(
                   Number(event.metadata._cost?.amount ?? 0),
                   event.metadata._cost?.currency ?? 'usd',
@@ -158,7 +158,7 @@ export default function EventDetailPage({
             <div className="flex flex-col gap-y-8">
               <div className="flex flex-row justify-between">
                 <h3 className="text-2xl">Child Events</h3>
-                <h3 className="dark:text-polar-500 text-2xl text-gray-400">
+                <h3 className="dark:text-tarifia-500 text-2xl text-gray-400">
                   {children.length} {children.length === 1 ? 'Event' : 'Events'}
                 </h3>
               </div>
@@ -204,10 +204,10 @@ export default function EventDetailPage({
           <Field label="Event Type">
             <div className="flex flex-col gap-y-2">
               <span className="text-sm dark:text-white">{event.label}</span>
-              <div className="dark:text-polar-500 flex flex-row items-center gap-x-2 text-xs text-gray-400">
+              <div className="dark:text-tarifia-500 flex flex-row items-center gap-x-2 text-xs text-gray-400">
                 <Link
                   href={`/dashboard/${organization.slug}/analytics/events?eventTypes=${encodeURIComponent(event.name)}`}
-                  className="hover:dark:text-polar-300 hover:text-gray-600"
+                  className="hover:dark:text-tarifia-300 hover:text-gray-600"
                 >
                   View Events
                 </Link>
@@ -216,7 +216,7 @@ export default function EventDetailPage({
                     <span>·</span>
                     <Link
                       href={`/dashboard/${organization.slug}/analytics/costs/${eventTypeId}`}
-                      className="hover:dark:text-polar-300 hover:text-gray-600"
+                      className="hover:dark:text-tarifia-300 hover:text-gray-600"
                     >
                       View Cost Span
                     </Link>
@@ -229,7 +229,7 @@ export default function EventDetailPage({
             <Field label="Customer">
               <Link
                 href={`/dashboard/${organization.slug}/customers/${event.customer.id}`}
-                className="dark:hover:bg-polar-800 -mx-2 flex flex-row items-center gap-x-3 rounded-lg px-2 py-2 transition-colors hover:bg-gray-50"
+                className="dark:hover:bg-tarifia-800 -mx-2 flex flex-row items-center gap-x-3 rounded-lg px-2 py-2 transition-colors hover:bg-gray-50"
               >
                 <Avatar
                   avatar_url={event.customer.avatar_url}
@@ -243,7 +243,7 @@ export default function EventDetailPage({
                     </span>
                   )}
                   {event.customer.email && (
-                    <span className="dark:text-polar-400 text-xs text-gray-500">
+                    <span className="dark:text-tarifia-400 text-xs text-gray-500">
                       {event.customer.email}
                     </span>
                   )}
@@ -261,28 +261,28 @@ export default function EventDetailPage({
               }
             >
               <div className="flex flex-col gap-y-3">
-                <span className="dark:text-polar-400 text-xs text-gray-500">
+                <span className="dark:text-tarifia-400 text-xs text-gray-500">
                   Compared to {anomaly.name} events in the last 30 days
                 </span>
-                <div className="dark:border-polar-700 flex overflow-hidden rounded-lg border border-gray-200">
+                <div className="dark:border-tarifia-700 flex overflow-hidden rounded-lg border border-gray-200">
                   <div className="flex flex-1 flex-col items-center gap-0.5 px-3 py-2">
-                    <span className="dark:text-polar-400 text-xs text-gray-500">
+                    <span className="dark:text-tarifia-400 text-xs text-gray-500">
                       Avg
                     </span>
                     <span className="font-mono text-sm tabular-nums dark:text-white">
                       {formatCurrency('subcent')(anomalyStats.avg, 'usd')}
                     </span>
                   </div>
-                  <div className="dark:bg-polar-700 w-px bg-gray-200" />
+                  <div className="dark:bg-tarifia-700 w-px bg-gray-200" />
                   <div className="flex flex-1 flex-col items-center gap-0.5 px-3 py-2">
                     <span className="text-xs text-red-500">Event</span>
                     <span className="font-mono text-sm text-red-500 tabular-nums">
                       {formatCurrency('subcent')(anomalyStats.value, 'usd')}
                     </span>
                   </div>
-                  <div className="dark:bg-polar-700 w-px bg-gray-200" />
+                  <div className="dark:bg-tarifia-700 w-px bg-gray-200" />
                   <div className="flex flex-1 flex-col items-center gap-0.5 px-3 py-2">
-                    <span className="dark:text-polar-400 text-xs text-gray-500">
+                    <span className="dark:text-tarifia-400 text-xs text-gray-500">
                       p99
                     </span>
                     <span className="font-mono text-sm tabular-nums dark:text-white">
@@ -307,8 +307,8 @@ function Field({
   children: React.ReactNode
 }) {
   return (
-    <div className="dark:border-polar-700 flex flex-col gap-y-1 border-t border-gray-200 pt-4 first:border-none first:pt-0">
-      <span className="dark:text-polar-500 flex items-center gap-1 text-sm text-gray-400">
+    <div className="dark:border-tarifia-700 flex flex-col gap-y-1 border-t border-gray-200 pt-4 first:border-none first:pt-0">
+      <span className="dark:text-tarifia-500 flex items-center gap-1 text-sm text-gray-400">
         {label}
       </span>
       {children}

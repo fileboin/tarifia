@@ -2,9 +2,9 @@
 
 import { useOrganization } from '@/hooks/queries'
 import { usePayoutAccountSetup } from '@/hooks/usePayoutAccountSetup'
-import { schemas } from '@polar-sh/client'
-import { Box } from '@polar-sh/orbit/Box'
-import { Button } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Button } from '@tarifia-sh/orbit'
 import { ArrowRight, BanknoteIcon, CheckIcon } from 'lucide-react'
 import { PathCardBanner } from './PathCardBanner'
 import { StatusBlock } from './StatusBlock'
@@ -53,7 +53,7 @@ export const PayoutAccountSection = ({
             <>
               You are receiving manual payouts.{' '}
               <a
-                href="mailto:support@polar.sh"
+                href="mailto:support@tarifia.sh"
                 className="underline hover:no-underline"
               >
                 Reach out to support

@@ -1,5 +1,5 @@
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
 import { motion } from 'motion/react'
 import React, { useState } from 'react'
 import { twMerge } from 'tailwind-merge'
@@ -70,12 +70,12 @@ export const ChatBubble = ({
                 'flex flex-col gap-2 p-3 whitespace-pre-wrap',
                 isSelf
                   ? twMerge(
-                      'dark:bg-polar-100 rounded-l-2xl bg-neutral-800',
+                      'dark:bg-tarifia-100 rounded-l-2xl bg-neutral-800',
                       isFirstInGroup ? 'rounded-tr-2xl' : 'rounded-tr-lg',
                       !isLastInGroup && 'rounded-br-lg',
                     )
                   : twMerge(
-                      'dark:bg-polar-600 rounded-r-2xl bg-gray-100',
+                      'dark:bg-tarifia-600 rounded-r-2xl bg-gray-100',
                       isFirstInGroup ? 'rounded-tl-2xl' : 'rounded-tl-lg',
                       !isLastInGroup && 'rounded-bl-lg',
                     ),

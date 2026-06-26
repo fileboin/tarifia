@@ -6,9 +6,9 @@ import { useOutsideClick } from '@/utils/useOutsideClick'
 import Face from '@mui/icons-material/Face'
 import LogoutOutlined from '@mui/icons-material/LogoutOutlined'
 import SpaceDashboardOutlined from '@mui/icons-material/SpaceDashboardOutlined'
-import { schemas } from '@polar-sh/client'
-import { Avatar } from '@polar-sh/orbit'
-import { Separator } from '@polar-sh/ui/components/ui/separator'
+import { schemas } from '@tarifia-sh/client'
+import { Avatar } from '@tarifia-sh/orbit'
+import { Separator } from '@tarifia-sh/ui/components/ui/separator'
 import Link from 'next/link'
 import { useRef, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
@@ -42,7 +42,7 @@ const PublicProfileDropdown = ({
   return (
     <div className={classNames}>
       <div
-        className="dark:border-polar-800 dark:hover:border-polar-700 relative flex shrink-0 cursor-pointer flex-row items-center rounded-full border-2 border-gray-50 shadow-xs transition-colors hover:border-blue-100"
+        className="dark:border-tarifia-800 dark:hover:border-tarifia-700 relative flex shrink-0 cursor-pointer flex-row items-center rounded-full border-2 border-gray-50 shadow-xs transition-colors hover:border-blue-100"
         onClick={() => setOpen(true)}
       >
         <Avatar
@@ -56,7 +56,7 @@ const PublicProfileDropdown = ({
         <div
           ref={ref}
           className={twMerge(
-            'dark:bg-polar-900 dark:text-polar-400 dark:border-polar-700 absolute z-50 w-[300px] overflow-hidden rounded-3xl bg-white p-2 shadow-xl dark:border',
+            'dark:bg-tarifia-900 dark:text-tarifia-400 dark:border-tarifia-700 absolute z-50 w-[300px] overflow-hidden rounded-3xl bg-white p-2 shadow-xl dark:border',
             'top-12 right-0',
           )}
         >

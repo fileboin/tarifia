@@ -30,11 +30,11 @@ import structlog
 import typer
 from sqlalchemy import or_, select
 
-from polar.kit.db.postgres import create_async_sessionmaker
-from polar.models import Organization
-from polar.models.organization import OrganizationStatus
-from polar.postgres import create_async_engine
-from polar.worker import enqueue_job
+from tarifia.kit.db.postgres import create_async_sessionmaker
+from tarifia.models import Organization
+from tarifia.models.organization import OrganizationStatus
+from tarifia.postgres import create_async_engine
+from tarifia.worker import enqueue_job
 
 cli = typer.Typer()
 

@@ -5,8 +5,8 @@ import { CurrencySelector } from '@/components/CurrencySelector'
 import { useAuth } from '@/hooks'
 import { useCreateOrganization } from '@/hooks/queries'
 import { setValidationErrors } from '@/utils/api/errors'
-import { schemas } from '@polar-sh/client'
-import { Button, Checkbox, Input } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Button, Checkbox, Input } from '@tarifia-sh/orbit'
 import {
   Form,
   FormControl,
@@ -14,8 +14,8 @@ import {
   FormField,
   FormItem,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
-import { Label } from '@polar-sh/ui/components/ui/label'
+} from '@tarifia-sh/ui/components/ui/form'
+import { Label } from '@tarifia-sh/ui/components/ui/label'
 import {
   type KeyboardEvent as ReactKeyboardEvent,
   useEffect,
@@ -106,7 +106,7 @@ const CreateOrganizationForm = ({
   return (
     <Form {...form}>
       <div className="flex flex-col gap-y-4">
-        <div className="dark:bg-polar-800 dark:border-polar-700 flex flex-col gap-y-4 rounded-2xl border border-gray-200 bg-white p-6">
+        <div className="dark:bg-tarifia-800 dark:border-tarifia-700 flex flex-col gap-y-4 rounded-2xl border border-gray-200 bg-white p-6">
           <FormField
             control={control}
             name="name"
@@ -183,11 +183,11 @@ const CreateOrganizationForm = ({
           />
         </div>
 
-        <div className="dark:bg-polar-800 dark:border-polar-700 flex flex-col gap-y-4 rounded-2xl border border-gray-200 bg-white p-6">
+        <div className="dark:bg-tarifia-800 dark:border-tarifia-700 flex flex-col gap-y-4 rounded-2xl border border-gray-200 bg-white p-6">
           <SupportedUseCases />
         </div>
 
-        <div className="dark:bg-polar-800 dark:border-polar-700 flex flex-col rounded-2xl border border-gray-200 bg-white p-6">
+        <div className="dark:bg-tarifia-800 dark:border-tarifia-700 flex flex-col rounded-2xl border border-gray-200 bg-white p-6">
           <FormField
             control={control}
             name="terms"
@@ -209,12 +209,12 @@ const CreateOrganizationForm = ({
                       className="cursor-pointer leading-relaxed font-medium"
                     >
                       I understand the restrictions above and agree to
-                      Polar&rsquo;s terms
+                      Tarifia&rsquo;s terms
                     </label>
-                    <ul className="dark:text-polar-400 flex flex-col gap-y-1 text-sm text-gray-500">
+                    <ul className="dark:text-tarifia-400 flex flex-col gap-y-1 text-sm text-gray-500">
                       <li>
                         <a
-                          href="https://polar.sh/docs/merchant-of-record/account-reviews"
+                          href="https://tarifia.sh/docs/merchant-of-record/account-reviews"
                           className="text-blue-600 hover:underline dark:text-blue-400"
                           target="_blank"
                           rel="noreferrer"
@@ -226,7 +226,7 @@ const CreateOrganizationForm = ({
                       </li>
                       <li>
                         <a
-                          href="https://polar.sh/legal/master-services-terms"
+                          href="https://tarifia.sh/legal/master-services-terms"
                           className="text-blue-600 hover:underline dark:text-blue-400"
                           target="_blank"
                           rel="noreferrer"
@@ -236,7 +236,7 @@ const CreateOrganizationForm = ({
                       </li>
                       <li>
                         <a
-                          href="https://polar.sh/legal/privacy-policy"
+                          href="https://tarifia.sh/legal/privacy-policy"
                           className="text-blue-600 hover:underline dark:text-blue-400"
                           target="_blank"
                           rel="noreferrer"

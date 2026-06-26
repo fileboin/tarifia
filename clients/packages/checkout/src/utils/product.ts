@@ -1,4 +1,4 @@
-import type { schemas } from '@polar-sh/client'
+import type { schemas } from '@tarifia-sh/client'
 
 export const isLegacyRecurringPrice = (
   price: schemas['ProductPrice'] | schemas['LegacyRecurringProductPrice'],

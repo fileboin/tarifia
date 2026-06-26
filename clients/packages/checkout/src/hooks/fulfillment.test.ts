@@ -1,4 +1,4 @@
-import type { Client, schemas } from '@polar-sh/client'
+import type { Client, schemas } from '@tarifia-sh/client'
 import { renderHook } from '@testing-library/react'
 import EventEmitter from 'eventemitter3'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'

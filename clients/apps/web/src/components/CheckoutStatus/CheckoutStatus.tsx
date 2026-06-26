@@ -2,8 +2,8 @@ import {
   CheckoutStatusDisplayColor,
   CheckoutStatusDisplayTitle,
 } from '@/utils/checkout'
-import { schemas } from '@polar-sh/client'
-import { Status } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Status } from '@tarifia-sh/orbit'
 
 const CheckoutStatus = ({
   checkout: { status },

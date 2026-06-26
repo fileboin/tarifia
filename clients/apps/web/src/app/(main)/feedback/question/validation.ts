@@ -1,4 +1,4 @@
-import { POLAR_DESCRIPTION } from '@/components/Feedback/constants'
+import { TARIFIA_DESCRIPTION } from '@/components/Feedback/constants'
 import { createGoogleGenerativeAI } from '@ai-sdk/google'
 import { generateObject } from 'ai'
 import { z } from 'zod'
@@ -15,23 +15,23 @@ export const validationSchema = z.object({
       'pre_approval',
     ])
     .describe(
-      '"answerable" if the message is a clear question that is about Polar; "unclear" if the message is not phrased as a question or lacks enough context to answer; "off_topic" if the message is clearly not about Polar; "account_review" if the user is asking why their account is under review or anything closely related to that; "pre_approval" if the user is asking us to pre-approve their account, eligibility, business model, or use case before they have signed up and gone through onboarding.',
+      '"answerable" if the message is a clear question that is about Tarifia; "unclear" if the message is not phrased as a question or lacks enough context to answer; "off_topic" if the message is clearly not about Tarifia; "account_review" if the user is asking why their account is under review or anything closely related to that; "pre_approval" if the user is asking us to pre-approve their account, eligibility, business model, or use case before they have signed up and gone through onboarding.',
     ),
 })
 
 export type ValidationStatus = z.infer<typeof validationSchema>['status']
 
-const VALIDATION_SYSTEM_PROMPT = `You classify incoming messages for the Polar support assistant.
+const VALIDATION_SYSTEM_PROMPT = `You classify incoming messages for the Tarifia support assistant.
 
-About Polar:
-${POLAR_DESCRIPTION}
+About Tarifia:
+${TARIFIA_DESCRIPTION}
 
 Return one of:
 - "account_review": the user is asking why their account is under review, why their payouts are on hold for a review, why they are being verified, or anything closely related to that. Examples: "why is my account under review?", "why are payouts on hold for a review?", "what's going on with this review?". When in doubt about whether a message is about an ongoing account review, return "account_review" — we have a canned answer for this case and never want to escalate it to a human.
-- "pre_approval": the user is asking us to confirm upfront whether their business, product, use case, or model is allowed on Polar, or to pre-approve their account before they sign up and go through onboarding. Examples: "can I sell X on Polar?", "is my use case eligible?", "would Polar approve a business that does Y?", "can you confirm I'm allowed under your AUP before I sign up?", "is my model acceptable?". We don't do proactive AUP or eligibility reviews over support — onboarding is the required path.
-- "answerable": the message is a clear question and is plausibly about Polar (its product, configuration, billing, payouts, integrations, account, API, or anything a Polar seller or customer would ask).
+- "pre_approval": the user is asking us to confirm upfront whether their business, product, use case, or model is allowed on Tarifia, or to pre-approve their account before they sign up and go through onboarding. Examples: "can I sell X on Tarifia?", "is my use case eligible?", "would Tarifia approve a business that does Y?", "can you confirm I'm allowed under your AUP before I sign up?", "is my model acceptable?". We don't do proactive AUP or eligibility reviews over support — onboarding is the required path.
+- "answerable": the message is a clear question and is plausibly about Tarifia (its product, configuration, billing, payouts, integrations, account, API, or anything a Tarifia seller or customer would ask).
 - "unclear": the message is not phrased as a question or does not contain enough context for us to look anything up.
-- "off_topic": the message is clearly not about Polar (e.g. weather, unrelated programming questions, general chitchat, other unrelated products).
+- "off_topic": the message is clearly not about Tarifia (e.g. weather, unrelated programming questions, general chitchat, other unrelated products).
 
 When in doubt between "answerable" and "off_topic", prefer "answerable" — we will search the docs and let the answer step decide.`
 

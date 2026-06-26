@@ -6,17 +6,17 @@ from unittest.mock import MagicMock, PropertyMock
 
 import pytest
 
-from polar.models.organization import Organization
-from polar.models.organization_review_feedback import OrganizationReviewFeedback
-from polar.models.user import User
-from polar.organization_review.collectors.feedback import collect_feedback_data
-from polar.organization_review.report import (
+from tarifia.models.organization import Organization
+from tarifia.models.organization_review_feedback import OrganizationReviewFeedback
+from tarifia.models.user import User
+from tarifia.organization_review.collectors.feedback import collect_feedback_data
+from tarifia.organization_review.report import (
     AgentReportV2,
     AnyAgentReport,
     parse_agent_report,
 )
-from polar.organization_review.repository import OrganizationReviewRepository
-from polar.organization_review.schemas import (
+from tarifia.organization_review.repository import OrganizationReviewRepository
+from tarifia.organization_review.schemas import (
     ActorType,
     DataSnapshot,
     DecisionType,
@@ -37,7 +37,7 @@ from polar.organization_review.schemas import (
     RiskLevel,
     UsageInfo,
 )
-from polar.postgres import AsyncSession
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 
 # ---------------------------------------------------------------------------
@@ -314,7 +314,7 @@ class TestCollectFeedbackData:
 
 class TestBuildPromptPriorFeedback:
     def _build(self, snapshot: DataSnapshot) -> str:
-        from polar.organization_review.analyzer import ReviewAnalyzer
+        from tarifia.organization_review.analyzer import ReviewAnalyzer
 
         analyzer = ReviewAnalyzer.__new__(ReviewAnalyzer)
         return analyzer._build_prompt(snapshot)
@@ -800,7 +800,7 @@ class TestCollectFeedbackDataIntegration:
                         dimension=ReviewDimension.PRODUCT_LEGITIMACY,
                         risk_level=RiskLevel.HIGH,
                         confidence=0.85,
-                        findings=["Price mismatch between website and Polar"],
+                        findings=["Price mismatch between website and Tarifia"],
                         recommendation="Deny",
                     ),
                     DimensionAssessment(
@@ -858,7 +858,7 @@ class TestCollectFeedbackDataIntegration:
         assert agent_entry.dimensions[0].dimension == "product_legitimacy"
         assert agent_entry.dimensions[0].risk_level == "HIGH"
         assert agent_entry.dimensions[0].findings == [
-            "Price mismatch between website and Polar"
+            "Price mismatch between website and Tarifia"
         ]
 
         human_entry = result.entries[1]

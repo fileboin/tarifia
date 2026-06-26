@@ -14,18 +14,18 @@ import {
 import AddOutlined from '@mui/icons-material/AddOutlined'
 import HiveOutlined from '@mui/icons-material/HiveOutlined'
 import Search from '@mui/icons-material/Search'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { Input } from '@polar-sh/orbit'
-import { List } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { Input } from '@tarifia-sh/orbit'
+import { List } from '@tarifia-sh/orbit'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
-import { ShadowBoxOnMd } from '@polar-sh/ui/components/atoms/ShadowBox'
+} from '@tarifia-sh/orbit'
+import { ShadowBoxOnMd } from '@tarifia-sh/ui/components/atoms/ShadowBox'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useQueryState } from 'nuqs'
@@ -229,13 +229,13 @@ export default function ClientPage({
         ) : (
           <ShadowBoxOnMd className="items-center justify-center gap-y-6 md:flex md:flex-col md:py-48">
             <HiveOutlined
-              className="dark:text-polar-600 text-5xl text-gray-300"
+              className="dark:text-tarifia-600 text-5xl text-gray-300"
               fontSize="large"
             />
             <div className="flex flex-col items-center gap-y-6">
               <div className="flex flex-col items-center gap-y-2">
                 <h3 className="text-lg font-medium">No products found</h3>
-                <p className="dark:text-polar-500 text-gray-500">
+                <p className="dark:text-tarifia-500 text-gray-500">
                   Start selling digital products today
                 </p>
               </div>

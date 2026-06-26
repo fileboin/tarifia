@@ -358,31 +358,31 @@ variable "tinybird_read_token" {
   sensitive   = true
 }
 
-# Polar
-variable "polar_access_token" {
-  description = "Polar API access token"
+# Tarifia
+variable "tarifia_access_token" {
+  description = "Tarifia API access token"
   type        = string
   sensitive   = true
 }
 
-variable "polar_webhook_secret" {
-  description = "Polar webhook secret"
+variable "tarifia_webhook_secret" {
+  description = "Tarifia webhook secret"
   type        = string
   sensitive   = true
 }
 
-variable "polar_organization_id" {
-  description = "Polar organization ID"
+variable "tarifia_organization_id" {
+  description = "Tarifia organization ID"
   type        = string
 }
 
-variable "polar_free_product_id" {
-  description = "Polar free-tier product ID"
+variable "tarifia_free_product_id" {
+  description = "Tarifia free-tier product ID"
   type        = string
 }
 
-variable "polar_scale_product_id" {
-  description = "Polar Scale-tier product ID"
+variable "tarifia_scale_product_id" {
+  description = "Tarifia Scale-tier product ID"
   type        = string
 }
 
@@ -411,7 +411,7 @@ variable "tailscale_advertise_routes" {
 # }
 
 variable "plain_default_tier_external_id" {
-  description = "Default Plain tier external ID used as a fallback for the polar-self support benefit"
+  description = "Default Plain tier external ID used as a fallback for the tarifia-self support benefit"
   type        = string
 }
 
@@ -479,8 +479,8 @@ variable "sentry_auth_token" {
   sensitive   = true
 }
 
-variable "polar_preview_access_token" {
-  description = "Polar preview access token for the Vercel frontend"
+variable "tarifia_preview_access_token" {
+  description = "Tarifia preview access token for the Vercel frontend"
   type        = string
   sensitive   = true
 }

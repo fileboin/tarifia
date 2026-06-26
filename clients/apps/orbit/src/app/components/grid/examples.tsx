@@ -1,5 +1,5 @@
-import { Box } from '@polar-sh/orbit/Box'
-import { Grid, GridItem, Text } from '@polar-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Grid, GridItem, Text } from '@tarifia-sh/orbit'
 import { type ReactNode } from 'react'
 
 function Cell({ children }: { children: ReactNode }) {

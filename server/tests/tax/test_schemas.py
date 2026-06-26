@@ -1,4 +1,4 @@
-from polar.tax.schemas import TaxJurisdiction
+from tarifia.tax.schemas import TaxJurisdiction
 
 
 class TestTaxJurisdictionFromAggregate:

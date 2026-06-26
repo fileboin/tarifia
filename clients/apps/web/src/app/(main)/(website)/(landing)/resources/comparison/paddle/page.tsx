@@ -1,17 +1,17 @@
-import { PolarVsPaddlePage } from '@/components/Landing/comparison/PolarPaddlePage'
+import { TarifiaVsPaddlePage } from '@/components/Landing/comparison/TarifiaPaddlePage'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Polar vs Paddle',
-  description: 'Comparing Polar and Paddle',
+  title: 'Tarifia vs Paddle',
+  description: 'Comparing Tarifia and Paddle',
   keywords:
-    'polar vs paddle, paddle, polar, comparison, pricing, pricing for polar, pricing for polar, pricing for polar',
+    'tarifia vs paddle, paddle, tarifia, comparison, pricing, pricing for tarifia, pricing for tarifia, pricing for tarifia',
   openGraph: {
-    siteName: 'Polar',
+    siteName: 'Tarifia',
     type: 'website',
     images: [
       {
-        url: 'https://polar.sh/assets/brand/polar_og.jpg',
+        url: 'https://tarifia.sh/assets/brand/tarifia_og.jpg',
         width: 1200,
         height: 630,
       },
@@ -21,15 +21,15 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     images: [
       {
-        url: 'https://polar.sh/assets/brand/polar_og.jpg',
+        url: 'https://tarifia.sh/assets/brand/tarifia_og.jpg',
         width: 1200,
         height: 630,
-        alt: 'Polar',
+        alt: 'Tarifia',
       },
     ],
   },
 }
 
 export default function Page() {
-  return <PolarVsPaddlePage />
+  return <TarifiaVsPaddlePage />
 }

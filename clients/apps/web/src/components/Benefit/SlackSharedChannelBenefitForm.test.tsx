@@ -35,11 +35,11 @@ vi.mock('../Toast/use-toast', () => ({
   toast: vi.fn(),
 }))
 
-vi.mock('@polar-sh/orbit/Box', () => ({
+vi.mock('@tarifia-sh/orbit/Box', () => ({
   Box: ({ children }: { children: ReactNode }) => <div>{children}</div>,
 }))
 
-vi.mock('@polar-sh/orbit', () => ({
+vi.mock('@tarifia-sh/orbit', () => ({
   Alert: ({ title, description }: { title: string; description?: string }) => (
     <div>
       <p>{title}</p>

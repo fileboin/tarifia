@@ -1,5 +1,5 @@
-import { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
+import { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
 import { OrderStatus } from '../Orders/OrderStatus'
 import { OverviewSummaryCard } from './OverviewSummaryCard'
 
@@ -19,13 +19,13 @@ export const LatestPurchaseOverview = ({
       )}`}
     >
       <div className="flex items-center justify-between gap-4">
-        <span className="dark:text-polar-400 text-gray-600">
+        <span className="dark:text-tarifia-400 text-gray-600">
           {order.product?.name ?? order.description}
         </span>
         <OrderStatus status={order.status} />
       </div>
 
-      <div className="dark:border-polar-700 mt-2 border-t border-gray-200 pt-2">
+      <div className="dark:border-tarifia-700 mt-2 border-t border-gray-200 pt-2">
         <div className="flex items-center justify-between">
           <span className="font-medium">Total</span>
           <span className="text-lg font-medium">

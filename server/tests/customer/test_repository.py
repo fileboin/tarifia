@@ -1,13 +1,13 @@
 import pytest
 from pytest_mock import MockerFixture
 
-from polar.customer.repository import CustomerRepository
-from polar.event.system import SystemEvent
-from polar.models import Customer, Organization
-from polar.models.customer import CustomerType, _avatar_url_for_email
-from polar.models.member import MemberRole
-from polar.models.webhook_endpoint import WebhookEventType
-from polar.postgres import AsyncSession
+from tarifia.customer.repository import CustomerRepository
+from tarifia.event.system import SystemEvent
+from tarifia.models import Customer, Organization
+from tarifia.models.customer import CustomerType, _avatar_url_for_email
+from tarifia.models.member import MemberRole
+from tarifia.models.webhook_endpoint import WebhookEventType
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_member
 
@@ -38,7 +38,7 @@ async def test_create_context(
     repository: CustomerRepository,
     organization: Organization,
 ) -> None:
-    enqueue_job_mock = mocker.patch("polar.customer.repository.enqueue_job")
+    enqueue_job_mock = mocker.patch("tarifia.customer.repository.enqueue_job")
 
     async with repository.create_context(
         Customer(email="customer@example.com", organization=organization)
@@ -68,7 +68,7 @@ async def test_update_tracks_billing_name(
     customer: Customer,
     repository: CustomerRepository,
 ) -> None:
-    enqueue_job_mock = mocker.patch("polar.customer.repository.enqueue_job")
+    enqueue_job_mock = mocker.patch("tarifia.customer.repository.enqueue_job")
 
     # `billing_name` is exposed via a property backed by the `_billing_name`
     # column, which is exactly the path the customer portal update goes through.
@@ -89,7 +89,7 @@ async def test_update_without_changes_emits_empty_updated_fields(
     customer: Customer,
     repository: CustomerRepository,
 ) -> None:
-    enqueue_job_mock = mocker.patch("polar.customer.repository.enqueue_job")
+    enqueue_job_mock = mocker.patch("tarifia.customer.repository.enqueue_job")
 
     await repository.update(customer)
 

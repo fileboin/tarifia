@@ -6,29 +6,29 @@ import stripe as stripe_lib
 from httpx import AsyncClient, Response
 from pytest_mock import MockerFixture
 
-from polar.enums import TaxProcessor
-from polar.integrations.stripe.service import StripeService
-from polar.kit.address import Address, CountryAlpha2
-from polar.models import (
+from tarifia.enums import TaxProcessor
+from tarifia.integrations.stripe.service import StripeService
+from tarifia.kit.address import Address, CountryAlpha2
+from tarifia.models import (
     Customer,
     Order,
     Organization,
     Product,
     Transaction,
 )
-from polar.models.dispute import DisputeAlertProcessor
-from polar.models.order import OrderStatus
-from polar.models.refund import RefundReason, RefundStatus
-from polar.models.webhook_endpoint import WebhookEventType
-from polar.order.repository import OrderRepository
-from polar.order.service import order as order_service
-from polar.postgres import AsyncSession
-from polar.refund.schemas import RefundCreate
-from polar.refund.service import MissingRelatedDispute, RefundedAlready
-from polar.refund.service import refund as refund_service
-from polar.tax.calculation import TaxCalculationService
-from polar.tax.calculation.base import AlreadyRevertedError
-from polar.wallet.service import wallet as wallet_service
+from tarifia.models.dispute import DisputeAlertProcessor
+from tarifia.models.order import OrderStatus
+from tarifia.models.refund import RefundReason, RefundStatus
+from tarifia.models.webhook_endpoint import WebhookEventType
+from tarifia.order.repository import OrderRepository
+from tarifia.order.service import order as order_service
+from tarifia.postgres import AsyncSession
+from tarifia.refund.schemas import RefundCreate
+from tarifia.refund.service import MissingRelatedDispute, RefundedAlready
+from tarifia.refund.service import refund as refund_service
+from tarifia.tax.calculation import TaxCalculationService
+from tarifia.tax.calculation.base import AlreadyRevertedError
+from tarifia.wallet.service import wallet as wallet_service
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_dispute,
@@ -44,21 +44,21 @@ from tests.fixtures.stripe import build_stripe_refund
 @pytest.fixture(autouse=True)
 def stripe_service_mock(mocker: MockerFixture) -> MagicMock:
     mock = MagicMock(spec=StripeService)
-    mocker.patch("polar.refund.service.stripe_service", new=mock)
+    mocker.patch("tarifia.refund.service.stripe_service", new=mock)
     return mock
 
 
 @pytest.fixture(autouse=True)
 def tax_calculation_service_service_mock(mocker: MockerFixture) -> MagicMock:
     mock = MagicMock(spec=TaxCalculationService)
-    mocker.patch("polar.refund.service.tax_calculation_service", new=mock)
+    mocker.patch("tarifia.refund.service.tax_calculation_service", new=mock)
     return mock
 
 
 @pytest.fixture(autouse=True)
 def refund_transaction_service_mock(mocker: MockerFixture) -> MagicMock:
     mock = mocker.patch(
-        "polar.refund.service.refund_transaction_service", autospec=True
+        "tarifia.refund.service.refund_transaction_service", autospec=True
     )
     return mock
 
@@ -948,7 +948,7 @@ class TestOrganizationRefundsBlocked:
         customer: Customer,
     ) -> None:
         """Test that refunds are blocked when the refunds capability is disabled."""
-        from polar.organization.repository import OrganizationRepository
+        from tarifia.organization.repository import OrganizationRepository
 
         org_repository = OrganizationRepository.from_session(session)
         organization = await org_repository.update(
@@ -976,7 +976,7 @@ class TestOrganizationRefundsBlocked:
             reason=RefundReason.customer_request,
         )
 
-        from polar.refund.service import RefundsBlocked
+        from tarifia.refund.service import RefundsBlocked
 
         # Should raise RefundsBlocked exception
         with pytest.raises(RefundsBlocked) as exc_info:
@@ -1003,7 +1003,7 @@ class TestOrganizationRefundsBlocked:
         )
 
         # Update order to paid status
-        from polar.order.repository import OrderRepository
+        from tarifia.order.repository import OrderRepository
 
         order_repository = OrderRepository.from_session(session)
         order = await order_repository.update(
@@ -1051,7 +1051,7 @@ class TestChargebackPreventionNotice:
         product: Product,
         customer: Customer,
     ) -> None:
-        enqueue_job_mock = mocker.patch("polar.refund.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.refund.service.enqueue_job")
 
         order, payment, _ = await create_order_and_payment(
             save_fixture,
@@ -1080,7 +1080,7 @@ class TestChargebackPreventionNotice:
         product: Product,
         customer: Customer,
     ) -> None:
-        enqueue_job_mock = mocker.patch("polar.refund.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.refund.service.enqueue_job")
 
         order, payment, _ = await create_order_and_payment(
             save_fixture,
@@ -1135,7 +1135,7 @@ class TestChargebackPreventionNotice:
         product: Product,
         customer: Customer,
     ) -> None:
-        enqueue_job_mock = mocker.patch("polar.refund.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.refund.service.enqueue_job")
 
         order, payment, _ = await create_order_and_payment(
             save_fixture,

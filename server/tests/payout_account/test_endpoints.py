@@ -4,8 +4,8 @@ import pytest
 import pytest_asyncio
 from httpx import AsyncClient
 
-from polar.auth.scope import READ_ONLY_SCOPES
-from polar.models import Organization, PayoutAccount, User, UserOrganization
+from tarifia.auth.scope import READ_ONLY_SCOPES
+from tarifia.models import Organization, PayoutAccount, User, UserOrganization
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (

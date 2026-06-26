@@ -1,8 +1,8 @@
 'use client'
 
 import { StatusBlock } from '@/components/Finance/Account/sections/StatusBlock'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
 import {
   ArrowRight,
   CheckIcon,

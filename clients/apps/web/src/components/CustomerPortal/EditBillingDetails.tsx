@@ -1,10 +1,10 @@
 import { useCustomerPortalCustomer } from '@/hooks/queries/customerPortal'
 import { setValidationErrors } from '@/utils/api/errors'
-import { enums, type schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import CountryPicker from '@polar-sh/ui/components/atoms/CountryPicker'
-import CountryStatePicker from '@polar-sh/ui/components/atoms/CountryStatePicker'
-import { Input } from '@polar-sh/orbit'
+import { enums, type schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import CountryPicker from '@tarifia-sh/ui/components/atoms/CountryPicker'
+import CountryStatePicker from '@tarifia-sh/ui/components/atoms/CountryStatePicker'
+import { Input } from '@tarifia-sh/orbit'
 import {
   Form,
   FormControl,
@@ -12,7 +12,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { useCallback, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 

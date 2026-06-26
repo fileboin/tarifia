@@ -1,5 +1,5 @@
 import { Section } from '@/components/Layout/Section'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { ProductMetadataForm } from '../ProductMetadataForm'
 import { ProductCheckoutSection } from './ProductCheckoutSection'
 import { ProductCustomerPortalSection } from './ProductCustomerPortalSection'
@@ -44,7 +44,7 @@ const ProductForm = ({
   benefitsSlot: React.ReactNode
 }) => {
   return (
-    <div className="dark:divide-polar-700 flex flex-col divide-y">
+    <div className="dark:divide-tarifia-700 flex flex-col divide-y">
       <ProductInfoSection />
 
       <ProductPricingSection organization={organization} update={update} />

@@ -4,7 +4,7 @@ import CreateDiscountModalContent from '@/components/Discounts/CreateDiscountMod
 import UpdateDiscountModalContent from '@/components/Discounts/UpdateDiscountModalContent'
 import { DashboardBody } from '@/components/Layout/DashboardLayout'
 import { ConfirmModal } from '@/components/Modal/ConfirmModal'
-import { InlineModal } from '@polar-sh/orbit'
+import { InlineModal } from '@tarifia-sh/orbit'
 import { useModal } from '@/components/Modal/useModal'
 import { toast } from '@/components/Toast/use-toast'
 import { useDeleteDiscount, useDiscounts } from '@/hooks/queries'
@@ -19,22 +19,22 @@ import { getDiscountDisplay } from '@/utils/discount'
 import AddOutlined from '@mui/icons-material/AddOutlined'
 import MoreVertOutlined from '@mui/icons-material/MoreVertOutlined'
 import Search from '@mui/icons-material/Search'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
 import {
   DataTable,
   DataTableColumnDef,
   DataTableColumnHeader,
-} from '@polar-sh/orbit'
-import FormattedDateTime from '@polar-sh/ui/components/atoms/FormattedDateTime'
-import { Input } from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
+import FormattedDateTime from '@tarifia-sh/ui/components/atoms/FormattedDateTime'
+import { Input } from '@tarifia-sh/orbit'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@polar-sh/ui/components/ui/dropdown-menu'
+} from '@tarifia-sh/ui/components/ui/dropdown-menu'
 import { useRouter } from 'next/navigation'
 import React, { useCallback, useState } from 'react'
 
@@ -247,7 +247,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
         return discount.ends_at ? (
           <FormattedDateTime datetime={discount.ends_at} resolution="day" />
         ) : (
-          <span className="dark:text-polar-500 text-gray-500">Never</span>
+          <span className="dark:text-tarifia-500 text-gray-500">Never</span>
         )
       },
     },
@@ -270,7 +270,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
             </DropdownMenuTrigger>
             <DropdownMenuContent
               align="end"
-              className="dark:bg-polar-800 bg-gray-50 shadow-lg"
+              className="dark:bg-tarifia-800 bg-gray-50 shadow-lg"
             >
               <DropdownMenuItem onClick={() => onDiscountSelected(discount)}>
                 Edit

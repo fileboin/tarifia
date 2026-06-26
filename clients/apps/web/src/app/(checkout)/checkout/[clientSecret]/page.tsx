@@ -4,13 +4,13 @@ import { resolveLocale } from '@/utils/i18n'
 import {
   CheckoutFormProvider,
   CheckoutProvider,
-} from '@polar-sh/checkout/providers'
+} from '@tarifia-sh/checkout/providers'
 import {
   ClientResponseError,
   NotFoundResponseError,
   createClient,
   unwrap,
-} from '@polar-sh/client'
+} from '@tarifia-sh/client'
 import type { Metadata } from 'next'
 import { notFound, redirect } from 'next/navigation'
 import CheckoutPage from './CheckoutPage'
@@ -28,7 +28,7 @@ export async function generateMetadata(props: {
   )
 
   if (!checkout?.product) {
-    return { title: 'Checkout | Polar' }
+    return { title: 'Checkout | Tarifia' }
   }
 
   return {

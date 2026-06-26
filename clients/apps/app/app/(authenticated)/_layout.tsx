@@ -3,9 +3,9 @@ import { useTheme } from '@/design-system/useTheme'
 import { useAppOpenTracking } from '@/hooks/useAppOpenTracking'
 import DeepLinkProvider from '@/providers/DeepLinkProvider'
 import NotificationsProvider from '@/providers/NotificationsProvider'
-import { PolarOrganizationProvider } from '@/providers/OrganizationProvider'
-import { PolarClientProvider } from '@/providers/PolarClientProvider'
-import { PolarQueryClientProvider } from '@/providers/PolarQueryClientProvider'
+import { TarifiaOrganizationProvider } from '@/providers/OrganizationProvider'
+import { TarifiaClientProvider } from '@/providers/TarifiaClientProvider'
+import { TarifiaQueryClientProvider } from '@/providers/TarifiaQueryClientProvider'
 import { useSession } from '@/providers/SessionProvider'
 import { ToastProvider } from '@/providers/ToastProvider'
 import { UserProvider } from '@/providers/UserProvider'
@@ -68,23 +68,23 @@ const RootLayout = () => {
 export default function Providers() {
   return (
     <ThemeProvider value={DarkTheme}>
-      <PolarClientProvider>
-        <PolarQueryClientProvider>
+      <TarifiaClientProvider>
+        <TarifiaQueryClientProvider>
           <DeepLinkProvider>
             <NotificationsProvider>
               <AuthenticatedErrorBoundary>
                 <UserProvider>
-                  <PolarOrganizationProvider>
+                  <TarifiaOrganizationProvider>
                     <ToastProvider>
                       <RootLayout />
                     </ToastProvider>
-                  </PolarOrganizationProvider>
+                  </TarifiaOrganizationProvider>
                 </UserProvider>
               </AuthenticatedErrorBoundary>
             </NotificationsProvider>
           </DeepLinkProvider>
-        </PolarQueryClientProvider>
-      </PolarClientProvider>
+        </TarifiaQueryClientProvider>
+      </TarifiaClientProvider>
     </ThemeProvider>
   )
 }

@@ -1,8 +1,8 @@
 'use client'
 
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
-import { Button, Grid } from '@polar-sh/orbit'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Button, Grid } from '@tarifia-sh/orbit'
 import Link from 'next/link'
 import GetStartedButton from '../Auth/GetStartedButton'
 import { VolumetricSlices } from './graphics/VolumetricSlices'
@@ -79,7 +79,7 @@ export const Pricing = () => (
         </Box>
         <Box alignItems="center" columnGap="m" paddingTop="m">
           <GetStartedButton size="default" />
-          <Link href="mailto:support@polar.sh">
+          <Link href="mailto:support@tarifia.sh">
             <Button variant="secondary">Contact Sales</Button>
           </Link>
         </Box>

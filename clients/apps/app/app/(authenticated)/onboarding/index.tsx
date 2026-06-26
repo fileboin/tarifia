@@ -6,10 +6,10 @@ import { Text } from '@/components/Shared/Text'
 import { Touchable } from '@/components/Shared/Touchable'
 import { useTheme } from '@/design-system/useTheme'
 import { useLogout } from '@/hooks/auth'
-import { useCreateOrganization } from '@/hooks/polar/organizations'
+import { useCreateOrganization } from '@/hooks/tarifia/organizations'
 import { OrganizationContext } from '@/providers/OrganizationProvider'
 import { queryClient } from '@/utils/query'
-import { ClientResponseError, schemas } from '@polar-sh/client'
+import { ClientResponseError, schemas } from '@tarifia-sh/client'
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router'
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -149,7 +149,7 @@ export default function Onboarding() {
                   <Touchable
                     onPress={() =>
                       Linking.openURL(
-                        'https://docs.polar.sh/merchant-of-record/acceptable-use',
+                        'https://docs.tarifia.sh/merchant-of-record/acceptable-use',
                       )
                     }
                   >
@@ -165,7 +165,7 @@ export default function Onboarding() {
                 <Touchable
                   onPress={() =>
                     Linking.openURL(
-                      'https://docs.polar.sh/merchant-of-record/account-reviews',
+                      'https://docs.tarifia.sh/merchant-of-record/account-reviews',
                     )
                   }
                 >
@@ -180,7 +180,7 @@ export default function Onboarding() {
                 <Touchable
                   onPress={() =>
                     Linking.openURL(
-                      'https://polar.sh/legal/master-services-terms',
+                      'https://tarifia.sh/legal/master-services-terms',
                     )
                   }
                 >
@@ -191,7 +191,7 @@ export default function Onboarding() {
               <Box>
                 <Touchable
                   onPress={() =>
-                    Linking.openURL('https://polar.sh/legal/privacy-policy')
+                    Linking.openURL('https://tarifia.sh/legal/privacy-policy')
                   }
                 >
                   <Text color="primary">Privacy Policy</Text>

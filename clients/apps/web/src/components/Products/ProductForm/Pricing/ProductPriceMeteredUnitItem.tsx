@@ -2,15 +2,15 @@
 
 import CreateMeterModalContent from '@/components/Meter/CreateMeterModalContent'
 import MeterSelector from '@/components/Meter/MeterSelector'
-import { InlineModal } from '@polar-sh/orbit'
+import { InlineModal } from '@tarifia-sh/orbit'
 import { useModal } from '@/components/Modal/useModal'
-import { SpinnerNoMargin } from '@polar-sh/orbit'
+import { SpinnerNoMargin } from '@tarifia-sh/orbit'
 import { useMeters } from '@/hooks/queries/meters'
-import { formatCurrency } from '@polar-sh/currency'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import MoneyInput from '@polar-sh/ui/components/atoms/MoneyInput'
-import { getMeterUnitFormat } from '@polar-sh/ui/lib/meterUnit'
+import { formatCurrency } from '@tarifia-sh/currency'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import MoneyInput from '@tarifia-sh/ui/components/atoms/MoneyInput'
+import { getMeterUnitFormat } from '@tarifia-sh/ui/lib/meterUnit'
 import {
   FormControl,
   FormDescription,
@@ -18,8 +18,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@polar-sh/orbit'
+} from '@tarifia-sh/ui/components/ui/form'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@tarifia-sh/orbit'
 import { InfoIcon, PlusIcon } from 'lucide-react'
 import React, { useCallback, useMemo } from 'react'
 import { useFormContext } from 'react-hook-form'
@@ -178,7 +178,7 @@ export const ProductPriceMeteredUnitItem: React.FC<
                       Cap amount
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <InfoIcon className="dark:text-polar-400 h-3.5 w-3.5 text-gray-400" />
+                          <InfoIcon className="dark:text-tarifia-400 h-3.5 w-3.5 text-gray-400" />
                         </TooltipTrigger>
                         <TooltipContent className="max-w-3xs">
                           Optional maximum amount that can be charged,

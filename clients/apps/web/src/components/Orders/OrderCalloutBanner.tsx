@@ -1,10 +1,10 @@
 'use client'
 
 import { isOrderDunningFailed } from '@/utils/order'
-import { schemas } from '@polar-sh/client'
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
-import FormattedDateTime from '@polar-sh/ui/components/atoms/FormattedDateTime'
+import { schemas } from '@tarifia-sh/client'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
+import FormattedDateTime from '@tarifia-sh/ui/components/atoms/FormattedDateTime'
 import { addDays, isPast, min, parseISO } from 'date-fns'
 import { ExternalLinkIcon } from 'lucide-react'
 import type { ReactNode } from 'react'
@@ -12,7 +12,7 @@ import type { ReactNode } from 'react'
 const DUNNING_TOTAL_RETRY_DAYS = 21
 
 const FAILED_PAYMENTS_DOCS_URL =
-  'https://docs.polar.sh/features/subscriptions/failed-payments'
+  'https://docs.tarifia.sh/features/subscriptions/failed-payments'
 
 const BannerColumn = ({
   divided = false,
@@ -96,7 +96,7 @@ const RecoveringColumns = ({
     <BannerColumn divided>
       <ColumnHeading label="Next attempt" datetime={nextAttemptAt} />
       <Text>
-        Polar always tries to recover failed subscription payments for you.
+        Tarifia always tries to recover failed subscription payments for you.
       </Text>
       <a
         href={FAILED_PAYMENTS_DOCS_URL}

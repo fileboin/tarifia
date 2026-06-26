@@ -1,0 +1,72 @@
+import json
+
+from fastapi import Depends, HTTPException, Request
+from tarifia_sdk._webhooks import (
+    WebhookUnknownTypeError,
+    WebhookVerificationError,
+    validate_event,
+)
+
+from tarifia.config import settings
+from tarifia.external_event.service import external_event as external_event_service
+from tarifia.models.external_event import ExternalEventSource
+from tarifia.postgres import AsyncSession, get_db_session
+from tarifia.routing import APIRouter
+
+router = APIRouter(
+    prefix="/integrations/tarifia",
+    tags=["integrations_tarifia"],
+    include_in_schema=False,
+)
+
+IMPLEMENTED_WEBHOOKS = {
+    "benefit_grant.created",
+    "benefit_grant.updated",
+    "benefit_grant.revoked",
+    "order.created",
+}
+
+# Defer order.created handling so payment settlement and invoice generation
+# have a chance to complete before we try to attach the invoice PDF.
+ORDER_CREATED_DELAY_MS = 60_000
+
+
+@router.post("/webhook", status_code=202, name="integrations.tarifia.webhook")
+async def webhook(
+    request: Request,
+    session: AsyncSession = Depends(get_db_session),
+) -> None:
+    secret = settings.TARIFIA_WEBHOOK_SECRET
+    if not secret:
+        raise HTTPException(status_code=500)
+
+    raw_body = await request.body()
+    headers = {k.lower(): v for k, v in request.headers.items()}
+
+    try:
+        validate_event(raw_body, headers, secret)
+    except WebhookVerificationError:
+        raise HTTPException(status_code=401)
+    except WebhookUnknownTypeError:
+        # SDK doesn't recognize this event type yet — ignore for forward compat.
+        return
+
+    payload = json.loads(raw_body.decode("utf-8"))
+    event_type = payload.get("type")
+    if event_type not in IMPLEMENTED_WEBHOOKS:
+        return
+
+    delivery_id = headers.get("webhook-id")
+    if not delivery_id:
+        raise HTTPException(status_code=400)
+
+    task_name = f"tarifia_self.webhook.{event_type}"
+    delay = ORDER_CREATED_DELAY_MS if event_type == "order.created" else None
+    await external_event_service.enqueue(
+        session,
+        ExternalEventSource.tarifia,
+        task_name,
+        delivery_id,
+        payload,
+        delay=delay,
+    )

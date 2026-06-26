@@ -244,7 +244,7 @@ class TestPreviewCLI:
             return connection
 
         monkeypatch.setenv(
-            "POLAR_PREVIEW_POSTGRES_ADMIN_DSN",
+            "TARIFIA_PREVIEW_POSTGRES_ADMIN_DSN",
             "postgresql://admin:secret@db.internal:5432/postgres",
         )
         monkeypatch.setattr(
@@ -284,11 +284,11 @@ class TestPreviewCLI:
         assert payload == {
             "database_name": "preview_pr_123",
             "env": {
-                "POLAR_POSTGRES_DATABASE": "preview_pr_123",
-                "POLAR_POSTGRES_HOST": "db.internal",
-                "POLAR_POSTGRES_PORT": "5432",
-                "POLAR_POSTGRES_PWD": "db-pass",
-                "POLAR_POSTGRES_USER": "preview_pr_123_app",
+                "TARIFIA_POSTGRES_DATABASE": "preview_pr_123",
+                "TARIFIA_POSTGRES_HOST": "db.internal",
+                "TARIFIA_POSTGRES_PORT": "5432",
+                "TARIFIA_POSTGRES_PWD": "db-pass",
+                "TARIFIA_POSTGRES_USER": "preview_pr_123_app",
             },
             "host": "db.internal",
             "password": "db-pass",
@@ -301,7 +301,7 @@ class TestPreviewCLI:
             "preview_postgres_database=preview_pr_123",
             "preview_postgres_user=preview_pr_123_app",
             "preview_postgres_password=db-pass",
-            'preview_postgres_env_json={"POLAR_POSTGRES_DATABASE":"preview_pr_123","POLAR_POSTGRES_HOST":"db.internal","POLAR_POSTGRES_PORT":"5432","POLAR_POSTGRES_PWD":"db-pass","POLAR_POSTGRES_USER":"preview_pr_123_app"}',
+            'preview_postgres_env_json={"TARIFIA_POSTGRES_DATABASE":"preview_pr_123","TARIFIA_POSTGRES_HOST":"db.internal","TARIFIA_POSTGRES_PORT":"5432","TARIFIA_POSTGRES_PWD":"db-pass","TARIFIA_POSTGRES_USER":"preview_pr_123_app"}',
         ]
 
     def test_postgres_provision_with_template_transfers_ownership(
@@ -328,10 +328,10 @@ class TestPreviewCLI:
             grant_calls.append((config.admin_dsn, database_name, role_name))
 
         monkeypatch.setenv(
-            "POLAR_PREVIEW_POSTGRES_ADMIN_DSN",
+            "TARIFIA_PREVIEW_POSTGRES_ADMIN_DSN",
             "postgresql://admin:secret@db.internal:5432/postgres",
         )
-        monkeypatch.setenv("POLAR_PREVIEW_POSTGRES_TEMPLATE_DATABASE", "polar_template")
+        monkeypatch.setenv("TARIFIA_PREVIEW_POSTGRES_TEMPLATE_DATABASE", "tarifia_template")
         monkeypatch.setattr(
             preview_script, "generate_preview_password", lambda: "db-pass"
         )
@@ -362,7 +362,7 @@ class TestPreviewCLI:
         create_db_sql = next(
             sql for sql, _ in cursor.executed if "CREATE DATABASE" in sql
         )
-        assert "TEMPLATE polar_template" in create_db_sql
+        assert "TEMPLATE tarifia_template" in create_db_sql
 
     def test_postgres_provision_reuses_database_with_template(
         self,
@@ -388,10 +388,10 @@ class TestPreviewCLI:
             grant_calls.append((config.admin_dsn, database_name, role_name))
 
         monkeypatch.setenv(
-            "POLAR_PREVIEW_POSTGRES_ADMIN_DSN",
+            "TARIFIA_PREVIEW_POSTGRES_ADMIN_DSN",
             "postgresql://admin:secret@db.internal:5432/postgres",
         )
-        monkeypatch.setenv("POLAR_PREVIEW_POSTGRES_TEMPLATE_DATABASE", "polar_template")
+        monkeypatch.setenv("TARIFIA_PREVIEW_POSTGRES_TEMPLATE_DATABASE", "tarifia_template")
         monkeypatch.setattr(
             preview_script, "generate_preview_password", lambda: "rotated-pass"
         )
@@ -438,7 +438,7 @@ class TestPreviewCLI:
             return connection
 
         monkeypatch.setenv(
-            "POLAR_PREVIEW_POSTGRES_ADMIN_DSN",
+            "TARIFIA_PREVIEW_POSTGRES_ADMIN_DSN",
             "postgresql://admin:secret@db.internal:5432/postgres",
         )
         monkeypatch.setattr(
@@ -477,11 +477,11 @@ class TestPreviewCLI:
         assert payload == {
             "database_name": "preview_pr_123",
             "env": {
-                "POLAR_POSTGRES_DATABASE": "preview_pr_123",
-                "POLAR_POSTGRES_HOST": "db.internal",
-                "POLAR_POSTGRES_PORT": "5432",
-                "POLAR_POSTGRES_PWD": "rotated-pass",
-                "POLAR_POSTGRES_USER": "preview_pr_123_app",
+                "TARIFIA_POSTGRES_DATABASE": "preview_pr_123",
+                "TARIFIA_POSTGRES_HOST": "db.internal",
+                "TARIFIA_POSTGRES_PORT": "5432",
+                "TARIFIA_POSTGRES_PWD": "rotated-pass",
+                "TARIFIA_POSTGRES_USER": "preview_pr_123_app",
             },
             "host": "db.internal",
             "password": "rotated-pass",
@@ -494,7 +494,7 @@ class TestPreviewCLI:
             "preview_postgres_database=preview_pr_123",
             "preview_postgres_user=preview_pr_123_app",
             "preview_postgres_password=rotated-pass",
-            'preview_postgres_env_json={"POLAR_POSTGRES_DATABASE":"preview_pr_123","POLAR_POSTGRES_HOST":"db.internal","POLAR_POSTGRES_PORT":"5432","POLAR_POSTGRES_PWD":"rotated-pass","POLAR_POSTGRES_USER":"preview_pr_123_app"}',
+            'preview_postgres_env_json={"TARIFIA_POSTGRES_DATABASE":"preview_pr_123","TARIFIA_POSTGRES_HOST":"db.internal","TARIFIA_POSTGRES_PORT":"5432","TARIFIA_POSTGRES_PWD":"rotated-pass","TARIFIA_POSTGRES_USER":"preview_pr_123_app"}',
         ]
 
     def test_postgres_teardown_drops_database_and_user(
@@ -515,7 +515,7 @@ class TestPreviewCLI:
             return connection
 
         monkeypatch.setenv(
-            "POLAR_PREVIEW_POSTGRES_ADMIN_DSN",
+            "TARIFIA_PREVIEW_POSTGRES_ADMIN_DSN",
             "postgresql://admin:secret@db.internal:5432/postgres",
         )
         monkeypatch.setattr(
@@ -591,11 +591,11 @@ class TestPreviewCLI:
         captured_commands: list[tuple[str, ...]] = []
         info_responses: list[dict[str, object]] = [
             {
-                "cloud": {"workspace_name": "polar"},
+                "cloud": {"workspace_name": "tarifia"},
                 "branches": {"items": []},
             },
             {
-                "cloud": {"workspace_name": "polar"},
+                "cloud": {"workspace_name": "tarifia"},
                 "branches": {
                     "items": [
                         {
@@ -614,7 +614,7 @@ class TestPreviewCLI:
             assert config == PreviewTinybirdAdminConfig(
                 api_url="https://api.tinybird.co",
                 admin_token="tb-admin-token",
-                workspace_name="polar",
+                workspace_name="tarifia",
                 last_partition=True,
             )
             captured_commands.append(args)
@@ -626,15 +626,15 @@ class TestPreviewCLI:
             assert config == PreviewTinybirdAdminConfig(
                 api_url="https://api.tinybird.co",
                 admin_token="tb-admin-token",
-                workspace_name="polar",
+                workspace_name="tarifia",
                 last_partition=True,
             )
             return info_responses.pop(0)
 
-        monkeypatch.setenv("POLAR_PREVIEW_TINYBIRD_API_URL", "https://api.tinybird.co")
-        monkeypatch.setenv("POLAR_PREVIEW_TINYBIRD_ADMIN_TOKEN", "tb-admin-token")
-        monkeypatch.setenv("POLAR_PREVIEW_TINYBIRD_WORKSPACE", "polar")
-        monkeypatch.setenv("POLAR_PREVIEW_TINYBIRD_LAST_PARTITION", "true")
+        monkeypatch.setenv("TARIFIA_PREVIEW_TINYBIRD_API_URL", "https://api.tinybird.co")
+        monkeypatch.setenv("TARIFIA_PREVIEW_TINYBIRD_ADMIN_TOKEN", "tb-admin-token")
+        monkeypatch.setenv("TARIFIA_PREVIEW_TINYBIRD_WORKSPACE", "tarifia")
+        monkeypatch.setenv("TARIFIA_PREVIEW_TINYBIRD_LAST_PARTITION", "true")
         monkeypatch.setattr(
             preview_script,
             "run_tinybird_cli_command",
@@ -671,18 +671,18 @@ class TestPreviewCLI:
                 "TINYBIRD_API_URL": "https://api.tinybird.co",
                 "TINYBIRD_BRANCH": "preview_pr_123",
                 "TINYBIRD_READ_TOKEN": "tb-preview-token",
-                "TINYBIRD_WORKSPACE": "polar",
+                "TINYBIRD_WORKSPACE": "tarifia",
             },
             "preview_id": "pr-123",
             "token": "tb-preview-token",
-            "workspace_name": "polar",
+            "workspace_name": "tarifia",
         }
 
         assert github_output.read_text().splitlines() == [
             "preview_tinybird_branch=preview_pr_123",
             "preview_tinybird_token=tb-preview-token",
-            'preview_tinybird_env_json={"TINYBIRD_API_TOKEN":"tb-preview-token","TINYBIRD_API_URL":"https://api.tinybird.co","TINYBIRD_BRANCH":"preview_pr_123","TINYBIRD_READ_TOKEN":"tb-preview-token","TINYBIRD_WORKSPACE":"polar"}',
-            "preview_tinybird_workspace=polar",
+            'preview_tinybird_env_json={"TINYBIRD_API_TOKEN":"tb-preview-token","TINYBIRD_API_URL":"https://api.tinybird.co","TINYBIRD_BRANCH":"preview_pr_123","TINYBIRD_READ_TOKEN":"tb-preview-token","TINYBIRD_WORKSPACE":"tarifia"}',
+            "preview_tinybird_workspace=tarifia",
         ]
 
     def test_tinybird_teardown_deletes_branch(
@@ -700,7 +700,7 @@ class TestPreviewCLI:
             assert config == PreviewTinybirdAdminConfig(
                 api_url="https://api.tinybird.co",
                 admin_token="tb-admin-token",
-                workspace_name="polar",
+                workspace_name="tarifia",
                 last_partition=False,
             )
             captured_commands.append(args)
@@ -712,11 +712,11 @@ class TestPreviewCLI:
             assert config == PreviewTinybirdAdminConfig(
                 api_url="https://api.tinybird.co",
                 admin_token="tb-admin-token",
-                workspace_name="polar",
+                workspace_name="tarifia",
                 last_partition=False,
             )
             return {
-                "cloud": {"workspace_name": "polar"},
+                "cloud": {"workspace_name": "tarifia"},
                 "branches": {
                     "items": [
                         {
@@ -727,9 +727,9 @@ class TestPreviewCLI:
                 },
             }
 
-        monkeypatch.setenv("POLAR_PREVIEW_TINYBIRD_API_URL", "https://api.tinybird.co")
-        monkeypatch.setenv("POLAR_PREVIEW_TINYBIRD_ADMIN_TOKEN", "tb-admin-token")
-        monkeypatch.setenv("POLAR_PREVIEW_TINYBIRD_WORKSPACE", "polar")
+        monkeypatch.setenv("TARIFIA_PREVIEW_TINYBIRD_API_URL", "https://api.tinybird.co")
+        monkeypatch.setenv("TARIFIA_PREVIEW_TINYBIRD_ADMIN_TOKEN", "tb-admin-token")
+        monkeypatch.setenv("TARIFIA_PREVIEW_TINYBIRD_WORKSPACE", "tarifia")
         monkeypatch.setattr(
             preview_script,
             "run_tinybird_cli_command",
@@ -774,9 +774,9 @@ class TestPreviewCLI:
     ) -> None:
         github_output = tmp_path / "github-output.txt"
 
-        monkeypatch.setenv("POLAR_PREVIEW_TINYBIRD_API_URL", "https://api.tinybird.co")
-        monkeypatch.setenv("POLAR_PREVIEW_TINYBIRD_ADMIN_TOKEN", "tb-admin-token")
-        monkeypatch.setenv("POLAR_PREVIEW_TINYBIRD_WORKSPACE", "polar")
+        monkeypatch.setenv("TARIFIA_PREVIEW_TINYBIRD_API_URL", "https://api.tinybird.co")
+        monkeypatch.setenv("TARIFIA_PREVIEW_TINYBIRD_ADMIN_TOKEN", "tb-admin-token")
+        monkeypatch.setenv("TARIFIA_PREVIEW_TINYBIRD_WORKSPACE", "tarifia")
         monkeypatch.setattr(
             preview_script,
             "get_tinybird_info",
@@ -801,7 +801,7 @@ class TestPreviewCLI:
         assert isinstance(result.exception, RuntimeError)
         assert (
             str(result.exception)
-            == "Tinybird token resolved to the wrong workspace: expected polar, got other"
+            == "Tinybird token resolved to the wrong workspace: expected tarifia, got other"
         )
         assert github_output.exists() is False
 
@@ -855,7 +855,7 @@ class TestPreviewCLI:
 
         assert result.exit_code == 1
         assert isinstance(result.exception, RuntimeError)
-        assert str(result.exception) == "POLAR_PREVIEW_TINYBIRD_API_URL is required"
+        assert str(result.exception) == "TARIFIA_PREVIEW_TINYBIRD_API_URL is required"
         assert postgres_provision_called is False
         assert github_output.exists() is False
 
@@ -879,7 +879,7 @@ class TestPreviewCLI:
             return PreviewTinybirdAdminConfig(
                 api_url="https://api.tinybird.co",
                 admin_token="tb-admin-token",
-                workspace_name="polar",
+                workspace_name="tarifia",
                 last_partition=False,
             )
 
@@ -992,7 +992,7 @@ class TestPreviewCLI:
             return PreviewTinybirdAdminConfig(
                 api_url="https://api.tinybird.co",
                 admin_token="tb-admin-token",
-                workspace_name="polar",
+                workspace_name="tarifia",
                 last_partition=False,
             )
 
@@ -1011,11 +1011,11 @@ class TestPreviewCLI:
                 port=5432,
                 password="db-pass",
                 env={
-                    "POLAR_POSTGRES_DATABASE": "preview_pr_123",
-                    "POLAR_POSTGRES_HOST": "db.internal",
-                    "POLAR_POSTGRES_PORT": "5432",
-                    "POLAR_POSTGRES_PWD": "db-pass",
-                    "POLAR_POSTGRES_USER": "preview_pr_123_app",
+                    "TARIFIA_POSTGRES_DATABASE": "preview_pr_123",
+                    "TARIFIA_POSTGRES_HOST": "db.internal",
+                    "TARIFIA_POSTGRES_PORT": "5432",
+                    "TARIFIA_POSTGRES_PWD": "db-pass",
+                    "TARIFIA_POSTGRES_USER": "preview_pr_123_app",
                 },
             )
 
@@ -1029,7 +1029,7 @@ class TestPreviewCLI:
             return PreviewTinybirdProvisionResult(
                 preview_id=preview_id,
                 branch_name="preview_pr_123",
-                workspace_name="polar",
+                workspace_name="tarifia",
                 api_url="https://api.tinybird.co",
                 token="tb-preview-token",
                 env={
@@ -1037,7 +1037,7 @@ class TestPreviewCLI:
                     "TINYBIRD_API_URL": "https://api.tinybird.co",
                     "TINYBIRD_BRANCH": "preview_pr_123",
                     "TINYBIRD_READ_TOKEN": "tb-preview-token",
-                    "TINYBIRD_WORKSPACE": "polar",
+                    "TINYBIRD_WORKSPACE": "tarifia",
                 },
             )
 
@@ -1089,9 +1089,9 @@ class TestPreviewCLI:
             "preview_postgres_database=preview_pr_123",
             "preview_postgres_user=preview_pr_123_app",
             "preview_postgres_password=db-pass",
-            'preview_postgres_env_json={"POLAR_POSTGRES_DATABASE":"preview_pr_123","POLAR_POSTGRES_HOST":"db.internal","POLAR_POSTGRES_PORT":"5432","POLAR_POSTGRES_PWD":"db-pass","POLAR_POSTGRES_USER":"preview_pr_123_app"}',
+            'preview_postgres_env_json={"TARIFIA_POSTGRES_DATABASE":"preview_pr_123","TARIFIA_POSTGRES_HOST":"db.internal","TARIFIA_POSTGRES_PORT":"5432","TARIFIA_POSTGRES_PWD":"db-pass","TARIFIA_POSTGRES_USER":"preview_pr_123_app"}',
             "preview_tinybird_branch=preview_pr_123",
             "preview_tinybird_token=tb-preview-token",
-            'preview_tinybird_env_json={"TINYBIRD_API_TOKEN":"tb-preview-token","TINYBIRD_API_URL":"https://api.tinybird.co","TINYBIRD_BRANCH":"preview_pr_123","TINYBIRD_READ_TOKEN":"tb-preview-token","TINYBIRD_WORKSPACE":"polar"}',
-            "preview_tinybird_workspace=polar",
+            'preview_tinybird_env_json={"TINYBIRD_API_TOKEN":"tb-preview-token","TINYBIRD_API_URL":"https://api.tinybird.co","TINYBIRD_BRANCH":"preview_pr_123","TINYBIRD_READ_TOKEN":"tb-preview-token","TINYBIRD_WORKSPACE":"tarifia"}',
+            "preview_tinybird_workspace=tarifia",
         ]

@@ -1,6 +1,6 @@
-import { Button, Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
-import { ButtonProps } from '@polar-sh/orbit/ui/button'
+import { Button, Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { ButtonProps } from '@tarifia-sh/orbit/ui/button'
 import { ReactNode } from 'react'
 
 interface EmptyStateProps {
@@ -28,7 +28,7 @@ export const EmptyState = ({
       borderColor="border-primary"
       padding="3xl"
     >
-      <div className="dark:text-polar-500 text-5xl text-gray-500">{icon}</div>
+      <div className="dark:text-tarifia-500 text-5xl text-gray-500">{icon}</div>
       <Box flexDirection="column" alignItems="center" textAlign="center">
         <Text variant="heading-xxs" as="h3">
           {title}

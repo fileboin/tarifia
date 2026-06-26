@@ -1,21 +1,21 @@
 'use client'
 
-import { useCheckoutForm } from '@polar-sh/checkout/providers'
-import type { schemas } from '@polar-sh/client'
+import { useCheckoutForm } from '@tarifia-sh/checkout/providers'
+import type { schemas } from '@tarifia-sh/client'
 import {
   DEFAULT_LOCALE,
   useTranslations,
   type AcceptedLocale,
-} from '@polar-sh/i18n'
-import { Button } from '@polar-sh/orbit'
-import { Input } from '@polar-sh/orbit'
+} from '@tarifia-sh/i18n'
+import { Button } from '@tarifia-sh/orbit'
+import { Input } from '@tarifia-sh/orbit'
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { useCallback, useState } from 'react'
 
 const XIcon = ({ className }: { className?: string }) => {
@@ -108,7 +108,7 @@ export const CheckoutDiscountInput = ({
         {!collapsible && (
           <label className="flex flex-row items-center justify-between text-sm">
             <span>{t('checkout.form.discountCode')}</span>
-            <span className="dark:text-polar-500 text-xs font-normal text-gray-500">
+            <span className="dark:text-tarifia-500 text-xs font-normal text-gray-500">
               {t('checkout.form.optional')}
             </span>
           </label>

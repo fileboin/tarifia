@@ -3,12 +3,12 @@ import uuid
 import pytest
 from pytest_mock import MockerFixture
 
-from polar.kit.address import Address, CountryAlpha2
-from polar.kit.db.postgres import AsyncSession
-from polar.locker import TimeoutLockError
-from polar.models import Account
-from polar.receipt.service import receipt as receipt_service
-from polar.receipt.tasks import ReceiptOrderDoesNotExist, receipt_render
+from tarifia.kit.address import Address, CountryAlpha2
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.locker import TimeoutLockError
+from tarifia.models import Account
+from tarifia.receipt.service import receipt as receipt_service
+from tarifia.receipt.tasks import ReceiptOrderDoesNotExist, receipt_render
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_customer,
@@ -26,8 +26,8 @@ def _patch_locker(mocker: MockerFixture, *, raises_timeout: bool = False) -> Non
     cm.__aexit__ = mocker.AsyncMock(return_value=None)
     locker = mocker.MagicMock()
     locker.lock = mocker.MagicMock(return_value=cm)
-    mocker.patch("polar.receipt.tasks.Locker", return_value=locker)
-    mocker.patch("polar.receipt.tasks.RedisMiddleware.get")
+    mocker.patch("tarifia.receipt.tasks.Locker", return_value=locker)
+    mocker.patch("tarifia.receipt.tasks.RedisMiddleware.get")
 
 
 @pytest.mark.asyncio
@@ -67,7 +67,7 @@ class TestReceiptRender:
         await receipt_service.allocate(session, order)
         await session.flush()
 
-        enqueue_job_mock = mocker.patch("polar.receipt.tasks.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.receipt.tasks.enqueue_job")
         _patch_locker(mocker, raises_timeout=True)
 
         await receipt_render(order.id)

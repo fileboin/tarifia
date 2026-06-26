@@ -2,14 +2,14 @@ import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import ClearOutlined from '@mui/icons-material/ClearOutlined'
 import DragHandleOutlined from '@mui/icons-material/DragHandleOutlined'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { Input } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { Input } from '@tarifia-sh/orbit'
 import {
   FormControl,
   FormField,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
@@ -58,7 +58,7 @@ const SortableOptionRow: React.FC<SortableOptionRowProps> = ({
         type="button"
         ref={setActivatorNodeRef}
         aria-label="Reorder option"
-        className="dark:text-polar-500 dark:hover:text-polar-300 flex shrink-0 cursor-grab touch-none items-center justify-center text-gray-400 transition-colors hover:text-gray-600 active:cursor-grabbing"
+        className="dark:text-tarifia-500 dark:hover:text-tarifia-300 flex shrink-0 cursor-grab touch-none items-center justify-center text-gray-400 transition-colors hover:text-gray-600 active:cursor-grabbing"
         {...attributes}
         {...listeners}
       >

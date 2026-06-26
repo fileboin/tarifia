@@ -1,11 +1,11 @@
-import { Box } from '@polar-sh/orbit/Box'
+import { Box } from '@tarifia-sh/orbit/Box'
 import {
   Text,
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
 import { type ReactNode } from 'react'
 import { getGeneratedProps, propSourceUrl } from '@/lib/props-data'
 

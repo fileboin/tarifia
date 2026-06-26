@@ -1,5 +1,5 @@
-import { schemas } from '@polar-sh/client'
-import { Status, type StatusColor } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Status, type StatusColor } from '@tarifia-sh/orbit'
 
 const OrderStatusDisplayTitle: Record<schemas['Order']['status'], string> = {
   draft: 'Draft',

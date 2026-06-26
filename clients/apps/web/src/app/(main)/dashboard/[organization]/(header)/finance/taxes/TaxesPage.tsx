@@ -11,17 +11,17 @@ import {
 } from '@/utils/datatable'
 import { fromISODate, toISODate } from '@/utils/metrics'
 import CloseOutlined from '@mui/icons-material/CloseOutlined'
-import { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
-import { Status } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Status } from '@tarifia-sh/orbit'
 import {
   DataTable,
   DataTableColumnDef,
   DataTableColumnHeader,
   Button,
-} from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
 import { endOfDay, endOfMonth, endOfToday, startOfMonth } from 'date-fns'
 import { parseAsArrayOf, parseAsString, useQueryState } from 'nuqs'
 import { useMemo } from 'react'
@@ -200,14 +200,14 @@ export default function TaxesPage({
                 Merchant of Record
               </Text>
               <Text variant="body" color="muted">
-                Polar collects and remits sales taxes for you automatically. No
+                Tarifia collects and remits sales taxes for you automatically. No
                 need for you to register or file in any jurisdictions.
               </Text>
             </Box>
 
             <Button variant="default" asChild>
               <a
-                href="https://polar.sh/docs/merchant-of-record/introduction"
+                href="https://tarifia.sh/docs/merchant-of-record/introduction"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -219,7 +219,7 @@ export default function TaxesPage({
               type="button"
               onClick={dismissMoR}
               aria-label="Dismiss"
-              className="dark:text-polar-500 dark:hover:text-polar-300 absolute top-6 right-6 cursor-pointer text-gray-400 transition-colors hover:text-gray-600"
+              className="dark:text-tarifia-500 dark:hover:text-tarifia-300 absolute top-6 right-6 cursor-pointer text-gray-400 transition-colors hover:text-gray-600"
             >
               <CloseOutlined fontSize="small" />
             </button>
@@ -231,7 +231,7 @@ export default function TaxesPage({
           flexWrap="wrap"
         >
           <SummaryCard
-            label="Tax remitted by Polar"
+            label="Tax remitted by Tarifia"
             value={formatCurrency('accounting')(
               summary?.tax_amount ?? 0,
               summary?.currency ?? 'usd',

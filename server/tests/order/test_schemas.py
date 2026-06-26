@@ -5,13 +5,13 @@ import uuid
 import pytest
 from pydantic import ValidationError
 
-from polar.models.customer import Customer
-from polar.models.order import (
+from tarifia.models.customer import Customer
+from tarifia.models.order import (
     OrderBillingReason,
     OrderBillingReasonInternal,
 )
-from polar.models.product import Product
-from polar.order.schemas import Order, OrderCreate
+from tarifia.models.product import Product
+from tarifia.order.schemas import Order, OrderCreate
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_order
 

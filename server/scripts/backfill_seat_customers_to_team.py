@@ -25,10 +25,10 @@ from rich.console import Console
 from rich.table import Table
 from sqlalchemy import Select, or_, select, update
 
-from polar.kit.db.postgres import create_async_sessionmaker
-from polar.models import Customer, Order, Organization, Subscription
-from polar.models.customer import CustomerType
-from polar.postgres import create_async_engine
+from tarifia.kit.db.postgres import create_async_sessionmaker
+from tarifia.models import Customer, Order, Organization, Subscription
+from tarifia.models.customer import CustomerType
+from tarifia.postgres import create_async_engine
 from scripts.helper import configure_script_console_logging, typer_async
 
 cli = typer.Typer()

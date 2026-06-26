@@ -1,12 +1,12 @@
 import AccountCreateModal from '@/components/Accounts/AccountCreateModal'
-import { Modal } from '@polar-sh/orbit'
+import { Modal } from '@tarifia-sh/orbit'
 import { useModal } from '@/components/Modal/useModal'
 import ManagePayoutAccountModal from '@/components/Payouts/ManagePayoutAccountModal'
 import {
   usePayoutAccount,
   usePayoutAccounts,
 } from '@/hooks/queries/payout_accounts'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { ReactNode, useCallback } from 'react'
 
 interface UsePayoutAccountSetupResult {

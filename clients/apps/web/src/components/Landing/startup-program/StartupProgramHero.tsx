@@ -2,8 +2,8 @@
 
 import ArrowForward from '@mui/icons-material/ArrowForward'
 import CheckOutlined from '@mui/icons-material/CheckOutlined'
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
 import Link from 'next/link'
 
 const STATS = [
@@ -19,7 +19,7 @@ export const StartupProgramHero = () => {
     <Box flexDirection="column" rowGap="3xl">
       <Box flexDirection="column" rowGap="2xl">
         <Text as="h3" variant="heading-l" wrap="pretty">
-          Polar for Startups
+          Tarifia for Startups
         </Text>
         <Text variant="heading-xs" wrap="balance">
           Handle usage-based billing, global tax compliance and real-time cost

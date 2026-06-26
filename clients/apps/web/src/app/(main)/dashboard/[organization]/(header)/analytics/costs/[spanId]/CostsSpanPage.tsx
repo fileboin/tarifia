@@ -2,9 +2,9 @@
 
 import { Chart } from '@/components/Costs/Chart'
 import { CostsBandedChart } from '@/components/Costs/CostsBandedChart'
-import { InlineModal } from '@polar-sh/orbit'
+import { InlineModal } from '@tarifia-sh/orbit'
 import { useModal } from '@/components/Modal/useModal'
-import { Spinner } from '@polar-sh/orbit'
+import { Spinner } from '@tarifia-sh/orbit'
 import { StatisticCard } from '@/components/Shared/StatisticCard'
 import { useEventTypes } from '@/hooks/queries/event_types'
 import {
@@ -12,11 +12,11 @@ import {
   useInfiniteEvents,
 } from '@/hooks/queries/events'
 import { fromISODate, getTimestampFormatter } from '@/utils/metrics'
-import { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
-import { Button } from '@polar-sh/orbit'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@polar-sh/orbit'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
+import { Button } from '@tarifia-sh/orbit'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@tarifia-sh/orbit'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@tarifia-sh/orbit'
 import { endOfDay, format, subDays, subMonths } from 'date-fns'
 import { ArrowDownRight, ArrowUpRight } from 'lucide-react'
 import {
@@ -243,7 +243,7 @@ export default function SpanDetailPage({
     <div className="flex flex-col gap-y-8">
       <div className="flex flex-row items-center justify-between gap-y-4">
         <div className="flex flex-col gap-y-2">
-          <span className="dark:text-polar-500 text-lg text-gray-500">
+          <span className="dark:text-tarifia-500 text-lg text-gray-500">
             Event Span
           </span>
           <h3 className="text-2xl font-medium whitespace-nowrap dark:text-white">
@@ -311,7 +311,7 @@ export default function SpanDetailPage({
             </div>
 
             {chartData.length > 0 && (
-              <div className="dark:border-polar-700 rounded-xl border border-gray-200 p-2">
+              <div className="dark:border-tarifia-700 rounded-xl border border-gray-200 p-2">
                 <CostsBandedChart
                   data={chartData}
                   xAxisFormatter={(value) => timestampFormatter(value)}
@@ -343,7 +343,7 @@ export default function SpanDetailPage({
 
         <TabsContent value="metrics">
           {chartData.length > 0 ? (
-            <div className="dark:bg-polar-700 rounded-3xl bg-gray-50 p-2">
+            <div className="dark:bg-tarifia-700 rounded-3xl bg-gray-50 p-2">
               <div className="px-3 pt-2 pb-4">
                 <h3 className="text-lg font-medium">Occurrences</h3>
               </div>
@@ -377,9 +377,9 @@ export default function SpanDetailPage({
               />
             </div>
           ) : (
-            <div className="dark:border-polar-700 fl ex min-h-96 w-full flex-col items-center justify-center gap-4 rounded-4xl border border-gray-200 p-24">
+            <div className="dark:border-tarifia-700 fl ex min-h-96 w-full flex-col items-center justify-center gap-4 rounded-4xl border border-gray-200 p-24">
               <h1 className="text-2xl font-normal">No data</h1>
-              <p className="dark:text-polar-500 text-gray-500">
+              <p className="dark:text-tarifia-500 text-gray-500">
                 No metrics available for this period
               </p>
             </div>
@@ -443,7 +443,7 @@ function Trend({
               ? 'text-red-500'
               : isDown
                 ? 'text-emerald-500'
-                : 'dark:text-polar-500 text-gray-400'
+                : 'dark:text-tarifia-500 text-gray-400'
           }`}
         >
           {isUp ? (
@@ -462,7 +462,7 @@ function Trend({
         <span>
           {fmt(currentStart)} – {fmt(currentEnd)}
         </span>
-        <span className="dark:text-polar-400 text-gray-400">
+        <span className="dark:text-tarifia-400 text-gray-400">
           vs {fmt(prevStart)} – {fmt(prevEnd)}
         </span>
       </TooltipContent>

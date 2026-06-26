@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-API_PORT="${POLAR_PREVIEW_API_PORT:-10000}"
-REDIS_PORT="${POLAR_REDIS_PORT:-6379}"
+API_PORT="${TARIFIA_PREVIEW_API_PORT:-10000}"
+REDIS_PORT="${TARIFIA_REDIS_PORT:-6379}"
 
 redis_pid=""
 worker_pid=""
@@ -25,12 +25,12 @@ until redis-cli -p "$REDIS_PORT" ping >/dev/null 2>&1; do sleep 0.2; done
 uv run dramatiq \
     -p 1 -t 1 \
     --queues high_priority medium_priority low_priority \
-    -f polar.worker.scheduler:start \
-    polar.worker.run &
+    -f tarifia.worker.scheduler:start \
+    tarifia.worker.run &
 worker_pid=$!
 
-ROOT_PATH="${POLAR_ROOT_PATH:-}"
-uv run uvicorn polar.app:app \
+ROOT_PATH="${TARIFIA_ROOT_PATH:-}"
+uv run uvicorn tarifia.app:app \
     --host 127.0.0.1 \
     --port "$API_PORT" \
     --root-path "$ROOT_PATH" \

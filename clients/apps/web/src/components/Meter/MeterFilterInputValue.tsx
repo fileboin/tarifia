@@ -1,8 +1,8 @@
 'use client'
 
 import { useEventNames } from '@/hooks/queries/events'
-import { Combobox } from '@polar-sh/ui/components/atoms/Combobox'
-import { Input } from '@polar-sh/orbit'
+import { Combobox } from '@tarifia-sh/ui/components/atoms/Combobox'
+import { Input } from '@tarifia-sh/orbit'
 import { useMemo, useState } from 'react'
 import { ControllerRenderProps, FieldPath, FieldValues } from 'react-hook-form'
 

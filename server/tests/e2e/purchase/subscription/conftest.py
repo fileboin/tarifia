@@ -2,8 +2,8 @@
 
 import pytest_asyncio
 
-from polar.enums import SubscriptionRecurringInterval
-from polar.models import Organization, Product
+from tarifia.enums import SubscriptionRecurringInterval
+from tarifia.models import Organization, Product
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_product
 

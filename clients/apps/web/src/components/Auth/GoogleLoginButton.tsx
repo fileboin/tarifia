@@ -2,8 +2,8 @@ import { useAuthSessionStart } from '@/hooks'
 import { usePostHog, type EventName } from '@/hooks/posthog'
 import { useToast } from '@/components/Toast/use-toast'
 import Google from '@mui/icons-material/Google'
-import { schemas } from '@polar-sh/client'
-import { Button, type ButtonProps } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Button, type ButtonProps } from '@tarifia-sh/orbit'
 import { getGoogleAuthorizeLoginURL } from '@/utils/auth'
 
 interface GoogleLoginButtonProps {

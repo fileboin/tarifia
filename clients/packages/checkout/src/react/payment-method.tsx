@@ -2,12 +2,12 @@
 
 import { useEffect, useRef } from 'react'
 import {
-  PolarEmbedPaymentMethod,
+  TarifiaEmbedPaymentMethod,
   type EmbedPaymentMethodErrorCode,
   type EmbedPaymentMethodRedirectResult,
 } from '../payment-method'
 
-const POLAR_PAYMENT_METHOD_EVENT = 'POLAR_PAYMENT_METHOD'
+const TARIFIA_PAYMENT_METHOD_EVENT = 'TARIFIA_PAYMENT_METHOD'
 const EMBED_PATH = '/embed/payment-method'
 
 type IncomingMessage =
@@ -17,28 +17,28 @@ type IncomingMessage =
   | { event: 'error'; code: EmbedPaymentMethodErrorCode }
   | { event: 'resize'; height: number }
 
-const isPolarMessage = (
+const isTarifiaMessage = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   message: any,
-): message is IncomingMessage & { type: typeof POLAR_PAYMENT_METHOD_EVENT } => {
+): message is IncomingMessage & { type: typeof TARIFIA_PAYMENT_METHOD_EVENT } => {
   return (
     !!message &&
     typeof message === 'object' &&
-    message.type === POLAR_PAYMENT_METHOD_EVENT
+    message.type === TARIFIA_PAYMENT_METHOD_EVENT
   )
 }
 
 const resolveEmbedBaseURL = (): string => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore - Defined at build time by tsup
-  const origins = __POLAR_CHECKOUT_EMBED_SCRIPT_ALLOWED_ORIGINS__ as string
+  const origins = __TARIFIA_CHECKOUT_EMBED_SCRIPT_ALLOWED_ORIGINS__ as string
   return origins.split(',')[0]
 }
 
 const isAllowedOrigin = (origin: string): boolean => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore - Defined at build time by tsup
-  return (__POLAR_CHECKOUT_EMBED_SCRIPT_ALLOWED_ORIGINS__ as string)
+  return (__TARIFIA_CHECKOUT_EMBED_SCRIPT_ALLOWED_ORIGINS__ as string)
     .split(',')
     .includes(origin)
 }
@@ -46,17 +46,17 @@ const isAllowedOrigin = (origin: string): boolean => {
 const buildIframeAllow = (): string => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore - Defined at build time by tsup
-  const origins = (__POLAR_CHECKOUT_EMBED_SCRIPT_ALLOWED_ORIGINS__ as string)
+  const origins = (__TARIFIA_CHECKOUT_EMBED_SCRIPT_ALLOWED_ORIGINS__ as string)
     .split(',')
     .join(' ')
   return `payment 'self' ${origins}; publickey-credentials-get 'self' ${origins};`
 }
 
-interface PolarPaymentMethodBaseProps {
+interface TarifiaPaymentMethodBaseProps {
   /**
    * A short-lived session token returned by
    * `POST /v1/customer-sessions`. Pass whatever the API returned —
-   * the SDK detects the prefix (`polar_cst_` vs `polar_mst_`) and
+   * the SDK detects the prefix (`tarifia_cst_` vs `tarifia_mst_`) and
    * routes the request to the right endpoint internally.
    */
   sessionToken: string
@@ -104,15 +104,15 @@ interface PolarPaymentMethodBaseProps {
   style?: React.CSSProperties
 }
 
-export type PolarPaymentMethodProps = PolarPaymentMethodBaseProps
+export type TarifiaPaymentMethodProps = TarifiaPaymentMethodBaseProps
 
 /**
- * Embeds the Polar "add payment method" form as a bare, chrome-less
+ * Embeds the Tarifia "add payment method" form as a bare, chrome-less
  * iframe inside the parent React tree.
  *
  * The merchant is responsible for any surrounding UI (modal, sheet,
  * inline card, etc). For a one-line modal experience, use
- * `PolarEmbedPaymentMethod.create()` from `@polar-sh/checkout/payment-method`
+ * `TarifiaEmbedPaymentMethod.create()` from `@tarifia-sh/checkout/payment-method`
  * instead.
  *
  * The iframe auto-resizes to its content height; you don't need to set
@@ -121,14 +121,14 @@ export type PolarPaymentMethodProps = PolarPaymentMethodBaseProps
  *
  * @example
  * ```tsx
- * <PolarPaymentMethod
+ * <TarifiaPaymentMethod
  *   sessionToken={token}
  *   onSuccess={(id) => console.log('Attached:', id)}
  *   onError={(code) => console.error(code)}
  * />
  * ```
  */
-export const PolarPaymentMethod = ({
+export const TarifiaPaymentMethod = ({
   sessionToken,
   theme,
   setAsDefault,
@@ -139,7 +139,7 @@ export const PolarPaymentMethod = ({
   onError,
   className,
   style,
-}: PolarPaymentMethodProps) => {
+}: TarifiaPaymentMethodProps) => {
   const containerRef = useRef<HTMLDivElement>(null)
 
   // Keep handlers in a ref so the effect doesn't re-mount the iframe
@@ -180,7 +180,7 @@ export const PolarPaymentMethod = ({
 
     const messageListener = ({ data, origin }: MessageEvent) => {
       if (!isAllowedOrigin(origin)) return
-      if (!isPolarMessage(data)) return
+      if (!isTarifiaMessage(data)) return
 
       switch (data.event) {
         case 'loaded':
@@ -238,7 +238,7 @@ export const usePaymentMethodRedirectResult = ({
   useEffect(() => {
     if (handledRef.current) return
     handledRef.current = true
-    const result = PolarEmbedPaymentMethod.getRedirectResult()
+    const result = TarifiaEmbedPaymentMethod.getRedirectResult()
     if (!result) return
     onResult?.(result)
     if (result.status === 'succeeded') {

@@ -3,22 +3,22 @@ import uuid
 import pytest
 from sqlalchemy import select
 
-from polar.enums import SubscriptionRecurringInterval
-from polar.kit.db.postgres import AsyncSession
-from polar.kit.utils import utc_now
-from polar.models import Account, Customer, CustomerSeat, User
-from polar.models.benefit import BenefitType
-from polar.models.benefit_grant import BenefitGrant
-from polar.models.customer import (
+from tarifia.enums import SubscriptionRecurringInterval
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.kit.utils import utc_now
+from tarifia.models import Account, Customer, CustomerSeat, User
+from tarifia.models.benefit import BenefitType
+from tarifia.models.benefit_grant import BenefitGrant
+from tarifia.models.customer import (
     CustomerOAuthAccount,
     CustomerOAuthPlatform,
     CustomerType,
 )
-from polar.models.customer_seat import SeatStatus
-from polar.models.license_key import LicenseKey
-from polar.models.member import Member, MemberRole
-from polar.models.subscription import SubscriptionStatus
-from polar.organization.tasks import (
+from tarifia.models.customer_seat import SeatStatus
+from tarifia.models.license_key import LicenseKey
+from tarifia.models.member import Member, MemberRole
+from tarifia.models.subscription import SubscriptionStatus
+from tarifia.organization.tasks import (
     OrganizationDoesNotExist,
     backfill_members,
 )
@@ -860,7 +860,7 @@ class TestBackfillMembers:
             organization_id=organization.id,
             customer_id=seat_holder_customer.id,
             benefit_id=benefit.id,
-            key="POLAR-TEST-KEY-123",
+            key="TARIFIA-TEST-KEY-123",
         )
         await save_fixture(license_key)
         lk_id = license_key.id
@@ -1418,7 +1418,7 @@ class TestBackfillMembersB2C:
             organization_id=organization.id,
             customer_id=customer.id,
             benefit_id=benefit.id,
-            key="POLAR-B2C-KEY-001",
+            key="TARIFIA-B2C-KEY-001",
         )
         await save_fixture(license_key)
         lk_id = license_key.id
@@ -1854,7 +1854,7 @@ class TestBackfillMembersB2B:
             organization_id=organization.id,
             customer_id=holder.id,
             benefit_id=benefit.id,
-            key="POLAR-B2B-KEY-001",
+            key="TARIFIA-B2B-KEY-001",
         )
         await save_fixture(license_key)
         lk_id = license_key.id

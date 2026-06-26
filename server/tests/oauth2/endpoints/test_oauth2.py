@@ -6,13 +6,13 @@ import pytest_asyncio
 from httpx import AsyncClient
 from sqlalchemy import select
 
-from polar.auth.scope import Scope
-from polar.auth.service import USER_SESSION_TOKEN_PREFIX
-from polar.config import settings
-from polar.kit.crypto import generate_token_hash_pair, get_token_hash
-from polar.kit.db.postgres import Session
-from polar.kit.utils import utc_now
-from polar.models import (
+from tarifia.auth.scope import Scope
+from tarifia.auth.service import USER_SESSION_TOKEN_PREFIX
+from tarifia.config import settings
+from tarifia.kit.crypto import generate_token_hash_pair, get_token_hash
+from tarifia.kit.db.postgres import Session
+from tarifia.kit.utils import utc_now
+from tarifia.models import (
     OAuth2AuthorizationCode,
     OAuth2Client,
     OAuth2Grant,
@@ -22,10 +22,10 @@ from polar.models import (
     UserOrganization,
     UserSession,
 )
-from polar.models.user_organization import OrganizationRole
-from polar.models.user_session_organization import UserSessionOrganization
-from polar.oauth2.service.oauth2_grant import oauth2_grant as oauth2_grant_service
-from polar.oauth2.sub_type import SubType
+from tarifia.models.user_organization import OrganizationRole
+from tarifia.models.user_session_organization import UserSessionOrganization
+from tarifia.oauth2.service.oauth2_grant import oauth2_grant as oauth2_grant_service
+from tarifia.oauth2.sub_type import SubType
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 
@@ -35,9 +35,9 @@ from ..conftest import create_oauth2_authorization_code, create_oauth2_token
 @pytest_asyncio.fixture
 async def oauth2_client(save_fixture: SaveFixture, user: User) -> OAuth2Client:
     oauth2_client = OAuth2Client(
-        client_id="polar_ci_123",
-        client_secret="polar_cs_123",
-        registration_access_token="polar_crt_123",
+        client_id="tarifia_ci_123",
+        client_secret="tarifia_cs_123",
+        registration_access_token="tarifia_crt_123",
         user=user,
     )
     oauth2_client.set_client_metadata(
@@ -58,9 +58,9 @@ async def oauth2_client(save_fixture: SaveFixture, user: User) -> OAuth2Client:
 @pytest_asyncio.fixture
 async def public_oauth2_client(save_fixture: SaveFixture, user: User) -> OAuth2Client:
     oauth2_client = OAuth2Client(
-        client_id="polar_ci_123",
-        client_secret="polar_cs_123",
-        registration_access_token="polar_crt_123",
+        client_id="tarifia_ci_123",
+        client_secret="tarifia_cs_123",
+        registration_access_token="tarifia_crt_123",
         user=user,
     )
     oauth2_client.set_client_metadata(
@@ -83,9 +83,9 @@ async def first_party_oauth2_client(
     save_fixture: SaveFixture, user: User
 ) -> OAuth2Client:
     oauth2_client = OAuth2Client(
-        client_id="polar_ci_123",
-        client_secret="polar_cs_123",
-        registration_access_token="polar_crt_123",
+        client_id="tarifia_ci_123",
+        client_secret="tarifia_cs_123",
+        registration_access_token="tarifia_crt_123",
         first_party=True,
         user=user,
     )
@@ -109,9 +109,9 @@ async def web_grant_oauth2_client(
     save_fixture: SaveFixture, user: User
 ) -> OAuth2Client:
     oauth2_client = OAuth2Client(
-        client_id="polar_ci_123",
-        client_secret="polar_cs_123",
-        registration_access_token="polar_crt_123",
+        client_id="tarifia_ci_123",
+        client_secret="tarifia_cs_123",
+        registration_access_token="tarifia_crt_123",
         user=user,
     )
     oauth2_client.set_client_metadata(
@@ -1043,9 +1043,9 @@ class TestOAuth2Token:
         json = response.json()
 
         access_token = json["access_token"]
-        assert access_token.startswith("polar_at_u_")
+        assert access_token.startswith("tarifia_at_u_")
         refresh_token = json["refresh_token"]
-        assert refresh_token.startswith("polar_rt_u_")
+        assert refresh_token.startswith("tarifia_rt_u_")
 
     async def test_authorization_code_user_carries_organization_down_scope(
         self,
@@ -1078,7 +1078,7 @@ class TestOAuth2Token:
 
         assert response.status_code == 200
         access_token = response.json()["access_token"]
-        assert access_token.startswith("polar_at_u_")
+        assert access_token.startswith("tarifia_at_u_")
 
         oauth2_token = (
             sync_session.execute(
@@ -1127,9 +1127,9 @@ class TestOAuth2Token:
         json = response.json()
 
         access_token = json["access_token"]
-        assert access_token.startswith("polar_at_u_")
+        assert access_token.startswith("tarifia_at_u_")
         refresh_token = json["refresh_token"]
-        assert refresh_token.startswith("polar_rt_u_")
+        assert refresh_token.startswith("tarifia_rt_u_")
 
     async def test_authorization_code_sub_organization(
         self,
@@ -1161,9 +1161,9 @@ class TestOAuth2Token:
         json = response.json()
 
         access_token = json["access_token"]
-        assert access_token.startswith("polar_at_o_")
+        assert access_token.startswith("tarifia_at_o_")
         refresh_token = json["refresh_token"]
-        assert refresh_token.startswith("polar_rt_o_")
+        assert refresh_token.startswith("tarifia_rt_o_")
 
     async def test_authorization_code_revoked_public_client(
         self,
@@ -1233,9 +1233,9 @@ class TestOAuth2Token:
         json = response.json()
 
         access_token = json["access_token"]
-        assert access_token.startswith("polar_at_u_")
+        assert access_token.startswith("tarifia_at_u_")
         refresh_token = json["refresh_token"]
-        assert refresh_token.startswith("polar_rt_u_")
+        assert refresh_token.startswith("tarifia_rt_u_")
 
     async def test_refresh_token_preserves_organization_down_scope(
         self,
@@ -1311,9 +1311,9 @@ class TestOAuth2Token:
         json = response.json()
 
         access_token = json["access_token"]
-        assert access_token.startswith("polar_at_o_")
+        assert access_token.startswith("tarifia_at_o_")
         refresh_token = json["refresh_token"]
-        assert refresh_token.startswith("polar_rt_o_")
+        assert refresh_token.startswith("tarifia_rt_o_")
 
     async def test_refresh_token_migrates_single_member_org_token(
         self,
@@ -1352,7 +1352,7 @@ class TestOAuth2Token:
 
         assert response.status_code == 200
         access_token = response.json()["access_token"]
-        assert access_token.startswith("polar_at_u_")
+        assert access_token.startswith("tarifia_at_u_")
 
         oauth2_token = (
             sync_session.execute(
@@ -1409,7 +1409,7 @@ class TestOAuth2Token:
 
         assert response.status_code == 200
         access_token = response.json()["access_token"]
-        assert access_token.startswith("polar_at_o_")
+        assert access_token.startswith("tarifia_at_o_")
 
     async def test_refresh_token_unauthenticated_private_client(
         self,
@@ -1465,9 +1465,9 @@ class TestOAuth2Token:
         json = response.json()
 
         access_token = json["access_token"]
-        assert access_token.startswith("polar_at_u_")
+        assert access_token.startswith("tarifia_at_u_")
         refresh_token = json["refresh_token"]
-        assert refresh_token.startswith("polar_rt_u_")
+        assert refresh_token.startswith("tarifia_rt_u_")
 
     @pytest.mark.parametrize(
         "payload",
@@ -1631,7 +1631,7 @@ class TestOAuth2Token:
         json = response.json()
 
         access_token = json["access_token"]
-        assert access_token.startswith("polar_at_u_")
+        assert access_token.startswith("tarifia_at_u_")
         assert "refresh_token" not in json
 
     async def test_web_grant_sub_organization(
@@ -1671,7 +1671,7 @@ class TestOAuth2Token:
         json = response.json()
 
         access_token = json["access_token"]
-        assert access_token.startswith("polar_at_u_")
+        assert access_token.startswith("tarifia_at_u_")
         assert "refresh_token" not in json
 
         oauth2_token = (
@@ -1728,7 +1728,7 @@ class TestOAuth2Token:
 
         assert response.status_code == 200
         access_token = response.json()["access_token"]
-        assert access_token.startswith("polar_at_u_")
+        assert access_token.startswith("tarifia_at_u_")
 
         oauth2_token = (
             sync_session.execute(
@@ -1777,7 +1777,7 @@ class TestOAuth2Token:
 
         assert response.status_code == 200
         access_token = response.json()["access_token"]
-        assert access_token.startswith("polar_at_u_")
+        assert access_token.startswith("tarifia_at_u_")
 
         oauth2_token = (
             sync_session.execute(
@@ -1878,7 +1878,7 @@ class TestOAuth2Token:
 
         assert response.status_code == 200
         access_token = response.json()["access_token"]
-        assert access_token.startswith("polar_at_u_")
+        assert access_token.startswith("tarifia_at_u_")
 
         oauth2_token = (
             sync_session.execute(
@@ -1972,7 +1972,7 @@ class TestOAuth2Token:
 
         assert response.status_code == 200
         access_token = response.json()["access_token"]
-        assert access_token.startswith("polar_at_u_")
+        assert access_token.startswith("tarifia_at_u_")
 
         oauth2_token = (
             sync_session.execute(

@@ -1,6 +1,6 @@
-import { Box } from '@polar-sh/orbit/Box'
+import { Box } from '@tarifia-sh/orbit/Box'
 import { PageHeader, Section, Prose } from '@/components/docs'
-import { Text } from '@polar-sh/orbit'
+import { Text } from '@tarifia-sh/orbit'
 import {
   BACKGROUND_TOKENS,
   TEXT_TOKENS,

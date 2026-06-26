@@ -3,15 +3,15 @@ from unittest.mock import AsyncMock, MagicMock
 import pytest
 from pytest_mock import MockerFixture
 
-from polar.organization_review.collectors.firecrawl_client import ScrapeResult
-from polar.organization_review.collectors.setup import (
+from tarifia.organization_review.collectors.firecrawl_client import ScrapeResult
+from tarifia.organization_review.collectors.setup import (
     _extract_domain,
     _normalize_domain,
     _resolve_redirect_with_browser,
     collect_setup_data,
     resolve_url_redirects,
 )
-from polar.organization_review.schemas import (
+from tarifia.organization_review.schemas import (
     CheckoutLinksData,
     CheckoutReturnUrlData,
     CheckoutSuccessUrlData,
@@ -368,11 +368,11 @@ class TestResolveUrlRedirects:
         import respx
 
         mocker.patch(
-            "polar.organization_review.collectors.setup._validate_url_host",
+            "tarifia.organization_review.collectors.setup._validate_url_host",
             return_value=None,
         )
         mocker.patch(
-            "polar.organization_review.collectors.setup._resolve_redirect_with_browser",
+            "tarifia.organization_review.collectors.setup._resolve_redirect_with_browser",
             return_value=UrlRedirectInfo(
                 original_url="https://example.com/thanks",
                 final_url="https://example.com/thanks",
@@ -395,7 +395,7 @@ class TestResolveUrlRedirects:
         import respx
 
         mocker.patch(
-            "polar.organization_review.collectors.setup._validate_url_host",
+            "tarifia.organization_review.collectors.setup._validate_url_host",
             return_value=None,
         )
 
@@ -417,11 +417,11 @@ class TestResolveUrlRedirects:
         import respx
 
         mocker.patch(
-            "polar.organization_review.collectors.setup._validate_url_host",
+            "tarifia.organization_review.collectors.setup._validate_url_host",
             return_value=None,
         )
         mocker.patch(
-            "polar.organization_review.collectors.setup._resolve_redirect_with_browser",
+            "tarifia.organization_review.collectors.setup._resolve_redirect_with_browser",
             return_value=UrlRedirectInfo(
                 original_url="https://example.com/old",
                 final_url="https://example.com/new",
@@ -446,11 +446,11 @@ class TestResolveUrlRedirects:
         import respx
 
         mocker.patch(
-            "polar.organization_review.collectors.setup._validate_url_host",
+            "tarifia.organization_review.collectors.setup._validate_url_host",
             return_value=None,
         )
         mocker.patch(
-            "polar.organization_review.collectors.setup._resolve_redirect_with_browser",
+            "tarifia.organization_review.collectors.setup._resolve_redirect_with_browser",
             return_value=UrlRedirectInfo(
                 original_url="https://example.com/thanks",
                 final_url="https://www.example.com/thanks",
@@ -478,11 +478,11 @@ class TestResolveUrlRedirects:
         import respx
 
         mocker.patch(
-            "polar.organization_review.collectors.setup._validate_url_host",
+            "tarifia.organization_review.collectors.setup._validate_url_host",
             return_value=None,
         )
         mocker.patch(
-            "polar.organization_review.collectors.setup._resolve_redirect_with_browser",
+            "tarifia.organization_review.collectors.setup._resolve_redirect_with_browser",
             return_value=UrlRedirectInfo(
                 original_url="https://www.example.com/thanks",
                 final_url="https://example.com/thanks",
@@ -508,7 +508,7 @@ class TestResolveUrlRedirects:
         import respx
 
         mocker.patch(
-            "polar.organization_review.collectors.setup._validate_url_host",
+            "tarifia.organization_review.collectors.setup._validate_url_host",
             return_value=None,
         )
 
@@ -528,13 +528,13 @@ class TestResolveUrlRedirects:
         import respx
 
         mocker.patch(
-            "polar.organization_review.collectors.setup._validate_url_host",
+            "tarifia.organization_review.collectors.setup._validate_url_host",
             return_value=None,
         )
         # GET returns 200 (no HTTP redirect) — browser pass will be triggered
         # Browser detects the client-side redirect to a different domain
         mocker.patch(
-            "polar.organization_review.collectors.setup._resolve_redirect_with_browser",
+            "tarifia.organization_review.collectors.setup._resolve_redirect_with_browser",
             return_value=UrlRedirectInfo(
                 original_url="https://legit-api.com/success",
                 final_url="https://scam-site.com/landing",
@@ -558,11 +558,11 @@ class TestResolveUrlRedirects:
         import respx
 
         mocker.patch(
-            "polar.organization_review.collectors.setup._validate_url_host",
+            "tarifia.organization_review.collectors.setup._validate_url_host",
             return_value=None,
         )
         mocker.patch(
-            "polar.organization_review.collectors.setup._resolve_redirect_with_browser",
+            "tarifia.organization_review.collectors.setup._resolve_redirect_with_browser",
             return_value=UrlRedirectInfo(
                 original_url="https://flaky-site.com/page",
                 error="browser_error",
@@ -584,11 +584,11 @@ class TestResolveRedirectFirecrawl:
     @pytest.mark.asyncio
     async def test_cross_domain_redirect(self, mocker: MockerFixture) -> None:
         mocker.patch(
-            "polar.organization_review.collectors.setup._validate_url_host",
+            "tarifia.organization_review.collectors.setup._validate_url_host",
             return_value=None,
         )
         mocker.patch(
-            "polar.organization_review.collectors.setup.scrape_markdown",
+            "tarifia.organization_review.collectors.setup.scrape_markdown",
             new_callable=AsyncMock,
             return_value=ScrapeResult(
                 markdown="x",
@@ -608,11 +608,11 @@ class TestResolveRedirectFirecrawl:
     @pytest.mark.asyncio
     async def test_same_domain_not_flagged(self, mocker: MockerFixture) -> None:
         mocker.patch(
-            "polar.organization_review.collectors.setup._validate_url_host",
+            "tarifia.organization_review.collectors.setup._validate_url_host",
             return_value=None,
         )
         mocker.patch(
-            "polar.organization_review.collectors.setup.scrape_markdown",
+            "tarifia.organization_review.collectors.setup.scrape_markdown",
             new_callable=AsyncMock,
             return_value=ScrapeResult(
                 markdown="x",
@@ -630,11 +630,11 @@ class TestResolveRedirectFirecrawl:
     @pytest.mark.asyncio
     async def test_www_variant_not_flagged(self, mocker: MockerFixture) -> None:
         mocker.patch(
-            "polar.organization_review.collectors.setup._validate_url_host",
+            "tarifia.organization_review.collectors.setup._validate_url_host",
             return_value=None,
         )
         mocker.patch(
-            "polar.organization_review.collectors.setup.scrape_markdown",
+            "tarifia.organization_review.collectors.setup.scrape_markdown",
             new_callable=AsyncMock,
             return_value=ScrapeResult(
                 markdown="x",
@@ -651,7 +651,7 @@ class TestResolveRedirectFirecrawl:
     @pytest.mark.asyncio
     async def test_blocked_scheme(self, mocker: MockerFixture) -> None:
         scrape = mocker.patch(
-            "polar.organization_review.collectors.setup.scrape_markdown",
+            "tarifia.organization_review.collectors.setup.scrape_markdown",
             new_callable=AsyncMock,
         )
 
@@ -663,11 +663,11 @@ class TestResolveRedirectFirecrawl:
     @pytest.mark.asyncio
     async def test_scrape_error_reported(self, mocker: MockerFixture) -> None:
         mocker.patch(
-            "polar.organization_review.collectors.setup._validate_url_host",
+            "tarifia.organization_review.collectors.setup._validate_url_host",
             return_value=None,
         )
         mocker.patch(
-            "polar.organization_review.collectors.setup.scrape_markdown",
+            "tarifia.organization_review.collectors.setup.scrape_markdown",
             new_callable=AsyncMock,
             side_effect=RuntimeError("firecrawl down"),
         )

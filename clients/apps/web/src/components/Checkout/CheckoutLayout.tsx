@@ -1,5 +1,5 @@
-import { PolarThemeProvider } from '@/app/providers'
-import type { schemas } from '@polar-sh/client'
+import { TarifiaThemeProvider } from '@/app/providers'
+import type { schemas } from '@tarifia-sh/client'
 import CheckoutEmbedLayout from './Embed/CheckoutEmbedLayout'
 
 const CheckoutLayout = ({
@@ -21,11 +21,11 @@ const CheckoutLayout = ({
   }
 
   return (
-    <PolarThemeProvider>
-      <div className="md:dark:bg-polar-950 dark:bg-polar-900 h-full min-h-screen bg-white md:bg-gray-50 dark:text-white">
+    <TarifiaThemeProvider>
+      <div className="md:dark:bg-tarifia-950 dark:bg-tarifia-900 h-full min-h-screen bg-white md:bg-gray-50 dark:text-white">
         {children}
       </div>
-    </PolarThemeProvider>
+    </TarifiaThemeProvider>
   )
 }
 

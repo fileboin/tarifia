@@ -6,13 +6,13 @@ import dramatiq
 import pytest
 from pytest_mock import MockerFixture
 
-from polar.benefit.grant.repository import BenefitGrantRepository
-from polar.benefit.grant.service import benefit_grant as benefit_grant_service
-from polar.benefit.strategies import BenefitActionRequiredError, BenefitServiceProtocol
-from polar.benefit.strategies.base.properties import BenefitGrantProperties
-from polar.benefit.strategies.base.service import BenefitRetriableError
-from polar.config import settings
-from polar.models import (
+from tarifia.benefit.grant.repository import BenefitGrantRepository
+from tarifia.benefit.grant.service import benefit_grant as benefit_grant_service
+from tarifia.benefit.strategies import BenefitActionRequiredError, BenefitServiceProtocol
+from tarifia.benefit.strategies.base.properties import BenefitGrantProperties
+from tarifia.benefit.strategies.base.service import BenefitRetriableError
+from tarifia.config import settings
+from tarifia.models import (
     Benefit,
     BenefitGrant,
     Customer,
@@ -21,9 +21,9 @@ from polar.models import (
     Product,
     Subscription,
 )
-from polar.models.member import MemberRole
-from polar.postgres import AsyncSession
-from polar.redis import Redis
+from tarifia.models.member import MemberRole
+from tarifia.postgres import AsyncSession
+from tarifia.redis import Redis
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_benefit_grant,
@@ -41,7 +41,7 @@ def benefit_strategy_mock(mocker: MockerFixture) -> MagicMock:
     strategy_mock.grant.return_value = {}
     strategy_mock.revoke.return_value = {}
     strategy_mock.cycle.return_value = {}
-    mock = mocker.patch("polar.benefit.grant.service.get_benefit_strategy")
+    mock = mocker.patch("tarifia.benefit.grant.service.get_benefit_strategy")
     mock.return_value = strategy_mock
     return strategy_mock
 
@@ -417,7 +417,7 @@ class TestEnqueueBenefitsGrants:
         subscription: Subscription,
     ) -> None:
         """All benefits are enqueued when there are no existing grants."""
-        enqueue_job_mock = mocker.patch("polar.benefit.grant.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.benefit.grant.service.enqueue_job")
 
         product = await set_product_benefits(
             save_fixture, product=product, benefits=benefits
@@ -445,7 +445,7 @@ class TestEnqueueBenefitsGrants:
         subscription: Subscription,
     ) -> None:
         """Already granted benefits are not re-enqueued."""
-        enqueue_job_mock = mocker.patch("polar.benefit.grant.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.benefit.grant.service.enqueue_job")
 
         grant = BenefitGrant(
             subscription=subscription, customer=customer, benefit=benefits[0]
@@ -478,7 +478,7 @@ class TestEnqueueBenefitsGrants:
         subscription: Subscription,
     ) -> None:
         """Benefits with BenefitActionRequiredError are not re-enqueued."""
-        enqueue_job_mock = mocker.patch("polar.benefit.grant.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.benefit.grant.service.enqueue_job")
 
         grant = BenefitGrant(
             subscription=subscription, customer=customer, benefit=benefits[0]
@@ -511,8 +511,8 @@ class TestEnqueueBenefitsGrants:
         subscription: Subscription,
     ) -> None:
         """Only granted benefits are revoked via a group with callback."""
-        group_mock = mocker.patch("polar.benefit.grant.service.group")
-        broker_mock = mocker.patch("polar.benefit.grant.service.dramatiq.get_broker")
+        group_mock = mocker.patch("tarifia.benefit.grant.service.group")
+        broker_mock = mocker.patch("tarifia.benefit.grant.service.dramatiq.get_broker")
 
         revoke_actor = MagicMock()
         enqueue_grants_actor = MagicMock()
@@ -567,8 +567,8 @@ class TestEnqueueBenefitsGrants:
         subscription: Subscription,
     ) -> None:
         """No jobs are enqueued when there are no grants to revoke."""
-        enqueue_job_mock = mocker.patch("polar.benefit.grant.service.enqueue_job")
-        group_mock = mocker.patch("polar.benefit.grant.service.group")
+        enqueue_job_mock = mocker.patch("tarifia.benefit.grant.service.enqueue_job")
+        group_mock = mocker.patch("tarifia.benefit.grant.service.group")
 
         product = await set_product_benefits(
             save_fixture, product=product, benefits=benefits
@@ -597,8 +597,8 @@ class TestEnqueueBenefitsGrants:
         This ensures old benefits are revoked, meters are reset, then new benefits
         are granted - fixing the negative credits bug.
         """
-        group_mock = mocker.patch("polar.benefit.grant.service.group")
-        broker_mock = mocker.patch("polar.benefit.grant.service.dramatiq.get_broker")
+        group_mock = mocker.patch("tarifia.benefit.grant.service.group")
+        broker_mock = mocker.patch("tarifia.benefit.grant.service.dramatiq.get_broker")
 
         revoke_actor = MagicMock()
         enqueue_grants_actor = MagicMock()
@@ -658,7 +658,7 @@ class TestEnqueueBenefitGrantUpdates:
         benefit_organization: Benefit,
         benefit_strategy_mock: MagicMock,
     ) -> None:
-        enqueue_job_mock = mocker.patch("polar.benefit.grant.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.benefit.grant.service.enqueue_job")
         benefit_strategy_mock.requires_update.return_value = False
 
         await benefit_grant_service.enqueue_benefit_grant_updates(
@@ -695,7 +695,7 @@ class TestEnqueueBenefitGrantUpdates:
         other_benefit_grant.set_granted()
         await save_fixture(other_benefit_grant)
 
-        enqueue_job_mock = mocker.patch("polar.benefit.grant.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.benefit.grant.service.enqueue_job")
         benefit_strategy_mock.requires_update.return_value = True
 
         await benefit_grant_service.enqueue_benefit_grant_updates(
@@ -733,7 +733,7 @@ class TestEnqueueBenefitGrantUpdates:
         other_benefit_grant.set_granted()
         await save_fixture(other_benefit_grant)
 
-        enqueue_job_mock = mocker.patch("polar.benefit.grant.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.benefit.grant.service.enqueue_job")
         benefit_strategy_mock.requires_update.return_value = True
 
         await benefit_grant_service.enqueue_benefit_grant_updates(
@@ -905,7 +905,7 @@ class TestEnqueueBenefitGrantCycles:
         grant.set_granted()
         await save_fixture(grant)
 
-        enqueue_job_mock = mocker.patch("polar.benefit.grant.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.benefit.grant.service.enqueue_job")
 
         await benefit_grant_service.enqueue_benefit_grant_cycles(
             session, redis, subscription=subscription
@@ -1032,7 +1032,7 @@ class TestEnqueueBenefitGrantDeletions:
         other_benefit_grant.set_granted()
         await save_fixture(other_benefit_grant)
 
-        enqueue_job_mock = mocker.patch("polar.benefit.grant.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.benefit.grant.service.enqueue_job")
 
         await benefit_grant_service.enqueue_benefit_grant_deletions(
             session, benefit_organization
@@ -1069,7 +1069,7 @@ class TestEnqueueCustomerGrantDeletions:
         grant2.set_granted()
         await save_fixture(grant2)
 
-        enqueue_job_mock = mocker.patch("polar.benefit.grant.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.benefit.grant.service.enqueue_job")
 
         await benefit_grant_service.enqueue_customer_grant_deletions(session, customer)
 

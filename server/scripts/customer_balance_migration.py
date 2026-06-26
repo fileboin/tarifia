@@ -9,14 +9,14 @@ from rich import print
 from sqlalchemy import and_, case, func, or_, select
 from sqlalchemy.dialects.postgresql import insert
 
-from polar import tasks  # noqa: F401
-from polar.kit.db.postgres import create_async_sessionmaker
-from polar.models import Checkout, Customer, Order, Payment, Wallet
-from polar.models.order import OrderStatus
-from polar.models.payment import PaymentStatus
-from polar.models.wallet_transaction import WalletTransaction
-from polar.postgres import create_async_engine
-from polar.redis import create_redis
+from tarifia import tasks  # noqa: F401
+from tarifia.kit.db.postgres import create_async_sessionmaker
+from tarifia.models import Checkout, Customer, Order, Payment, Wallet
+from tarifia.models.order import OrderStatus
+from tarifia.models.payment import PaymentStatus
+from tarifia.models.wallet_transaction import WalletTransaction
+from tarifia.postgres import create_async_engine
+from tarifia.redis import create_redis
 
 cli = typer.Typer()
 

@@ -4,9 +4,9 @@ import pytest
 from pytest_mock import MockerFixture
 from sqlalchemy.orm import joinedload
 
-from polar.event.system import SystemEvent
-from polar.integrations.stripe.service import StripeService
-from polar.models import (
+from tarifia.event.system import SystemEvent
+from tarifia.integrations.stripe.service import StripeService
+from tarifia.models import (
     Account,
     Customer,
     Order,
@@ -16,23 +16,23 @@ from polar.models import (
     Transaction,
     User,
 )
-from polar.models.refund import RefundStatus
-from polar.models.transaction import Processor, TransactionType
-from polar.postgres import AsyncSession
-from polar.transaction.repository import BalanceTransactionRepository
-from polar.transaction.service.balance import BalanceTransactionService
-from polar.transaction.service.balance import (
+from tarifia.models.refund import RefundStatus
+from tarifia.models.transaction import Processor, TransactionType
+from tarifia.postgres import AsyncSession
+from tarifia.transaction.repository import BalanceTransactionRepository
+from tarifia.transaction.service.balance import BalanceTransactionService
+from tarifia.transaction.service.balance import (
     balance_transaction as balance_transaction_service,
 )
-from polar.transaction.service.processor_fee import ProcessorFeeTransactionService
-from polar.transaction.service.refund import (  # type: ignore[attr-defined]
+from tarifia.transaction.service.processor_fee import ProcessorFeeTransactionService
+from tarifia.transaction.service.refund import (  # type: ignore[attr-defined]
     NotCanceledRefundError,
     NotSucceededRefundError,
     RefundTransactionAlreadyExistsError,
     RefundTransactionDoesNotExistError,
     processor_fee_transaction_service,
 )
-from polar.transaction.service.refund import (
+from tarifia.transaction.service.refund import (
     refund_transaction as refund_transaction_service,
 )
 from tests.fixtures.database import SaveFixture
@@ -48,8 +48,8 @@ from tests.transaction.conftest import create_transaction
 @pytest.fixture(autouse=True)
 def stripe_service_mock(mocker: MockerFixture) -> MagicMock:
     mock = MagicMock(spec=StripeService)
-    mocker.patch("polar.refund.service.stripe_service", new=mock)
-    mocker.patch("polar.transaction.service.refund.stripe_service", new=mock)
+    mocker.patch("tarifia.refund.service.stripe_service", new=mock)
+    mocker.patch("tarifia.transaction.service.refund.stripe_service", new=mock)
     return mock
 
 
@@ -57,7 +57,7 @@ def stripe_service_mock(mocker: MockerFixture) -> MagicMock:
 def balance_transaction_service_mock(mocker: MockerFixture) -> MagicMock:
     mock = MagicMock(spec=BalanceTransactionService)
     mocker.patch(
-        "polar.transaction.service.refund.balance_transaction_service", new=mock
+        "tarifia.transaction.service.refund.balance_transaction_service", new=mock
     )
     return mock
 
@@ -598,12 +598,12 @@ class TestRevert:
         )
         assert len(balance_transactions) == 6
 
-        assert balance_transactions[0] == outgoing_balance  # From Polar...
+        assert balance_transactions[0] == outgoing_balance  # From Tarifia...
         assert balance_transactions[1] == incoming_balance  # ... to Account
         assert balance_transactions[2] == refund_outgoing_balance  # From Account...
-        assert balance_transactions[3] == refund_incoming_balance  # ... to Polar
+        assert balance_transactions[3] == refund_incoming_balance  # ... to Tarifia
 
-        reverse_balance_account = balance_transactions[4]  # From Polar...
+        reverse_balance_account = balance_transactions[4]  # From Tarifia...
         assert reverse_balance_account.account is None
         assert reverse_balance_account.balance_reversal_transaction is not None
         assert reverse_balance_account.balance_reversal_transaction == outgoing_balance
@@ -615,16 +615,16 @@ class TestRevert:
         assert reverse_balance_account.amount == -refund_incoming_balance.amount
         assert reverse_balance_account.payment_transaction is None
 
-        reverse_balance_polar = balance_transactions[5]  # ... to Account
-        assert reverse_balance_polar.account is not None
-        assert reverse_balance_polar.balance_reversal_transaction is not None
-        assert reverse_balance_polar.balance_reversal_transaction == incoming_balance
+        reverse_balance_tarifia = balance_transactions[5]  # ... to Account
+        assert reverse_balance_tarifia.account is not None
+        assert reverse_balance_tarifia.balance_reversal_transaction is not None
+        assert reverse_balance_tarifia.balance_reversal_transaction == incoming_balance
         assert (
-            reverse_balance_polar.balance_reversal_transaction.amount
-            == reverse_balance_polar.amount
+            reverse_balance_tarifia.balance_reversal_transaction.amount
+            == reverse_balance_tarifia.amount
         )
-        assert reverse_balance_polar.amount == -refund_outgoing_balance.amount
-        assert reverse_balance_polar.payment_transaction is None
+        assert reverse_balance_tarifia.amount == -refund_outgoing_balance.amount
+        assert reverse_balance_tarifia.payment_transaction is None
 
     async def test_valid_different_settlement_currency(
         self,
@@ -768,12 +768,12 @@ class TestRevert:
         )
         assert len(balance_transactions) == 6
 
-        assert balance_transactions[0] == outgoing_balance  # From Polar...
+        assert balance_transactions[0] == outgoing_balance  # From Tarifia...
         assert balance_transactions[1] == incoming_balance  # ... to Account
         assert balance_transactions[2] == refund_outgoing_balance  # From Account...
-        assert balance_transactions[3] == refund_incoming_balance  # ... to Polar
+        assert balance_transactions[3] == refund_incoming_balance  # ... to Tarifia
 
-        reverse_balance_account = balance_transactions[4]  # From Polar...
+        reverse_balance_account = balance_transactions[4]  # From Tarifia...
         assert reverse_balance_account.account is None
         assert reverse_balance_account.balance_reversal_transaction is not None
         assert reverse_balance_account.balance_reversal_transaction == outgoing_balance
@@ -785,16 +785,16 @@ class TestRevert:
         assert reverse_balance_account.amount == -refund_incoming_balance.amount
         assert reverse_balance_account.payment_transaction is None
 
-        reverse_balance_polar = balance_transactions[5]  # ... to Account
-        assert reverse_balance_polar.account is not None
-        assert reverse_balance_polar.balance_reversal_transaction is not None
-        assert reverse_balance_polar.balance_reversal_transaction == incoming_balance
+        reverse_balance_tarifia = balance_transactions[5]  # ... to Account
+        assert reverse_balance_tarifia.account is not None
+        assert reverse_balance_tarifia.balance_reversal_transaction is not None
+        assert reverse_balance_tarifia.balance_reversal_transaction == incoming_balance
         assert (
-            reverse_balance_polar.balance_reversal_transaction.amount
-            == reverse_balance_polar.amount
+            reverse_balance_tarifia.balance_reversal_transaction.amount
+            == reverse_balance_tarifia.amount
         )
-        assert reverse_balance_polar.amount == -refund_outgoing_balance.amount
-        assert reverse_balance_polar.payment_transaction is None
+        assert reverse_balance_tarifia.amount == -refund_outgoing_balance.amount
+        assert reverse_balance_tarifia.payment_transaction is None
 
 
 @pytest.mark.asyncio

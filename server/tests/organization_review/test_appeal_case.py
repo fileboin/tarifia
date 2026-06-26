@@ -6,28 +6,28 @@ import pytest
 import pytest_asyncio
 from pytest_mock import MockerFixture
 
-from polar.models import OrganizationReview
-from polar.models.organization import Organization
-from polar.models.support_case import (
+from tarifia.models import OrganizationReview
+from tarifia.models.organization import Organization
+from tarifia.models.support_case import (
     SupportCaseMessageAuthorKind,
     SupportCaseMessageType,
     SupportCaseParticipant,
     SupportCaseParticipantKind,
     SupportCaseType,
 )
-from polar.models.user import User
-from polar.organization_review.appeal_case import (
+from tarifia.models.user import User
+from tarifia.organization_review.appeal_case import (
     HUMAN_REVIEW_GREETING,
     HUMAN_REVIEW_GREETING_DELAY_MS,
     CaseAlreadyExistsError,
     CaseClosedError,
 )
-from polar.organization_review.appeal_case import (
+from tarifia.organization_review.appeal_case import (
     appeal_case as appeal_case_service,
 )
-from polar.organization_review.tasks import post_appeal_greeting
-from polar.postgres import AsyncSession
-from polar.support_case.repository import (
+from tarifia.organization_review.tasks import post_appeal_greeting
+from tarifia.postgres import AsyncSession
+from tarifia.support_case.repository import (
     SupportCaseMessageRepository,
     SupportCaseParticipantRepository,
 )
@@ -74,10 +74,10 @@ class TestRequestHumanReview:
         user: User,
     ) -> None:
         enqueue_job_mock = mocker.patch(
-            "polar.organization_review.appeal_case.enqueue_job"
+            "tarifia.organization_review.appeal_case.enqueue_job"
         )
         publish_mock = mocker.patch(
-            "polar.organization_review.appeal_case.publish_appeal_update"
+            "tarifia.organization_review.appeal_case.publish_appeal_update"
         )
 
         case = await appeal_case_service.request_human_review(
@@ -192,7 +192,7 @@ class TestReplyNotifiesMerchant:
         organization: Organization,
         user: User,
     ) -> None:
-        enqueue = mocker.patch("polar.organization_review.appeal_case.enqueue_job")
+        enqueue = mocker.patch("tarifia.organization_review.appeal_case.enqueue_job")
         case = await appeal_case_service.request_human_review(
             session,
             denied_review,
@@ -202,7 +202,7 @@ class TestReplyNotifiesMerchant:
         )
         enqueue.reset_mock()
         publish = mocker.patch(
-            "polar.organization_review.appeal_case.publish_appeal_update"
+            "tarifia.organization_review.appeal_case.publish_appeal_update"
         )
         message = await appeal_case_service.add_reply(
             session,
@@ -224,7 +224,7 @@ class TestReplyNotifiesMerchant:
         organization: Organization,
         user: User,
     ) -> None:
-        enqueue = mocker.patch("polar.organization_review.appeal_case.enqueue_job")
+        enqueue = mocker.patch("tarifia.organization_review.appeal_case.enqueue_job")
         case = await appeal_case_service.request_human_review(
             session,
             denied_review,
@@ -234,7 +234,7 @@ class TestReplyNotifiesMerchant:
         )
         enqueue.reset_mock()
         publish = mocker.patch(
-            "polar.organization_review.appeal_case.publish_appeal_update"
+            "tarifia.organization_review.appeal_case.publish_appeal_update"
         )
         await appeal_case_service.add_reply(
             session,
@@ -255,7 +255,7 @@ class TestReplyNotifiesMerchant:
         organization: Organization,
         user: User,
     ) -> None:
-        enqueue = mocker.patch("polar.organization_review.appeal_case.enqueue_job")
+        enqueue = mocker.patch("tarifia.organization_review.appeal_case.enqueue_job")
         case = await appeal_case_service.request_human_review(
             session,
             denied_review,
@@ -265,7 +265,7 @@ class TestReplyNotifiesMerchant:
         )
         enqueue.reset_mock()
         publish = mocker.patch(
-            "polar.organization_review.appeal_case.publish_appeal_update"
+            "tarifia.organization_review.appeal_case.publish_appeal_update"
         )
         message = await appeal_case_service.record_decision(
             session, case, approved=False, staff_user=user, reason="denied again"
@@ -286,9 +286,9 @@ class TestPostAppealGreeting:
         organization: Organization,
         user: User,
     ) -> None:
-        mocker.patch("polar.organization_review.appeal_case.enqueue_job")
+        mocker.patch("tarifia.organization_review.appeal_case.enqueue_job")
         publish_mock = mocker.patch(
-            "polar.organization_review.tasks.publish_appeal_update"
+            "tarifia.organization_review.tasks.publish_appeal_update"
         )
         case = await appeal_case_service.request_human_review(
             session,
@@ -299,7 +299,7 @@ class TestPostAppealGreeting:
         )
 
         with patch(
-            "polar.organization_review.tasks.AsyncSessionMaker",
+            "tarifia.organization_review.tasks.AsyncSessionMaker",
             side_effect=lambda: _session_maker(session),
         ):
             await _post_appeal_greeting(case.id)
@@ -325,7 +325,7 @@ class TestPostAppealGreeting:
         organization: Organization,
         user: User,
     ) -> None:
-        mocker.patch("polar.organization_review.appeal_case.enqueue_job")
+        mocker.patch("tarifia.organization_review.appeal_case.enqueue_job")
         case = await appeal_case_service.request_human_review(
             session,
             denied_review,
@@ -335,7 +335,7 @@ class TestPostAppealGreeting:
         )
 
         with patch(
-            "polar.organization_review.tasks.AsyncSessionMaker",
+            "tarifia.organization_review.tasks.AsyncSessionMaker",
             side_effect=lambda: _session_maker(session),
         ):
             await _post_appeal_greeting(case.id)

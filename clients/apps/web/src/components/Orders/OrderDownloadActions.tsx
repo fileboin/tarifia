@@ -1,7 +1,7 @@
 'use client'
 
-import type { schemas } from '@polar-sh/client'
-import { useIsMobile } from '@polar-sh/ui/hooks/use-mobile'
+import type { schemas } from '@tarifia-sh/client'
+import { useIsMobile } from '@tarifia-sh/ui/hooks/use-mobile'
 import { DownloadInvoicePortal } from './DownloadInvoice'
 import { DownloadReceiptPortal } from './DownloadReceipt'
 

@@ -8,7 +8,7 @@ import IntervalPicker, {
   getNextValidInterval,
 } from '@/components/Metrics/IntervalPicker'
 import { ConfirmModal } from '@/components/Modal/ConfirmModal'
-import { InlineModal } from '@polar-sh/orbit'
+import { InlineModal } from '@tarifia-sh/orbit'
 import { useModal } from '@/components/Modal/useModal'
 import { toast } from '@/components/Toast/use-toast'
 import { useSafeCopy } from '@/hooks/clipboard'
@@ -20,16 +20,16 @@ import { useDateRange } from '@/utils/date'
 import { usePushRouteWithoutCache } from '@/utils/router'
 
 import MoreVert from '@mui/icons-material/MoreVert'
-import { schemas } from '@polar-sh/client'
-import { Avatar } from '@polar-sh/orbit'
-import { Button } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Avatar } from '@tarifia-sh/orbit'
+import { Button } from '@tarifia-sh/orbit'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@polar-sh/ui/components/ui/dropdown-menu'
+} from '@tarifia-sh/ui/components/ui/dropdown-menu'
 import { endOfToday, startOfDay } from 'date-fns'
 import { parseAsStringLiteral, useQueryState } from 'nuqs'
 import React, { useCallback } from 'react'
@@ -217,7 +217,7 @@ const CustomerHeader = ({
         hide={hideDeleteCustomerModal}
         title={`Delete Customer "${customer.email ?? customer.name ?? 'customer'}"?`}
         body={
-          <div className="dark:text-polar-400 flex flex-col gap-y-2 text-sm leading-relaxed text-gray-500">
+          <div className="dark:text-tarifia-400 flex flex-col gap-y-2 text-sm leading-relaxed text-gray-500">
             <p>This action cannot be undone and will immediately:</p>
             <ol className="list-inside list-disc pl-4">
               <li>Cancel any active subscriptions for the customer</li>
@@ -286,13 +286,13 @@ const ClientPage: React.FC<ClientPageProps> = ({ organization, customer }) => {
               <p className="text-lg">
                 {hasName ? customer.name : (customer.billing_name ?? '—')}
                 {showBillingName && (
-                  <span className="dark:text-polar-500 ml-1.5 text-gray-500">
+                  <span className="dark:text-tarifia-500 ml-1.5 text-gray-500">
                     {customer.billing_name}
                   </span>
                 )}
               </p>
               {(customer.email || customer.type === 'individual') && (
-                <div className="dark:text-polar-500 flex flex-row items-center text-base font-normal text-gray-500">
+                <div className="dark:text-tarifia-500 flex flex-row items-center text-base font-normal text-gray-500">
                   <span>{customer.email ?? '—'}</span>
                 </div>
               )}

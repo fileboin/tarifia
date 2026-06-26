@@ -2,7 +2,7 @@ import react from '@vitejs/plugin-react'
 import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitest/config'
 
-// Orbit's `@polar-sh/orbit` entry resolves to raw TS source that calls
+// Orbit's `@tarifia-sh/orbit` entry resolves to raw TS source that calls
 // `stylex.defineVars` at module load. Without the StyleX babel plugin those
 // calls throw ("Styles must be compiled by '@stylexjs/babel-plugin'"), which
 // breaks any test that imports an Orbit component. Mirror apps/web/babel.config.js.

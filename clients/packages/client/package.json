@@ -1,7 +1,7 @@
 {
-  "name": "@polar-sh/client",
-  "description": "Polar Internal API Client",
-  "author": "Polar",
+  "name": "@tarifia-sh/client",
+  "description": "Tarifia Internal API Client",
+  "author": "Tarifia",
   "license": "Apache-2.0",
   "type": "module",
   "private": true,
@@ -25,8 +25,8 @@
     }
   },
   "devDependencies": {
-    "@polar-sh/eslint-config": "workspace:*",
-    "@polar-sh/typescript-config": "workspace:*",
+    "@tarifia-sh/eslint-config": "workspace:*",
+    "@tarifia-sh/typescript-config": "workspace:*",
     "openapi-typescript": "^7.10.1",
     "tsup": "^8.5.1",
     "typescript": "latest"

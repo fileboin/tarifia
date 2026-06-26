@@ -4,21 +4,21 @@ import { useCustomerPortalSessionAuthenticate } from '@/hooks/queries/customerPo
 import { setValidationErrors } from '@/utils/api/errors'
 import { getQueryClient } from '@/utils/api/query'
 import { api } from '@/utils/client'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
-} from '@polar-sh/ui/components/atoms/InputOTP'
-import ShadowBox from '@polar-sh/ui/components/atoms/ShadowBox'
+} from '@tarifia-sh/ui/components/atoms/InputOTP'
+import ShadowBox from '@tarifia-sh/ui/components/atoms/ShadowBox'
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useCallback } from 'react'
@@ -73,7 +73,7 @@ const ClientPage = ({
           <h2 className="text-2xl text-black dark:text-white">
             Verification code
           </h2>
-          <p className="dark:text-polar-500 text-gray-500">
+          <p className="dark:text-tarifia-500 text-gray-500">
             Enter the verification code sent to your email address.
           </p>
         </div>
@@ -104,7 +104,7 @@ const ClientPage = ({
                             <InputOTPSlot
                               key={index}
                               index={index}
-                              className="dark:border-polar-600 h-12 w-12 border-gray-300 text-xl md:h-16 md:w-16 md:text-2xl"
+                              className="dark:border-tarifia-600 h-12 w-12 border-gray-300 text-xl md:h-16 md:w-16 md:text-2xl"
                             />
                           ))}
                         </InputOTPGroup>
@@ -132,7 +132,7 @@ const ClientPage = ({
               Access my purchases
             </Button>
 
-            <p className="dark:text-polar-400 text-sm text-gray-500">
+            <p className="dark:text-tarifia-400 text-sm text-gray-500">
               Don&apos;t have a code?{' '}
               <Link href="request" className="underline hover:no-underline">
                 Request a new one

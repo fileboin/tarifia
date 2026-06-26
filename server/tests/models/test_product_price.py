@@ -3,8 +3,8 @@ from typing import Any
 
 import pytest
 
-from polar.models import Meter, Product
-from polar.models.product_price import (
+from tarifia.models import Meter, Product
+from tarifia.models.product_price import (
     ProductPriceFixed,
     ProductPriceSeatUnit,
     SeatTierType,

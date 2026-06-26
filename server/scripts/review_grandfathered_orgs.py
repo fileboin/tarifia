@@ -52,14 +52,14 @@ from rich.table import Table
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import async_sessionmaker
 
-from polar import tasks  # noqa: F401  -- registers dramatiq actors
-from polar.kit.db.postgres import AsyncSession, create_async_sessionmaker
-from polar.models.organization import OrganizationStatus
-from polar.organization.repository import OrganizationRepository
-from polar.postgres import create_async_engine
-from polar.redis import create_redis
-from polar.worker import enqueue_job, make_bulk_job_delay_calculator
-from polar.worker._enqueue import JobQueueManager
+from tarifia import tasks  # noqa: F401  -- registers dramatiq actors
+from tarifia.kit.db.postgres import AsyncSession, create_async_sessionmaker
+from tarifia.models.organization import OrganizationStatus
+from tarifia.organization.repository import OrganizationRepository
+from tarifia.postgres import create_async_engine
+from tarifia.redis import create_redis
+from tarifia.worker import enqueue_job, make_bulk_job_delay_calculator
+from tarifia.worker._enqueue import JobQueueManager
 from scripts.helper import configure_script_console_logging, typer_async
 
 cli = typer.Typer()

@@ -23,11 +23,11 @@ import {
 } from '@/utils/planSavings'
 import CheckOutlined from '@mui/icons-material/CheckOutlined'
 import CloseOutlined from '@mui/icons-material/CloseOutlined'
-import { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
-import { Button } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Button } from '@tarifia-sh/orbit'
 import { subDays } from 'date-fns'
 import Link from 'next/link'
 import { useMemo } from 'react'
@@ -310,7 +310,7 @@ export const PlanUpsell = ({ organization }: PlanUpsellProps) => {
         type="button"
         onClick={dismiss}
         aria-label="Dismiss"
-        className="dark:text-polar-500 dark:hover:text-polar-300 absolute top-6 right-6 cursor-pointer text-gray-400 transition-colors hover:text-gray-600"
+        className="dark:text-tarifia-500 dark:hover:text-tarifia-300 absolute top-6 right-6 cursor-pointer text-gray-400 transition-colors hover:text-gray-600"
       >
         <CloseOutlined fontSize="small" />
       </button>

@@ -51,7 +51,7 @@ RUNS_DIR = SCREENSHOTS_DIR / "runs"
 DEV_CLI = ROOT_DIR / "dev" / "cli" / "dev"
 DEFAULT_BASE_BRANCH = "main"
 DEFAULT_WEB_PORT = 3000  # both sides run here, sequentially
-DEFAULT_LOGIN_EMAIL = "admin@polar.sh"
+DEFAULT_LOGIN_EMAIL = "admin@tarifia.sh"
 DEFAULT_AUTH_PATHS = ["/dashboard"]  # path prefixes that require login
 
 # Viewports to capture at. Each selected one is shot per URL per side, with the
@@ -264,15 +264,15 @@ def _ask_autodetect() -> bool:
 
 def _resolve_import(spec: str, from_file: Path) -> Path | None:
     """Resolve a JS/TS import specifier to a source file under web/src or a shared
-    package's src. Handles relative, `@/…` (→ web/src), and `@polar-sh/<pkg>/…`
+    package's src. Handles relative, `@/…` (→ web/src), and `@tarifia-sh/<pkg>/…`
     (→ packages/<pkg>/src) — plus extension and `/index` resolution. Returns None
     for node_modules / asset / unresolved specifiers."""
     if spec.startswith("."):
         base = from_file.parent / spec
     elif spec.startswith("@/"):
         base = WEB_SRC_DIR / spec[2:]
-    elif spec.startswith("@polar-sh/"):
-        pkg, _, sub = spec[len("@polar-sh/") :].partition("/")
+    elif spec.startswith("@tarifia-sh/"):
+        pkg, _, sub = spec[len("@tarifia-sh/") :].partition("/")
         base = PACKAGES_DIR / pkg / "src" / sub
     else:
         return None  # bare module (react, etc.) — not ours
@@ -476,7 +476,7 @@ def _tick_progress(progress: Progress, task, t0: float, total: float, stop) -> N
 def _dev_up(run_dir: Path, set_status, label: str, wipe_next: bool = False) -> None:
     """Rebuild for the branch currently checked out (on BOTH branches): run
     `dev up` to install deps, run migrations, and rebuild the workspace packages
-    (`@polar-sh/ui` ships as prebuilt `dist/`, so a branch's UI changes only land
+    (`@tarifia-sh/ui` ships as prebuilt `dist/`, so a branch's UI changes only land
     once its packages are rebuilt). Since the web server is restarted fresh per
     branch, turbopack picks up the rebuilt `dist` on startup.
 
@@ -1118,7 +1118,7 @@ def register(app: typer.Typer, prompt_setup: callable) -> None:
         """
         console.print()
         title = _gradient("Snap", GRADIENT_START, GRADIENT_END)
-        title.append("\nPolar's visual regression tool", style="dim")
+        title.append("\nTarifia's visual regression tool", style="dim")
         title.justify = "center"
         console.print(Panel(title, border_style="blue", padding=(1, 4)))
         console.print()

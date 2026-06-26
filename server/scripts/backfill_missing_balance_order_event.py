@@ -5,16 +5,16 @@ import typer
 from sqlalchemy import select
 from sqlalchemy.orm import joinedload
 
-from polar.event.service import event as event_service
-from polar.event.system import (
+from tarifia.event.service import event as event_service
+from tarifia.event.system import (
     BalanceCreditOrderMetadata,
     BalanceOrderMetadata,
     SystemEvent,
     build_system_event,
 )
-from polar.kit.db.postgres import create_async_sessionmaker
-from polar.models import Event, Order, Transaction
-from polar.postgres import create_async_engine
+from tarifia.kit.db.postgres import create_async_sessionmaker
+from tarifia.models import Event, Order, Transaction
+from tarifia.postgres import create_async_engine
 from scripts.helper import typer_async
 
 log = structlog.get_logger()

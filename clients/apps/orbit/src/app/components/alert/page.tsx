@@ -1,7 +1,7 @@
 'use client'
 
-import { Alert, Button } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
+import { Alert, Button } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
 import { useState } from 'react'
 import type { PropRow } from '@/components/docs'
 import { Example, PageHeader, PropsTable, Section } from '@/components/docs'

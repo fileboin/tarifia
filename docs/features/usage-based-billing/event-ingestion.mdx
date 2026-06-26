@@ -7,20 +7,20 @@ import Events from "/snippets/usage/events.mdx";
 
 <Events />
 
-## Ingest events using the Polar SDK
+## Ingest events using the Tarifia SDK
 
-To ingest events, you can use the Polar SDKs.
+To ingest events, you can use the Tarifia SDKs.
 
 ### TypeScript Example
 
 ```typescript
-import { Polar } from "@polar-sh/sdk";
+import { Tarifia } from "@tarifia-sh/sdk";
 
-const polar = new Polar({
-  accessToken: process.env["POLAR_ACCESS_TOKEN"] ?? "",
+const tarifia = new Tarifia({
+  accessToken: process.env["TARIFIA_ACCESS_TOKEN"] ?? "",
 });
 
-await polar.events.ingest({
+await tarifia.events.ingest({
   events: [
     {
       name: "<value>",
@@ -55,7 +55,7 @@ Once an event is ingested, it cannot be changed, nor can it be deleted.
 
 You can set the `timestamp` field on an event to any point in the past — useful for batched ingestion or replaying from your own queue. The timestamp does not need to be part of the current billing cycle.
 
-Polar attributes events to billing periods based on **when they were received by Polar**, not the supplied `timestamp`. An event ingested today with a `timestamp` from a previous billing period is included on the **current cycle** — it is not added to the already-closed invoice for the period it logically belongs to. Polar never issues retroactive invoices or credits for late events.
+Tarifia attributes events to billing periods based on **when they were received by Tarifia**, not the supplied `timestamp`. An event ingested today with a `timestamp` from a previous billing period is included on the **current cycle** — it is not added to the already-closed invoice for the period it logically belongs to. Tarifia never issues retroactive invoices or credits for late events.
 
 The supplied `timestamp` is still used to:
 

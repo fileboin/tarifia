@@ -1,9 +1,9 @@
 import pytest_asyncio
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from polar.enums import SubscriptionRecurringInterval
-from polar.kit.utils import utc_now
-from polar.models import (
+from tarifia.enums import SubscriptionRecurringInterval
+from tarifia.kit.utils import utc_now
+from tarifia.models import (
     Customer,
     Order,
     Organization,
@@ -11,9 +11,9 @@ from polar.models import (
     User,
     UserOrganization,
 )
-from polar.models.customer_seat import CustomerSeat, SeatStatus
-from polar.models.order import OrderStatus
-from polar.models.subscription import SubscriptionStatus
+from tarifia.models.customer_seat import CustomerSeat, SeatStatus
+from tarifia.models.order import OrderStatus
+from tarifia.models.subscription import SubscriptionStatus
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_customer_seat,

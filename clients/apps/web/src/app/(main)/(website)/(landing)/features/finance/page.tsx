@@ -2,17 +2,17 @@ import { FinancePage } from '@/components/Landing/features/FinancePage'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Finance — Polar',
+  title: 'Finance — Tarifia',
   description:
     'Live balance, transactions ledger, transparent fees, and manual payouts. All visible.',
   keywords:
     'finance, payouts, transactions, ledger, balance, fees, stripe connect, multi-currency',
   openGraph: {
-    siteName: 'Polar',
+    siteName: 'Tarifia',
     type: 'website',
     images: [
       {
-        url: 'https://polar.sh/assets/brand/polar_og.jpg',
+        url: 'https://tarifia.sh/assets/brand/tarifia_og.jpg',
         width: 1200,
         height: 630,
       },
@@ -22,10 +22,10 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     images: [
       {
-        url: 'https://polar.sh/assets/brand/polar_og.jpg',
+        url: 'https://tarifia.sh/assets/brand/tarifia_og.jpg',
         width: 1200,
         height: 630,
-        alt: 'Polar',
+        alt: 'Tarifia',
       },
     ],
   },

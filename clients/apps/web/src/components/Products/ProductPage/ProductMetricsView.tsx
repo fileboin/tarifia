@@ -1,6 +1,6 @@
 import { MetricGroup } from '@/components/Metrics/dashboards/MetricGroup'
 import { ParsedMetricsResponse } from '@/hooks/queries'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 
 export interface ProductMetricsViewProps {
   data?: ParsedMetricsResponse

@@ -5,12 +5,12 @@ from typing import Any
 import pytest
 from sqlalchemy import select
 
-from polar.integrations.tinybird.client import TinybirdClient
-from polar.integrations.tinybird.service import DATASOURCE_EVENTS, events_to_tinybird
-from polar.kit.db.postgres import AsyncSession
-from polar.kit.utils import utc_now
-from polar.models import Event, MeterEvent, Organization
-from polar.models.event import EventSource
+from tarifia.integrations.tinybird.client import TinybirdClient
+from tarifia.integrations.tinybird.service import DATASOURCE_EVENTS, events_to_tinybird
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.kit.utils import utc_now
+from tarifia.models import Event, MeterEvent, Organization
+from tarifia.models.event import EventSource
 from scripts.reingest_missing_events import fetch_tinybird_rows, find_missing, reingest
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (

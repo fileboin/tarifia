@@ -1,0 +1,362 @@
+from collections.abc import AsyncGenerator
+
+from fastapi import Depends, Query, Response
+from pydantic import UUID4
+
+from tarifia.auth.permission import OrganizationPermission
+from tarifia.authz.service import (
+    assert_organization_permission,
+    assert_resource_permission,
+)
+from tarifia.customer.schemas.customer import CustomerID, ExternalCustomerID
+from tarifia.exceptions import ResourceNotFound
+from tarifia.kit.csv import CSVStreamingResponse, IterableCSVWriter
+from tarifia.kit.metadata import MetadataQuery, get_metadata_query_openapi_schema
+from tarifia.kit.pagination import ListResource, PaginationParams, PaginationParamsQuery
+from tarifia.kit.schemas import MultipleQueryFilter
+from tarifia.models import Order
+from tarifia.models.product import ProductBillingType
+from tarifia.openapi import APITag
+from tarifia.organization.resolver import get_payload_organization
+from tarifia.organization.schemas import OrganizationID
+from tarifia.postgres import (
+    AsyncReadSession,
+    AsyncSession,
+    get_db_read_session,
+    get_db_session,
+)
+from tarifia.product.schemas import ProductID
+from tarifia.routing import APIRouter
+from tarifia.subscription.schemas import SubscriptionID
+
+from . import auth, sorting
+from .schemas import Order as OrderSchema
+from .schemas import (
+    OrderCreate,
+    OrderFinalize,
+    OrderID,
+    OrderInvoice,
+    OrderNotFound,
+    OrderReceipt,
+    OrderUpdate,
+)
+from .service import (
+    MissingInvoiceBillingDetails,
+    OffSessionChargesNotEnabled,
+    OrderNotDraft,
+    OrganizationNotReadyForPayments,
+    PaymentActionRequired,
+    PaymentFailed,
+)
+from .service import order as order_service
+
+router = APIRouter(prefix="/orders", tags=["orders", APITag.public])
+
+
+@router.get(
+    "/",
+    summary="List Orders",
+    response_model=ListResource[OrderSchema],
+    openapi_extra={"parameters": [get_metadata_query_openapi_schema()]},
+)
+async def list(
+    auth_subject: auth.OrdersRead,
+    pagination: PaginationParamsQuery,
+    sorting: sorting.ListSorting,
+    metadata: MetadataQuery,
+    organization_id: MultipleQueryFilter[OrganizationID] | None = Query(
+        None, title="OrganizationID Filter", description="Filter by organization ID."
+    ),
+    product_id: MultipleQueryFilter[ProductID] | None = Query(
+        None, title="ProductID Filter", description="Filter by product ID."
+    ),
+    product_billing_type: MultipleQueryFilter[ProductBillingType] | None = Query(
+        None,
+        title="ProductBillingType Filter",
+        description=(
+            "Filter by product billing type. "
+            "`recurring` will filter data corresponding "
+            "to subscriptions creations or renewals. "
+            "`one_time` will filter data corresponding to one-time purchases."
+        ),
+    ),
+    discount_id: MultipleQueryFilter[UUID4] | None = Query(
+        None, title="DiscountID Filter", description="Filter by discount ID."
+    ),
+    customer_id: MultipleQueryFilter[CustomerID] | None = Query(
+        None, title="CustomerID Filter", description="Filter by customer ID."
+    ),
+    external_customer_id: MultipleQueryFilter[ExternalCustomerID] | None = Query(
+        None,
+        title="ExternalCustomerID Filter",
+        description="Filter by customer external ID.",
+    ),
+    checkout_id: MultipleQueryFilter[UUID4] | None = Query(
+        None, title="CheckoutID Filter", description="Filter by checkout ID."
+    ),
+    subscription_id: MultipleQueryFilter[SubscriptionID] | None = Query(
+        None, title="SubscriptionID Filter", description="Filter by subscription ID."
+    ),
+    session: AsyncReadSession = Depends(get_db_read_session),
+) -> ListResource[OrderSchema]:
+    """List orders."""
+    results, count = await order_service.list(
+        session,
+        auth_subject,
+        organization_id=organization_id,
+        product_id=product_id,
+        product_billing_type=product_billing_type,
+        discount_id=discount_id,
+        customer_id=customer_id,
+        external_customer_id=external_customer_id,
+        checkout_id=checkout_id,
+        subscription_id=subscription_id,
+        metadata=metadata,
+        pagination=pagination,
+        sorting=sorting,
+    )
+
+    return ListResource.from_paginated_results(
+        [OrderSchema.model_validate(result) for result in results],
+        count,
+        pagination,
+    )
+
+
+@router.get("/export", summary="Export Orders", response_class=CSVStreamingResponse)
+async def export(
+    auth_subject: auth.OrdersRead,
+    organization_id: MultipleQueryFilter[OrganizationID] | None = Query(
+        None, title="OrganizationID Filter", description="Filter by organization ID."
+    ),
+    product_id: MultipleQueryFilter[ProductID] | None = Query(
+        None, title="ProductID Filter", description="Filter by product ID."
+    ),
+    session: AsyncReadSession = Depends(get_db_read_session),
+) -> CSVStreamingResponse:
+    """Export orders as a CSV file."""
+
+    async def create_csv() -> AsyncGenerator[str, None]:
+        csv_writer = IterableCSVWriter(dialect="excel")
+        # CSV header
+        yield csv_writer.getrow(
+            (
+                "Email",
+                "Created At",
+                "Product",
+                "Amount",
+                "Currency",
+                "Status",
+                "Invoice number",
+            )
+        )
+
+        (results, _) = await order_service.list(
+            session,
+            auth_subject,
+            organization_id=organization_id,
+            product_id=product_id,
+            pagination=PaginationParams(limit=1000000, page=1),
+        )
+
+        for order in results:
+            yield csv_writer.getrow(
+                (
+                    order.customer.email,
+                    order.created_at.isoformat(),
+                    order.description,
+                    order.net_amount / 100,
+                    order.currency,
+                    order.status,
+                    order.invoice_number,
+                )
+            )
+
+    return CSVStreamingResponse(create_csv(), "tarifia-orders.csv")
+
+
+@router.get(
+    "/{id}",
+    summary="Get Order",
+    response_model=OrderSchema,
+    responses={404: OrderNotFound},
+)
+async def get(
+    id: OrderID,
+    auth_subject: auth.OrdersRead,
+    session: AsyncReadSession = Depends(get_db_read_session),
+) -> Order:
+    """Get an order by ID."""
+    order = await order_service.get(session, auth_subject, id)
+
+    if order is None:
+        raise ResourceNotFound()
+
+    return order
+
+
+@router.post(
+    "/",
+    status_code=201,
+    summary="Create Order",
+    response_model=OrderSchema,
+)
+async def create(
+    order_create: OrderCreate,
+    auth_subject: auth.OrdersWrite,
+    session: AsyncSession = Depends(get_db_session),
+) -> Order:
+    """
+    Create a draft order for an off-session charge against a saved payment
+    method. The order is created with `status=draft` and no invoice number;
+    call `POST /v1/orders/{id}/finalize` to attempt the charge.
+
+    The organization must have the `off_session_charges_enabled` feature flag.
+    """
+    organization = await get_payload_organization(session, auth_subject, order_create)
+
+    await assert_organization_permission(
+        session, auth_subject, organization.id, OrganizationPermission.sales_manage
+    )
+
+    return await order_service.create_draft_order(session, organization, order_create)
+
+
+@router.patch(
+    "/{id}",
+    summary="Update Order",
+    response_model=OrderSchema,
+    responses={404: OrderNotFound},
+)
+async def update(
+    order_update: OrderUpdate,
+    authorized: auth.OrderSalesManage,
+    session: AsyncSession = Depends(get_db_session),
+) -> Order:
+    """Update an order."""
+    return await order_service.update(session, authorized.order, order_update)
+
+
+@router.post(
+    "/{id}/finalize",
+    summary="Finalize Order",
+    response_model=OrderSchema,
+    responses={
+        402: {
+            "description": (
+                "The charge failed, or requires customer authentication "
+                "(e.g. a 3DS challenge) that can't be completed off-session."
+            ),
+            "model": PaymentFailed.schema() | PaymentActionRequired.schema(),
+        },
+        403: {
+            "description": (
+                "Off-session charges are not enabled for this organization, "
+                "or its account can't currently accept payments."
+            ),
+            "model": OffSessionChargesNotEnabled.schema()
+            | OrganizationNotReadyForPayments.schema(),
+        },
+        404: OrderNotFound,
+        412: {
+            "description": "The order is not in `draft` status.",
+            "model": OrderNotDraft.schema(),
+        },
+    },
+)
+async def finalize(
+    authorized: auth.OrderSalesManage,
+    finalize_payload: OrderFinalize = OrderFinalize(),
+    session: AsyncSession = Depends(get_db_session),
+) -> Order:
+    """
+    Finalize a draft order and synchronously attempt an off-session charge.
+
+    On success, the order transitions to `paid` and benefit grants fire
+    before the response returns. On failure (decline, missing payment method,
+    SCA challenge), the order stays in `draft` and a 4xx error is returned.
+
+    The request fails with 412 if the order is not in `draft` status.
+    """
+    return await order_service.finalize_order(
+        session,
+        authorized.order,
+        payment_method_id=finalize_payload.payment_method_id,
+    )
+
+
+@router.post(
+    "/{id}/invoice",
+    status_code=202,
+    summary="Generate Order Invoice",
+    responses={
+        404: OrderNotFound,
+        422: {
+            "description": "Order is missing billing name or address.",
+            "model": MissingInvoiceBillingDetails.schema(),
+        },
+    },
+)
+async def generate_invoice(
+    id: OrderID,
+    auth_subject: auth.OrdersRead,
+    session: AsyncSession = Depends(get_db_session),
+) -> None:
+    """Trigger generation of an order's invoice."""
+    order = await order_service.get(session, auth_subject, id)
+
+    if order is None:
+        raise ResourceNotFound()
+
+    await assert_resource_permission(
+        session, auth_subject, order, OrganizationPermission.sales_manage
+    )
+
+    await order_service.trigger_invoice_generation(session, order)
+
+
+@router.get(
+    "/{id}/invoice",
+    summary="Get Order Invoice",
+    response_model=OrderInvoice,
+    responses={404: OrderNotFound},
+)
+async def invoice(
+    id: OrderID,
+    auth_subject: auth.OrdersRead,
+    session: AsyncReadSession = Depends(get_db_read_session),
+) -> OrderInvoice:
+    """Get an order's invoice data."""
+    order = await order_service.get(session, auth_subject, id)
+
+    if order is None:
+        raise ResourceNotFound()
+
+    return await order_service.get_order_invoice(order)
+
+
+@router.get(
+    "/{id}/receipt",
+    summary="Get Order Receipt",
+    response_model=OrderReceipt,
+    responses={
+        202: {"description": "Receipt generation in progress."},
+        404: OrderNotFound,
+    },
+)
+async def receipt(
+    id: OrderID,
+    auth_subject: auth.OrdersRead,
+    session: AsyncReadSession = Depends(get_db_read_session),
+) -> Response | OrderReceipt:
+    """Get a presigned URL to download an order's receipt PDF."""
+    order = await order_service.get(session, auth_subject, id)
+
+    if order is None:
+        raise ResourceNotFound()
+
+    receipt = await order_service.get_order_receipt(order)
+    if receipt is None:
+        return Response(status_code=202)
+
+    return receipt

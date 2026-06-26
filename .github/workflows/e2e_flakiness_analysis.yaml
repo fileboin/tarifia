@@ -115,9 +115,9 @@ jobs:
       - name: Connect to Tailscale
         uses: tailscale/github-action@v4
         with:
-          oauth-client-id: ${{ secrets.POLAR_TAILSCALE_OAUTH_CLIENT_ID }}
-          oauth-secret: ${{ secrets.POLAR_TAILSCALE_OAUTH_SECRET }}
-          tags: ${{ vars.POLAR_PREVIEW_TAILSCALE_TAGS || 'tag:ci' }}
+          oauth-client-id: ${{ secrets.TARIFIA_TAILSCALE_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TARIFIA_TAILSCALE_OAUTH_SECRET }}
+          tags: ${{ vars.TARIFIA_PREVIEW_TAILSCALE_TAGS || 'tag:ci' }}
 
       - name: Install Chrome
         uses: browser-actions/setup-chrome@latest
@@ -177,8 +177,8 @@ jobs:
         run: |
           DATE=$(date -u +%Y-%m-%d)
           RUN_ID=${{ github.run_id }}
-          S3_PATH="s3://polar-public-files/e2e-artifacts/${DATE}-${RUN_ID}/healing-screenshots"
-          PUBLIC_BASE="https://uploads.polar.sh/e2e-artifacts/${DATE}-${RUN_ID}/healing-screenshots"
+          S3_PATH="s3://tarifia-public-files/e2e-artifacts/${DATE}-${RUN_ID}/healing-screenshots"
+          PUBLIC_BASE="https://uploads.tarifia.sh/e2e-artifacts/${DATE}-${RUN_ID}/healing-screenshots"
           SCREENSHOT_URLS=""
 
           if [ -d healing-screenshots ]; then
@@ -297,7 +297,7 @@ jobs:
         run: |
           DATE=$(date -u +%Y-%m-%d)
           RUN_ID=${{ github.run_id }}
-          PUBLIC_BASE="https://uploads.polar.sh/e2e-artifacts/${DATE}-${RUN_ID}/healing-screenshots"
+          PUBLIC_BASE="https://uploads.tarifia.sh/e2e-artifacts/${DATE}-${RUN_ID}/healing-screenshots"
           THREAD_TS="${{ steps.context.outputs.slack_thread_ts }}"
 
           if [ -d healing-screenshots ]; then

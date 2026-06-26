@@ -1,7 +1,7 @@
 import { useCustomerSubscriptionChargePreview } from '@/hooks/queries/customerPortal'
 import { isFreePrice, isSeatBasedPrice } from '@/utils/product'
-import { Client, schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
+import { Client, schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
 import { useMemo } from 'react'
 import ProductPriceLabel from '../Products/ProductPriceLabel'
 import { OverviewSummaryCard } from './OverviewSummaryCard'
@@ -105,7 +105,7 @@ export const CurrentPeriodOverview = ({
     <OverviewSummaryCard title={headerTitle} meta={chargeDateLabel}>
       {product && subscriptionPreview && (
         <div className="flex items-center justify-between">
-          <span className="dark:text-polar-400 text-gray-600">
+          <span className="dark:text-tarifia-400 text-gray-600">
             {isSeatBasedProduct && seats != null
               ? `${product.name} (${seats} ${seats === 1 ? 'seat' : 'seats'})`
               : product.name}
@@ -131,7 +131,7 @@ export const CurrentPeriodOverview = ({
 
           {prorations.map((proration, index) => (
             <div key={index} className="flex items-center justify-between">
-              <span className="dark:text-polar-400 text-gray-600">
+              <span className="dark:text-tarifia-400 text-gray-600">
                 {proration.label}
               </span>
               <span className="font-medium">
@@ -151,7 +151,7 @@ export const CurrentPeriodOverview = ({
 
           {subscription.meters.map((meter) => (
             <div key={meter.id} className="flex items-center justify-between">
-              <span className="dark:text-polar-400 text-gray-600">
+              <span className="dark:text-tarifia-400 text-gray-600">
                 {meter.meter.name}
               </span>
               <span className="font-medium">
@@ -162,9 +162,9 @@ export const CurrentPeriodOverview = ({
         </>
       )}
 
-      <div className="dark:border-polar-700 mt-2 border-t border-gray-200 pt-2">
+      <div className="dark:border-tarifia-700 mt-2 border-t border-gray-200 pt-2">
         {(hasTaxes || hasDiscount) && (
-          <div className="dark:text-polar-500 mb-1.5 flex items-center justify-between text-gray-500">
+          <div className="dark:text-tarifia-500 mb-1.5 flex items-center justify-between text-gray-500">
             <span>Subtotal</span>
             <span>
               {formatCurrency('compact')(
@@ -176,7 +176,7 @@ export const CurrentPeriodOverview = ({
         )}
 
         {hasDiscount && (
-          <div className="dark:text-polar-500 mb-1 flex items-center justify-between text-gray-500">
+          <div className="dark:text-tarifia-500 mb-1 flex items-center justify-between text-gray-500">
             <span>Discount</span>
             <span>
               {formatCurrency('compact')(
@@ -188,7 +188,7 @@ export const CurrentPeriodOverview = ({
         )}
 
         {hasTaxes && (
-          <div className="dark:text-polar-500 mb-1 flex items-center justify-between text-gray-500">
+          <div className="dark:text-tarifia-500 mb-1 flex items-center justify-between text-gray-500">
             <span>Taxes</span>
             <span>
               {formatCurrency('compact')(
@@ -210,7 +210,7 @@ export const CurrentPeriodOverview = ({
                 subscription.currency,
               )
             ) : (
-              <span className="dark:text-polar-500 animate-pulse text-gray-500">
+              <span className="dark:text-tarifia-500 animate-pulse text-gray-500">
                 Loading…
               </span>
             )}

@@ -1,4 +1,4 @@
-import { nextJsConfig } from '@polar-sh/eslint-config/next-js'
+import { nextJsConfig } from '@tarifia-sh/eslint-config/next-js'
 
 /** @type {import("eslint").Linter.Config} */
 export default [

@@ -1,1 +1,1 @@
-# Polar Python SDK
+# Tarifia Python SDK

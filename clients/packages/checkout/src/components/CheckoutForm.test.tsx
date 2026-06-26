@@ -1,5 +1,5 @@
-import type { schemas } from '@polar-sh/client'
-import type { ThemingPresetProps } from '@polar-sh/ui/hooks/theming'
+import type { schemas } from '@tarifia-sh/client'
+import type { ThemingPresetProps } from '@tarifia-sh/ui/hooks/theming'
 import { act, render, screen } from '@testing-library/react'
 import { useEffect } from 'react'
 import type { UseFormReturn } from 'react-hook-form'

@@ -1,10 +1,10 @@
-import { Box } from '@polar-sh/orbit/Box'
-import { Text } from '@polar-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Text } from '@tarifia-sh/orbit'
 import type {
   BackgroundColorToken,
   TextColorToken,
   BorderColorToken,
-} from '@polar-sh/orbit/theme'
+} from '@tarifia-sh/orbit/theme'
 
 export const BACKGROUND_TOKENS: {
   token: BackgroundColorToken

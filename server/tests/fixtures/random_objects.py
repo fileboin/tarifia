@@ -11,21 +11,21 @@ from typing import Any, Literal, Unpack
 import pytest_asyncio
 from typing_extensions import TypeIs
 
-from polar.enums import (
+from tarifia.enums import (
     PaymentProcessor,
     PayoutAccountType,
     SubscriptionRecurringInterval,
     TaxBehavior,
     TaxProcessor,
 )
-from polar.kit.address import Address
-from polar.kit.currency import PresentmentCurrency
-from polar.kit.trial import TrialInterval
-from polar.kit.utils import utc_now
-from polar.kit.visibility import Visibility
-from polar.meter.aggregation import Aggregation, CountAggregation
-from polar.meter.filter import Filter, FilterClause, FilterConjunction, FilterOperator
-from polar.models import (
+from tarifia.kit.address import Address
+from tarifia.kit.currency import PresentmentCurrency
+from tarifia.kit.trial import TrialInterval
+from tarifia.kit.utils import utc_now
+from tarifia.kit.visibility import Visibility
+from tarifia.meter.aggregation import Aggregation, CountAggregation
+from tarifia.meter.filter import Filter, FilterClause, FilterConjunction, FilterOperator
+from tarifia.models import (
     Account,
     Benefit,
     BillingEntry,
@@ -75,18 +75,18 @@ from polar.models import (
     WalletTransaction,
     WebhookEndpoint,
 )
-from polar.models.benefit import BenefitType
-from polar.models.benefit_grant import (
+from tarifia.models.benefit import BenefitType
+from tarifia.models.benefit_grant import (
     BenefitGrant,
     BenefitGrantScope,
 )
-from polar.models.billing_entry import BillingEntryDirection, BillingEntryType
-from polar.models.checkout import (
+from tarifia.models.billing_entry import BillingEntryDirection, BillingEntryType
+from tarifia.models.checkout import (
     CheckoutAnalyticsMetadata,
     CheckoutStatus,
     get_expires_at,
 )
-from polar.models.custom_field import (
+from tarifia.models.custom_field import (
     CustomFieldCheckbox,
     CustomFieldCheckboxProperties,
     CustomFieldNumber,
@@ -98,31 +98,31 @@ from polar.models.custom_field import (
     CustomFieldTextProperties,
     CustomFieldType,
 )
-from polar.models.customer_seat import SeatStatus
-from polar.models.discount import (
+from tarifia.models.customer_seat import SeatStatus
+from tarifia.models.discount import (
     DiscountDuration,
     DiscountFixed,
     DiscountPercentage,
     DiscountType,
 )
-from polar.models.dispute import DisputeAlertProcessor, DisputeStatus
-from polar.models.event import EventSource
-from polar.models.file import FileServiceTypes
-from polar.models.member import MemberRole
-from polar.models.notification_recipient import NotificationRecipient
-from polar.models.order import OrderBillingReasonInternal, OrderStatus
-from polar.models.organization import STATUS_CAPABILITIES, OrganizationStatus
-from polar.models.payment import PaymentStatus, PaymentTrigger
-from polar.models.payout import PayoutStatus
-from polar.models.payout_attempt import PayoutAttemptStatus
-from polar.models.pledge import Pledge, PledgeState, PledgeType
-from polar.models.product_price import (
+from tarifia.models.dispute import DisputeAlertProcessor, DisputeStatus
+from tarifia.models.event import EventSource
+from tarifia.models.file import FileServiceTypes
+from tarifia.models.member import MemberRole
+from tarifia.models.notification_recipient import NotificationRecipient
+from tarifia.models.order import OrderBillingReasonInternal, OrderStatus
+from tarifia.models.organization import STATUS_CAPABILITIES, OrganizationStatus
+from tarifia.models.payment import PaymentStatus, PaymentTrigger
+from tarifia.models.payout import PayoutStatus
+from tarifia.models.payout_attempt import PayoutAttemptStatus
+from tarifia.models.pledge import Pledge, PledgeState, PledgeType
+from tarifia.models.product_price import (
     ProductPriceAmountType,
     ProductPriceType,
     SeatTierType,
 )
-from polar.models.subscription import SubscriptionStatus
-from polar.models.support_case import (
+from tarifia.models.subscription import SubscriptionStatus
+from tarifia.models.support_case import (
     DisputeSupportCase,
     ReviewAppealSupportCase,
     SupportCase,
@@ -130,15 +130,15 @@ from polar.models.support_case import (
     SupportCaseMessageAuthorKind,
     SupportCaseMessageType,
 )
-from polar.models.transaction import Processor, TransactionType
-from polar.models.user import OAuthAccount, OAuthPlatform
-from polar.models.user_organization import OrganizationRole
-from polar.models.wallet import WalletType
-from polar.models.webhook_endpoint import WebhookEventType, WebhookFormat
-from polar.notification_recipient.schemas import NotificationRecipientPlatform
-from polar.product.price_set import PriceSet
-from polar.tax.calculation import TaxBreakdownItem
-from polar.tax.tax_id import TaxID
+from tarifia.models.transaction import Processor, TransactionType
+from tarifia.models.user import OAuthAccount, OAuthPlatform
+from tarifia.models.user_organization import OrganizationRole
+from tarifia.models.wallet import WalletType
+from tarifia.models.webhook_endpoint import WebhookEventType, WebhookFormat
+from tarifia.notification_recipient.schemas import NotificationRecipientPlatform
+from tarifia.product.price_set import PriceSet
+from tarifia.tax.calculation import TaxBreakdownItem
+from tarifia.tax.tax_id import TaxID
 from tests.fixtures.database import SaveFixture
 
 
@@ -300,7 +300,7 @@ async def create_pledge(
     save_fixture: SaveFixture,
     organization: Organization,
     *,
-    issue_reference: str = "polarsource/polar/1",
+    issue_reference: str = "tarifiasource/tarifia/1",
     pledging_organization: Organization | None = None,
     pledging_user: User | None = None,
     state: PledgeState = PledgeState.created,
@@ -2187,7 +2187,7 @@ async def create_payout(
         account_currency=account_currency,
         account_amount=account_amount,
         transactions=[transaction] if transaction else [],
-        invoice_number=invoice_number or rstr("POLAR-"),
+        invoice_number=invoice_number or rstr("TARIFIA-"),
         attempts=[
             PayoutAttempt(
                 processor_id=rstr("PAYOUT_ATTEMPT_PROCESSOR_ID"),

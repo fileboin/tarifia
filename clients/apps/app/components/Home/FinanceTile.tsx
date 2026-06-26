@@ -3,9 +3,9 @@ import {
   useOrganizationAccount,
   usePayoutAccount,
   useTransactionsSummary,
-} from '@/hooks/polar/finance'
+} from '@/hooks/tarifia/finance'
 import { OrganizationContext } from '@/providers/OrganizationProvider'
-import { formatCurrency } from '@polar-sh/currency'
+import { formatCurrency } from '@tarifia-sh/currency'
 import { useRouter } from 'expo-router'
 import { useContext } from 'react'
 import { Button } from '../Shared/Button'

@@ -2,17 +2,17 @@ from collections.abc import Sequence
 
 from sqlalchemy.orm import contains_eager
 
-from polar.auth.models import AuthSubject
-from polar.auth.scope import Scope
-from polar.benefit.strategies.downloadables.properties import (
+from tarifia.auth.models import AuthSubject
+from tarifia.auth.scope import Scope
+from tarifia.benefit.strategies.downloadables.properties import (
     BenefitGrantDownloadablesProperties,
 )
-from polar.benefit.strategies.downloadables.schemas import (
+from tarifia.benefit.strategies.downloadables.schemas import (
     BenefitDownloadablesCreateProperties,
 )
-from polar.benefit.strategies.downloadables.service import BenefitDownloadablesService
-from polar.customer_portal.repository.downloadable import DownloadableRepository
-from polar.models import (
+from tarifia.benefit.strategies.downloadables.service import BenefitDownloadablesService
+from tarifia.customer_portal.repository.downloadable import DownloadableRepository
+from tarifia.models import (
     Benefit,
     Customer,
     Downloadable,
@@ -21,10 +21,10 @@ from polar.models import (
     Organization,
     Product,
 )
-from polar.models.benefit import BenefitType
-from polar.models.subscription import SubscriptionStatus
-from polar.postgres import AsyncSession, sql
-from polar.redis import Redis
+from tarifia.models.benefit import BenefitType
+from tarifia.models.subscription import SubscriptionStatus
+from tarifia.postgres import AsyncSession, sql
+from tarifia.redis import Redis
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_benefit,

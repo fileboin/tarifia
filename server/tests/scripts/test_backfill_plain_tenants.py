@@ -6,8 +6,8 @@ import pytest
 from pytest_mock import MockerFixture
 from sqlalchemy.ext.asyncio import AsyncEngine
 
-from polar.kit.db.postgres import AsyncSession, create_async_sessionmaker
-from polar.models import Organization, UserOrganization
+from tarifia.kit.db.postgres import AsyncSession, create_async_sessionmaker
+from tarifia.models import Organization, UserOrganization
 from scripts.backfill_plain_tenants import run_backfill
 
 
@@ -21,7 +21,7 @@ class TestBackfillPlainTenants:
         user_organization: UserOrganization,
     ) -> None:
         mocker.patch(
-            "scripts.backfill_plain_tenants.settings.POLAR_ORGANIZATION_ID",
+            "scripts.backfill_plain_tenants.settings.TARIFIA_ORGANIZATION_ID",
             str(uuid.uuid4()),
         )
         mocker.patch(

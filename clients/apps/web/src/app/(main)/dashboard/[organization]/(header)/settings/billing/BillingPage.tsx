@@ -2,7 +2,7 @@
 
 import AccessRestricted from '@/components/Finance/AccessRestricted'
 import { DashboardBody } from '@/components/Layout/DashboardLayout'
-import { Modal } from '@polar-sh/orbit'
+import { Modal } from '@tarifia-sh/orbit'
 import { useModal } from '@/components/Modal/useModal'
 import { BillingAddressModal } from '@/components/Settings/Billing/BillingAddressModal'
 import { BillingAddressSection } from '@/components/Settings/Billing/BillingAddressSection'
@@ -25,11 +25,11 @@ import {
   useOrganizationSubscription,
 } from '@/hooks/queries/billing'
 
-import { PolarEmbedPaymentMethod } from '@polar-sh/checkout/payment-method'
-import { usePaymentMethodRedirectResult } from '@polar-sh/checkout/react/payment-method'
+import { TarifiaEmbedPaymentMethod } from '@tarifia-sh/checkout/payment-method'
+import { usePaymentMethodRedirectResult } from '@tarifia-sh/checkout/react/payment-method'
 import { CONFIG } from '@/utils/config'
-import { schemas } from '@polar-sh/client'
-import { Box } from '@polar-sh/orbit/Box'
+import { schemas } from '@tarifia-sh/client'
+import { Box } from '@tarifia-sh/orbit/Box'
 import { useQueryClient } from '@tanstack/react-query'
 import { useTheme } from 'next-themes'
 import { useRouter } from 'next/navigation'
@@ -96,7 +96,7 @@ export default function BillingPage({
       })
       return
     }
-    const embed = await PolarEmbedPaymentMethod.create({
+    const embed = await TarifiaEmbedPaymentMethod.create({
       sessionToken: session.token,
       theme: theme.resolvedTheme === 'dark' ? 'dark' : 'light',
     })
@@ -183,7 +183,7 @@ export default function BillingPage({
         <Section id="orders">
           <SectionDescription
             title="Order history"
-            description="Past invoices for your Polar subscription"
+            description="Past invoices for your Tarifia subscription"
           />
           {ordersQuery.isLoading ? (
             <LoadingBox height={240} borderRadius="l" />

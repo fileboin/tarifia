@@ -1,13 +1,13 @@
 'use client'
 
-import { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
+import { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
 import {
   DEFAULT_LOCALE,
   useTranslations,
   type AcceptedLocale,
-} from '@polar-sh/i18n'
-import { formatDate } from '@polar-sh/i18n/formatters/date'
+} from '@tarifia-sh/i18n'
+import { formatDate } from '@tarifia-sh/i18n/formatters/date'
 import { addDays, addMonths, addWeeks, addYears } from 'date-fns'
 import { useMemo } from 'react'
 import {
@@ -284,7 +284,7 @@ const CheckoutPricingBreakdown = ({
           {meteredPrices.length > 0 && (
             <DetailRow
               title={t('checkout.pricing.additionalMeteredUsage')}
-              className="dark:border-polar-700 mt-2 border-t border-gray-200 pt-4"
+              className="dark:border-tarifia-700 mt-2 border-t border-gray-200 pt-4"
             />
           )}
           {meteredPrices.map((meteredPrice) => (

@@ -1,5 +1,5 @@
-import { getMetricsRangeDates, schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
+import { getMetricsRangeDates, schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
 import {
   differenceInDays,
   differenceInMonths,
@@ -164,7 +164,7 @@ export const METRIC_GROUPS: MetricGroup[] = [
         slug: 'net_revenue',
         display_name: 'Net Revenue',
         description:
-          'Revenue after deducting Polar fees and payment processing costs.',
+          'Revenue after deducting Tarifia fees and payment processing costs.',
       },
       {
         slug: 'cumulative_revenue',
@@ -416,7 +416,7 @@ export const METRIC_GROUPS: MetricGroup[] = [
         slug: 'costs',
         display_name: 'Costs',
         description:
-          'Total platform costs including Polar fees and payment processing.',
+          'Total platform costs including Tarifia fees and payment processing.',
       },
       {
         slug: 'cumulative_costs',

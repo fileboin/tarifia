@@ -1,7 +1,7 @@
 import hashlib
 import hmac
 
-from polar.integrations.slack.verification import verify_slack_signature
+from tarifia.integrations.slack.verification import verify_slack_signature
 
 
 def _signature(signing_secret: str, body: bytes, timestamp: int) -> str:

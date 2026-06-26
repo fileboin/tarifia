@@ -1,16 +1,16 @@
 'use client'
 
-import { schemas } from '@polar-sh/client'
-import { Input } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Input } from '@tarifia-sh/orbit'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
-import { Switch } from '@polar-sh/orbit'
-import { Checkbox } from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
+import { Switch } from '@tarifia-sh/orbit'
+import { Checkbox } from '@tarifia-sh/orbit'
 import {
   FormControl,
   FormDescription,
@@ -18,7 +18,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
@@ -194,7 +194,7 @@ export const LicenseKeysBenefitForm = () => {
               htmlFor="license-key-activations-user-admin"
               className="-mt-2 text-sm"
             >
-              Enable user to deactivate instances via Polar
+              Enable user to deactivate instances via Tarifia
             </label>
           </div>
         </>

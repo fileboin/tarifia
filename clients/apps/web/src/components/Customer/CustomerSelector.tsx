@@ -1,19 +1,19 @@
 'use client'
 
-import { Spinner } from '@polar-sh/orbit'
+import { Spinner } from '@tarifia-sh/orbit'
 import { useCustomers } from '@/hooks/queries'
 import { useInViewport } from '@/hooks/utils'
 import Close from '@mui/icons-material/Close'
 import Search from '@mui/icons-material/Search'
-import { Avatar } from '@polar-sh/orbit'
-import { Button } from '@polar-sh/orbit'
-import { Input } from '@polar-sh/orbit'
-import { List, ListItem } from '@polar-sh/orbit'
+import { Avatar } from '@tarifia-sh/orbit'
+import { Button } from '@tarifia-sh/orbit'
+import { Input } from '@tarifia-sh/orbit'
+import { List, ListItem } from '@tarifia-sh/orbit'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@polar-sh/ui/components/ui/popover'
+} from '@tarifia-sh/ui/components/ui/popover'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 interface CustomerSelectorProps {
@@ -146,7 +146,7 @@ export const CustomerSelector = ({
               </div>
             )}
             {allCustomers.length === 0 && !hasNextPage && (
-              <div className="dark:text-polar-500 flex w-full items-center justify-center py-8 text-sm text-gray-500">
+              <div className="dark:text-tarifia-500 flex w-full items-center justify-center py-8 text-sm text-gray-500">
                 {query ? 'No customers found' : 'No customers yet'}
               </div>
             )}
@@ -173,7 +173,7 @@ export const CustomerSelector = ({
               <Button
                 size="icon"
                 variant="ghost"
-                className="dark:text-polar-500 size-6 text-gray-500 opacity-0 transition-all group-hover:opacity-100"
+                className="dark:text-tarifia-500 size-6 text-gray-500 opacity-0 transition-all group-hover:opacity-100"
                 onClick={(e) => {
                   e.stopPropagation()
                   handleToggleCustomer(customer.id)

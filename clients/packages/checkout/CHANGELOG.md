@@ -1,10 +1,10 @@
-# @polar-sh/checkout
+# @tarifia-sh/checkout
 
 ## 0.3.0
 
 ### Minor Changes
 
-- b9975a9: Adds an embedded payment method to @polar-sh/checkout. With a modal SDK (PolarEmbedPaymentMethod.create()) and React component (<PolarPaymentMethod />) for attaching a card to a customer/member. The CDN embed.global.js now bundles both checkout and payment-method auto-init in a single script.
+- b9975a9: Adds an embedded payment method to @tarifia-sh/checkout. With a modal SDK (TarifiaEmbedPaymentMethod.create()) and React component (<TarifiaPaymentMethod />) for attaching a card to a customer/member. The CDN embed.global.js now bundles both checkout and payment-method auto-init in a single script.
 - 9b59a1d: Add payment method flow to the SDK
 
 ### Patch Changes
@@ -34,7 +34,7 @@
 
 ### Minor Changes
 
-- b9975a9: Adds an embedded payment method to @polar-sh/checkout. With a modal SDK (PolarEmbedPaymentMethod.create()) and React component (<PolarPaymentMethod />) for attaching a card to a customer/member. The CDN embed.global.js now bundles both checkout and payment-method auto-init in a single script.
+- b9975a9: Adds an embedded payment method to @tarifia-sh/checkout. With a modal SDK (TarifiaEmbedPaymentMethod.create()) and React component (<TarifiaPaymentMethod />) for attaching a card to a customer/member. The CDN embed.global.js now bundles both checkout and payment-method auto-init in a single script.
 
 ## 0.2.1
 
@@ -46,14 +46,14 @@
 
 ### Minor Changes
 
-- f8bc897: Add onLoaded option on `PolarEmbedCheckout.create` to wire a loaded event listener, ensuring it's always executed, even if the checkout loads very quickly.
+- f8bc897: Add onLoaded option on `TarifiaEmbedCheckout.create` to wire a loaded event listener, ensuring it's always executed, even if the checkout loads very quickly.
 
   **Breaking change**
 
-  The theme should now be passed in an object when calling `PolarEmbedCheckout.create`:
+  The theme should now be passed in an object when calling `TarifiaEmbedCheckout.create`:
 
   ```ts
-  PolarEmbedCheckout.create('__CHECKOUT_LINK__', { theme: 'dark' })
+  TarifiaEmbedCheckout.create('__CHECKOUT_LINK__', { theme: 'dark' })
   ```
 
 ## 0.1.15
@@ -69,13 +69,13 @@
 - d9a45ea: Bump dependencies and setup trusted publishing
 - 258bdb1: Dependency upgrades, including React 19 peer dependency support
 - Updated dependencies [258bdb1]
-  - @polar-sh/ui@0.1.2
+  - @tarifia-sh/ui@0.1.2
 
 ## 0.1.13
 
 ### Patch Changes
 
-- f22a0d1: Update Polar SDK
+- f22a0d1: Update Tarifia SDK
 
 ## 0.1.12
 
@@ -163,4 +163,4 @@
 
 ### Minor Changes
 
-- Initial release of @polar-sh/checkout
+- Initial release of @tarifia-sh/checkout

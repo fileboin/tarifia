@@ -17,11 +17,11 @@ import dramatiq
 from dramatiq import Retry
 from dramatiq.middleware.current_message import CurrentMessage
 
-from polar.config import settings
-from polar.kit.db.postgres import AsyncSession
-from polar.redis import Redis
-from polar.worker import JobQueueManager
-from polar.worker._enqueue import _job_queue_manager
+from tarifia.config import settings
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.redis import Redis
+from tarifia.worker import JobQueueManager
+from tarifia.worker._enqueue import _job_queue_manager
 
 logger = logging.getLogger(__name__)
 
@@ -95,16 +95,16 @@ class TaskDrainError(Exception):
 
 
 def _discover_task_modules() -> None:
-    """Import all ``tasks.py`` modules under ``polar/`` so actors register with the broker."""
-    polar_root = Path(__file__).resolve().parents[2] / "polar"
-    for tasks_file in polar_root.rglob("tasks.py"):
+    """Import all ``tasks.py`` modules under ``tarifia/`` so actors register with the broker."""
+    tarifia_root = Path(__file__).resolve().parents[2] / "tarifia"
+    for tasks_file in tarifia_root.rglob("tasks.py"):
         # Skip test files, __pycache__, and hidden directories
         if any(
             part.startswith((".", "__")) or part == "tests" for part in tasks_file.parts
         ):
             continue
         module_path = (
-            str(tasks_file.relative_to(polar_root.parent))
+            str(tasks_file.relative_to(tarifia_root.parent))
             .replace("/", ".")
             .removesuffix(".py")
         )
@@ -141,7 +141,7 @@ def build_actor_registry() -> dict[str, Any]:
     """
     Build a mapping from actor_name to the original async function.
 
-    Auto-discovers all task modules under polar/, then unwraps each
+    Auto-discovers all task modules under tarifia/, then unwraps each
     registered actor to get the async function callable from tests.
     """
     _discover_task_modules()

@@ -79,10 +79,10 @@ class PythonEmitter(EmitterBase):
 
         for file in {
             (".zed", "settings.json"),
-            ("polar", "__init__.py"),
-            ("polar", "base.py"),
-            ("polar", "client.py"),
-            ("polar", "literals.py"),
+            ("tarifia", "__init__.py"),
+            ("tarifia", "base.py"),
+            ("tarifia", "client.py"),
+            ("tarifia", "literals.py"),
             ("tests", "__init__.py"),
             ("tests", "test_base.py"),
             (".python-version",),
@@ -97,8 +97,8 @@ class PythonEmitter(EmitterBase):
             )
 
         self.render_file(
-            "polar/inputs.py",
-            root_directory / "polar" / "inputs.py",
+            "tarifia/inputs.py",
+            root_directory / "tarifia" / "inputs.py",
             {
                 **self.get_context(),
                 "input_enum_imports": self._get_input_enum_imports(),
@@ -106,8 +106,8 @@ class PythonEmitter(EmitterBase):
         )
 
         self.render_file(
-            "polar/outputs.py",
-            root_directory / "polar" / "outputs.py",
+            "tarifia/outputs.py",
+            root_directory / "tarifia" / "outputs.py",
             {
                 **self.get_context(),
                 "output_enum_imports": self._get_output_enum_imports(),
@@ -116,8 +116,8 @@ class PythonEmitter(EmitterBase):
 
         errors = self._collect_all_errors()
         self.render_file(
-            "polar/errors.py",
-            root_directory / "polar" / "errors.py",
+            "tarifia/errors.py",
+            root_directory / "tarifia" / "errors.py",
             {
                 **self.get_context(),
                 "errors": errors,
@@ -126,7 +126,7 @@ class PythonEmitter(EmitterBase):
         )
 
         for service in self.ir.services:
-            self._emit_service(service, root_directory / "polar")
+            self._emit_service(service, root_directory / "tarifia")
 
     def run_post_actions(self, root_directory: pathlib.Path | str) -> None:
         super().run_post_actions(root_directory)
@@ -154,7 +154,7 @@ class PythonEmitter(EmitterBase):
             service_path = output_path / f"{to_snake_case(service.name)}.py"
 
         self.render_file(
-            "polar/service.py",
+            "tarifia/service.py",
             service_path,
             {
                 **self.get_context(),

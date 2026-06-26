@@ -1,4 +1,4 @@
-import { Footer, Intro, Text, WrapperPolar } from '../components/foundation'
+import { Footer, Intro, Text, WrapperTarifia } from '../components/foundation'
 import CreditSummaryTable from '../components/CreditSummaryTable'
 import type { schemas } from '../types'
 
@@ -7,7 +7,7 @@ export function NotificationCreditsGranted({
   formatted_amount,
 }: schemas['MaintainerAccountCreditsGrantedNotificationPayload']) {
   return (
-    <WrapperPolar
+    <WrapperTarifia
       preview={`${organization_name} has received ${formatted_amount} in fee credits`}
     >
       <Intro>
@@ -31,7 +31,7 @@ export function NotificationCreditsGranted({
         organization_name={organization_name}
       />
       <Footer email={null} />
-    </WrapperPolar>
+    </WrapperTarifia>
   )
 }
 

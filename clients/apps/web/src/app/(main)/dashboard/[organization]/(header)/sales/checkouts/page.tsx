@@ -1,13 +1,13 @@
 import { getServerSideAPI } from '@/utils/client/serverside'
 import { DataTableSearchParams, parseSearchParams } from '@/utils/datatable'
 import { getOrganizationBySlugOrNotFound } from '@/utils/organization'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { Metadata } from 'next'
 import CheckoutsPage from './CheckoutsPage'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Checkouts', // " | Polar is added by the template"
+    title: 'Checkouts', // " | Tarifia is added by the template"
   }
 }
 

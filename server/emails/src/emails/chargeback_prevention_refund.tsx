@@ -4,7 +4,7 @@ import {
   Heading,
   List,
   Text,
-  WrapperPolar,
+  WrapperTarifia,
 } from '../components/foundation'
 import type { schemas } from '../types'
 
@@ -24,7 +24,7 @@ export function ChargebackPreventionRefund({
     : refund_date
 
   return (
-    <WrapperPolar
+    <WrapperTarifia
       preview={`We've issued a chargeback prevention refund for order ${order_number}`}
     >
       <Text>Hello,</Text>
@@ -57,7 +57,7 @@ export function ChargebackPreventionRefund({
       <Divider />
       <Heading>Why was this refund issued?</Heading>
       <Text>
-        Polar receives early-warning alerts from some card issuers and banking
+        Tarifia receives early-warning alerts from some card issuers and banking
         partners when a cardholder attempts to dispute a transaction. These
         alerts come in before a formal chargeback is filed with the card
         networks.
@@ -87,20 +87,20 @@ export function ChargebackPreventionRefund({
         you avoid these extra costs and issues.
       </Text>
       <Text>
-        Polar usually treats completed sales as the merchant's and does not
+        Tarifia usually treats completed sales as the merchant's and does not
         issue refunds to customers unless there are special circumstances. We
         only use chargeback-prevention refunds when it is likely to be better
         than letting a formal dispute happen.
       </Text>
       <Text>If you have any questions, just reply to this email.</Text>
       <Footer email={email} />
-    </WrapperPolar>
+    </WrapperTarifia>
   )
 }
 
 ChargebackPreventionRefund.PreviewProps = {
   email: 'merchant@example.com',
-  order_number: 'POLAR-2026-00042',
+  order_number: 'TARIFIA-2026-00042',
   customer_name: 'Bob Ross',
   amount: 4595,
   currency: 'usd',

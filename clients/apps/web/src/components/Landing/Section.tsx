@@ -20,7 +20,7 @@ export const Section = ({
       id={id}
       className={twMerge(
         'relative flex flex-col md:items-center',
-        border ? 'dark:border-polar-700 border-b border-gray-200' : '',
+        border ? 'dark:border-tarifia-700 border-b border-gray-200' : '',
         wrapperClassName,
       )}
     >

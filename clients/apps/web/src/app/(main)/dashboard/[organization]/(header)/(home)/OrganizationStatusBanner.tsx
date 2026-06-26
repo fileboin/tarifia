@@ -1,6 +1,6 @@
 import { useOrganizationPaymentStatus } from '@/hooks/queries'
 import { CONFIG } from '@/utils/config'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { DeniedBanner } from './DeniedBanner'
 import { OffboardedBanner } from './OffboardedBanner'
 import { OffboardingBanner } from './OffboardingBanner'

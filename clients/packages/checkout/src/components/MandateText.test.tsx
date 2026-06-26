@@ -17,7 +17,7 @@ describe('MandateText', () => {
     const link = screen.getByRole('link', { name: 'Buyer Terms' })
     expect(link).toHaveAttribute(
       'href',
-      'https://polar.sh/legal/checkout-buyer-terms',
+      'https://tarifia.sh/legal/checkout-buyer-terms',
     )
     expect(link).toHaveAttribute('target', '_blank')
   })

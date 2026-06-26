@@ -8,14 +8,14 @@ import { getExperiments } from '@/experiments/server'
 import { UserContextProvider } from '@/providers/auth'
 import { CONFIG } from '@/utils/config'
 import { getAuthenticatedUser, getUserOrganizations } from '@/utils/user'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { PHASE_PRODUCTION_BUILD } from 'next/constants'
 import { Viewport } from 'next/types'
 import {
   NavigationHistoryProvider,
-  PolarNuqsProvider,
-  PolarPostHogProvider,
-  PolarQueryClientProvider,
+  TarifiaNuqsProvider,
+  TarifiaPostHogProvider,
+  TarifiaQueryClientProvider,
 } from './providers'
 
 export const viewport: Viewport = {
@@ -82,16 +82,16 @@ export default async function RootLayout({
             user={authenticatedUser}
             userOrganizations={userOrganizations}
           >
-            <PolarPostHogProvider>
-              <PolarQueryClientProvider>
-                <PolarNuqsProvider>
+            <TarifiaPostHogProvider>
+              <TarifiaQueryClientProvider>
+                <TarifiaNuqsProvider>
                   <NavigationHistoryProvider>
                     {CONFIG.IS_SANDBOX && <SandboxBanner />}
                     {children}
                   </NavigationHistoryProvider>
-                </PolarNuqsProvider>
-              </PolarQueryClientProvider>
-            </PolarPostHogProvider>
+                </TarifiaNuqsProvider>
+              </TarifiaQueryClientProvider>
+            </TarifiaPostHogProvider>
           </UserContextProvider>
         </ExperimentProvider>
       </body>

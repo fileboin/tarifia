@@ -3,10 +3,10 @@ import uuid
 import pytest
 from httpx import AsyncClient
 
-from polar.models import Customer, Member, Organization
-from polar.models.customer import CustomerType
-from polar.models.member import MemberRole
-from polar.postgres import AsyncSession
+from tarifia.models import Customer, Member, Organization
+from tarifia.models.customer import CustomerType
+from tarifia.models.member import MemberRole
+from tarifia.postgres import AsyncSession
 from tests.fixtures.auth import (
     CUSTOMER_AUTH_SUBJECT,
     MEMBER_AUTH_SUBJECT,

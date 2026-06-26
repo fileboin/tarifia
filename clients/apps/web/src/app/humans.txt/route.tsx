@@ -44,11 +44,11 @@ export async function GET() {
 
 
 
-              Polar is made by all of our wonderful contributors.
+              Tarifia is made by all of our wonderful contributors.
 
-                    https://github.com/polarsource/polar
+                    https://github.com/tarifiasource/tarifia
 
-                Wanna work with us? https://polar.sh/company#open-roles
+                Wanna work with us? https://tarifia.sh/company#open-roles
 
     `,
     {

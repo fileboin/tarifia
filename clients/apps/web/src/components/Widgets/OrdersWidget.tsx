@@ -1,10 +1,10 @@
 import { useOrders } from '@/hooks/queries/orders'
 import { OrganizationContext } from '@/providers/maintainerOrganization'
-import { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
-import { Button } from '@polar-sh/orbit'
-import { Card } from '@polar-sh/ui/components/atoms/Card'
-import { Status, type StatusColor } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
+import { Button } from '@tarifia-sh/orbit'
+import { Card } from '@tarifia-sh/ui/components/atoms/Card'
+import { Status, type StatusColor } from '@tarifia-sh/orbit'
 import Link from 'next/link'
 import { useContext } from 'react'
 import { twMerge } from 'tailwind-merge'
@@ -44,10 +44,10 @@ const OrderCard = ({ className, order }: OrderCardProps) => {
     <Card
       className={twMerge(
         className,
-        'dark:bg-polar-800 flex flex-col gap-y-1 rounded-xl border-none bg-gray-50 px-4 py-4 transition-opacity hover:opacity-60',
+        'dark:bg-tarifia-800 flex flex-col gap-y-1 rounded-xl border-none bg-gray-50 px-4 py-4 transition-opacity hover:opacity-60',
       )}
     >
-      <div className="dark:text-polar-500 flex flex-row items-baseline justify-between text-sm text-gray-500">
+      <div className="dark:text-tarifia-500 flex flex-row items-baseline justify-between text-sm text-gray-500">
         <span>{displayDate}</span>
         <Status
           color={orderStatusBadgeColor(order)}
@@ -105,9 +105,9 @@ export const OrdersWidget = ({ className }: OrdersWidgetProps) => {
           ))}
         </div>
       ) : (
-        <div className="dark:bg-polar-800 mb-6 flex flex-1 flex-col items-center justify-center gap-y-2 rounded-lg bg-gray-50 p-8 text-center">
+        <div className="dark:bg-tarifia-800 mb-6 flex flex-1 flex-col items-center justify-center gap-y-2 rounded-lg bg-gray-50 p-8 text-center">
           <h3>No orders found</h3>
-          <p className="dark:text-polar-500 text-sm text-gray-500">
+          <p className="dark:text-tarifia-500 text-sm text-gray-500">
             Your most recent orders will appear here.
           </p>
         </div>

@@ -10,22 +10,22 @@ import {
 import { useCopyMemberLoginLink } from '@/hooks/useCopyMemberLoginLink'
 import { validateEmail } from '@/utils/validation'
 import MoreVertOutlined from '@mui/icons-material/MoreVertOutlined'
-import { Client, schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
+import { Client, schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@polar-sh/ui/components/atoms/DropdownMenu'
-import { Input } from '@polar-sh/orbit'
+} from '@tarifia-sh/ui/components/atoms/DropdownMenu'
+import { Input } from '@tarifia-sh/orbit'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
 import { useState } from 'react'
 import { ConfirmModal } from '../Modal/ConfirmModal'
 import { toast } from '../Toast/use-toast'
@@ -204,10 +204,10 @@ export const CustomerPortalTeamSection = ({
         </div>
       </div>
 
-      <div className="dark:border-polar-700 overflow-hidden rounded-2xl border border-gray-200">
+      <div className="dark:border-tarifia-700 overflow-hidden rounded-2xl border border-gray-200">
         <table className="w-full table-fixed caption-bottom text-sm">
           <thead className="[&_tr]:border-b">
-            <tr className="dark:bg-polar-800 border-b bg-gray-50 transition-colors">
+            <tr className="dark:bg-tarifia-800 border-b bg-gray-50 transition-colors">
               <th className="text-muted-foreground h-12 px-4 text-left align-middle font-medium">
                 Member
               </th>
@@ -231,13 +231,13 @@ export const CustomerPortalTeamSection = ({
                           {member.name || member.email}
                         </span>
                         {isCurrentUser && (
-                          <span className="dark:text-polar-500 text-xs text-gray-500">
+                          <span className="dark:text-tarifia-500 text-xs text-gray-500">
                             (you)
                           </span>
                         )}
                       </div>
                       {member.name && (
-                        <span className="dark:text-polar-500 text-xs text-gray-500">
+                        <span className="dark:text-tarifia-500 text-xs text-gray-500">
                           {member.email}
                         </span>
                       )}

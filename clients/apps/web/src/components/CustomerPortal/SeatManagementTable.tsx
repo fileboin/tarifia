@@ -10,17 +10,17 @@ import {
 import { useCopyMemberLoginLink } from '@/hooks/useCopyMemberLoginLink'
 import { validateEmail } from '@/utils/validation'
 import MoreVertOutlined from '@mui/icons-material/MoreVertOutlined'
-import { Client, schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
+import { Client, schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@polar-sh/ui/components/atoms/DropdownMenu'
-import { Status } from '@polar-sh/orbit'
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
+} from '@tarifia-sh/ui/components/atoms/DropdownMenu'
+import { Status } from '@tarifia-sh/orbit'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
 import { useState } from 'react'
 import { toast } from '../Toast/use-toast'
 import { seatStatusDisplayConfig } from '../Seats/seatStatus'
@@ -213,10 +213,10 @@ export const SeatManagementTable = ({
       )}
 
       {!isLoadingSeats && (seats.length > 0 || availableSeats > 0) && (
-        <div className="dark:border-polar-700 overflow-hidden rounded-2xl border border-gray-200">
+        <div className="dark:border-tarifia-700 overflow-hidden rounded-2xl border border-gray-200">
           <table className="w-full caption-bottom text-sm">
             <thead className="[&_tr]:border-b">
-              <tr className="dark:bg-polar-800 border-b bg-gray-50">
+              <tr className="dark:bg-tarifia-800 border-b bg-gray-50">
                 <th className="text-muted-foreground h-12 px-4 text-left align-middle font-medium">
                   Member
                 </th>

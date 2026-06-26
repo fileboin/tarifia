@@ -1,16 +1,16 @@
 import { useCustomerBenefitGrants } from '@/hooks/queries/customerPortal'
 import { useCustomerSSE } from '@/hooks/sse'
 import { createClientSideAPI } from '@/utils/client'
-import type { ProductCheckoutPublic } from '@polar-sh/checkout/guards'
+import type { ProductCheckoutPublic } from '@tarifia-sh/checkout/guards'
 import {
   DEFAULT_LOCALE,
   useTranslations,
   type AcceptedLocale,
-} from '@polar-sh/i18n'
-import { List, ListItem } from '@polar-sh/orbit'
+} from '@tarifia-sh/i18n'
+import { List, ListItem } from '@tarifia-sh/orbit'
 import { useEffect } from 'react'
 import { BenefitGrant } from '../Benefit/BenefitGrant'
-import { SpinnerNoMargin } from '@polar-sh/orbit'
+import { SpinnerNoMargin } from '@tarifia-sh/orbit'
 
 interface CheckoutBenefitsProps {
   checkout: ProductCheckoutPublic
@@ -60,7 +60,7 @@ const CheckoutBenefits = ({
         {benefitGrants?.items.map((benefitGrant) => (
           <ListItem
             key={benefitGrant.id}
-            className="dark:bg-polar-800 dark:hover:bg-polar-800 bg-white p-4 hover:bg-white"
+            className="dark:bg-tarifia-800 dark:hover:bg-tarifia-800 bg-white p-4 hover:bg-white"
           >
             <BenefitGrant
               api={api}
@@ -72,7 +72,7 @@ const CheckoutBenefits = ({
         {(benefitGrants?.items?.length || 0) < expectedBenefits && (
           <ListItem className="flex flex-row items-center justify-center gap-2">
             <SpinnerNoMargin className="h-4 w-4" />
-            <p className="dark:text-polar-500 text-gray-500">
+            <p className="dark:text-tarifia-500 text-gray-500">
               {t('checkout.benefits.granting')}
             </p>
           </ListItem>

@@ -1,10 +1,10 @@
 import { useOnboardingTracking } from '@/hooks'
 import { OrganizationContext } from '@/providers/maintainerOrganization'
 import ArrowOutwardOutlined from '@mui/icons-material/ArrowOutwardOutlined'
-import { schemas } from '@polar-sh/client'
-import { Box } from '@polar-sh/orbit/Box'
-import { Button } from '@polar-sh/orbit'
-import { Tabs, TabsList, TabsTrigger } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Button } from '@tarifia-sh/orbit'
+import { Tabs, TabsList, TabsTrigger } from '@tarifia-sh/orbit'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useContext, useEffect, useMemo, useState } from 'react'
@@ -44,35 +44,35 @@ const frameworks = (products: schemas['Product'][]) =>
     {
       slug: 'nextjs',
       name: 'Next.js',
-      link: 'https://polar.sh/docs/integrate/sdk/adapters/nextjs',
+      link: 'https://tarifia.sh/docs/integrate/sdk/adapters/nextjs',
       icon: <NextJsIcon size={24} />,
-      packages: '@polar-sh/nextjs',
-      code: `import { Checkout } from "@polar-sh/nextjs";
+      packages: '@tarifia-sh/nextjs',
+      code: `import { Checkout } from "@tarifia-sh/nextjs";
 
 export const GET = Checkout({
-  accessToken: process.env.POLAR_ACCESS_TOKEN,
-  successUrl: process.env.POLAR_SUCCESS_URL
+  accessToken: process.env.TARIFIA_ACCESS_TOKEN,
+  successUrl: process.env.TARIFIA_SUCCESS_URL
 });`,
     },
     {
       slug: 'better-auth',
       name: 'BetterAuth',
-      link: 'https://polar.sh/docs/integrate/sdk/adapters/better-auth',
+      link: 'https://tarifia.sh/docs/integrate/sdk/adapters/better-auth',
       icon: <BetterAuthIcon size={24} />,
-      packages: 'better-auth @polar-sh/better-auth @polar-sh/sdk',
+      packages: 'better-auth @tarifia-sh/better-auth @tarifia-sh/sdk',
       code: `import { betterAuth } from "better-auth";
-import { polar, checkout, portal, usage, webhooks } from "@polar-sh/better-auth";
-import { Polar } from "@polar-sh/sdk";
+import { tarifia, checkout, portal, usage, webhooks } from "@tarifia-sh/better-auth";
+import { Tarifia } from "@tarifia-sh/sdk";
 
-const polarClient = new Polar({
-    accessToken: process.env.POLAR_ACCESS_TOKEN
+const tarifiaClient = new Tarifia({
+    accessToken: process.env.TARIFIA_ACCESS_TOKEN
 });
 
 const auth = betterAuth({
     // ... Better Auth config
     plugins: [
-        polar({
-            client: polarClient,
+        tarifia({
+            client: tarifiaClient,
             createCustomerOnSignUp: true,
             use: [
                 checkout({
@@ -86,7 +86,7 @@ ${products
   )
   .join(',\n')}
                     ],
-                    successUrl: process.env.POLAR_SUCCESS_URL,
+                    successUrl: process.env.TARIFIA_SUCCESS_URL,
                     authenticatedUsersOnly: true
                 })
             ],
@@ -97,20 +97,20 @@ ${products
     {
       slug: 'nodejs',
       name: 'Node.js',
-      link: 'https://polar.sh/docs/integrate/sdk/typescript',
+      link: 'https://tarifia.sh/docs/integrate/sdk/typescript',
       icon: <NodeJsIcon size={24} />,
-      packages: '@polar-sh/sdk',
-      code: `import { Polar } from "@polar-sh/sdk";
+      packages: '@tarifia-sh/sdk',
+      code: `import { Tarifia } from "@tarifia-sh/sdk";
 
-const polar = new Polar({
-  accessToken: process.env.POLAR_ACCESS_TOKEN,
+const tarifia = new Tarifia({
+  accessToken: process.env.TARIFIA_ACCESS_TOKEN,
 });
 
-const checkout = await polar.checkouts.create({
+const checkout = await tarifia.checkouts.create({
   products: [
 ${products.map((p) => `    "${p.id}"`).join(',\n')}
   ],
-  successUrl: process.env.POLAR_SUCCESS_URL
+  successUrl: process.env.TARIFIA_SUCCESS_URL
 });
 
 redirect(checkout.url)`,
@@ -118,21 +118,21 @@ redirect(checkout.url)`,
     {
       slug: 'python',
       name: 'Python',
-      link: 'https://polar.sh/docs/integrate/sdk/python',
+      link: 'https://tarifia.sh/docs/integrate/sdk/python',
       icon: <PythonIcon size={24} />,
-      pythonInstall: 'pip install polar-sdk',
+      pythonInstall: 'pip install tarifia-sdk',
       code: `import os
-from polar_sdk import Polar
+from tarifia_sdk import Tarifia
 
-with Polar(
-    access_token=os.environ.get("POLAR_ACCESS_TOKEN"),
-) as polar:
+with Tarifia(
+    access_token=os.environ.get("TARIFIA_ACCESS_TOKEN"),
+) as tarifia:
 
-    res = polar.checkouts.create(request={
+    res = tarifia.checkouts.create(request={
         "products": [
 ${products.map((p) => `            "${p.id}"`).join(',\n')}
         ],
-        "success_url": os.environ.get("POLAR_SUCCESS_URL")
+        "success_url": os.environ.get("TARIFIA_SUCCESS_URL")
     })
 
     # Handle response
@@ -212,7 +212,7 @@ export const IntegrateStep = ({ products }: IntegrateStepProps) => {
           <LogoIcon size={50} />
           <Box flexDirection="column" rowGap="l">
             <h1 className="text-3xl">Integrate Checkout</h1>
-            <p className="dark:text-polar-400 text-lg text-gray-600">
+            <p className="dark:text-tarifia-400 text-lg text-gray-600">
               Integrate checkouts with your favorite framework.
             </p>
           </Box>
@@ -239,7 +239,7 @@ export const IntegrateStep = ({ products }: IntegrateStepProps) => {
           </Box>
           <Box flexDirection="column" rowGap="l">
             <Link
-              href={`https://polar.sh/docs/integrate/sdk/adapters/nextjs`}
+              href={`https://tarifia.sh/docs/integrate/sdk/adapters/nextjs`}
               target="_blank"
               className="w-full"
             >
@@ -289,12 +289,12 @@ export const IntegrateStep = ({ products }: IntegrateStepProps) => {
                       setPackageManager(v as PackageManager)
                     }
                   >
-                    <TabsList className="dark:bg-polar-800 rounded-sm bg-gray-100 p-0.5">
+                    <TabsList className="dark:bg-tarifia-800 rounded-sm bg-gray-100 p-0.5">
                       {packageManagers.map((pm) => (
                         <TabsTrigger
                           key={pm}
                           value={pm}
-                          className="dark:data-[state=active]:bg-polar-700 !rounded-sm px-2.5 py-1 text-xs data-[state=active]:bg-white data-[state=active]:shadow-sm"
+                          className="dark:data-[state=active]:bg-tarifia-700 !rounded-sm px-2.5 py-1 text-xs data-[state=active]:bg-white data-[state=active]:shadow-sm"
                         >
                           {pm}
                         </TabsTrigger>
@@ -319,8 +319,8 @@ export const IntegrateStep = ({ products }: IntegrateStepProps) => {
               <CodeWrapper>
                 <SyntaxHighlighterClient
                   lang="bash"
-                  code={`POLAR_ACCESS_TOKEN=${createdToken ?? 'XXX'}
-POLAR_SUCCESS_URL=https://example.com/success?checkout_id={CHECKOUT_ID}`}
+                  code={`TARIFIA_ACCESS_TOKEN=${createdToken ?? 'XXX'}
+TARIFIA_SUCCESS_URL=https://example.com/success?checkout_id={CHECKOUT_ID}`}
                 />
               </CodeWrapper>
             </Box>

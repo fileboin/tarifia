@@ -2,16 +2,16 @@ import {
   useOrganizationReviewStatus,
   useSupportCase,
 } from '@/hooks/queries/org'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { useSyncExternalStore } from 'react'
 
 export const isNotifiable = (m: schemas['SupportCaseMessage']) =>
   m.author_kind !== 'merchant' && m.type !== 'opened' && m.type !== 'closed'
 
 const storageKey = (organizationId: string) =>
-  `polar:appeal-case-seen:${organizationId}`
+  `tarifia:appeal-case-seen:${organizationId}`
 
-const SEEN_EVENT = 'polar:appeal-case-seen'
+const SEEN_EVENT = 'tarifia:appeal-case-seen'
 
 export const getSeenCount = (organizationId: string): number => {
   if (typeof window === 'undefined') return 0

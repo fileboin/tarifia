@@ -1,4 +1,4 @@
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 
 // Early Member orgs (grandfathered, no paid subscription) pay 4% + 40¢ on every
 // transaction PLUS a +0.5% surcharge on subscription-product revenue only. Paid

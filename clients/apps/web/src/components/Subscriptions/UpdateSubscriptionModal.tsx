@@ -6,20 +6,20 @@ import { setValidationErrors } from '@/utils/api/errors'
 import { getDiscountDisplay } from '@/utils/discount'
 import { hasLegacyRecurringPrices } from '@/utils/product'
 import { formatTrialEnd, useTrialChangeOutcome } from '@/utils/trial-change'
-import { isValidationError, schemas } from '@polar-sh/client'
-import { Box } from '@polar-sh/orbit/Box'
-import { Button } from '@polar-sh/orbit'
-import { Combobox } from '@polar-sh/ui/components/atoms/Combobox'
-import DateTimePicker from '@polar-sh/ui/components/atoms/DateTimePicker'
-import { Pill } from '@polar-sh/orbit'
+import { isValidationError, schemas } from '@tarifia-sh/client'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Button } from '@tarifia-sh/orbit'
+import { Combobox } from '@tarifia-sh/ui/components/atoms/Combobox'
+import DateTimePicker from '@tarifia-sh/ui/components/atoms/DateTimePicker'
+import { Pill } from '@tarifia-sh/orbit'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@tarifia-sh/orbit'
 import {
   Form,
   FormControl,
@@ -28,7 +28,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { XIcon } from 'lucide-react'
 import { useCallback, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -520,14 +520,14 @@ const UpdateTrial = ({
     <>
       <div className="flex flex-col gap-4">
         {/* Section 2: Set/Update trial end date */}
-        <div className="dark:bg-polar-800 flex flex-col gap-y-4 rounded-2xl bg-gray-50 p-6">
+        <div className="dark:bg-tarifia-800 flex flex-col gap-y-4 rounded-2xl bg-gray-50 p-6">
           <div className="flex flex-col gap-y-2">
             <h3 className="text-lg font-medium">
               {subscription.status === 'trialing'
                 ? 'Update Trial'
                 : 'Add Trial Period'}
             </h3>
-            <p className="dark:text-polar-500 mt-1 text-sm text-gray-500">
+            <p className="dark:text-tarifia-500 mt-1 text-sm text-gray-500">
               {subscription.status === 'trialing'
                 ? 'Set a new trial end date to extend or reduce the current trial period.'
                 : 'Add a trial period by setting a trial end date in the future.'}
@@ -583,10 +583,10 @@ const UpdateTrial = ({
 
         {/* Section 1: End trial now */}
         {subscription.status === 'trialing' && (
-          <div className="dark:bg-polar-800 flex flex-col items-start gap-y-4 rounded-2xl bg-gray-50 p-6">
+          <div className="dark:bg-tarifia-800 flex flex-col items-start gap-y-4 rounded-2xl bg-gray-50 p-6">
             <div className="flex flex-col gap-2">
               <h3 className="text-lg font-medium">End Trial</h3>
-              <p className="dark:text-polar-500 text-sm text-gray-500">
+              <p className="dark:text-tarifia-500 text-sm text-gray-500">
                 This will immediately end the trial period and charge the
                 customer for a new billing cycle.
               </p>
@@ -667,10 +667,10 @@ const UpdateBillingPeriod = ({
   )
 
   return (
-    <div className="dark:bg-polar-800 flex flex-col gap-y-4 rounded-2xl bg-gray-50 p-6">
+    <div className="dark:bg-tarifia-800 flex flex-col gap-y-4 rounded-2xl bg-gray-50 p-6">
       <div className="flex flex-col gap-y-2">
         <h3 className="text-lg font-medium">Update Billing Period</h3>
-        <p className="dark:text-polar-500 mt-1 text-sm text-gray-500">
+        <p className="dark:text-tarifia-500 mt-1 text-sm text-gray-500">
           Extend the current billing period by setting a new end date in the
           future. This is useful for providing additional free subscription time
           to a customer.

@@ -18,10 +18,10 @@ import {
 import { useBillingPlanTelemetry } from '@/hooks/useBillingPlanTelemetry'
 import { extractApiErrorMessage } from '@/utils/api/errors'
 import ArrowBackOutlined from '@mui/icons-material/ArrowBackOutlined'
-import { schemas } from '@polar-sh/client'
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
-import { Button } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Button } from '@tarifia-sh/orbit'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useMemo, useState } from 'react'
@@ -256,7 +256,7 @@ export default function ChangePlanPage({
         <Box flexDirection="column" rowGap="l">
           <Link
             href={billingHref}
-            className="dark:text-polar-400 dark:hover:text-polar-200 inline-flex w-fit items-center gap-x-1 text-sm text-gray-500 hover:text-gray-700"
+            className="dark:text-tarifia-400 dark:hover:text-tarifia-200 inline-flex w-fit items-center gap-x-1 text-sm text-gray-500 hover:text-gray-700"
           >
             <ArrowBackOutlined fontSize="inherit" />
             <span>Back to Billing</span>
@@ -268,7 +268,7 @@ export default function ChangePlanPage({
             <Text color="muted">
               {isCurrentPlanCustom
                 ? 'You are on a custom plan. Send an email to support to change plan or discuss terms.'
-                : 'Pick a new plan for your Polar subscription. You can change again at any time.'}
+                : 'Pick a new plan for your Tarifia subscription. You can change again at any time.'}
             </Text>
           </Box>
         </Box>

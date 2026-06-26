@@ -6,7 +6,7 @@ from unittest.mock import AsyncMock, patch
 import httpx
 import pytest
 
-from polar.kit.http import (
+from tarifia.kit.http import (
     SSRFBlockedError,
     check_url_reachable,
     get_content_disposition,
@@ -141,7 +141,7 @@ def _mock_transport(
     def factory(**kwargs: object) -> httpx.AsyncClient:
         return real_async_client(transport=httpx.MockTransport(handler), **kwargs)  # type: ignore[arg-type]
 
-    with patch("polar.kit.http.httpx.AsyncClient", new=factory):
+    with patch("tarifia.kit.http.httpx.AsyncClient", new=factory):
         yield
 
 

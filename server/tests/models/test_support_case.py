@@ -2,9 +2,9 @@ import pytest
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 
-from polar.models.file import FileServiceTypes
-from polar.models.organization import Organization
-from polar.models.support_case import (
+from tarifia.models.file import FileServiceTypes
+from tarifia.models.organization import Organization
+from tarifia.models.support_case import (
     ReviewAppealSupportCase,
     SupportCase,
     SupportCaseAttachment,
@@ -15,9 +15,9 @@ from polar.models.support_case import (
     SupportCaseParticipant,
     SupportCaseParticipantKind,
 )
-from polar.postgres import AsyncSession
-from polar.support_case.repository import SupportCaseMessageRepository
-from polar.support_case.service import support_case as support_case_service
+from tarifia.postgres import AsyncSession
+from tarifia.support_case.repository import SupportCaseMessageRepository
+from tarifia.support_case.service import support_case as support_case_service
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_organization_review,

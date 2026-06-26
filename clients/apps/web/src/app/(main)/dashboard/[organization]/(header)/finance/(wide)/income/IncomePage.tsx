@@ -12,7 +12,7 @@ import {
   serializeSearchParams,
 } from '@/utils/datatable'
 import { ISODuration } from '@/utils/duration'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { usePathname, useRouter } from 'next/navigation'
 
 export default function ClientPage({

@@ -1,8 +1,8 @@
-import type { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
-import type { AcceptedLocale } from '@polar-sh/i18n'
-import { getTranslations } from '@polar-sh/i18n'
-import { formatOrdinal } from '@polar-sh/i18n/formatters/ordinal'
+import type { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
+import type { AcceptedLocale } from '@tarifia-sh/i18n'
+import { getTranslations } from '@tarifia-sh/i18n'
+import { formatOrdinal } from '@tarifia-sh/i18n/formatters/ordinal'
 import { useMemo } from 'react'
 
 interface AmountLabelProps {

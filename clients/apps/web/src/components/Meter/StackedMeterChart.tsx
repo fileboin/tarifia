@@ -1,8 +1,8 @@
 'use client'
 
 import { getTimestampFormatter } from '@/utils/metrics'
-import { schemas } from '@polar-sh/client'
-import { ChartContainer } from '@polar-sh/ui/components/ui/chart'
+import { schemas } from '@tarifia-sh/client'
+import { ChartContainer } from '@tarifia-sh/ui/components/ui/chart'
 import { useTheme } from 'next-themes'
 import { useMemo } from 'react'
 import { Bar, BarChart, CartesianGrid, Tooltip, XAxis, YAxis } from 'recharts'

@@ -3,7 +3,7 @@
 import { useDraggable } from '@/hooks/draggable'
 import { closestCenter, DndContext, DragOverlay } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { useCallback, useMemo } from 'react'
 import { BenefitRow } from './components/BenefitRow'
 import { SortableBenefitRow } from './components/SortableBenefitRow'
@@ -65,7 +65,7 @@ export const BenefitSearchSimple = ({
 
   if (benefits.length === 0) {
     return (
-      <div className="dark:border-polar-700 dark:text-polar-500 rounded-xl border border-gray-200 py-8 text-center text-sm text-gray-500">
+      <div className="dark:border-tarifia-700 dark:text-tarifia-500 rounded-xl border border-gray-200 py-8 text-center text-sm text-gray-500">
         No benefits available
       </div>
     )
@@ -104,7 +104,7 @@ export const BenefitSearchSimple = ({
   }
 
   return (
-    <div className="dark:border-polar-700 dark:divide-polar-700 flex flex-col divide-y divide-gray-100 overflow-clip rounded-xl border border-gray-200">
+    <div className="dark:border-tarifia-700 dark:divide-tarifia-700 flex flex-col divide-y divide-gray-100 overflow-clip rounded-xl border border-gray-200">
       {benefits.map((benefit) => (
         <BenefitRow
           key={benefit.id}

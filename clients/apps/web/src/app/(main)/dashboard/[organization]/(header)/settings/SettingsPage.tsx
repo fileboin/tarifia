@@ -15,8 +15,8 @@ import { Section, SectionDescription } from '@/components/Settings/Section'
 import { useHasPermission } from '@/hooks/permissions'
 import { useUserOrganizationNotificationSettings } from '@/hooks/queries/user_organizations'
 import { CONFIG } from '@/utils/config'
-import { schemas } from '@polar-sh/client'
-import { Alert } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Alert } from '@tarifia-sh/orbit'
 import Link from 'next/link'
 
 export default function ClientPage({
@@ -141,7 +141,7 @@ export default function ClientPage({
         <Section id="developers">
           <SectionDescription
             title="Developers"
-            description="Manage access tokens to authenticate with the Polar API"
+            description="Manage access tokens to authenticate with the Tarifia API"
           />
           {canManageOrganization === false ? (
             <AccessRestricted message="You don't have permission to manage access tokens for this organization. Ask an admin if you need access." />

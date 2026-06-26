@@ -6,11 +6,11 @@ import {
   useOrganizationAccount,
   usePayoutEstimate,
   useTransactionsSummary,
-} from '@/hooks/polar/finance'
-import { useOrders } from '@/hooks/polar/orders'
+} from '@/hooks/tarifia/finance'
+import { useOrders } from '@/hooks/tarifia/orders'
 import { useStoreReview } from '@/hooks/useStoreReview'
 import { OrganizationContext } from '@/providers/OrganizationProvider'
-import { formatCurrency } from '@polar-sh/currency'
+import { formatCurrency } from '@tarifia-sh/currency'
 import { Stack, useRouter } from 'expo-router'
 import React, { useContext, useMemo } from 'react'
 import { SafeAreaView } from 'react-native'

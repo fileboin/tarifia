@@ -1,4 +1,4 @@
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import React, { createContext, ReactNode, useContext, useState } from 'react'
 
 interface PayoutContextType {

@@ -146,17 +146,17 @@
   --color-gray-900: oklch(0.21 0.034 264.665);
   --color-gray-950: oklch(0.13 0.028 261.692);
 
-  --color-polar-50: hsl(233, 4%, 85%);
-  --color-polar-100: hsl(233, 4%, 79%);
-  --color-polar-200: hsl(233, 4%, 68%);
-  --color-polar-300: hsl(233, 4%, 62%);
-  --color-polar-400: hsl(233, 4%, 52%);
-  --color-polar-500: hsl(233, 4%, 46%);
-  --color-polar-600: hsl(233, 4%, 16%);
-  --color-polar-700: hsl(233, 4%, 12%);
-  --color-polar-800: hsl(233, 4%, 9.5%);
-  --color-polar-900: hsl(233, 4%, 6.5%);
-  --color-polar-950: hsl(233, 4%, 3.5%);
+  --color-tarifia-50: hsl(233, 4%, 85%);
+  --color-tarifia-100: hsl(233, 4%, 79%);
+  --color-tarifia-200: hsl(233, 4%, 68%);
+  --color-tarifia-300: hsl(233, 4%, 62%);
+  --color-tarifia-400: hsl(233, 4%, 52%);
+  --color-tarifia-500: hsl(233, 4%, 46%);
+  --color-tarifia-600: hsl(233, 4%, 16%);
+  --color-tarifia-700: hsl(233, 4%, 12%);
+  --color-tarifia-800: hsl(233, 4%, 9.5%);
+  --color-tarifia-900: hsl(233, 4%, 6.5%);
+  --color-tarifia-950: hsl(233, 4%, 3.5%);
 
   /* shadcn */
   --color-border: var(--border);
@@ -366,39 +366,39 @@
   }
 
   :root.dark {
-    --background: var(--color-polar-800);
-    --foreground: var(--color-polar-500);
+    --background: var(--color-tarifia-800);
+    --foreground: var(--color-tarifia-500);
 
-    --card: var(--color-polar-800);
-    --card-foreground: var(--color-polar-50);
+    --card: var(--color-tarifia-800);
+    --card-foreground: var(--color-tarifia-50);
 
-    --popover: var(--color-polar-900);
-    --popover-foreground: var(--color-polar-50);
+    --popover: var(--color-tarifia-900);
+    --popover-foreground: var(--color-tarifia-50);
 
-    --sidebar-background: var(--color-polar-950);
-    --sidebar-foreground: var(--color-polar-50);
+    --sidebar-background: var(--color-tarifia-950);
+    --sidebar-foreground: var(--color-tarifia-50);
     --sidebar-primary: var(--color-blue);
-    --sidebar-primary-foreground: var(--color-polar-50);
-    --sidebar-border: var(--color-polar-700);
+    --sidebar-primary-foreground: var(--color-tarifia-50);
+    --sidebar-border: var(--color-tarifia-700);
 
     --primary: var(--color-blue);
-    --primary-foreground: var(--color-polar-50);
+    --primary-foreground: var(--color-tarifia-50);
 
-    --secondary: var(--color-polar-900);
-    --secondary-foreground: var(--color-polar-50);
+    --secondary: var(--color-tarifia-900);
+    --secondary-foreground: var(--color-tarifia-50);
 
-    --muted: var(--color-polar-700);
-    --muted-foreground: var(--color-polar-500);
+    --muted: var(--color-tarifia-700);
+    --muted-foreground: var(--color-tarifia-500);
 
     --accent: var(--color-blue);
-    --accent-foreground: var(--color-polar-50);
+    --accent-foreground: var(--color-tarifia-50);
 
     --destructive: var(--color-red-500);
     --destructive-foreground: var(--color-red-500);
 
-    --border: var(--color-polar-700);
-    --input: var(--color-polar-700);
-    --ring: var(--color-polar-700);
+    --border: var(--color-tarifia-700);
+    --input: var(--color-tarifia-700);
+    --ring: var(--color-tarifia-700);
   }
 }
 
@@ -410,8 +410,8 @@ pre.shiki {
     background-color: var(--color-gray-100) !important;
   }
 
-  .dark .dark\:prose-pre\:bg-polar-800 & {
-    background-color: var(--color-polar-800) !important;
+  .dark .dark\:prose-pre\:bg-tarifia-800 & {
+    background-color: var(--color-tarifia-800) !important;
   }
 }
 

@@ -10,19 +10,19 @@ import {
   isSeatBasedPrice,
 } from '@/utils/product'
 import MoreVertOutlined from '@mui/icons-material/MoreVertOutlined'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { ListItem } from '@polar-sh/orbit'
-import { Pill } from '@polar-sh/orbit'
-import { Status } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { ListItem } from '@tarifia-sh/orbit'
+import { Pill } from '@tarifia-sh/orbit'
+import { Status } from '@tarifia-sh/orbit'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@polar-sh/ui/components/ui/dropdown-menu'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@polar-sh/orbit'
+} from '@tarifia-sh/ui/components/ui/dropdown-menu'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@tarifia-sh/orbit'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useCallback } from 'react'
@@ -154,7 +154,7 @@ export const ProductListItem = ({
                   </DropdownMenuTrigger>
                   <DropdownMenuContent
                     align="end"
-                    className="dark:bg-polar-800 bg-gray-50 shadow-lg"
+                    className="dark:bg-tarifia-800 bg-gray-50 shadow-lg"
                   >
                     <DropdownMenuItem
                       onClick={handleContextMenuCallback(() => {

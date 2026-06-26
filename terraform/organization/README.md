@@ -1,12 +1,12 @@
 # AWS Organizations
 
-This Terraform root manages Polar's AWS Organizations structure.
+This Terraform root manages Tarifia's AWS Organizations structure.
 
 ## Layout
 
 ```text
 AWS Organization
-├── Management account: polar
+├── Management account: tarifia
 └── Workloads
     ├── Production
     │   └── production
@@ -45,7 +45,7 @@ Those roles trust HCP Terraform's AWS dynamic credentials issuer and are scoped 
 workspace:
 
 ```text
-production account -> polar workspace
+production account -> tarifia workspace
 sandbox account    -> sandbox workspace
 test account       -> test workspace
 ```
@@ -56,24 +56,24 @@ The HCP Terraform workspace variables that point each workspace at its AWS role 
 ## Staff access (IAM Identity Center)
 
 `identity_center.tf` defines three access tiers, each with a per-account permission set named
-`Polar<Tier><Account>` (e.g. `PolarReadOnlySandbox`). Sets are assigned to Google Workspace groups
+`Tarifia<Tier><Account>` (e.g. `TarifiaReadOnlySandbox`). Sets are assigned to Google Workspace groups
 across all accounts:
 
 | Group                                            | Permission set              | Access                                              |
 | ------------------------------------------------ | --------------------------- | --------------------------------------------------- |
-| `awsadmins@polar.sh`                             | `PolarAdmin<Account>`       | Unrestricted administrator                          |
-| `awsengineers@polar.sh`, `engineering@polar.sh`  | `PolarEngineering<Account>` | Power-user (no IAM/Organizations), bounded by `PolarPermissionBoundary` |
-| `awsaccess@polar.sh`                             | `PolarReadOnly<Account>`    | Read-only                                           |
+| `awsadmins@tarifia.sh`                             | `TarifiaAdmin<Account>`       | Unrestricted administrator                          |
+| `awsengineers@tarifia.sh`, `engineering@tarifia.sh`  | `TarifiaEngineering<Account>` | Power-user (no IAM/Organizations), bounded by `TarifiaPermissionBoundary` |
+| `awsaccess@tarifia.sh`                             | `TarifiaReadOnly<Account>`    | Read-only                                           |
 
 Group membership is not managed here; manage it in the Identity Center console or via SCIM from
 Google Workspace.
 
 ## Permission boundary
 
-`PolarPermissionBoundary` (the `permission_boundary` module) is deployed to every account and caps
+`TarifiaPermissionBoundary` (the `permission_boundary` module) is deployed to every account and caps
 the privileges of internal roles and users. It is enforced in three ways:
 
-- The `PolarEngineering*` permission sets attach it to engineer sessions.
+- The `TarifiaEngineering*` permission sets attach it to engineer sessions.
 - Role-creating modules take a `permissions_boundary_arn` so application and CI roles carry it; the
   `terraform-cloud` automation roles are exempt.
 - The `RequirePermissionsBoundary` SCP on the `Workloads` OU requires the boundary on new

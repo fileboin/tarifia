@@ -4,11 +4,11 @@ from uuid import uuid4
 import pytest
 from pytest_mock import MockerFixture
 
-from polar.benefit.grant.repository import BenefitGrantRepository
-from polar.config import settings
-from polar.integrations.slack.repository import SlackAppRepository
-from polar.integrations.slack.schemas import SlackIntegrationCredentialsUpdate
-from polar.integrations.slack.service import (
+from tarifia.benefit.grant.repository import BenefitGrantRepository
+from tarifia.config import settings
+from tarifia.integrations.slack.repository import SlackAppRepository
+from tarifia.integrations.slack.schemas import SlackIntegrationCredentialsUpdate
+from tarifia.integrations.slack.service import (
     OAUTH_STATE_JWT_TYPE,
     SlackAppService,
     SlackIntegrationAppIdAlreadyLinked,
@@ -16,19 +16,19 @@ from polar.integrations.slack.service import (
     SlackIntegrationInvalidState,
     SlackIntegrationNotConfigured,
 )
-from polar.kit import jwt
-from polar.models import (
+from tarifia.kit import jwt
+from tarifia.models import (
     Benefit,
     Customer,
     Organization,
     SlackApp,
 )
-from polar.models.benefit import BenefitType
-from polar.postgres import AsyncSession
+from tarifia.models.benefit import BenefitType
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_benefit, create_benefit_grant
 
-_REDIRECT_URI = "https://api.polar.sh/v1/integrations/slack/callback"
+_REDIRECT_URI = "https://api.tarifia.sh/v1/integrations/slack/callback"
 _BASE_PROPERTIES = {
     "channel_name_template": "support-{customer_name}",
     "private": True,
@@ -268,7 +268,7 @@ class TestDecodeState:
             data={
                 "integration_id": str(integration_id),
                 "subject_id": str(subject_id),
-                "return_to": "https://polar.sh/dashboard",
+                "return_to": "https://tarifia.sh/dashboard",
             },
             secret=settings.SECRET,
             type=OAUTH_STATE_JWT_TYPE,
@@ -278,7 +278,7 @@ class TestDecodeState:
 
         assert decoded["integration_id"] == str(integration_id)
         assert decoded["subject_id"] == str(subject_id)
-        assert decoded["return_to"] == "https://polar.sh/dashboard"
+        assert decoded["return_to"] == "https://tarifia.sh/dashboard"
 
 
 @pytest.mark.asyncio

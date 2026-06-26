@@ -1,23 +1,23 @@
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest'
-import { PolarEmbedCheckout } from './checkout'
+import { TarifiaEmbedCheckout } from './checkout'
 
 const ALLOWED_ORIGIN = 'http://127.0.0.1:3000'
 
 beforeAll(() => {
   // Define the build-time global that embed.ts expects
   // @ts-expect-error - Global defined at build time by tsup
-  globalThis.__POLAR_CHECKOUT_EMBED_SCRIPT_ALLOWED_ORIGINS__ = ALLOWED_ORIGIN
+  globalThis.__TARIFIA_CHECKOUT_EMBED_SCRIPT_ALLOWED_ORIGINS__ = ALLOWED_ORIGIN
 })
 
-describe('PolarEmbedCheckout', () => {
+describe('TarifiaEmbedCheckout', () => {
   describe('postMessage', () => {
     it('posts a message to the parent window with the correct type', () => {
       const postMessageSpy = vi.spyOn(window.parent, 'postMessage')
 
-      PolarEmbedCheckout.postMessage({ event: 'loaded' }, ALLOWED_ORIGIN)
+      TarifiaEmbedCheckout.postMessage({ event: 'loaded' }, ALLOWED_ORIGIN)
 
       expect(postMessageSpy).toHaveBeenCalledWith(
-        { event: 'loaded', type: 'POLAR_CHECKOUT' },
+        { event: 'loaded', type: 'TARIFIA_CHECKOUT' },
         ALLOWED_ORIGIN,
       )
 
@@ -27,7 +27,7 @@ describe('PolarEmbedCheckout', () => {
     it('includes event data for success messages', () => {
       const postMessageSpy = vi.spyOn(window.parent, 'postMessage')
 
-      PolarEmbedCheckout.postMessage(
+      TarifiaEmbedCheckout.postMessage(
         {
           event: 'success',
           successURL: 'https://example.com/success',
@@ -41,7 +41,7 @@ describe('PolarEmbedCheckout', () => {
           event: 'success',
           successURL: 'https://example.com/success',
           redirect: true,
-          type: 'POLAR_CHECKOUT',
+          type: 'TARIFIA_CHECKOUT',
         },
         ALLOWED_ORIGIN,
       )
@@ -56,19 +56,19 @@ describe('PolarEmbedCheckout', () => {
       document.querySelectorAll('iframe').forEach((el) => el.remove())
       document.querySelectorAll('style').forEach((el) => el.remove())
       document.querySelectorAll('div').forEach((el) => el.remove())
-      document.body.classList.remove('polar-no-scroll')
+      document.body.classList.remove('tarifia-no-scroll')
     })
 
     it('creates an iframe with the correct src', async () => {
-      const promise = PolarEmbedCheckout.create(
-        'https://buy.polar.sh/polar_cl_123',
+      const promise = TarifiaEmbedCheckout.create(
+        'https://buy.tarifia.sh/tarifia_cl_123',
       )
 
       // Simulate the loaded event from the iframe
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'loaded' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'loaded' },
         }),
       )
 
@@ -78,7 +78,7 @@ describe('PolarEmbedCheckout', () => {
       expect(iframe).not.toBeNull()
 
       const src = new URL(iframe!.src)
-      expect(src.pathname).toBe('/polar_cl_123')
+      expect(src.pathname).toBe('/tarifia_cl_123')
       expect(src.searchParams.get('embed')).toBe('true')
       expect(src.searchParams.get('embed_origin')).toBe(window.location.origin)
 
@@ -86,15 +86,15 @@ describe('PolarEmbedCheckout', () => {
     })
 
     it('sets theme query parameter when provided', async () => {
-      const promise = PolarEmbedCheckout.create(
-        'https://buy.polar.sh/polar_cl_123',
+      const promise = TarifiaEmbedCheckout.create(
+        'https://buy.tarifia.sh/tarifia_cl_123',
         { theme: 'dark' },
       )
 
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'loaded' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'loaded' },
         }),
       )
 
@@ -107,17 +107,17 @@ describe('PolarEmbedCheckout', () => {
       checkout.close()
     })
 
-    it('adds polar-no-scroll class to body', async () => {
-      const promise = PolarEmbedCheckout.create(
-        'https://buy.polar.sh/polar_cl_123',
+    it('adds tarifia-no-scroll class to body', async () => {
+      const promise = TarifiaEmbedCheckout.create(
+        'https://buy.tarifia.sh/tarifia_cl_123',
       )
 
-      expect(document.body.classList.contains('polar-no-scroll')).toBe(true)
+      expect(document.body.classList.contains('tarifia-no-scroll')).toBe(true)
 
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'loaded' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'loaded' },
         }),
       )
 
@@ -128,15 +128,15 @@ describe('PolarEmbedCheckout', () => {
     it('calls onLoaded callback when checkout loads', async () => {
       const onLoaded = vi.fn()
 
-      const promise = PolarEmbedCheckout.create(
-        'https://buy.polar.sh/polar_cl_123',
+      const promise = TarifiaEmbedCheckout.create(
+        'https://buy.tarifia.sh/tarifia_cl_123',
         { onLoaded },
       )
 
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'loaded' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'loaded' },
         }),
       )
 
@@ -153,18 +153,18 @@ describe('PolarEmbedCheckout', () => {
       document.querySelectorAll('iframe').forEach((el) => el.remove())
       document.querySelectorAll('style').forEach((el) => el.remove())
       document.querySelectorAll('div').forEach((el) => el.remove())
-      document.body.classList.remove('polar-no-scroll')
+      document.body.classList.remove('tarifia-no-scroll')
     })
 
     it('removes the iframe from the DOM', async () => {
-      const promise = PolarEmbedCheckout.create(
-        'https://buy.polar.sh/polar_cl_123',
+      const promise = TarifiaEmbedCheckout.create(
+        'https://buy.tarifia.sh/tarifia_cl_123',
       )
 
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'loaded' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'loaded' },
         }),
       )
 
@@ -177,22 +177,22 @@ describe('PolarEmbedCheckout', () => {
       expect(document.querySelector('iframe')).toBeNull()
     })
 
-    it('removes polar-no-scroll class from body', async () => {
-      const promise = PolarEmbedCheckout.create(
-        'https://buy.polar.sh/polar_cl_123',
+    it('removes tarifia-no-scroll class from body', async () => {
+      const promise = TarifiaEmbedCheckout.create(
+        'https://buy.tarifia.sh/tarifia_cl_123',
       )
 
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'loaded' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'loaded' },
         }),
       )
 
       const checkout = await promise
       checkout.close()
 
-      expect(document.body.classList.contains('polar-no-scroll')).toBe(false)
+      expect(document.body.classList.contains('tarifia-no-scroll')).toBe(false)
     })
   })
 
@@ -201,18 +201,18 @@ describe('PolarEmbedCheckout', () => {
       document.querySelectorAll('iframe').forEach((el) => el.remove())
       document.querySelectorAll('style').forEach((el) => el.remove())
       document.querySelectorAll('div').forEach((el) => el.remove())
-      document.body.classList.remove('polar-no-scroll')
+      document.body.classList.remove('tarifia-no-scroll')
     })
 
     it('dispatches close event and removes iframe', async () => {
-      const promise = PolarEmbedCheckout.create(
-        'https://buy.polar.sh/polar_cl_123',
+      const promise = TarifiaEmbedCheckout.create(
+        'https://buy.tarifia.sh/tarifia_cl_123',
       )
 
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'loaded' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'loaded' },
         }),
       )
 
@@ -221,7 +221,7 @@ describe('PolarEmbedCheckout', () => {
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'close' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'close' },
         }),
       )
 
@@ -232,14 +232,14 @@ describe('PolarEmbedCheckout', () => {
     })
 
     it('prevents close after confirmed event', async () => {
-      const promise = PolarEmbedCheckout.create(
-        'https://buy.polar.sh/polar_cl_123',
+      const promise = TarifiaEmbedCheckout.create(
+        'https://buy.tarifia.sh/tarifia_cl_123',
       )
 
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'loaded' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'loaded' },
         }),
       )
 
@@ -249,7 +249,7 @@ describe('PolarEmbedCheckout', () => {
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'confirmed' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'confirmed' },
         }),
       )
 
@@ -257,7 +257,7 @@ describe('PolarEmbedCheckout', () => {
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'close' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'close' },
         }),
       )
 
@@ -270,14 +270,14 @@ describe('PolarEmbedCheckout', () => {
     it('ignores messages from disallowed origins', async () => {
       const closeListener = vi.fn()
 
-      const promise = PolarEmbedCheckout.create(
-        'https://buy.polar.sh/polar_cl_123',
+      const promise = TarifiaEmbedCheckout.create(
+        'https://buy.tarifia.sh/tarifia_cl_123',
       )
 
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'loaded' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'loaded' },
         }),
       )
 
@@ -287,7 +287,7 @@ describe('PolarEmbedCheckout', () => {
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: 'https://evil.com',
-          data: { type: 'POLAR_CHECKOUT', event: 'close' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'close' },
         }),
       )
 
@@ -300,14 +300,14 @@ describe('PolarEmbedCheckout', () => {
     it('ignores messages that are not embed checkout messages', async () => {
       const closeListener = vi.fn()
 
-      const promise = PolarEmbedCheckout.create(
-        'https://buy.polar.sh/polar_cl_123',
+      const promise = TarifiaEmbedCheckout.create(
+        'https://buy.tarifia.sh/tarifia_cl_123',
       )
 
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'loaded' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'loaded' },
         }),
       )
 
@@ -327,15 +327,15 @@ describe('PolarEmbedCheckout', () => {
     })
 
     it('skips the default loaded action when preventDefault is called', async () => {
-      const promise = PolarEmbedCheckout.create(
-        'https://buy.polar.sh/polar_cl_123',
+      const promise = TarifiaEmbedCheckout.create(
+        'https://buy.tarifia.sh/tarifia_cl_123',
         { onLoaded: (event) => event.preventDefault() },
       )
 
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'loaded' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'loaded' },
         }),
       )
 
@@ -343,20 +343,20 @@ describe('PolarEmbedCheckout', () => {
 
       // Loader spinner should still be in the DOM since the default action
       // (removing the loader) was prevented.
-      expect(document.querySelector('.polar-loader-spinner')).not.toBeNull()
+      expect(document.querySelector('.tarifia-loader-spinner')).not.toBeNull()
 
       checkout.close()
     })
 
     it('skips the default close action when preventDefault is called', async () => {
-      const promise = PolarEmbedCheckout.create(
-        'https://buy.polar.sh/polar_cl_123',
+      const promise = TarifiaEmbedCheckout.create(
+        'https://buy.tarifia.sh/tarifia_cl_123',
       )
 
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'loaded' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'loaded' },
         }),
       )
 
@@ -366,7 +366,7 @@ describe('PolarEmbedCheckout', () => {
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'close' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'close' },
         }),
       )
 
@@ -376,14 +376,14 @@ describe('PolarEmbedCheckout', () => {
     })
 
     it('skips the default confirmed action when preventDefault is called', async () => {
-      const promise = PolarEmbedCheckout.create(
-        'https://buy.polar.sh/polar_cl_123',
+      const promise = TarifiaEmbedCheckout.create(
+        'https://buy.tarifia.sh/tarifia_cl_123',
       )
 
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'loaded' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'loaded' },
         }),
       )
 
@@ -394,7 +394,7 @@ describe('PolarEmbedCheckout', () => {
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'confirmed' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'confirmed' },
         }),
       )
 
@@ -402,7 +402,7 @@ describe('PolarEmbedCheckout', () => {
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'close' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'close' },
         }),
       )
 
@@ -410,14 +410,14 @@ describe('PolarEmbedCheckout', () => {
     })
 
     it('skips the default success action when preventDefault is called', async () => {
-      const promise = PolarEmbedCheckout.create(
-        'https://buy.polar.sh/polar_cl_123',
+      const promise = TarifiaEmbedCheckout.create(
+        'https://buy.tarifia.sh/tarifia_cl_123',
       )
 
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'loaded' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'loaded' },
         }),
       )
 
@@ -429,7 +429,7 @@ describe('PolarEmbedCheckout', () => {
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'confirmed' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'confirmed' },
         }),
       )
 
@@ -439,7 +439,7 @@ describe('PolarEmbedCheckout', () => {
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
           data: {
-            type: 'POLAR_CHECKOUT',
+            type: 'TARIFIA_CHECKOUT',
             event: 'success',
             successURL: 'https://example.com/thanks',
             redirect: false,
@@ -450,7 +450,7 @@ describe('PolarEmbedCheckout', () => {
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'close' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'close' },
         }),
       )
 
@@ -460,14 +460,14 @@ describe('PolarEmbedCheckout', () => {
     })
 
     it('re-enables closing after success event', async () => {
-      const promise = PolarEmbedCheckout.create(
-        'https://buy.polar.sh/polar_cl_123',
+      const promise = TarifiaEmbedCheckout.create(
+        'https://buy.tarifia.sh/tarifia_cl_123',
       )
 
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'loaded' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'loaded' },
         }),
       )
 
@@ -477,7 +477,7 @@ describe('PolarEmbedCheckout', () => {
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'confirmed' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'confirmed' },
         }),
       )
 
@@ -486,7 +486,7 @@ describe('PolarEmbedCheckout', () => {
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
           data: {
-            type: 'POLAR_CHECKOUT',
+            type: 'TARIFIA_CHECKOUT',
             event: 'success',
             successURL: 'https://example.com/thanks',
             redirect: false,
@@ -498,7 +498,7 @@ describe('PolarEmbedCheckout', () => {
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'close' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'close' },
         }),
       )
 
@@ -513,20 +513,20 @@ describe('PolarEmbedCheckout', () => {
       document.querySelectorAll('iframe').forEach((el) => el.remove())
       document.querySelectorAll('style').forEach((el) => el.remove())
       document.querySelectorAll('div').forEach((el) => el.remove())
-      document.body.classList.remove('polar-no-scroll')
+      document.body.classList.remove('tarifia-no-scroll')
     })
 
     it('fires custom event listeners', async () => {
       const listener = vi.fn()
 
-      const promise = PolarEmbedCheckout.create(
-        'https://buy.polar.sh/polar_cl_123',
+      const promise = TarifiaEmbedCheckout.create(
+        'https://buy.tarifia.sh/tarifia_cl_123',
       )
 
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'loaded' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'loaded' },
         }),
       )
 
@@ -536,7 +536,7 @@ describe('PolarEmbedCheckout', () => {
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'confirmed' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'confirmed' },
         }),
       )
 
@@ -548,14 +548,14 @@ describe('PolarEmbedCheckout', () => {
     it('removes event listeners', async () => {
       const listener = vi.fn()
 
-      const promise = PolarEmbedCheckout.create(
-        'https://buy.polar.sh/polar_cl_123',
+      const promise = TarifiaEmbedCheckout.create(
+        'https://buy.tarifia.sh/tarifia_cl_123',
       )
 
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'loaded' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'loaded' },
         }),
       )
 
@@ -566,7 +566,7 @@ describe('PolarEmbedCheckout', () => {
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'confirmed' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'confirmed' },
         }),
       )
 
@@ -579,21 +579,21 @@ describe('PolarEmbedCheckout', () => {
   describe('init', () => {
     afterEach(() => {
       document
-        .querySelectorAll('[data-polar-checkout]')
+        .querySelectorAll('[data-tarifia-checkout]')
         .forEach((el) => el.remove())
       document.querySelectorAll('iframe').forEach((el) => el.remove())
       document.querySelectorAll('style').forEach((el) => el.remove())
       document.querySelectorAll('div').forEach((el) => el.remove())
-      document.body.classList.remove('polar-no-scroll')
+      document.body.classList.remove('tarifia-no-scroll')
     })
 
-    it('attaches click handlers to elements with data-polar-checkout', () => {
+    it('attaches click handlers to elements with data-tarifia-checkout', () => {
       const link = document.createElement('a')
-      link.href = 'https://buy.polar.sh/polar_cl_123'
-      link.setAttribute('data-polar-checkout', '')
+      link.href = 'https://buy.tarifia.sh/tarifia_cl_123'
+      link.setAttribute('data-tarifia-checkout', '')
       document.body.appendChild(link)
 
-      PolarEmbedCheckout.init()
+      TarifiaEmbedCheckout.init()
 
       // Click should create an iframe
       link.click()
@@ -603,10 +603,10 @@ describe('PolarEmbedCheckout', () => {
     })
   })
 
-  describe('window.Polar', () => {
-    it('exposes EmbedCheckout on window.Polar', () => {
-      expect(window.Polar).toBeDefined()
-      expect(window.Polar.EmbedCheckout).toBe(PolarEmbedCheckout)
+  describe('window.Tarifia', () => {
+    it('exposes EmbedCheckout on window.Tarifia', () => {
+      expect(window.Tarifia).toBeDefined()
+      expect(window.Tarifia.EmbedCheckout).toBe(TarifiaEmbedCheckout)
     })
   })
 })

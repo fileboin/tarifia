@@ -1,7 +1,7 @@
-import { schemas } from '@polar-sh/client'
-import { Button, DataTable, Status, Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
-import FormattedDateTime from '@polar-sh/ui/components/atoms/FormattedDateTime'
+import { schemas } from '@tarifia-sh/client'
+import { Button, DataTable, Status, Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
+import FormattedDateTime from '@tarifia-sh/ui/components/atoms/FormattedDateTime'
 import Link from 'next/link'
 import { seatStatusDisplayConfig } from '../Seats/seatStatus'
 

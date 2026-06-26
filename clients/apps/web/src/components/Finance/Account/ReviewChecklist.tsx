@@ -1,7 +1,7 @@
 'use client'
 
-import { schemas } from '@polar-sh/client'
-import { Box, type BoxProps } from '@polar-sh/orbit/Box'
+import { schemas } from '@tarifia-sh/client'
+import { Box, type BoxProps } from '@tarifia-sh/orbit/Box'
 import { AnimatePresence, motion } from 'motion/react'
 import { useTheme } from 'next-themes'
 import { ChecklistRow } from './ChecklistRow'
@@ -37,7 +37,7 @@ export const ReviewChecklist = ({
     <Box
       flexDirection="column"
       rowGap="s"
-      // eslint-disable-next-line polar/no-style-box
+      // eslint-disable-next-line tarifia/no-style-box
       style={{ perspective: 1200 }}
     >
       {isLoading ? (

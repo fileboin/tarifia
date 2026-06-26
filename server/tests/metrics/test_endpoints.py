@@ -3,11 +3,11 @@ from httpx import AsyncClient
 from pytest_mock import MockerFixture
 from redis.exceptions import RedisError
 
-from polar.auth.scope import Scope
-from polar.kit.time_queries import TimeInterval
-from polar.metrics.service import metrics as metrics_service
-from polar.models import UserOrganization
-from polar.redis import Redis
+from tarifia.auth.scope import Scope
+from tarifia.kit.time_queries import TimeInterval
+from tarifia.metrics.service import metrics as metrics_service
+from tarifia.models import UserOrganization
+from tarifia.redis import Redis
 from tests.fixtures.auth import AuthSubjectFixture
 
 

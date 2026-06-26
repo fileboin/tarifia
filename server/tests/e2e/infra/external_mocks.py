@@ -47,13 +47,13 @@ def mock_stripe_service(mocker: MockerFixture) -> MagicMock:
     """
     from types import SimpleNamespace
 
-    from polar.integrations.stripe.service import StripeService
+    from tarifia.integrations.stripe.service import StripeService
 
     mock = MagicMock(spec=StripeService)
-    mocker.patch("polar.checkout.service.stripe_service", new=mock)
-    mocker.patch("polar.integrations.stripe.payment.stripe_service", new=mock)
-    mocker.patch("polar.payment_method.service.stripe_service", new=mock)
-    mocker.patch("polar.order.service.stripe_service", new=mock)
+    mocker.patch("tarifia.checkout.service.stripe_service", new=mock)
+    mocker.patch("tarifia.integrations.stripe.payment.stripe_service", new=mock)
+    mocker.patch("tarifia.payment_method.service.stripe_service", new=mock)
+    mocker.patch("tarifia.order.service.stripe_service", new=mock)
 
     # Safe defaults so flows work without StripeSimulator
     mock.create_customer.return_value = SimpleNamespace(id="cus_e2e_default")
@@ -87,12 +87,12 @@ def mock_stripe_service(mocker: MockerFixture) -> MagicMock:
 @pytest.fixture(autouse=True)
 def mock_tax_calculation(mocker: MockerFixture) -> MagicMock:
     """Mock tax calculation to avoid external calls."""
-    from polar.enums import TaxBehavior, TaxProcessor
-    from polar.tax.calculation import TaxabilityReason, TaxCalculationService
+    from tarifia.enums import TaxBehavior, TaxProcessor
+    from tarifia.tax.calculation import TaxabilityReason, TaxCalculationService
 
     mock = MagicMock(spec=TaxCalculationService)
-    mocker.patch("polar.checkout.service.tax_calculation_service", new=mock)
-    mocker.patch("polar.order.service.tax_calculation_service", new=mock)
+    mocker.patch("tarifia.checkout.service.tax_calculation_service", new=mock)
+    mocker.patch("tarifia.order.service.tax_calculation_service", new=mock)
     mock.calculate.return_value = (
         {
             "processor_id": "TAX_E2E_TEST",
@@ -120,14 +120,14 @@ def mock_tax_calculation(mocker: MockerFixture) -> MagicMock:
 @pytest.fixture(autouse=True)
 def mock_posthog(mocker: MockerFixture) -> MagicMock:
     """Silence PostHog analytics calls."""
-    return mocker.patch("polar.checkout.service.posthog")
+    return mocker.patch("tarifia.checkout.service.posthog")
 
 
 @pytest.fixture(autouse=True)
 def mock_webhook_send(mocker: MockerFixture) -> MagicMock:
     """Mock webhook sending to avoid external HTTP calls."""
     return mocker.patch(
-        "polar.webhook.service.WebhookService.send",
+        "tarifia.webhook.service.WebhookService.send",
         new_callable=AsyncMock,
     )
 
@@ -136,7 +136,7 @@ def mock_webhook_send(mocker: MockerFixture) -> MagicMock:
 def mock_publish_checkout_event(mocker: MockerFixture) -> AsyncMock:
     """Mock checkout event stream publishing."""
     return mocker.patch(
-        "polar.checkout.eventstream.publish",
+        "tarifia.checkout.eventstream.publish",
         new_callable=AsyncMock,
     )
 
@@ -155,5 +155,5 @@ def mock_invoice_service(mocker: MockerFixture) -> MagicMock:
         return_value=("https://mock-s3/invoices/mock-invoice.pdf", None)
     )
     mock.compute_order_checksum = MagicMock(return_value="mock-checksum")
-    mocker.patch("polar.order.service.invoice_service", new=mock)
+    mocker.patch("tarifia.order.service.invoice_service", new=mock)
     return mock

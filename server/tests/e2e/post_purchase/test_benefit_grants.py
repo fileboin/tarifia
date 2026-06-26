@@ -16,16 +16,16 @@ from httpx import AsyncClient
 from sqlalchemy import select
 from sqlalchemy.orm import joinedload
 
-from polar.auth.dependencies import _auth_subject_factory_cache
-from polar.auth.models import AuthSubject
-from polar.auth.scope import Scope
-from polar.config import settings
-from polar.customer_session.service import customer_session as cs_service
-from polar.kit.db.postgres import AsyncSession
-from polar.models import Organization, Product
-from polar.models.benefit import BenefitType
-from polar.models.benefit_grant import BenefitGrant
-from polar.models.file import File
+from tarifia.auth.dependencies import _auth_subject_factory_cache
+from tarifia.auth.models import AuthSubject
+from tarifia.auth.scope import Scope
+from tarifia.config import settings
+from tarifia.customer_session.service import customer_session as cs_service
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.models import Organization, Product
+from tarifia.models.benefit import BenefitType
+from tarifia.models.benefit_grant import BenefitGrant
+from tarifia.models.file import File
 from tests.e2e.conftest import E2E_AUTH
 from tests.e2e.infra import DrainFn, StripeSimulator
 from tests.e2e.purchase.conftest import complete_purchase

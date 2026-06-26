@@ -2,15 +2,15 @@ import pytest
 import pytest_asyncio
 from httpx import AsyncClient
 
-from polar.auth.scope import Scope
-from polar.models import (
+from tarifia.auth.scope import Scope
+from tarifia.models import (
     Customer,
     Order,
     Product,
     Transaction,
     UserOrganization,
 )
-from polar.models.transaction import Processor, TransactionType
+from tarifia.models.transaction import Processor, TransactionType
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_order
@@ -27,7 +27,7 @@ async def create_tax_transaction(
     currency: str = "usd",
 ) -> Transaction:
     # The org link flows through `order` (Order.organization_id); the
-    # transaction itself is on the Polar side and is not tied to an account.
+    # transaction itself is on the Tarifia side and is not tied to an account.
     transaction = Transaction(
         type=type,
         account=None,

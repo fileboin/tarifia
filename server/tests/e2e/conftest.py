@@ -18,15 +18,15 @@ import pytest
 import pytest_asyncio
 from pytest_mock import MockerFixture
 
-from polar.auth.scope import Scope
-from polar.kit.db.postgres import AsyncSession
-from polar.models import Organization, User, UserOrganization
-from polar.redis import Redis
-from polar.worker import JobQueueManager
-from polar.worker._enqueue import _job_queue_manager
-from polar.worker._httpx import HTTPXMiddleware
-from polar.worker._redis import RedisMiddleware
-from polar.worker._sqlalchemy import SQLAlchemyMiddleware
+from tarifia.auth.scope import Scope
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.models import Organization, User, UserOrganization
+from tarifia.redis import Redis
+from tarifia.worker import JobQueueManager
+from tarifia.worker._enqueue import _job_queue_manager
+from tarifia.worker._httpx import HTTPXMiddleware
+from tarifia.worker._redis import RedisMiddleware
+from tarifia.worker._sqlalchemy import SQLAlchemyMiddleware
 from tests.e2e.infra import (
     DrainFn,
     EmailCapture,
@@ -120,7 +120,7 @@ def email_capture() -> EmailCapture:
 @pytest.fixture(autouse=True)
 def mock_email_sender(mocker: MockerFixture, email_capture: EmailCapture) -> MagicMock:
     mock = create_email_sender_mock(email_capture)
-    mocker.patch("polar.email.tasks.email_sender", new=mock)
+    mocker.patch("tarifia.email.tasks.email_sender", new=mock)
     return mock
 
 

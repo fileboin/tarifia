@@ -22,10 +22,10 @@ import {
   DataTablePaginationState,
   DataTableSortingState,
 } from '@/utils/datatable'
-import { operations, schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import CopyToClipboardInput from '@polar-sh/ui/components/atoms/CopyToClipboardInput'
-import { Switch } from '@polar-sh/orbit'
+import { operations, schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import CopyToClipboardInput from '@tarifia-sh/ui/components/atoms/CopyToClipboardInput'
+import { Switch } from '@tarifia-sh/orbit'
 import { useParams, useRouter } from 'next/navigation'
 import { parseAsArrayOf, parseAsString, useQueryState } from 'nuqs'
 import { useCallback, useState } from 'react'
@@ -188,7 +188,7 @@ export default function ClientPage({
             {endpoint.name && endpoint.name.length > 0 ? (
               <>
                 <h3 className="text-lg">{endpoint.name}</h3>
-                <p className="dark:text-polar-400 truncate font-mono text-sm text-gray-500">
+                <p className="dark:text-tarifia-400 truncate font-mono text-sm text-gray-500">
                   {endpoint.url}
                 </p>
               </>

@@ -7,7 +7,7 @@ import pytest
 from fakeredis import FakeAsyncRedis
 from redis import RedisError
 
-from polar.worker._queue_metrics import (
+from tarifia.worker._queue_metrics import (
     QUEUE_NAMES,
     QUEUE_OLDEST_MESSAGE_AGE,
     QUEUE_SIZE,

@@ -1,20 +1,20 @@
 'use client'
 
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@polar-sh/ui/components/atoms/Accordion'
-import { TextArea } from '@polar-sh/orbit'
+} from '@tarifia-sh/ui/components/atoms/Accordion'
+import { TextArea } from '@tarifia-sh/orbit'
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import Link from 'next/link'
 import { useFormContext } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
@@ -38,7 +38,7 @@ export const ProductCheckoutSection = ({
           <AccordionTrigger className="cursor-pointer hover:no-underline">
             <div className="flex flex-col items-start gap-y-2 text-left">
               <h2 className="text-lg font-medium">Checkout Page</h2>
-              <p className="dark:text-polar-500 text-sm leading-snug font-normal text-gray-500">
+              <p className="dark:text-tarifia-500 text-sm leading-snug font-normal text-gray-500">
                 Customize how this product is presented during checkout
               </p>
             </div>
@@ -52,7 +52,7 @@ export const ProductCheckoutSection = ({
                   <FormItem className="flex flex-col gap-2">
                     <div className="flex flex-row items-center justify-between">
                       <FormLabel>Description</FormLabel>
-                      <p className="dark:text-polar-500 text-sm text-gray-500">
+                      <p className="dark:text-tarifia-500 text-sm text-gray-500">
                         Markdown format
                       </p>
                     </div>
@@ -92,7 +92,7 @@ export const ProductCheckoutSection = ({
               <div className="flex flex-col gap-2">
                 <div className="flex flex-row items-center justify-between">
                   <FormLabel>Checkout Fields</FormLabel>
-                  <p className="dark:text-polar-500 text-sm text-gray-500">
+                  <p className="dark:text-tarifia-500 text-sm text-gray-500">
                     <Link
                       className="text-blue-500 hover:underline"
                       href={`/dashboard/${organization.slug}/settings/custom-fields`}

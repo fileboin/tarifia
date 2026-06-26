@@ -2,8 +2,8 @@ import ProductPriceLabel from '@/components/Products/ProductPriceLabel'
 import { useSubscription } from '@/hooks/queries'
 import { OrganizationContext } from '@/providers/maintainerOrganization'
 import AllInclusiveOutlined from '@mui/icons-material/AllInclusiveOutlined'
-import { schemas } from '@polar-sh/client'
-import { Status, type StatusColor } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Status, type StatusColor } from '@tarifia-sh/orbit'
 import Link from 'next/link'
 import { useContext, useMemo } from 'react'
 import { EventCardBase } from './EventCardBase'
@@ -47,7 +47,7 @@ export const SubscriptionEventCard = ({
               <AllInclusiveOutlined fontSize="inherit" />
               <span className="">{subscription.product.name}</span>
             </div>
-            <span className="dark:text-polar-500 text-gray-500">
+            <span className="dark:text-tarifia-500 text-gray-500">
               <ProductPriceLabel
                 product={subscription.product}
                 currency={subscription.currency}

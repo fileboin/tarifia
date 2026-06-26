@@ -1,8 +1,8 @@
 import { useCreateMeter } from '@/hooks/queries/meters'
 import { setValidationErrors } from '@/utils/api/errors'
-import { isValidationError, schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { Form } from '@polar-sh/ui/components/ui/form'
+import { isValidationError, schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { Form } from '@tarifia-sh/ui/components/ui/form'
 import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { useToast } from '../Toast/use-toast'
@@ -80,7 +80,7 @@ const CreateMeterModalContent = ({
     <div className="flex flex-col gap-y-6 overflow-y-auto px-8 py-10">
       <div>
         <h2 className="text-lg">Create Meter</h2>
-        <div className="dark:text-polar-500 mt-2 space-y-2 text-sm text-gray-500">
+        <div className="dark:text-tarifia-500 mt-2 space-y-2 text-sm text-gray-500">
           <p>
             Meters are aggregated filters on ingested events. They are used to
             calculate your customer&apos;s usage of whatever you choose to

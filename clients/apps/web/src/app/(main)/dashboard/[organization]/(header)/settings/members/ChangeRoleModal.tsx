@@ -3,17 +3,17 @@ import { useAuth } from '@/hooks/auth'
 import { useUpdateOrganizationMemberRole } from '@/hooks/queries/org'
 import { useOrganizationRoles } from '@/hooks/queries/roles'
 import Check from '@mui/icons-material/Check'
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
 import { useMemo, useState } from 'react'
 
 import { ROLE_LABELS, ROLE_ORDER } from './constants'
@@ -120,7 +120,7 @@ export function ChangeRoleModal({
           borderColor="border-primary"
         >
           <table className="w-full text-sm">
-            <thead className="dark:bg-polar-700 sticky top-0 bg-gray-50 text-xs">
+            <thead className="dark:bg-tarifia-700 sticky top-0 bg-gray-50 text-xs">
               <tr>
                 <th className="px-3 py-2 text-left font-medium">Permission</th>
                 {orderedRoles.map((r) => (
@@ -134,7 +134,7 @@ export function ChangeRoleModal({
               {allPermissions.map((permission) => (
                 <tr
                   key={permission}
-                  className="dark:border-polar-700 border-t border-gray-200"
+                  className="dark:border-tarifia-700 border-t border-gray-200"
                 >
                   <td className="px-3 py-2">
                     <code className="text-xs">{permission}</code>

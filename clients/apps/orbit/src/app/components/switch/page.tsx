@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { Box } from '@polar-sh/orbit/Box'
-import { Switch, Text } from '@polar-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Switch, Text } from '@tarifia-sh/orbit'
 import {
   Example,
   PageHeader,

@@ -1,6 +1,6 @@
 'use client'
 
-import type { Client, schemas } from '@polar-sh/client'
+import type { Client, schemas } from '@tarifia-sh/client'
 import { useCallback, useState } from 'react'
 
 import { hasProductCheckout, isLegacyRecurringProductPrice } from '../guards'

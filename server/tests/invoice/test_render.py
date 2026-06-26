@@ -5,14 +5,14 @@ from collections.abc import Mapping
 
 import pytest
 
-from polar.invoice.generator import Invoice, InvoiceItem
-from polar.invoice.render import (
+from tarifia.invoice.generator import Invoice, InvoiceItem
+from tarifia.invoice.render import (
     SERVER_DIRECTORY,
     InvoiceRenderError,
     build_invoice_renderer_env,
     render_invoice_pdf,
 )
-from polar.kit.address import Address, CountryAlpha2
+from tarifia.kit.address import Address, CountryAlpha2
 
 
 @pytest.fixture
@@ -20,9 +20,9 @@ def invoice() -> Invoice:
     return Invoice(
         number="12345",
         date=datetime.datetime(2025, 1, 1, 0, 0, 0, tzinfo=datetime.UTC),
-        seller_name="Polar Software Inc",
+        seller_name="Tarifia Software Inc",
         seller_address=Address(
-            line1="123 Polar St",
+            line1="123 Tarifia St",
             city="San Francisco",
             state="CA",
             postal_code="94107",
@@ -62,15 +62,15 @@ async def test_render_invoice_pdf(invoice: Invoice) -> None:
 
 def test_build_invoice_renderer_env(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("PATH", os.environ.get("PATH", ""))
-    monkeypatch.setenv("POLAR_ENV", "testing")
-    monkeypatch.setenv("POLAR_CUSTOM_OVERRIDE", "1")
+    monkeypatch.setenv("TARIFIA_ENV", "testing")
+    monkeypatch.setenv("TARIFIA_CUSTOM_OVERRIDE", "1")
     monkeypatch.setenv("PROMETHEUS_MULTIPROC_DIR", "/tmp/should-not-leak")
     monkeypatch.setenv("UNRELATED_RUNTIME_VAR", "ignore-me")
 
     env = build_invoice_renderer_env()
 
-    assert env["POLAR_ENV"] == "testing"
-    assert env["POLAR_CUSTOM_OVERRIDE"] == "1"
+    assert env["TARIFIA_ENV"] == "testing"
+    assert env["TARIFIA_CUSTOM_OVERRIDE"] == "1"
     assert "PATH" in env
     assert "PROMETHEUS_MULTIPROC_DIR" not in env
     assert "UNRELATED_RUNTIME_VAR" not in env
@@ -92,23 +92,23 @@ async def test_render_invoice_pdf_raises_on_subprocess_failure(
     invoice: Invoice, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     process = StubProcess(b"", b"boom", 1)
-    monkeypatch.setenv("POLAR_ENV", "testing")
-    monkeypatch.setenv("POLAR_CUSTOM_OVERRIDE", "1")
+    monkeypatch.setenv("TARIFIA_ENV", "testing")
+    monkeypatch.setenv("TARIFIA_CUSTOM_OVERRIDE", "1")
     monkeypatch.setenv("PROMETHEUS_MULTIPROC_DIR", "/tmp/does-not-exist")
 
     async def create_subprocess_exec(*args: object, **kwargs: object) -> StubProcess:
         kwargs_dict = kwargs if isinstance(kwargs, Mapping) else {}
-        assert args == (sys.executable, "-m", "polar.invoice.render")
+        assert args == (sys.executable, "-m", "tarifia.invoice.render")
         assert kwargs_dict["cwd"] == SERVER_DIRECTORY
         env = kwargs_dict["env"]
         assert isinstance(env, Mapping)
-        assert env["POLAR_ENV"] == "testing"
-        assert env["POLAR_CUSTOM_OVERRIDE"] == "1"
+        assert env["TARIFIA_ENV"] == "testing"
+        assert env["TARIFIA_CUSTOM_OVERRIDE"] == "1"
         assert "PROMETHEUS_MULTIPROC_DIR" not in env
         return process
 
     monkeypatch.setattr(
-        "polar.invoice.render.asyncio.create_subprocess_exec", create_subprocess_exec
+        "tarifia.invoice.render.asyncio.create_subprocess_exec", create_subprocess_exec
     )
 
     with pytest.raises(InvoiceRenderError, match="Invoice renderer failed: boom"):

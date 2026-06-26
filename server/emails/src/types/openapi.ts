@@ -660,7 +660,7 @@ export interface components {
       /**
        * Repository Owner
        * @description The owner of the repository.
-       * @example polarsource
+       * @example tarifiasource
        */
       repository_owner: string
       /**
@@ -902,7 +902,7 @@ export interface components {
       /**
        * Slack Integration Id
        * Format: uuid4
-       * @description Polar Slack integration linked to this benefit.
+       * @description Tarifia Slack integration linked to this benefit.
        */
       slack_integration_id: string
       /**
@@ -2189,18 +2189,18 @@ export interface components {
       /** Url */
       url: string
     }
-    /** PolarSelfStartupProgramWelcomeEmail */
-    PolarSelfStartupProgramWelcomeEmail: {
+    /** TarifiaSelfStartupProgramWelcomeEmail */
+    TarifiaSelfStartupProgramWelcomeEmail: {
       /**
        * Template
-       * @default polar_self_startup_program_welcome
+       * @default tarifia_self_startup_program_welcome
        * @constant
        */
-      template: 'polar_self_startup_program_welcome'
-      props: components['schemas']['PolarSelfStartupProgramWelcomeProps']
+      template: 'tarifia_self_startup_program_welcome'
+      props: components['schemas']['TarifiaSelfStartupProgramWelcomeProps']
     }
-    /** PolarSelfStartupProgramWelcomeProps */
-    PolarSelfStartupProgramWelcomeProps: {
+    /** TarifiaSelfStartupProgramWelcomeProps */
+    TarifiaSelfStartupProgramWelcomeProps: {
       /** Email */
       email: string
       /** Organization Name */
@@ -2208,35 +2208,35 @@ export interface components {
       /** Billing Url */
       billing_url: string
     }
-    /** PolarSelfSubscriptionConfirmationEmail */
-    PolarSelfSubscriptionConfirmationEmail: {
+    /** TarifiaSelfSubscriptionConfirmationEmail */
+    TarifiaSelfSubscriptionConfirmationEmail: {
       /**
        * Template
-       * @default polar_self_subscription_confirmation
+       * @default tarifia_self_subscription_confirmation
        * @constant
        */
-      template: 'polar_self_subscription_confirmation'
-      props: components['schemas']['PolarSelfSubscriptionConfirmationProps']
+      template: 'tarifia_self_subscription_confirmation'
+      props: components['schemas']['TarifiaSelfSubscriptionConfirmationProps']
     }
-    /** PolarSelfSubscriptionConfirmationProps */
-    PolarSelfSubscriptionConfirmationProps: {
+    /** TarifiaSelfSubscriptionConfirmationProps */
+    TarifiaSelfSubscriptionConfirmationProps: {
       /** Email */
       email: string
       /** Product Name */
       product_name: string
     }
-    /** PolarSelfSubscriptionCycledEmail */
-    PolarSelfSubscriptionCycledEmail: {
+    /** TarifiaSelfSubscriptionCycledEmail */
+    TarifiaSelfSubscriptionCycledEmail: {
       /**
        * Template
-       * @default polar_self_subscription_cycled
+       * @default tarifia_self_subscription_cycled
        * @constant
        */
-      template: 'polar_self_subscription_cycled'
-      props: components['schemas']['PolarSelfSubscriptionCycledProps']
+      template: 'tarifia_self_subscription_cycled'
+      props: components['schemas']['TarifiaSelfSubscriptionCycledProps']
     }
-    /** PolarSelfSubscriptionCycledProps */
-    PolarSelfSubscriptionCycledProps: {
+    /** TarifiaSelfSubscriptionCycledProps */
+    TarifiaSelfSubscriptionCycledProps: {
       /** Email */
       email: string
       /** Product Name */

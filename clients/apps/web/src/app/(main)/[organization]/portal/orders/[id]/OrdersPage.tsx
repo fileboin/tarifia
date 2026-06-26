@@ -2,8 +2,8 @@
 
 import CustomerPortalOrder from '@/components/CustomerPortal/CustomerPortalOrder'
 import { createClientSideAPI } from '@/utils/client'
-import { schemas } from '@polar-sh/client'
-import { getThemePreset } from '@polar-sh/ui/hooks/theming'
+import { schemas } from '@tarifia-sh/client'
+import { getThemePreset } from '@tarifia-sh/ui/hooks/theming'
 import { useTheme } from 'next-themes'
 
 const ClientPage = ({

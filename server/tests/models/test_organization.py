@@ -1,10 +1,10 @@
 import pytest
 from sqlalchemy.orm import joinedload
 
-from polar.kit.utils import utc_now
-from polar.models import Organization, OrganizationReview
-from polar.organization.repository import OrganizationRepository
-from polar.postgres import AsyncSession
+from tarifia.kit.utils import utc_now
+from tarifia.models import Organization, OrganizationReview
+from tarifia.organization.repository import OrganizationRepository
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 
 

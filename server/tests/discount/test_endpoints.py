@@ -5,15 +5,15 @@ import pytest
 import pytest_asyncio
 from httpx import AsyncClient
 
-from polar.discount.repository import DiscountRepository
-from polar.models import Discount, Organization, UserOrganization
-from polar.models.discount import (
+from tarifia.discount.repository import DiscountRepository
+from tarifia.models import Discount, Organization, UserOrganization
+from tarifia.models.discount import (
     DiscountDuration,
     DiscountFixed,
     DiscountPercentage,
     DiscountType,
 )
-from polar.postgres import AsyncSession
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_discount
 

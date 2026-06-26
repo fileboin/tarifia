@@ -4,15 +4,15 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Resources',
-  description: 'Handy links related to the Polar platform',
+  description: 'Handy links related to the Tarifia platform',
   keywords:
     'monetization, merchant of record, saas, digital products, platform, developer, open source, funding, open source, economy',
   openGraph: {
-    siteName: 'Polar',
+    siteName: 'Tarifia',
     type: 'website',
     images: [
       {
-        url: 'https://polar.sh/assets/brand/polar_og.jpg',
+        url: 'https://tarifia.sh/assets/brand/tarifia_og.jpg',
         width: 1200,
         height: 630,
       },
@@ -22,10 +22,10 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     images: [
       {
-        url: 'https://polar.sh/assets/brand/polar_og.jpg',
+        url: 'https://tarifia.sh/assets/brand/tarifia_og.jpg',
         width: 1200,
         height: 630,
-        alt: 'Polar',
+        alt: 'Tarifia',
       },
     ],
   },
@@ -34,14 +34,14 @@ export const metadata: Metadata = {
 const resourceLinks = [
   {
     title: 'Documentation',
-    description: 'Learn the ins and outs of the Polar platform',
-    href: 'https://polar.sh/docs',
+    description: 'Learn the ins and outs of the Tarifia platform',
+    href: 'https://tarifia.sh/docs',
     target: '_blank',
   },
   {
-    title: 'Why Polar',
+    title: 'Why Tarifia',
     description:
-      'Learn why Polar is the best choice for monetizing your business',
+      'Learn why Tarifia is the best choice for monetizing your business',
     href: '/resources/why',
   },
   {
@@ -58,22 +58,22 @@ const resourceLinks = [
 
 const comparisonLinks = [
   {
-    title: 'Polar vs. Stripe',
+    title: 'Tarifia vs. Stripe',
     href: '/resources/comparison/stripe',
-    description: 'Compare Polar with Stripe',
+    description: 'Compare Tarifia with Stripe',
     target: '_blank',
   },
 
   {
-    title: 'Polar vs. Paddle',
+    title: 'Tarifia vs. Paddle',
     href: '/resources/comparison/paddle',
-    description: 'Compare Polar with Paddle',
+    description: 'Compare Tarifia with Paddle',
     target: '_blank',
   },
   {
-    title: 'Polar vs. Lemon Squeezy',
+    title: 'Tarifia vs. Lemon Squeezy',
     href: '/resources/comparison/lemon-squeezy',
-    description: 'Compare Polar with Lemon Squeezy',
+    description: 'Compare Tarifia with Lemon Squeezy',
     target: '_blank',
   },
 ]
@@ -89,14 +89,14 @@ export default function Resources() {
           {resourceLinks.map((link) => (
             <Link
               key={link.title + link.description}
-              className="dark:hover:bg-polar-900 dark:border-polar-700 flex w-full cursor-pointer flex-col gap-6 border border-gray-300 p-6 transition-colors duration-200 hover:bg-gray-100"
+              className="dark:hover:bg-tarifia-900 dark:border-tarifia-700 flex w-full cursor-pointer flex-col gap-6 border border-gray-300 p-6 transition-colors duration-200 hover:bg-gray-100"
               href={link.href}
               target={link.target}
             >
               <ArrowOutwardOutlined fontSize="inherit" />
               <div className="flex flex-col gap-2">
                 <h3 className="font-mono text-xl">{link.title}</h3>
-                <p className="dark:text-polar-500 font-sm text-gray-500">
+                <p className="dark:text-tarifia-500 font-sm text-gray-500">
                   {link.description}
                 </p>
               </div>
@@ -110,14 +110,14 @@ export default function Resources() {
           {comparisonLinks.map((link) => (
             <Link
               key={link.title + link.description}
-              className="dark:hover:bg-polar-900 dark:border-polar-700 flex w-full cursor-pointer flex-col gap-6 border border-gray-300 p-6 transition-colors duration-200 hover:bg-gray-100"
+              className="dark:hover:bg-tarifia-900 dark:border-tarifia-700 flex w-full cursor-pointer flex-col gap-6 border border-gray-300 p-6 transition-colors duration-200 hover:bg-gray-100"
               href={link.href}
               target={link.target}
             >
               <ArrowOutwardOutlined fontSize="inherit" />
               <div className="flex flex-col gap-2">
                 <h3 className="font-mono text-xl">{link.title}</h3>
-                <p className="dark:text-polar-500 font-sm text-gray-500">
+                <p className="dark:text-tarifia-500 font-sm text-gray-500">
                   {link.description}
                 </p>
               </div>

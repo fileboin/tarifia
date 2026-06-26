@@ -3,22 +3,22 @@
 import CustomFieldTypeIcon from '@/components/CustomFields/CustomFieldTypeIcon'
 import { useCustomFields } from '@/hooks/queries'
 import ClearOutlined from '@mui/icons-material/ClearOutlined'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { List, ListItem } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { List, ListItem } from '@tarifia-sh/orbit'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
-import { Switch } from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
+import { Switch } from '@tarifia-sh/orbit'
 import {
   FormControl,
   FormField,
   FormLabel,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { useMemo, useState } from 'react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
@@ -104,7 +104,7 @@ export const ProductCustomFieldSection = ({
                                 'text-sm',
                                 field.value
                                   ? ''
-                                  : 'dark:text-polar-500 text-gray-500',
+                                  : 'dark:text-tarifia-500 text-gray-500',
                               )}
                             >
                               Required

@@ -1,12 +1,12 @@
 import pytest
 
-from polar.kit.db.postgres import AsyncSession
-from polar.kit.utils import utc_now
-from polar.models import Account, Benefit, Customer, Organization, Product
-from polar.models.benefit import BenefitType
-from polar.models.benefit_grant import BenefitGrant
-from polar.models.license_key import LicenseKey, LicenseKeyStatus
-from polar.models.member import Member, MemberRole
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.kit.utils import utc_now
+from tarifia.models import Account, Benefit, Customer, Organization, Product
+from tarifia.models.benefit import BenefitType
+from tarifia.models.benefit_grant import BenefitGrant
+from tarifia.models.license_key import LicenseKey, LicenseKeyStatus
+from tarifia.models.member import Member, MemberRole
 from scripts.migrate_organizations_members import (
     find_deleted_oneoff_grants,
     restore_oneoff_grant_batch,
@@ -482,7 +482,7 @@ class TestRestoreOneoffGrantBatch:
             organization_id=organization.id,
             customer_id=customer.id,
             benefit_id=benefit.id,
-            key="POLAR-RESTORE-TEST-KEY",
+            key="TARIFIA-RESTORE-TEST-KEY",
             status=LicenseKeyStatus.revoked,
         )
         license_key.set_deleted_at()
@@ -595,7 +595,7 @@ class TestRestoreOneoffGrantBatch:
             customer_id=customer.id,
             benefit_id=benefit.id,
             member_id=owner.id,
-            key="POLAR-HEALTHY-KEY-001",
+            key="TARIFIA-HEALTHY-KEY-001",
             status=LicenseKeyStatus.granted,
         )
         await save_fixture(license_key)
@@ -773,7 +773,7 @@ class TestRestoreOneoffGrantBatch:
             organization_id=organization.id,
             customer_id=other_customer.id,
             benefit_id=benefit.id,
-            key="POLAR-WRONG-OWNER-KEY",
+            key="TARIFIA-WRONG-OWNER-KEY",
             status=LicenseKeyStatus.revoked,
         )
         wrong_lk.set_deleted_at()
@@ -888,7 +888,7 @@ class TestFindAndRestoreEndToEnd:
             customer_id=customer.id,
             benefit_id=benefit_lk.id,
             member_id=owner.id,
-            key="POLAR-SURVIVED-KEY",
+            key="TARIFIA-SURVIVED-KEY",
             status=LicenseKeyStatus.granted,
         )
         await save_fixture(lk1)
@@ -897,7 +897,7 @@ class TestFindAndRestoreEndToEnd:
             organization_id=organization.id,
             customer_id=customer.id,
             benefit_id=benefit_lk.id,
-            key="POLAR-DELETED-KEY-01",
+            key="TARIFIA-DELETED-KEY-01",
             status=LicenseKeyStatus.revoked,
         )
         lk2.set_deleted_at()

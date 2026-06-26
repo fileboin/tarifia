@@ -1,6 +1,6 @@
 import { UploadImage } from '@/components/Image/Image'
-import { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
+import { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
 
 interface WalletCardProps {
   organization: schemas['CustomerOrganization']
@@ -9,7 +9,7 @@ interface WalletCardProps {
 
 const WalletCard = ({ organization, wallet }: WalletCardProps) => {
   return (
-    <div className="dark:bg-polar-800 relative w-full max-w-md overflow-hidden rounded-3xl border border-gray-200 bg-gray-100 p-8 shadow-lg dark:border-transparent">
+    <div className="dark:bg-tarifia-800 relative w-full max-w-md overflow-hidden rounded-3xl border border-gray-200 bg-gray-100 p-8 shadow-lg dark:border-transparent">
       {/* Content */}
       <div className="relative z-10">
         {/* Organization logo */}
@@ -19,10 +19,10 @@ const WalletCard = ({ organization, wallet }: WalletCardProps) => {
               src={organization.avatar_url}
               approximateWidth={48}
               alt={organization.name}
-              className="dark:bg-polar-700 h-12 w-12 rounded-lg border border-gray-200 bg-white object-cover p-1 dark:border-transparent"
+              className="dark:bg-tarifia-700 h-12 w-12 rounded-lg border border-gray-200 bg-white object-cover p-1 dark:border-transparent"
             />
           ) : (
-            <div className="dark:bg-polar-700 dark:text-polar-400 flex h-12 w-12 items-center justify-center rounded-lg border border-gray-200 bg-white text-lg font-semibold text-gray-600 dark:border-transparent">
+            <div className="dark:bg-tarifia-700 dark:text-tarifia-400 flex h-12 w-12 items-center justify-center rounded-lg border border-gray-200 bg-white text-lg font-semibold text-gray-600 dark:border-transparent">
               {organization.name.charAt(0).toUpperCase()}
             </div>
           )}
@@ -30,7 +30,7 @@ const WalletCard = ({ organization, wallet }: WalletCardProps) => {
 
         {/* Balance */}
         <div className="mb-2">
-          <div className="dark:text-polar-400 mb-1 text-sm font-medium tracking-wider text-gray-500 uppercase">
+          <div className="dark:text-tarifia-400 mb-1 text-sm font-medium tracking-wider text-gray-500 uppercase">
             Available Balance
           </div>
           <div className="text-4xl font-bold tracking-tight text-gray-950 dark:text-white">
@@ -41,7 +41,7 @@ const WalletCard = ({ organization, wallet }: WalletCardProps) => {
         {/* Card footer */}
         <div className="mt-8 flex items-end justify-between">
           <div>
-            <div className="dark:text-polar-400 text-xs font-medium tracking-wider text-gray-500 uppercase">
+            <div className="dark:text-tarifia-400 text-xs font-medium tracking-wider text-gray-500 uppercase">
               Organization
             </div>
             <div className="text-sm font-semibold text-gray-950 dark:text-white">
@@ -49,7 +49,7 @@ const WalletCard = ({ organization, wallet }: WalletCardProps) => {
             </div>
           </div>
           <div className="text-right">
-            <div className="dark:text-polar-400 text-xs font-medium tracking-wider text-gray-500 uppercase">
+            <div className="dark:text-tarifia-400 text-xs font-medium tracking-wider text-gray-500 uppercase">
               Currency
             </div>
             <div className="text-sm font-semibold text-gray-950 uppercase dark:text-white">

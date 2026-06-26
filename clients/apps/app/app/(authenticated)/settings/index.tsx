@@ -4,7 +4,7 @@ import { SettingsItem } from '@/components/Settings/SettingsList'
 import { Box } from '@/components/Shared/Box'
 import { Text } from '@/components/Shared/Text'
 import { useTheme } from '@/design-system/useTheme'
-import { useOrganizations } from '@/hooks/polar/organizations'
+import { useOrganizations } from '@/hooks/tarifia/organizations'
 import { useSettingsActions } from '@/hooks/useSettingsActions'
 import { OrganizationContext } from '@/providers/OrganizationProvider'
 import Constants from 'expo-constants'
@@ -89,20 +89,20 @@ export default function Index() {
           <SettingsItem
             title="Support"
             variant="link"
-            onPress={() => Linking.openURL('https://polar.sh/docs/support')}
+            onPress={() => Linking.openURL('https://tarifia.sh/docs/support')}
           />
           <SettingsItem
             title="Privacy Policy"
             variant="link"
             onPress={() =>
-              Linking.openURL('https://polar.sh/legal/privacy-policy')
+              Linking.openURL('https://tarifia.sh/legal/privacy-policy')
             }
           />
           <SettingsItem
             title="Terms of Service"
             variant="link"
             onPress={() =>
-              Linking.openURL('https://polar.sh/legal/master-services-terms')
+              Linking.openURL('https://tarifia.sh/legal/master-services-terms')
             }
           />
           <Box height={1} backgroundColor="border" marginVertical="spacing-8" />
@@ -120,7 +120,7 @@ export default function Index() {
           gap="spacing-4"
         >
           <Text variant="body" color="subtext" textAlign="center">
-            {`Polar (${APP_VERSION})`}
+            {`Tarifia (${APP_VERSION})`}
           </Text>
           <UpdateId />
         </Box>

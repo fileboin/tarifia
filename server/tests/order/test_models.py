@@ -1,5 +1,5 @@
-from polar.models import OrderItem, Product
-from polar.models.product_price import (
+from tarifia.models import OrderItem, Product
+from tarifia.models.product_price import (
     ProductPriceFixed,
     ProductPriceSeatUnit,
 )

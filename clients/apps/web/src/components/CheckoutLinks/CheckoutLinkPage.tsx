@@ -1,10 +1,10 @@
 import { OrganizationContext } from '@/providers/maintainerOrganization'
 import { CONFIG } from '@/utils/config'
-import { schemas } from '@polar-sh/client'
-import CopyToClipboardInput from '@polar-sh/ui/components/atoms/CopyToClipboardInput'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@polar-sh/orbit'
-import { Checkbox } from '@polar-sh/orbit'
-import { Label } from '@polar-sh/ui/components/ui/label'
+import { schemas } from '@tarifia-sh/client'
+import CopyToClipboardInput from '@tarifia-sh/ui/components/atoms/CopyToClipboardInput'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@tarifia-sh/orbit'
+import { Checkbox } from '@tarifia-sh/orbit'
+import { Label } from '@tarifia-sh/ui/components/ui/label'
 import { useContext, useMemo, useState } from 'react'
 import { toast } from '../Toast/use-toast'
 import { CheckoutLinkForm } from './CheckoutLinkForm'
@@ -23,7 +23,7 @@ export const CheckoutLinkPage = ({ checkoutLink }: CheckoutLinkPageProps) => {
     const theme = darkmode ? 'dark' : 'light'
 
     return `
-<a href="${checkoutLink?.url}" data-polar-checkout data-polar-checkout-theme="${theme}">Purchase</a>
+<a href="${checkoutLink?.url}" data-tarifia-checkout data-tarifia-checkout-theme="${theme}">Purchase</a>
 <script src="${CONFIG.CHECKOUT_EMBED_SCRIPT_SRC}" defer data-auto-init></script>
   `.trim()
   }, [checkoutLink, darkmode])
@@ -31,7 +31,7 @@ export const CheckoutLinkPage = ({ checkoutLink }: CheckoutLinkPageProps) => {
   const showDarkmodeToggle = embedType === 'svg' || embedType === 'checkout'
 
   const triggerClassName =
-    'dark:data-[state=active]:bg-polar-900 data-[state=active]:bg-white w-full rounded-full!'
+    'dark:data-[state=active]:bg-tarifia-900 data-[state=active]:bg-white w-full rounded-full!'
 
   return (
     <div className="flex w-full flex-col gap-8">
@@ -39,7 +39,7 @@ export const CheckoutLinkPage = ({ checkoutLink }: CheckoutLinkPageProps) => {
         defaultValue={embedType}
         onValueChange={(value) => setEmbedType(value)}
       >
-        <TabsList className="dark:bg-polar-800 mb-4 w-full rounded-full bg-gray-100">
+        <TabsList className="dark:bg-tarifia-800 mb-4 w-full rounded-full bg-gray-100">
           <TabsTrigger className={triggerClassName} value="link">
             Link
           </TabsTrigger>

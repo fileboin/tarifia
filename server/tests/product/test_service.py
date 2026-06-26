@@ -7,13 +7,13 @@ import pytest
 import pytest_asyncio
 from pytest_mock import MockerFixture
 
-from polar.auth.models import AuthSubject
-from polar.enums import SubscriptionRecurringInterval, TaxBehaviorOption
-from polar.exceptions import PolarRequestValidationError
-from polar.kit.currency import PresentmentCurrency
-from polar.kit.pagination import PaginationParams
-from polar.kit.trial import TrialInterval
-from polar.models import (
+from tarifia.auth.models import AuthSubject
+from tarifia.enums import SubscriptionRecurringInterval, TaxBehaviorOption
+from tarifia.exceptions import TarifiaRequestValidationError
+from tarifia.kit.currency import PresentmentCurrency
+from tarifia.kit.pagination import PaginationParams
+from tarifia.kit.trial import TrialInterval
+from tarifia.models import (
     Benefit,
     File,
     Meter,
@@ -22,22 +22,22 @@ from polar.models import (
     User,
     UserOrganization,
 )
-from polar.models.benefit import BenefitType
-from polar.models.file import FileServiceTypes, ProductMediaFile
-from polar.models.organization import OrganizationStatus
-from polar.models.product_price import (
+from tarifia.models.benefit import BenefitType
+from tarifia.models.file import FileServiceTypes, ProductMediaFile
+from tarifia.models.organization import OrganizationStatus
+from tarifia.models.product_price import (
     ProductPriceAmountType,
     ProductPriceFixed,
 )
-from polar.organization_review.schemas import ReviewContext
-from polar.postgres import AsyncSession
-from polar.product.guard import (
+from tarifia.organization_review.schemas import ReviewContext
+from tarifia.postgres import AsyncSession
+from tarifia.product.guard import (
     is_fixed_price,
     is_metered_price,
     is_seat_price,
     is_static_price,
 )
-from polar.product.schemas import (
+from tarifia.product.schemas import (
     ExistingProductPrice,
     ProductCreate,
     ProductCreateOneTime,
@@ -50,8 +50,8 @@ from polar.product.schemas import (
     ProductPriceSeatTiers,
     ProductUpdate,
 )
-from polar.product.service import product as product_service
-from polar.product.sorting import ProductSortProperty
+from tarifia.product.service import product as product_service
+from tarifia.product.sorting import ProductSortProperty
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
@@ -65,7 +65,7 @@ from tests.fixtures.random_objects import (
 
 @pytest.fixture
 def enqueue_job_mock(mocker: MockerFixture) -> AsyncMock:
-    return mocker.patch("polar.product.service.enqueue_job")
+    return mocker.patch("tarifia.product.service.enqueue_job")
 
 
 @pytest.mark.asyncio
@@ -354,7 +354,7 @@ class TestCreate:
             ],
         )
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.create(session, create_schema, auth_subject)
 
     @pytest.mark.auth
@@ -377,7 +377,7 @@ class TestCreate:
             ],
         )
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.create(session, create_schema, auth_subject)
 
     @pytest.mark.auth
@@ -520,7 +520,7 @@ class TestCreate:
             ],
         )
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.create(session, create_schema, auth_subject)
 
     @pytest.mark.auth(AuthSubjectFixture(subject="organization"))
@@ -567,7 +567,7 @@ class TestCreate:
             medias=[uuid.uuid4()],
         )
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.create(session, create_schema, auth_subject)
 
     @pytest.mark.auth
@@ -617,7 +617,7 @@ class TestCreate:
             medias=[file.id],
         )
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.create(session, create_schema, auth_subject)
 
     @pytest.mark.auth
@@ -725,7 +725,7 @@ class TestCreate:
         user_organization: UserOrganization,
         meter: Meter,
     ) -> None:
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.create(
                 session,
                 ProductCreateOneTime(
@@ -755,7 +755,7 @@ class TestCreate:
         organization: Organization,
         user_organization: UserOrganization,
     ) -> None:
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.create(
                 session,
                 ProductCreateRecurring(
@@ -783,7 +783,7 @@ class TestCreate:
         user_organization: UserOrganization,
         meter: Meter,
     ) -> None:
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.create(
                 session,
                 ProductCreateOneTime(
@@ -810,7 +810,7 @@ class TestCreate:
         user_organization: UserOrganization,
         meter: Meter,
     ) -> None:
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.create(
                 session,
                 ProductCreateRecurring(
@@ -844,7 +844,7 @@ class TestCreate:
         user_organization: UserOrganization,
     ) -> None:
         """Test that multiple static prices in the same currency are not allowed"""
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.create(
                 session,
                 ProductCreateOneTime(
@@ -876,7 +876,7 @@ class TestCreate:
         meter: Meter,
     ) -> None:
         """Test that each currency must have the same set of prices"""
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.create(
                 session,
                 ProductCreateRecurring(
@@ -916,7 +916,7 @@ class TestCreate:
         meter: Meter,
     ) -> None:
         """Test that the default presentment currency is included in the product prices"""
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.create(
                 session,
                 ProductCreateRecurring(
@@ -1037,7 +1037,7 @@ class TestCreate:
             ],
         )
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.create(session, create_schema, auth_subject)
 
     @pytest.mark.auth
@@ -1087,7 +1087,7 @@ class TestCreate:
         meter: Meter,
     ) -> None:
         """Test that prices for the same currency must have the same tax_behavior"""
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.create(
                 session,
                 ProductCreateRecurring(
@@ -1269,7 +1269,7 @@ class TestCreateFixedSeatComposition:
         user_organization: UserOrganization,
         seat_based_pricing_enabled: None,
     ) -> None:
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.create(
                 session,
                 ProductCreateRecurring(
@@ -1293,7 +1293,7 @@ class TestCreateFixedSeatComposition:
         user_organization: UserOrganization,
         seat_based_pricing_enabled: None,
     ) -> None:
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.create(
                 session,
                 ProductCreateRecurring(
@@ -1317,7 +1317,7 @@ class TestCreateFixedSeatComposition:
         user_organization: UserOrganization,
         seat_based_pricing_enabled: None,
     ) -> None:
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.create(
                 session,
                 ProductCreateRecurring(
@@ -1343,7 +1343,7 @@ class TestCreateFixedSeatComposition:
         organization: Organization,
         user_organization: UserOrganization,
     ) -> None:
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.create(
                 session,
                 ProductCreateRecurring(
@@ -1371,7 +1371,7 @@ class TestCreateFixedSeatComposition:
         seat_based_pricing_enabled: None,
     ) -> None:
         """USD = fixed + seat, EUR = fixed only must be rejected."""
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.create(
                 session,
                 ProductCreateRecurring(
@@ -1398,7 +1398,7 @@ class TestCreateFixedSeatComposition:
         user_organization: UserOrganization,
         seat_based_pricing_enabled: None,
     ) -> None:
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.create(
                 session,
                 ProductCreateRecurring(
@@ -1423,7 +1423,7 @@ class TestCreateFixedSeatComposition:
     ) -> None:
         """Without ``seat_based_pricing_enabled`` the seat gate alone rejects the
         composition — no separate fixed+seat gate is needed."""
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.create(
                 session,
                 ProductCreateRecurring(
@@ -1450,7 +1450,7 @@ class TestUpdate:
         user_organization: UserOrganization,
     ) -> None:
         update_schema = ProductUpdate(prices=[])
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.update(
                 session,
                 product,
@@ -1728,7 +1728,7 @@ class TestUpdate:
         user_organization: UserOrganization,
     ) -> None:
         update_schema = ProductUpdate(medias=[uuid.uuid4()])
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.update(
                 session,
                 product,
@@ -1774,7 +1774,7 @@ class TestUpdate:
         await save_fixture(file)
 
         update_schema = ProductUpdate(medias=[file.id])
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.update(
                 session,
                 product,
@@ -1834,7 +1834,7 @@ class TestUpdate:
             recurring_interval=SubscriptionRecurringInterval.year
         )
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.update(
                 session,
                 product,
@@ -1866,7 +1866,7 @@ class TestUpdate:
             ]
         )
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.update(
                 session,
                 product_recurring_monthly_and_yearly,
@@ -1963,7 +1963,7 @@ class TestUpdate:
                 ),
             ]
         )
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.update(
                 session,
                 product,
@@ -1992,7 +1992,7 @@ class TestUpdate:
                 ),
             ]
         )
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.update(
                 session,
                 product,
@@ -2015,7 +2015,7 @@ class TestUpdate:
             trial_interval=TrialInterval.month, trial_interval_count=1
         )
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.update(
                 session,
                 product_one_time,
@@ -2067,7 +2067,7 @@ class TestUpdateBenefits:
         )
         assert len(product.product_benefits) == len(benefits)
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.update_benefits(
                 session,
                 product,
@@ -2095,7 +2095,7 @@ class TestUpdateBenefits:
             UserOrganization(user=user, organization=organization_second)
         )
 
-        with pytest.raises(PolarRequestValidationError, match="same organization"):
+        with pytest.raises(TarifiaRequestValidationError, match="same organization"):
             await product_service.update_benefits(
                 session,
                 product,
@@ -2343,7 +2343,7 @@ class TestUpdateBenefits:
             properties={"note": None},
         )
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.update_benefits(
                 session,
                 product,
@@ -2379,7 +2379,7 @@ class TestUpdateBenefits:
             benefits=[not_selectable_benefit],
         )
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await product_service.update_benefits(
                 session,
                 product,

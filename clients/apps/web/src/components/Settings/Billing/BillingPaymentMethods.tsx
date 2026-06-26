@@ -9,10 +9,10 @@ import {
   type OrganizationPaymentMethodCard,
 } from '@/hooks/queries/billing'
 import { extractApiErrorMessage } from '@/utils/api/errors'
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
-import { Button } from '@polar-sh/orbit'
-import { Status } from '@polar-sh/orbit'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Button } from '@tarifia-sh/orbit'
+import { Status } from '@tarifia-sh/orbit'
 import { X } from 'lucide-react'
 import { PaymentMethodDisplay } from '../../PaymentMethodDisplay'
 import { LoadingBox } from '../../Shared/LoadingBox'
@@ -136,7 +136,7 @@ export const BillingPaymentMethods = ({
       <Box alignItems="start" justifyContent="between" columnGap="m">
         <SectionDescription
           title="Payment methods"
-          description="Cards used to pay for your Polar subscription"
+          description="Cards used to pay for your Tarifia subscription"
         />
         <Button onClick={onAddPaymentMethod} variant="secondary">
           Add payment method

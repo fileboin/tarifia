@@ -3,15 +3,15 @@
 import { useGetOrganizationOrderInvoice } from '@/hooks/queries/billing'
 import { toast } from '@/components/Toast/use-toast'
 import FileDownloadOutlined from '@mui/icons-material/FileDownloadOutlined'
-import { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
-import { DataTable, DataTableColumnDef } from '@polar-sh/orbit'
-import FormattedDateTime from '@polar-sh/ui/components/atoms/FormattedDateTime'
-import { Pill } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { DataTable, DataTableColumnDef } from '@tarifia-sh/orbit'
+import FormattedDateTime from '@tarifia-sh/ui/components/atoms/FormattedDateTime'
+import { Pill } from '@tarifia-sh/orbit'
 import { useCallback } from 'react'
-import { Button } from '@polar-sh/orbit'
+import { Button } from '@tarifia-sh/orbit'
 
 const formatPrice = formatCurrency('standard', 'en-US')
 

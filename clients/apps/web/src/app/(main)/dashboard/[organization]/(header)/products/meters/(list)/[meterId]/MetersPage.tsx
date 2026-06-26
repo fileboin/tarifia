@@ -7,16 +7,16 @@ import { useToast } from '@/components/Toast/use-toast'
 import { useUpdateMeter } from '@/hooks/queries/meters'
 import { apiErrorToast } from '@/utils/api/errors'
 import MoreVertOutlined from '@mui/icons-material/MoreVertOutlined'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { Status } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { Status } from '@tarifia-sh/orbit'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@polar-sh/ui/components/ui/dropdown-menu'
+} from '@tarifia-sh/ui/components/ui/dropdown-menu'
 import { useRouter, useSearchParams } from 'next/navigation'
 import React, { useCallback } from 'react'
 
@@ -117,7 +117,7 @@ const ClientPage: React.FC<ClientPageProps> = ({ organization, meter }) => {
               </DropdownMenuTrigger>
               <DropdownMenuContent
                 align="end"
-                className="dark:bg-polar-800 bg-gray-50 shadow-lg"
+                className="dark:bg-tarifia-800 bg-gray-50 shadow-lg"
               >
                 <DropdownMenuItem
                   onClick={() => {

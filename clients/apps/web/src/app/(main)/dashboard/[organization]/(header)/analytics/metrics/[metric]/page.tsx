@@ -3,7 +3,7 @@ import DashboardDetailClientPage from '@/components/Metrics/dashboards/Dashboard
 import { getServerSideAPI } from '@/utils/client/serverside'
 import { fromISODate, METRIC_GROUPS, toISODate } from '@/utils/metrics'
 import { getOrganizationBySlugOrNotFound } from '@/utils/organization'
-import { schemas, unwrap } from '@polar-sh/client'
+import { schemas, unwrap } from '@tarifia-sh/client'
 import { endOfDay, max, subMonths } from 'date-fns'
 import { notFound, redirect, RedirectType } from 'next/navigation'
 

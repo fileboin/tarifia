@@ -2,7 +2,7 @@
 
 import ChevronLeftRounded from '@mui/icons-material/ChevronLeftRounded'
 import ChevronRightRounded from '@mui/icons-material/ChevronRightRounded'
-import { Button } from '@polar-sh/orbit'
+import { Button } from '@tarifia-sh/orbit'
 import { AnimatePresence, motion } from 'motion/react'
 import { useCallback, useState } from 'react'
 
@@ -49,7 +49,7 @@ export const Slideshow = ({ images }: SlideshowProps) => {
   )
 
   return (
-    <div className="dark:bg-polar-900 dark:border-polar-700 relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-xl bg-gray-100 bg-cover bg-center lg:rounded-3xl dark:border">
+    <div className="dark:bg-tarifia-900 dark:border-tarifia-700 relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-xl bg-gray-100 bg-cover bg-center lg:rounded-3xl dark:border">
       <AnimatePresence initial={false} custom={direction}>
         <motion.div
           className="absolute inset-0 h-full w-full bg-cover bg-center"

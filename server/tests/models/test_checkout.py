@@ -3,12 +3,12 @@ from datetime import UTC, datetime
 
 import pytest
 
-from polar.config import settings
-from polar.kit.address import Address, CountryAlpha2
-from polar.kit.trial import TrialInterval
-from polar.models import Checkout, Organization, Product
-from polar.models.checkout import BillingAddressFieldMode, CheckoutStatus
-from polar.postgres import AsyncSession
+from tarifia.config import settings
+from tarifia.kit.address import Address, CountryAlpha2
+from tarifia.kit.trial import TrialInterval
+from tarifia.models import Checkout, Organization, Product
+from tarifia.models.checkout import BillingAddressFieldMode, CheckoutStatus
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_checkout, create_product
 

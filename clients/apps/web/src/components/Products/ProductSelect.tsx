@@ -1,7 +1,7 @@
 import { useProducts, useSelectedProducts } from '@/hooks/queries'
 import ExpandMoreOutlined from '@mui/icons-material/ExpandMoreOutlined'
-import { operations, schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
+import { operations, schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
 import {
   Command,
   CommandEmpty,
@@ -10,12 +10,12 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from '@polar-sh/ui/components/ui/command'
+} from '@tarifia-sh/ui/components/ui/command'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@polar-sh/ui/components/ui/popover'
+} from '@tarifia-sh/ui/components/ui/popover'
 import { CheckIcon } from 'lucide-react'
 import React, { useCallback, useMemo, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
@@ -219,7 +219,7 @@ const ProductSelect: React.FC<ProductSelectProps> = ({
           role="combobox"
           aria-expanded={open}
           className={twMerge(
-            'ring-offset-background placeholder:text-muted-foreground focus:ring-ring dark:bg-polar-800 dark:hover:bg-polar-700 dark:border-polar-700 dark:hover:border-polar-700 flex h-10 w-full! flex-row items-center justify-between gap-x-2 rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm font-normal font-sans shadow-xs transition-colors hover:border-gray-300 hover:bg-white focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
+            'ring-offset-background placeholder:text-muted-foreground focus:ring-ring dark:bg-tarifia-800 dark:hover:bg-tarifia-700 dark:border-tarifia-700 dark:hover:border-tarifia-700 flex h-10 w-full! flex-row items-center justify-between gap-x-2 rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm font-normal font-sans shadow-xs transition-colors hover:border-gray-300 hover:bg-white focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
             className,
           )}
           wrapperClassNames="justify-between w-full min-w-[200px]"

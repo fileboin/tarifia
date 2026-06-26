@@ -1,8 +1,8 @@
 'use client'
 
-import { schemas } from '@polar-sh/client'
-import { Input } from '@polar-sh/orbit'
-import { Checkbox } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Input } from '@tarifia-sh/orbit'
+import { Checkbox } from '@tarifia-sh/orbit'
 import {
   FormControl,
   FormDescription,
@@ -10,18 +10,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { PlusIcon } from 'lucide-react'
 import { useCallback } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import CreateMeterModalContent from '@/components/Meter/CreateMeterModalContent'
 import MeterSelector from '@/components/Meter/MeterSelector'
-import { InlineModal } from '@polar-sh/orbit'
+import { InlineModal } from '@tarifia-sh/orbit'
 import { useModal } from '@/components/Modal/useModal'
-import { SpinnerNoMargin } from '@polar-sh/orbit'
+import { SpinnerNoMargin } from '@tarifia-sh/orbit'
 import { useMeters } from '@/hooks/queries/meters'
-import { Button } from '@polar-sh/orbit'
+import { Button } from '@tarifia-sh/orbit'
 
 export const MeterCreditBenefitForm = ({
   organization,

@@ -4,11 +4,11 @@ import pytest
 import pytest_asyncio
 from fastapi import FastAPI
 from httpx import ASGITransport, AsyncClient
-from polar_sdk import Polar
+from tarifia_sdk import Tarifia
 
-from polar.auth.scope import Scope
-from polar.kit.utils import utc_now
-from polar.models import Benefit, Customer, Organization, Product, UserOrganization
+from tarifia.auth.scope import Scope
+from tarifia.kit.utils import utc_now
+from tarifia.models import Benefit, Customer, Organization, Product, UserOrganization
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
@@ -20,9 +20,9 @@ from tests.fixtures.random_objects import (
 
 
 @pytest_asyncio.fixture
-async def polar(app: FastAPI) -> AsyncGenerator[Polar]:
+async def tarifia(app: FastAPI) -> AsyncGenerator[Tarifia]:
     async with AsyncClient(transport=ASGITransport(app=app)) as client:
-        yield Polar(access_token="", async_client=client)
+        yield Tarifia(access_token="", async_client=client)
 
 
 @pytest.mark.asyncio
@@ -36,31 +36,31 @@ class TestSDK:
 
     async def test_get_organization(
         self,
-        polar: Polar,
+        tarifia: Tarifia,
         organization: Organization,
         user_organization: UserOrganization,
     ) -> None:
-        response = await polar.organizations.get_async(id=str(organization.id))
+        response = await tarifia.organizations.get_async(id=str(organization.id))
         assert response is not None
 
     async def test_list_products(
         self,
-        polar: Polar,
+        tarifia: Tarifia,
         product: Product,
         product_second: Product,
         user_organization: UserOrganization,
     ) -> None:
         products = [product, product_second]
 
-        response = await polar.products.list_async()
+        response = await tarifia.products.list_async()
         assert response is not None
 
         assert len(response.result.items) == len(products)
 
     async def test_list_benefits(
-        self, polar: Polar, benefits: list[Benefit], user_organization: UserOrganization
+        self, tarifia: Tarifia, benefits: list[Benefit], user_organization: UserOrganization
     ) -> None:
-        response = await polar.benefits.list_async()
+        response = await tarifia.benefits.list_async()
         assert response is not None
 
         assert len(response.result.items) == len(benefits)
@@ -68,7 +68,7 @@ class TestSDK:
     async def test_list_orders(
         self,
         save_fixture: SaveFixture,
-        polar: Polar,
+        tarifia: Tarifia,
         product: Product,
         product_one_time: Product,
         customer: Customer,
@@ -91,7 +91,7 @@ class TestSDK:
             ),
         ]
 
-        response = await polar.orders.list_async()
+        response = await tarifia.orders.list_async()
         assert response is not None
 
         assert len(response.result.items) == len(orders)
@@ -99,7 +99,7 @@ class TestSDK:
     async def test_list_subscriptions(
         self,
         save_fixture: SaveFixture,
-        polar: Polar,
+        tarifia: Tarifia,
         product: Product,
         customer: Customer,
         user_organization: UserOrganization,
@@ -113,7 +113,7 @@ class TestSDK:
             ),
         ]
 
-        response = await polar.subscriptions.list_async()
+        response = await tarifia.subscriptions.list_async()
         assert response is not None
 
         assert len(response.result.items) == len(subscriptions)
@@ -121,7 +121,7 @@ class TestSDK:
     async def test_cancel_subscription(
         self,
         save_fixture: SaveFixture,
-        polar: Polar,
+        tarifia: Tarifia,
         product: Product,
         customer: Customer,
         user_organization: UserOrganization,
@@ -130,7 +130,7 @@ class TestSDK:
             save_fixture, product=product, customer=customer
         )
 
-        response = await polar.subscriptions.update_async(
+        response = await tarifia.subscriptions.update_async(
             id=str(subscription.id),
             subscription_update={"cancel_at_period_end": True},
         )
@@ -143,12 +143,12 @@ class TestSDK:
     async def test_create_checkout(
         self,
         save_fixture: SaveFixture,
-        polar: Polar,
+        tarifia: Tarifia,
         product: Product,
         customer: Customer,
         user_organization: UserOrganization,
     ) -> None:
-        response = await polar.checkouts.create_async(
+        response = await tarifia.checkouts.create_async(
             request={
                 "products": [str(product.id)],
                 "external_customer_id": "EXTERNAL_CUSTOMER_ID",
@@ -162,12 +162,12 @@ class TestSDK:
     async def test_create_checkout_link(
         self,
         save_fixture: SaveFixture,
-        polar: Polar,
+        tarifia: Tarifia,
         product: Product,
         customer: Customer,
         user_organization: UserOrganization,
     ) -> None:
-        response = await polar.checkout_links.create_async(
+        response = await tarifia.checkout_links.create_async(
             request={
                 "payment_processor": "stripe",
                 "product_id": str(product.id),
@@ -180,13 +180,13 @@ class TestSDK:
     async def test_client_get_checkout(
         self,
         save_fixture: SaveFixture,
-        polar: Polar,
+        tarifia: Tarifia,
         product: Product,
         customer: Customer,
         user_organization: UserOrganization,
     ) -> None:
         checkout = await create_checkout(save_fixture, products=[product])
-        response = await polar.checkouts.client_get_async(
+        response = await tarifia.checkouts.client_get_async(
             client_secret=checkout.client_secret
         )
         assert response is not None

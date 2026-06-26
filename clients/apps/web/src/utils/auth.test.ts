@@ -1,4 +1,4 @@
-import type { Client, schemas } from '@polar-sh/client'
+import type { Client, schemas } from '@tarifia-sh/client'
 import { describe, expect, it, vi } from 'vitest'
 import {
   checkAuthenticationSession,

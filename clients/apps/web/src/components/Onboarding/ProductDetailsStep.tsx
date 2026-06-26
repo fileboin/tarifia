@@ -3,11 +3,11 @@
 import { useAuth } from '@/hooks'
 import { useCreateOrganization } from '@/hooks/queries'
 import { AupVerdict, useAupValidation } from '@/hooks/useAupValidation'
-import { schemas } from '@polar-sh/client'
-import { Box } from '@polar-sh/orbit/Box'
-import { Button, Text } from '@polar-sh/orbit'
-import { Input } from '@polar-sh/orbit'
-import { TextArea } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Button, Text } from '@tarifia-sh/orbit'
+import { Input } from '@tarifia-sh/orbit'
+import { TextArea } from '@tarifia-sh/orbit'
 import {
   Form,
   FormControl,
@@ -15,7 +15,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { useOnboardingV2Tracking } from '@/hooks/onboardingV2'
 import { useRouter } from 'next/navigation'
 import { useEffect, useMemo, useState } from 'react'

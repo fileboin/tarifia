@@ -1,8 +1,8 @@
 import { useCreateCustomField } from '@/hooks/queries'
 import { setValidationErrors } from '@/utils/api/errors'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { Form } from '@polar-sh/ui/components/ui/form'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { Form } from '@tarifia-sh/ui/components/ui/form'
 import { useCallback } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from '../Toast/use-toast'
@@ -64,7 +64,7 @@ const CreateCustomFieldModalContent = ({
     <div className="flex flex-col gap-y-6 overflow-y-auto px-8 py-10">
       <div>
         <h2 className="text-lg">Create Custom Field</h2>
-        <p className="dark:text-polar-500 mt-2 text-sm text-gray-500">
+        <p className="dark:text-tarifia-500 mt-2 text-sm text-gray-500">
           Custom Fields allow you to ask additional information from your
           customers at checkout, and will be available for use in all products
           of your organization.

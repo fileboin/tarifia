@@ -1,7 +1,7 @@
 'use client'
 
 import { useOrganizationReviewStatus } from '@/hooks/queries/org'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef } from 'react'
 import { AccountPageApproved } from './AccountPageApproved'

@@ -2,7 +2,7 @@ import {
   GenericChart,
   GenericChartSeries,
 } from '@/components/Charts/GenericChart'
-import { Spinner } from '@polar-sh/orbit'
+import { Spinner } from '@tarifia-sh/orbit'
 
 export interface ChartSeries {
   key: string
@@ -45,7 +45,7 @@ export const Chart = <T extends Record<string, unknown>>({
   }))
 
   return (
-    <div className="dark:bg-polar-900 flex w-full flex-col gap-y-2 rounded-2xl bg-white px-4 pt-4">
+    <div className="dark:bg-tarifia-900 flex w-full flex-col gap-y-2 rounded-2xl bg-white px-4 pt-4">
       {loading ? (
         <div
           style={{ height }}

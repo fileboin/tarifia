@@ -3,11 +3,11 @@ import uuid
 import pytest
 from httpx import AsyncClient
 
-from polar.enums import SubscriptionRecurringInterval
-from polar.kit.visibility import Visibility
-from polar.models import Customer, Member, Organization, Product, Subscription
-from polar.models.subscription import SubscriptionStatus
-from polar.postgres import AsyncSession
+from tarifia.enums import SubscriptionRecurringInterval
+from tarifia.kit.visibility import Visibility
+from tarifia.models import Customer, Member, Organization, Product, Subscription
+from tarifia.models.subscription import SubscriptionStatus
+from tarifia.postgres import AsyncSession
 from tests.fixtures.auth import (
     CUSTOMER_AUTH_SUBJECT,
     MEMBER_AUTH_SUBJECT,

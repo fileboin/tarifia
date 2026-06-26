@@ -3,13 +3,13 @@
 import { useOnboardingV2Tracking } from '@/hooks/onboardingV2'
 import { api } from '@/utils/client'
 import { formatCountry } from '@/utils/formatters'
-import { enums, schemas } from '@polar-sh/client'
-import { Box } from '@polar-sh/orbit/Box'
-import { Button } from '@polar-sh/orbit'
-import CountryPicker from '@polar-sh/ui/components/atoms/CountryPicker'
-import { Input } from '@polar-sh/orbit'
+import { enums, schemas } from '@tarifia-sh/client'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Button } from '@tarifia-sh/orbit'
+import CountryPicker from '@tarifia-sh/ui/components/atoms/CountryPicker'
+import { Input } from '@tarifia-sh/orbit'
 
-import { Tabs, TabsList, TabsTrigger } from '@polar-sh/orbit'
+import { Tabs, TabsList, TabsTrigger } from '@tarifia-sh/orbit'
 import {
   Form,
   FormControl,
@@ -17,7 +17,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { useRouter } from 'next/navigation'
 import { useEffect, useMemo, useState } from 'react'
 import { useForm, useFormContext, useWatch } from 'react-hook-form'
@@ -296,7 +296,7 @@ export function BusinessDetailsStep() {
             name="organizationType"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>Using Polar as</FormLabel>
+                <FormLabel>Using Tarifia as</FormLabel>
                 <FormControl>
                   <Tabs
                     value={field.value}
@@ -308,16 +308,16 @@ export function BusinessDetailsStep() {
                       }
                     }}
                   >
-                    <TabsList className="dark:bg-polar-950 w-full flex-row items-center rounded-full bg-gray-100">
+                    <TabsList className="dark:bg-tarifia-950 w-full flex-row items-center rounded-full bg-gray-100">
                       <TabsTrigger
                         value="individual"
-                        className="dark:data-[state=active]:bg-polar-800 grow rounded-full! data-[state=active]:bg-white"
+                        className="dark:data-[state=active]:bg-tarifia-800 grow rounded-full! data-[state=active]:bg-white"
                       >
                         Individual
                       </TabsTrigger>
                       <TabsTrigger
                         value="company"
-                        className="dark:data-[state=active]:bg-polar-800 grow rounded-full! data-[state=active]:bg-white"
+                        className="dark:data-[state=active]:bg-tarifia-800 grow rounded-full! data-[state=active]:bg-white"
                       >
                         Business
                       </TabsTrigger>

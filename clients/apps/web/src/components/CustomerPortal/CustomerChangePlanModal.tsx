@@ -1,16 +1,16 @@
 'use client'
 
-import { InlineModalHeader } from '@polar-sh/orbit'
+import { InlineModalHeader } from '@tarifia-sh/orbit'
 import {
   useCustomerPaymentMethods,
   useCustomerUpdateSubscription,
 } from '@/hooks/queries/customerPortal'
 import { hasLegacyRecurringPrices, isFreePrice } from '@/utils/product'
 import { formatTrialEnd, useTrialChangeOutcome } from '@/utils/trial-change'
-import { Client, schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { List, ListItem } from '@polar-sh/orbit'
-import { Checkbox } from '@polar-sh/orbit'
+import { Client, schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { List, ListItem } from '@tarifia-sh/orbit'
+import { Checkbox } from '@tarifia-sh/orbit'
 import { useRouter } from 'next/navigation'
 import { useCallback, useMemo, useState } from 'react'
 import { resolveBenefitIcon } from '../Benefit/utils'
@@ -266,7 +266,7 @@ const CustomerChangePlanModal = ({
         </List>
         <h3 className="font-medium">Available Plans</h3>
         {availableProducts.length === 0 ? (
-          <p className="dark:text-polar-500 dark:bg-polar-800 rounded-2xl bg-gray-50 p-3 text-center text-sm text-gray-500">
+          <p className="dark:text-tarifia-500 dark:bg-tarifia-800 rounded-2xl bg-gray-50 p-3 text-center text-sm text-gray-500">
             No other plans available
           </p>
         ) : (
@@ -291,7 +291,7 @@ const CustomerChangePlanModal = ({
               <div className="flex flex-col gap-y-2">
                 {addedBenefits.map((benefit) => (
                   <div key={benefit.id} className="flex flex-row align-middle">
-                    <span className="dark:bg-polar-700 flex h-6 w-6 shrink-0 flex-row items-center justify-center rounded-full bg-blue-50 text-2xl text-blue-500 dark:text-white">
+                    <span className="dark:bg-tarifia-700 flex h-6 w-6 shrink-0 flex-row items-center justify-center rounded-full bg-blue-50 text-2xl text-blue-500 dark:text-white">
                       {resolveBenefitIcon(benefit.type, 'h-3 w-3')}
                     </span>
                     <span className="ml-2 text-sm">{benefit.description}</span>
@@ -308,7 +308,7 @@ const CustomerChangePlanModal = ({
               <div className="flex flex-col gap-y-2">
                 {removedBenefits.map((benefit) => (
                   <div key={benefit.id} className="flex flex-row align-middle">
-                    <span className="dark:bg-polar-700 flex h-6 w-6 shrink-0 flex-row items-center justify-center rounded-full bg-blue-50 text-2xl text-blue-500 dark:text-white">
+                    <span className="dark:bg-tarifia-700 flex h-6 w-6 shrink-0 flex-row items-center justify-center rounded-full bg-blue-50 text-2xl text-blue-500 dark:text-white">
                       {resolveBenefitIcon(benefit.type, 'h-3 w-3')}
                     </span>
                     <span className="ml-2 text-sm">{benefit.description}</span>
@@ -330,14 +330,14 @@ const CustomerChangePlanModal = ({
                 </div>
               )}
 
-              <span className="dark:text-polar-500 text-sm text-pretty text-gray-500">
+              <span className="dark:text-tarifia-500 text-sm text-pretty text-gray-500">
                 {invoicingMessage}
               </span>
             </label>
           )}
         </div>
         {needToAddPaymentMethod && (
-          <p className="dark:text-polar-500 text-sm text-gray-500">
+          <p className="dark:text-tarifia-500 text-sm text-gray-500">
             You need to add a payment method before updating your plan. Head to
             the Customer Portal Settings to add a payment method.
           </p>

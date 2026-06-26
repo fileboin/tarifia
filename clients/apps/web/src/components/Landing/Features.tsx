@@ -61,14 +61,14 @@ export const Features = () => {
             <Link
               key={tile.title}
               href={tile.href}
-              className="dark:bg-polar-900 dark:hover:bg-polar-800 flex flex-col bg-gray-50 transition-colors hover:bg-gray-100"
+              className="dark:bg-tarifia-900 dark:hover:bg-tarifia-800 flex flex-col bg-gray-50 transition-colors hover:bg-gray-100"
             >
               <div className="flex flex-col gap-8 p-8">
                 <span className="font-display text-3xl text-gray-900 dark:text-white">
                   {tile.title}
                 </span>
-                <div className="dark:bg-polar-600 h-[2px] w-10 bg-gray-200" />
-                <span className="dark:text-polar-500 text-xl text-gray-500">
+                <div className="dark:bg-tarifia-600 h-[2px] w-10 bg-gray-200" />
+                <span className="dark:text-tarifia-500 text-xl text-gray-500">
                   {tile.desc}
                 </span>
               </div>

@@ -10,18 +10,18 @@ from pydantic import UUID4
 from rich.progress import Progress
 from sqlalchemy import func, select
 
-from polar import tasks  # noqa: F401
-from polar.kit.db.postgres import create_async_sessionmaker
-from polar.models import Customer, Order
-from polar.models.refund import RefundReason
-from polar.order.repository import OrderRepository
-from polar.organization.repository import OrganizationRepository
-from polar.postgres import create_async_engine
-from polar.redis import create_redis
-from polar.refund.schemas import RefundCreate
-from polar.refund.service import RefundDisputedPayment, RefundedAlready
-from polar.refund.service import refund as refund_service
-from polar.worker import JobQueueManager
+from tarifia import tasks  # noqa: F401
+from tarifia.kit.db.postgres import create_async_sessionmaker
+from tarifia.models import Customer, Order
+from tarifia.models.refund import RefundReason
+from tarifia.order.repository import OrderRepository
+from tarifia.organization.repository import OrganizationRepository
+from tarifia.postgres import create_async_engine
+from tarifia.redis import create_redis
+from tarifia.refund.schemas import RefundCreate
+from tarifia.refund.service import RefundDisputedPayment, RefundedAlready
+from tarifia.refund.service import refund as refund_service
+from tarifia.worker import JobQueueManager
 
 cli = typer.Typer()
 

@@ -3,7 +3,7 @@ import {
   OrganizationPermission,
   useOrganizationRoles,
 } from '@/hooks/queries/roles'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 
 const useOrganizationRole = (
   organizationId: string | undefined,

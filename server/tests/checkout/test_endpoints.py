@@ -8,16 +8,16 @@ import pytest_asyncio
 from httpx import AsyncClient
 from pytest_mock import MockerFixture
 
-from polar.auth.models import AuthSubject
-from polar.auth.scope import Scope
-from polar.checkout.repository import CheckoutRepository
-from polar.checkout.schemas import CheckoutProductCreate
-from polar.checkout.service import checkout as checkout_service
-from polar.enums import SubscriptionRecurringInterval, TaxBehavior, TaxProcessor
-from polar.integrations.stripe.service import StripeService
-from polar.kit.utils import utc_now
-from polar.kit.visibility import Visibility
-from polar.models import (
+from tarifia.auth.models import AuthSubject
+from tarifia.auth.scope import Scope
+from tarifia.checkout.repository import CheckoutRepository
+from tarifia.checkout.schemas import CheckoutProductCreate
+from tarifia.checkout.service import checkout as checkout_service
+from tarifia.enums import SubscriptionRecurringInterval, TaxBehavior, TaxProcessor
+from tarifia.integrations.stripe.service import StripeService
+from tarifia.kit.utils import utc_now
+from tarifia.kit.visibility import Visibility
+from tarifia.models import (
     Checkout,
     Customer,
     Discount,
@@ -28,13 +28,13 @@ from polar.models import (
     UserOrganization,
     WebhookEndpoint,
 )
-from polar.models.checkout import CheckoutStatus
-from polar.models.discount import DiscountDuration, DiscountType
-from polar.models.organization import OrganizationStatus
-from polar.models.product_price import ProductPriceSeatUnit
-from polar.postgres import AsyncSession
-from polar.tax.calculation import TaxCalculationService
-from polar.tax.calculation.base import TaxabilityReason
+from tarifia.models.checkout import CheckoutStatus
+from tarifia.models.discount import DiscountDuration, DiscountType
+from tarifia.models.organization import OrganizationStatus
+from tarifia.models.product_price import ProductPriceSeatUnit
+from tarifia.postgres import AsyncSession
+from tarifia.tax.calculation import TaxCalculationService
+from tarifia.tax.calculation.base import TaxabilityReason
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
@@ -63,14 +63,14 @@ def api_prefix(request: pytest.FixtureRequest) -> str:
 @pytest.fixture(autouse=True)
 def stripe_service_mock(mocker: MockerFixture) -> MagicMock:
     mock = MagicMock(spec=StripeService)
-    mocker.patch("polar.checkout.service.stripe_service", new=mock)
+    mocker.patch("tarifia.checkout.service.stripe_service", new=mock)
     return mock
 
 
 @pytest.fixture(autouse=True)
 def calculate_tax_mock(mocker: MockerFixture) -> AsyncMock:
     mock = mocker.patch(
-        "polar.checkout.service.tax_calculation_service", spec=TaxCalculationService
+        "tarifia.checkout.service.tax_calculation_service", spec=TaxCalculationService
     )
     mock.calculate.return_value = (
         {

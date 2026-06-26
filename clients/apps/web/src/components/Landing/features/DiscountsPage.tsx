@@ -36,7 +36,7 @@ export const DiscountsPage = () => {
 
       <FeatureSection title="Three knobs">
         <p>
-          Every discount in Polar is built from three decisions. The first is{' '}
+          Every discount in Tarifia is built from three decisions. The first is{' '}
           <strong>shape</strong>, which sets how the discount reduces the price:
           a percentage off the order, or a fixed amount off in the
           customer&apos;s currency.
@@ -88,7 +88,7 @@ export const DiscountsPage = () => {
 
       <FeatureSplit
         title="Three ways to apply a discount"
-        description="Different campaigns need different mechanics. Polar supports all three on the same primitive, without parallel coupon systems."
+        description="Different campaigns need different mechanics. Tarifia supports all three on the same primitive, without parallel coupon systems."
         bullets={[
           {
             title: 'Auto-apply via Checkout Link',

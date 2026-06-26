@@ -1,15 +1,15 @@
 import { benefitsDisplayNames } from '@/components/Benefit/utils'
 import CheckOutlined from '@mui/icons-material/CheckOutlined'
 import FilterList from '@mui/icons-material/FilterList'
-import { enums, schemas } from '@polar-sh/client'
-import { Button, Text } from '@polar-sh/orbit'
+import { enums, schemas } from '@tarifia-sh/client'
+import { Button, Text } from '@tarifia-sh/orbit'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@polar-sh/ui/components/ui/dropdown-menu'
+} from '@tarifia-sh/ui/components/ui/dropdown-menu'
 import { twMerge } from 'tailwind-merge'
 
 export const BenefitTypeFilter = ({

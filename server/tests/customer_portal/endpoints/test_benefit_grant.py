@@ -1,8 +1,8 @@
 import pytest
 from httpx import AsyncClient
 
-from polar.kit.visibility import Visibility
-from polar.models import Benefit, Customer, Member, Organization, Subscription
+from tarifia.kit.visibility import Visibility
+from tarifia.models import Benefit, Customer, Member, Organization, Subscription
 from tests.fixtures.auth import CUSTOMER_AUTH_SUBJECT
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_benefit_grant

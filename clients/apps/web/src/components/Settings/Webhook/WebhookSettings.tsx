@@ -1,13 +1,13 @@
 'use client'
 
 import { useListWebhooksEndpoints } from '@/hooks/queries'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import FormattedDateTime from '@polar-sh/ui/components/atoms/FormattedDateTime'
-import { ListGroup } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import FormattedDateTime from '@tarifia-sh/ui/components/atoms/FormattedDateTime'
+import { ListGroup } from '@tarifia-sh/orbit'
 import { ArrowUpRightIcon } from 'lucide-react'
 import Link from 'next/link'
-import { InlineModal } from '@polar-sh/orbit'
+import { InlineModal } from '@tarifia-sh/orbit'
 import { useModal } from '../../Modal/useModal'
 import NewWebhookModal from './NewWebhookModal'
 
@@ -37,7 +37,7 @@ const WebhookSettings = (props: { org: schemas['Organization'] }) => {
           })
         ) : (
           <ListGroup.Item>
-            <p className="dark:text-polar-400 text-sm text-gray-500">
+            <p className="dark:text-tarifia-400 text-sm text-gray-500">
               {`${props.org.name} doesn't have any webhooks yet`}
             </p>
           </ListGroup.Item>
@@ -48,7 +48,7 @@ const WebhookSettings = (props: { org: schemas['Organization'] }) => {
               Add Endpoint
             </Button>
             <Link
-              href="https://polar.sh/docs/integrate/webhooks/endpoints"
+              href="https://tarifia.sh/docs/integrate/webhooks/endpoints"
               className="shrink-0"
             >
               <Button className="gap-x-2" asChild variant="ghost">
@@ -92,7 +92,7 @@ const Endpoint = ({
             className={`inline-block h-2 w-2 shrink-0 rounded-full ${
               endpoint.enabled
                 ? 'bg-emerald-500 ring-2 ring-emerald-100'
-                : 'dark:bg-polar-600 bg-gray-300'
+                : 'dark:bg-tarifia-600 bg-gray-300'
             }`}
             title={endpoint.enabled ? 'Enabled' : 'Disabled'}
           />
@@ -103,16 +103,16 @@ const Endpoint = ({
           )}
         </div>
         {hasName && (
-          <p className="dark:text-polar-400 truncate pl-4 font-mono text-xs text-gray-500">
+          <p className="dark:text-tarifia-400 truncate pl-4 font-mono text-xs text-gray-500">
             {endpoint.url}
           </p>
         )}
-        <p className="dark:text-polar-400 pl-4 text-sm text-gray-500">
+        <p className="dark:text-tarifia-400 pl-4 text-sm text-gray-500">
           Added on{' '}
           <FormattedDateTime datetime={endpoint.created_at} dateStyle="long" />
         </p>
       </div>
-      <div className="dark:text-polar-400 text-gray-500">
+      <div className="dark:text-tarifia-400 text-gray-500">
         <Link
           href={`/dashboard/${organization.slug}/settings/webhooks/endpoints/${endpoint.id}`}
         >

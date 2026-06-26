@@ -4,11 +4,11 @@ from typing import Any
 
 import pytest_asyncio
 
-from polar.event.system import SystemEvent
-from polar.integrations.tinybird.client import TinybirdClient
-from polar.integrations.tinybird.service import DATASOURCE_EVENTS, _event_to_tinybird
-from polar.models import Customer, Event, Order, Organization, Product, Subscription
-from polar.models.event import EventSource
+from tarifia.event.system import SystemEvent
+from tarifia.integrations.tinybird.client import TinybirdClient
+from tarifia.integrations.tinybird.service import DATASOURCE_EVENTS, _event_to_tinybird
+from tarifia.models import Customer, Event, Order, Organization, Product, Subscription
+from tarifia.models.event import EventSource
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_event
 

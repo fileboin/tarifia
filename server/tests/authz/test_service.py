@@ -2,12 +2,12 @@ from uuid import UUID
 
 import pytest
 
-from polar.auth.models import AuthSubject
-from polar.authz.service import get_accessible_org_ids, get_accessible_organization
-from polar.models import Organization, User
-from polar.models.organization import OrganizationStatus
-from polar.models.user_organization import UserOrganization
-from polar.postgres import AsyncSession
+from tarifia.auth.models import AuthSubject
+from tarifia.authz.service import get_accessible_org_ids, get_accessible_organization
+from tarifia.models import Organization, User
+from tarifia.models.organization import OrganizationStatus
+from tarifia.models.user_organization import UserOrganization
+from tarifia.postgres import AsyncSession
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 

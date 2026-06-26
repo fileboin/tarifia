@@ -5,7 +5,7 @@ import { useCopyMemberLoginLink } from '@/hooks/useCopyMemberLoginLink'
 import { useMembers } from '@/hooks/queries/members'
 import { useMultipleCustomerSeats } from '@/hooks/queries/seats'
 import MoreVertOutlined from '@mui/icons-material/MoreVertOutlined'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import {
   Avatar,
   Button,
@@ -14,15 +14,15 @@ import {
   Status,
   type StatusColor,
   Text,
-} from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
-import FormattedDateTime from '@polar-sh/ui/components/atoms/FormattedDateTime'
+} from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
+import FormattedDateTime from '@tarifia-sh/ui/components/atoms/FormattedDateTime'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@polar-sh/ui/components/ui/dropdown-menu'
+} from '@tarifia-sh/ui/components/ui/dropdown-menu'
 import { useMemo, useState } from 'react'
 import { EditMemberModal } from './EditMemberModal'
 import { seatStatusDisplayConfig } from '../Seats/seatStatus'

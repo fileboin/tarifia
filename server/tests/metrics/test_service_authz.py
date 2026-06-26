@@ -1,9 +1,9 @@
 import pytest
 
-from polar.auth.models import AuthSubject
-from polar.metrics.service import metrics as metrics_service
-from polar.models import Organization, User, UserOrganization
-from polar.postgres import AsyncSession
+from tarifia.auth.models import AuthSubject
+from tarifia.metrics.service import metrics as metrics_service
+from tarifia.models import Organization, User, UserOrganization
+from tarifia.postgres import AsyncSession
 from tests.fixtures.auth import AuthSubjectFixture
 
 

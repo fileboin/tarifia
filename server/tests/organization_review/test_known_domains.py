@@ -1,6 +1,6 @@
 import pytest
 
-from polar.organization_review.known_domains import (
+from tarifia.organization_review.known_domains import (
     KNOWN_DOMAINS,
     KnownDomain,
     known_domains_for_prompt,

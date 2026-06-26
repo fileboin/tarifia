@@ -1,5 +1,5 @@
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
 import { AnimatePresence, motion } from 'motion/react'
 import { Loader2, Paperclip, Send } from 'lucide-react'
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react'
@@ -118,13 +118,13 @@ export const Composer = ({
               onClick={() => fileInputRef.current?.click()}
               disabled={busy}
               aria-label="Attach files"
-              className="dark:text-polar-400 dark:hover:text-polar-200 mb-2 ml-[-10px] flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center text-gray-500 transition-colors hover:text-gray-900 disabled:cursor-default disabled:opacity-30"
+              className="dark:text-tarifia-400 dark:hover:text-tarifia-200 mb-2 ml-[-10px] flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center text-gray-500 transition-colors hover:text-gray-900 disabled:cursor-default disabled:opacity-30"
             >
               <Paperclip className="h-4 w-4" />
             </button>
           </>
         )}
-        <div className="dark:border-polar-700 dark:bg-polar-800 relative flex-1 rounded-2xl border border-gray-200 bg-white">
+        <div className="dark:border-tarifia-700 dark:bg-tarifia-800 relative flex-1 rounded-2xl border border-gray-200 bg-white">
           <AnimatePresence initial={false}>
             {attachments.length > 0 && (
               <motion.div
@@ -162,14 +162,14 @@ export const Composer = ({
             rows={1}
             placeholder={placeholder}
             maxLength={MAX_LENGTH}
-            className="dark:text-polar-50 block max-h-[240px] w-full resize-none overflow-y-auto border-0 bg-transparent py-3 pr-12 pl-4 text-sm leading-5 text-gray-900 shadow-none ring-0 outline-none placeholder:text-gray-400 focus:border-0 focus:ring-0 focus:outline-none focus-visible:ring-0 focus-visible:outline-none"
+            className="dark:text-tarifia-50 block max-h-[240px] w-full resize-none overflow-y-auto border-0 bg-transparent py-3 pr-12 pl-4 text-sm leading-5 text-gray-900 shadow-none ring-0 outline-none placeholder:text-gray-400 focus:border-0 focus:ring-0 focus:outline-none focus-visible:ring-0 focus-visible:outline-none"
           />
           <button
             type="button"
             onClick={submit}
             disabled={!canSend || busy}
             aria-label="Send"
-            className="dark:bg-polar-50 dark:text-polar-900 dark:hover:bg-polar-200 dark:disabled:hover:bg-polar-50 absolute right-2 bottom-2 flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-gray-900 text-white transition-colors hover:bg-gray-700 disabled:cursor-default disabled:opacity-30 disabled:hover:bg-gray-900"
+            className="dark:bg-tarifia-50 dark:text-tarifia-900 dark:hover:bg-tarifia-200 dark:disabled:hover:bg-tarifia-50 absolute right-2 bottom-2 flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-gray-900 text-white transition-colors hover:bg-gray-700 disabled:cursor-default disabled:opacity-30 disabled:hover:bg-gray-900"
           >
             {busy && !flying ? (
               <Loader2 className="h-4 w-4 animate-spin" />

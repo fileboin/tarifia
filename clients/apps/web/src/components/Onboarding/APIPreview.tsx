@@ -1,7 +1,7 @@
 'use client'
 
-import { type schemas } from '@polar-sh/client'
-import { Box } from '@polar-sh/orbit/Box'
+import { type schemas } from '@tarifia-sh/client'
+import { Box } from '@tarifia-sh/orbit/Box'
 import { useEffect, useMemo, useRef, useState } from 'react'
 
 import { useOnboardingData, useOnboardingDataLive } from './OnboardingContext'
@@ -186,7 +186,7 @@ export function APIPreview({ step }: { step: APIPreviewStep }) {
         </Box>
         <Box flexDirection="column">
           <p className="font-mono text-[10px] leading-relaxed text-gray-400 dark:text-gray-600">
-            Host: api.polar.sh
+            Host: api.tarifia.sh
           </p>
           <p className="font-mono text-[10px] leading-relaxed text-gray-400 dark:text-gray-600">
             Content-Type: application/json
@@ -195,7 +195,7 @@ export function APIPreview({ step }: { step: APIPreviewStep }) {
             Content-Length: {contentLength}
           </p>
           <p className="font-mono text-[10px] leading-relaxed text-gray-400 dark:text-gray-600">
-            Authorization: Bearer polar_sk_Yj1mbihldmVudHMp
+            Authorization: Bearer tarifia_sk_Yj1mbihldmVudHMp
           </p>
         </Box>
       </Box>

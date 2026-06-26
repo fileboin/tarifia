@@ -6,10 +6,10 @@
 #
 set -euo pipefail
 
-IDLE_TIMEOUT="${POLAR_PREVIEW_IDLE_TIMEOUT:-1800}" # 30 minutes
+IDLE_TIMEOUT="${TARIFIA_PREVIEW_IDLE_TIMEOUT:-1800}" # 30 minutes
 
-for unit in $(systemctl list-units --type=service --state=running --plain --no-legend 'polar-preview-backend@*' | awk '{print $1}'); do
-    PR_NUM="${unit#polar-preview-backend@}"
+for unit in $(systemctl list-units --type=service --state=running --plain --no-legend 'tarifia-preview-backend@*' | awk '{print $1}'); do
+    PR_NUM="${unit#tarifia-preview-backend@}"
     PR_NUM="${PR_NUM%.service}"
     [[ "$PR_NUM" =~ ^[0-9]+$ ]] || continue
 

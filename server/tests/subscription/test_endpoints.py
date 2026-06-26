@@ -5,20 +5,20 @@ import pytest
 import pytest_asyncio
 from httpx import AsyncClient
 
-from polar.auth.scope import Scope
-from polar.enums import SubscriptionRecurringInterval
-from polar.kit.utils import utc_now
-from polar.kit.visibility import Visibility
-from polar.models import (
+from tarifia.auth.scope import Scope
+from tarifia.enums import SubscriptionRecurringInterval
+from tarifia.kit.utils import utc_now
+from tarifia.kit.visibility import Visibility
+from tarifia.models import (
     Customer,
     Organization,
     Product,
     Subscription,
     UserOrganization,
 )
-from polar.models.customer_seat import SeatStatus
-from polar.models.subscription import CustomerCancellationReason, SubscriptionStatus
-from polar.postgres import AsyncSession
+from tarifia.models.customer_seat import SeatStatus
+from tarifia.models.subscription import CustomerCancellationReason, SubscriptionStatus
+from tarifia.postgres import AsyncSession
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (

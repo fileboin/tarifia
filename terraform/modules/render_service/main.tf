@@ -1,4 +1,4 @@
-# Polar Render service setup
+# Tarifia Render service setup
 #
 # Sets up a service, and the specified workers.
 # Includes the environment groups
@@ -11,8 +11,8 @@ resource "render_env_group" "google" {
   environment_id = var.render_environment_id
   name           = "google-${var.environment}"
   env_vars = {
-    POLAR_GOOGLE_CLIENT_ID     = { value = var.google_secrets.client_id }
-    POLAR_GOOGLE_CLIENT_SECRET = { value = var.google_secrets.client_secret }
+    TARIFIA_GOOGLE_CLIENT_ID     = { value = var.google_secrets.client_id }
+    TARIFIA_GOOGLE_CLIENT_SECRET = { value = var.google_secrets.client_secret }
   }
 }
 
@@ -20,7 +20,7 @@ resource "render_env_group" "openai" {
   environment_id = var.render_environment_id
   name           = "openai-${var.environment}"
   env_vars = {
-    POLAR_OPENAI_API_KEY = { value = var.openai_secrets.api_key }
+    TARIFIA_OPENAI_API_KEY = { value = var.openai_secrets.api_key }
   }
 }
 
@@ -28,7 +28,7 @@ resource "render_env_group" "pydantic_ai_gateway" {
   environment_id = var.render_environment_id
   name           = "pydantic-ai-gateway-${var.environment}"
   env_vars = {
-    POLAR_PYDANTIC_AI_GATEWAY_API_KEY = { value = var.pydantic_ai_gateway_secrets.api_key }
+    TARIFIA_PYDANTIC_AI_GATEWAY_API_KEY = { value = var.pydantic_ai_gateway_secrets.api_key }
   }
 }
 
@@ -37,48 +37,48 @@ resource "render_env_group" "backend" {
   name           = "backend-${var.environment}"
   env_vars = merge(
     {
-      POLAR_USER_SESSION_COOKIE_DOMAIN           = { value = var.backend_config.user_session_cookie_domain }
-      POLAR_AUTHENTICATION_SESSION_COOKIE_DOMAIN = { value = var.backend_config.authentication_session_cookie_domain }
-      POLAR_OAUTH2_SESSION_STATE_COOKIE_DOMAIN   = { value = var.backend_config.oauth2_session_state_cookie_domain }
-      POLAR_BASE_URL                             = { value = var.backend_config.base_url }
-      POLAR_DEBUG                                = { value = var.backend_config.debug }
-      POLAR_EMAIL_SENDER                         = { value = var.backend_config.email_sender }
-      POLAR_EMAIL_FROM_NAME                      = { value = var.backend_config.email_from_name }
-      POLAR_EMAIL_FROM_DOMAIN                    = { value = var.backend_config.email_from_domain }
-      POLAR_ENV                                  = { value = local.environment }
-      POLAR_FRONTEND_BASE_URL                    = { value = var.backend_config.frontend_base_url }
-      POLAR_CHECKOUT_BASE_URL                    = { value = var.backend_config.checkout_base_url }
-      POLAR_JWKS                                 = { value = var.backend_config.jwks_path }
-      POLAR_LOG_LEVEL                            = { value = var.backend_config.log_level }
-      POLAR_TESTING                              = { value = var.backend_config.testing }
-      POLAR_AUTH_COOKIE_DOMAIN                   = { value = var.backend_config.auth_cookie_domain }
-      POLAR_INVOICES_ADDITIONAL_INFO             = { value = var.backend_config.invoices_additional_info }
-      POLAR_INVOICES_VAT_NUMBERS                 = { value = var.backend_config.invoices_vat_numbers }
-      POLAR_STRIPE_PUBLISHABLE_KEY               = { value = var.backend_secrets.stripe_publishable_key }
-      POLAR_CURRENT_JWK_KID                      = { value = var.backend_secrets.current_jwk_kid }
-      POLAR_DISCORD_BOT_TOKEN                    = { value = var.backend_secrets.discord_bot_token }
-      POLAR_DISCORD_CLIENT_ID                    = { value = var.backend_secrets.discord_client_id }
-      POLAR_DISCORD_CLIENT_SECRET                = { value = var.backend_secrets.discord_client_secret }
-      POLAR_DISCORD_PROXY_URL                    = { value = var.backend_secrets.discord_proxy_url }
-      POLAR_RESEND_API_KEY                       = { value = var.backend_secrets.resend_api_key }
-      POLAR_RESEND_WEBHOOK_SECRET                = { value = var.backend_secrets.resend_webhook_secret }
-      POLAR_FIRECRAWL_API_KEY                    = { value = var.backend_secrets.firecrawl_api_key }
-      POLAR_LOGO_DEV_PUBLISHABLE_KEY             = { value = var.backend_secrets.logo_dev_publishable_key }
-      POLAR_SECRET                               = { value = var.backend_secrets.secret }
-      POLAR_SENTRY_DSN                           = { value = var.backend_secrets.sentry_dsn }
-      POLAR_TAX_PROCESSORS                       = { value = var.backend_config.tax_processors }
-      POLAR_TAX_RECORD_PROCESSOR                 = { value = var.backend_config.tax_record_processor }
-      POLAR_NUMERAL_API_KEY                      = { value = var.backend_secrets.numeral_api_key }
-      POLAR_CUSTOMER_PORTAL_URL_OVERRIDES        = { value = var.backend_config.customer_portal_url_overrides }
+      TARIFIA_USER_SESSION_COOKIE_DOMAIN           = { value = var.backend_config.user_session_cookie_domain }
+      TARIFIA_AUTHENTICATION_SESSION_COOKIE_DOMAIN = { value = var.backend_config.authentication_session_cookie_domain }
+      TARIFIA_OAUTH2_SESSION_STATE_COOKIE_DOMAIN   = { value = var.backend_config.oauth2_session_state_cookie_domain }
+      TARIFIA_BASE_URL                             = { value = var.backend_config.base_url }
+      TARIFIA_DEBUG                                = { value = var.backend_config.debug }
+      TARIFIA_EMAIL_SENDER                         = { value = var.backend_config.email_sender }
+      TARIFIA_EMAIL_FROM_NAME                      = { value = var.backend_config.email_from_name }
+      TARIFIA_EMAIL_FROM_DOMAIN                    = { value = var.backend_config.email_from_domain }
+      TARIFIA_ENV                                  = { value = local.environment }
+      TARIFIA_FRONTEND_BASE_URL                    = { value = var.backend_config.frontend_base_url }
+      TARIFIA_CHECKOUT_BASE_URL                    = { value = var.backend_config.checkout_base_url }
+      TARIFIA_JWKS                                 = { value = var.backend_config.jwks_path }
+      TARIFIA_LOG_LEVEL                            = { value = var.backend_config.log_level }
+      TARIFIA_TESTING                              = { value = var.backend_config.testing }
+      TARIFIA_AUTH_COOKIE_DOMAIN                   = { value = var.backend_config.auth_cookie_domain }
+      TARIFIA_INVOICES_ADDITIONAL_INFO             = { value = var.backend_config.invoices_additional_info }
+      TARIFIA_INVOICES_VAT_NUMBERS                 = { value = var.backend_config.invoices_vat_numbers }
+      TARIFIA_STRIPE_PUBLISHABLE_KEY               = { value = var.backend_secrets.stripe_publishable_key }
+      TARIFIA_CURRENT_JWK_KID                      = { value = var.backend_secrets.current_jwk_kid }
+      TARIFIA_DISCORD_BOT_TOKEN                    = { value = var.backend_secrets.discord_bot_token }
+      TARIFIA_DISCORD_CLIENT_ID                    = { value = var.backend_secrets.discord_client_id }
+      TARIFIA_DISCORD_CLIENT_SECRET                = { value = var.backend_secrets.discord_client_secret }
+      TARIFIA_DISCORD_PROXY_URL                    = { value = var.backend_secrets.discord_proxy_url }
+      TARIFIA_RESEND_API_KEY                       = { value = var.backend_secrets.resend_api_key }
+      TARIFIA_RESEND_WEBHOOK_SECRET                = { value = var.backend_secrets.resend_webhook_secret }
+      TARIFIA_FIRECRAWL_API_KEY                    = { value = var.backend_secrets.firecrawl_api_key }
+      TARIFIA_LOGO_DEV_PUBLISHABLE_KEY             = { value = var.backend_secrets.logo_dev_publishable_key }
+      TARIFIA_SECRET                               = { value = var.backend_secrets.secret }
+      TARIFIA_SENTRY_DSN                           = { value = var.backend_secrets.sentry_dsn }
+      TARIFIA_TAX_PROCESSORS                       = { value = var.backend_config.tax_processors }
+      TARIFIA_TAX_RECORD_PROCESSOR                 = { value = var.backend_config.tax_record_processor }
+      TARIFIA_NUMERAL_API_KEY                      = { value = var.backend_secrets.numeral_api_key }
+      TARIFIA_CUSTOMER_PORTAL_URL_OVERRIDES        = { value = var.backend_config.customer_portal_url_overrides }
     },
     var.backend_config.plain_default_tier_external_id != "" ? {
-      POLAR_PLAIN_DEFAULT_TIER_EXTERNAL_ID = { value = var.backend_config.plain_default_tier_external_id }
+      TARIFIA_PLAIN_DEFAULT_TIER_EXTERNAL_ID = { value = var.backend_config.plain_default_tier_external_id }
     } : {},
     var.backend_config.user_session_cookie_key != "" ? {
-      POLAR_USER_SESSION_COOKIE_KEY = { value = var.backend_config.user_session_cookie_key }
+      TARIFIA_USER_SESSION_COOKIE_KEY = { value = var.backend_config.user_session_cookie_key }
     } : {},
     var.backend_config.auth_cookie_key != "" ? {
-      POLAR_AUTH_COOKIE_KEY = { value = var.backend_config.auth_cookie_key }
+      TARIFIA_AUTH_COOKIE_KEY = { value = var.backend_config.auth_cookie_key }
     } : {},
   )
 
@@ -94,16 +94,16 @@ resource "render_env_group" "backend_production" {
   environment_id = var.render_environment_id
   name           = "backend-production-only"
   env_vars = {
-    POLAR_BACKOFFICE_HOST                = { value = var.backend_config.backoffice_host }
-    POLAR_CHECKOUT_LINK_HOST             = { value = var.backend_config.checkout_link_host }
-    POLAR_DISCORD_WEBHOOK_URL            = { value = var.backend_secrets.discord_webhook_url }
-    POLAR_POSTHOG_PROJECT_API_KEY        = { value = var.backend_secrets.posthog_project_api_key }
-    POLAR_PLAIN_REQUEST_SIGNING_SECRET   = { value = var.backend_secrets.plain_request_signing_secret }
-    POLAR_PLAIN_TOKEN                    = { value = var.backend_secrets.plain_token }
-    POLAR_PLAIN_CHAT_SECRET              = { value = var.backend_secrets.plain_chat_secret }
-    POLAR_APP_REVIEW_EMAIL               = { value = var.backend_secrets.app_review_email }
-    POLAR_APP_REVIEW_OTP_CODE            = { value = var.backend_secrets.app_review_otp_code }
-    POLAR_CHARGEBACK_STOP_WEBHOOK_SECRET = { value = var.backend_secrets.chargeback_stop_webhook_secret }
+    TARIFIA_BACKOFFICE_HOST                = { value = var.backend_config.backoffice_host }
+    TARIFIA_CHECKOUT_LINK_HOST             = { value = var.backend_config.checkout_link_host }
+    TARIFIA_DISCORD_WEBHOOK_URL            = { value = var.backend_secrets.discord_webhook_url }
+    TARIFIA_POSTHOG_PROJECT_API_KEY        = { value = var.backend_secrets.posthog_project_api_key }
+    TARIFIA_PLAIN_REQUEST_SIGNING_SECRET   = { value = var.backend_secrets.plain_request_signing_secret }
+    TARIFIA_PLAIN_TOKEN                    = { value = var.backend_secrets.plain_token }
+    TARIFIA_PLAIN_CHAT_SECRET              = { value = var.backend_secrets.plain_chat_secret }
+    TARIFIA_APP_REVIEW_EMAIL               = { value = var.backend_secrets.app_review_email }
+    TARIFIA_APP_REVIEW_OTP_CODE            = { value = var.backend_secrets.app_review_otp_code }
+    TARIFIA_CHARGEBACK_STOP_WEBHOOK_SECRET = { value = var.backend_secrets.chargeback_stop_webhook_secret }
   }
 }
 
@@ -111,19 +111,19 @@ resource "render_env_group" "aws_s3" {
   environment_id = var.render_environment_id
   name           = "aws-s3-${var.environment}"
   env_vars = {
-    POLAR_AWS_REGION                       = { value = var.aws_s3_config.region }
-    POLAR_AWS_SIGNATURE_VERSION            = { value = var.aws_s3_config.signature_version }
-    POLAR_S3_FILES_BUCKET_NAME             = { value = "polar-${var.environment}-files" }
-    POLAR_S3_FILES_PRESIGN_TTL             = { value = var.aws_s3_config.files_presign_ttl }
-    POLAR_S3_FILES_PUBLIC_BUCKET_NAME      = { value = var.aws_s3_config.files_public_bucket_name }
-    POLAR_S3_CUSTOMER_INVOICES_BUCKET_NAME = { value = var.aws_s3_config.customer_invoices_bucket_name }
-    POLAR_S3_CUSTOMER_RECEIPTS_BUCKET_NAME = { value = var.aws_s3_config.customer_receipts_bucket_name }
-    POLAR_S3_PAYOUT_INVOICES_BUCKET_NAME   = { value = var.aws_s3_config.payout_invoices_bucket_name }
-    POLAR_S3_LOGS_BUCKET_NAME              = { value = var.aws_s3_config.logs_bucket_name }
-    POLAR_AWS_ACCESS_KEY_ID                = { value = var.aws_s3_secrets.access_key_id }
-    POLAR_AWS_SECRET_ACCESS_KEY            = { value = var.aws_s3_secrets.secret_access_key }
-    POLAR_S3_FILES_DOWNLOAD_SALT           = { value = var.aws_s3_secrets.files_download_salt }
-    POLAR_S3_FILES_DOWNLOAD_SECRET         = { value = var.aws_s3_secrets.files_download_secret }
+    TARIFIA_AWS_REGION                       = { value = var.aws_s3_config.region }
+    TARIFIA_AWS_SIGNATURE_VERSION            = { value = var.aws_s3_config.signature_version }
+    TARIFIA_S3_FILES_BUCKET_NAME             = { value = "tarifia-${var.environment}-files" }
+    TARIFIA_S3_FILES_PRESIGN_TTL             = { value = var.aws_s3_config.files_presign_ttl }
+    TARIFIA_S3_FILES_PUBLIC_BUCKET_NAME      = { value = var.aws_s3_config.files_public_bucket_name }
+    TARIFIA_S3_CUSTOMER_INVOICES_BUCKET_NAME = { value = var.aws_s3_config.customer_invoices_bucket_name }
+    TARIFIA_S3_CUSTOMER_RECEIPTS_BUCKET_NAME = { value = var.aws_s3_config.customer_receipts_bucket_name }
+    TARIFIA_S3_PAYOUT_INVOICES_BUCKET_NAME   = { value = var.aws_s3_config.payout_invoices_bucket_name }
+    TARIFIA_S3_LOGS_BUCKET_NAME              = { value = var.aws_s3_config.logs_bucket_name }
+    TARIFIA_AWS_ACCESS_KEY_ID                = { value = var.aws_s3_secrets.access_key_id }
+    TARIFIA_AWS_SECRET_ACCESS_KEY            = { value = var.aws_s3_secrets.secret_access_key }
+    TARIFIA_S3_FILES_DOWNLOAD_SALT           = { value = var.aws_s3_secrets.files_download_salt }
+    TARIFIA_S3_FILES_DOWNLOAD_SECRET         = { value = var.aws_s3_secrets.files_download_secret }
   }
 }
 
@@ -132,11 +132,11 @@ resource "render_env_group" "worker_sqs" {
   environment_id = var.render_environment_id
   name           = "worker-sqs-${var.environment}"
   env_vars = {
-    POLAR_WORKER_SQS_ENABLED               = { value = var.worker_sqs_config.enabled }
-    POLAR_WORKER_SQS_ACTORS                = { value = var.worker_sqs_config.actors }
-    POLAR_WORKER_SQS_QUEUE_PREFIX          = { value = var.worker_sqs_config.queue_prefix }
-    POLAR_WORKER_SQS_AWS_ACCESS_KEY_ID     = { value = var.worker_sqs_config.aws_access_key_id }
-    POLAR_WORKER_SQS_AWS_SECRET_ACCESS_KEY = { value = var.worker_sqs_config.aws_secret_access_key }
+    TARIFIA_WORKER_SQS_ENABLED               = { value = var.worker_sqs_config.enabled }
+    TARIFIA_WORKER_SQS_ACTORS                = { value = var.worker_sqs_config.actors }
+    TARIFIA_WORKER_SQS_QUEUE_PREFIX          = { value = var.worker_sqs_config.queue_prefix }
+    TARIFIA_WORKER_SQS_AWS_ACCESS_KEY_ID     = { value = var.worker_sqs_config.aws_access_key_id }
+    TARIFIA_WORKER_SQS_AWS_SECRET_ACCESS_KEY = { value = var.worker_sqs_config.aws_secret_access_key }
   }
 }
 
@@ -144,13 +144,13 @@ resource "render_env_group" "github" {
   environment_id = var.render_environment_id
   name           = "github-${var.environment}"
   env_vars = {
-    POLAR_GITHUB_CLIENT_ID                           = { value = var.github_secrets.client_id }
-    POLAR_GITHUB_CLIENT_SECRET                       = { value = var.github_secrets.client_secret }
-    POLAR_GITHUB_REPOSITORY_BENEFITS_APP_IDENTIFIER  = { value = var.github_secrets.repository_benefits_app_identifier }
-    POLAR_GITHUB_REPOSITORY_BENEFITS_APP_NAMESPACE   = { value = var.github_secrets.repository_benefits_app_namespace }
-    POLAR_GITHUB_REPOSITORY_BENEFITS_APP_PRIVATE_KEY = { value = var.github_secrets.repository_benefits_app_private_key }
-    POLAR_GITHUB_REPOSITORY_BENEFITS_CLIENT_ID       = { value = var.github_secrets.repository_benefits_client_id }
-    POLAR_GITHUB_REPOSITORY_BENEFITS_CLIENT_SECRET   = { value = var.github_secrets.repository_benefits_client_secret }
+    TARIFIA_GITHUB_CLIENT_ID                           = { value = var.github_secrets.client_id }
+    TARIFIA_GITHUB_CLIENT_SECRET                       = { value = var.github_secrets.client_secret }
+    TARIFIA_GITHUB_REPOSITORY_BENEFITS_APP_IDENTIFIER  = { value = var.github_secrets.repository_benefits_app_identifier }
+    TARIFIA_GITHUB_REPOSITORY_BENEFITS_APP_NAMESPACE   = { value = var.github_secrets.repository_benefits_app_namespace }
+    TARIFIA_GITHUB_REPOSITORY_BENEFITS_APP_PRIVATE_KEY = { value = var.github_secrets.repository_benefits_app_private_key }
+    TARIFIA_GITHUB_REPOSITORY_BENEFITS_CLIENT_ID       = { value = var.github_secrets.repository_benefits_client_id }
+    TARIFIA_GITHUB_REPOSITORY_BENEFITS_CLIENT_SECRET   = { value = var.github_secrets.repository_benefits_client_secret }
   }
 }
 
@@ -158,9 +158,9 @@ resource "render_env_group" "stripe" {
   environment_id = var.render_environment_id
   name           = "stripe-${var.environment}"
   env_vars = {
-    POLAR_STRIPE_CONNECT_WEBHOOK_SECRET = { value = var.stripe_secrets.connect_webhook_secret }
-    POLAR_STRIPE_SECRET_KEY             = { value = var.stripe_secrets.secret_key }
-    POLAR_STRIPE_WEBHOOK_SECRET         = { value = var.stripe_secrets.webhook_secret }
+    TARIFIA_STRIPE_CONNECT_WEBHOOK_SECRET = { value = var.stripe_secrets.connect_webhook_secret }
+    TARIFIA_STRIPE_SECRET_KEY             = { value = var.stripe_secrets.secret_key }
+    TARIFIA_STRIPE_WEBHOOK_SECRET         = { value = var.stripe_secrets.webhook_secret }
   }
 }
 
@@ -169,8 +169,8 @@ resource "render_env_group" "logfire" {
   environment_id = var.render_environment_id
   name           = "logfire-${var.environment}"
   env_vars = {
-    POLAR_LOGFIRE_PROJECT_NAME = { value = var.logfire_config.project_name }
-    POLAR_LOGFIRE_TOKEN        = { value = var.logfire_config.token }
+    TARIFIA_LOGFIRE_PROJECT_NAME = { value = var.logfire_config.project_name }
+    TARIFIA_LOGFIRE_TOKEN        = { value = var.logfire_config.token }
   }
 }
 
@@ -179,10 +179,10 @@ resource "render_env_group" "apple" {
   environment_id = var.render_environment_id
   name           = "apple-${var.environment}"
   env_vars = {
-    POLAR_APPLE_CLIENT_ID = { value = var.apple_secrets.client_id }
-    POLAR_APPLE_TEAM_ID   = { value = var.apple_secrets.team_id }
-    POLAR_APPLE_KEY_ID    = { value = var.apple_secrets.key_id }
-    POLAR_APPLE_KEY_VALUE = { value = var.apple_secrets.key_value }
+    TARIFIA_APPLE_CLIENT_ID = { value = var.apple_secrets.client_id }
+    TARIFIA_APPLE_TEAM_ID   = { value = var.apple_secrets.team_id }
+    TARIFIA_APPLE_KEY_ID    = { value = var.apple_secrets.key_id }
+    TARIFIA_APPLE_KEY_VALUE = { value = var.apple_secrets.key_value }
   }
 }
 
@@ -192,15 +192,15 @@ resource "render_env_group" "prometheus" {
   name           = "prometheus-${var.environment}"
   env_vars = merge(
     {
-      POLAR_GRAFANA_CLOUD_PROMETHEUS_WRITE_URL      = { value = "${var.prometheus_config.url}/api/prom/push" }
-      POLAR_GRAFANA_CLOUD_PROMETHEUS_WRITE_USERNAME = { value = var.prometheus_config.username }
-      POLAR_GRAFANA_CLOUD_PROMETHEUS_WRITE_PASSWORD = { value = var.prometheus_config.password }
-      POLAR_GRAFANA_CLOUD_PROMETHEUS_WRITE_INTERVAL = { value = var.prometheus_config.interval }
+      TARIFIA_GRAFANA_CLOUD_PROMETHEUS_WRITE_URL      = { value = "${var.prometheus_config.url}/api/prom/push" }
+      TARIFIA_GRAFANA_CLOUD_PROMETHEUS_WRITE_USERNAME = { value = var.prometheus_config.username }
+      TARIFIA_GRAFANA_CLOUD_PROMETHEUS_WRITE_PASSWORD = { value = var.prometheus_config.password }
+      TARIFIA_GRAFANA_CLOUD_PROMETHEUS_WRITE_INTERVAL = { value = var.prometheus_config.interval }
     },
     var.prometheus_config.query_key != null ? {
-      POLAR_GRAFANA_CLOUD_PROMETHEUS_QUERY_URL  = { value = "${var.prometheus_config.url}/api/prom" }
-      POLAR_GRAFANA_CLOUD_PROMETHEUS_QUERY_USER = { value = var.prometheus_config.username }
-      POLAR_GRAFANA_CLOUD_PROMETHEUS_QUERY_KEY  = { value = var.prometheus_config.query_key }
+      TARIFIA_GRAFANA_CLOUD_PROMETHEUS_QUERY_URL  = { value = "${var.prometheus_config.url}/api/prom" }
+      TARIFIA_GRAFANA_CLOUD_PROMETHEUS_QUERY_USER = { value = var.prometheus_config.username }
+      TARIFIA_GRAFANA_CLOUD_PROMETHEUS_QUERY_KEY  = { value = var.prometheus_config.query_key }
     } : {}
   )
 }
@@ -210,8 +210,8 @@ resource "render_env_group" "slo_report" {
   environment_id = var.render_environment_id
   name           = "slo-report-${var.environment}"
   env_vars = {
-    POLAR_SLACK_BOT_TOKEN = { value = var.slo_report_config.slack_bot_token }
-    POLAR_SLACK_CHANNEL   = { value = var.slo_report_config.slack_channel }
+    TARIFIA_SLACK_BOT_TOKEN = { value = var.slo_report_config.slack_bot_token }
+    TARIFIA_SLACK_CHANNEL   = { value = var.slo_report_config.slack_channel }
   }
 }
 
@@ -220,27 +220,27 @@ resource "render_env_group" "tinybird" {
   environment_id = var.render_environment_id
   name           = "tinybird-${var.environment}"
   env_vars = {
-    POLAR_TINYBIRD_API_URL             = { value = var.tinybird_config.api_url }
-    POLAR_TINYBIRD_CLICKHOUSE_URL      = { value = var.tinybird_config.clickhouse_url }
-    POLAR_TINYBIRD_API_TOKEN           = { value = var.tinybird_config.api_token }
-    POLAR_TINYBIRD_READ_TOKEN          = { value = var.tinybird_config.read_token }
-    POLAR_TINYBIRD_CLICKHOUSE_USERNAME = { value = var.tinybird_config.clickhouse_username }
-    POLAR_TINYBIRD_CLICKHOUSE_TOKEN    = { value = var.tinybird_config.clickhouse_token }
-    POLAR_TINYBIRD_WORKSPACE           = { value = var.tinybird_config.workspace }
+    TARIFIA_TINYBIRD_API_URL             = { value = var.tinybird_config.api_url }
+    TARIFIA_TINYBIRD_CLICKHOUSE_URL      = { value = var.tinybird_config.clickhouse_url }
+    TARIFIA_TINYBIRD_API_TOKEN           = { value = var.tinybird_config.api_token }
+    TARIFIA_TINYBIRD_READ_TOKEN          = { value = var.tinybird_config.read_token }
+    TARIFIA_TINYBIRD_CLICKHOUSE_USERNAME = { value = var.tinybird_config.clickhouse_username }
+    TARIFIA_TINYBIRD_CLICKHOUSE_TOKEN    = { value = var.tinybird_config.clickhouse_token }
+    TARIFIA_TINYBIRD_WORKSPACE           = { value = var.tinybird_config.workspace }
   }
 }
 
-resource "render_env_group" "polar_self" {
-  count          = var.polar_self_config != null ? 1 : 0
+resource "render_env_group" "tarifia_self" {
+  count          = var.tarifia_self_config != null ? 1 : 0
   environment_id = var.render_environment_id
-  name           = "polar-self-${var.environment}"
+  name           = "tarifia-self-${var.environment}"
   env_vars = {
-    POLAR_POLAR_ACCESS_TOKEN     = { value = var.polar_self_config.access_token }
-    POLAR_POLAR_WEBHOOK_SECRET   = { value = var.polar_self_config.webhook_secret }
-    POLAR_POLAR_ORGANIZATION_ID  = { value = var.polar_self_config.organization_id }
-    POLAR_POLAR_FREE_PRODUCT_ID  = { value = var.polar_self_config.free_product_id }
-    POLAR_POLAR_API_URL          = { value = var.polar_self_config.api_url }
-    POLAR_POLAR_SCALE_PRODUCT_ID = { value = var.polar_self_config.scale_product_id }
+    TARIFIA_TARIFIA_ACCESS_TOKEN     = { value = var.tarifia_self_config.access_token }
+    TARIFIA_TARIFIA_WEBHOOK_SECRET   = { value = var.tarifia_self_config.webhook_secret }
+    TARIFIA_TARIFIA_ORGANIZATION_ID  = { value = var.tarifia_self_config.organization_id }
+    TARIFIA_TARIFIA_FREE_PRODUCT_ID  = { value = var.tarifia_self_config.free_product_id }
+    TARIFIA_TARIFIA_API_URL          = { value = var.tarifia_self_config.api_url }
+    TARIFIA_TARIFIA_SCALE_PRODUCT_ID = { value = var.tarifia_self_config.scale_product_id }
   }
 }
 
@@ -249,9 +249,9 @@ resource "render_env_group" "memory_profile" {
   environment_id = var.render_environment_id
   name           = "memory-profile-${var.environment}"
   env_vars = {
-    POLAR_MEMORY_PROFILE_ENABLED        = { value = "true" }
-    POLAR_MEMORY_PROFILE_S3_BUCKET_NAME = { value = var.memory_profile_config.s3_bucket_name }
-    POLAR_MEMORY_PROFILE_INTERVAL       = { value = var.memory_profile_config.interval }
+    TARIFIA_MEMORY_PROFILE_ENABLED        = { value = "true" }
+    TARIFIA_MEMORY_PROFILE_S3_BUCKET_NAME = { value = var.memory_profile_config.s3_bucket_name }
+    TARIFIA_MEMORY_PROFILE_INTERVAL       = { value = var.memory_profile_config.interval }
   }
 }
 
@@ -259,16 +259,16 @@ resource "render_env_group" "database" {
   environment_id = var.render_environment_id
   name           = "database-${var.environment}"
   env_vars = {
-    POLAR_POSTGRES_DATABASE      = { value = var.api_service_config.postgres_database }
-    POLAR_POSTGRES_HOST          = { value = var.postgres_config.host }
-    POLAR_POSTGRES_PORT          = { value = var.postgres_config.port }
-    POLAR_POSTGRES_USER          = { value = var.postgres_config.user }
-    POLAR_POSTGRES_PWD           = { value = var.postgres_config.password }
-    POLAR_POSTGRES_READ_DATABASE = { value = var.api_service_config.postgres_read_database }
-    POLAR_POSTGRES_READ_HOST     = { value = var.postgres_config.read_host }
-    POLAR_POSTGRES_READ_PORT     = { value = var.postgres_config.read_port }
-    POLAR_POSTGRES_READ_USER     = { value = var.postgres_config.read_user }
-    POLAR_POSTGRES_READ_PWD      = { value = var.postgres_config.read_password }
+    TARIFIA_POSTGRES_DATABASE      = { value = var.api_service_config.postgres_database }
+    TARIFIA_POSTGRES_HOST          = { value = var.postgres_config.host }
+    TARIFIA_POSTGRES_PORT          = { value = var.postgres_config.port }
+    TARIFIA_POSTGRES_USER          = { value = var.postgres_config.user }
+    TARIFIA_POSTGRES_PWD           = { value = var.postgres_config.password }
+    TARIFIA_POSTGRES_READ_DATABASE = { value = var.api_service_config.postgres_read_database }
+    TARIFIA_POSTGRES_READ_HOST     = { value = var.postgres_config.read_host }
+    TARIFIA_POSTGRES_READ_PORT     = { value = var.postgres_config.read_port }
+    TARIFIA_POSTGRES_READ_USER     = { value = var.postgres_config.read_user }
+    TARIFIA_POSTGRES_READ_PWD      = { value = var.postgres_config.read_password }
   }
 }
 
@@ -276,9 +276,9 @@ resource "render_env_group" "redis" {
   environment_id = var.render_environment_id
   name           = "redis-${var.environment}"
   env_vars = {
-    POLAR_REDIS_HOST = { value = var.redis_config.host }
-    POLAR_REDIS_PORT = { value = var.redis_config.port }
-    POLAR_REDIS_DB   = { value = var.api_service_config.redis_db }
+    TARIFIA_REDIS_HOST = { value = var.redis_config.host }
+    TARIFIA_REDIS_PORT = { value = var.redis_config.port }
+    TARIFIA_REDIS_DB   = { value = var.api_service_config.redis_db }
   }
 }
 
@@ -344,9 +344,9 @@ resource "render_web_service" "api" {
     SERVICE_NAME             = { value = "api${local.env_suffix}" }
     WEB_CONCURRENCY          = { value = var.api_service_config.web_concurrency }
     FORWARDED_ALLOW_IPS      = { value = var.api_service_config.forwarded_allow_ips }
-    POLAR_ALLOWED_HOSTS      = { value = var.api_service_config.allowed_hosts }
-    POLAR_CORS_ORIGINS       = { value = var.api_service_config.cors_origins }
-    POLAR_DATABASE_POOL_SIZE = { value = var.api_service_config.database_pool_size }
+    TARIFIA_ALLOWED_HOSTS      = { value = var.api_service_config.allowed_hosts }
+    TARIFIA_CORS_ORIGINS       = { value = var.api_service_config.cors_origins }
+    TARIFIA_DATABASE_POOL_SIZE = { value = var.api_service_config.database_pool_size }
   }
 }
 
@@ -382,12 +382,12 @@ resource "render_web_service" "worker" {
     {
       SERVICE_NAME             = { value = each.key }
       dramatiq_prom_port       = { value = each.value.dramatiq_prom_port }
-      POLAR_DATABASE_POOL_SIZE = { value = each.value.database_pool_size }
+      TARIFIA_DATABASE_POOL_SIZE = { value = each.value.database_pool_size }
     },
     (each.value.redis_host != null && each.value.redis_port != null && each.value.redis_db) ? {
-      POLAR_REDIS_HOST = { value = each.value.redis_host }
-      POLAR_REDIS_PORT = { value = each.value.redis_port }
-      POLAR_REDIS_DB   = { value = each.value.redis_db }
+      TARIFIA_REDIS_HOST = { value = each.value.redis_host }
+      TARIFIA_REDIS_PORT = { value = each.value.redis_port }
+      TARIFIA_REDIS_DB   = { value = each.value.redis_db }
     } : {}
   )
 }
@@ -413,13 +413,13 @@ resource "render_cron_job" "cron" {
   }
 
   # Cron jobs don't support Render secret_files, so we pass JWKS as an env var
-  # and write it to a temp file in the start command. POLAR_JWKS is set here
+  # and write it to a temp file in the start command. TARIFIA_JWKS is set here
   # to override the env group value (/etc/secrets/jwks.json) which doesn't exist.
   env_vars = {
     SERVICE_NAME             = { value = each.key }
-    POLAR_DATABASE_POOL_SIZE = { value = each.value.database_pool_size }
-    POLAR_JWKS               = { value = "/tmp/jwks.json" }
-    POLAR_JWKS_CONTENT       = { value = var.backend_secrets.jwks }
+    TARIFIA_DATABASE_POOL_SIZE = { value = each.value.database_pool_size }
+    TARIFIA_JWKS               = { value = "/tmp/jwks.json" }
+    TARIFIA_JWKS_CONTENT       = { value = var.backend_secrets.jwks }
   }
 }
 
@@ -517,9 +517,9 @@ resource "render_env_group_link" "tinybird" {
   service_ids  = local.all_service_ids
 }
 
-resource "render_env_group_link" "polar_self" {
-  count        = var.polar_self_config != null ? 1 : 0
-  env_group_id = render_env_group.polar_self[0].id
+resource "render_env_group_link" "tarifia_self" {
+  count        = var.tarifia_self_config != null ? 1 : 0
+  env_group_id = render_env_group.tarifia_self[0].id
   service_ids  = local.all_service_ids
 }
 

@@ -1,7 +1,7 @@
 'use client'
 
-import { Tabs, TabsContent, TabsList, TabsTrigger, Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
+import { Tabs, TabsContent, TabsList, TabsTrigger, Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
 import { useState } from 'react'
 import type { PropRow } from '@/components/docs'
 import {

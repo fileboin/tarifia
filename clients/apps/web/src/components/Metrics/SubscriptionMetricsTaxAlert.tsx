@@ -1,4 +1,4 @@
-import type { schemas } from '@polar-sh/client'
+import type { schemas } from '@tarifia-sh/client'
 import { SubscriptionMetricsTaxAlertClient } from './SubscriptionMetricsTaxAlertClient'
 
 const AFFECTED_TAX_BEHAVIORS = new Set<schemas['TaxBehaviorOption']>([

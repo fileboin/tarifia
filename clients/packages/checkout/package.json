@@ -1,13 +1,13 @@
 {
-  "name": "@polar-sh/checkout",
-  "description": "Polar Checkout SDK",
-  "author": "Polar",
+  "name": "@tarifia-sh/checkout",
+  "description": "Tarifia Checkout SDK",
+  "author": "Tarifia",
   "license": "Apache-2.0",
   "type": "module",
   "version": "0.3.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/polarsource/polar.git",
+    "url": "https://github.com/tarifiasource/tarifia.git",
     "directory": "clients/packages/checkout"
   },
   "scripts": {
@@ -80,8 +80,8 @@
     }
   },
   "devDependencies": {
-    "@polar-sh/eslint-config": "workspace:*",
-    "@polar-sh/typescript-config": "workspace:*",
+    "@tarifia-sh/eslint-config": "workspace:*",
+    "@tarifia-sh/typescript-config": "workspace:*",
     "@stylexjs/babel-plugin": "^0.18.2",
     "@stripe/react-stripe-js": "^5.6.1",
     "@stripe/stripe-js": "^8.11.0",
@@ -96,11 +96,11 @@
     "tsup": "^8.5.1",
     "typescript": "latest",
     "vitest": "^4.1.4",
-    "@polar-sh/currency": "workspace:^",
-    "@polar-sh/client": "workspace:*",
-    "@polar-sh/i18n": "workspace:*",
-    "@polar-sh/orbit": "workspace:*",
-    "@polar-sh/ui": "workspace:^",
+    "@tarifia-sh/currency": "workspace:^",
+    "@tarifia-sh/client": "workspace:*",
+    "@tarifia-sh/i18n": "workspace:*",
+    "@tarifia-sh/orbit": "workspace:*",
+    "@tarifia-sh/ui": "workspace:^",
     "date-fns": "^4.1.0",
     "event-source-plus": "^0.1.15",
     "eventemitter3": "^5.0.4",

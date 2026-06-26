@@ -1,9 +1,9 @@
 import typer
 from sqlalchemy import select, update
 
-from polar.models import Order, Payment
-from polar.models.order import OrderBillingReason
-from polar.models.payment import PaymentStatus
+from tarifia.models import Order, Payment
+from tarifia.models.order import OrderBillingReason
+from tarifia.models.payment import PaymentStatus
 from scripts.helper import (
     configure_script_logging,
     limit_bindparam,

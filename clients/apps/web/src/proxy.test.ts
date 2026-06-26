@@ -232,17 +232,17 @@ describe('middleware function', () => {
 
     const request = new NextRequest('https://example.com/dashboard', {
       headers: {
-        'x-polar-user': Buffer.from(JSON.stringify(spoofedUser)).toString(
+        'x-tarifia-user': Buffer.from(JSON.stringify(spoofedUser)).toString(
           'base64',
         ),
       },
     })
-    request.cookies.set('polar_session', 'valid-session-token')
+    request.cookies.set('tarifia_session', 'valid-session-token')
 
     const response = await proxy(request)
 
     expect(response.status).toBe(200)
-    expect(getForwardedRequestHeader(response, 'x-polar-user')).toBe(
+    expect(getForwardedRequestHeader(response, 'x-tarifia-user')).toBe(
       Buffer.from(JSON.stringify(mockUser)).toString('base64'),
     )
   })
@@ -253,16 +253,16 @@ describe('middleware function', () => {
     const response = await proxy(request)
 
     expect(response.status).toBe(200)
-    expect(getForwardedRequestHeader(response, 'x-polar-user')).toBeNull()
+    expect(getForwardedRequestHeader(response, 'x-tarifia-user')).toBeNull()
     expect(getForwardedRequestHeaderNames(response)).not.toContain(
-      'x-polar-user',
+      'x-tarifia-user',
     )
   })
 
   it('should strip spoofed user headers from forwarded routes', async () => {
     const request = new NextRequest('https://example.com/docs/overview', {
       headers: {
-        'x-polar-user': Buffer.from(
+        'x-tarifia-user': Buffer.from(
           JSON.stringify({ id: 'spoofed', email: 'attacker@example.com' }),
         ).toString('base64'),
       },
@@ -271,9 +271,9 @@ describe('middleware function', () => {
     const response = await proxy(request)
 
     expect(response.status).toBe(200)
-    expect(getForwardedRequestHeader(response, 'x-polar-user')).toBeNull()
+    expect(getForwardedRequestHeader(response, 'x-tarifia-user')).toBeNull()
     expect(getForwardedRequestHeaderNames(response)).not.toContain(
-      'x-polar-user',
+      'x-tarifia-user',
     )
     expect(createServerSideAPI).not.toHaveBeenCalled()
   })
@@ -304,7 +304,7 @@ describe('middleware function', () => {
     })
 
     const request = new NextRequest('https://example.com/dashboard')
-    request.cookies.set('polar_session', 'valid-session-token')
+    request.cookies.set('tarifia_session', 'valid-session-token')
 
     await expect(proxy(request)).rejects.toThrow(
       'Unexpected response status while fetching authenticated user',
@@ -321,7 +321,7 @@ describe('middleware function', () => {
     })
 
     const request = new NextRequest('https://example.com/dashboard')
-    request.cookies.set('polar_session', 'invalid-session-token')
+    request.cookies.set('tarifia_session', 'invalid-session-token')
 
     const response = await proxy(request)
 
@@ -342,7 +342,7 @@ describe('middleware function', () => {
     })
 
     const request = new NextRequest('https://example.com/dashboard')
-    request.cookies.set('polar_session', 'rate-limited-session-token')
+    request.cookies.set('tarifia_session', 'rate-limited-session-token')
 
     // Must not throw: a 429 should be treated as "couldn't determine the user"
     // and proceed as anonymous (protected route -> redirect to login).
@@ -370,35 +370,35 @@ describe('middleware function', () => {
 })
 
 describe('the /to/ dance', () => {
-  it('bounces /to/* to the sandbox host when polar_env cookie does not match the current env', async () => {
-    const request = new NextRequest('https://polar.sh/to/dashboard/products')
-    request.cookies.set('polar_env', 'sandbox')
+  it('bounces /to/* to the sandbox host when tarifia_env cookie does not match the current env', async () => {
+    const request = new NextRequest('https://tarifia.sh/to/dashboard/products')
+    request.cookies.set('tarifia_env', 'sandbox')
 
     const response = await proxy(request)
 
     expect(response.status).toBe(307)
     expect(response.headers.get('location')).toBe(
-      'https://sandbox.polar.sh/to/dashboard/products',
+      'https://sandbox.tarifia.sh/to/dashboard/products',
     )
   })
 
   it('preserves query string when bouncing /to/*', async () => {
     const request = new NextRequest(
-      'https://polar.sh/to/dashboard/products?foo=bar',
+      'https://tarifia.sh/to/dashboard/products?foo=bar',
     )
-    request.cookies.set('polar_env', 'sandbox')
+    request.cookies.set('tarifia_env', 'sandbox')
 
     const response = await proxy(request)
 
     expect(response.status).toBe(307)
     expect(response.headers.get('location')).toBe(
-      'https://sandbox.polar.sh/to/dashboard/products?foo=bar',
+      'https://sandbox.tarifia.sh/to/dashboard/products?foo=bar',
     )
   })
 
-  it('does not bounce when polar_env cookie matches the current env', async () => {
-    const request = new NextRequest('https://polar.sh/to/dashboard/products')
-    request.cookies.set('polar_env', 'production')
+  it('does not bounce when tarifia_env cookie matches the current env', async () => {
+    const request = new NextRequest('https://tarifia.sh/to/dashboard/products')
+    request.cookies.set('tarifia_env', 'production')
 
     const response = await proxy(request)
 
@@ -406,9 +406,9 @@ describe('the /to/ dance', () => {
     expect(response.headers.get('location')).toContain('/auth')
   })
 
-  it('ignores invalid polar_env cookie values', async () => {
-    const request = new NextRequest('https://polar.sh/to/dashboard/products')
-    request.cookies.set('polar_env', 'narnia')
+  it('ignores invalid tarifia_env cookie values', async () => {
+    const request = new NextRequest('https://tarifia.sh/to/dashboard/products')
+    request.cookies.set('tarifia_env', 'narnia')
 
     const response = await proxy(request)
 
@@ -417,8 +417,8 @@ describe('the /to/ dance', () => {
   })
 
   it('does not bounce non-/to/ paths even with a mismatching cookie', async () => {
-    const request = new NextRequest('https://polar.sh/dashboard')
-    request.cookies.set('polar_env', 'sandbox')
+    const request = new NextRequest('https://tarifia.sh/dashboard')
+    request.cookies.set('tarifia_env', 'sandbox')
 
     const response = await proxy(request)
 

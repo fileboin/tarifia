@@ -5,7 +5,7 @@ import TaxesPage from './TaxesPage'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `Finance - Taxes`, // " | Polar is added by the template"
+    title: `Finance - Taxes`, // " | Tarifia is added by the template"
   }
 }
 

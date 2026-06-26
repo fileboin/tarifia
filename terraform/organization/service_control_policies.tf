@@ -1,10 +1,10 @@
 locals {
-  permission_boundary_policy_name = "PolarPermissionBoundary"
+  permission_boundary_policy_name = "TarifiaPermissionBoundary"
 
   permission_boundary_exempt_principals = [
     "arn:aws:iam::*:role/${var.member_account_bootstrap_role_name}",
     "arn:aws:iam::*:role/${local.terraform_cloud.role_name}",
-    "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/*AWSReservedSSO_PolarAdmin*",
+    "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/*AWSReservedSSO_TarifiaAdmin*",
   ]
 
   permission_boundary_role_creation_exempt_principals = concat(
@@ -129,7 +129,7 @@ locals {
 
     require_permissions_boundary = {
       name        = "RequirePermissionsBoundary"
-      description = "Require the Polar permission boundary on IAM roles and users created in workload accounts, and protect it from removal."
+      description = "Require the Tarifia permission boundary on IAM roles and users created in workload accounts, and protect it from removal."
       target_ids  = [aws_organizations_organizational_unit.workloads.id]
       content = {
         Version = "2012-10-17"

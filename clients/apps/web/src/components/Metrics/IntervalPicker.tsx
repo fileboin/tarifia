@@ -1,11 +1,11 @@
-import { enums, schemas } from '@polar-sh/client'
+import { enums, schemas } from '@tarifia-sh/client'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
 import { differenceInDays } from 'date-fns'
 import { useMemo } from 'react'
 

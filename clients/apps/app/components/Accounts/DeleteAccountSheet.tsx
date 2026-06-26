@@ -1,7 +1,7 @@
 import { Button } from '@/components/Shared/Button'
 import { Text } from '@/components/Shared/Text'
 import { useTheme } from '@/design-system/useTheme'
-import { useOrganizations } from '@/hooks/polar/organizations'
+import { useOrganizations } from '@/hooks/tarifia/organizations'
 import { useSettingsActions } from '@/hooks/useSettingsActions'
 import { OrganizationContext } from '@/providers/OrganizationProvider'
 import { useUser } from '@/providers/UserProvider'

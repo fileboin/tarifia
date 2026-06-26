@@ -23,14 +23,14 @@ import { usePayments } from '@/hooks/queries/payments'
 import { useMemberModelEnabled } from '@/hooks/useMemberModelEnabled'
 import { formatCountry, formatPercentage } from '@/utils/formatters'
 import { getPreviousDateRange } from '@/utils/metrics'
-import { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
-import { Button } from '@polar-sh/orbit'
-import { DataTable } from '@polar-sh/orbit'
-import FormattedDateTime from '@polar-sh/ui/components/atoms/FormattedDateTime'
-import ShadowBox from '@polar-sh/ui/components/atoms/ShadowBox'
-import { Status } from '@polar-sh/orbit'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
+import { Button } from '@tarifia-sh/orbit'
+import { DataTable } from '@tarifia-sh/orbit'
+import FormattedDateTime from '@tarifia-sh/ui/components/atoms/FormattedDateTime'
+import ShadowBox from '@tarifia-sh/ui/components/atoms/ShadowBox'
+import { Status } from '@tarifia-sh/orbit'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@tarifia-sh/orbit'
 import Link from 'next/link'
 import React, { useMemo } from 'react'
 import { benefitsDisplayNames } from '../Benefit/utils'
@@ -481,7 +481,7 @@ export const CustomerPage: React.FC<CustomerPageProps> = ({
                   <div className="flex flex-col gap-0.5">
                     <span>{original.benefit.description}</span>
 
-                    <span className="dark:text-polar-500 text-xs text-gray-500">
+                    <span className="dark:text-tarifia-500 text-xs text-gray-500">
                       {benefitsDisplayNames[original.benefit.type]}
                     </span>
                   </div>
@@ -511,7 +511,7 @@ export const CustomerPage: React.FC<CustomerPageProps> = ({
                   original.revoked_at ? (
                     <FormattedDateTime datetime={original.revoked_at} />
                   ) : (
-                    <span className="dark:text-polar-800 text-gray-400">—</span>
+                    <span className="dark:text-tarifia-800 text-gray-400">—</span>
                   ),
               },
               {

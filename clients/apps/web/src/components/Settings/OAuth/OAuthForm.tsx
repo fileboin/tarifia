@@ -1,12 +1,12 @@
-import { Button } from '@polar-sh/orbit'
-import { Input } from '@polar-sh/orbit'
+import { Button } from '@tarifia-sh/orbit'
+import { Input } from '@tarifia-sh/orbit'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
 import {
   FormControl,
   FormDescription,
@@ -14,12 +14,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 
 import ImageUpload from '@/components/Form/ImageUpload'
 import AddOutlined from '@mui/icons-material/AddOutlined'
 import ClearOutlined from '@mui/icons-material/ClearOutlined'
-import { enums } from '@polar-sh/client'
+import { enums } from '@tarifia-sh/client'
 import Link from 'next/link'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { TreeMultiSelect } from '../TreeMultiSelect'
@@ -83,7 +83,7 @@ export const FieldClientType = () => {
             <em>Confidential Client</em>.{' '}
             <Link
               className="text-blue-500 hover:text-blue-400 dark:text-blue-400 dark:hover:text-blue-300"
-              href="https://polar.sh/docs/documentation/integration-guides/authenticating-with-polar"
+              href="https://tarifia.sh/docs/documentation/integration-guides/authenticating-with-tarifia"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -130,7 +130,7 @@ export const FieldClientSecret = ({
         SPA or mobile app.{' '}
         <Link
           className="text-blue-500 hover:text-blue-400 dark:text-blue-400 dark:hover:text-blue-300"
-          href="https://polar.sh/docs/documentation/integration-guides/authenticating-with-polar"
+          href="https://tarifia.sh/docs/documentation/integration-guides/authenticating-with-tarifia"
           target="_blank"
           rel="noopener noreferrer"
         >

@@ -4,9 +4,9 @@ import {
   MaintainerAccountCreditsGrantedNotificationPayload,
   MaintainerNewPaidSubscriptionNotificationPayload,
   MaintainerNewProductSaleNotificationPayload,
-} from '@/hooks/polar/notifications'
+} from '@/hooks/tarifia/notifications'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
-import { formatCurrency } from '@polar-sh/currency'
+import { formatCurrency } from '@tarifia-sh/currency'
 import { useMemo } from 'react'
 import { StyleProp, ViewStyle } from 'react-native'
 import { Text } from '../Shared/Text'

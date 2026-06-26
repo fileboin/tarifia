@@ -1,6 +1,6 @@
 from opentelemetry import baggage as otel_baggage
 
-from polar.observability.baggage import organization_baggage
+from tarifia.observability.baggage import organization_baggage
 
 
 class TestOrganizationBaggage:

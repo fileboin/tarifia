@@ -13,7 +13,7 @@ import {
   LineChart,
   XAxis,
   YAxis,
-} from '@polar-sh/ui/components/ui/chart'
+} from '@tarifia-sh/ui/components/ui/chart'
 import { useTheme } from 'next-themes'
 import React, { useCallback, useId, useMemo, useRef, useState } from 'react'
 import { ReferenceLine } from 'recharts'

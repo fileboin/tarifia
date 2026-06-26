@@ -5,20 +5,20 @@ import pytest
 from pytest_mock import MockerFixture
 from sqlalchemy import select
 
-from polar.customer.schemas.customer import CustomerUpdate
-from polar.customer.service import customer as customer_service
-from polar.customer_portal.service.customer_session import (
+from tarifia.customer.schemas.customer import CustomerUpdate
+from tarifia.customer.service import customer as customer_service
+from tarifia.customer_portal.service.customer_session import (
     CustomerDoesNotExist,
     CustomerSelectionRequired,
     CustomerSessionCodeInvalidOrExpired,
     OrganizationDoesNotExist,
 )
-from polar.customer_portal.service.customer_session import (
+from tarifia.customer_portal.service.customer_session import (
     customer_session as customer_session_service,
 )
-from polar.customer_session.service import CUSTOMER_SESSION_TOKEN_PREFIX
-from polar.kit.utils import utc_now
-from polar.models import (
+from tarifia.customer_session.service import CUSTOMER_SESSION_TOKEN_PREFIX
+from tarifia.kit.utils import utc_now
+from tarifia.models import (
     Account,
     CustomerSession,
     CustomerSessionCode,
@@ -27,9 +27,9 @@ from polar.models import (
     Organization,
     User,
 )
-from polar.models.member import MemberRole
-from polar.models.member_session import MEMBER_SESSION_TOKEN_PREFIX
-from polar.postgres import AsyncSession
+from tarifia.models.member import MemberRole
+from tarifia.models.member_session import MEMBER_SESSION_TOKEN_PREFIX
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_account,
@@ -574,7 +574,7 @@ class TestSend:
         )
 
         enqueue_mock = mocker.patch(
-            "polar.customer_portal.service.customer_session.enqueue_email_template"
+            "tarifia.customer_portal.service.customer_session.enqueue_email_template"
         )
 
         customer_session_code, code = await customer_session_service.request(
@@ -645,7 +645,7 @@ class TestAuthenticate:
         # Authenticate
         token, session_obj = await customer_session_service.authenticate(session, code)
 
-        # Should return CustomerSession with polar_cst_ prefix
+        # Should return CustomerSession with tarifia_cst_ prefix
         assert token.startswith(CUSTOMER_SESSION_TOKEN_PREFIX)
         assert isinstance(session_obj, CustomerSession)
         assert session_obj.customer_id == customer.id
@@ -656,7 +656,7 @@ class TestAuthenticate:
         save_fixture: SaveFixture,
         organization: Organization,
     ) -> None:
-        """Test that member-enabled org returns MemberSession with polar_mst_ prefix."""
+        """Test that member-enabled org returns MemberSession with tarifia_mst_ prefix."""
         organization.feature_settings = {"member_model_enabled": True}
         await save_fixture(organization)
 
@@ -681,7 +681,7 @@ class TestAuthenticate:
         # Authenticate
         token, session_obj = await customer_session_service.authenticate(session, code)
 
-        # Should return MemberSession with polar_mst_ prefix
+        # Should return MemberSession with tarifia_mst_ prefix
         assert token.startswith(MEMBER_SESSION_TOKEN_PREFIX)
         assert isinstance(session_obj, MemberSession)
         assert session_obj.member_id == owner_member.id
@@ -833,7 +833,7 @@ class TestAuthenticate:
         """Full flow: customer email updated server-side, MST flow still works with new email.
 
         Regression test for: when customers.email is updated but members.email is NOT synced,
-        the polar_mst_* authenticate flow fails because the member lookup by (customer_id, email)
+        the tarifia_mst_* authenticate flow fails because the member lookup by (customer_id, email)
         returns no rows.
         """
 

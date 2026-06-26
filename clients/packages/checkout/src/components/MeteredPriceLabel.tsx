@@ -1,8 +1,8 @@
-import type { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
-import { DEFAULT_LOCALE, type AcceptedLocale } from '@polar-sh/i18n'
-import { getMeterUnitFormat } from '@polar-sh/ui/lib/meterUnit'
-import { cn } from '@polar-sh/ui/lib/utils'
+import type { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
+import { DEFAULT_LOCALE, type AcceptedLocale } from '@tarifia-sh/i18n'
+import { getMeterUnitFormat } from '@tarifia-sh/ui/lib/meterUnit'
+import { cn } from '@tarifia-sh/ui/lib/utils'
 
 interface MeteredPriceLabelProps {
   price: schemas['ProductPriceMeteredUnit']
@@ -31,7 +31,7 @@ const MeteredPriceLabel: React.FC<MeteredPriceLabelProps> = ({
     <div className="flex flex-row items-baseline gap-x-1">
       {discountedAmount !== null ? (
         <>
-          <span className="dark:text-polar-500 text-gray-400 line-through">
+          <span className="dark:text-tarifia-500 text-gray-400 line-through">
             {format(baseAmount, price.price_currency)}
           </span>
           <span>{format(discountedAmount, price.price_currency)}</span>
@@ -41,7 +41,7 @@ const MeteredPriceLabel: React.FC<MeteredPriceLabelProps> = ({
       )}
       <span
         className={cn(
-          'dark:text-polar-400 text-[max(12px,0.5em)] text-gray-500',
+          'dark:text-tarifia-400 text-[max(12px,0.5em)] text-gray-500',
           price.meter.unit === 'custom' ? 'lowercase' : '',
         )}
       >

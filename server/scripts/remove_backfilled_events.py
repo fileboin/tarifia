@@ -9,10 +9,10 @@ from rich.progress import Progress
 from sqlalchemy import delete, func, select
 from sqlalchemy.engine import CursorResult
 
-from polar.event.system import SystemEvent
-from polar.kit.db.postgres import create_async_sessionmaker
-from polar.models import Event, Meter
-from polar.postgres import create_async_engine
+from tarifia.event.system import SystemEvent
+from tarifia.kit.db.postgres import create_async_sessionmaker
+from tarifia.models import Event, Meter
+from tarifia.postgres import create_async_engine
 
 cli = typer.Typer()
 

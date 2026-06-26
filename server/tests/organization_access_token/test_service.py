@@ -4,36 +4,36 @@ from unittest.mock import MagicMock
 import pytest
 from pytest_mock import MockerFixture
 
-from polar.auth.models import AuthSubject
-from polar.auth.scope import Scope
-from polar.config import settings
-from polar.email.schemas import OrganizationAccessTokenLeakedEmail
-from polar.enums import TokenType
-from polar.exceptions import PolarRequestValidationError
-from polar.kit.crypto import get_token_hash
-from polar.kit.utils import utc_now
-from polar.models import (
+from tarifia.auth.models import AuthSubject
+from tarifia.auth.scope import Scope
+from tarifia.config import settings
+from tarifia.email.schemas import OrganizationAccessTokenLeakedEmail
+from tarifia.enums import TokenType
+from tarifia.exceptions import TarifiaRequestValidationError
+from tarifia.kit.crypto import get_token_hash
+from tarifia.kit.utils import utc_now
+from tarifia.models import (
     Organization,
     OrganizationAccessToken,
     PersonalAccessToken,
     User,
     UserOrganization,
 )
-from polar.organization_access_token.schemas import (
+from tarifia.organization_access_token.schemas import (
     AvailableScope,
     OrganizationAccessTokenCreate,
 )
-from polar.organization_access_token.service import (
+from tarifia.organization_access_token.service import (
     organization_access_token as organization_access_token_service,
 )
-from polar.postgres import AsyncSession
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 
 
 @pytest.fixture(autouse=True)
 def enqueue_email_mock(mocker: MockerFixture) -> MagicMock:
     return mocker.patch(
-        "polar.organization_access_token.service.enqueue_email_template", autospec=True
+        "tarifia.organization_access_token.service.enqueue_email_template", autospec=True
     )
 
 
@@ -44,7 +44,7 @@ class TestRevokeLeaked:
     ) -> None:
         result = await organization_access_token_service.revoke_leaked(
             session,
-            "polar_pat_123",
+            "tarifia_pat_123",
             TokenType.organization_access_token,
             notifier="github",
             url="https://github.com",
@@ -61,7 +61,7 @@ class TestRevokeLeaked:
         user_organization: UserOrganization,
         enqueue_email_mock: MagicMock,
     ) -> None:
-        token_hash = get_token_hash("polar_pat_123", secret=settings.SECRET)
+        token_hash = get_token_hash("tarifia_pat_123", secret=settings.SECRET)
         organization_access_token = OrganizationAccessToken(
             comment="Test",
             token=token_hash,
@@ -73,7 +73,7 @@ class TestRevokeLeaked:
 
         result = await organization_access_token_service.revoke_leaked(
             session,
-            "polar_pat_123",
+            "tarifia_pat_123",
             TokenType.organization_access_token,
             notifier="github",
             url="https://github.com",
@@ -106,7 +106,7 @@ class TestCreateScopeValidation:
             user, {Scope.organization_access_tokens_write}, pat_session
         )
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await organization_access_token_service.create(
                 session,
                 auth_subject,

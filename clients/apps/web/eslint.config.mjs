@@ -1,12 +1,12 @@
-import { nextJsConfig } from '@polar-sh/eslint-config/next-js'
-import polarPlugin from './eslint-rules/index.mjs'
+import { nextJsConfig } from '@tarifia-sh/eslint-config/next-js'
+import tarifiaPlugin from './eslint-rules/index.mjs'
 
 /** @type {import("eslint").Linter.Config} */
 export default [
   ...nextJsConfig,
   {
     plugins: {
-      polar: polarPlugin,
+      tarifia: tarifiaPlugin,
     },
     languageOptions: {
       parserOptions: {
@@ -29,7 +29,7 @@ export default [
       'react-hooks/preserve-manual-memoization': 'warn',
       'react-hooks/immutability': 'warn',
       'react-hooks/purity': 'warn',
-      'polar/no-toast-error-detail': 'error',
+      'tarifia/no-toast-error-detail': 'error',
     },
   },
   {
@@ -38,11 +38,11 @@ export default [
       'react/no-danger': 'error',
       'react/self-closing-comp': 'warn',
       'react/jsx-no-useless-fragment': 'warn',
-      'polar/no-classname-box': 'error',
-      'polar/no-classname-text': 'error',
-      'polar/no-style-box': 'error',
-      'polar/no-style-text': 'error',
-      'polar/no-next-image': 'error',
+      'tarifia/no-classname-box': 'error',
+      'tarifia/no-classname-text': 'error',
+      'tarifia/no-style-box': 'error',
+      'tarifia/no-style-text': 'error',
+      'tarifia/no-next-image': 'error',
     },
   },
   {
@@ -51,8 +51,8 @@ export default [
       'src/app/**/portal/**/*.{ts,tsx}',
     ],
     rules: {
-      'polar/no-merchant-queries-in-customer-portal': 'error',
-      'polar/no-merchant-api-calls-in-customer-portal': 'error',
+      'tarifia/no-merchant-queries-in-customer-portal': 'error',
+      'tarifia/no-merchant-api-calls-in-customer-portal': 'error',
     },
   },
   {
@@ -65,7 +65,7 @@ export default [
       'src/app/**/portal/claim/page.tsx',
     ],
     rules: {
-      'polar/require-customer-portal-page': 'error',
+      'tarifia/require-customer-portal-page': 'error',
     },
   },
   {
@@ -74,7 +74,7 @@ export default [
       'src/components/Onboarding/**/*.tsx',
     ],
     rules: {
-      'polar/no-raw-html-layout': 'error',
+      'tarifia/no-raw-html-layout': 'error',
     },
   },
   {

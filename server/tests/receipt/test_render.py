@@ -4,10 +4,10 @@ from collections.abc import Mapping
 
 import pytest
 
-from polar.invoice.generator import InvoiceItem
-from polar.kit.address import Address, CountryAlpha2
-from polar.receipt.generator import Receipt, ReceiptRefund
-from polar.receipt.render import (
+from tarifia.invoice.generator import InvoiceItem
+from tarifia.kit.address import Address, CountryAlpha2
+from tarifia.receipt.generator import Receipt, ReceiptRefund
+from tarifia.receipt.render import (
     SERVER_DIRECTORY,
     ReceiptRenderError,
     render_receipt_pdf,
@@ -19,9 +19,9 @@ def receipt() -> Receipt:
     return Receipt(
         number="RCPT-AB1-0001",
         date=datetime.datetime(2025, 1, 1, 0, 0, 0, tzinfo=datetime.UTC),
-        seller_name="Polar Software Inc",
+        seller_name="Tarifia Software Inc",
         seller_address=Address(
-            line1="123 Polar St",
+            line1="123 Tarifia St",
             city="San Francisco",
             state="CA",
             postal_code="94107",
@@ -86,12 +86,12 @@ async def test_render_receipt_pdf_raises_on_subprocess_failure(
 
     async def create_subprocess_exec(*args: object, **kwargs: object) -> StubProcess:
         kwargs_dict = kwargs if isinstance(kwargs, Mapping) else {}
-        assert args == (sys.executable, "-m", "polar.receipt.render")
+        assert args == (sys.executable, "-m", "tarifia.receipt.render")
         assert kwargs_dict["cwd"] == SERVER_DIRECTORY
         return process
 
     monkeypatch.setattr(
-        "polar.receipt.render.asyncio.create_subprocess_exec", create_subprocess_exec
+        "tarifia.receipt.render.asyncio.create_subprocess_exec", create_subprocess_exec
     )
 
     with pytest.raises(ReceiptRenderError, match="Receipt renderer failed: boom"):
@@ -130,10 +130,10 @@ async def test_render_receipt_pdf_timeout(
         return process
 
     monkeypatch.setattr(
-        "polar.receipt.render.asyncio.create_subprocess_exec", create_subprocess_exec
+        "tarifia.receipt.render.asyncio.create_subprocess_exec", create_subprocess_exec
     )
-    monkeypatch.setattr("polar.receipt.render.RENDER_TIMEOUT_SECONDS", 0.1)
-    monkeypatch.setattr("polar.receipt.render.KILL_WAIT_SECONDS", 0.1)
+    monkeypatch.setattr("tarifia.receipt.render.RENDER_TIMEOUT_SECONDS", 0.1)
+    monkeypatch.setattr("tarifia.receipt.render.KILL_WAIT_SECONDS", 0.1)
 
     with pytest.raises(ReceiptRenderError, match="timed out"):
         await render_receipt_pdf(receipt)

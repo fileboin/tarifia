@@ -1,10 +1,10 @@
-import { InlineModal } from '@polar-sh/orbit'
-import { enums, type schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import CountryPicker from '@polar-sh/ui/components/atoms/CountryPicker'
-import CountryStatePicker from '@polar-sh/ui/components/atoms/CountryStatePicker'
-import { Input } from '@polar-sh/orbit'
-import { DropdownMenuItem } from '@polar-sh/ui/components/ui/dropdown-menu'
+import { InlineModal } from '@tarifia-sh/orbit'
+import { enums, type schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import CountryPicker from '@tarifia-sh/ui/components/atoms/CountryPicker'
+import CountryStatePicker from '@tarifia-sh/ui/components/atoms/CountryStatePicker'
+import { Input } from '@tarifia-sh/orbit'
+import { DropdownMenuItem } from '@tarifia-sh/ui/components/ui/dropdown-menu'
 import {
   Form,
   FormControl,
@@ -13,8 +13,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
-import { Textarea } from '@polar-sh/orbit/ui/textarea'
+} from '@tarifia-sh/ui/components/ui/form'
+import { Textarea } from '@tarifia-sh/orbit/ui/textarea'
 import { useCallback } from 'react'
 import { usePayoutContext } from './PayoutContext'
 import { useInvoiceDownload } from './useInvoiceDownload'

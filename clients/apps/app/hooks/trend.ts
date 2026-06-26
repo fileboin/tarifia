@@ -1,7 +1,7 @@
 import { OrganizationContext } from '@/providers/OrganizationProvider'
-import { operations } from '@polar-sh/client'
+import { operations } from '@tarifia-sh/client'
 import { useContext, useMemo } from 'react'
-import { useMetrics } from './polar/metrics'
+import { useMetrics } from './tarifia/metrics'
 
 export const useRevenueTrend = (
   currentInterval: [Date, Date],

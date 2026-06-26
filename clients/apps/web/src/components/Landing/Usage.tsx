@@ -25,7 +25,7 @@ const LAYERS = [
 export const Usage = () => (
   <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
     {LAYERS.map((l, i) => (
-      <div key={l.id} className="dark:bg-polar-900 flex flex-col bg-gray-50">
+      <div key={l.id} className="dark:bg-tarifia-900 flex flex-col bg-gray-50">
         {/* Graphic */}
         <div className="aspect-square">
           {i === 0 && <RadialSpinner />}
@@ -38,7 +38,7 @@ export const Usage = () => (
             <span className="font-display text-2xl text-gray-900 dark:text-white">
               {l.id} — {l.name}
             </span>
-            <span className="dark:text-polar-500 text-xl text-gray-500">
+            <span className="dark:text-tarifia-500 text-xl text-gray-500">
               {l.desc}
             </span>
           </div>

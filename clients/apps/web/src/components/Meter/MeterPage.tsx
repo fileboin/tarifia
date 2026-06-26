@@ -2,26 +2,26 @@
 
 import { Events } from '@/components/Events/Events'
 import MeterEventsTab from '@/components/Meter/MeterEventsTab'
-import { Spinner } from '@polar-sh/orbit'
+import { Spinner } from '@tarifia-sh/orbit'
 import { useEvents } from '@/hooks/queries/events'
 import { useMeterQuantities } from '@/hooks/queries/meters'
 import { ParsedMetricPeriod } from '@/hooks/queries/metrics'
 import { OrganizationContext } from '@/providers/maintainerOrganization'
 import { dateRangeToInterval } from '@/utils/metrics'
 import { UTCDate } from '@date-fns/utc'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import {
   Card,
   CardContent,
   CardHeader,
-} from '@polar-sh/ui/components/atoms/Card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@polar-sh/orbit'
+} from '@tarifia-sh/ui/components/atoms/Card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@tarifia-sh/orbit'
 import { endOfMonth, startOfMonth, subMonths } from 'date-fns'
 import { useCallback, useContext, useMemo, useState } from 'react'
 import DateRangePicker from '../Metrics/DateRangePicker'
 import IntervalPicker, { getNextValidInterval } from '../Metrics/IntervalPicker'
 import MetricChart from '../Metrics/MetricChart'
-import { InlineModal } from '@polar-sh/orbit'
+import { InlineModal } from '@tarifia-sh/orbit'
 import { Well, WellContent, WellHeader } from '../Shared/Well'
 import FormattedUnits from './FormattedUnits'
 import MeterCustomersTab from './MeterCustomersTab'
@@ -73,7 +73,7 @@ export const MeterPage = ({
       end_timestamp: dateRange.to.toISOString(),
       interval,
       // Aggregate by customer and then `sum` by default, as it's the most common use case
-      // See: https://github.com/polarsource/polar/issues/7032
+      // See: https://github.com/tarifiasource/tarifia/issues/7032
       customer_aggregation_function: 'sum',
     },
   )
@@ -113,7 +113,7 @@ export const MeterPage = ({
                 />
               </div>
             </WellHeader>
-            <WellContent className="dark:bg-polar-900 flex-col rounded-3xl bg-white p-4">
+            <WellContent className="dark:bg-tarifia-900 flex-col rounded-3xl bg-white p-4">
               {chartLoading ? (
                 <div className="flex h-[300px] flex-col items-center justify-center">
                   <Spinner />
@@ -151,7 +151,7 @@ export const MeterPage = ({
             <div className="flex flex-col gap-y-6">
               <div className="flex flex-col gap-y-2">
                 <h3 className="text-xl">Latest meter events</h3>
-                <p className="dark:text-polar-500 text-gray-500">
+                <p className="dark:text-tarifia-500 text-gray-500">
                   Recently received meter events
                 </p>
               </div>
@@ -205,7 +205,7 @@ const MeterActivityCards = ({ meter }: { meter: schemas['Meter'] }) => {
     end_timestamp: dates.currentMonthEnd.toISOString(),
     interval: 'month',
     // Aggregate by customer and then `sum` by default, as it's the most common use case
-    // See: https://github.com/polarsource/polar/issues/7032
+    // See: https://github.com/tarifiasource/tarifia/issues/7032
     customer_aggregation_function: 'sum',
   })
 
@@ -214,7 +214,7 @@ const MeterActivityCards = ({ meter }: { meter: schemas['Meter'] }) => {
     end_timestamp: dates.allTimeEnd.toISOString(),
     interval: 'month',
     // Aggregate by customer and then `sum` by default, as it's the most common use case
-    // See: https://github.com/polarsource/polar/issues/7032
+    // See: https://github.com/tarifiasource/tarifia/issues/7032
     customer_aggregation_function: 'sum',
   })
 
@@ -246,7 +246,7 @@ const MeterActivityCards = ({ meter }: { meter: schemas['Meter'] }) => {
         <Card key={i} className="flex-1 rounded-3xl">
           <CardHeader className="flex flex-col gap-y-0">
             <h3 className="text-lg">{card.title}</h3>
-            <span className="dark:text-polar-500 text-gray-500">
+            <span className="dark:text-tarifia-500 text-gray-500">
               {card.startDate.toLocaleDateString('en-US', {
                 month: 'long',
                 day: 'numeric',

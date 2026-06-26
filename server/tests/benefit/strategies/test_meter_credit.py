@@ -2,15 +2,15 @@ from uuid import uuid4
 
 import pytest
 
-from polar.auth.models import AuthSubject
-from polar.benefit.grant.service import benefit_grant as benefit_grant_service
-from polar.benefit.strategies.base.service import BenefitPropertiesValidationError
-from polar.benefit.strategies.meter_credit.service import BenefitMeterCreditService
-from polar.customer_meter.repository import CustomerMeterRepository
-from polar.customer_meter.service import customer_meter as customer_meter_service
-from polar.meter.aggregation import AggregationFunction, PropertyAggregation
-from polar.meter.filter import Filter, FilterClause, FilterConjunction, FilterOperator
-from polar.models import (
+from tarifia.auth.models import AuthSubject
+from tarifia.benefit.grant.service import benefit_grant as benefit_grant_service
+from tarifia.benefit.strategies.base.service import BenefitPropertiesValidationError
+from tarifia.benefit.strategies.meter_credit.service import BenefitMeterCreditService
+from tarifia.customer_meter.repository import CustomerMeterRepository
+from tarifia.customer_meter.service import customer_meter as customer_meter_service
+from tarifia.meter.aggregation import AggregationFunction, PropertyAggregation
+from tarifia.meter.filter import Filter, FilterClause, FilterConjunction, FilterOperator
+from tarifia.models import (
     Customer,
     Organization,
     Product,
@@ -18,9 +18,9 @@ from polar.models import (
     User,
     UserOrganization,
 )
-from polar.models.benefit import BenefitType
-from polar.postgres import AsyncSession
-from polar.redis import Redis
+from tarifia.models.benefit import BenefitType
+from tarifia.postgres import AsyncSession
+from tarifia.redis import Redis
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_benefit,

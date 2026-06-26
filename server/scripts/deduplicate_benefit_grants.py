@@ -3,10 +3,10 @@ from uuid import UUID
 import typer
 from sqlalchemy import select
 
-from polar.benefit.grant.repository import BenefitGrantRepository
-from polar.kit.db.postgres import AsyncSession, create_async_sessionmaker
-from polar.models import BenefitGrant
-from polar.postgres import create_async_engine
+from tarifia.benefit.grant.repository import BenefitGrantRepository
+from tarifia.kit.db.postgres import AsyncSession, create_async_sessionmaker
+from tarifia.models import BenefitGrant
+from tarifia.postgres import create_async_engine
 
 from .helper import configure_script_logging, typer_async
 

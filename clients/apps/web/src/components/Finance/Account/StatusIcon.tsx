@@ -1,11 +1,11 @@
 'use client'
 
-import { schemas } from '@polar-sh/client'
-import { Box } from '@polar-sh/orbit/Box'
+import { schemas } from '@tarifia-sh/client'
+import { Box } from '@tarifia-sh/orbit/Box'
 import type {
   BackgroundColorToken,
   TextColorToken,
-} from '@polar-sh/orbit/theme'
+} from '@tarifia-sh/orbit/theme'
 import { AnimatePresence, motion } from 'motion/react'
 import {
   CheckIcon,

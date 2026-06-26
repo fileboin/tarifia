@@ -1,6 +1,6 @@
 import pytest
 
-from polar.models.discount import DiscountFixed, DiscountPercentage
+from tarifia.models.discount import DiscountFixed, DiscountPercentage
 
 
 def _fixed(amount: int, currency: str = "usd") -> DiscountFixed:

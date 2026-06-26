@@ -2,7 +2,7 @@
 
 import { useSubscriptions } from '@/hooks/queries'
 import { useDismissed } from '@/hooks/useDismissed'
-import { Alert } from '@polar-sh/orbit'
+import { Alert } from '@tarifia-sh/orbit'
 
 interface SubscriptionMetricsTaxAlertClientProps {
   organizationId: string

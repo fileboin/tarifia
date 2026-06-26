@@ -21,14 +21,14 @@ import * as React from 'react'
 
 import { OrganizationContext } from '@/providers/maintainerOrganization'
 import CalendarMonthOutlined from '@mui/icons-material/CalendarMonthOutlined'
-import { schemas } from '@polar-sh/client'
-import FormattedInterval from '@polar-sh/ui/components/atoms/FormattedInterval'
-import { Calendar } from '@polar-sh/ui/components/ui/calendar'
+import { schemas } from '@tarifia-sh/client'
+import FormattedInterval from '@tarifia-sh/ui/components/atoms/FormattedInterval'
+import { Calendar } from '@tarifia-sh/ui/components/ui/calendar'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@polar-sh/ui/components/ui/popover'
+} from '@tarifia-sh/ui/components/ui/popover'
 import { useContext } from 'react'
 import { twMerge } from 'tailwind-merge'
 
@@ -129,12 +129,12 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
   return (
     <div
       className={twMerge(
-        'dark:border-polar-700 dark:bg-polar-800 dark:divide-polar-700 flex h-10 w-52 flex-row divide-x divide-gray-200 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-xs',
+        'dark:border-tarifia-700 dark:bg-tarifia-800 dark:divide-tarifia-700 flex h-10 w-52 flex-row divide-x divide-gray-200 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-xs',
         className,
       )}
     >
       <Popover>
-        <PopoverTrigger className="dark:hover:bg-polar-700 flex cursor-pointer items-center justify-center px-4 py-3 duration-150 hover:bg-gray-100">
+        <PopoverTrigger className="dark:hover:bg-tarifia-700 flex cursor-pointer items-center justify-center px-4 py-3 duration-150 hover:bg-gray-100">
           <CalendarMonthOutlined fontSize="inherit" />
         </PopoverTrigger>
         <PopoverContent>
@@ -155,7 +155,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
       </Popover>
 
       <Popover>
-        <PopoverTrigger className="dark:hover:bg-polar-700 flex-1 cursor-pointer truncate px-4 text-sm duration-150 hover:bg-gray-100">
+        <PopoverTrigger className="dark:hover:bg-tarifia-700 flex-1 cursor-pointer truncate px-4 text-sm duration-150 hover:bg-gray-100">
           {interval ? (
             interval.label
           ) : date?.from ? (
@@ -231,9 +231,9 @@ const DateRangeIntervals = ({
           onClick={() => onIntervalChange(int)}
           role="button"
           className={twMerge(
-            'dark:hover:bg-polar-800 dark:text-polar-500 flex w-full items-center justify-between rounded-sm border border-transparent px-3 py-2 text-sm text-gray-500 select-none hover:bg-gray-100',
+            'dark:hover:bg-tarifia-800 dark:text-tarifia-500 flex w-full items-center justify-between rounded-sm border border-transparent px-3 py-2 text-sm text-gray-500 select-none hover:bg-gray-100',
             interval?.slug === int.slug &&
-              'dark:bg-polar-800 dark:border-polar-700 bg-gray-100 text-black dark:text-white',
+              'dark:bg-tarifia-800 dark:border-tarifia-700 bg-gray-100 text-black dark:text-white',
           )}
         >
           {int.label}

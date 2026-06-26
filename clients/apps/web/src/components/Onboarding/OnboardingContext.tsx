@@ -11,7 +11,7 @@ import {
   type ReactNode,
 } from 'react'
 
-const STORAGE_KEY = 'polar_onboarding_v2'
+const STORAGE_KEY = 'tarifia_onboarding_v2'
 
 export interface OnboardingData {
   // Screen 1 — Personal

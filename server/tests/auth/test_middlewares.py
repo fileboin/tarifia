@@ -3,16 +3,16 @@ import time
 import pytest
 from starlette.requests import Request
 
-from polar.auth.middlewares import get_auth_subject
-from polar.auth.service import auth as auth_service
-from polar.config import settings
-from polar.kit.crypto import get_token_hash
-from polar.models import OAuth2Token, Organization, User, UserOrganization
-from polar.models.oauth2_token_organization import OAuth2TokenOrganization
-from polar.models.user_session_organization import UserSessionOrganization
-from polar.oauth2.constants import ACCESS_TOKEN_PREFIX
-from polar.oauth2.sub_type import SubType
-from polar.postgres import AsyncSession
+from tarifia.auth.middlewares import get_auth_subject
+from tarifia.auth.service import auth as auth_service
+from tarifia.config import settings
+from tarifia.kit.crypto import get_token_hash
+from tarifia.models import OAuth2Token, Organization, User, UserOrganization
+from tarifia.models.oauth2_token_organization import OAuth2TokenOrganization
+from tarifia.models.user_session_organization import UserSessionOrganization
+from tarifia.oauth2.constants import ACCESS_TOKEN_PREFIX
+from tarifia.oauth2.sub_type import SubType
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 
 
@@ -34,7 +34,7 @@ async def _create_oauth2_token(
     organization: Organization | None = None,
 ) -> OAuth2Token:
     token = OAuth2Token(
-        client_id="polar_ci_test",
+        client_id="tarifia_ci_test",
         token_type="bearer",
         access_token=get_token_hash(access_token, secret=settings.SECRET),
         scope="",

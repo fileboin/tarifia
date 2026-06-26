@@ -1,10 +1,10 @@
 'use client'
 
 import ArrowDownwardOutlined from '@mui/icons-material/ArrowDownwardOutlined'
-import { Text } from '@polar-sh/orbit'
+import { Text } from '@tarifia-sh/orbit'
 import { useTheme } from 'next-themes'
 import React, { useCallback, useState } from 'react'
-import { PolarLogotype } from '../Layout/Public/PolarLogotype'
+import { TarifiaLogotype } from '../Layout/Public/TarifiaLogotype'
 import { SectionLayout } from './SectionLayout'
 import { VectorEditor } from './Vector'
 
@@ -136,7 +136,7 @@ function WordmarkClearSpaceGrid() {
 function DownloadButton() {
   return (
     <a
-      href="/assets/brand/polar_brand.zip"
+      href="/assets/brand/tarifia_brand.zip"
       download
       className="flex w-fit cursor-none flex-row items-center gap-x-3 border-b border-black pb-0.5 text-2xl dark:border-white"
     >
@@ -155,7 +155,7 @@ function DontCard({
 }) {
   return (
     <div className="flex flex-col gap-3">
-      <div className="dark:bg-polar-900 relative flex aspect-square items-center justify-center overflow-hidden bg-neutral-100">
+      <div className="dark:bg-tarifia-900 relative flex aspect-square items-center justify-center overflow-hidden bg-neutral-100">
         {children}
         <div className="pointer-events-none absolute right-2 bottom-2">
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -180,7 +180,7 @@ function DontCard({
           </svg>
         </div>
       </div>
-      <span className="dark:text-polar-500 text-sm text-neutral-500">
+      <span className="dark:text-tarifia-500 text-sm text-neutral-500">
         {label}
       </span>
     </div>
@@ -205,22 +205,22 @@ export function LogoSection() {
       <div className="flex flex-col gap-16 md:gap-48">
         <div className="flex flex-col gap-4">
           <div className="grid grid-cols-1 gap-8 xl:grid-cols-3">
-            <div className="dark:bg-polar-900 flex aspect-square items-center justify-center bg-neutral-100">
-              <PolarLogotype
+            <div className="dark:bg-tarifia-900 flex aspect-square items-center justify-center bg-neutral-100">
+              <TarifiaLogotype
                 logoVariant="logotype"
                 logoClassName="dark:text-white"
                 size={360}
               />
             </div>
-            <div className="dark:bg-polar-900 flex aspect-square items-center justify-center bg-neutral-100">
-              <PolarLogotype
+            <div className="dark:bg-tarifia-900 flex aspect-square items-center justify-center bg-neutral-100">
+              <TarifiaLogotype
                 logoVariant="icon"
                 logoClassName="dark:text-white"
                 size={220}
               />
             </div>
             <div
-              className="dark:bg-polar-900 flex aspect-square cursor-auto items-center justify-center bg-neutral-100"
+              className="dark:bg-tarifia-900 flex aspect-square cursor-auto items-center justify-center bg-neutral-100"
               onMouseEnter={hideBrandCursor}
               onMouseLeave={showBrandCursor}
             >
@@ -234,12 +234,12 @@ export function LogoSection() {
           </div>
         </div>
 
-        {/* ── The Polar Wordmark ──────────────────────────────────────── */}
+        {/* ── The Tarifia Wordmark ──────────────────────────────────────── */}
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-16">
           {/* Title */}
           <div className="flex flex-col gap-6">
             <Text as="h2" variant="heading-l">
-              The Polar
+              The Tarifia
               <br />
               Wordmark
             </Text>
@@ -250,10 +250,10 @@ export function LogoSection() {
           <div className="flex flex-col gap-20">
             <div className="flex flex-col gap-6 text-lg leading-relaxed md:text-xl">
               <p>
-                The Polar wordmark joins the globe mark with the logotype,
+                The Tarifia wordmark joins the globe mark with the logotype,
                 forming the complete brand signature. Use it wherever both the
                 symbol and the name need to be present — marketing materials,
-                landing pages, and any context where Polar is being introduced.
+                landing pages, and any context where Tarifia is being introduced.
               </p>
               <p>
                 The wordmark maintains a fixed spatial relationship between the
@@ -263,10 +263,10 @@ export function LogoSection() {
             </div>
 
             <div className="flex flex-col gap-3">
-              <div className="dark:bg-polar-900 flex items-center justify-center bg-neutral-100 p-8">
+              <div className="dark:bg-tarifia-900 flex items-center justify-center bg-neutral-100 p-8">
                 <WordmarkClearSpaceGrid />
               </div>
-              <p className="dark:text-polar-500 text-lg leading-relaxed text-neutral-500">
+              <p className="dark:text-tarifia-500 text-lg leading-relaxed text-neutral-500">
                 Always surround the wordmark with clear space equal to the
                 height of the globe mark. Keep this zone free of other
                 logotypes, body copy, illustrations, and decorative elements. On
@@ -278,7 +278,7 @@ export function LogoSection() {
             <div className="grid grid-cols-2 gap-6">
               <DontCard label="Don't stretch or distort">
                 <div style={{ transform: 'scaleY(1.6)' }}>
-                  <PolarLogotype
+                  <TarifiaLogotype
                     logoVariant="logotype"
                     logoClassName="dark:text-white"
                     size={150}
@@ -288,7 +288,7 @@ export function LogoSection() {
 
               <DontCard label="Don't rotate">
                 <div style={{ transform: 'rotate(45deg)' }}>
-                  <PolarLogotype
+                  <TarifiaLogotype
                     logoVariant="logotype"
                     logoClassName="dark:text-white"
                     size={150}
@@ -297,7 +297,7 @@ export function LogoSection() {
               </DontCard>
 
               <DontCard label="Don't use low-contrast colour">
-                <PolarLogotype
+                <TarifiaLogotype
                   logoVariant="logotype"
                   logoClassName="text-neutral-200 dark:text-neutral-800"
                   size={150}
@@ -305,7 +305,7 @@ export function LogoSection() {
               </DontCard>
 
               <DontCard label="Don't recolour outside brand palette">
-                <PolarLogotype
+                <TarifiaLogotype
                   logoVariant="logotype"
                   logoClassName="text-emerald-500 dark:text-emerald-500"
                   size={150}
@@ -313,7 +313,7 @@ export function LogoSection() {
               </DontCard>
 
               <DontCard label="Don't use below 100px wide">
-                <PolarLogotype
+                <TarifiaLogotype
                   logoVariant="logotype"
                   logoClassName="dark:text-white"
                   size={80}
@@ -324,19 +324,19 @@ export function LogoSection() {
 
           {/* Wordmark on black — 3:2 ratio */}
           <div
-            className="dark:bg-polar-900 flex items-center justify-center bg-neutral-100"
+            className="dark:bg-tarifia-900 flex items-center justify-center bg-neutral-100"
             style={{ aspectRatio: '3 / 2' }}
           >
-            <PolarLogotype logoVariant="logotype" size={300} />
+            <TarifiaLogotype logoVariant="logotype" size={300} />
           </div>
         </div>
 
-        {/* ── The Polar Globe ─────────────────────────────────────────── */}
+        {/* ── The Tarifia Globe ─────────────────────────────────────────── */}
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-16">
           {/* Title */}
           <div className="flex flex-col gap-6">
             <Text as="h2" variant="heading-l">
-              The Polar Globe
+              The Tarifia Globe
             </Text>
             <DownloadButton />
           </div>
@@ -345,7 +345,7 @@ export function LogoSection() {
           <div className="flex flex-col gap-20">
             <div className="flex flex-col gap-6 text-lg leading-relaxed md:text-xl">
               <p>
-                A polar reference is a point of orientation — something constant
+                A tarifia reference is a point of orientation — something constant
                 in a shifting landscape. For AI companies, billing is that
                 reference point. It&apos;s where experimentation meets
                 economics, where intelligence becomes revenue.
@@ -353,7 +353,7 @@ export function LogoSection() {
               <p>
                 The globe embodies that role: steady at the center, expansive at
                 the edges. As AI companies scale across borders and models
-                evolve in real time, Polar provides the infrastructure that
+                evolve in real time, Tarifia provides the infrastructure that
                 keeps value aligned with usage — globally, reliably, and without
                 friction.
               </p>
@@ -361,10 +361,10 @@ export function LogoSection() {
             </div>
 
             <div className="flex flex-col gap-3">
-              <div className="dark:bg-polar-900 flex items-center justify-center bg-neutral-100 p-8">
+              <div className="dark:bg-tarifia-900 flex items-center justify-center bg-neutral-100 p-8">
                 <ClearSpaceGrid />
               </div>
-              <p className="dark:text-polar-500 text-lg leading-relaxed text-neutral-500">
+              <p className="dark:text-tarifia-500 text-lg leading-relaxed text-neutral-500">
                 Maintain clear space equal to the diameter of the globe on all
                 sides. Nothing — text, imagery, or other marks — should enter
                 this zone. On tight layouts, reduce the logo size before
@@ -375,7 +375,7 @@ export function LogoSection() {
             <div className="grid grid-cols-2 gap-6">
               <DontCard label="Don't stretch or distort">
                 <div style={{ transform: 'scaleX(1.6)' }}>
-                  <PolarLogotype
+                  <TarifiaLogotype
                     logoVariant="icon"
                     logoClassName="dark:text-white"
                     size={130}
@@ -385,7 +385,7 @@ export function LogoSection() {
 
               <DontCard label="Don't rotate">
                 <div style={{ transform: 'rotate(45deg)' }}>
-                  <PolarLogotype
+                  <TarifiaLogotype
                     logoVariant="icon"
                     logoClassName="dark:text-white"
                     size={130}
@@ -394,7 +394,7 @@ export function LogoSection() {
               </DontCard>
 
               <DontCard label="Don't use low-contrast colour">
-                <PolarLogotype
+                <TarifiaLogotype
                   logoVariant="icon"
                   logoClassName="text-neutral-200 dark:text-neutral-800"
                   size={130}
@@ -402,7 +402,7 @@ export function LogoSection() {
               </DontCard>
 
               <DontCard label="Don't recolour outside brand palette">
-                <PolarLogotype
+                <TarifiaLogotype
                   logoVariant="icon"
                   logoClassName="text-emerald-500 dark:text-emerald-500"
                   size={130}
@@ -413,10 +413,10 @@ export function LogoSection() {
 
           {/* Logo on black — 2:3 ratio */}
           <div
-            className="dark:bg-polar-900 flex items-center justify-center bg-neutral-100"
+            className="dark:bg-tarifia-900 flex items-center justify-center bg-neutral-100"
             style={{ aspectRatio: '2 / 3' }}
           >
-            <PolarLogotype logoVariant="icon" size={200} />
+            <TarifiaLogotype logoVariant="icon" size={200} />
           </div>
         </div>
       </div>

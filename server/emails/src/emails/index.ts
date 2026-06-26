@@ -15,9 +15,9 @@ import { OrganizationAccountUnlink } from './organization_account_unlink'
 import { OrganizationInvite } from './organization_invite'
 import { OrganizationOffboarded } from './organization_offboarded'
 import { PersonalAccessTokenLeaked } from './personal_access_token_leaked'
-import { PolarSelfStartupProgramWelcome } from './polar_self_startup_program_welcome'
-import { PolarSelfSubscriptionConfirmation } from './polar_self_subscription_confirmation'
-import { PolarSelfSubscriptionCycled } from './polar_self_subscription_cycled'
+import { TarifiaSelfStartupProgramWelcome } from './tarifia_self_startup_program_welcome'
+import { TarifiaSelfSubscriptionConfirmation } from './tarifia_self_subscription_confirmation'
+import { TarifiaSelfSubscriptionCycled } from './tarifia_self_subscription_cycled'
 import { SeatInvitation } from './seat_invitation'
 import { SubscriptionCancellation } from './subscription_cancellation'
 import { SubscriptionConfirmation } from './subscription_confirmation'
@@ -65,9 +65,9 @@ const TEMPLATES: Record<string, React.FC<never>> = {
   notification_new_subscription: NotificationNewSubscription,
   notification_credits_granted: NotificationCreditsGranted,
   chargeback_prevention_refund: ChargebackPreventionRefund,
-  polar_self_subscription_confirmation: PolarSelfSubscriptionConfirmation,
-  polar_self_subscription_cycled: PolarSelfSubscriptionCycled,
-  polar_self_startup_program_welcome: PolarSelfStartupProgramWelcome,
+  tarifia_self_subscription_confirmation: TarifiaSelfSubscriptionConfirmation,
+  tarifia_self_subscription_cycled: TarifiaSelfSubscriptionCycled,
+  tarifia_self_startup_program_welcome: TarifiaSelfStartupProgramWelcome,
 }
 
 export default TEMPLATES

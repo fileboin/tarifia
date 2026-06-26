@@ -1,8 +1,8 @@
 from unittest.mock import MagicMock
 
-from polar.models.product import ProductVisibility
-from polar.models.product_price import ProductPriceAmountType
-from polar.organization_review.collectors.products import collect_products_data
+from tarifia.models.product import ProductVisibility
+from tarifia.models.product_price import ProductPriceAmountType
+from tarifia.organization_review.collectors.products import collect_products_data
 
 
 def _build_price(

@@ -6,11 +6,11 @@ import { PlanUpsell } from '@/components/Upsell/PlanUpsell'
 import { AccountWidget } from '@/components/Widgets/AccountWidget'
 import { OrdersWidget } from '@/components/Widgets/OrdersWidget'
 import RevenueWidget from '@/components/Widgets/RevenueWidget'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { OrganizationStatusBanner } from './OrganizationStatusBanner'
 
 const cellClassName =
-  'dark:border-polar-700 border-t-0 border-r border-b border-l-0 border-gray-200'
+  'dark:border-tarifia-700 border-t-0 border-r border-b border-l-0 border-gray-200'
 
 interface OverviewPageProps {
   organization: schemas['Organization']
@@ -23,7 +23,7 @@ export default function OverviewPage({ organization }: OverviewPageProps) {
       <OrganizationStatusBanner organization={organization} />
       <OverviewSection organization={organization} />
 
-      <div className="dark:border-polar-700 overflow-hidden rounded-xl border border-gray-200">
+      <div className="dark:border-tarifia-700 overflow-hidden rounded-xl border border-gray-200">
         <div className="grid grid-cols-1 [clip-path:inset(1px_1px_1px_1px)] lg:grid-cols-3">
           <RevenueWidget className={cellClassName} />
           <OrdersWidget className={cellClassName} />

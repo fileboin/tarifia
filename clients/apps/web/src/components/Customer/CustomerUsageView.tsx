@@ -1,12 +1,12 @@
 import { useCustomerMeters } from '@/hooks/queries/customerMeters'
 import { useMultipleMeterQuantities } from '@/hooks/queries/meters'
 import { useSubscriptions } from '@/hooks/queries/subscriptions'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { useRouter } from 'next/navigation'
-import { formatCurrency } from '@polar-sh/currency'
-import ShadowBox from '@polar-sh/ui/components/atoms/ShadowBox'
-import { DataTable, DataTableColumnHeader } from '@polar-sh/orbit'
-import { TabsContent } from '@polar-sh/orbit'
+import { formatCurrency } from '@tarifia-sh/currency'
+import ShadowBox from '@tarifia-sh/ui/components/atoms/ShadowBox'
+import { DataTable, DataTableColumnHeader } from '@tarifia-sh/orbit'
+import { TabsContent } from '@tarifia-sh/orbit'
 import { useMemo } from 'react'
 import FormattedUnits from '../Meter/FormattedUnits'
 import StackedMeterChart from '../Meter/StackedMeterChart'
@@ -154,8 +154,8 @@ export const CustomerUsageView = ({
 
   return (
     <TabsContent value="usage" className="flex flex-col gap-y-8">
-      <ShadowBox className="dark:bg-polar-800 flex flex-col gap-y-4 p-2">
-        <div className="dark:bg-polar-900 rounded-3xl bg-white p-4">
+      <ShadowBox className="dark:bg-tarifia-800 flex flex-col gap-y-4 p-2">
+        <div className="dark:bg-tarifia-900 rounded-3xl bg-white p-4">
           <StackedMeterChart
             data={chartData}
             series={series}
@@ -186,7 +186,7 @@ export const CustomerUsageView = ({
                 />
                 <span>{row.original.meter.name}</span>
                 {row.original.subscription && (
-                  <span className="dark:text-polar-500 text-gray-500">
+                  <span className="dark:text-tarifia-500 text-gray-500">
                     {row.original.subscription.product.name}
                   </span>
                 )}
@@ -237,7 +237,7 @@ export const CustomerUsageView = ({
                   {formatCurrency('compact')(overages.cost, overages.currency)}
                 </span>
               ) : (
-                <span className="dark:text-polar-500 text-gray-500">—</span>
+                <span className="dark:text-tarifia-500 text-gray-500">—</span>
               )
             },
           },

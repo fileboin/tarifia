@@ -1,2 +1,2 @@
-// eslint-disable-next-line polar/no-next-image
+// eslint-disable-next-line tarifia/no-next-image
 export { default as StaticImage } from 'next/image'

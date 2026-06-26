@@ -1,7 +1,7 @@
 'use client'
 
-import { Client, schemas } from '@polar-sh/client'
-import { List, ListItem } from '@polar-sh/orbit'
+import { Client, schemas } from '@tarifia-sh/client'
+import { List, ListItem } from '@tarifia-sh/orbit'
 import { BenefitGrant } from '../Benefit/BenefitGrant'
 
 export interface CustomerPortalGrantsSimpleProps {

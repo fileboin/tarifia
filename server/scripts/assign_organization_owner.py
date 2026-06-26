@@ -22,7 +22,7 @@ Defaults to a dry-run; pass --execute to actually write.
 
 Options:
     --execute                actually assign the owner (default: dry-run)
-    --sync-polar-for-polar   also sync the new owner's role on Polar's own
+    --sync-tarifia-for-tarifia   also sync the new owner's role on Tarifia's own
                              self-customer (mirrors organization.change_owner)
     --yes                    skip the confirmation prompt
 """
@@ -34,15 +34,15 @@ import typer
 from sqlalchemy import select, update
 from sqlalchemy.exc import IntegrityError
 
-from polar.kit.db.postgres import create_async_sessionmaker
-from polar.models import UserOrganization
-from polar.models.user_organization import OrganizationRole
-from polar.organization.repository import OrganizationRepository
-from polar.organization.service import CannotChangeOwnerError
-from polar.organization.service import organization as organization_service
-from polar.postgres import create_async_engine
-from polar.user.repository import UserRepository
-from polar.user_organization.repository import UserOrganizationRepository
+from tarifia.kit.db.postgres import create_async_sessionmaker
+from tarifia.models import UserOrganization
+from tarifia.models.user_organization import OrganizationRole
+from tarifia.organization.repository import OrganizationRepository
+from tarifia.organization.service import CannotChangeOwnerError
+from tarifia.organization.service import organization as organization_service
+from tarifia.postgres import create_async_engine
+from tarifia.user.repository import UserRepository
+from tarifia.user_organization.repository import UserOrganizationRepository
 
 cli = typer.Typer()
 
@@ -61,13 +61,13 @@ def assign_owner(
     execute: bool = typer.Option(
         False, "--execute", help="Actually assign the owner (default: dry-run)."
     ),
-    sync_polar_for_polar: bool = typer.Option(
+    sync_tarifia_for_tarifia: bool = typer.Option(
         False,
-        "--sync-polar-for-polar",
+        "--sync-tarifia-for-tarifia",
         help=(
-            "Also sync the new owner's role on Polar's own self-customer, "
+            "Also sync the new owner's role on Tarifia's own self-customer, "
             "mirroring organization.change_owner. Fails if the org has no "
-            "Polar self-customer/member."
+            "Tarifia self-customer/member."
         ),
     ),
     yes: bool = typer.Option(False, "--yes", help="Skip the confirmation prompt."),
@@ -152,8 +152,8 @@ def assign_owner(
             plan.append(
                 f"set role of {target_user.email} ({membership.role}) -> owner{suffix}"
             )
-            if sync_polar_for_polar:
-                plan.append("sync new owner's role on Polar's self-customer")
+            if sync_tarifia_for_tarifia:
+                plan.append("sync new owner's role on Tarifia's self-customer")
             typer.echo("Plan: " + "; ".join(plan))
 
             if not execute:
@@ -185,17 +185,17 @@ def assign_owner(
                 typer.echo(f"Failed to assign owner: {e}")
                 raise typer.Exit(code=1) from e
 
-            if sync_polar_for_polar:
+            if sync_tarifia_for_tarifia:
                 # Reuse the same sync organization.change_owner performs, so the
-                # owner's role on Polar's self-customer stays consistent.
+                # owner's role on Tarifia's self-customer stays consistent.
                 try:
-                    await organization_service._sync_polar_self_customer_owner(
+                    await organization_service._sync_tarifia_self_customer_owner(
                         session,
                         organization_id=organization.id,
                         new_owner_user=target_user,
                     )
                 except CannotChangeOwnerError as e:
-                    typer.echo(f"Polar-for-Polar sync failed: {e}")
+                    typer.echo(f"Tarifia-for-Tarifia sync failed: {e}")
                     raise typer.Exit(code=1) from e
 
             await session.commit()

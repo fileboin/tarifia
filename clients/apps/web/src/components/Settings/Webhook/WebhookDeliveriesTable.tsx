@@ -16,14 +16,14 @@ import {
 } from '@/utils/datatable'
 import KeyboardArrowDownOutlined from '@mui/icons-material/KeyboardArrowDownOutlined'
 import KeyboardArrowRightOutlined from '@mui/icons-material/KeyboardArrowRightOutlined'
-import { operations, schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
+import { operations, schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
 import {
   DataTable,
   DataTableColumnDef,
   DataTableColumnHeader,
-} from '@polar-sh/orbit'
-import FormattedDateTime from '@polar-sh/ui/components/atoms/FormattedDateTime'
+} from '@tarifia-sh/orbit'
+import FormattedDateTime from '@tarifia-sh/ui/components/atoms/FormattedDateTime'
 import { CellContext } from '@tanstack/react-table'
 import { useRouter, useSearchParams } from 'next/navigation'
 import React, { useCallback } from 'react'
@@ -148,9 +148,9 @@ const DeliveriesTable: React.FC<DeliveriesTableProps> = ({
             }}
           >
             {row.getIsExpanded() ? (
-              <KeyboardArrowDownOutlined className="dark:text-polar-500 text-gray-500" />
+              <KeyboardArrowDownOutlined className="dark:text-tarifia-500 text-gray-500" />
             ) : (
-              <KeyboardArrowRightOutlined className="dark:text-polar-500 text-gray-500" />
+              <KeyboardArrowRightOutlined className="dark:text-tarifia-500 text-gray-500" />
             )}
           </button>
         )

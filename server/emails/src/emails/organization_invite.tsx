@@ -3,7 +3,7 @@ import {
   Footer,
   Intro,
   Text,
-  WrapperPolar,
+  WrapperTarifia,
 } from '../components/foundation'
 import type { schemas } from '../types'
 
@@ -14,23 +14,23 @@ export function OrganizationInvite({
   invite_url,
 }: schemas['OrganizationInviteProps']) {
   return (
-    <WrapperPolar
-      preview={`You've been added to ${organization_name} on Polar`}
+    <WrapperTarifia
+      preview={`You've been added to ${organization_name} on Tarifia`}
     >
       <Intro>
         {inviter_email} has added you to{' '}
         <Text as="span" weight="bold">
           {organization_name}
         </Text>{' '}
-        on Polar.
+        on Tarifia.
       </Intro>
       <Text>
         As a member of {organization_name} you're now able to manage{' '}
-        {organization_name}'s products, customers, and subscriptions on Polar.
+        {organization_name}'s products, customers, and subscriptions on Tarifia.
       </Text>
-      <Button href={invite_url}>Go to the Polar dashboard</Button>
+      <Button href={invite_url}>Go to the Tarifia dashboard</Button>
       <Footer email={email} />
-    </WrapperPolar>
+    </WrapperTarifia>
   )
 }
 
@@ -38,7 +38,7 @@ OrganizationInvite.PreviewProps = {
   email: 'john@example.com',
   organization_name: 'Acme Inc.',
   inviter_email: 'admin@acme.com',
-  invite_url: 'https://polar.sh/dashboard/acme-inc',
+  invite_url: 'https://tarifia.sh/dashboard/acme-inc',
 }
 
 export default OrganizationInvite

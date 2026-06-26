@@ -1,14 +1,14 @@
 'use client'
 
-import { formatCurrency } from '@polar-sh/currency'
-import type { AcceptedLocale } from '@polar-sh/i18n'
+import { formatCurrency } from '@tarifia-sh/currency'
+import type { AcceptedLocale } from '@tarifia-sh/i18n'
 import {
   DEFAULT_LOCALE,
   getTranslations,
   useTranslations,
-} from '@polar-sh/i18n'
-import { formatDate } from '@polar-sh/i18n/formatters/date'
-import { formatOrdinal } from '@polar-sh/i18n/formatters/ordinal'
+} from '@tarifia-sh/i18n'
+import { formatDate } from '@tarifia-sh/i18n/formatters/date'
+import { formatOrdinal } from '@tarifia-sh/i18n/formatters/ordinal'
 import type { ProductCheckoutPublic } from '../guards'
 import { isLegacyRecurringPrice } from '../utils/product'
 
@@ -80,7 +80,7 @@ const CheckoutTrialHeroPrice = ({
   return (
     <div className="flex flex-col gap-y-1">
       <span>{trialLabel}</span>
-      <span className="dark:text-polar-500 text-sm font-normal text-gray-500">
+      <span className="dark:text-tarifia-500 text-sm font-normal text-gray-500">
         {t('checkout.trial.hero.then')}{' '}
         <strong className="font-semibold">{priceStr}</strong>
         {dateStr

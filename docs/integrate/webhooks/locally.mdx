@@ -4,26 +4,26 @@ sidebarTitle: "Local Development"
 description: "Setup Webhook delivery to your local machine"
 ---
 
-### Install Polar CLI
+### Install Tarifia CLI
 
 macOS, Linux, WSL:
 
 ```bash
-curl -fsSL https://polar.sh/install.sh | bash
+curl -fsSL https://tarifia.sh/install.sh | bash
 ```
 
 ### Login to your account
 
-This will allow you to authenticate with Polar.
+This will allow you to authenticate with Tarifia.
 
 ```bash
-polar login
+tarifia login
 ```
 
 ### Listen for Webhooks
 
 ```bash
-polar listen http://localhost:3000/
+tarifia listen http://localhost:3000/
 ```
 
 You will be prompted to select which Organization you want to listen for.
@@ -46,7 +46,7 @@ If you don't set the correct secret, you'll see 403 errors if you use our Webhoo
 
 ```bash
 # .env
-POLAR_WEBHOOK_SECRET=6t3c8ce2247c493a3ade20uea4484d64
+TARIFIA_WEBHOOK_SECRET=6t3c8ce2247c493a3ade20uea4484d64
 ```
 
 ### All set!

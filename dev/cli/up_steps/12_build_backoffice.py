@@ -11,7 +11,7 @@ from shared import (
 
 NAME = "Building backoffice assets"
 
-BACKOFFICE_DIR = SERVER_DIR / "polar" / "backoffice"
+BACKOFFICE_DIR = SERVER_DIR / "tarifia" / "backoffice"
 
 
 def check_backoffice_built() -> bool:

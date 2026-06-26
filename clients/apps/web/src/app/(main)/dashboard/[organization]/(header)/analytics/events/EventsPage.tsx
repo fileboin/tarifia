@@ -6,7 +6,7 @@ import { EventMetadataFilter } from '@/components/Events/EventMetadataFilter'
 import { Events } from '@/components/Events/Events'
 import { DashboardBody } from '@/components/Layout/DashboardLayout'
 import DateRangePicker from '@/components/Metrics/DateRangePicker'
-import { Modal } from '@polar-sh/orbit'
+import { Modal } from '@tarifia-sh/orbit'
 import { useModal } from '@/components/Modal/useModal'
 import Pagination from '@/components/Pagination/Pagination'
 import { useEventNames, useEvents } from '@/hooks/queries/events'
@@ -14,18 +14,18 @@ import useDebounce from '@/utils/useDebounce'
 import AddOutlined from '@mui/icons-material/AddOutlined'
 import RefreshOutlined from '@mui/icons-material/RefreshOutlined'
 import Search from '@mui/icons-material/Search'
-import { operations, schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { Input } from '@polar-sh/orbit'
-import { List, ListItem } from '@polar-sh/orbit'
+import { operations, schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { Input } from '@tarifia-sh/orbit'
+import { List, ListItem } from '@tarifia-sh/orbit'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@tarifia-sh/orbit'
 import { endOfToday } from 'date-fns'
 import { useRouter, useSearchParams } from 'next/navigation'
 import {
@@ -183,7 +183,7 @@ const ClientPage: React.FC<ClientPageProps> = ({ organization }) => {
     <DashboardBody
       title="Events"
       header={
-        <h3 className="dark:text-polar-500 text-xl text-gray-500">
+        <h3 className="dark:text-tarifia-500 text-xl text-gray-500">
           {totalCount} {totalCount === 1 ? 'Event' : 'Events'}
         </h3>
       }
@@ -226,7 +226,7 @@ const ClientPage: React.FC<ClientPageProps> = ({ organization }) => {
           <div
             className={twMerge(
               'flex flex-col gap-y-6 overflow-y-auto px-4 pt-2 pb-4',
-              hasScrolled && 'dark:border-polar-700 border-t border-gray-200',
+              hasScrolled && 'dark:border-tarifia-700 border-t border-gray-200',
             )}
             onScroll={handleScroll}
           >
@@ -242,7 +242,7 @@ const ClientPage: React.FC<ClientPageProps> = ({ organization }) => {
               {debouncedQuery &&
                 debouncedQuery.length > 0 &&
                 debouncedQuery.length < 3 && (
-                  <p className="dark:text-polar-500 text-xs text-gray-400">
+                  <p className="dark:text-tarifia-500 text-xs text-gray-400">
                     Type at least 3 characters to search
                   </p>
                 )}
@@ -288,7 +288,7 @@ const ClientPage: React.FC<ClientPageProps> = ({ organization }) => {
                             key={eventType.name}
                             size="small"
                             className="justify-between px-3 font-mono text-xs"
-                            inactiveClassName="text-gray-500 dark:text-polar-500"
+                            inactiveClassName="text-gray-500 dark:text-tarifia-500"
                             selected={selectedEventTypes?.includes(
                               eventType.name,
                             )}
@@ -308,7 +308,7 @@ const ClientPage: React.FC<ClientPageProps> = ({ organization }) => {
                             <span className="w-full truncate">
                               {eventType.label}
                             </span>
-                            <span className="text-xxs dark:text-polar-500 font-mono text-gray-500">
+                            <span className="text-xxs dark:text-tarifia-500 font-mono text-gray-500">
                               {Number(eventType.occurrences).toLocaleString(
                                 'en-US',
                                 {
@@ -366,9 +366,9 @@ const ClientPage: React.FC<ClientPageProps> = ({ organization }) => {
     >
       <div className="flex h-full flex-col gap-y-4">
         {events?.items.length === 0 && !isFetching ? (
-          <div className="dark:border-polar-700 flex min-h-96 w-full flex-col items-center justify-center gap-4 rounded-4xl border border-gray-200 p-8 text-center md:p-24">
+          <div className="dark:border-tarifia-700 flex min-h-96 w-full flex-col items-center justify-center gap-4 rounded-4xl border border-gray-200 p-8 text-center md:p-24">
             <h1 className="text-2xl font-normal">No Events Found</h1>
-            <p className="dark:text-polar-500 text-gray-500">
+            <p className="dark:text-tarifia-500 text-gray-500">
               There are no events matching your current filters
             </p>
           </div>

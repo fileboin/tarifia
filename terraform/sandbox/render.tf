@@ -15,8 +15,8 @@ resource "render_registry_credential" "ghcr" {
 # ============================================================================
 
 data "tfe_outputs" "production" {
-  organization = "polar-sh"
-  workspace    = "polar"
+  organization = "tarifia-sh"
+  workspace    = "tarifia"
 }
 
 data "render_postgres" "db" {
@@ -59,7 +59,7 @@ locals {
   db_password = data.render_postgres.db.connection_info.password
 
   # Read replica connection info
-  read_replica = [for r in data.render_postgres.db.read_replicas : r if r.name == "polar-read"][0]
+  read_replica = [for r in data.render_postgres.db.read_replicas : r if r.name == "tarifia-read"][0]
 
   # Redis connection info
   redis_host = render_redis.redis_sandbox.id
@@ -119,34 +119,34 @@ module "sandbox" {
   }
 
   api_service_config = {
-    allowed_hosts          = "[\"sandbox.polar.sh\"]"
-    cors_origins           = "[\"https://sandbox.polar.sh\", \"https://github.com\", \"https://docs.polar.sh\"]"
-    custom_domains         = [{ name = "sandbox-api.polar.sh" }]
+    allowed_hosts          = "[\"sandbox.tarifia.sh\"]"
+    cors_origins           = "[\"https://sandbox.tarifia.sh\", \"https://github.com\", \"https://docs.tarifia.sh\"]"
+    custom_domains         = [{ name = "sandbox-api.tarifia.sh" }]
     web_concurrency        = "2"
     forwarded_allow_ips    = "*"
     database_pool_size     = "10"
-    postgres_database      = "polar_sandbox"
-    postgres_read_database = "polar_sandbox"
+    postgres_database      = "tarifia_sandbox"
+    postgres_read_database = "tarifia_sandbox"
     redis_db               = "1"
     plan                   = "pro"
   }
 
   workers = {
     worker-sandbox = {
-      start_command      = "uv run dramatiq polar.worker.run -p 4 -t 8 -f polar.worker.scheduler:start --queues high_priority medium_priority low_priority"
+      start_command      = "uv run dramatiq tarifia.worker.run -p 4 -t 8 -f tarifia.worker.scheduler:start --queues high_priority medium_priority low_priority"
       dramatiq_prom_port = "10000"
     }
     worker-sandbox-webhook = {
-      start_command      = "uv run dramatiq polar.worker.run -p 1 -t 16 --queues webhooks"
+      start_command      = "uv run dramatiq tarifia.worker.run -p 1 -t 16 --queues webhooks"
       dramatiq_prom_port = "10001"
       database_pool_size = "16"
     }
     worker-sandbox-tinybird = {
-      start_command      = "uv run dramatiq polar.worker.run -p 1 -t 16 --queues tinybird"
+      start_command      = "uv run dramatiq tarifia.worker.run -p 1 -t 16 --queues tinybird"
       dramatiq_prom_port = "10002"
     }
     worker-sandbox-invoices-receipts = {
-      start_command      = "uv run dramatiq polar.worker.run -p 1 -t 3 --queues invoices_and_receipts"
+      start_command      = "uv run dramatiq tarifia.worker.run -p 1 -t 3 --queues invoices_and_receipts"
       plan               = "standard"
       dramatiq_prom_port = "10003"
     }
@@ -154,7 +154,7 @@ module "sandbox" {
     # Temporary drain worker - listens to ALL queues on production Redis
     # This allows draining in-flight tasks from the current shared Redis
     worker-sandbox-drain = {
-      start_command      = "uv run dramatiq polar.worker.run -p 2 -t 4 --queues high_priority medium_priority low_priority webhooks tinybird invoices_and_receipts"
+      start_command      = "uv run dramatiq tarifia.worker.run -p 2 -t 4 --queues high_priority medium_priority low_priority webhooks tinybird invoices_and_receipts"
       dramatiq_prom_port = "10004"
       plan               = "standard"
       redis_host         = local.production_redis_host
@@ -177,22 +177,22 @@ module "sandbox" {
   }
 
   backend_config = {
-    base_url                             = "https://sandbox-api.polar.sh"
-    user_session_cookie_domain           = "polar.sh"
-    user_session_cookie_key              = "polar_sandbox_session"
-    authentication_session_cookie_domain = "polar.sh"
-    oauth2_session_state_cookie_domain   = "polar.sh"
+    base_url                             = "https://sandbox-api.tarifia.sh"
+    user_session_cookie_domain           = "tarifia.sh"
+    user_session_cookie_key              = "tarifia_sandbox_session"
+    authentication_session_cookie_domain = "tarifia.sh"
+    oauth2_session_state_cookie_domain   = "tarifia.sh"
     debug                                = "0"
     email_sender                         = "resend"
-    email_from_name                      = "[SANDBOX] Polar"
-    email_from_domain                    = "notifications.sandbox.polar.sh"
-    frontend_base_url                    = "https://sandbox.polar.sh"
-    checkout_base_url                    = "https://sandbox-api.polar.sh/v1/checkout-links/{client_secret}/redirect"
+    email_from_name                      = "[SANDBOX] Tarifia"
+    email_from_domain                    = "notifications.sandbox.tarifia.sh"
+    frontend_base_url                    = "https://sandbox.tarifia.sh"
+    checkout_base_url                    = "https://sandbox-api.tarifia.sh/v1/checkout-links/{client_secret}/redirect"
     jwks_path                            = "/etc/secrets/jwks.json"
     log_level                            = "INFO"
     testing                              = "0"
-    auth_cookie_domain                   = "polar.sh"
-    auth_cookie_key                      = "polar_sandbox_session"
+    auth_cookie_domain                   = "tarifia.sh"
+    auth_cookie_key                      = "tarifia_sandbox_session"
     tax_processors                       = "[\"numeral\",\"stripe\"]"
     tax_record_processor                 = "numeral"
     customer_portal_url_overrides        = var.customer_portal_url_overrides
@@ -220,11 +220,11 @@ module "sandbox" {
     region                        = "us-east-2"
     signature_version             = "v4"
     files_presign_ttl             = "3600"
-    files_public_bucket_name      = "polar-public-sandbox-files"
-    customer_invoices_bucket_name = "polar-sandbox-customer-invoices"
-    customer_receipts_bucket_name = "polar-sandbox-customer-receipts"
-    payout_invoices_bucket_name   = "polar-sandbox-payout-invoices"
-    logs_bucket_name              = "polar-sandbox-logs"
+    files_public_bucket_name      = "tarifia-public-sandbox-files"
+    customer_invoices_bucket_name = "tarifia-sandbox-customer-invoices"
+    customer_receipts_bucket_name = "tarifia-sandbox-customer-receipts"
+    payout_invoices_bucket_name   = "tarifia-sandbox-payout-invoices"
+    logs_bucket_name              = "tarifia-sandbox-logs"
   }
 
   aws_s3_secrets = {
@@ -237,7 +237,7 @@ module "sandbox" {
   worker_sqs_config = {
     enabled               = "true"
     actors                = var.worker_sqs_actors
-    queue_prefix          = "polar-sandbox-tasks"
+    queue_prefix          = "tarifia-sandbox-tasks"
     aws_access_key_id     = aws_iam_access_key.tasks_producer.id
     aws_secret_access_key = aws_iam_access_key.tasks_producer.secret
   }
@@ -276,16 +276,16 @@ module "sandbox" {
   }
 
   memory_profile_config = {
-    s3_bucket_name = "polar-sandbox-logs"
+    s3_bucket_name = "tarifia-sandbox-logs"
   }
 
-  polar_self_config = {
-    access_token     = var.polar_access_token
-    webhook_secret   = var.polar_webhook_secret
-    organization_id  = var.polar_organization_id
-    free_product_id  = var.polar_free_product_id
-    scale_product_id = var.polar_scale_product_id
-    api_url          = "https://sandbox-api.polar.sh"
+  tarifia_self_config = {
+    access_token     = var.tarifia_access_token
+    webhook_secret   = var.tarifia_webhook_secret
+    organization_id  = var.tarifia_organization_id
+    free_product_id  = var.tarifia_free_product_id
+    scale_product_id = var.tarifia_scale_product_id
+    api_url          = "https://sandbox-api.tarifia.sh"
   }
 
   tinybird_config = {
@@ -311,7 +311,7 @@ import {
 
 resource "cloudflare_dns_record" "api" {
   zone_id = "22bcd1b07ec25452aab472486bc8df94"
-  name    = "sandbox-api.polar.sh"
+  name    = "sandbox-api.tarifia.sh"
   type    = "CNAME"
   content = replace(module.sandbox.api_service_url, "https://", "")
   proxied = true

@@ -1,25 +1,25 @@
 ---
 name: fix-sentry
-description: Analyze and fix issues reported by Sentry in the Polar codebase.
+description: Analyze and fix issues reported by Sentry in the Tarifia codebase.
 user-invocable: true
-allowed-tools: Bash(gh:*) Bash(git:*) logfire_polar* sentry_polar* github*
+allowed-tools: Bash(gh:*) Bash(git:*) logfire_tarifia* sentry_tarifia* github*
 ---
 
-You're responsible for analyzing and fixing issues reported by Sentry in the Polar codebase. This involves investigating the Sentry reports, identifying the root causes of the issues, and implementing fixes to resolve them.
+You're responsible for analyzing and fixing issues reported by Sentry in the Tarifia codebase. This involves investigating the Sentry reports, identifying the root causes of the issues, and implementing fixes to resolve them.
 
 ## Input
 
 If not provided in the invocation prompt, you should ask the user for the a Sentry issue ID or a link to the Sentry issue. This will allow you to access the details of the issue and begin your analysis.
 
-The Sentry organization ID of Polar is `4505046560538624` and its slug is `polar-sh`.
+The Sentry organization ID of Tarifia is `4505046560538624` and its slug is `tarifia-sh`.
 
 ## Step 1: Analyze the Sentry issue
 
-Using the sentry_polar tools, access the details of the Sentry issue provided by the user. This includes the error message, stack trace, and any additional context or metadata associated with the issue.
+Using the sentry_tarifia tools, access the details of the Sentry issue provided by the user. This includes the error message, stack trace, and any additional context or metadata associated with the issue.
 
 ## Step 2: correlate with Logfire logs
 
-Extract the `correlation_id` tag from the Sentry issue. If available, use it to search for related logs in Logfire using the logfire_polar tools. This can provide additional context and insights into the events leading up to the issue, helping you to further understand the root cause.
+Extract the `correlation_id` tag from the Sentry issue. If available, use it to search for related logs in Logfire using the logfire_tarifia tools. This can provide additional context and insights into the events leading up to the issue, helping you to further understand the root cause.
 
 The clause will look like this: `attributes->>'correlation_id' = '<correlation_id>'`
 
@@ -35,7 +35,7 @@ Synthetize the information gathered from the Sentry issue, Logfire logs, and sou
 
 ## Step 5: Implement a fix
 
-**Important**: If your analysis indicates that the issue involves heavy architectural changes, or if you are unsure about the best way to implement a fix, do not proceed with implementing a fix on your own. Instead, open an issue on `polarsource/polar` with your findings and analysis.
+**Important**: If your analysis indicates that the issue involves heavy architectural changes, or if you are unsure about the best way to implement a fix, do not proceed with implementing a fix on your own. Instead, open an issue on `tarifiasource/tarifia` with your findings and analysis.
 
 ### Step 5.1: Create a worktree
 
@@ -65,4 +65,4 @@ Commit your changes to the branch you created in the worktree. Make sure to writ
 
 ### Step 5.4: Open a pull request
 
-Open a pull request on `polarsource/polar` using github tools, detailing your analysis, adding relevant links to the Sentry issue and Logfire logs, and describing the changes you made to fix the issue.
+Open a pull request on `tarifiasource/tarifia` using github tools, detailing your analysis, adding relevant links to the Sentry issue and Logfire logs, and describing the changes you made to fix the issue.

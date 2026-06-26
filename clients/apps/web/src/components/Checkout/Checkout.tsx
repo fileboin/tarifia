@@ -15,18 +15,18 @@ import {
   CheckoutProductSwitcher,
   CheckoutPWYWForm,
   CheckoutSeatSelector,
-} from '@polar-sh/checkout/components'
+} from '@tarifia-sh/checkout/components'
 import {
   getSeatPrice,
   hasProductCheckout,
   type ProductCheckoutPublic,
-} from '@polar-sh/checkout/guards'
-import { useCheckoutFulfillmentListener } from '@polar-sh/checkout/hooks'
-import { useCheckout, useCheckoutForm } from '@polar-sh/checkout/providers'
-import { ClientResponseError, type schemas } from '@polar-sh/client'
-import { AcceptedLocale } from '@polar-sh/i18n'
-import { Alert, Avatar } from '@polar-sh/orbit'
-import ShadowBox from '@polar-sh/ui/components/atoms/ShadowBox'
+} from '@tarifia-sh/checkout/guards'
+import { useCheckoutFulfillmentListener } from '@tarifia-sh/checkout/hooks'
+import { useCheckout, useCheckoutForm } from '@tarifia-sh/checkout/providers'
+import { ClientResponseError, type schemas } from '@tarifia-sh/client'
+import { AcceptedLocale } from '@tarifia-sh/i18n'
+import { Alert, Avatar } from '@tarifia-sh/orbit'
+import ShadowBox from '@tarifia-sh/ui/components/atoms/ShadowBox'
 import {
   Dialog,
   DialogContent,
@@ -34,8 +34,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@polar-sh/ui/components/ui/dialog'
-import { getThemePreset } from '@polar-sh/ui/hooks/theming'
+} from '@tarifia-sh/ui/components/ui/dialog'
+import { getThemePreset } from '@tarifia-sh/ui/hooks/theming'
 import type { Stripe, StripeElements } from '@stripe/stripe-js'
 import { useTheme } from 'next-themes'
 import Link from 'next/link'
@@ -222,7 +222,7 @@ const Checkout = ({
 
   if (embed) {
     return (
-      <ShadowBox className="dark:md:bg-polar-900 flex flex-col gap-y-12 divide-gray-200 overflow-hidden rounded-3xl md:bg-white dark:divide-transparent">
+      <ShadowBox className="dark:md:bg-tarifia-900 flex flex-col gap-y-12 divide-gray-200 overflow-hidden rounded-3xl md:bg-white dark:divide-transparent">
         {shouldBlockCheckout && (
           <PaymentNotReadyBanner
             organizationStatus={paymentStatus?.organization_status}
@@ -280,7 +280,7 @@ const Checkout = ({
                   checkout.active_trial_interval_count && (
                     <>
                       <CheckoutHeroPrice checkout={checkout} locale={locale} />
-                      <hr className="dark:border-polar-700 border-gray-200" />
+                      <hr className="dark:border-tarifia-700 border-gray-200" />
                     </>
                   )}
                 <CheckoutPricingBreakdown checkout={checkout} locale={locale} />
@@ -305,7 +305,7 @@ const Checkout = ({
       {checkout.return_url && (
         <Link
           href={checkout.return_url}
-          className="dark:text-polar-500 text-gray-600"
+          className="dark:text-tarifia-500 text-gray-600"
         >
           <ArrowLeft size={20} />
         </Link>
@@ -357,7 +357,7 @@ const Checkout = ({
                             )}
                           </button>
                         </DialogTrigger>
-                        <DialogContent className="dark:bg-polar-900 max-w-2xl">
+                        <DialogContent className="dark:bg-tarifia-900 max-w-2xl">
                           <DialogHeader>
                             <DialogTitle>{checkout.product.name}</DialogTitle>
                             <DialogDescription className="sr-only">
@@ -436,7 +436,7 @@ const Checkout = ({
           </div>
         </div>
       </div>
-      <div className="dark:md:bg-polar-900 md:bg-white">
+      <div className="dark:md:bg-tarifia-900 md:bg-white">
         <div className="mx-auto flex w-full max-w-[480px] flex-col gap-y-8 px-4 py-6 md:mx-0 md:py-12 md:pr-4 md:pl-12">
           {shouldBlockCheckout && (
             <PaymentNotReadyBanner

@@ -1,7 +1,7 @@
 import { useCustomerPortalContext } from '@/components/CustomerPortal/CustomerPortalProvider'
 import { extractApiErrorMessage } from '@/utils/api/errors'
 import { getQueryClient } from '@/utils/api/query'
-import { Client, operations, schemas, unwrap } from '@polar-sh/client'
+import { Client, operations, schemas, unwrap } from '@tarifia-sh/client'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { defaultRetry } from './retry'
 

@@ -7,9 +7,9 @@ import stripe as stripe_lib
 from pytest_mock import MockerFixture
 from sqlalchemy.orm import joinedload
 
-from polar.enums import PayoutAccountType
-from polar.integrations.stripe.service import StripeService
-from polar.models import (
+from tarifia.enums import PayoutAccountType
+from tarifia.integrations.stripe.service import StripeService
+from tarifia.models import (
     Account,
     IssueReward,
     Order,
@@ -19,15 +19,15 @@ from polar.models import (
     Transaction,
     User,
 )
-from polar.models.transaction import (
+from tarifia.models.transaction import (
     PlatformFeeType,
     Processor,
     ProcessorFeeType,
     TransactionType,
 )
-from polar.postgres import AsyncSession
-from polar.transaction.service.platform_fee import PayoutAmountTooLow
-from polar.transaction.service.platform_fee import (
+from tarifia.postgres import AsyncSession
+from tarifia.transaction.service.platform_fee import PayoutAmountTooLow
+from tarifia.transaction.service.platform_fee import (
     platform_fee_transaction as platform_fee_transaction_service,
 )
 from tests.fixtures.database import SaveFixture
@@ -248,7 +248,7 @@ class TestCreateFeesReversalBalances:
     ) -> None:
         stripe_service_mock = MagicMock(spec=StripeService)
         mocker.patch(
-            "polar.transaction.service.platform_fee.stripe_service",
+            "tarifia.transaction.service.platform_fee.stripe_service",
             new=stripe_service_mock,
         )
         stripe_service_mock.get_charge.return_value = stripe_lib.Charge.construct_from(
@@ -324,7 +324,7 @@ class TestCreateFeesReversalBalances:
     ) -> None:
         stripe_service_mock = MagicMock(spec=StripeService)
         mocker.patch(
-            "polar.transaction.service.platform_fee.stripe_service",
+            "tarifia.transaction.service.platform_fee.stripe_service",
             new=stripe_service_mock,
         )
         stripe_service_mock.get_charge.return_value = stripe_lib.Charge.construct_from(

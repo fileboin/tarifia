@@ -1,15 +1,15 @@
 import pytest
 from sqlalchemy import func, select
 
-from polar.kit.db.postgres import AsyncSession
-from polar.meter.aggregation import (
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.meter.aggregation import (
     AggregationFunction,
     CountAggregation,
     PropertyAggregation,
 )
-from polar.meter.filter import Filter, FilterClause, FilterConjunction, FilterOperator
-from polar.models import Event, Meter, MeterEvent, Organization
-from polar.models.event import EventSource
+from tarifia.meter.filter import Filter, FilterClause, FilterConjunction, FilterOperator
+from tarifia.models import Event, Meter, MeterEvent, Organization
+from tarifia.models.event import EventSource
 from scripts.backfill_meter_events import run_backfill
 from tests.fixtures.database import SaveFixture
 

@@ -1,6 +1,6 @@
 import { Upload } from '@/components/FileUpload/Upload'
 import { retryWithBackoff } from '@/utils/retry'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import * as Sentry from '@sentry/nextjs'
 
 const uploadProductMedia = (

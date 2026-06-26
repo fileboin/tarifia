@@ -30,8 +30,8 @@ from sqlalchemy import CursorResult, bindparam, text
 from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.dialects.postgresql import UUID as PGUUID
 
-from polar.kit.db.postgres import AsyncSession, create_async_sessionmaker
-from polar.postgres import create_async_engine
+from tarifia.kit.db.postgres import AsyncSession, create_async_sessionmaker
+from tarifia.postgres import create_async_engine
 from scripts.helper import configure_script_logging, typer_async
 
 cli = typer.Typer()

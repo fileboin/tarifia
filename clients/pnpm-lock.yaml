@@ -66,10 +66,10 @@ importers:
       '@gorhom/bottom-sheet':
         specifier: ^5.2.8
         version: 5.2.8(@types/react@19.2.13)(react-native-gesture-handler@2.28.0(react-native@0.81.5(@babel/core@7.29.0)(@react-native-community/cli@20.1.2(typescript@5.9.3))(@types/react@19.2.13)(react@19.1.0))(react@19.1.0))(react-native-reanimated@4.1.6(@babel/core@7.29.0)(react-native-worklets@0.5.1(@babel/core@7.29.0)(react-native@0.81.5(@babel/core@7.29.0)(@react-native-community/cli@20.1.2(typescript@5.9.3))(@types/react@19.2.13)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.29.0)(@react-native-community/cli@20.1.2(typescript@5.9.3))(@types/react@19.2.13)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.29.0)(@react-native-community/cli@20.1.2(typescript@5.9.3))(@types/react@19.2.13)(react@19.1.0))(react@19.1.0)
-      '@polar-sh/client':
+      '@tarifia-sh/client':
         specifier: workspace:*
         version: link:../../packages/client
-      '@polar-sh/currency':
+      '@tarifia-sh/currency':
         specifier: workspace:^
         version: link:../../packages/currency
       '@react-native-async-storage/async-storage':
@@ -268,10 +268,10 @@ importers:
 
   apps/orbit:
     dependencies:
-      '@polar-sh/orbit':
+      '@tarifia-sh/orbit':
         specifier: workspace:*
         version: link:../../packages/orbit
-      '@polar-sh/ui':
+      '@tarifia-sh/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       '@stylexjs/stylex':
@@ -296,10 +296,10 @@ importers:
         specifier: ^3.23.0
         version: 3.23.0
     devDependencies:
-      '@polar-sh/eslint-config':
+      '@tarifia-sh/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
-      '@polar-sh/typescript-config':
+      '@tarifia-sh/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
       '@stylexjs/babel-plugin':
@@ -386,25 +386,25 @@ importers:
       '@next/third-parties':
         specifier: ^16.2.4
         version: 16.2.4(next@16.2.6(@babel/core@7.29.0)(@opentelemetry/api@1.9.1)(@playwright/test@1.61.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(react@19.2.5)
-      '@polar-sh/checkout':
+      '@tarifia-sh/checkout':
         specifier: workspace:^
         version: link:../../packages/checkout
-      '@polar-sh/client':
+      '@tarifia-sh/client':
         specifier: workspace:*
         version: link:../../packages/client
-      '@polar-sh/currency':
+      '@tarifia-sh/currency':
         specifier: workspace:^
         version: link:../../packages/currency
-      '@polar-sh/i18n':
+      '@tarifia-sh/i18n':
         specifier: workspace:*
         version: link:../../packages/i18n
-      '@polar-sh/orbit':
+      '@tarifia-sh/orbit':
         specifier: workspace:*
         version: link:../../packages/orbit
-      '@polar-sh/sdk':
+      '@tarifia-sh/sdk':
         specifier: ^0.46.1
         version: 0.46.1
-      '@polar-sh/ui':
+      '@tarifia-sh/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       '@posthog/ai':
@@ -576,10 +576,10 @@ importers:
       '@playwright/test':
         specifier: ^1.61.0
         version: 1.61.0
-      '@polar-sh/eslint-config':
+      '@tarifia-sh/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
-      '@polar-sh/typescript-config':
+      '@tarifia-sh/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
       '@stylexjs/babel-plugin':
@@ -648,7 +648,7 @@ importers:
 
   examples/checkout-embed:
     dependencies:
-      '@polar-sh/checkout':
+      '@tarifia-sh/checkout':
         specifier: workspace:*
         version: link:../../packages/checkout
       http-server:
@@ -661,25 +661,25 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0
     devDependencies:
-      '@polar-sh/client':
+      '@tarifia-sh/client':
         specifier: workspace:*
         version: link:../client
-      '@polar-sh/currency':
+      '@tarifia-sh/currency':
         specifier: workspace:^
         version: link:../currency
-      '@polar-sh/eslint-config':
+      '@tarifia-sh/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@polar-sh/i18n':
+      '@tarifia-sh/i18n':
         specifier: workspace:*
         version: link:../i18n
-      '@polar-sh/orbit':
+      '@tarifia-sh/orbit':
         specifier: workspace:*
         version: link:../orbit
-      '@polar-sh/typescript-config':
+      '@tarifia-sh/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
-      '@polar-sh/ui':
+      '@tarifia-sh/ui':
         specifier: workspace:^
         version: link:../ui
       '@stripe/react-stripe-js':
@@ -749,10 +749,10 @@ importers:
         specifier: ^0.0.15
         version: 0.0.15
     devDependencies:
-      '@polar-sh/eslint-config':
+      '@tarifia-sh/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@polar-sh/typescript-config':
+      '@tarifia-sh/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
       openapi-typescript:
@@ -767,10 +767,10 @@ importers:
 
   packages/currency:
     devDependencies:
-      '@polar-sh/eslint-config':
+      '@tarifia-sh/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@polar-sh/typescript-config':
+      '@tarifia-sh/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
       tsup:
@@ -818,10 +818,10 @@ importers:
       '@ai-sdk/openai':
         specifier: ^3.0.53
         version: 3.0.53(zod@4.4.3)
-      '@polar-sh/eslint-config':
+      '@tarifia-sh/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@polar-sh/typescript-config':
+      '@tarifia-sh/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
       '@types/react':
@@ -897,10 +897,10 @@ importers:
         specifier: ^3.5.0
         version: 3.5.0
     devDependencies:
-      '@polar-sh/eslint-config':
+      '@tarifia-sh/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@polar-sh/typescript-config':
+      '@tarifia-sh/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
       '@types/react':
@@ -926,10 +926,10 @@ importers:
 
   packages/ui:
     dependencies:
-      '@polar-sh/currency':
+      '@tarifia-sh/currency':
         specifier: workspace:^
         version: link:../currency
-      '@polar-sh/orbit':
+      '@tarifia-sh/orbit':
         specifier: workspace:*
         version: link:../orbit
       '@radix-ui/react-accordion':
@@ -1011,10 +1011,10 @@ importers:
         specifier: ^3.5.0
         version: 3.5.0
     devDependencies:
-      '@polar-sh/eslint-config':
+      '@tarifia-sh/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@polar-sh/typescript-config':
+      '@tarifia-sh/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
       '@stripe/stripe-js':
@@ -3528,7 +3528,7 @@ packages:
     resolution: {integrity: sha512-h104Kh26rR8tm+a3Qkc5S4VLYint3FE48as7+/5oCEcKR2idC/pF1G6AhIXKI+eHPJa/3J9i5z0Al47IeGHPkA==}
     engines: {node: '>=12'}
 
-  '@polar-sh/sdk@0.46.1':
+  '@tarifia-sh/sdk@0.46.1':
     resolution: {integrity: sha512-bFoEX2wxa5rWe2jTrJrf2Knelf/3zW1O2wGoqYoJfuRVvUgGSml1TB1v6NO+tDkT5d1bMfUFXBKxFYnuegG1iw==}
 
   '@polka/url@1.0.0-next.29':
@@ -15958,7 +15958,7 @@ snapshots:
       '@pnpm/network.ca-file': 1.0.2
       config-chain: 1.1.13
 
-  '@polar-sh/sdk@0.46.1':
+  '@tarifia-sh/sdk@0.46.1':
     dependencies:
       standardwebhooks: 1.0.0
       zod: 4.3.6

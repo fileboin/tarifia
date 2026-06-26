@@ -4,12 +4,12 @@ import pytest
 import pytest_asyncio
 from httpx import AsyncClient
 
-from polar.auth.scope import Scope
-from polar.checkout.repository import CheckoutRepository
-from polar.checkout.service import CHECKOUT_CLIENT_SECRET_PREFIX
-from polar.enums import SubscriptionRecurringInterval
-from polar.kit.visibility import Visibility
-from polar.models import (
+from tarifia.auth.scope import Scope
+from tarifia.checkout.repository import CheckoutRepository
+from tarifia.checkout.service import CHECKOUT_CLIENT_SECRET_PREFIX
+from tarifia.enums import SubscriptionRecurringInterval
+from tarifia.kit.visibility import Visibility
+from tarifia.models import (
     Checkout,
     CheckoutLink,
     Organization,
@@ -17,8 +17,8 @@ from polar.models import (
     User,
     UserOrganization,
 )
-from polar.models.organization import OrganizationStatus
-from polar.postgres import AsyncSession
+from tarifia.models.organization import OrganizationStatus
+from tarifia.postgres import AsyncSession
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (

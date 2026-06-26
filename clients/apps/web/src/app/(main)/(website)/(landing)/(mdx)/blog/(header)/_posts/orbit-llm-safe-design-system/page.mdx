@@ -15,7 +15,7 @@ created_at: 2026-06-16T12:00:00.000000+00:00
 
 <InnerWrapper>
 
-Most of the UI code shipped at Polar today is written with an LLM in the loop. That is great for speed. It is harder on consistency, unless your design system is built for it.
+Most of the UI code shipped at Tarifia today is written with an LLM in the loop. That is great for speed. It is harder on consistency, unless your design system is built for it.
 
 We're early on a new one, called Orbit, and still figuring a lot of it out. We are probably right about a few things, and wrong about other. This post is about the thinking behind it, written down while it's fresh, so we can argue with it later.
 
@@ -27,7 +27,7 @@ So the bet we're making with Orbit is this: make it hard to express an off-brand
 
 ### Before we begin
 
-We want to make something very clear, this is not a knock on Tailwind. We think it's outstanding. It's the most ergonomic utility CSS has ever had, it's what a lot of Polar was built with, and we'd reach for it again on a project where humans type most of the markup. Its openness is a genuine feature when a person is at the keyboard.
+We want to make something very clear, this is not a knock on Tailwind. We think it's outstanding. It's the most ergonomic utility CSS has ever had, it's what a lot of Tarifia was built with, and we'd reach for it again on a project where humans type most of the markup. Its openness is a genuine feature when a person is at the keyboard.
 
 The catch is narrow and specific: that same openness is exactly what works against us once an LLM is doing the typing. We're not steering away from Tailwind because it's bad. We're constraining it because our author changed.
 
@@ -150,11 +150,11 @@ You still get a real \<nav\> and a real \<ul\> in the DOM, with the right DOM pr
 And we enforce it using ESLint rules.
 
 ```js
-'polar/no-raw-html-layout': 'error',
+'tarifia/no-raw-html-layout': 'error',
 ```
 
 ```
-Use <Box /> from @polar-sh/orbit instead of <div />.
+Use <Box /> from @tarifia-sh/orbit instead of <div />.
 This ensures we follow the Orbit design system.
 ```
 
@@ -172,7 +172,7 @@ That means there is no dark: variant to remember, because there is no second sty
 
 It's early, so take this as a direction rather than a verdict. But the reviews are already starting to feel different. We used to review generated UI for style drift: wrong gray, wrong spacing, forgotten dark mode, a stray arbitrary value.
 
-Not every developer at Polar is familiar with the design system and UX standards, and neither should they be. More of that is now correct by construction, so the conversation shifts toward behavior and layout.
+Not every developer at Tarifia is familiar with the design system and UX standards, and neither should they be. More of that is now correct by construction, so the conversation shifts toward behavior and layout.
 
 The LLM isn't being trusted to know our palette. It is being handed a vocabulary where most of the words it can say are the right ones.
 

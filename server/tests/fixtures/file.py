@@ -15,21 +15,21 @@ from botocore.config import Config
 from httpx import AsyncClient, Response
 from minio import Minio
 
-from polar.config import settings
-from polar.file.repository import FileRepository
-from polar.file.s3 import S3_SERVICES
-from polar.file.schemas import DownloadableFileCreate, FileUpload, FileUploadCompleted
-from polar.file.service import file as file_service
-from polar.integrations.aws.s3.schemas import (
+from tarifia.config import settings
+from tarifia.file.repository import FileRepository
+from tarifia.file.s3 import S3_SERVICES
+from tarifia.file.schemas import DownloadableFileCreate, FileUpload, FileUploadCompleted
+from tarifia.file.service import file as file_service
+from tarifia.integrations.aws.s3.schemas import (
     S3FileCreateMultipart,
     S3FileCreatePart,
     S3FileUploadCompleted,
     S3FileUploadCompletedPart,
     S3FileUploadPart,
 )
-from polar.models import File, Organization
-from polar.models.file import FileServiceTypes
-from polar.postgres import AsyncSession
+from tarifia.models import File, Organization
+from tarifia.models.file import FileServiceTypes
+from tarifia.postgres import AsyncSession
 
 pwd = Path(__file__).parent.absolute()
 
@@ -220,10 +220,10 @@ class TestFile:
         metadata = s3_object["Metadata"]
 
         assert s3_object["ETag"] == completed.checksum_etag
-        assert metadata["polar-id"] == str(completed.id)
-        assert metadata["polar-organization-id"] == str(completed.organization_id)
-        assert metadata["polar-name"] == completed.name
-        assert metadata["polar-size"] == str(self.size)
+        assert metadata["tarifia-id"] == str(completed.id)
+        assert metadata["tarifia-organization-id"] == str(completed.organization_id)
+        assert metadata["tarifia-name"] == completed.name
+        assert metadata["tarifia-size"] == str(self.size)
         assert s3_object["ContentLength"] == self.size
         assert s3_object["ContentType"] == self.mime_type
 

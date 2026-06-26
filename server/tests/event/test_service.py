@@ -9,25 +9,25 @@ import pytest
 from pydantic import ValidationError
 from pytest_mock import MockerFixture
 
-from polar.auth.models import AuthSubject, is_user
-from polar.event.repository import EventRepository
-from polar.event.schemas import (
+from tarifia.auth.models import AuthSubject, is_user
+from tarifia.event.repository import EventRepository
+from tarifia.event.schemas import (
     EventCreateCustomer,
     EventCreateExternalCustomer,
     EventsIngest,
 )
-from polar.event.service import event as event_service
-from polar.event.sorting import EventNamesSortProperty
-from polar.event.system import SystemEvent
-from polar.event_type.repository import EventTypeRepository
-from polar.exceptions import PolarRequestValidationError
-from polar.integrations.tinybird.service import TinybirdEventTypeStats
-from polar.kit.pagination import PaginationParams
-from polar.kit.time_queries import TimeInterval
-from polar.kit.utils import utc_now
-from polar.meter.aggregation import AggregationFunction, PropertyAggregation
-from polar.meter.filter import Filter, FilterClause, FilterConjunction, FilterOperator
-from polar.models import (
+from tarifia.event.service import event as event_service
+from tarifia.event.sorting import EventNamesSortProperty
+from tarifia.event.system import SystemEvent
+from tarifia.event_type.repository import EventTypeRepository
+from tarifia.exceptions import TarifiaRequestValidationError
+from tarifia.integrations.tinybird.service import TinybirdEventTypeStats
+from tarifia.kit.pagination import PaginationParams
+from tarifia.kit.time_queries import TimeInterval
+from tarifia.kit.utils import utc_now
+from tarifia.meter.aggregation import AggregationFunction, PropertyAggregation
+from tarifia.meter.filter import Filter, FilterClause, FilterConjunction, FilterOperator
+from tarifia.models import (
     Customer,
     CustomerMeter,
     EventType,
@@ -37,15 +37,15 @@ from polar.models import (
     User,
     UserOrganization,
 )
-from polar.models.checkout import CheckoutStatus
-from polar.models.discount import DiscountDuration, DiscountType
-from polar.models.event import EventSource
-from polar.models.order import OrderStatus
-from polar.models.subscription import CustomerCancellationReason
-from polar.order.service import order as order_service
-from polar.postgres import AsyncSession
-from polar.subscription.service import SubscriptionUpdateContext
-from polar.subscription.service import subscription as subscription_service
+from tarifia.models.checkout import CheckoutStatus
+from tarifia.models.discount import DiscountDuration, DiscountType
+from tarifia.models.event import EventSource
+from tarifia.models.order import OrderStatus
+from tarifia.models.subscription import CustomerCancellationReason
+from tarifia.order.service import order as order_service
+from tarifia.postgres import AsyncSession
+from tarifia.subscription.service import SubscriptionUpdateContext
+from tarifia.subscription.service import subscription as subscription_service
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.events import get_all_by_name, get_all_by_organization
@@ -63,12 +63,12 @@ from tests.fixtures.random_objects import (
 
 @pytest.fixture
 def enqueue_job_mock(mocker: MockerFixture) -> MagicMock:
-    return mocker.patch("polar.event.service.enqueue_job")
+    return mocker.patch("tarifia.event.service.enqueue_job")
 
 
 @pytest.fixture
 def enqueue_events_mock(mocker: MockerFixture) -> AsyncMock:
-    return mocker.patch("polar.event.service.enqueue_events")
+    return mocker.patch("tarifia.event.service.enqueue_events")
 
 
 @pytest.mark.asyncio
@@ -268,7 +268,7 @@ class TestGet:
         auth_subject: AuthSubject[User],
     ) -> None:
         mocker.patch(
-            "polar.integrations.tinybird.service.TinybirdEventsQuery.get_event_ids_and_count",
+            "tarifia.integrations.tinybird.service.TinybirdEventsQuery.get_event_ids_and_count",
             new_callable=AsyncMock,
             return_value=([], 0),
         )
@@ -309,7 +309,7 @@ class TestGet:
         event = await create_event(save_fixture, organization=organization)
 
         mocker.patch(
-            "polar.integrations.tinybird.service.TinybirdEventsQuery.get_event_ids_and_count",
+            "tarifia.integrations.tinybird.service.TinybirdEventsQuery.get_event_ids_and_count",
             new_callable=AsyncMock,
             return_value=([str(event.id)], 1),
         )
@@ -339,12 +339,12 @@ class TestGet:
         )
 
         mocker.patch(
-            "polar.integrations.tinybird.service.TinybirdEventsQuery.get_event_ids_and_count",
+            "tarifia.integrations.tinybird.service.TinybirdEventsQuery.get_event_ids_and_count",
             new_callable=AsyncMock,
             return_value=([str(parent.id)], 1),
         )
         mocker.patch(
-            "polar.integrations.tinybird.service.TinybirdEventsQuery.get_descendant_aggregates",
+            "tarifia.integrations.tinybird.service.TinybirdEventsQuery.get_descendant_aggregates",
             new_callable=AsyncMock,
             return_value=(2, {"_cost_amount": 150.0}),
         )
@@ -374,7 +374,7 @@ class TestListNames:
     ) -> None:
         now = utc_now()
         query_mock = mocker.patch(
-            "polar.event.tinybird_repository.TinybirdEventsQuery.get_event_type_stats",
+            "tarifia.event.tinybird_repository.TinybirdEventsQuery.get_event_type_stats",
             new_callable=AsyncMock,
             return_value=[
                 TinybirdEventTypeStats(
@@ -468,7 +468,7 @@ class TestIngest:
             ]
         )
 
-        with pytest.raises(PolarRequestValidationError) as e:
+        with pytest.raises(TarifiaRequestValidationError) as e:
             await event_service.ingest(session, auth_subject, ingest)
 
         errors = e.value.errors()
@@ -495,7 +495,7 @@ class TestIngest:
             ]
         )
 
-        with pytest.raises(PolarRequestValidationError) as e:
+        with pytest.raises(TarifiaRequestValidationError) as e:
             await event_service.ingest(session, auth_subject, ingest)
 
         errors = e.value.errors()
@@ -539,7 +539,7 @@ class TestIngest:
             ]
         )
 
-        with pytest.raises(PolarRequestValidationError) as e:
+        with pytest.raises(TarifiaRequestValidationError) as e:
             await event_service.ingest(session, auth_subject, ingest)
 
         errors = e.value.errors()
@@ -970,7 +970,7 @@ class TestIngest:
             ]
         )
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await event_service.ingest(session, auth_subject, ingest)
 
     @pytest.mark.auth(AuthSubjectFixture(subject="organization"))
@@ -1001,7 +1001,7 @@ class TestIngest:
             ]
         )
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await event_service.ingest(session, auth_subject, ingest)
 
     @pytest.mark.auth(AuthSubjectFixture(subject="organization"))

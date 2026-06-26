@@ -1,7 +1,7 @@
 import pytest_asyncio
 
-from polar.locker import Locker
-from polar.redis import Redis
+from tarifia.locker import Locker
+from tarifia.redis import Redis
 
 
 @pytest_asyncio.fixture

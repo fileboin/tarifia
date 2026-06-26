@@ -7,17 +7,17 @@ import {
   useCustomerCancelSubscription,
   useCustomerUncancelSubscription,
 } from '@/hooks/queries/customerPortal'
-import { Client, schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
-import { Button } from '@polar-sh/orbit'
-import FormattedDateTime from '@polar-sh/ui/components/atoms/FormattedDateTime'
-import ShadowBox from '@polar-sh/ui/components/atoms/ShadowBox'
+import { Client, schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
+import { Button } from '@tarifia-sh/orbit'
+import FormattedDateTime from '@tarifia-sh/ui/components/atoms/FormattedDateTime'
+import ShadowBox from '@tarifia-sh/ui/components/atoms/ShadowBox'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import CustomerPortalSubscription from './CustomerPortalSubscription'
 import { ConfirmModal } from '../Modal/ConfirmModal'
-import { InlineModal } from '@polar-sh/orbit'
+import { InlineModal } from '@tarifia-sh/orbit'
 import { useModal } from '../Modal/useModal'
 import { DetailRow } from '../Shared/DetailRow'
 import CustomerCancellationModal from './CustomerCancellationModal'
@@ -77,7 +77,7 @@ const CustomerSubscriptionDetails = ({
   }
 
   return (
-    <ShadowBox className="dark:bg-polar-900 flex w-full flex-col gap-y-6 bg-gray-50 dark:border-transparent">
+    <ShadowBox className="dark:bg-tarifia-900 flex w-full flex-col gap-y-6 bg-gray-50 dark:border-transparent">
       <CustomerSubscriptionHeader subscription={subscription} />
       <div className="flex flex-col text-sm">
         <DetailRow

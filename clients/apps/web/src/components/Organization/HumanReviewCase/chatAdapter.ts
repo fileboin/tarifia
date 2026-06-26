@@ -6,7 +6,7 @@ import {
 import { getExtension } from '@/components/Chat/fileUtils'
 import { Upload } from '@/components/FileUpload/Upload'
 import { CONFIG } from '@/utils/config'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 
 // Mirrors the exact MIME types the backend accepts.
 const ACCEPTED_MIME_TYPES = [

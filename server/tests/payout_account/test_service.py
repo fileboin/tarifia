@@ -1,21 +1,21 @@
 import pytest
 from pytest_mock import MockerFixture
 
-from polar.auth.models import AuthSubject
-from polar.enums import PayoutAccountType
-from polar.integrations.stripe.service import StripeService
-from polar.models import Organization, User
-from polar.models.payout_attempt import PayoutAttemptStatus
-from polar.payout_account.service import (
+from tarifia.auth.models import AuthSubject
+from tarifia.enums import PayoutAccountType
+from tarifia.integrations.stripe.service import StripeService
+from tarifia.models import Organization, User
+from tarifia.models.payout_attempt import PayoutAttemptStatus
+from tarifia.payout_account.service import (
     PayoutAccountHasPendingPayouts,
     PayoutAccountLinkedToOrganization,
     PayoutAccountNonZeroBalance,
     PayoutAccountStripeAccountDoesNotExist,
 )
-from polar.payout_account.service import (
+from tarifia.payout_account.service import (
     payout_account as payout_account_service,
 )
-from polar.postgres import AsyncSession
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_account,
@@ -27,7 +27,7 @@ from tests.fixtures.random_objects import (
 @pytest.fixture(autouse=True)
 def stripe_service_mock(mocker: MockerFixture) -> StripeService:
     mock = mocker.MagicMock(spec=StripeService)
-    mocker.patch("polar.payout_account.service.stripe", new=mock)
+    mocker.patch("tarifia.payout_account.service.stripe", new=mock)
     return mock
 
 

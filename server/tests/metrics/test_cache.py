@@ -6,16 +6,16 @@ import pytest
 from pytest_mock import MockerFixture
 from redis.exceptions import RedisError
 
-from polar.kit.time_queries import TimeInterval
-from polar.metrics.cache import (
+from tarifia.kit.time_queries import TimeInterval
+from tarifia.metrics.cache import (
     METRICS_CACHE_TTL_SECONDS,
     build_cache_key,
     get_cached_metrics,
     set_cached_metrics,
 )
-from polar.metrics.metrics import METRICS
-from polar.metrics.schemas import MetricsResponse
-from polar.redis import Redis
+from tarifia.metrics.metrics import METRICS
+from tarifia.metrics.schemas import MetricsResponse
+from tarifia.redis import Redis
 
 
 def _empty_metrics_response() -> MetricsResponse:

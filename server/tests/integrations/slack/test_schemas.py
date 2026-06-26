@@ -4,11 +4,11 @@ from uuid import uuid4
 import pytest
 from pydantic import ValidationError
 
-from polar.integrations.slack.schemas import (
+from tarifia.integrations.slack.schemas import (
     SlackIntegration,
     SlackIntegrationCredentialsUpdate,
 )
-from polar.models import SlackApp
+from tarifia.models import SlackApp
 
 
 class TestSlackIntegrationCredentialsUpdate:

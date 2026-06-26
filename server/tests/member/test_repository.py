@@ -3,11 +3,11 @@ import uuid
 import pytest
 from sqlalchemy import text
 
-from polar.kit.utils import utc_now
-from polar.member.repository import MemberRepository
-from polar.models import Account, Member, Organization, User
-from polar.models.member import MemberRole
-from polar.postgres import AsyncSession
+from tarifia.kit.utils import utc_now
+from tarifia.member.repository import MemberRepository
+from tarifia.models import Account, Member, Organization, User
+from tarifia.models.member import MemberRole
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_account,

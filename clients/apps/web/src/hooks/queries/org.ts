@@ -6,7 +6,7 @@ import {
   operations,
   schemas,
   unwrap,
-} from '@polar-sh/client'
+} from '@tarifia-sh/client'
 import { skipToken, useMutation, useQuery } from '@tanstack/react-query'
 import { defaultRetry } from './retry'
 

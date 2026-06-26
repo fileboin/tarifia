@@ -15,8 +15,8 @@ import AddOutlined from '@mui/icons-material/AddOutlined'
 import ArrowDownward from '@mui/icons-material/ArrowDownward'
 import ArrowUpward from '@mui/icons-material/ArrowUpward'
 import Search from '@mui/icons-material/Search'
-import { enums, schemas } from '@polar-sh/client'
-import { Input, Button, Spinner, InlineModal } from '@polar-sh/orbit'
+import { enums, schemas } from '@tarifia-sh/client'
+import { Input, Button, Spinner, InlineModal } from '@tarifia-sh/orbit'
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 import {
@@ -127,7 +127,7 @@ export const BenefitListSidebar = ({
 
   return (
     <>
-      <div className="dark:divide-polar-800 flex h-full flex-col divide-y divide-gray-200">
+      <div className="dark:divide-tarifia-800 flex h-full flex-col divide-y divide-gray-200">
         <div className="flex flex-row items-center justify-between gap-6 px-4 py-4">
           <div>Benefits</div>
           <div className="flex flex-row items-center gap-4">
@@ -158,10 +158,10 @@ export const BenefitListSidebar = ({
           </div>
         </div>
         <div className="flex flex-row items-center gap-3 px-4 py-2">
-          <div className="dark:bg-polar-800 flex h-8 w-8 items-center justify-center rounded-full bg-gray-100">
+          <div className="dark:bg-tarifia-800 flex h-8 w-8 items-center justify-center rounded-full bg-gray-100">
             <Search
               fontSize="inherit"
-              className="dark:text-polar-500 text-gray-500"
+              className="dark:text-tarifia-500 text-gray-500"
             />
           </div>
           <Input
@@ -171,7 +171,7 @@ export const BenefitListSidebar = ({
             onChange={(e) => setQuery(e.target.value)}
           />
         </div>
-        <div className="dark:divide-polar-800 flex h-full grow flex-col divide-y divide-gray-50 overflow-y-auto">
+        <div className="dark:divide-tarifia-800 flex h-full grow flex-col divide-y divide-gray-50 overflow-y-auto">
           {!isLoading && benefits.length === 0 && (!!query || !!typeFilter) && (
             <BenefitListFilterEmptyState
               onClearFilters={() => {
@@ -189,20 +189,20 @@ export const BenefitListSidebar = ({
                 key={benefit.id}
                 href={benefitHref}
                 className={twMerge(
-                  'dark:hover:bg-polar-800 cursor-pointer hover:bg-gray-100',
+                  'dark:hover:bg-tarifia-800 cursor-pointer hover:bg-gray-100',
                   selectedBenefitId === benefit.id &&
-                    'dark:bg-polar-800 bg-gray-100',
+                    'dark:bg-tarifia-800 bg-gray-100',
                 )}
               >
                 <div className="flex flex-row items-center gap-3 px-4 py-3">
-                  <span className="dark:bg-polar-700 flex h-6 w-6 shrink-0 flex-row items-center justify-center rounded-full bg-gray-200 text-2xl text-black dark:text-white">
+                  <span className="dark:bg-tarifia-700 flex h-6 w-6 shrink-0 flex-row items-center justify-center rounded-full bg-gray-200 text-2xl text-black dark:text-white">
                     {resolveBenefitIcon(benefit.type, 'h-3 w-3')}
                   </span>
                   <div className="flex min-w-0 flex-col">
                     <div className="w-full truncate text-sm">
                       {benefit.description}
                     </div>
-                    <div className="dark:text-polar-500 w-full truncate text-xs text-gray-500">
+                    <div className="dark:text-tarifia-500 w-full truncate text-xs text-gray-500">
                       {benefitsDisplayNames[benefit.type]}
                     </div>
                   </div>

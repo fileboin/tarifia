@@ -1,13 +1,13 @@
 'use client'
 
-import { Input } from '@polar-sh/orbit'
+import { Input } from '@tarifia-sh/orbit'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
 import { useState } from 'react'
 import { ControllerRenderProps, FieldPath, FieldValues } from 'react-hook-form'
 

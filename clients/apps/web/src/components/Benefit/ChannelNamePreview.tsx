@@ -1,7 +1,7 @@
 import { usePreviewSlackChannelName } from '@/hooks/queries'
 import useDebounce from '@/utils/useDebounce'
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
 import { useEffect, useState } from 'react'
 
 interface Props {

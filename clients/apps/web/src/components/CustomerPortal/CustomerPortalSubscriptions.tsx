@@ -1,14 +1,14 @@
 import revalidate from '@/app/actions'
 import { useCustomerOrders } from '@/hooks/queries/customerPortal'
-import { Client, schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { DataTable } from '@polar-sh/orbit'
-import FormattedDateTime from '@polar-sh/ui/components/atoms/FormattedDateTime'
-import { getThemePreset } from '@polar-sh/ui/hooks/theming'
+import { Client, schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { DataTable } from '@tarifia-sh/orbit'
+import FormattedDateTime from '@tarifia-sh/ui/components/atoms/FormattedDateTime'
+import { getThemePreset } from '@tarifia-sh/ui/hooks/theming'
 import { useTheme } from 'next-themes'
 import { useRouter } from 'next/navigation'
 import { useCallback, useMemo, useState } from 'react'
-import { InlineModal } from '@polar-sh/orbit'
+import { InlineModal } from '@tarifia-sh/orbit'
 import { useModal } from '../Modal/useModal'
 import CustomerSubscriptionDetails from './CustomerSubscriptionDetails'
 import CustomerPortalSubscription from './CustomerPortalSubscription'
@@ -48,7 +48,7 @@ export const ActiveSubscriptionsOverview = ({
             />
           ))
         ) : (
-          <div className="dark:border-polar-700 flex flex-col items-center justify-center rounded-2xl border border-gray-200 p-12 text-gray-500">
+          <div className="dark:border-tarifia-700 flex flex-col items-center justify-center rounded-2xl border border-gray-200 p-12 text-gray-500">
             <p>No Subscriptions Found</p>
           </div>
         )}

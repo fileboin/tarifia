@@ -2,28 +2,28 @@
 
 import { TrialConfigurationForm } from '@/components/TrialConfiguration/TrialConfigurationForm'
 import { isLegacyRecurringPrice, isMeteredPrice } from '@/utils/product'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { Input } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { Input } from '@tarifia-sh/orbit'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
-import ShadowBox from '@polar-sh/ui/components/atoms/ShadowBox'
+} from '@tarifia-sh/orbit'
+import ShadowBox from '@tarifia-sh/ui/components/atoms/ShadowBox'
 import {
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
-import { Label } from '@polar-sh/ui/components/ui/label'
+} from '@tarifia-sh/ui/components/ui/form'
+import { Label } from '@tarifia-sh/ui/components/ui/label'
 import {
   RadioGroup,
   RadioGroupItem,
-} from '@polar-sh/ui/components/ui/radio-group'
+} from '@tarifia-sh/ui/components/ui/radio-group'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
@@ -403,7 +403,7 @@ export const ProductPricingSection = ({
         className={className}
         compact={compact}
       >
-        <div className="prose dark:bg-polar-700 dark:text-polar-500 rounded-2xl bg-gray-100 p-6 text-sm text-gray-500">
+        <div className="prose dark:bg-tarifia-700 dark:text-tarifia-500 rounded-2xl bg-gray-100 p-6 text-sm text-gray-500">
           <p>
             This product uses a deprecated pricing model with both a monthly and
             yearly pricing.
@@ -430,7 +430,7 @@ export const ProductPricingSection = ({
       className={className}
       compact={compact}
     >
-      <div className="dark:divide-polar-700 flex w-full flex-col divide-y divide-gray-200">
+      <div className="dark:divide-tarifia-700 flex w-full flex-col divide-y divide-gray-200">
         <div className="@container flex flex-col gap-y-6 py-6">
           <RadioGroup
             value={productType}
@@ -446,8 +446,8 @@ export const ProductPricingSection = ({
                 htmlFor={`price-type-${option}`}
                 className={`flex flex-col gap-3 rounded-2xl border p-4 font-normal transition-colors not-aria-disabled:cursor-pointer ${
                   productType === option
-                    ? 'dark:bg-polar-800 bg-gray-50'
-                    : 'dark:border-polar-700 dark:not-aria-disabled:hover:border-polar-700 dark:text-polar-500 dark:not-aria-disabled:hover:bg-polar-700 dark:bg-polar-900 border-gray-100 text-gray-500 not-aria-disabled:hover:border-gray-200'
+                    ? 'dark:bg-tarifia-800 bg-gray-50'
+                    : 'dark:border-tarifia-700 dark:not-aria-disabled:hover:border-tarifia-700 dark:text-tarifia-500 dark:not-aria-disabled:hover:bg-tarifia-700 dark:bg-tarifia-900 border-gray-100 text-gray-500 not-aria-disabled:hover:border-gray-200'
                 }`}
                 aria-disabled={update}
               >
@@ -604,7 +604,7 @@ export const ProductPricingSection = ({
             return (
               <div
                 key={`${selectedCurrency}-${index}`}
-                className="dark:border-polar-700 rounded-2xl border border-gray-200 p-4"
+                className="dark:border-tarifia-700 rounded-2xl border border-gray-200 p-4"
               >
                 <ProductPriceItem
                   organization={organization}
@@ -633,9 +633,9 @@ export const ProductPricingSection = ({
 
         {update && recurringInterval && (
           <div className="flex flex-col py-6">
-            <ShadowBox className="dark:bg-polar-800 flex flex-col gap-2 rounded-2xl! border-none! p-4">
+            <ShadowBox className="dark:bg-tarifia-800 flex flex-col gap-2 rounded-2xl! border-none! p-4">
               <h3 className="text-sm font-medium">Updating pricing model</h3>
-              <p className="dark:text-polar-500 text-gray-5 00 text-sm">
+              <p className="dark:text-tarifia-500 text-gray-5 00 text-sm">
                 Changing pricing model on subscription products will only affect
                 new customers. Current customers will keep their original
                 pricing model.

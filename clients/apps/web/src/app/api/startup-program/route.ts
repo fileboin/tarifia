@@ -14,7 +14,7 @@ const requestSchema = z.object({
   paymentVolume: z.string().max(200).optional().default(''),
   currentBillingPlatform: z.string().max(100).optional().default(''),
   currentBillingPlatformOther: z.string().max(200).optional().default(''),
-  polarOrgSlug: z.string().max(200).optional().default(''),
+  tarifiaOrgSlug: z.string().max(200).optional().default(''),
   teamSize: z.string().max(50).optional().default(''),
   location: z.string().max(200).optional().default(''),
   pitch: z.string().max(2000).optional().default(''),
@@ -40,8 +40,8 @@ const buildEntryValues = (
   if (data.paymentVolume) values.payment_volume = data.paymentVolume
   if (data.location) values.location = data.location
   if (data.pitch) values.pitch = data.pitch
-  if (data.currentBillingPlatform === 'Polar' && data.polarOrgSlug) {
-    values.polar_org_slug = data.polarOrgSlug
+  if (data.currentBillingPlatform === 'Tarifia' && data.tarifiaOrgSlug) {
+    values.tarifia_org_slug = data.tarifiaOrgSlug
   }
 
   // Select attributes — option titles must match the choices configured on

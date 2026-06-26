@@ -1,6 +1,6 @@
 import os
 
-os.environ["POLAR_ENV"] = "testing"
+os.environ["TARIFIA_ENV"] = "testing"
 
 
 from tests.fixtures import *  # noqa

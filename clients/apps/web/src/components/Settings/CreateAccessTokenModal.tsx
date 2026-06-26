@@ -1,10 +1,10 @@
 'use client'
 
-import { InlineModalHeader } from '@polar-sh/orbit'
+import { InlineModalHeader } from '@tarifia-sh/orbit'
 import { useCreateOrganizationAccessToken } from '@/hooks/queries'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { Form } from '@polar-sh/ui/components/ui/form'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { Form } from '@tarifia-sh/ui/components/ui/form'
 import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import {

@@ -4,10 +4,10 @@ import pytest
 import pytest_asyncio
 from httpx import AsyncClient
 
-from polar.models import User
-from polar.models.account import Account
-from polar.models.organization import Organization
-from polar.models.user_organization import UserOrganization
+from tarifia.models import User
+from tarifia.models.account import Account
+from tarifia.models.organization import Organization
+from tarifia.models.user_organization import UserOrganization
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_account
 

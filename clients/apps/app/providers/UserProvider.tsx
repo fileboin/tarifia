@@ -1,6 +1,6 @@
-import { usePolarClient } from '@/providers/PolarClientProvider'
+import { useTarifiaClient } from '@/providers/TarifiaClientProvider'
 import { useSession } from '@/providers/SessionProvider'
-import { schemas, unwrap } from '@polar-sh/client'
+import { schemas, unwrap } from '@tarifia-sh/client'
 import { useQuery } from '@tanstack/react-query'
 import { createContext, PropsWithChildren, useContext } from 'react'
 
@@ -20,12 +20,12 @@ export const useUser = () => useContext(UserContext)
 
 export function UserProvider({ children }: PropsWithChildren) {
   const { session } = useSession()
-  const { polar } = usePolarClient()
+  const { tarifia } = useTarifiaClient()
 
   const { data: user, isLoading } = useQuery({
     queryKey: ['userinfo'],
     queryFn: async () => {
-      const data = await unwrap(polar.GET('/v1/oauth2/userinfo'))
+      const data = await unwrap(tarifia.GET('/v1/oauth2/userinfo'))
       return data as User
     },
     enabled: !!session,

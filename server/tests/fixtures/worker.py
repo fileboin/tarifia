@@ -8,13 +8,13 @@ import pytest_asyncio
 from dramatiq.middleware.current_message import CurrentMessage
 from pytest_mock import MockerFixture
 
-from polar.config import settings
-from polar.kit.db.postgres import AsyncSession
-from polar.redis import Redis
-from polar.worker import JobQueueManager, RedisMiddleware
-from polar.worker._enqueue import _job_queue_manager
-from polar.worker._httpx import HTTPXMiddleware
-from polar.worker._sqlalchemy import SQLAlchemyMiddleware
+from tarifia.config import settings
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.redis import Redis
+from tarifia.worker import JobQueueManager, RedisMiddleware
+from tarifia.worker._enqueue import _job_queue_manager
+from tarifia.worker._httpx import HTTPXMiddleware
+from tarifia.worker._sqlalchemy import SQLAlchemyMiddleware
 
 
 @pytest.fixture(autouse=True)

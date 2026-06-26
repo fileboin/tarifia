@@ -16,8 +16,8 @@ fi
 
 CANDIDATE="$1"
 BRANCH="$2"
-FORK_NAME="polar-${CANDIDATE}"
-REMOTE_URL="git@github.com:polarsource/${FORK_NAME}.git"
+FORK_NAME="tarifia-${CANDIDATE}"
+REMOTE_URL="git@github.com:tarifiasource/${FORK_NAME}.git"
 
 # Validate candidate name format
 if ! [[ "$CANDIDATE" =~ ^[a-zA-Z0-9_-]+$ ]]; then

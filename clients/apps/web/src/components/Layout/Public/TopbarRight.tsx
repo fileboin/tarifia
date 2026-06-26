@@ -2,13 +2,13 @@
 
 import { AuthModal } from '@/components/Auth/AuthModal'
 import GetStartedButton from '@/components/Auth/GetStartedButton'
-import { Modal } from '@polar-sh/orbit'
+import { Modal } from '@tarifia-sh/orbit'
 import { useModal } from '@/components/Modal/useModal'
 import PublicProfileDropdown from '@/components/Navigation/PublicProfileDropdown'
 import Popover from '@/components/Notifications/NotificationsPopover'
 import { usePostHog } from '@/hooks/posthog'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
 import { usePathname } from 'next/navigation'
 
 const TopbarRight = ({
@@ -45,7 +45,7 @@ const TopbarRight = ({
       <GetStartedButton
         className="hidden md:flex"
         size="default"
-        text="Sell with Polar"
+        text="Sell with Tarifia"
       />
 
       <Modal

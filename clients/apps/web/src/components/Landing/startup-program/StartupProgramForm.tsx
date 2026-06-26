@@ -1,17 +1,17 @@
 'use client'
 
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
-import { Button } from '@polar-sh/orbit'
-import { Input } from '@polar-sh/orbit'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Button } from '@tarifia-sh/orbit'
+import { Input } from '@tarifia-sh/orbit'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
-import { TextArea } from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
+import { TextArea } from '@tarifia-sh/orbit'
 import { useState } from 'react'
 
 const FUNDING_OPTIONS = [
@@ -26,7 +26,7 @@ const TEAM_SIZE_OPTIONS = ['1', '2 to 5', '6 to 15', '16 to 50', '50+']
 
 const BILLING_PLATFORM_OPTIONS = [
   'None',
-  'Polar',
+  'Tarifia',
   'Stripe',
   'Paddle',
   'Lemon Squeezy',
@@ -81,7 +81,7 @@ interface FormState {
   paymentVolume: string
   currentBillingPlatform: string
   currentBillingPlatformOther: string
-  polarOrgSlug: string
+  tarifiaOrgSlug: string
   teamSize: string
   location: string
   pitch: string
@@ -100,9 +100,9 @@ const INITIAL: FormState = {
   partner: '',
   partnerOther: '',
   paymentVolume: '',
-  currentBillingPlatform: 'Polar',
+  currentBillingPlatform: 'Tarifia',
   currentBillingPlatformOther: '',
-  polarOrgSlug: '',
+  tarifiaOrgSlug: '',
   teamSize: '',
   location: '',
   pitch: '',
@@ -259,12 +259,12 @@ export const StartupProgramForm = () => {
         )}
       </Field>
 
-      {form.currentBillingPlatform === 'Polar' && (
-        <Field label="Polar Organization Slug" htmlFor="polarOrgSlug">
+      {form.currentBillingPlatform === 'Tarifia' && (
+        <Field label="Tarifia Organization Slug" htmlFor="tarifiaOrgSlug">
           <Input
-            id="polarOrgSlug"
-            value={form.polarOrgSlug}
-            onChange={(e) => set('polarOrgSlug')(e.target.value)}
+            id="tarifiaOrgSlug"
+            value={form.tarifiaOrgSlug}
+            onChange={(e) => set('tarifiaOrgSlug')(e.target.value)}
             placeholder="acme-inc"
           />
         </Field>

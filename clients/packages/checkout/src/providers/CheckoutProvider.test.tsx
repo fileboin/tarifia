@@ -12,9 +12,9 @@ const { mockClient, mockCreateClient } = vi.hoisted(() => ({
   mockCreateClient: vi.fn(),
 }))
 
-vi.mock('@polar-sh/client', async () => {
+vi.mock('@tarifia-sh/client', async () => {
   const actual =
-    await vi.importActual<typeof import('@polar-sh/client')>('@polar-sh/client')
+    await vi.importActual<typeof import('@tarifia-sh/client')>('@tarifia-sh/client')
   return {
     ...actual,
     createClient: mockCreateClient,
@@ -73,13 +73,13 @@ describe('CheckoutProvider', () => {
   describe('baseUrl resolution', () => {
     it('uses production by default', () => {
       renderProvider({ initialCheckout: createCheckout() })
-      expect(mockCreateClient).toHaveBeenCalledWith('https://api.polar.sh')
+      expect(mockCreateClient).toHaveBeenCalledWith('https://api.tarifia.sh')
     })
 
     it('uses sandbox when server=sandbox', () => {
       renderProvider({ server: 'sandbox', initialCheckout: createCheckout() })
       expect(mockCreateClient).toHaveBeenCalledWith(
-        'https://sandbox-api.polar.sh',
+        'https://sandbox-api.tarifia.sh',
       )
     })
 
@@ -88,7 +88,7 @@ describe('CheckoutProvider', () => {
         server: 'production',
         initialCheckout: createCheckout(),
       })
-      expect(mockCreateClient).toHaveBeenCalledWith('https://api.polar.sh')
+      expect(mockCreateClient).toHaveBeenCalledWith('https://api.tarifia.sh')
     })
 
     it('uses serverURL when provided (stripping trailing /v1)', () => {
@@ -201,7 +201,7 @@ describe('CheckoutProvider', () => {
       const initialCheckout = createCheckout({ id: 'ch_initial' })
       mockClient.PATCH.mockResolvedValue(
         fail({
-          error: 'PolarRequestValidationError',
+          error: 'TarifiaRequestValidationError',
           detail: [
             {
               type: 'value_error',
@@ -219,7 +219,7 @@ describe('CheckoutProvider', () => {
         const result = await getCtx().update({ customer_email: 'bad' })
         expect(result.ok).toBe(false)
         if (!result.ok && result.error) {
-          expect(result.error.error).toBe('PolarRequestValidationError')
+          expect(result.error.error).toBe('TarifiaRequestValidationError')
         }
       })
 

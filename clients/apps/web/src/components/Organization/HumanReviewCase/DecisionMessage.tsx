@@ -1,6 +1,6 @@
-import { schemas } from '@polar-sh/client'
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
+import { schemas } from '@tarifia-sh/client'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
 import { motion } from 'motion/react'
 import { Check, X } from 'lucide-react'
 import React from 'react'
@@ -38,7 +38,7 @@ export const DecisionMessage = ({ message, organization }: Props) => {
             transition={BUBBLE_SPRING}
             style={{ transformOrigin: 'bottom left' }}
           >
-            <div className="dark:bg-polar-600 flex flex-col gap-1 rounded-2xl rounded-bl-none bg-gray-100 p-3 whitespace-pre-wrap">
+            <div className="dark:bg-tarifia-600 flex flex-col gap-1 rounded-2xl rounded-bl-none bg-gray-100 p-3 whitespace-pre-wrap">
               <Box display="flex" alignItems="center" columnGap="xs">
                 {approved ? (
                   <Check className="h-4 w-4 shrink-0 text-emerald-500" />

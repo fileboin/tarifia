@@ -1,6 +1,6 @@
 'use client'
 
-import { Spinner } from '@polar-sh/orbit'
+import { Spinner } from '@tarifia-sh/orbit'
 import {
   Area,
   CartesianGrid,
@@ -11,7 +11,7 @@ import {
   Line,
   XAxis,
   YAxis,
-} from '@polar-sh/ui/components/ui/chart'
+} from '@tarifia-sh/ui/components/ui/chart'
 import { useTheme } from 'next-themes'
 import { useMemo } from 'react'
 
@@ -127,7 +127,7 @@ export const CostsBandedChart = ({
               horizontal={false}
               vertical={true}
               stroke={
-                isDark ? 'var(--color-polar-700)' : 'var(--color-gray-200)'
+                isDark ? 'var(--color-tarifia-700)' : 'var(--color-gray-200)'
               }
               strokeDasharray="6 6"
             />
@@ -233,7 +233,7 @@ export const CostsBandedChart = ({
                     Average
                   </div>
                   <div className="flex items-center gap-1.5 whitespace-nowrap">
-                    <div className="dark:bg-polar-500 h-2 w-2 shrink-0 rounded-[2px] bg-gray-500" />
+                    <div className="dark:bg-tarifia-500 h-2 w-2 shrink-0 rounded-[2px] bg-gray-500" />
                     P10-P90
                   </div>
                   <div className="flex items-center gap-1.5 whitespace-nowrap">

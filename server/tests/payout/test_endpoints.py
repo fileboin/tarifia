@@ -6,11 +6,11 @@ from fastapi import FastAPI
 from httpx import AsyncClient
 from pytest_mock import MockerFixture
 
-from polar.models import Organization, Payout, User, UserOrganization
-from polar.models.transaction import TransactionType
-from polar.payout.endpoints import payout_service  # type: ignore[attr-defined]
-from polar.payout.service import PayoutService
-from polar.postgres import AsyncSession, get_db_sessionmaker
+from tarifia.models import Organization, Payout, User, UserOrganization
+from tarifia.models.transaction import TransactionType
+from tarifia.payout.endpoints import payout_service  # type: ignore[attr-defined]
+from tarifia.payout.service import PayoutService
+from tarifia.postgres import AsyncSession, get_db_sessionmaker
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_account,

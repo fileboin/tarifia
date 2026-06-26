@@ -22,7 +22,7 @@ export default function BlogPage() {
   const posts = getAllContent()
 
   return (
-    <div className="dark:bg-polar-950 min-h-screen bg-white text-gray-900 dark:text-white">
+    <div className="dark:bg-tarifia-950 min-h-screen bg-white text-gray-900 dark:text-white">
       <section className="mx-auto flex w-full max-w-2xl flex-col items-center px-6 py-12">
         <BlogHero
           title="Blog"
@@ -38,7 +38,7 @@ export default function BlogPage() {
               href={post.href}
               className="group flex flex-col gap-4"
             >
-              <div className="dark:bg-polar-800 relative aspect-video w-full overflow-hidden rounded-md bg-gray-100">
+              <div className="dark:bg-tarifia-800 relative aspect-video w-full overflow-hidden rounded-md bg-gray-100">
                 {post.image ? (
                   <StaticImage
                     src={post.image}
@@ -48,7 +48,7 @@ export default function BlogPage() {
                     unoptimized
                   />
                 ) : (
-                  <div className="dark:bg-polar-800 absolute inset-0 bg-gray-100" />
+                  <div className="dark:bg-tarifia-800 absolute inset-0 bg-gray-100" />
                 )}
               </div>
 
@@ -56,7 +56,7 @@ export default function BlogPage() {
                 <h2 className="text-lg leading-snug font-medium transition-opacity group-hover:opacity-70">
                   {post.title}
                 </h2>
-                <div className="dark:text-polar-500 flex items-center gap-2 text-sm text-gray-400">
+                <div className="dark:text-tarifia-500 flex items-center gap-2 text-sm text-gray-400">
                   <span className="font-medium">{TYPE_LABEL[post.type]}</span>
                   {post.date && (
                     <>

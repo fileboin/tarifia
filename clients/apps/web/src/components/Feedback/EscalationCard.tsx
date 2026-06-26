@@ -1,16 +1,16 @@
 'use client'
 
-import { schemas } from '@polar-sh/client'
-import { Box } from '@polar-sh/orbit/Box'
-import { Button } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Button } from '@tarifia-sh/orbit'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
-import { TextArea } from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
+import { TextArea } from '@tarifia-sh/orbit'
 import { useState } from 'react'
 
 interface EscalationCardProps {
@@ -46,8 +46,8 @@ export const EscalationCard = ({
       borderColor="border-primary"
     >
       <Box flexDirection="column" rowGap="xs">
-        <h3 className="text-sm font-medium">Send to the Polar team</h3>
-        <p className="dark:text-polar-500 text-sm text-gray-500">
+        <h3 className="text-sm font-medium">Send to the Tarifia team</h3>
+        <p className="dark:text-tarifia-500 text-sm text-gray-500">
           The full transcript is included automatically. Add anything else
           you&apos;d like to share below.
         </p>

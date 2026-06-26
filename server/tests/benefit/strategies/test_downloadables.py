@@ -3,17 +3,17 @@ from uuid import UUID, uuid4
 
 import pytest
 
-from polar.auth.models import AuthSubject
-from polar.benefit.strategies.base.service import BenefitPropertiesValidationError
-from polar.benefit.strategies.downloadables.properties import (
+from tarifia.auth.models import AuthSubject
+from tarifia.benefit.strategies.base.service import BenefitPropertiesValidationError
+from tarifia.benefit.strategies.downloadables.properties import (
     BenefitDownloadablesProperties,
 )
-from polar.benefit.strategies.downloadables.schemas import (
+from tarifia.benefit.strategies.downloadables.schemas import (
     BenefitDownloadablesCreateProperties,
 )
-from polar.benefit.strategies.downloadables.service import BenefitDownloadablesService
-from polar.file.schemas import FileRead
-from polar.models import (
+from tarifia.benefit.strategies.downloadables.service import BenefitDownloadablesService
+from tarifia.file.schemas import FileRead
+from tarifia.models import (
     Benefit,
     Customer,
     Downloadable,
@@ -23,10 +23,10 @@ from polar.models import (
     User,
     UserOrganization,
 )
-from polar.models.benefit import BenefitType
-from polar.models.downloadable import DownloadableStatus
-from polar.postgres import AsyncSession
-from polar.redis import Redis
+from tarifia.models.benefit import BenefitType
+from tarifia.models.downloadable import DownloadableStatus
+from tarifia.postgres import AsyncSession
+from tarifia.redis import Redis
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.downloadable import TestDownloadable
 from tests.fixtures.file import TestFile, uploaded_fixture

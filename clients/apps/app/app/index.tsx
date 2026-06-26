@@ -1,7 +1,7 @@
 import { FadeInAndUp } from '@/components/Animations/FadeInAndUp'
 import { KenBurns } from '@/components/Animations/KenBurns'
 import { Box } from '@/components/Shared/Box'
-import LogoIcon from '@/components/Shared/PolarLogo'
+import LogoIcon from '@/components/Shared/TarifiaLogo'
 import { Text } from '@/components/Shared/Text'
 import { Touchable } from '@/components/Shared/Touchable'
 import { useTheme } from '@/design-system/useTheme'

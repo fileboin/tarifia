@@ -1,5 +1,5 @@
 import { api } from '@/utils/client'
-import { operations, unwrap } from '@polar-sh/client'
+import { operations, unwrap } from '@tarifia-sh/client'
 import { useQuery } from '@tanstack/react-query'
 import { defaultRetry } from './retry'
 

@@ -1,7 +1,7 @@
 import { defineConfig, Options } from 'tsup'
 
 const allowedOriginsDefine = {
-  __POLAR_CHECKOUT_EMBED_SCRIPT_ALLOWED_ORIGINS__: `'${process.env.POLAR_CHECKOUT_EMBED_SCRIPT_ALLOWED_ORIGINS ? process.env.POLAR_CHECKOUT_EMBED_SCRIPT_ALLOWED_ORIGINS : 'http://127.0.0.1:3000'}'`,
+  __TARIFIA_CHECKOUT_EMBED_SCRIPT_ALLOWED_ORIGINS__: `'${process.env.TARIFIA_CHECKOUT_EMBED_SCRIPT_ALLOWED_ORIGINS ? process.env.TARIFIA_CHECKOUT_EMBED_SCRIPT_ALLOWED_ORIGINS : 'http://127.0.0.1:3000'}'`,
 }
 
 export const options: Options[] = [

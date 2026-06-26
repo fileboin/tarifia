@@ -3,9 +3,9 @@ import uuid
 import pytest
 from httpx import AsyncClient
 
-from polar.auth.scope import Scope
-from polar.models import Organization, UserOrganization
-from polar.models.metric_dashboard import MetricDashboard
+from tarifia.auth.scope import Scope
+from tarifia.models import Organization, UserOrganization
+from tarifia.models.metric_dashboard import MetricDashboard
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 

@@ -1,14 +1,14 @@
 'use client'
 
 import { Section } from '@/components/Layout/Section'
-import { Input } from '@polar-sh/orbit'
+import { Input } from '@tarifia-sh/orbit'
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { useFormContext } from 'react-hook-form'
 import { ProductFormType } from './ProductForm'
 

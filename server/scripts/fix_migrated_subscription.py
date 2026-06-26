@@ -12,9 +12,9 @@ import typer
 from rich.progress import Progress
 from sqlalchemy import bindparam, func, select, update
 
-from polar.kit.db.postgres import create_async_sessionmaker
-from polar.models import Subscription
-from polar.postgres import create_async_engine
+from tarifia.kit.db.postgres import create_async_sessionmaker
+from tarifia.models import Subscription
+from tarifia.postgres import create_async_engine
 
 cli = typer.Typer()
 

@@ -17,7 +17,7 @@ struct Provider: AppIntentTimelineProvider {
     }
 
     func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
-        let defaults = UserDefaults(suiteName: "group.com.polarsource.Polar")
+        let defaults = UserDefaults(suiteName: "group.com.tarifiasource.Tarifia")
         let orgName = defaults?.string(forKey: "widget_organization_name")
         let days = configuration.timeFrame.days
         
@@ -36,7 +36,7 @@ struct Provider: AppIntentTimelineProvider {
     
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
         let currentDate = Date()
-        let defaults = UserDefaults(suiteName: "group.com.polarsource.Polar")
+        let defaults = UserDefaults(suiteName: "group.com.tarifiasource.Tarifia")
         let orgName = defaults?.string(forKey: "widget_organization_name")
         let days = configuration.timeFrame.days
 
@@ -94,7 +94,7 @@ struct Provider: AppIntentTimelineProvider {
         let startDateStr = dateFormatter.string(from: startDate)
         let endDateStr = dateFormatter.string(from: endDate)
         
-        var components = URLComponents(string: "https://api.polar.sh/v1/metrics/")!
+        var components = URLComponents(string: "https://api.tarifia.sh/v1/metrics/")!
         components.queryItems = [
             URLQueryItem(name: "organization_id", value: organizationId),
             URLQueryItem(name: "start_date", value: startDateStr),
@@ -152,7 +152,7 @@ struct Provider: AppIntentTimelineProvider {
     }
 
     private func fetchMetrics(days: Int, metricType: MetricType) async -> (Int, Double?, [RevenueData], Int?)? {
-        let defaults = UserDefaults(suiteName: "group.com.polarsource.Polar")
+        let defaults = UserDefaults(suiteName: "group.com.tarifiasource.Tarifia")
         guard let organizationId = defaults?.string(forKey: "widget_organization_id") else {
             return nil
         }
@@ -168,7 +168,7 @@ struct Provider: AppIntentTimelineProvider {
         let startDateStr = dateFormatter.string(from: startDate)
         let endDateStr = dateFormatter.string(from: endDate)
         
-        var components = URLComponents(string: "https://api.polar.sh/v1/metrics/")!
+        var components = URLComponents(string: "https://api.tarifia.sh/v1/metrics/")!
         components.queryItems = [
             URLQueryItem(name: "organization_id", value: organizationId),
             URLQueryItem(name: "start_date", value: startDateStr),
@@ -233,7 +233,7 @@ struct Provider: AppIntentTimelineProvider {
     }
     
     private func fetchAllMetrics(days: Int) async -> CombinedMetrics? {
-        let defaults = UserDefaults(suiteName: "group.com.polarsource.Polar")
+        let defaults = UserDefaults(suiteName: "group.com.tarifiasource.Tarifia")
         guard let organizationId = defaults?.string(forKey: "widget_organization_id") else {
             return nil
         }
@@ -249,7 +249,7 @@ struct Provider: AppIntentTimelineProvider {
         let startDateStr = dateFormatter.string(from: startDate)
         let endDateStr = dateFormatter.string(from: endDate)
         
-        var components = URLComponents(string: "https://api.polar.sh/v1/metrics/")!
+        var components = URLComponents(string: "https://api.tarifia.sh/v1/metrics/")!
         components.queryItems = [
             URLQueryItem(name: "organization_id", value: organizationId),
             URLQueryItem(name: "start_date", value: startDateStr),
@@ -410,7 +410,7 @@ struct widgetEntryView : View {
         
         let primaryTextColor: Color = colorScheme == .dark ? .white : .black
         let secondaryTextColor: Color = colorScheme == .dark ? .white.opacity(0.6) : .black.opacity(0.6)
-        let logoImageName = colorScheme == .dark ? "PolarLogoWhite" : "PolarLogoBlack"
+        let logoImageName = colorScheme == .dark ? "TarifiaLogoWhite" : "TarifiaLogoBlack"
         
         return ZStack {
             if !entry.isError {
@@ -631,7 +631,7 @@ struct widgetEntryView : View {
         
         let primaryTextColor: Color = colorScheme == .dark ? .white : .black
         let secondaryTextColor: Color = colorScheme == .dark ? .white.opacity(0.6) : .black.opacity(0.6)
-        let logoImageName = colorScheme == .dark ? "PolarLogoWhite" : "PolarLogoBlack"
+        let logoImageName = colorScheme == .dark ? "TarifiaLogoWhite" : "TarifiaLogoBlack"
         
         let chartColor = "005FFF"
       
@@ -783,7 +783,7 @@ struct LockScreenWidget: Widget {
             LockScreenWidgetView(entry: entry)
         }
         .supportedFamilies([.accessoryCircular, .accessoryRectangular, .accessoryInline])
-        .configurationDisplayName("Polar Lock Screen")
+        .configurationDisplayName("Tarifia Lock Screen")
         .description("Quick glance at your metrics.")
     }
 }

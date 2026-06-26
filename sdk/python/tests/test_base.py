@@ -2,16 +2,16 @@ import typing
 
 import pytest
 
-from polar.base import AsyncClientBase, SyncClientBase
+from tarifia.base import AsyncClientBase, SyncClientBase
 
 
 @pytest.fixture(params=[SyncClientBase, AsyncClientBase])
 def client(request) -> SyncClientBase | AsyncClientBase:
     cls = request.param
     return cls(
-        base_url="https://api.polar.sh",
+        base_url="https://api.tarifia.sh",
         version="2026-04",
-        access_token="polar_at_u_xxx",
+        access_token="tarifia_at_u_xxx",
     )
 
 
@@ -19,11 +19,11 @@ class TestBuildRequest:
     @pytest.mark.parametrize(
         ("value", "expected"),
         [
-            ({"id": "value"}, "https://api.polar.sh/v1/items/value"),
-            ({"id": 123}, "https://api.polar.sh/v1/items/123"),
+            ({"id": "value"}, "https://api.tarifia.sh/v1/items/value"),
+            ({"id": 123}, "https://api.tarifia.sh/v1/items/123"),
             (
                 {"id": "value with spaces"},
-                "https://api.polar.sh/v1/items/value%20with%20spaces",
+                "https://api.tarifia.sh/v1/items/value%20with%20spaces",
             ),
         ],
     )
@@ -56,5 +56,5 @@ class TestBuildRequest:
         assert request.method == "GET"
         assert (
             str(request.url)
-            == "https://api.polar.sh/v1/items/?string_param=value&bool_param=true&int_param=42&list_param=a&list_param=b&list_param=c&dict_param%5Bkey%5D=value"
+            == "https://api.tarifia.sh/v1/items/?string_param=value&bool_param=true&int_param=42&list_param=a&list_param=b&list_param=c&dict_param%5Bkey%5D=value"
         )

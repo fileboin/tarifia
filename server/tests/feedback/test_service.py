@@ -1,13 +1,13 @@
 import pytest
 from pytest_mock import MockerFixture
 
-from polar.auth.models import AuthSubject
-from polar.exceptions import PolarRequestValidationError
-from polar.feedback.schemas import FeedbackCreate
-from polar.feedback.service import feedback as feedback_service
-from polar.models import Organization, User, UserOrganization
-from polar.models.feedback import FeedbackType
-from polar.postgres import AsyncSession
+from tarifia.auth.models import AuthSubject
+from tarifia.exceptions import TarifiaRequestValidationError
+from tarifia.feedback.schemas import FeedbackCreate
+from tarifia.feedback.service import feedback as feedback_service
+from tarifia.models import Organization, User, UserOrganization
+from tarifia.models.feedback import FeedbackType
+from tarifia.postgres import AsyncSession
 from tests.fixtures.auth import AuthSubjectFixture
 
 
@@ -21,7 +21,7 @@ def _build_payload(
         type=type,
         message=message,
         organization_id=organization.id,
-        client_context={"url": "https://polar.sh/dashboard"},
+        client_context={"url": "https://tarifia.sh/dashboard"},
     )
 
 
@@ -43,7 +43,7 @@ class TestSubmit:
         assert feedback.user_id == auth_subject.subject.id
         assert feedback.organization_id == organization.id
         assert feedback.type == FeedbackType.bug
-        assert feedback.client_context == {"url": "https://polar.sh/dashboard"}
+        assert feedback.client_context == {"url": "https://tarifia.sh/dashboard"}
 
     @pytest.mark.auth(AuthSubjectFixture(subject="user"))
     async def test_question_enqueues_plain_reply(
@@ -54,7 +54,7 @@ class TestSubmit:
         user_organization: UserOrganization,
         auth_subject: AuthSubject[User],
     ) -> None:
-        enqueue_job_mock = mocker.patch("polar.feedback.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.feedback.service.enqueue_job")
 
         feedback = await feedback_service.submit(
             session,
@@ -79,7 +79,7 @@ class TestSubmit:
         user_organization: UserOrganization,
         auth_subject: AuthSubject[User],
     ) -> None:
-        enqueue_job_mock = mocker.patch("polar.feedback.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.feedback.service.enqueue_job")
 
         await feedback_service.submit(
             session, auth_subject, _build_payload(organization, type=FeedbackType.bug)
@@ -94,7 +94,7 @@ class TestSubmit:
         organization: Organization,
         auth_subject: AuthSubject[User],
     ) -> None:
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await feedback_service.submit(
                 session, auth_subject, _build_payload(organization)
             )

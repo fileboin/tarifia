@@ -26,7 +26,7 @@ const SandboxBanner = () => {
       </div>
       <div>
         <a
-          href="https://polar.sh/start"
+          href="https://tarifia.sh/start"
           className="font-medium transition-colors hover:text-yellow-600 dark:hover:text-yellow-400"
         >
           Exit sandbox

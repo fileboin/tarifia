@@ -29,7 +29,7 @@ export const CostInsightsPage = () => {
       <FeaturePageGraphic graphic={GaugeSweep} />
 
       <FeaturePageIntro>
-        Polar already tracks revenue from orders and subscriptions. Cost
+        Tarifia already tracks revenue from orders and subscriptions. Cost
         Insights adds the spending side, so profit and lifetime value can be
         computed against actual cost of service rather than a guess.
       </FeaturePageIntro>
@@ -37,8 +37,8 @@ export const CostInsightsPage = () => {
       <FeatureSection title="How it works">
         <p>
           The mechanism is intentionally small. When you ingest an event through
-          the Polar API, you can attach a <strong>_cost</strong> property with
-          an amount and a currency, and Polar will treat that as the cost of
+          the Tarifia API, you can attach a <strong>_cost</strong> property with
+          an amount and a currency, and Tarifia will treat that as the cost of
           serving the event.
         </p>
         <p>

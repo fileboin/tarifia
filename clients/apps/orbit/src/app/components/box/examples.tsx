@@ -1,5 +1,5 @@
-import { Box } from '@polar-sh/orbit/Box'
-import { Text } from '@polar-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Text } from '@tarifia-sh/orbit'
 import { type ReactNode } from 'react'
 
 // Small visible swatch used inside layout demos so flex/grid behavior is legible.

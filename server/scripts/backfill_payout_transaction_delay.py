@@ -5,7 +5,7 @@ from functools import wraps
 import typer
 from sqlalchemy import select, update
 
-from polar.models import Account
+from tarifia.models import Account
 from scripts.helper import (
     configure_script_logging,
     limit_bindparam,

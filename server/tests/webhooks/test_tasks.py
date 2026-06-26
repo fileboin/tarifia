@@ -3,18 +3,18 @@ from unittest.mock import MagicMock
 import pytest
 from pytest_mock import MockerFixture
 
-from polar.config import settings
-from polar.models import WebhookEndpoint, WebhookEvent
-from polar.models.webhook_endpoint import WebhookEventType
-from polar.postgres import AsyncSession
-from polar.webhook.service import webhook as webhook_service
-from polar.webhook.tasks import _webhook_event_send
+from tarifia.config import settings
+from tarifia.models import WebhookEndpoint, WebhookEvent
+from tarifia.models.webhook_endpoint import WebhookEventType
+from tarifia.postgres import AsyncSession
+from tarifia.webhook.service import webhook as webhook_service
+from tarifia.webhook.tasks import _webhook_event_send
 from tests.fixtures.database import SaveFixture
 
 
 @pytest.fixture
 def enqueue_job_mock(mocker: MockerFixture) -> MagicMock:
-    return mocker.patch("polar.webhook.tasks.enqueue_job")
+    return mocker.patch("tarifia.webhook.tasks.enqueue_job")
 
 
 @pytest.mark.asyncio

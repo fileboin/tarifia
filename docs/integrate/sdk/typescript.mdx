@@ -7,24 +7,24 @@ description: SDK for JavaScript runtimes (Node.js and Browser)
 
 ## Examples
 
-- [With Node.js](https://github.com/polarsource/examples/tree/main/with-nodejs)
+- [With Node.js](https://github.com/tarifiasource/examples/tree/main/with-nodejs)
 
 ## Installation
 
 <Tabs>
   <Tab title="npm">
     ```bash Terminal
-    npm install @polar-sh/sdk
+    npm install @tarifia-sh/sdk
     ```
   </Tab>
   <Tab title="yarn">
     ```bash Terminal
-    yarn add @polar-sh/sdk
+    yarn add @tarifia-sh/sdk
     ```
   </Tab>
   <Tab title="pnpm">
     ```bash Terminal
-    pnpm add @polar-sh/sdk
+    pnpm add @tarifia-sh/sdk
     ```
   </Tab>
 </Tabs>
@@ -32,15 +32,15 @@ description: SDK for JavaScript runtimes (Node.js and Browser)
 ## Quickstart
 
 ```typescript icon="square-js" index.js
-import { Polar } from '@polar-sh/sdk'
+import { Tarifia } from '@tarifia-sh/sdk'
 
-const polar = new Polar({
-  accessToken: process.env.POLAR_ACCESS_TOKEN,
-  server: process.env.POLAR_MODE || 'sandbox' // sandbox or production
+const tarifia = new Tarifia({
+  accessToken: process.env.TARIFIA_ACCESS_TOKEN,
+  server: process.env.TARIFIA_MODE || 'sandbox' // sandbox or production
 })
 
 async function run() {
-  const result = await polar.users.benefits.list({})
+  const result = await tarifia.users.benefits.list({})
   for await (const page of result) {
     // Handle the page
     console.log(page)

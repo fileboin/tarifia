@@ -3,10 +3,10 @@ import uuid
 import pytest
 from pytest_mock import MockerFixture
 
-from polar.kit.db.postgres import AsyncSession
-from polar.models import Organization, User, UserOrganization
-from polar.models.organization import OrganizationStatus
-from polar.organization.tasks import (
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.models import Organization, User, UserOrganization
+from tarifia.models.organization import OrganizationStatus
+from tarifia.organization.tasks import (
     OrganizationDoesNotExist,
     organization_created,
     organization_offboarded,
@@ -56,7 +56,7 @@ class TestOrganizationUnderReview:
 
         session.expunge_all()
 
-        enqueue_job_mock = mocker.patch("polar.organization.tasks.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.tasks.enqueue_job")
 
         await organization_under_review(organization.id)
 
@@ -79,7 +79,7 @@ class TestOrganizationUnderReview:
 
         session.expunge_all()
 
-        enqueue_job_mock = mocker.patch("polar.organization.tasks.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.tasks.enqueue_job")
 
         await organization_under_review(organization.id)
 
@@ -109,7 +109,7 @@ class TestOrganizationOffboarded:
         session.expunge_all()
 
         enqueue_email_mock = mocker.patch(
-            "polar.organization.tasks.enqueue_email_template"
+            "tarifia.organization.tasks.enqueue_email_template"
         )
 
         await organization_offboarded(organization.id)

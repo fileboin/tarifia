@@ -3,7 +3,7 @@
 import { CustomerContextView } from '@/components/Customer/CustomerContextView'
 import CustomFieldValue from '@/components/CustomFields/CustomFieldValue'
 import { DashboardBody } from '@/components/Layout/DashboardLayout'
-import { InlineModal } from '@polar-sh/orbit'
+import { InlineModal } from '@tarifia-sh/orbit'
 import { useModal } from '@/components/Modal/useModal'
 import { DownloadInvoiceDashboard } from '@/components/Orders/DownloadInvoice'
 import { OrderCalloutBanner } from '@/components/Orders/OrderCalloutBanner'
@@ -36,13 +36,13 @@ import {
 } from '@/utils/order'
 import ArrowOutwardOutlined from '@mui/icons-material/ArrowOutwardOutlined'
 import { ArrowUpRightIcon } from 'lucide-react'
-import { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
-import { Button } from '@polar-sh/orbit'
-import { DataTable, Truncated, type DataTableColumnDef } from '@polar-sh/orbit'
-import FormattedDateTime from '@polar-sh/ui/components/atoms/FormattedDateTime'
-import ShadowBox from '@polar-sh/ui/components/atoms/ShadowBox'
-import { Status } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
+import { Button } from '@tarifia-sh/orbit'
+import { DataTable, Truncated, type DataTableColumnDef } from '@tarifia-sh/orbit'
+import FormattedDateTime from '@tarifia-sh/ui/components/atoms/FormattedDateTime'
+import ShadowBox from '@tarifia-sh/ui/components/atoms/ShadowBox'
+import { Status } from '@tarifia-sh/orbit'
 import { Separator } from '@radix-ui/react-dropdown-menu'
 import Link from 'next/link'
 import React from 'react'
@@ -152,7 +152,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
         />
       ) : null}
 
-      <ShadowBox className="dark:divide-polar-700 flex flex-col divide-y divide-gray-200 border-gray-200 bg-transparent p-0 md:rounded-3xl!">
+      <ShadowBox className="dark:divide-tarifia-700 flex flex-col divide-y divide-gray-200 border-gray-200 bg-transparent p-0 md:rounded-3xl!">
         <div className="flex flex-col gap-6 p-4 md:p-8">
           <div className="flex flex-col gap-1">
             <DetailRow
@@ -205,7 +205,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
                     <span
                       className={twMerge(
                         order.discount.code
-                          ? 'text-polar-500 dark:text-polar-500'
+                          ? 'text-tarifia-500 dark:text-tarifia-500'
                           : undefined,
                       )}
                     >
@@ -237,7 +237,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
               valueClassName="capitalize"
             />
 
-            <Separator className="dark:bg-polar-700 my-4 h-px bg-gray-300" />
+            <Separator className="dark:bg-tarifia-700 my-4 h-px bg-gray-300" />
 
             <div className="flex flex-col gap-1 pb-4">
               {order.items.map((item) => (
@@ -314,7 +314,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
             order.billing_name ||
             order.customer.tax_id ? (
               <>
-                <Separator className="dark:bg-polar-700 my-4 h-px bg-gray-300" />
+                <Separator className="dark:bg-tarifia-700 my-4 h-px bg-gray-300" />
                 {order.billing_name ? (
                   <DetailRow label="Billing Name" value={order.billing_name} />
                 ) : null}
@@ -583,7 +583,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-y-2">
             <h3 className="text-lg">Seats</h3>
-            <p className="dark:text-polar-500 text-sm text-gray-500">
+            <p className="dark:text-tarifia-500 text-sm text-gray-500">
               {availableSeats} of {totalSeats} seats available
             </p>
           </div>
@@ -596,7 +596,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
           )}
 
           {!isLoadingSeats && seats.length === 0 && (
-            <p className="dark:text-polar-500 text-sm text-gray-500">
+            <p className="dark:text-tarifia-500 text-sm text-gray-500">
               No seats have been assigned yet.
             </p>
           )}

@@ -7,21 +7,21 @@ import httpx
 import pytest
 import respx
 
-from polar.integrations.tinybird.client import (
+from tarifia.integrations.tinybird.client import (
     MAX_RETRIES,
     TinybirdClient,
     TinybirdOperationalError,
     TinybirdRequestError,
 )
-from polar.integrations.tinybird.service import (
+from tarifia.integrations.tinybird.service import (
     DATASOURCE_EVENTS,
     TinybirdEventsQuery,
     TinybirdEventTypesQuery,
     _event_to_tinybird,
     count_user_events_by_organization,
 )
-from polar.models import Event
-from polar.models.event import EventSource
+from tarifia.models import Event
+from tarifia.models.event import EventSource
 from tests.fixtures.tinybird import tinybird_available
 
 pytestmark = pytest.mark.xdist_group(name="tinybird")

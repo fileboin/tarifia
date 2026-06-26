@@ -1,11 +1,11 @@
 import pytest
 from httpx import AsyncClient
 
-from polar.auth.scope import READ_ONLY_SCOPES
-from polar.kit.utils import utc_now
-from polar.models import Organization, User, UserOrganization
-from polar.models.organization import OrganizationStatus
-from polar.models.user_organization import OrganizationRole
+from tarifia.auth.scope import READ_ONLY_SCOPES
+from tarifia.kit.utils import utc_now
+from tarifia.models import Organization, User, UserOrganization
+from tarifia.models.organization import OrganizationStatus
+from tarifia.models.user_organization import OrganizationRole
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 

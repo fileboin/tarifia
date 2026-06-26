@@ -1,6 +1,6 @@
 'use client'
 
-import { type Client, schemas, unwrap } from '@polar-sh/client'
+import { type Client, schemas, unwrap } from '@tarifia-sh/client'
 import {
   DEFAULT_LOCALE,
   getTranslationLocale,
@@ -8,9 +8,9 @@ import {
   useTranslations,
   type AcceptedLocale,
   type SupportedLocale,
-} from '@polar-sh/i18n'
-import { Button } from '@polar-sh/orbit'
-import { ThemingPresetProps } from '@polar-sh/ui/hooks/theming'
+} from '@tarifia-sh/i18n'
+import { Button } from '@tarifia-sh/orbit'
+import { ThemingPresetProps } from '@tarifia-sh/ui/hooks/theming'
 import {
   Elements,
   ElementsConsumer,
@@ -146,7 +146,7 @@ export const PaymentMethodForm = ({
       }
       const search = new URLSearchParams(window.location.search)
       search.delete('redirect_status')
-      search.delete('polar_setup_intent')
+      search.delete('tarifia_setup_intent')
       router.replace(`${window.location.pathname}?${search.toString()}`)
     })()
   }, [

@@ -1,11 +1,11 @@
 import { useLogout } from '@/hooks/auth'
-import { useDeleteOrganization } from '@/hooks/polar/organizations'
-import { useDeleteUser } from '@/hooks/polar/users'
-import { schemas } from '@polar-sh/client'
+import { useDeleteOrganization } from '@/hooks/tarifia/organizations'
+import { useDeleteUser } from '@/hooks/tarifia/users'
+import { schemas } from '@tarifia-sh/client'
 import { useCallback, useState } from 'react'
 import { Alert, Linking } from 'react-native'
 
-const SUPPORT_URL = 'https://polar.sh/docs/support'
+const SUPPORT_URL = 'https://tarifia.sh/docs/support'
 
 interface UseSettingsActionsOptions {
   selectedOrganization: schemas['Organization'] | undefined

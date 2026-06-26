@@ -3,7 +3,7 @@ import pytest
 from fastapi import APIRouter, FastAPI
 from logfire.testing import CaptureLogfire
 
-from polar.logfire import instrument_fastapi
+from tarifia.logfire import instrument_fastapi
 
 
 @pytest.mark.asyncio
@@ -21,7 +21,7 @@ async def test_instrument_fastapi(
     app = FastAPI()
     app.include_router(mid, prefix="/v1")
 
-    instrument_fastapi(app)  # same call as polar/app.py:264
+    instrument_fastapi(app)  # same call as tarifia/app.py:264
 
     transport = httpx.ASGITransport(app=app)
     async with httpx.AsyncClient(transport=transport, base_url="http://test") as client:

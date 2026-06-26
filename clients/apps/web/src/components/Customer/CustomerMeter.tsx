@@ -1,10 +1,10 @@
 import { ParsedMeterQuantities } from '@/hooks/queries/meters'
 import { ParsedMetricPeriod } from '@/hooks/queries/metrics'
-import { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
-import FormattedDateTime from '@polar-sh/ui/components/atoms/FormattedDateTime'
-import FormattedInterval from '@polar-sh/ui/components/atoms/FormattedInterval'
-import ShadowBox from '@polar-sh/ui/components/atoms/ShadowBox'
+import { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
+import FormattedDateTime from '@tarifia-sh/ui/components/atoms/FormattedDateTime'
+import FormattedInterval from '@tarifia-sh/ui/components/atoms/FormattedInterval'
+import ShadowBox from '@tarifia-sh/ui/components/atoms/ShadowBox'
 import { useMemo } from 'react'
 import FormattedUnits from '../Meter/FormattedUnits'
 import MetricChart from '../Metrics/MetricChart'
@@ -54,11 +54,11 @@ export const CustomerMeter = ({
   }, [customerMeter.consumed_units, customerMeter.credited_units])
 
   return (
-    <ShadowBox className="dark:bg-polar-800 flex flex-col gap-y-6 p-8">
+    <ShadowBox className="dark:bg-tarifia-800 flex flex-col gap-y-6 p-8">
       <div className="flex flex-row items-start justify-between gap-x-4">
         <div className="flex flex-col gap-y-1">
           {customerMeter.subscription && (
-            <span className="dark:text-polar-500 text-sm text-gray-500">
+            <span className="dark:text-tarifia-500 text-sm text-gray-500">
               {customerMeter.subscription.product.name}
             </span>
           )}
@@ -66,7 +66,7 @@ export const CustomerMeter = ({
             {meter.name}
           </h2>
           {customerMeter.subscription && (
-            <span className="dark:text-polar-400 text-sm text-gray-500">
+            <span className="dark:text-tarifia-400 text-sm text-gray-500">
               {customerMeter.subscription.current_period_end ? (
                 <FormattedInterval
                   startDatetime={
@@ -87,7 +87,7 @@ export const CustomerMeter = ({
         </div>
         {unitPrice && (
           <div className="flex flex-col items-end gap-y-1">
-            <span className="dark:text-polar-500 text-sm text-gray-500">
+            <span className="dark:text-tarifia-500 text-sm text-gray-500">
               Overages
             </span>
             <span className="text-2xl font-semibold text-gray-900 dark:text-white">
@@ -108,14 +108,14 @@ export const CustomerMeter = ({
               style={{ width: `${creditProgress.pct * 100}%` }}
             />
           </div>
-          <span className="dark:text-polar-400 text-right text-sm text-gray-500">
+          <span className="dark:text-tarifia-400 text-right text-sm text-gray-500">
             <FormattedUnits value={customerMeter.consumed_units} /> of{' '}
             <FormattedUnits value={customerMeter.credited_units} /> credits used
           </span>
         </div>
       )}
 
-      <div className="dark:bg-polar-900 -mx-2 rounded-3xl bg-white p-4">
+      <div className="dark:bg-tarifia-900 -mx-2 rounded-3xl bg-white p-4">
         <MetricChart
           data={quantities as unknown as ParsedMetricPeriod[]}
           interval="day"

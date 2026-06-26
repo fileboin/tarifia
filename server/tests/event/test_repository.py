@@ -3,11 +3,11 @@ from datetime import datetime, timedelta
 
 import pytest
 
-from polar.event.repository import EventRepository
-from polar.kit.utils import utc_now
-from polar.models import Event, Organization
-from polar.models.event import EventSource
-from polar.postgres import AsyncSession
+from tarifia.event.repository import EventRepository
+from tarifia.kit.utils import utc_now
+from tarifia.models import Event, Organization
+from tarifia.models.event import EventSource
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 
 
@@ -37,7 +37,7 @@ async def _create_event(
 
 
 @pytest.mark.asyncio
-class TestGetLatestPolarSelfIngestionTimestamp:
+class TestGetLatestTarifiaSelfIngestionTimestamp:
     async def test_returns_latest_for_organization(
         self,
         save_fixture: SaveFixture,
@@ -62,7 +62,7 @@ class TestGetLatestPolarSelfIngestionTimestamp:
         )
 
         repository = EventRepository.from_session(session)
-        result = await repository.get_latest_polar_self_ingestion_timestamp(
+        result = await repository.get_latest_tarifia_self_ingestion_timestamp(
             organization.id
         )
 
@@ -74,7 +74,7 @@ class TestGetLatestPolarSelfIngestionTimestamp:
         organization: Organization,
     ) -> None:
         repository = EventRepository.from_session(session)
-        result = await repository.get_latest_polar_self_ingestion_timestamp(
+        result = await repository.get_latest_tarifia_self_ingestion_timestamp(
             organization.id
         )
 
@@ -97,7 +97,7 @@ class TestGetLatestPolarSelfIngestionTimestamp:
         )
 
         repository = EventRepository.from_session(session)
-        result = await repository.get_latest_polar_self_ingestion_timestamp(
+        result = await repository.get_latest_tarifia_self_ingestion_timestamp(
             organization.id
         )
 
@@ -119,7 +119,7 @@ class TestGetLatestPolarSelfIngestionTimestamp:
         )
 
         repository = EventRepository.from_session(session)
-        result = await repository.get_latest_polar_self_ingestion_timestamp(
+        result = await repository.get_latest_tarifia_self_ingestion_timestamp(
             organization.id
         )
 

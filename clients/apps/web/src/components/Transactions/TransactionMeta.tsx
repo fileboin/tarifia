@@ -1,5 +1,5 @@
-import { schemas } from '@polar-sh/client'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@tarifia-sh/orbit'
 import { useMemo } from 'react'
 
 const getTransactionMeta = (transaction: schemas['Transaction']) => {
@@ -54,7 +54,7 @@ const TransactionMeta: React.FC<TransactionMetaProps> = ({ transaction }) => {
               {'product' in transactionMeta.meta &&
                 transactionMeta.meta.product && (
                   <TooltipTrigger asChild>
-                    <span className="dark:text-polar-500 min-w-0 truncate text-sm text-gray-500">
+                    <span className="dark:text-tarifia-500 min-w-0 truncate text-sm text-gray-500">
                       {transactionMeta.meta.product.name}
                     </span>
                   </TooltipTrigger>

@@ -5,7 +5,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-} from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
 
 const BENEFIT_REVOCATION_GRACE_PERIOD_LABELS: Record<number, string> = {
   0: 'Immediately',

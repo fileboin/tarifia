@@ -1,4 +1,4 @@
-import type { schemas } from '@polar-sh/client'
+import type { schemas } from '@tarifia-sh/client'
 import { getSeatPrice } from '../guards'
 
 export interface SeatRow {

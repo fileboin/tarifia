@@ -9,7 +9,7 @@ if [ $# -lt 4 ]; then
   exit 1
 fi
 
-IMG="ghcr.io/polarsource/polar:${1}"
+IMG="ghcr.io/tarifiasource/tarifia:${1}"
 HAS_MIGRATIONS="${2}"
 API_SERVICE_ID="${3}"
 WORKER_SERVICE_IDS="${4}"

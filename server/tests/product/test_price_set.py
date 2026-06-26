@@ -2,13 +2,13 @@ from decimal import Decimal
 
 import pytest
 
-from polar.models import (
+from tarifia.models import (
     ProductPriceCustom,
     ProductPriceFixed,
     ProductPriceMeteredUnit,
     ProductPriceSeatUnit,
 )
-from polar.product.price_set import PriceSet, calculate_upfront_amount
+from tarifia.product.price_set import PriceSet, calculate_upfront_amount
 
 
 def _fixed(amount: int = 1000) -> ProductPriceFixed:

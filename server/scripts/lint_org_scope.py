@@ -2,8 +2,8 @@
 
 Resolving "which organizations can this subject access?" must go through the
 canonical helpers so a single definition stays enforceable — `select_user_org_ids`
-(`polar.authz.repository`) for subquery use, or `get_accessible_org_ids`
-(`polar.authz.service`). This matters ahead of session/token organization
+(`tarifia.authz.repository`) for subquery use, or `get_accessible_org_ids`
+(`tarifia.authz.service`). This matters ahead of session/token organization
 scoping: those helpers are the one place the down-scope restriction is applied,
 so a hand-rolled subquery silently bypasses it.
 
@@ -133,7 +133,7 @@ def check_file(path: Path) -> list[tuple[Path, int, str]]:
                 node.lineno,
                 "hand-rolled UserOrganization membership expansion bypasses "
                 "org-scope enforcement. Use select_user_org_ids("
-                "auth_subject.subject.id) from polar.authz.repository (or "
+                "auth_subject.subject.id) from tarifia.authz.repository (or "
                 "get_accessible_org_ids). Escape with `# noqa: org-scope` if "
                 "intentional.",
             )
@@ -143,7 +143,7 @@ def check_file(path: Path) -> list[tuple[Path, int, str]]:
 
 
 def main() -> int:
-    root = Path(__file__).resolve().parent.parent / "polar"
+    root = Path(__file__).resolve().parent.parent / "tarifia"
     if not root.exists():
         print(f"error: {root} not found", file=sys.stderr)
         return 2

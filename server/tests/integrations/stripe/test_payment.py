@@ -3,24 +3,24 @@ from datetime import timedelta
 import pytest
 from freezegun import freeze_time
 
-from polar.enums import PaymentProcessor
-from polar.integrations.stripe.payment import (
+from tarifia.enums import PaymentProcessor
+from tarifia.integrations.stripe.payment import (
     _resolve_trigger,
     handle_failure,
 )
-from polar.kit.db.postgres import AsyncSession
-from polar.kit.utils import utc_now
-from polar.models import (
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.kit.utils import utc_now
+from tarifia.models import (
     Customer,
     Product,
     Subscription,
 )
-from polar.models.order import OrderStatus
-from polar.models.payment import PaymentTrigger
-from polar.models.subscription import SubscriptionStatus
-from polar.order.repository import OrderRepository
-from polar.payment.repository import PaymentRepository
-from polar.subscription.repository import SubscriptionRepository
+from tarifia.models.order import OrderStatus
+from tarifia.models.payment import PaymentTrigger
+from tarifia.models.subscription import SubscriptionStatus
+from tarifia.order.repository import OrderRepository
+from tarifia.payment.repository import PaymentRepository
+from tarifia.subscription.repository import SubscriptionRepository
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_order,

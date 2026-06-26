@@ -2,9 +2,9 @@
 
 import { useChat } from '@ai-sdk/react'
 import ArrowForwardOutlined from '@mui/icons-material/ArrowForwardOutlined'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { TextArea } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { TextArea } from '@tarifia-sh/orbit'
 import { DefaultChatTransport } from 'ai'
 import { nanoid } from 'nanoid'
 import { useEffect, useMemo, useRef, useState } from 'react'
@@ -97,11 +97,11 @@ export const AIProductChat = ({
 
   return (
     <div className="flex flex-col gap-y-4">
-      <div className="dark:bg-polar-900 flex flex-col overflow-hidden rounded-3xl">
+      <div className="dark:bg-tarifia-900 flex flex-col overflow-hidden rounded-3xl">
         {messages.length > 0 && (
           <div
             className={twMerge(
-              'dark:border-polar-700 flex h-full max-h-[640px] flex-1 flex-col gap-y-6 overflow-y-auto rounded-t-3xl border border-gray-200 p-6',
+              'dark:border-tarifia-700 flex h-full max-h-[640px] flex-1 flex-col gap-y-6 overflow-y-auto rounded-t-3xl border border-gray-200 p-6',
               isChatDone ? 'rounded-b-3xl border-b' : 'border-b-0',
             )}
           >
@@ -115,7 +115,7 @@ export const AIProductChat = ({
                 <div
                   className={`prose dark:prose-invert text-sm ${
                     message.role === 'user'
-                      ? 'dark:bg-polar-800 rounded-2xl bg-gray-100 px-4 py-2 dark:text-white'
+                      ? 'dark:bg-tarifia-800 rounded-2xl bg-gray-100 px-4 py-2 dark:text-white'
                       : 'w-full space-y-4 dark:text-white'
                   }`}
                 >
@@ -142,7 +142,7 @@ export const AIProductChat = ({
         {!isChatDone && (
           <form
             onSubmit={handleSubmit}
-            className="dark:border-polar-700 flex shrink-0 flex-col gap-3 overflow-hidden rounded-b-3xl border first:rounded-t-3xl"
+            className="dark:border-tarifia-700 flex shrink-0 flex-col gap-3 overflow-hidden rounded-b-3xl border first:rounded-t-3xl"
           >
             <TextArea
               ref={textareaRef}
@@ -163,7 +163,7 @@ export const AIProductChat = ({
                 type="submit"
                 disabled={status !== 'ready' || !input.trim()}
                 loading={status === 'submitted' || status === 'streaming'}
-                className="dark:hover:bg-polar-50 rounded-full bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black"
+                className="dark:hover:bg-tarifia-50 rounded-full bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black"
               >
                 {messages.length === 0 ? 'Create' : 'Send'}
                 <ArrowForwardOutlined className="ml-2" fontSize="inherit" />

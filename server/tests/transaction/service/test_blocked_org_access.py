@@ -1,17 +1,17 @@
 import pytest
 
-from polar.auth.models import AuthSubject
-from polar.kit.pagination import PaginationParams
-from polar.models import (
+from tarifia.auth.models import AuthSubject
+from tarifia.kit.pagination import PaginationParams
+from tarifia.models import (
     Account,
     Organization,
     User,
     UserOrganization,
 )
-from polar.models.organization import OrganizationStatus
-from polar.models.transaction import TransactionType
-from polar.postgres import AsyncSession
-from polar.transaction.service.transaction import transaction as transaction_service
+from tarifia.models.organization import OrganizationStatus
+from tarifia.models.transaction import TransactionType
+from tarifia.postgres import AsyncSession
+from tarifia.transaction.service.transaction import transaction as transaction_service
 from tests.fixtures.database import SaveFixture
 from tests.transaction.conftest import create_transaction
 

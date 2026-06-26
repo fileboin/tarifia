@@ -5,7 +5,7 @@ variable "name" {
 
 # Git / build configuration
 variable "git_repo" {
-  description = "Connected Git repository, e.g. \"polarsource/polar\""
+  description = "Connected Git repository, e.g. \"tarifiasource/tarifia\""
   type        = string
 }
 
@@ -125,8 +125,8 @@ variable "config" {
     s3_public_images_bucket_port                    = string
     s3_public_images_bucket_pathname                = string
     s3_upload_origins                               = string
-    polar_checkout_embed_script_allowed_origins     = string
-    polar_openapi_schema_url                        = string
+    tarifia_checkout_embed_script_allowed_origins     = string
+    tarifia_openapi_schema_url                        = string
     enable_experimental_corepack                    = string
   })
 }
@@ -139,7 +139,7 @@ variable "secrets" {
     mintlify_assistant_api_key  = string
     gram_api_key                = string
     sentry_auth_token           = string
-    polar_preview_access_token  = string
+    tarifia_preview_access_token  = string
   })
   sensitive = true
 }

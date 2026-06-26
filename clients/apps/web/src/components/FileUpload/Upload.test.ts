@@ -1,4 +1,4 @@
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { Upload } from './Upload'
 

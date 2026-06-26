@@ -29,7 +29,7 @@ export const SubscriptionsPage = () => {
       <FeaturePageGraphic graphic={CycleArrow} />
 
       <FeaturePageIntro>
-        At the close of each cycle, Polar advances the period and charges the
+        At the close of each cycle, Tarifia advances the period and charges the
         saved card. If the charge fails, the subscription enters payment
         recovery before anything is revoked.
       </FeaturePageIntro>
@@ -37,13 +37,13 @@ export const SubscriptionsPage = () => {
       <FeatureSection title="How a subscription works">
         <p>
           A subscription is created the moment a customer checks out a product
-          with a recurring price. Polar issues the first order, collects the
+          with a recurring price. Tarifia issues the first order, collects the
           first payment, and grants every <strong>benefit</strong> attached to
           the product.
         </p>
         <p>
           From that point on, the subscription advances itself. At the end of
-          every cycle, Polar generates a new order with tax and any active
+          every cycle, Tarifia generates a new order with tax and any active
           discount applied, then charges the saved payment method without your
           code in the loop.
         </p>
@@ -108,12 +108,12 @@ export const SubscriptionsPage = () => {
 
       <FeatureRichList
         title="Payment recovery"
-        description="When a renewal charge fails, the subscription moves to past_due and Polar runs a four-attempt retry schedule before revoking benefits."
+        description="When a renewal charge fails, the subscription moves to past_due and Tarifia runs a four-attempt retry schedule before revoking benefits."
         items={[
           {
             title: 'Four retries over 21 days',
             description:
-              'Polar retries the charge after 2, 5, 7, and 7 days. A successful retry restores the subscription to active.',
+              'Tarifia retries the charge after 2, 5, 7, and 7 days. A successful retry restores the subscription to active.',
           },
           {
             title: 'Customer reminders',
@@ -135,7 +135,7 @@ export const SubscriptionsPage = () => {
 
       <FeatureSection title="The Customer Portal">
         <p>
-          Every Polar account includes a hosted <strong>Customer Portal</strong>{' '}
+          Every Tarifia account includes a hosted <strong>Customer Portal</strong>{' '}
           where subscribers can update payment methods, download invoices,
           change plans, manage seats, and cancel. You can either link to it
           directly or embed it inside your product.
@@ -152,7 +152,7 @@ export const SubscriptionsPage = () => {
 
       <FeatureCTA
         title="Connect a recurring product"
-        description="Set a recurring price on a product and Polar runs the rest of the lifecycle."
+        description="Set a recurring price on a product and Tarifia runs the rest of the lifecycle."
       />
     </FeaturePageLayout>
   )

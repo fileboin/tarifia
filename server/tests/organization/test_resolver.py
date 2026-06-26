@@ -1,12 +1,12 @@
 import pytest
 from pydantic import UUID4, BaseModel
 
-from polar.auth.models import AuthSubject
-from polar.exceptions import PolarRequestValidationError
-from polar.models import Organization, User, UserOrganization
-from polar.models.user_organization import OrganizationRole
-from polar.organization.resolver import get_payload_organization
-from polar.postgres import AsyncSession
+from tarifia.auth.models import AuthSubject
+from tarifia.exceptions import TarifiaRequestValidationError
+from tarifia.models import Organization, User, UserOrganization
+from tarifia.models.user_organization import OrganizationRole
+from tarifia.organization.resolver import get_payload_organization
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 
 
@@ -42,7 +42,7 @@ class TestGetPayloadOrganization:
     ) -> None:
         assert auth_subject.organization_ids is None
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await get_payload_organization(
                 session, auth_subject, OrganizationIDPayload()
             )
@@ -87,7 +87,7 @@ class TestGetPayloadOrganization:
             {organization.id, organization_second.id}
         )
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await get_payload_organization(
                 session, auth_subject, OrganizationIDPayload()
             )
@@ -107,7 +107,7 @@ class TestGetPayloadOrganization:
             {organization.id, organization_second.id}
         )
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await get_payload_organization(
                 session, auth_subject, OrganizationIDPayload()
             )

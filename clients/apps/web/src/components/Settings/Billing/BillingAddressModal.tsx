@@ -6,11 +6,11 @@ import {
   useUpdateOrganizationBillingDetails,
   type OrganizationBillingDetailsUpdate,
 } from '@/hooks/queries/billing'
-import { enums } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import CountryPicker from '@polar-sh/ui/components/atoms/CountryPicker'
-import CountryStatePicker from '@polar-sh/ui/components/atoms/CountryStatePicker'
-import { Input } from '@polar-sh/orbit'
+import { enums } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import CountryPicker from '@tarifia-sh/ui/components/atoms/CountryPicker'
+import CountryStatePicker from '@tarifia-sh/ui/components/atoms/CountryStatePicker'
+import { Input } from '@tarifia-sh/orbit'
 import {
   Form,
   FormControl,
@@ -18,7 +18,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -84,8 +84,8 @@ export const BillingAddressModal = ({
     <div className="flex flex-col gap-y-6 p-8">
       <div className="flex flex-col gap-y-1">
         <h3 className="text-xl">Billing address</h3>
-        <p className="dark:text-polar-500 text-gray-500">
-          The address used on invoices for your Polar subscription
+        <p className="dark:text-tarifia-500 text-gray-500">
+          The address used on invoices for your Tarifia subscription
         </p>
       </div>
       <Form {...form}>

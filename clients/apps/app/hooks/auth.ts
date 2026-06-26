@@ -12,9 +12,9 @@ import { useCallback } from 'react'
 import {
   useDeleteNotificationRecipient,
   useGetNotificationRecipient,
-} from './polar/notifications'
+} from './tarifia/notifications'
 
-const widgetStorage = new ExtensionStorage('group.com.polarsource.Polar')
+const widgetStorage = new ExtensionStorage('group.com.tarifiasource.Tarifia')
 
 export const useLogout = () => {
   const { session, setSession } = useSession()

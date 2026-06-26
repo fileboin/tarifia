@@ -5,16 +5,16 @@ import pytest
 from httpx import AsyncClient
 from pytest_mock import MockerFixture
 
-from polar.config import settings
-from polar.integrations.polar.service import PolarSelfService
-from polar.models import Product, User
-from polar.models.account import Account
-from polar.models.organization import Organization, OrganizationStatus
-from polar.models.subscription import SubscriptionStatus
-from polar.models.user_organization import OrganizationRole, UserOrganization
-from polar.payout_account.service import PayoutAccountServiceError
-from polar.postgres import AsyncSession
-from polar.user_organization.service import (
+from tarifia.config import settings
+from tarifia.integrations.tarifia.service import TarifiaSelfService
+from tarifia.models import Product, User
+from tarifia.models.account import Account
+from tarifia.models.organization import Organization, OrganizationStatus
+from tarifia.models.subscription import SubscriptionStatus
+from tarifia.models.user_organization import OrganizationRole, UserOrganization
+from tarifia.payout_account.service import PayoutAccountServiceError
+from tarifia.postgres import AsyncSession
+from tarifia.user_organization.service import (
     user_organization as user_organization_service,
 )
 from tests.fixtures.auth import AuthSubjectFixture
@@ -215,7 +215,7 @@ class TestEnablePreviewAccess:
 
         assert response.status_code == 200
         feature_settings = response.json()["feature_settings"]
-        for flag in PolarSelfService.PREVIEW_ACCESS_FEATURE_FLAGS:
+        for flag in TarifiaSelfService.PREVIEW_ACCESS_FEATURE_FLAGS:
             assert feature_settings[flag] is True
         # Existing flags are preserved.
         assert feature_settings["issue_funding_enabled"] is True
@@ -538,7 +538,7 @@ class TestUpdateOrganization:
             json={
                 "website": "https://example.com",
                 "email": "support@example.com",
-                "socials": [{"platform": "x", "url": "https://x.com/polar"}],
+                "socials": [{"platform": "x", "url": "https://x.com/tarifia"}],
             },
         )
         assert update_response.status_code == 200
@@ -560,7 +560,7 @@ class TestUpdateOrganization:
         organization: Organization,
         user_organization: UserOrganization,
     ) -> None:
-        enqueue_job_mock = mocker.patch("polar.organization.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.organization.service.enqueue_job")
 
         organization.status = OrganizationStatus.CREATED
         await save_fixture(organization)
@@ -570,7 +570,7 @@ class TestUpdateOrganization:
             json={
                 "website": "https://example.com",
                 "email": "support@example.com",
-                "socials": [{"platform": "x", "url": "https://x.com/polar"}],
+                "socials": [{"platform": "x", "url": "https://x.com/tarifia"}],
                 "details": {
                     "product_description": "Subscription SaaS for software teams and agencies.",
                     "selling_categories": ["Software / SaaS"],
@@ -617,7 +617,7 @@ class TestInviteOrganization:
         )
         response = await client.post(
             f"/v1/organizations/{organization.id}/members/invite",
-            json={"email": "test@polar.sh"},
+            json={"email": "test@tarifia.sh"},
         )
         assert response.status_code == 404
 
@@ -636,7 +636,7 @@ class TestInviteOrganization:
         organization: Organization,
         user_organization: UserOrganization,  # Makes this user part of the organization
     ) -> None:
-        email_to_invite = "test@polar.sh"
+        email_to_invite = "test@tarifia.sh"
 
         members_before = await user_organization_service.list_by_org(
             session, organization.id
@@ -1015,7 +1015,7 @@ class TestDeleteOrganization:
         mocker: MockerFixture,
     ) -> None:
         # Mock the enqueue_job to prevent actual task execution
-        mock_enqueue = mocker.patch("polar.organization.service.enqueue_job")
+        mock_enqueue = mocker.patch("tarifia.organization.service.enqueue_job")
 
         response = await client.delete(f"/v1/organizations/{organization.id}")
 
@@ -1048,7 +1048,7 @@ class TestDeleteOrganization:
         await create_order(save_fixture, customer=customer, product=product)
 
         # Mock the enqueue_job to prevent actual task execution
-        mock_enqueue = mocker.patch("polar.organization.service.enqueue_job")
+        mock_enqueue = mocker.patch("tarifia.organization.service.enqueue_job")
 
         response = await client.delete(f"/v1/organizations/{organization.id}")
 
@@ -1086,7 +1086,7 @@ class TestDeleteOrganization:
         )
 
         # Mock the enqueue_job to prevent actual task execution
-        mock_enqueue = mocker.patch("polar.organization.service.enqueue_job")
+        mock_enqueue = mocker.patch("tarifia.organization.service.enqueue_job")
 
         response = await client.delete(f"/v1/organizations/{organization.id}")
 
@@ -1113,10 +1113,10 @@ class TestDeleteOrganization:
     ) -> None:
         # Mock payout account deletion to succeed (returns None on success)
         payout_account_delete_mock = mocker.patch(
-            "polar.organization.service.payout_account_service.delete",
+            "tarifia.organization.service.payout_account_service.delete",
             return_value=None,
         )
-        mock_enqueue = mocker.patch("polar.organization.service.enqueue_job")
+        mock_enqueue = mocker.patch("tarifia.organization.service.enqueue_job")
 
         response = await client.delete(f"/v1/organizations/{organization.id}")
 
@@ -1146,10 +1146,10 @@ class TestDeleteOrganization:
         # Mock payout account deletion to fail with an exception
         # Mock payout account deletion to succeed (returns None on success)
         payout_account_delete_mock = mocker.patch(
-            "polar.organization.service.payout_account_service.delete",
+            "tarifia.organization.service.payout_account_service.delete",
             side_effect=PayoutAccountServiceError("Stripe account deletion failed"),
         )
-        mock_enqueue = mocker.patch("polar.organization.service.enqueue_job")
+        mock_enqueue = mocker.patch("tarifia.organization.service.enqueue_job")
 
         response = await client.delete(f"/v1/organizations/{organization.id}")
 

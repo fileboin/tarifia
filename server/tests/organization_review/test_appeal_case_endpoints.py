@@ -4,12 +4,12 @@ import pytest
 import pytest_asyncio
 from httpx import AsyncClient
 
-from polar.models import OrganizationReview
-from polar.models.organization import Organization
-from polar.models.user import User
-from polar.models.user_organization import UserOrganization
-from polar.organization_review.appeal_case import appeal_case as appeal_case_service
-from polar.postgres import AsyncSession
+from tarifia.models import OrganizationReview
+from tarifia.models.organization import Organization
+from tarifia.models.user import User
+from tarifia.models.user_organization import UserOrganization
+from tarifia.organization_review.appeal_case import appeal_case as appeal_case_service
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_organization_review,

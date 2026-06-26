@@ -12,10 +12,10 @@ from rich.progress import Progress
 from sqlalchemy import bindparam, delete, func, select, update
 from sqlalchemy.util.typing import TypedDict
 
-from polar.kit.db.postgres import create_async_sessionmaker
-from polar.models import WebhookEvent
-from polar.models.webhook_endpoint import WebhookEventType
-from polar.postgres import create_async_engine
+from tarifia.kit.db.postgres import create_async_sessionmaker
+from tarifia.models import WebhookEvent
+from tarifia.models.webhook_endpoint import WebhookEventType
+from tarifia.postgres import create_async_engine
 
 cli = typer.Typer()
 

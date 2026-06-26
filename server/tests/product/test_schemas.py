@@ -4,12 +4,12 @@ from typing import Any
 import pytest
 from pydantic import TypeAdapter, ValidationError
 
-from polar.enums import SubscriptionRecurringInterval
-from polar.kit.currency import PresentmentCurrency
-from polar.kit.visibility import Visibility
-from polar.models import Organization
-from polar.models.product_price import ProductPriceAmountType
-from polar.product.schemas import (
+from tarifia.enums import SubscriptionRecurringInterval
+from tarifia.kit.currency import PresentmentCurrency
+from tarifia.kit.visibility import Visibility
+from tarifia.models import Organization
+from tarifia.models.product_price import ProductPriceAmountType
+from tarifia.product.schemas import (
     BenefitPublicList,
     ProductCreate,
     ProductCreateOneTime,

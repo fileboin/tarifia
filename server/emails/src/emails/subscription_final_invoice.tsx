@@ -54,7 +54,7 @@ SubscriptionFinalInvoice.PreviewProps = {
     status: 'canceled',
   },
   order,
-  url: 'https://polar.sh/acme-inc/portal/subscriptions/12345',
+  url: 'https://tarifia.sh/acme-inc/portal/subscriptions/12345',
 }
 
 export default SubscriptionFinalInvoice

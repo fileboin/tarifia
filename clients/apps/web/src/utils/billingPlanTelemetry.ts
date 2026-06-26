@@ -1,11 +1,11 @@
 import type { JsonType } from '@posthog/core'
 
 /**
- * Utilities for telemetry around Polar's *own* billing-plan upgrade flow
+ * Utilities for telemetry around Tarifia's *own* billing-plan upgrade flow
  * (the checkout that lives behind the dashboard's Pricing settings and the
- * dashboard upsell). Not to be confused with the customer-facing Polar
+ * dashboard upsell). Not to be confused with the customer-facing Tarifia
  * Checkout product — these helpers are exclusively about us tracking how
- * Polar's organizations move between Polar's plans.
+ * Tarifia's organizations move between Tarifia's plans.
  *
  * Attribution is encoded as plain `source=...` query params, not UTM tags.
  * UTM is reserved for external marketing attribution; mixing internal

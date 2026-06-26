@@ -1,7 +1,7 @@
 import { ParsedMetricsResponse } from '@/hooks/queries/metrics'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@tarifia-sh/orbit'
 import domtoimage from 'dom-to-image'
 import { useRef, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
@@ -59,7 +59,7 @@ export const ShareChartModal = ({
 
       const link = document.createElement('a')
       link.href = URL.createObjectURL(blob)
-      link.download = 'polar-chart.png'
+      link.download = 'tarifia-chart.png'
       link.click()
 
       toast({
@@ -95,7 +95,7 @@ export const ShareChartModal = ({
       <div className="flex flex-col items-start gap-8">
         <div
           ref={chartRef}
-          className="dark:bg-polar-950 flex w-full max-w-4xl flex-col items-center justify-center gap-12 rounded-4xl bg-blue-50 p-12"
+          className="dark:bg-tarifia-950 flex w-full max-w-4xl flex-col items-center justify-center gap-12 rounded-4xl bg-blue-50 p-12"
           style={{
             backgroundImage:
               theme === 'mono'
@@ -106,7 +106,7 @@ export const ShareChartModal = ({
           }}
         >
           <MetricChartBox
-            className="dark:border-polar-600/50"
+            className="dark:border-tarifia-600/50"
             data={data}
             previousData={previousData}
             interval={interval}

@@ -1,10 +1,10 @@
 'use client'
 
 import { getServerURL } from '@/utils/api'
-import { schemas } from '@polar-sh/client'
-import { Avatar } from '@polar-sh/orbit'
-import { Button } from '@polar-sh/orbit'
-import { List, ListItem } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Avatar } from '@tarifia-sh/orbit'
+import { Button } from '@tarifia-sh/orbit'
+import { List, ListItem } from '@tarifia-sh/orbit'
 import { useState } from 'react'
 import OrganizationSelector from './OrganizationSelector'
 import SharedLayout from './components/SharedLayout'
@@ -53,11 +53,11 @@ const AuthorizePage = ({
       introduction={
         sub && (
           <>
-            <div className="dark:text-polar-400 w-full text-center text-lg text-gray-600">
+            <div className="dark:text-tarifia-400 w-full text-center text-lg text-gray-600">
               <span className="font-medium">{clientName}</span> requests the
-              following permissions to your personal Polar account.
+              following permissions to your personal Tarifia account.
             </div>
-            <div className="dark:border-polar-700 dark:bg-polar-800 mt-6 mb-0 inline-flex flex-row items-center justify-start gap-2 rounded-2xl border border-gray-100 bg-gray-50 p-2 pr-4 text-sm">
+            <div className="dark:border-tarifia-700 dark:bg-tarifia-800 mt-6 mb-0 inline-flex flex-row items-center justify-start gap-2 rounded-2xl border border-gray-100 bg-gray-50 p-2 pr-4 text-sm">
               <Avatar
                 className="h-8 w-8"
                 avatar_url={sub.avatar_url}
@@ -75,7 +75,7 @@ const AuthorizePage = ({
             {Object.entries(groupScopes(scopes)).map(([key, scopes]) => (
               <ListItem
                 key={key}
-                className="dark:bg-polar-800 dark:hover:bg-polar-800 flex flex-col items-start gap-y-1 bg-white py-3 text-sm hover:bg-white"
+                className="dark:bg-tarifia-800 dark:hover:bg-tarifia-800 flex flex-col items-start gap-y-1 bg-white py-3 text-sm hover:bg-white"
                 size="small"
               >
                 <h3 className="font-medium capitalize">
@@ -85,7 +85,7 @@ const AuthorizePage = ({
                   {scopes.map((scope) => (
                     <li
                       key={scope}
-                      className="dark:text-polar-500 text-sm text-gray-500"
+                      className="dark:text-tarifia-500 text-sm text-gray-500"
                     >
                       {scope_display_names[scope]}
                     </li>
@@ -127,7 +127,7 @@ const AuthorizePage = ({
             Before using this app, you can review {clientName}&apos;s{' '}
             {client.tos_uri && (
               <a
-                className="dark:text-polar-300 text-gray-700"
+                className="dark:text-tarifia-300 text-gray-700"
                 href={client.tos_uri}
               >
                 Terms of Service
@@ -136,7 +136,7 @@ const AuthorizePage = ({
             {client.tos_uri && client.policy_uri && ' and '}
             {client.policy_uri && (
               <a
-                className="dark:text-polar-300 text-gray-700"
+                className="dark:text-tarifia-300 text-gray-700"
                 href={client.policy_uri}
               >
                 Privacy Policy

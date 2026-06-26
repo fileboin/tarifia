@@ -3,8 +3,8 @@ import uuid
 import pytest
 from httpx import AsyncClient
 
-from polar.models import Account, Member, Organization, User, UserOrganization
-from polar.models.customer import CustomerType
+from tarifia.models import Account, Member, Organization, User, UserOrganization
+from tarifia.models.customer import CustomerType
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (

@@ -25,13 +25,13 @@ ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 WORKDIR /app
 
-COPY ./polar/backoffice/pnpm-lock.yaml .
-COPY ./polar/backoffice/package.json .
-COPY ./polar/backoffice/pnpm-workspace.yaml .
+COPY ./tarifia/backoffice/pnpm-lock.yaml .
+COPY ./tarifia/backoffice/package.json .
+COPY ./tarifia/backoffice/pnpm-workspace.yaml .
 RUN --mount=type=cache,target=/pnpm/store \
   pnpm install --frozen-lockfile --store-dir=/pnpm/store
 
-COPY ./polar/backoffice/ .
+COPY ./tarifia/backoffice/ .
 
 RUN pnpm run build
 
@@ -82,8 +82,8 @@ EOF
 
 # Stage 5: Final production image
 FROM --platform=$BUILDPLATFORM python:3.14-slim AS production
-LABEL org.opencontainers.image.source=https://github.com/polarsource/polar
-LABEL org.opencontainers.image.description="Polar"
+LABEL org.opencontainers.image.source=https://github.com/tarifiasource/tarifia
+LABEL org.opencontainers.image.description="Tarifia"
 LABEL org.opencontainers.image.licenses=Apache-2.0
 COPY --from=ghcr.io/astral-sh/uv:0.11.24 /uv /uvx /bin/
 
@@ -110,20 +110,20 @@ RUN --mount=type=bind,source=uv.lock,target=uv.lock \
 ADD . /app/server/
 
 COPY --from=build-emails-bin /app/bin/react-email-pkg /app/server/
-ENV POLAR_EMAIL_RENDERER_BINARY_PATH=/app/server/react-email-pkg
+ENV TARIFIA_EMAIL_RENDERER_BINARY_PATH=/app/server/react-email-pkg
 
-COPY --from=build-backoffice /app/static /app/server/polar/backoffice/static
+COPY --from=build-backoffice /app/static /app/server/tarifia/backoffice/static
 
 COPY --from=download-ipinfo /data /data
-ENV POLAR_IP_GEOLOCATION_DATABASE_DIRECTORY_PATH=/data
-ENV POLAR_IP_GEOLOCATION_DATABASE_NAME=country_asn.mmdb
+ENV TARIFIA_IP_GEOLOCATION_DATABASE_DIRECTORY_PATH=/data
+ENV TARIFIA_IP_GEOLOCATION_DATABASE_NAME=country_asn.mmdb
 
-COPY --from=download-cjk-fonts /fonts/ /app/server/polar/invoice/fonts/
+COPY --from=download-cjk-fonts /fonts/ /app/server/tarifia/invoice/fonts/
 
 ARG RELEASE_VERSION
 ENV RELEASE_VERSION=${RELEASE_VERSION}
 
-CMD ["uv", "run", "uvicorn", "polar.app:app", "--host", "0.0.0.0", "--port", "10000", "--limit-max-requests", "50000", "--limit-max-requests-jitter", "10000", "--timeout-graceful-shutdown", "30"]
+CMD ["uv", "run", "uvicorn", "tarifia.app:app", "--host", "0.0.0.0", "--port", "10000", "--limit-max-requests", "50000", "--limit-max-requests-jitter", "10000", "--timeout-graceful-shutdown", "30"]
 
 # Stage 6: AWS Lambda image (SQS-driven background tasks, POC)
 FROM public.ecr.aws/lambda/python:3.14 AS lambda-build
@@ -146,11 +146,11 @@ RUN --mount=type=bind,source=uv.lock,target=uv.lock \
 ADD . /app/server/
 
 COPY --from=build-emails-bin /app/bin/react-email-pkg /app/server/
-ENV POLAR_EMAIL_RENDERER_BINARY_PATH=/app/server/react-email-pkg
+ENV TARIFIA_EMAIL_RENDERER_BINARY_PATH=/app/server/react-email-pkg
 
-COPY --from=build-backoffice /app/static /app/server/polar/backoffice/static
+COPY --from=build-backoffice /app/static /app/server/tarifia/backoffice/static
 COPY --from=download-ipinfo /data /data
-COPY --from=download-cjk-fonts /fonts/ /app/server/polar/invoice/fonts/
+COPY --from=download-cjk-fonts /fonts/ /app/server/tarifia/invoice/fonts/
 
 ARG RELEASE_VERSION
 ENV RELEASE_VERSION=${RELEASE_VERSION}
@@ -168,9 +168,9 @@ COPY --from=docker.io/tailscale/tailscale:v1.98.4 /usr/local/bin/tailscale /var/
 ENV LAMBDA_TASK_ROOT=/app/server
 ENV PATH="/app/server/.venv/bin:$PATH"
 ENV PYTHONPATH="/app/server/.venv/lib/python3.14/site-packages:/app/server"
-ENV POLAR_EMAIL_RENDERER_BINARY_PATH=/app/server/react-email-pkg
-ENV POLAR_IP_GEOLOCATION_DATABASE_DIRECTORY_PATH=/data
-ENV POLAR_IP_GEOLOCATION_DATABASE_NAME=country_asn.mmdb
+ENV TARIFIA_EMAIL_RENDERER_BINARY_PATH=/app/server/react-email-pkg
+ENV TARIFIA_IP_GEOLOCATION_DATABASE_DIRECTORY_PATH=/data
+ENV TARIFIA_IP_GEOLOCATION_DATABASE_NAME=country_asn.mmdb
 
 WORKDIR /app/server
 
@@ -182,21 +182,21 @@ RUN mkdir -p /var/run /var/cache /var/lib /var/task \
   && ln -s /tmp/tailscale /var/task/tailscale
 
 RUN <<'EOF'
-cat > /var/runtime/polar-bootstrap <<'BOOTSTRAP'
+cat > /var/runtime/tarifia-bootstrap <<'BOOTSTRAP'
 #!/bin/sh
 set -eu
 
-if [ -n "${POLAR_JWKS_CONTENT:-}" ] && [ -n "${POLAR_JWKS:-}" ]; then
-  mkdir -p "$(dirname "$POLAR_JWKS")"
-  printf "%s" "$POLAR_JWKS_CONTENT" > "$POLAR_JWKS"
+if [ -n "${TARIFIA_JWKS_CONTENT:-}" ] && [ -n "${TARIFIA_JWKS:-}" ]; then
+  mkdir -p "$(dirname "$TARIFIA_JWKS")"
+  printf "%s" "$TARIFIA_JWKS_CONTENT" > "$TARIFIA_JWKS"
 fi
 
 # Tailscale disabled: ALL_PROXY routed HTTP egress through the SOCKS proxy. Re-enable for private-network access.
 # if [ -n "${TAILSCALE_AUTHKEY:-}" ]; then
 #   mkdir -p /tmp/tailscale
 #   /var/runtime/tailscaled --tun=userspace-networking --socks5-server=localhost:1055 &
-#   tailscale_hostname="${TAILSCALE_HOSTNAME:-polar-${POLAR_ENV:-unknown}-worker-lambda}"
-#   tailscale_tags="tag:${POLAR_ENV:-unknown},tag:worker-lambda,tag:aws"
+#   tailscale_hostname="${TAILSCALE_HOSTNAME:-tarifia-${TARIFIA_ENV:-unknown}-worker-lambda}"
+#   tailscale_tags="tag:${TARIFIA_ENV:-unknown},tag:worker-lambda,tag:aws"
 #   until /var/runtime/tailscale up --authkey="${TAILSCALE_AUTHKEY}?ephemeral=true&preauthorized=true" --hostname="${tailscale_hostname}" --advertise-tags="${tailscale_tags}"; do
 #     sleep 0.1
 #   done
@@ -205,8 +205,8 @@ fi
 
 exec /lambda-entrypoint.sh "$@"
 BOOTSTRAP
-chmod +x /var/runtime/polar-bootstrap
+chmod +x /var/runtime/tarifia-bootstrap
 EOF
 
-ENTRYPOINT ["/var/runtime/polar-bootstrap"]
-CMD ["polar.worker.aws_lambda.handler"]
+ENTRYPOINT ["/var/runtime/tarifia-bootstrap"]
+CMD ["tarifia.worker.aws_lambda.handler"]

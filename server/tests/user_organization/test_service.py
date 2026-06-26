@@ -4,10 +4,10 @@ from uuid import uuid4
 import pytest
 from pytest_mock import MockerFixture
 
-from polar.models import Account, Organization, User, UserOrganization
-from polar.models.user import IdentityVerificationStatus
-from polar.models.user_organization import OrganizationRole
-from polar.user_organization.service import (
+from tarifia.models import Account, Organization, User, UserOrganization
+from tarifia.models.user import IdentityVerificationStatus
+from tarifia.models.user_organization import OrganizationRole
+from tarifia.user_organization.service import (
     AlreadyOwner,
     CannotRemoveOrganizationOwner,
     InvalidOwnerRoleAssignment,
@@ -17,7 +17,7 @@ from polar.user_organization.service import (
     OwnerRoleCannotBeRemoved,
     UserNotMemberOfOrganization,
 )
-from polar.user_organization.service import (
+from tarifia.user_organization.service import (
     user_organization as user_organization_service,
 )
 from tests.fixtures.database import SaveFixture
@@ -94,8 +94,8 @@ class TestRemoveMemberSafe:
         user: User,
         save_fixture: Any,
     ) -> None:
-        from polar.kit.utils import utc_now
-        from polar.models import UserOrganization
+        from tarifia.kit.utils import utc_now
+        from tarifia.models import UserOrganization
 
         owner_user_org = UserOrganization(
             user_id=user.id,
@@ -124,8 +124,8 @@ class TestRemoveMemberSafe:
         save_fixture: Any,
     ) -> None:
         # Create user organization relationship for non-admin user
-        from polar.kit.utils import utc_now
-        from polar.models import UserOrganization
+        from tarifia.kit.utils import utc_now
+        from tarifia.models import UserOrganization
 
         user_org_relation = UserOrganization(
             user_id=user_second.id,
@@ -174,7 +174,7 @@ class TestRemoveMember:
         )
         assert user_org is None
 
-        from polar.postgres import sql
+        from tarifia.postgres import sql
 
         result = await session.execute(
             sql.select(UserOrganization).where(
@@ -186,7 +186,7 @@ class TestRemoveMember:
         assert deleted_user_org is not None
         assert deleted_user_org.deleted_at is not None
 
-    async def test_enqueues_polar_self_member_removal(
+    async def test_enqueues_tarifia_self_member_removal(
         self,
         mocker: MockerFixture,
         session: Any,
@@ -196,7 +196,7 @@ class TestRemoveMember:
         user_organization_second: UserOrganization,
     ) -> None:
         enqueue_remove_member_mock = mocker.patch(
-            "polar.user_organization.service.polar_self_service.enqueue_remove_member"
+            "tarifia.user_organization.service.tarifia_self_service.enqueue_remove_member"
         )
 
         await user_organization_service.remove_member(
@@ -218,7 +218,7 @@ class TestRemoveMember:
         user: User,
     ) -> None:
         enqueue_remove_member_mock = mocker.patch(
-            "polar.user_organization.service.polar_self_service.enqueue_remove_member"
+            "tarifia.user_organization.service.tarifia_self_service.enqueue_remove_member"
         )
 
         await user_organization_service.remove_member(

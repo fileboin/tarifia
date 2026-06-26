@@ -1,10 +1,10 @@
 import { extractApiErrorMessage } from '@/utils/api/errors'
 import { MemoizedMarkdown } from '@/components/Markdown/MemoizedMarkdown'
-import { schemas } from '@polar-sh/client'
-import { Box } from '@polar-sh/orbit/Box'
-import { Button } from '@polar-sh/orbit'
-import { Tabs, TabsList, TabsTrigger } from '@polar-sh/orbit'
-import { TextArea } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Button } from '@tarifia-sh/orbit'
+import { Tabs, TabsList, TabsTrigger } from '@tarifia-sh/orbit'
+import { TextArea } from '@tarifia-sh/orbit'
 import {
   Form,
   FormControl,
@@ -12,7 +12,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -155,22 +155,22 @@ export const FeedbackForm = ({
             <FormItem className="w-full">
               <FormControl>
                 <Tabs value={field.value} onValueChange={field.onChange}>
-                  <TabsList className="dark:bg-polar-950 w-full flex-row items-center rounded-full bg-gray-100">
+                  <TabsList className="dark:bg-tarifia-950 w-full flex-row items-center rounded-full bg-gray-100">
                     <TabsTrigger
                       value="question"
-                      className="dark:data-[state=active]:bg-polar-800 grow rounded-full! data-[state=active]:bg-white"
+                      className="dark:data-[state=active]:bg-tarifia-800 grow rounded-full! data-[state=active]:bg-white"
                     >
                       Question
                     </TabsTrigger>
                     <TabsTrigger
                       value="feedback"
-                      className="dark:data-[state=active]:bg-polar-800 grow rounded-full! data-[state=active]:bg-white"
+                      className="dark:data-[state=active]:bg-tarifia-800 grow rounded-full! data-[state=active]:bg-white"
                     >
                       Feedback
                     </TabsTrigger>
                     <TabsTrigger
                       value="bug"
-                      className="dark:data-[state=active]:bg-polar-800 grow rounded-full! data-[state=active]:bg-white"
+                      className="dark:data-[state=active]:bg-tarifia-800 grow rounded-full! data-[state=active]:bg-white"
                     >
                       Bug
                     </TabsTrigger>
@@ -193,7 +193,7 @@ export const FeedbackForm = ({
             <FormItem className="w-full">
               <div className="flex flex-row items-center justify-between">
                 <FormLabel>Message</FormLabel>
-                <span className="dark:text-polar-400 text-sm text-gray-400">
+                <span className="dark:text-tarifia-400 text-sm text-gray-400">
                   {(field.value ?? '').length} / {MAX_MESSAGE_LENGTH}
                 </span>
               </div>

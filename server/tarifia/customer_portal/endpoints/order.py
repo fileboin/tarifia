@@ -1,0 +1,280 @@
+from typing import Annotated
+
+from fastapi import Depends, Query, Response
+
+from tarifia.exceptions import ResourceNotFound
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.kit.pagination import ListResource, PaginationParamsQuery
+from tarifia.kit.schemas import MultipleQueryFilter
+from tarifia.kit.sorting import Sorting, SortingGetter
+from tarifia.models import Order
+from tarifia.models.product import ProductBillingType
+from tarifia.openapi import APITag
+from tarifia.order.schemas import OrderID
+from tarifia.order.service import (
+    MissingInvoiceBillingDetails,
+    PaymentAlreadyInProgress,
+)
+from tarifia.payment.repository import PaymentRepository
+from tarifia.postgres import get_db_session
+from tarifia.product.schemas import ProductID
+from tarifia.routing import APIRouter
+from tarifia.subscription.schemas import SubscriptionID
+
+from .. import auth
+from ..schemas.order import (
+    CustomerOrder,
+    CustomerOrderConfirmPayment,
+    CustomerOrderInvoice,
+    CustomerOrderPaymentConfirmation,
+    CustomerOrderPaymentStatus,
+    CustomerOrderReceipt,
+    CustomerOrderUpdate,
+)
+from ..service.order import (
+    CustomerOrderSortProperty,
+    ManualRetryLimitExceeded,
+    OrderNotEligibleForRetry,
+)
+from ..service.order import customer_order as customer_order_service
+
+router = APIRouter(prefix="/orders", tags=["orders", APITag.public])
+
+OrderNotFound = {"description": "Order not found.", "model": ResourceNotFound.schema()}
+
+ListSorting = Annotated[
+    list[Sorting[CustomerOrderSortProperty]],
+    Depends(SortingGetter(CustomerOrderSortProperty, ["-created_at"])),
+]
+
+
+@router.get("/", summary="List Orders", response_model=ListResource[CustomerOrder])
+async def list(
+    auth_subject: auth.CustomerPortalUnionBillingRead,
+    pagination: PaginationParamsQuery,
+    sorting: ListSorting,
+    product_id: MultipleQueryFilter[ProductID] | None = Query(
+        None, title="ProductID Filter", description="Filter by product ID."
+    ),
+    product_billing_type: MultipleQueryFilter[ProductBillingType] | None = Query(
+        None,
+        title="ProductBillingType Filter",
+        description=(
+            "Filter by product billing type. "
+            "`recurring` will filter data corresponding "
+            "to subscriptions creations or renewals. "
+            "`one_time` will filter data corresponding to one-time purchases."
+        ),
+    ),
+    subscription_id: MultipleQueryFilter[SubscriptionID] | None = Query(
+        None, title="SubscriptionID Filter", description="Filter by subscription ID."
+    ),
+    query: str | None = Query(
+        None, description="Search by product or organization name."
+    ),
+    session: AsyncSession = Depends(get_db_session),
+) -> ListResource[CustomerOrder]:
+    """List orders of the authenticated customer."""
+    results, count = await customer_order_service.list(
+        session,
+        auth_subject,
+        product_id=product_id,
+        product_billing_type=product_billing_type,
+        subscription_id=subscription_id,
+        query=query,
+        pagination=pagination,
+        sorting=sorting,
+    )
+
+    return ListResource.from_paginated_results(
+        [CustomerOrder.model_validate(result) for result in results],
+        count,
+        pagination,
+    )
+
+
+@router.get(
+    "/{id}",
+    summary="Get Order",
+    response_model=CustomerOrder,
+    responses={404: OrderNotFound},
+)
+async def get(
+    id: OrderID,
+    auth_subject: auth.CustomerPortalUnionBillingRead,
+    session: AsyncSession = Depends(get_db_session),
+) -> Order:
+    """Get an order by ID for the authenticated customer."""
+    order = await customer_order_service.get_by_id(session, auth_subject, id)
+
+    if order is None:
+        raise ResourceNotFound()
+
+    return order
+
+
+@router.patch(
+    "/{id}",
+    summary="Update Order",
+    response_model=CustomerOrder,
+    responses={404: OrderNotFound},
+)
+async def update(
+    id: OrderID,
+    order_update: CustomerOrderUpdate,
+    auth_subject: auth.CustomerPortalUnionBillingWrite,
+    session: AsyncSession = Depends(get_db_session),
+) -> Order:
+    """Update an order for the authenticated customer."""
+    order = await customer_order_service.get_by_id(session, auth_subject, id)
+
+    if order is None:
+        raise ResourceNotFound()
+
+    return await customer_order_service.update(session, order, order_update)
+
+
+@router.post(
+    "/{id}/invoice",
+    status_code=202,
+    summary="Generate Order Invoice",
+    responses={
+        404: OrderNotFound,
+        422: {
+            "description": "Order is missing billing name or address.",
+            "model": MissingInvoiceBillingDetails.schema(),
+        },
+    },
+)
+async def generate_invoice(
+    id: OrderID,
+    auth_subject: auth.CustomerPortalUnionBillingRead,
+    session: AsyncSession = Depends(get_db_session),
+) -> None:
+    """Trigger generation of an order's invoice."""
+    order = await customer_order_service.get_by_id(session, auth_subject, id)
+
+    if order is None:
+        raise ResourceNotFound()
+
+    await customer_order_service.trigger_invoice_generation(session, order)
+
+
+@router.get(
+    "/{id}/invoice",
+    summary="Get Order Invoice",
+    response_model=CustomerOrderInvoice,
+    responses={404: OrderNotFound},
+)
+async def invoice(
+    id: OrderID,
+    auth_subject: auth.CustomerPortalUnionBillingRead,
+    session: AsyncSession = Depends(get_db_session),
+) -> CustomerOrderInvoice:
+    """Get an order's invoice data."""
+    order = await customer_order_service.get_by_id(session, auth_subject, id)
+
+    if order is None:
+        raise ResourceNotFound()
+
+    return await customer_order_service.get_order_invoice(order)
+
+
+@router.get(
+    "/{id}/receipt",
+    summary="Get Order Receipt",
+    response_model=CustomerOrderReceipt,
+    responses={
+        202: {"description": "Receipt generation in progress."},
+        404: OrderNotFound,
+    },
+)
+async def receipt(
+    id: OrderID,
+    auth_subject: auth.CustomerPortalUnionBillingRead,
+    session: AsyncSession = Depends(get_db_session),
+) -> Response | CustomerOrderReceipt:
+    """Get a presigned URL to download an order's receipt PDF."""
+    order = await customer_order_service.get_by_id(session, auth_subject, id)
+
+    if order is None:
+        raise ResourceNotFound()
+
+    receipt = await customer_order_service.get_order_receipt(order)
+    if receipt is None:
+        return Response(status_code=202)
+
+    return receipt
+
+
+@router.get(
+    "/{id}/payment-status",
+    summary="Get Order Payment Status",
+    response_model=CustomerOrderPaymentStatus,
+    responses={404: OrderNotFound},
+)
+async def get_payment_status(
+    id: OrderID,
+    auth_subject: auth.CustomerPortalUnionBillingRead,
+    session: AsyncSession = Depends(get_db_session),
+) -> CustomerOrderPaymentStatus:
+    """Get the current payment status for an order."""
+    order = await customer_order_service.get_by_id(session, auth_subject, id)
+
+    if order is None:
+        raise ResourceNotFound()
+
+    payment_repository = PaymentRepository.from_session(session)
+    payment = await payment_repository.get_latest_for_order(order.id)
+
+    if payment is None:
+        return CustomerOrderPaymentStatus(
+            status="no_payment",
+            error=None,
+        )
+
+    return CustomerOrderPaymentStatus(
+        status=payment.status,
+        error=payment.decline_message if payment.decline_message is not None else None,
+    )
+
+
+@router.post(
+    "/{id}/confirm-payment",
+    summary="Confirm Retry Payment",
+    response_model=CustomerOrderPaymentConfirmation,
+    responses={
+        404: OrderNotFound,
+        409: {
+            "description": "Payment already in progress.",
+            "model": PaymentAlreadyInProgress.schema(),
+        },
+        422: {
+            "description": "Order not eligible for retry or payment confirmation failed.",
+            "model": OrderNotEligibleForRetry.schema(),
+        },
+        429: {
+            "description": "Manual retry limit exceeded.",
+            "model": ManualRetryLimitExceeded.schema(),
+        },
+    },
+)
+async def confirm_retry_payment(
+    id: OrderID,
+    confirm_data: CustomerOrderConfirmPayment,
+    auth_subject: auth.CustomerPortalUnionBillingWrite,
+    session: AsyncSession = Depends(get_db_session),
+) -> CustomerOrderPaymentConfirmation:
+    """Confirm a retry payment using a Stripe confirmation token."""
+    order = await customer_order_service.get_by_id(session, auth_subject, id)
+
+    if order is None:
+        raise ResourceNotFound()
+
+    return await customer_order_service.confirm_retry_payment(
+        session,
+        order,
+        confirm_data.confirmation_token_id,
+        confirm_data.payment_processor,
+        confirm_data.payment_method_id,
+    )

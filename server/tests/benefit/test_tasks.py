@@ -4,9 +4,9 @@ import pytest
 from dramatiq import Retry
 from pytest_mock import MockerFixture
 
-from polar.benefit.grant.service import BenefitGrantService
-from polar.benefit.strategies import BenefitRetriableError
-from polar.benefit.tasks import (  # type: ignore[attr-defined]
+from tarifia.benefit.grant.service import BenefitGrantService
+from tarifia.benefit.strategies import BenefitRetriableError
+from tarifia.benefit.tasks import (  # type: ignore[attr-defined]
     BenefitDoesNotExist,
     BenefitGrantDoesNotExist,
     CustomerDoesNotExist,
@@ -18,10 +18,10 @@ from polar.benefit.tasks import (  # type: ignore[attr-defined]
     benefit_revoke,
     benefit_update,
 )
-from polar.models import Benefit, BenefitGrant, Customer, Subscription
-from polar.postgres import AsyncSession
-from polar.subscription.service import SubscriptionService
-from polar.subscription.service import subscription as subscription_service
+from tarifia.models import Benefit, BenefitGrant, Customer, Subscription
+from tarifia.postgres import AsyncSession
+from tarifia.subscription.service import SubscriptionService
+from tarifia.subscription.service import subscription as subscription_service
 from tests.fixtures.database import SaveFixture
 
 
@@ -272,7 +272,7 @@ class TestBenefitDelete:
         benefit_organization: Benefit,
         session: AsyncSession,
     ) -> None:
-        enqueue_job_mock = mocker.patch("polar.benefit.grant.service.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.benefit.grant.service.enqueue_job")
 
         grant = BenefitGrant(
             subscription=subscription, customer=customer, benefit=benefit_organization
@@ -393,7 +393,7 @@ class TestBenefitEnqueueGrants:
         benefit_organization_second: Benefit,
         session: AsyncSession,
     ) -> None:
-        enqueue_job_mock = mocker.patch("polar.benefit.tasks.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.benefit.tasks.enqueue_job")
 
         benefit_ids = [benefit_organization.id, benefit_organization_second.id]
 
@@ -427,7 +427,7 @@ class TestBenefitEnqueueGrants:
         subscription: Subscription,
         session: AsyncSession,
     ) -> None:
-        enqueue_job_mock = mocker.patch("polar.benefit.tasks.enqueue_job")
+        enqueue_job_mock = mocker.patch("tarifia.benefit.tasks.enqueue_job")
 
         session.expunge_all()
 

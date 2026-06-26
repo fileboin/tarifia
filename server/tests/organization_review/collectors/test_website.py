@@ -5,9 +5,9 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import httpx
 import pytest
 
-from polar.kit.http import SSRFBlockedError
-from polar.organization_review.collectors.firecrawl_client import ScrapeResult
-from polar.organization_review.collectors.website import (
+from tarifia.kit.http import SSRFBlockedError
+from tarifia.organization_review.collectors.firecrawl_client import ScrapeResult
+from tarifia.organization_review.collectors.website import (
     MAX_CHARS_PER_PAGE,
     MAX_PAGES,
     MAX_REDIRECTS,
@@ -19,11 +19,11 @@ from polar.organization_review.collectors.website import (
     collect_website_data,
     fetch_page,
 )
-from polar.organization_review.schemas import WebsiteData
+from tarifia.organization_review.schemas import WebsiteData
 
 # Shorthand for patching resolve_and_validate_ip to allow all IPs
 _PATCH_SSRF = patch(
-    "polar.organization_review.collectors.website.resolve_and_validate_ip",
+    "tarifia.organization_review.collectors.website.resolve_and_validate_ip",
     new_callable=AsyncMock,
 )
 
@@ -350,7 +350,7 @@ class TestCollectWebsiteData:
     @pytest.mark.asyncio
     async def test_prepends_https_if_missing(self) -> None:
         with patch(
-            "polar.organization_review.collectors.website._run_website_agent",
+            "tarifia.organization_review.collectors.website._run_website_agent",
             new_callable=AsyncMock,
         ) as mock_run:
             mock_run.return_value = WebsiteData(base_url="https://example.com")
@@ -367,7 +367,7 @@ class TestCollectWebsiteData:
     @pytest.mark.asyncio
     async def test_strips_trailing_slash(self) -> None:
         with patch(
-            "polar.organization_review.collectors.website._run_website_agent",
+            "tarifia.organization_review.collectors.website._run_website_agent",
             new_callable=AsyncMock,
         ) as mock_run:
             mock_run.return_value = WebsiteData(base_url="https://example.com")
@@ -388,11 +388,11 @@ class TestCollectWebsiteData:
 
         with (
             patch(
-                "polar.organization_review.collectors.website._run_website_agent",
+                "tarifia.organization_review.collectors.website._run_website_agent",
                 side_effect=slow_agent,
             ),
             patch(
-                "polar.organization_review.collectors.website.OVERALL_TIMEOUT_S", 0.01
+                "tarifia.organization_review.collectors.website.OVERALL_TIMEOUT_S", 0.01
             ),
         ):
             result = await collect_website_data("https://example.com")
@@ -403,7 +403,7 @@ class TestCollectWebsiteData:
     @pytest.mark.asyncio
     async def test_exception_returns_error_data(self) -> None:
         with patch(
-            "polar.organization_review.collectors.website._run_website_agent",
+            "tarifia.organization_review.collectors.website._run_website_agent",
             new_callable=AsyncMock,
             side_effect=RuntimeError("boom"),
         ):
@@ -428,7 +428,7 @@ class TestFetchPageSSRF:
         ctx.deps = deps
 
         with patch(
-            "polar.organization_review.collectors.website.resolve_and_validate_ip",
+            "tarifia.organization_review.collectors.website.resolve_and_validate_ip",
             new_callable=AsyncMock,
             side_effect=SSRFBlockedError("resolves to private IP 10.0.0.1"),
         ):
@@ -463,7 +463,7 @@ class TestFetchPageSSRF:
                 raise SSRFBlockedError(f"Blocked: {hostname} resolves to private IP")
 
         with patch(
-            "polar.organization_review.collectors.website.resolve_and_validate_ip",
+            "tarifia.organization_review.collectors.website.resolve_and_validate_ip",
             new_callable=AsyncMock,
             side_effect=_validate_side_effect,
         ):
@@ -585,12 +585,12 @@ def _patch_scrape_markdown(result: ScrapeResult | Exception) -> Any:
     """Patch scrape_markdown to return a ScrapeResult or raise an exception."""
     if isinstance(result, Exception):
         return patch(
-            "polar.organization_review.collectors.website.scrape_markdown",
+            "tarifia.organization_review.collectors.website.scrape_markdown",
             new_callable=AsyncMock,
             side_effect=result,
         )
     return patch(
-        "polar.organization_review.collectors.website.scrape_markdown",
+        "tarifia.organization_review.collectors.website.scrape_markdown",
         new_callable=AsyncMock,
         return_value=result,
     )

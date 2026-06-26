@@ -1,5 +1,5 @@
-import { schemas } from '@polar-sh/client'
-import { Avatar } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Avatar } from '@tarifia-sh/orbit'
 
 interface BenefitGrantMemberBadgeProps {
   member: schemas['Member'] | null | undefined
@@ -9,7 +9,7 @@ export const BenefitGrantMemberBadge = ({
   member,
 }: BenefitGrantMemberBadgeProps) => {
   if (!member) {
-    return <span className="dark:text-polar-500 text-sm text-gray-500">—</span>
+    return <span className="dark:text-tarifia-500 text-sm text-gray-500">—</span>
   }
 
   return (
@@ -24,7 +24,7 @@ export const BenefitGrantMemberBadge = ({
           {member.name ?? member.email}
         </div>
         {member.name && (
-          <div className="dark:text-polar-500 w-full truncate text-xs text-gray-500">
+          <div className="dark:text-tarifia-500 w-full truncate text-xs text-gray-500">
             {member.email}
           </div>
         )}

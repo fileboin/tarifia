@@ -19,7 +19,7 @@ export const PricingPage = () => {
           <h3>Pricing you can read off a page</h3>
           <p>
             Most Merchant of Record providers only offer lower fees through
-            opaque, sales-gated &quot;volume discounts&quot;. Polar goes the
+            opaque, sales-gated &quot;volume discounts&quot;. Tarifia goes the
             opposite direction: every rate is posted publicly, and you choose
             the plan that fits. No sales process, no negotiations.
           </p>
@@ -29,7 +29,7 @@ export const PricingPage = () => {
       <ResourceSection id="plans" title="Plans">
         <div className="flex flex-col gap-4">
           <p>
-            Polar offers a free Starter plan plus three optional paid plans
+            Tarifia offers a free Starter plan plus three optional paid plans
             &ndash; Pro, Growth, and Scale &ndash; that lower your variable rate
             and prioritize your support inquiries. You can switch between plans
             anytime, and your rate adjusts immediately.
@@ -38,7 +38,7 @@ export const PricingPage = () => {
           <div className="overflow-x-auto">
             <table className="min-w-full">
               <thead>
-                <tr className="dark:bg-polar-800 bg-gray-50">
+                <tr className="dark:bg-tarifia-800 bg-gray-50">
                   <th className="px-4 py-2 text-left">Plan</th>
                   <th className="px-4 py-2 text-left">Monthly fee</th>
                   <th className="px-4 py-2 text-left">Per transaction</th>
@@ -103,7 +103,7 @@ export const PricingPage = () => {
           <div className="overflow-x-auto">
             <table className="min-w-full">
               <thead>
-                <tr className="dark:bg-polar-800 bg-gray-50">
+                <tr className="dark:bg-tarifia-800 bg-gray-50">
                   <th className="px-4 py-2 text-left">Plan</th>
                   <th className="px-4 py-2 text-left">Breakeven vs. Starter</th>
                 </tr>
@@ -144,7 +144,7 @@ export const PricingPage = () => {
           <p>
             Organizations created before <strong>May 27, 2026 </strong> stay on
             the Early Member rate indefinitely. This was the rate we offered
-            while Polar was catching up on feature parity with other Merchant of
+            while Tarifia was catching up on feature parity with other Merchant of
             Record providers, and we&apos;ve committed to honoring it for
             everyone who signed up under it.
           </p>
@@ -152,7 +152,7 @@ export const PricingPage = () => {
           <div className="overflow-x-auto">
             <table className="min-w-full">
               <thead>
-                <tr className="dark:bg-polar-800 bg-gray-50">
+                <tr className="dark:bg-tarifia-800 bg-gray-50">
                   <th className="px-4 py-2 text-left">Monthly fee</th>
                   <th className="px-4 py-2 text-left">Per transaction</th>
                   <th className="px-4 py-2 text-left">Subscription fee</th>
@@ -207,11 +207,11 @@ export const PricingPage = () => {
             <h3 className="text-lg">Payout fees</h3>
             <p>
               While payouts may incur fees charged by our payout providers,
-              Polar does not add any extra fees or markup. These are strictly
-              Stripe&apos;s fees, and Polar does not profit from them.
+              Tarifia does not add any extra fees or markup. These are strictly
+              Stripe&apos;s fees, and Tarifia does not profit from them.
             </p>
             <p>
-              In addition, Polar offers manual withdrawals for developers,
+              In addition, Tarifia offers manual withdrawals for developers,
               keeping you in control of when to issue payouts.
             </p>
             <div className="flex flex-col gap-4 pt-4">
@@ -231,7 +231,7 @@ export const PricingPage = () => {
             </div>
           </div>
 
-          <div className="dark:text-polar-300 dark:bg-polar-800 bg-gray-50 p-4 text-sm text-gray-500">
+          <div className="dark:text-tarifia-300 dark:bg-tarifia-800 bg-gray-50 p-4 text-sm text-gray-500">
             We also reserve the right to pass on any other fees Stripe might
             impose in the future.
           </div>
@@ -257,7 +257,7 @@ export const PricingPage = () => {
                   <td className="px-4 py-2">VAT (25%)</td>
                   <td className="px-4 py-2">$7.5</td>
                 </tr>
-                <tr className="dark:bg-polar-800 bg-gray-50 font-bold">
+                <tr className="dark:bg-tarifia-800 bg-gray-50 font-bold">
                   <td className="px-4 py-2">Total Transaction Value</td>
                   <td className="px-4 py-2">$37.5</td>
                 </tr>
@@ -273,7 +273,7 @@ export const PricingPage = () => {
           <div className="overflow-x-auto">
             <table className="min-w-full">
               <thead>
-                <tr className="dark:bg-polar-800 bg-gray-50">
+                <tr className="dark:bg-tarifia-800 bg-gray-50">
                   <th className="px-4 py-2 text-left">Plan</th>
                   <th className="px-4 py-2 text-left">Transaction Fee</th>
                   <th className="px-4 py-2 text-left">International (+1.5%)</th>
@@ -331,17 +331,17 @@ export const PricingPage = () => {
           </p>
           <p>
             However, we continuously work to proactively reduce the rate of
-            chargebacks across Polar to be at or lower than industry standards.
+            chargebacks across Tarifia to be at or lower than industry standards.
           </p>
           <p>
             Credit card networks impose monitoring programs, penalties and
             higher chargeback costs for sellers with high chargeback rates
-            (~0.7%+). Since Polar is the Merchant of Record, we therefore always
+            (~0.7%+). Since Tarifia is the Merchant of Record, we therefore always
             monitor and proactively prevent our rate coming close to these
             thresholds.
           </p>
-          <div className="dark:bg-polar-800 bg-gray-50 p-4">
-            <p className="dark:text-polar-300 text-sm text-gray-500">
+          <div className="dark:bg-tarifia-800 bg-gray-50 p-4">
+            <p className="dark:text-tarifia-300 text-sm text-gray-500">
               Therefore, we might need to intervene and even suspend your
               account unless swift and proactive measures are taken to reduce
               chargebacks to an acceptable industry standard.

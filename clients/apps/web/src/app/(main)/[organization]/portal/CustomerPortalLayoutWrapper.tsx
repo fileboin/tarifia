@@ -4,9 +4,9 @@ import { CustomerPortalProvider } from '@/components/CustomerPortal/CustomerPort
 import { useCustomerPortalSession } from '@/hooks/queries/customerPortal'
 import { createClientSideAPI } from '@/utils/client'
 import ArrowBackOutlined from '@mui/icons-material/ArrowBackOutlined'
-import { schemas } from '@polar-sh/client'
-import { Avatar } from '@polar-sh/orbit'
-import { TooltipProvider } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Avatar } from '@tarifia-sh/orbit'
+import { TooltipProvider } from '@tarifia-sh/orbit'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 
@@ -44,7 +44,7 @@ export function CustomerPortalLayoutWrapper({
           {session?.return_url && (
             <Link
               href={session.return_url}
-              className="dark:text-polar-500 flex min-w-0 flex-row items-center gap-x-1 text-xs text-gray-500"
+              className="dark:text-tarifia-500 flex min-w-0 flex-row items-center gap-x-1 text-xs text-gray-500"
             >
               <ArrowBackOutlined fontSize="inherit" className="flex-none" />
               <span className="truncate">Back to {organization.name}</span>

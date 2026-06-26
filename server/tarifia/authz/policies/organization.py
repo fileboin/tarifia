@@ -1,0 +1,21 @@
+from tarifia.auth.models import AuthSubject, Organization, User
+from tarifia.auth.permission import OrganizationPermission
+from tarifia.authz.types import PolicyResult
+from tarifia.models import Organization as OrganizationModel
+from tarifia.postgres import AsyncReadSession
+
+from . import _require_permission
+
+
+async def can_manage(
+    session: AsyncReadSession,
+    auth_subject: AuthSubject[User | Organization],
+    organization: OrganizationModel,
+) -> PolicyResult:
+    """Can the subject edit, delete, or set the payout account for this organization?"""
+    return await _require_permission(
+        session,
+        auth_subject,
+        organization,
+        permission=OrganizationPermission.organization_manage,
+    )

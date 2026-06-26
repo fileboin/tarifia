@@ -1,8 +1,8 @@
 import pytest
 from httpx import AsyncClient
 
-from polar.auth.scope import Scope
-from polar.models import Organization, UserOrganization
+from tarifia.auth.scope import Scope
+from tarifia.models import Organization, UserOrganization
 from tests.fixtures.auth import AuthSubjectFixture
 
 

@@ -1,19 +1,19 @@
 locals {
   production_legacy_sso_user_assignments = {
-    "francois@polar.sh-cloudfront_admin" = { email = "francois@polar.sh", permission_set = "cloudfront_admin" }
-    "francois@polar.sh-s3_full_access"   = { email = "francois@polar.sh", permission_set = "s3_full_access" }
-    "jesper@polar.sh-admin"              = { email = "jesper@polar.sh", permission_set = "admin" }
-    "jesper@polar.sh-cloudfront_admin"   = { email = "jesper@polar.sh", permission_set = "cloudfront_admin" }
-    "jesper@polar.sh-s3_full_access"     = { email = "jesper@polar.sh", permission_set = "s3_full_access" }
-    "petru@polar.sh-cloudfront_admin"    = { email = "petru@polar.sh", permission_set = "cloudfront_admin" }
-    "petru@polar.sh-s3_full_access"      = { email = "petru@polar.sh", permission_set = "s3_full_access" }
-    "pieter@polar.sh-cloudfront_admin"   = { email = "pieter@polar.sh", permission_set = "cloudfront_admin" }
-    "pieter@polar.sh-s3_full_access"     = { email = "pieter@polar.sh", permission_set = "s3_full_access" }
-    "sebastian@polar.sh-cloudfront_admin" = {
-      email          = "sebastian@polar.sh"
+    "francois@tarifia.sh-cloudfront_admin" = { email = "francois@tarifia.sh", permission_set = "cloudfront_admin" }
+    "francois@tarifia.sh-s3_full_access"   = { email = "francois@tarifia.sh", permission_set = "s3_full_access" }
+    "jesper@tarifia.sh-admin"              = { email = "jesper@tarifia.sh", permission_set = "admin" }
+    "jesper@tarifia.sh-cloudfront_admin"   = { email = "jesper@tarifia.sh", permission_set = "cloudfront_admin" }
+    "jesper@tarifia.sh-s3_full_access"     = { email = "jesper@tarifia.sh", permission_set = "s3_full_access" }
+    "petru@tarifia.sh-cloudfront_admin"    = { email = "petru@tarifia.sh", permission_set = "cloudfront_admin" }
+    "petru@tarifia.sh-s3_full_access"      = { email = "petru@tarifia.sh", permission_set = "s3_full_access" }
+    "pieter@tarifia.sh-cloudfront_admin"   = { email = "pieter@tarifia.sh", permission_set = "cloudfront_admin" }
+    "pieter@tarifia.sh-s3_full_access"     = { email = "pieter@tarifia.sh", permission_set = "s3_full_access" }
+    "sebastian@tarifia.sh-cloudfront_admin" = {
+      email          = "sebastian@tarifia.sh"
       permission_set = "cloudfront_admin"
     }
-    "sebastian@polar.sh-s3_full_access" = { email = "sebastian@polar.sh", permission_set = "s3_full_access" }
+    "sebastian@tarifia.sh-s3_full_access" = { email = "sebastian@tarifia.sh", permission_set = "s3_full_access" }
   }
 
   production_legacy_sso_permission_set_arns = {
@@ -171,11 +171,11 @@ module "production_s3_buckets" {
   }
 
   environment     = "production"
-  allowed_origins = ["https://polar.sh"]
+  allowed_origins = ["https://tarifia.sh"]
 }
 
 resource "aws_s3_bucket" "production_lambda_artifacts" {
-  bucket = "polar-lambda-artifacts"
+  bucket = "tarifia-lambda-artifacts"
 }
 
 resource "aws_s3_bucket_versioning" "production_lambda_artifacts" {
@@ -196,7 +196,7 @@ module "production_image_resizer" {
     aws = aws
   }
 
-  function_name            = "polar-image-resizer"
+  function_name            = "tarifia-image-resizer"
   s3_bucket                = aws_s3_bucket.production_lambda_artifacts.id
   s3_key                   = data.aws_s3_object.production_image_resizer_package.key
   s3_object_version        = data.aws_s3_object.production_image_resizer_package.version_id
@@ -211,13 +211,13 @@ module "production_cloudfront_public_assets" {
     aws.us_east_1 = aws
   }
 
-  name                           = "polar-public-files"
-  domain                         = "uploads.polar.sh"
+  name                           = "tarifia-public-files"
+  domain                         = "uploads.tarifia.sh"
   cloudflare_zone_id             = "22bcd1b07ec25452aab472486bc8df94"
   s3_bucket_id                   = module.production_s3_buckets.public_files_bucket_id
   s3_bucket_regional_domain_name = module.production_s3_buckets.public_files_bucket_regional_domain_name
   s3_bucket_arn                  = module.production_s3_buckets.public_files_bucket_arn
-  cors_allowed_origins           = ["https://polar.sh", "https://trace.playwright.dev"]
+  cors_allowed_origins           = ["https://tarifia.sh", "https://trace.playwright.dev"]
 
   lambda_function_associations = [
     {
@@ -234,13 +234,13 @@ module "production_cloudfront_cdn" {
     aws.us_east_1 = aws
   }
 
-  name                           = "polar-cdn"
-  domain                         = "cdn.polar.sh"
+  name                           = "tarifia-cdn"
+  domain                         = "cdn.tarifia.sh"
   cloudflare_zone_id             = "22bcd1b07ec25452aab472486bc8df94"
   s3_bucket_id                   = module.production_s3_buckets.public_assets_bucket_id
   s3_bucket_regional_domain_name = module.production_s3_buckets.public_assets_bucket_regional_domain_name
   s3_bucket_arn                  = module.production_s3_buckets.public_assets_bucket_arn
-  cors_allowed_origins           = ["https://polar.sh"]
+  cors_allowed_origins           = ["https://tarifia.sh"]
 }
 
 resource "aws_iam_policy" "production_lambda_artifacts_upload" {
@@ -286,10 +286,10 @@ resource "aws_iam_policy" "production_e2e_reports_upload" {
   })
 }
 
-resource "aws_iam_policy" "production_polar_sh_backups" {
+resource "aws_iam_policy" "production_tarifia_sh_backups" {
   provider = aws.us_east_2
 
-  name = "polar-sh-backups"
+  name = "tarifia-sh-backups"
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -318,14 +318,14 @@ module "production_github_oidc_backup" {
   }
 
   role_name   = "github-actions-backup"
-  github_org  = "polarsource"
-  github_repo = "polar"
+  github_org  = "tarifiasource"
+  github_repo = "tarifia"
   github_subjects = [
     "ref:refs/heads/main",
     "pull_request",
   ]
   policy_arns = {
-    backups          = aws_iam_policy.production_polar_sh_backups.arn
+    backups          = aws_iam_policy.production_tarifia_sh_backups.arn
     lambda_artifacts = aws_iam_policy.production_lambda_artifacts_upload.arn
     e2e_reports      = aws_iam_policy.production_e2e_reports_upload.arn
   }
@@ -338,14 +338,14 @@ module "production_application_access" {
     aws = aws.us_east_2
   }
 
-  username = "polar-production-files"
+  username = "tarifia-production-files"
   buckets = {
-    customer_invoices = { name = "polar-customer-invoices" }
-    customer_receipts = { name = "polar-customer-receipts" }
-    payout_invoices   = { name = "polar-payout-invoices" }
-    files             = { name = "polar-production-files", description = "Policy used by our app for downloadable benefits. Keep permissions to a bare minimum." }
-    public_files      = { name = "polar-public-files", description = "Policy used by our app for public uploads -products medias and such-. Keep permissions to a bare minimum." }
-    logs              = { name = "polar-production-logs", description = "Policy used by our app to write OpenTelemetry spans to S3 for long-term backup." }
+    customer_invoices = { name = "tarifia-customer-invoices" }
+    customer_receipts = { name = "tarifia-customer-receipts" }
+    payout_invoices   = { name = "tarifia-payout-invoices" }
+    files             = { name = "tarifia-production-files", description = "Policy used by our app for downloadable benefits. Keep permissions to a bare minimum." }
+    public_files      = { name = "tarifia-public-files", description = "Policy used by our app for public uploads -products medias and such-. Keep permissions to a bare minimum." }
+    logs              = { name = "tarifia-production-logs", description = "Policy used by our app to write OpenTelemetry spans to S3 for long-term backup." }
   }
 }
 
@@ -356,13 +356,13 @@ module "production_athena_spans" {
   }
 
   environment      = "production"
-  logs_bucket_name = "polar-production-logs"
+  logs_bucket_name = "tarifia-production-logs"
 }
 
 resource "aws_s3_bucket" "production_backups" {
   provider = aws.us_east_2
 
-  bucket = "polar-sh-backups"
+  bucket = "tarifia-sh-backups"
 }
 
 resource "aws_s3_bucket_lifecycle_configuration" "production_backups" {
@@ -416,148 +416,148 @@ import {
 }
 
 import {
-  to = aws_ssoadmin_account_assignment.production_user_assignments["francois@polar.sh-cloudfront_admin"]
+  to = aws_ssoadmin_account_assignment.production_user_assignments["francois@tarifia.sh-cloudfront_admin"]
   id = "24e864a8-d051-70ae-422d-514cea9f9d30,USER,975049931254,AWS_ACCOUNT,arn:aws:sso:::permissionSet/ssoins-7223aa5e609c2376/ps-722397de1aa87297,arn:aws:sso:::instance/ssoins-7223aa5e609c2376"
 }
 
 import {
-  to = aws_ssoadmin_account_assignment.production_user_assignments["francois@polar.sh-s3_full_access"]
+  to = aws_ssoadmin_account_assignment.production_user_assignments["francois@tarifia.sh-s3_full_access"]
   id = "24e864a8-d051-70ae-422d-514cea9f9d30,USER,975049931254,AWS_ACCOUNT,arn:aws:sso:::permissionSet/ssoins-7223aa5e609c2376/ps-722379888f161379,arn:aws:sso:::instance/ssoins-7223aa5e609c2376"
 }
 
 import {
-  to = aws_ssoadmin_account_assignment.production_user_assignments["jesper@polar.sh-admin"]
+  to = aws_ssoadmin_account_assignment.production_user_assignments["jesper@tarifia.sh-admin"]
   id = "e4884488-4001-705f-6ec8-410b54204d38,USER,975049931254,AWS_ACCOUNT,arn:aws:sso:::permissionSet/ssoins-7223aa5e609c2376/ps-7223f76f71a4e308,arn:aws:sso:::instance/ssoins-7223aa5e609c2376"
 }
 
 import {
-  to = aws_ssoadmin_account_assignment.production_user_assignments["jesper@polar.sh-cloudfront_admin"]
+  to = aws_ssoadmin_account_assignment.production_user_assignments["jesper@tarifia.sh-cloudfront_admin"]
   id = "e4884488-4001-705f-6ec8-410b54204d38,USER,975049931254,AWS_ACCOUNT,arn:aws:sso:::permissionSet/ssoins-7223aa5e609c2376/ps-722397de1aa87297,arn:aws:sso:::instance/ssoins-7223aa5e609c2376"
 }
 
 import {
-  to = aws_ssoadmin_account_assignment.production_user_assignments["jesper@polar.sh-s3_full_access"]
+  to = aws_ssoadmin_account_assignment.production_user_assignments["jesper@tarifia.sh-s3_full_access"]
   id = "e4884488-4001-705f-6ec8-410b54204d38,USER,975049931254,AWS_ACCOUNT,arn:aws:sso:::permissionSet/ssoins-7223aa5e609c2376/ps-722379888f161379,arn:aws:sso:::instance/ssoins-7223aa5e609c2376"
 }
 
 import {
-  to = aws_ssoadmin_account_assignment.production_user_assignments["petru@polar.sh-cloudfront_admin"]
+  to = aws_ssoadmin_account_assignment.production_user_assignments["petru@tarifia.sh-cloudfront_admin"]
   id = "c4a8f4b8-90e1-7074-ebb5-90de4710ac65,USER,975049931254,AWS_ACCOUNT,arn:aws:sso:::permissionSet/ssoins-7223aa5e609c2376/ps-722397de1aa87297,arn:aws:sso:::instance/ssoins-7223aa5e609c2376"
 }
 
 import {
-  to = aws_ssoadmin_account_assignment.production_user_assignments["petru@polar.sh-s3_full_access"]
+  to = aws_ssoadmin_account_assignment.production_user_assignments["petru@tarifia.sh-s3_full_access"]
   id = "c4a8f4b8-90e1-7074-ebb5-90de4710ac65,USER,975049931254,AWS_ACCOUNT,arn:aws:sso:::permissionSet/ssoins-7223aa5e609c2376/ps-722379888f161379,arn:aws:sso:::instance/ssoins-7223aa5e609c2376"
 }
 
 import {
-  to = aws_ssoadmin_account_assignment.production_user_assignments["pieter@polar.sh-cloudfront_admin"]
+  to = aws_ssoadmin_account_assignment.production_user_assignments["pieter@tarifia.sh-cloudfront_admin"]
   id = "c4f80468-c071-7014-beac-96234b38771b,USER,975049931254,AWS_ACCOUNT,arn:aws:sso:::permissionSet/ssoins-7223aa5e609c2376/ps-722397de1aa87297,arn:aws:sso:::instance/ssoins-7223aa5e609c2376"
 }
 
 import {
-  to = aws_ssoadmin_account_assignment.production_user_assignments["pieter@polar.sh-s3_full_access"]
+  to = aws_ssoadmin_account_assignment.production_user_assignments["pieter@tarifia.sh-s3_full_access"]
   id = "c4f80468-c071-7014-beac-96234b38771b,USER,975049931254,AWS_ACCOUNT,arn:aws:sso:::permissionSet/ssoins-7223aa5e609c2376/ps-722379888f161379,arn:aws:sso:::instance/ssoins-7223aa5e609c2376"
 }
 
 import {
-  to = aws_ssoadmin_account_assignment.production_user_assignments["sebastian@polar.sh-cloudfront_admin"]
+  to = aws_ssoadmin_account_assignment.production_user_assignments["sebastian@tarifia.sh-cloudfront_admin"]
   id = "f4180428-5091-7004-2e1f-51693a6a0e4b,USER,975049931254,AWS_ACCOUNT,arn:aws:sso:::permissionSet/ssoins-7223aa5e609c2376/ps-722397de1aa87297,arn:aws:sso:::instance/ssoins-7223aa5e609c2376"
 }
 
 import {
-  to = aws_ssoadmin_account_assignment.production_user_assignments["sebastian@polar.sh-s3_full_access"]
+  to = aws_ssoadmin_account_assignment.production_user_assignments["sebastian@tarifia.sh-s3_full_access"]
   id = "f4180428-5091-7004-2e1f-51693a6a0e4b,USER,975049931254,AWS_ACCOUNT,arn:aws:sso:::permissionSet/ssoins-7223aa5e609c2376/ps-722379888f161379,arn:aws:sso:::instance/ssoins-7223aa5e609c2376"
 }
 
 import {
   to = module.production_s3_buckets.aws_s3_bucket.customer_invoices
-  id = "polar-customer-invoices"
+  id = "tarifia-customer-invoices"
 }
 
 import {
   to = module.production_s3_buckets.aws_s3_bucket.customer_receipts
-  id = "polar-customer-receipts"
+  id = "tarifia-customer-receipts"
 }
 
 import {
   to = module.production_s3_buckets.aws_s3_bucket.files
-  id = "polar-production-files"
+  id = "tarifia-production-files"
 }
 
 import {
   to = module.production_s3_buckets.aws_s3_bucket.logs
-  id = "polar-production-logs"
+  id = "tarifia-production-logs"
 }
 
 import {
   to = module.production_s3_buckets.aws_s3_bucket.payout_invoices
-  id = "polar-payout-invoices"
+  id = "tarifia-payout-invoices"
 }
 
 import {
   to = module.production_s3_buckets.aws_s3_bucket.public_assets
-  id = "polar-public-assets"
+  id = "tarifia-public-assets"
 }
 
 import {
   to = module.production_s3_buckets.aws_s3_bucket.public_files
-  id = "polar-public-files"
+  id = "tarifia-public-files"
 }
 
 import {
   to = module.production_s3_buckets.aws_s3_bucket_cors_configuration.files
-  id = "polar-production-files"
+  id = "tarifia-production-files"
 }
 
 import {
   to = module.production_s3_buckets.aws_s3_bucket_cors_configuration.public_files
-  id = "polar-public-files"
+  id = "tarifia-public-files"
 }
 
 import {
   to = module.production_s3_buckets.aws_s3_bucket_policy.public_assets
-  id = "polar-public-assets"
+  id = "tarifia-public-assets"
 }
 
 import {
   to = module.production_s3_buckets.aws_s3_bucket_policy.public_files
-  id = "polar-public-files"
+  id = "tarifia-public-files"
 }
 
 import {
   to = module.production_s3_buckets.aws_s3_bucket_public_access_block.public_assets
-  id = "polar-public-assets"
+  id = "tarifia-public-assets"
 }
 
 import {
   to = module.production_s3_buckets.aws_s3_bucket_public_access_block.public_files
-  id = "polar-public-files"
+  id = "tarifia-public-files"
 }
 
 import {
   to = aws_s3_bucket.production_lambda_artifacts
-  id = "polar-lambda-artifacts"
+  id = "tarifia-lambda-artifacts"
 }
 
 import {
   to = aws_s3_bucket_versioning.production_lambda_artifacts
-  id = "polar-lambda-artifacts"
+  id = "tarifia-lambda-artifacts"
 }
 
 import {
   to = module.production_image_resizer.aws_iam_role.this
-  id = "polar-image-resizer"
+  id = "tarifia-image-resizer"
 }
 
 import {
   to = module.production_image_resizer.aws_iam_role_policy.this
-  id = "polar-image-resizer:polar-image-resizer"
+  id = "tarifia-image-resizer:tarifia-image-resizer"
 }
 
 import {
   to = module.production_image_resizer.aws_lambda_function.this
-  id = "polar-image-resizer"
+  id = "tarifia-image-resizer"
 }
 
 import {
@@ -581,7 +581,7 @@ import {
 }
 
 import {
-  to = module.production_cloudfront_public_assets.cloudflare_dns_record.acm_validation["uploads.polar.sh"]
+  to = module.production_cloudfront_public_assets.cloudflare_dns_record.acm_validation["uploads.tarifia.sh"]
   id = "22bcd1b07ec25452aab472486bc8df94/712c07bcb48686b39deddef3364b5d3d"
 }
 
@@ -611,7 +611,7 @@ import {
 }
 
 import {
-  to = module.production_cloudfront_cdn.cloudflare_dns_record.acm_validation["cdn.polar.sh"]
+  to = module.production_cloudfront_cdn.cloudflare_dns_record.acm_validation["cdn.tarifia.sh"]
   id = "22bcd1b07ec25452aab472486bc8df94/e789463e7465415466330fd924a9c4c5"
 }
 
@@ -631,8 +631,8 @@ import {
 }
 
 import {
-  to = aws_iam_policy.production_polar_sh_backups
-  id = "arn:aws:iam::975049931254:policy/polar-sh-backups"
+  to = aws_iam_policy.production_tarifia_sh_backups
+  id = "arn:aws:iam::975049931254:policy/tarifia-sh-backups"
 }
 
 import {
@@ -647,7 +647,7 @@ import {
 
 import {
   to = module.production_github_oidc_backup.aws_iam_role_policy_attachment.policies["backups"]
-  id = "github-actions-backup/arn:aws:iam::975049931254:policy/polar-sh-backups"
+  id = "github-actions-backup/arn:aws:iam::975049931254:policy/tarifia-sh-backups"
 }
 
 import {
@@ -662,100 +662,100 @@ import {
 
 import {
   to = module.production_application_access.aws_iam_user.this
-  id = "polar-production-files"
+  id = "tarifia-production-files"
 }
 
 import {
   to = module.production_application_access.aws_iam_policy.customer_invoices
-  id = "arn:aws:iam::975049931254:policy/polar-customer-invoices"
+  id = "arn:aws:iam::975049931254:policy/tarifia-customer-invoices"
 }
 
 import {
   to = module.production_application_access.aws_iam_policy.customer_receipts
-  id = "arn:aws:iam::975049931254:policy/polar-customer-receipts"
+  id = "arn:aws:iam::975049931254:policy/tarifia-customer-receipts"
 }
 
 import {
   to = module.production_application_access.aws_iam_policy.files
-  id = "arn:aws:iam::975049931254:policy/polar-production-files"
+  id = "arn:aws:iam::975049931254:policy/tarifia-production-files"
 }
 
 import {
   to = module.production_application_access.aws_iam_policy.logs
-  id = "arn:aws:iam::975049931254:policy/polar-production-logs"
+  id = "arn:aws:iam::975049931254:policy/tarifia-production-logs"
 }
 
 import {
   to = module.production_application_access.aws_iam_policy.payout_invoices
-  id = "arn:aws:iam::975049931254:policy/polar-payout-invoices"
+  id = "arn:aws:iam::975049931254:policy/tarifia-payout-invoices"
 }
 
 import {
   to = module.production_application_access.aws_iam_policy.public_files
-  id = "arn:aws:iam::975049931254:policy/polar-public-files"
+  id = "arn:aws:iam::975049931254:policy/tarifia-public-files"
 }
 
 import {
   to = module.production_application_access.aws_iam_user_policy_attachment.customer_invoices
-  id = "polar-production-files/arn:aws:iam::975049931254:policy/polar-customer-invoices"
+  id = "tarifia-production-files/arn:aws:iam::975049931254:policy/tarifia-customer-invoices"
 }
 
 import {
   to = module.production_application_access.aws_iam_user_policy_attachment.customer_receipts
-  id = "polar-production-files/arn:aws:iam::975049931254:policy/polar-customer-receipts"
+  id = "tarifia-production-files/arn:aws:iam::975049931254:policy/tarifia-customer-receipts"
 }
 
 import {
   to = module.production_application_access.aws_iam_user_policy_attachment.files
-  id = "polar-production-files/arn:aws:iam::975049931254:policy/polar-production-files"
+  id = "tarifia-production-files/arn:aws:iam::975049931254:policy/tarifia-production-files"
 }
 
 import {
   to = module.production_application_access.aws_iam_user_policy_attachment.logs
-  id = "polar-production-files/arn:aws:iam::975049931254:policy/polar-production-logs"
+  id = "tarifia-production-files/arn:aws:iam::975049931254:policy/tarifia-production-logs"
 }
 
 import {
   to = module.production_application_access.aws_iam_user_policy_attachment.payout_invoices
-  id = "polar-production-files/arn:aws:iam::975049931254:policy/polar-payout-invoices"
+  id = "tarifia-production-files/arn:aws:iam::975049931254:policy/tarifia-payout-invoices"
 }
 
 import {
   to = module.production_application_access.aws_iam_user_policy_attachment.public_files
-  id = "polar-production-files/arn:aws:iam::975049931254:policy/polar-public-files"
+  id = "tarifia-production-files/arn:aws:iam::975049931254:policy/tarifia-public-files"
 }
 
 import {
   to = module.production_athena_spans.aws_s3_bucket.athena_results
-  id = "polar-production-athena-results"
+  id = "tarifia-production-athena-results"
 }
 
 import {
   to = module.production_athena_spans.aws_s3_bucket_lifecycle_configuration.athena_results
-  id = "polar-production-athena-results"
+  id = "tarifia-production-athena-results"
 }
 
 import {
   to = module.production_athena_spans.aws_glue_catalog_database.spans
-  id = "975049931254:polar-production-spans"
+  id = "975049931254:tarifia-production-spans"
 }
 
 import {
   to = module.production_athena_spans.aws_glue_catalog_table.spans
-  id = "975049931254:polar-production-spans:spans"
+  id = "975049931254:tarifia-production-spans:spans"
 }
 
 import {
   to = module.production_athena_spans.aws_athena_workgroup.spans
-  id = "polar-production-spans"
+  id = "tarifia-production-spans"
 }
 
 import {
   to = aws_s3_bucket.production_backups
-  id = "polar-sh-backups"
+  id = "tarifia-sh-backups"
 }
 
 import {
   to = aws_s3_bucket_lifecycle_configuration.production_backups
-  id = "polar-sh-backups"
+  id = "tarifia-sh-backups"
 }

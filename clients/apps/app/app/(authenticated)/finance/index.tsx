@@ -10,9 +10,9 @@ import {
   usePayoutAccount,
   usePayouts,
   useTransactionsSummary,
-} from '@/hooks/polar/finance'
+} from '@/hooks/tarifia/finance'
 import { OrganizationContext } from '@/providers/OrganizationProvider'
-import { formatCurrency } from '@polar-sh/currency'
+import { formatCurrency } from '@tarifia-sh/currency'
 import { Stack, useRouter } from 'expo-router'
 import { useCallback, useContext } from 'react'
 import { RefreshControl, ScrollView } from 'react-native'

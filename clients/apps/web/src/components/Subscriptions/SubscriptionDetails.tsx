@@ -2,11 +2,11 @@
 
 import { OrganizationContext } from '@/providers/maintainerOrganization'
 import ArrowOutwardOutlined from '@mui/icons-material/ArrowOutwardOutlined'
-import { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
-import { Button } from '@polar-sh/orbit'
-import FormattedDateTime from '@polar-sh/ui/components/atoms/FormattedDateTime'
-import { TextArea } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
+import { Button } from '@tarifia-sh/orbit'
+import FormattedDateTime from '@tarifia-sh/ui/components/atoms/FormattedDateTime'
+import { TextArea } from '@tarifia-sh/orbit'
 import Link from 'next/link'
 import { useContext } from 'react'
 import { DetailRow } from '../Shared/DetailRow'
@@ -147,7 +147,7 @@ const SubscriptionDetails = ({ subscription }: SubscriptionDetailsProps) => {
                 <span
                   className={twMerge(
                     subscription.discount.code
-                      ? 'text-polar-500 dark:text-polar-500'
+                      ? 'text-tarifia-500 dark:text-tarifia-500'
                       : undefined,
                   )}
                 >

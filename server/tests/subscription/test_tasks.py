@@ -3,10 +3,10 @@ import uuid
 import pytest
 from pytest_mock import MockerFixture
 
-from polar.models import Customer, Product
-from polar.postgres import AsyncSession
-from polar.subscription.service import SubscriptionService
-from polar.subscription.tasks import (  # type: ignore[attr-defined]
+from tarifia.models import Customer, Product
+from tarifia.postgres import AsyncSession
+from tarifia.subscription.service import SubscriptionService
+from tarifia.subscription.tasks import (  # type: ignore[attr-defined]
     SubscriptionDoesNotExist,
     SubscriptionTierDoesNotExist,
     subscription_enqueue_benefits_grants,

@@ -5,9 +5,9 @@ from unittest.mock import AsyncMock, MagicMock
 import pytest
 from pytest_mock import MockerFixture
 
-from polar.config import settings
-from polar.models import Organization
-from polar.startup_program.service import (
+from tarifia.config import settings
+from tarifia.models import Organization
+from tarifia.startup_program.service import (
     DISCOUNT_BASIS_POINTS,
     DISCOUNT_DURATION_IN_MONTHS,
     DISCOUNT_ID_KEY,
@@ -15,9 +15,9 @@ from polar.startup_program.service import (
     StartupProgramError,
     StartupProgramStatus,
 )
-from polar.startup_program.service import startup_program as startup_program_service
+from tarifia.startup_program.service import startup_program as startup_program_service
 
-POLAR_ORG_ID = str(uuid.UUID("00000000-0000-0000-0000-0000000000a1"))
+TARIFIA_ORG_ID = str(uuid.UUID("00000000-0000-0000-0000-0000000000a1"))
 SCALE_PRODUCT_ID = "prod_scale"
 SDK_CUSTOMER_ID = "cust_sdk_1"
 SDK_DISCOUNT_ID = "disc_sdk_1"
@@ -57,9 +57,9 @@ def _make_billing_contact(email: str) -> MagicMock:
 
 @pytest.fixture
 def configure_startup_program(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr(settings, "POLAR_ORGANIZATION_ID", POLAR_ORG_ID)
-    monkeypatch.setattr(settings, "POLAR_SCALE_PRODUCT_ID", SCALE_PRODUCT_ID)
-    monkeypatch.setattr(settings, "POLAR_ACCESS_TOKEN", "polar_test_token")
+    monkeypatch.setattr(settings, "TARIFIA_ORGANIZATION_ID", TARIFIA_ORG_ID)
+    monkeypatch.setattr(settings, "TARIFIA_SCALE_PRODUCT_ID", SCALE_PRODUCT_ID)
+    monkeypatch.setattr(settings, "TARIFIA_ACCESS_TOKEN", "tarifia_test_token")
 
 
 @pytest.fixture
@@ -72,7 +72,7 @@ def client_mock(mocker: MockerFixture) -> MagicMock:
     client.delete_discount = AsyncMock(return_value=None)
     client.update_customer_metadata = AsyncMock(return_value=None)
     client.list_billing_contacts = AsyncMock(return_value=[])
-    mocker.patch("polar.startup_program.service.get_client", return_value=client)
+    mocker.patch("tarifia.startup_program.service.get_client", return_value=client)
     return client
 
 
@@ -83,21 +83,21 @@ class TestMarkInvited:
         monkeypatch: pytest.MonkeyPatch,
         organization: Organization,
     ) -> None:
-        monkeypatch.setattr(settings, "POLAR_ORGANIZATION_ID", "")
-        monkeypatch.setattr(settings, "POLAR_SCALE_PRODUCT_ID", "")
+        monkeypatch.setattr(settings, "TARIFIA_ORGANIZATION_ID", "")
+        monkeypatch.setattr(settings, "TARIFIA_SCALE_PRODUCT_ID", "")
 
         with pytest.raises(StartupProgramError):
             await startup_program_service.mark_invited(organization)
 
     @pytest.mark.usefixtures("configure_startup_program")
-    async def test_raises_when_no_polar_customer(
+    async def test_raises_when_no_tarifia_customer(
         self,
         client_mock: MagicMock,
         organization: Organization,
     ) -> None:
         client_mock.get_customer_by_external_id_or_none.return_value = None
 
-        with pytest.raises(StartupProgramError, match="No Polar customer"):
+        with pytest.raises(StartupProgramError, match="No Tarifia customer"):
             await startup_program_service.mark_invited(organization)
 
     @pytest.mark.usefixtures("configure_startup_program")
@@ -127,7 +127,7 @@ class TestMarkInvited:
         # subscription before its product is switched to Scale, so proration
         # at the switch reflects the discount.
         assert create_kwargs["products"] is None
-        # POLAR_ACCESS_TOKEN is organization-scoped, so the API rejects any
+        # TARIFIA_ACCESS_TOKEN is organization-scoped, so the API rejects any
         # explicit organization_id on the request.
         assert "organization_id" not in create_kwargs
 
@@ -213,7 +213,7 @@ class TestMarkInvited:
         organization: Organization,
     ) -> None:
         enqueue_mock = mocker.patch(
-            "polar.startup_program.service.enqueue_email_template"
+            "tarifia.startup_program.service.enqueue_email_template"
         )
         client_mock.get_customer_by_external_id_or_none.return_value = (
             _make_sdk_customer(external_id=str(organization.id))
@@ -316,14 +316,14 @@ class TestUninvite:
             await startup_program_service.uninvite(organization)
 
     @pytest.mark.usefixtures("configure_startup_program")
-    async def test_raises_when_no_polar_customer(
+    async def test_raises_when_no_tarifia_customer(
         self,
         client_mock: MagicMock,
         organization: Organization,
     ) -> None:
         client_mock.get_customer_by_external_id_or_none.return_value = None
 
-        with pytest.raises(StartupProgramError, match="No Polar customer"):
+        with pytest.raises(StartupProgramError, match="No Tarifia customer"):
             await startup_program_service.uninvite(organization)
 
 
@@ -452,8 +452,8 @@ class TestResolveCheckoutDiscountId:
         monkeypatch: pytest.MonkeyPatch,
         client_mock: MagicMock,
     ) -> None:
-        monkeypatch.setattr(settings, "POLAR_ORGANIZATION_ID", "")
-        monkeypatch.setattr(settings, "POLAR_SCALE_PRODUCT_ID", "")
+        monkeypatch.setattr(settings, "TARIFIA_ORGANIZATION_ID", "")
+        monkeypatch.setattr(settings, "TARIFIA_SCALE_PRODUCT_ID", "")
 
         resolved = await startup_program_service.resolve_checkout_discount_id(
             organization_id=uuid.uuid4(), product_id=SCALE_PRODUCT_ID

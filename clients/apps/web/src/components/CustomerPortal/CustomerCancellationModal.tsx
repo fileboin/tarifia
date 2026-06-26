@@ -1,24 +1,24 @@
 'use client'
 
 import revalidate from '@/app/actions'
-import { Modal, ModalProps } from '@polar-sh/orbit'
+import { Modal, ModalProps } from '@tarifia-sh/orbit'
 import { useCustomerCancelSubscription } from '@/hooks/queries/customerPortal'
 import { setValidationErrors } from '@/utils/api/errors'
-import { isValidationError, schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { TextArea } from '@polar-sh/orbit'
+import { isValidationError, schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { TextArea } from '@tarifia-sh/orbit'
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
-import { Label } from '@polar-sh/ui/components/ui/label'
+} from '@tarifia-sh/ui/components/ui/form'
+import { Label } from '@tarifia-sh/ui/components/ui/label'
 import {
   RadioGroup,
   RadioGroupItem,
-} from '@polar-sh/ui/components/ui/radio-group'
+} from '@tarifia-sh/ui/components/ui/radio-group'
 import { useRouter } from 'next/navigation'
 import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
@@ -109,7 +109,7 @@ const CustomerCancellationModal = ({
         <div className="flex flex-col gap-y-6 p-6 sm:p-12">
           <div className="flex flex-col gap-y-2">
             <h3 className="text-2xl">We&apos;re sorry to see you go!</h3>
-            <p className="dark:text-polar-500 leading-relaxed text-balance text-gray-500">
+            <p className="dark:text-tarifia-500 leading-relaxed text-balance text-gray-500">
               You&apos;re always welcome back! Let us know why you&apos;re
               leaving to help us improve our product.
             </p>

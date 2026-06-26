@@ -4,7 +4,7 @@ import CreateCustomFieldModalContent from '@/components/CustomFields/CreateCusto
 import CustomFieldTypeLabel from '@/components/CustomFields/CustomFieldTypeLabel'
 import UpdateCustomFieldModalContent from '@/components/CustomFields/UpdateCustomFieldModalContent'
 import { DashboardBody } from '@/components/Layout/DashboardLayout'
-import { InlineModal } from '@polar-sh/orbit'
+import { InlineModal } from '@tarifia-sh/orbit'
 import { toast } from '@/components/Toast/use-toast'
 import { useCustomFields, useDeleteCustomField } from '@/hooks/queries'
 import { extractApiErrorMessage } from '@/utils/api/errors'
@@ -16,19 +16,19 @@ import {
 } from '@/utils/datatable'
 import AddOutlined from '@mui/icons-material/AddOutlined'
 import MoreVertOutlined from '@mui/icons-material/MoreVertOutlined'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
 import {
   DataTable,
   DataTableColumnDef,
   DataTableColumnHeader,
-} from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@polar-sh/ui/components/ui/dropdown-menu'
+} from '@tarifia-sh/ui/components/ui/dropdown-menu'
 import { useRouter } from 'next/navigation'
 import React, { useCallback, useState } from 'react'
 
@@ -198,7 +198,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
             </DropdownMenuTrigger>
             <DropdownMenuContent
               align="end"
-              className="dark:bg-polar-800 bg-gray-50 shadow-lg"
+              className="dark:bg-tarifia-800 bg-gray-50 shadow-lg"
             >
               <DropdownMenuItem
                 onClick={() => onCustomFieldSelected(customField)}

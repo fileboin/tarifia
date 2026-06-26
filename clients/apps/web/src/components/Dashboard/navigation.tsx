@@ -1,6 +1,6 @@
 import { AppealCaseUnreadBadge } from '@/components/Organization/HumanReviewCase/AppealCaseUnreadBadge'
 import { useHasPermission } from '@/hooks/permissions'
-import { PolarHog, usePostHog } from '@/hooks/posthog'
+import { TarifiaHog, usePostHog } from '@/hooks/posthog'
 import AllInclusiveOutlined from '@mui/icons-material/AllInclusiveOutlined'
 import AttachMoneyOutlined from '@mui/icons-material/AttachMoneyOutlined'
 import CodeOutlined from '@mui/icons-material/CodeOutlined'
@@ -14,7 +14,7 @@ import ShoppingBagOutlined from '@mui/icons-material/ShoppingBagOutlined'
 import SpaceDashboardOutlined from '@mui/icons-material/SpaceDashboardOutlined'
 import TrendingUp from '@mui/icons-material/TrendingUp'
 import TuneOutlined from '@mui/icons-material/TuneOutlined'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { ShoppingCart } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { useMemo } from 'react'
@@ -97,7 +97,7 @@ const applyIsActive = (path: string): ((r: Route) => RouteWithActive) => {
 const useResolveRoutes = (
   routesResolver: (
     org?: schemas['Organization'],
-    posthog?: PolarHog,
+    posthog?: TarifiaHog,
   ) => Route[],
   org?: schemas['Organization'],
   allowAll?: boolean,

@@ -1,5 +1,5 @@
 import { CONFIG } from '@/utils/config'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 
 import {
   SyntaxHighlighterClient,
@@ -38,22 +38,22 @@ export const MeterGetStarted = ({ meter }: MeterGetStartedProps) => {
     : 'some_arbitrary_name'
 
   return (
-    <div className="dark:bg-polar-800 dark:border-polar-700 flex flex-col gap-y-4 rounded-2xl border border-gray-200 bg-gray-100 p-6">
+    <div className="dark:bg-tarifia-800 dark:border-tarifia-700 flex flex-col gap-y-4 rounded-2xl border border-gray-200 bg-gray-100 p-6">
       <div className="flex flex-col gap-y-2">
         <h2 className="text-xl">Get started with metering</h2>
-        <p className="dark:text-polar-500 text-gray-500">
+        <p className="dark:text-tarifia-500 text-gray-500">
           Meter usage by sending events which match the Meter Filter, to the
-          Polar Ingestion API.
+          Tarifia Ingestion API.
         </p>
       </div>
-      <pre className="dark:bg-polar-900 rounded-lg bg-white p-4 font-mono text-sm">
+      <pre className="dark:bg-tarifia-900 rounded-lg bg-white p-4 font-mono text-sm">
         <SyntaxHighlighterProvider>
           <SyntaxHighlighterClient
             lang="typescript"
-            code={`import { Polar } from "@polar-sh/sdk";
+            code={`import { Tarifia } from "@tarifia-sh/sdk";
 
-const polar = new Polar({
-  accessToken: process.env["POLAR_ACCESS_TOKEN"] ?? "",${
+const tarifia = new Tarifia({
+  accessToken: process.env["TARIFIA_ACCESS_TOKEN"] ?? "",${
     CONFIG.IS_SANDBOX
       ? `
   server: "sandbox",`
@@ -62,7 +62,7 @@ const polar = new Polar({
 });
 
 export const GET = async (req: Request, res: Response) => {
-  await polar.events.ingest({
+  await tarifia.events.ingest({
     events: [
       {
         name: "${nameClauseValue}",

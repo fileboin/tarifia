@@ -1,5 +1,5 @@
-import { getMetricsRangeDates, schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
+import { getMetricsRangeDates, schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
 import {
   differenceInDays,
   differenceInMonths,

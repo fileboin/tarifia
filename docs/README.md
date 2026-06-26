@@ -1,4 +1,4 @@
-# Polar docs
+# Tarifia docs
 
 Using Mintlify.
 
@@ -27,7 +27,7 @@ We have a script that takes care of:
     * Existing pages are not updated, so you can safely edit them without losing your changes.
 
 ```bash Terminal
-./update-schema.sh https://spec.speakeasy.com/polar/polar/polar-oas-with-code-samples
+./update-schema.sh https://spec.speakeasy.com/tarifia/tarifia/tarifia-oas-with-code-samples
 ```
 
 The script is run automatically by the CI pipeline every day and opens a PR if there are changes.

@@ -3,7 +3,7 @@ import {
   Footer,
   Intro,
   Text,
-  WrapperPolar,
+  WrapperTarifia,
 } from '../components/foundation'
 import type { schemas } from '../types'
 
@@ -13,15 +13,15 @@ export function OrganizationOffboarded({
   account_url,
 }: schemas['OrganizationOffboardedProps']) {
   return (
-    <WrapperPolar
-      preview={`${organization_name} has been offboarded from Polar`}
+    <WrapperTarifia
+      preview={`${organization_name} has been offboarded from Tarifia`}
     >
       <Intro headline={`${organization_name} has been offboarded`}>
         Your organization{' '}
         <Text as="span" weight="bold">
           {organization_name}
         </Text>{' '}
-        has been offboarded from Polar. New payments, including checkouts and
+        has been offboarded from Tarifia. New payments, including checkouts and
         subscription renewals, are now disabled.
       </Intro>
       <Text>
@@ -34,14 +34,14 @@ export function OrganizationOffboarded({
         help.
       </Text>
       <Footer email={email} />
-    </WrapperPolar>
+    </WrapperTarifia>
   )
 }
 
 OrganizationOffboarded.PreviewProps = {
   email: 'admin@example.com',
   organization_name: 'Acme Inc.',
-  account_url: 'https://polar.sh/dashboard/acme-inc/finance/account',
+  account_url: 'https://tarifia.sh/dashboard/acme-inc/finance/account',
 }
 
 export default OrganizationOffboarded

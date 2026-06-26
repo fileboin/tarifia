@@ -1,7 +1,7 @@
 'use client'
 
-import type { Client, schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
+import type { Client, schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
 import type EventEmitter from 'eventemitter3'
 import { useCallback, useRef, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
@@ -125,7 +125,7 @@ const DownloadReceipt = ({
           Try again
         </Button>
         <Button type="button" asChild className="w-full">
-          <a href="mailto:support@polar.sh">Contact support</a>
+          <a href="mailto:support@tarifia.sh">Contact support</a>
         </Button>
       </div>
     )

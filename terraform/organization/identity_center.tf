@@ -10,29 +10,29 @@ locals {
   }
 
   identity_center_groups = {
-    awsadmins    = { display_name = "awsadmins@polar.sh" }
-    awsengineers = { display_name = "awsengineers@polar.sh" }
-    engineering  = { display_name = "engineering@polar.sh" }
-    awsaccess    = { display_name = "awsaccess@polar.sh" }
+    awsadmins    = { display_name = "awsadmins@tarifia.sh" }
+    awsengineers = { display_name = "awsengineers@tarifia.sh" }
+    engineering  = { display_name = "engineering@tarifia.sh" }
+    awsaccess    = { display_name = "awsaccess@tarifia.sh" }
   }
 
   access_tiers = {
     admin = {
-      base_name          = "PolarAdmin"
+      base_name          = "TarifiaAdmin"
       description        = "Unrestricted administrator access."
       managed_policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
       boundary           = false
       groups             = ["awsadmins"]
     }
     engineering = {
-      base_name          = "PolarEngineering"
-      description        = "Power-user access (no IAM/Organizations management) confined by the Polar permission boundary."
+      base_name          = "TarifiaEngineering"
+      description        = "Power-user access (no IAM/Organizations management) confined by the Tarifia permission boundary."
       managed_policy_arn = "arn:aws:iam::aws:policy/PowerUserAccess"
       boundary           = true
       groups             = ["awsengineers", "engineering"]
     }
     read_only = {
-      base_name          = "PolarReadOnly"
+      base_name          = "TarifiaReadOnly"
       description        = "Read-only access across the account."
       managed_policy_arn = "arn:aws:iam::aws:policy/ReadOnlyAccess"
       boundary           = false

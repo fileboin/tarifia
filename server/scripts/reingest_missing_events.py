@@ -14,16 +14,16 @@ import typer
 from sqlalchemy import select
 from sqlalchemy.dialects.postgresql import insert
 
-from polar import tasks  # noqa: F401
-from polar.event.service import event as event_service
-from polar.integrations.tinybird.client import TinybirdClient, client
-from polar.kit.db.postgres import AsyncSession, create_async_sessionmaker
-from polar.kit.utils import utc_now
-from polar.models import Customer, Event
-from polar.models.event import EventSource
-from polar.postgres import create_async_engine
-from polar.redis import create_redis
-from polar.worker import JobQueueManager
+from tarifia import tasks  # noqa: F401
+from tarifia.event.service import event as event_service
+from tarifia.integrations.tinybird.client import TinybirdClient, client
+from tarifia.kit.db.postgres import AsyncSession, create_async_sessionmaker
+from tarifia.kit.utils import utc_now
+from tarifia.models import Customer, Event
+from tarifia.models.event import EventSource
+from tarifia.postgres import create_async_engine
+from tarifia.redis import create_redis
+from tarifia.worker import JobQueueManager
 
 cli = typer.Typer()
 

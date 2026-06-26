@@ -14,18 +14,18 @@ import LinkedIn from '@mui/icons-material/LinkedIn'
 import Public from '@mui/icons-material/Public'
 import X from '@mui/icons-material/X'
 import YouTube from '@mui/icons-material/YouTube'
-import { enums, isValidationError, schemas } from '@polar-sh/client'
-import { Avatar } from '@polar-sh/orbit'
-import { Button } from '@polar-sh/orbit'
-import CopyToClipboardInput from '@polar-sh/ui/components/atoms/CopyToClipboardInput'
-import CountryPicker from '@polar-sh/ui/components/atoms/CountryPicker'
-import { Input } from '@polar-sh/orbit'
+import { enums, isValidationError, schemas } from '@tarifia-sh/client'
+import { Avatar } from '@tarifia-sh/orbit'
+import { Button } from '@tarifia-sh/orbit'
+import CopyToClipboardInput from '@tarifia-sh/ui/components/atoms/CopyToClipboardInput'
+import CountryPicker from '@tarifia-sh/ui/components/atoms/CountryPicker'
+import { Input } from '@tarifia-sh/orbit'
 import {
   Form,
   FormControl,
   FormField,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { AlertTriangle, CheckCircle, Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import React, { useCallback } from 'react'
@@ -158,7 +158,7 @@ const OrganizationSocialLinks = ({
                     onClick={() => {
                       field.onChange(socials.filter((_, i) => i !== index))
                     }}
-                    className="dark:text-polar-400 text-gray-400 hover:text-gray-600"
+                    className="dark:text-tarifia-400 text-gray-400 hover:text-gray-600"
                   >
                     <CloseOutlined fontSize="small" />
                   </Button>
@@ -269,7 +269,7 @@ const OrganizationDetailsForm: React.FC<OrganizationDetailsFormProps> = ({
                     />
                     {!readOnly && (
                       <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity hover:opacity-100">
-                        <AddPhotoAlternateOutlined className="dark:text-polar-400 text-gray-600" />
+                        <AddPhotoAlternateOutlined className="dark:text-tarifia-400 text-gray-600" />
                       </div>
                     )}
                   </div>
@@ -427,7 +427,7 @@ const OrganizationDetailsForm: React.FC<OrganizationDetailsFormProps> = ({
         <div>
           <div className="mb-4 flex flex-col items-start">
             <label className="block text-sm font-medium">Social Media</label>
-            <p className="dark:text-polar-400 mt-2 text-xs text-gray-600">
+            <p className="dark:text-tarifia-400 mt-2 text-xs text-gray-600">
               Your personal social media links are used for identity
               verification. They will never be shown publicly.
             </p>

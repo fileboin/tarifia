@@ -4,20 +4,20 @@ sidebarTitle: "Embedded Payment Method"
 description: "Embed our payment method flow on your site"
 ---
 
-<img src="https://polar.sh/docs/assets/features/checkout/embed-payment-method/polar-sdk-payment-method.png" />
+<img src="https://tarifia.sh/docs/assets/features/checkout/embed-payment-method/tarifia-sdk-payment-method.png" />
 
 Let your customers securely add a payment method without leaving your site.
 
 ## Getting a session token
 
-Every embed is authenticated with a short-lived **customer session token**. Create it **on your server** to keep the Polar access token secret, then hand the token to the client.
+Every embed is authenticated with a short-lived **customer session token**. Create it **on your server** to keep the Tarifia access token secret, then hand the token to the client.
 
 ```ts
-import { Polar } from "@polar-sh/sdk";
+import { Tarifia } from "@tarifia-sh/sdk";
 
-const polar = new Polar({ accessToken: process.env.POLAR_ACCESS_TOKEN });
+const tarifia = new Tarifia({ accessToken: process.env.TARIFIA_ACCESS_TOKEN });
 
-const session = await polar.customerSessions.create({
+const session = await tarifia.customerSessions.create({
   customerId: "the-customer-id",
 });
 ```
@@ -30,27 +30,27 @@ Start by installing the SDK.
 
 <CodeGroup>
   ```bash npm
-  npm install @polar-sh/checkout
+  npm install @tarifia-sh/checkout
   ```
   ```bash pnpm
-  pnpm add @polar-sh/checkout
+  pnpm add @tarifia-sh/checkout
   ```
   ```bash yarn
-  yarn add @polar-sh/checkout
+  yarn add @tarifia-sh/checkout
   ```
   ```bash bun
-  bun add @polar-sh/checkout
+  bun add @tarifia-sh/checkout
   ```
 </CodeGroup>
 
 ### Modal
 
-`PolarEmbedPaymentMethod.create()` opens the embed as a full-screen modal overlay.
+`TarifiaEmbedPaymentMethod.create()` opens the embed as a full-screen modal overlay.
 
 ```ts
-import { PolarEmbedPaymentMethod } from "@polar-sh/checkout/payment-method";
+import { TarifiaEmbedPaymentMethod } from "@tarifia-sh/checkout/payment-method";
 
-const embed = await PolarEmbedPaymentMethod.create({
+const embed = await TarifiaEmbedPaymentMethod.create({
   sessionToken: session.token,
 });
 
@@ -76,7 +76,7 @@ Open the modal from a Client Component event handler:
 
 ```tsx
 "use client";
-import { PolarEmbedPaymentMethod } from "@polar-sh/checkout/payment-method";
+import { TarifiaEmbedPaymentMethod } from "@tarifia-sh/checkout/payment-method";
 
 interface Props {
   sessionToken: string;
@@ -84,7 +84,7 @@ interface Props {
 
 export function AddPaymentMethodButton({sessionToken}: Props) {
   const onClick = async () => {
-    const embed = await PolarEmbedPaymentMethod.create({ sessionToken });
+    const embed = await TarifiaEmbedPaymentMethod.create({ sessionToken });
     embed.addEventListener("success", (event) => {
       console.log({event});
     });
@@ -99,9 +99,9 @@ export function AddPaymentMethodButton({sessionToken}: Props) {
 Mount a chrome-less, auto-resizing iframe into an element you control:
 
 ```ts
-import { PolarEmbedPaymentMethod } from "@polar-sh/checkout/payment-method";
+import { TarifiaEmbedPaymentMethod } from "@tarifia-sh/checkout/payment-method";
 
-const embed = PolarEmbedPaymentMethod.createInline({
+const embed = TarifiaEmbedPaymentMethod.createInline({
   sessionToken: session.token,
   element: document.getElementById("payment-method")!,
 });
@@ -115,13 +115,13 @@ embed.addEventListener("success", (event) => {
 
 ### Inline embed (React)
 
-Use the `<PolarPaymentMethod />` component:
+Use the `<TarifiaPaymentMethod />` component:
 
 ```tsx
-import { PolarPaymentMethod } from "@polar-sh/checkout/react/payment-method";
+import { TarifiaPaymentMethod } from "@tarifia-sh/checkout/react/payment-method";
 
 return (
-  <PolarPaymentMethod
+  <TarifiaPaymentMethod
     sessionToken={session.token}
     onSuccess={(paymentMethodId) => console.log({paymentMethodId})}
   />
@@ -130,34 +130,34 @@ return (
 
 ### Code Snippet
 
-The simplest integration: add the script and a trigger element with `data-polar-payment-method`. Clicking the element opens the modal.
+The simplest integration: add the script and a trigger element with `data-tarifia-payment-method`. Clicking the element opens the modal.
 
 ```html
-<button data-polar-payment-method="polar_cst_xxx">Add payment method</button>
+<button data-tarifia-payment-method="tarifia_cst_xxx">Add payment method</button>
 
 <script
   defer
   data-auto-init
-  src="https://cdn.jsdelivr.net/npm/@polar-sh/checkout@latest/dist/embed.global.js"
+  src="https://cdn.jsdelivr.net/npm/@tarifia-sh/checkout@latest/dist/embed.global.js"
 ></script>
 ```
 
-The same script also powers embedded checkout triggers — one tag covers every Polar embed.
+The same script also powers embedded checkout triggers — one tag covers every Tarifia embed.
 
 | Attribute                                  | Value           | Description                                                                                       |
 | ------------------------------------------ | --------------- | ------------------------------------------------------------------------------------------------- |
-| `data-polar-payment-method`                | `string`        | **Required.** The session token. Clicking the element opens the modal.                            |
-| `data-polar-payment-method-theme`          | `light \| dark` | Optional theme override.                                                                          |
-| `data-polar-payment-method-set-as-default` | `true \| false` | Optional. Default `true`. Pass `"false"` to add the card without overriding the existing default. |
-| `data-polar-payment-method-return-url`     | `string`        | Optional. Return URL for redirect-based payment methods. Defaults to the current page.            |
-| `data-polar-payment-method-locale`         | `string`        | Optional. BCP47 locale (e.g. `'en'`, `'fr-FR'`). Unsupported locales fall back to English.        |
+| `data-tarifia-payment-method`                | `string`        | **Required.** The session token. Clicking the element opens the modal.                            |
+| `data-tarifia-payment-method-theme`          | `light \| dark` | Optional theme override.                                                                          |
+| `data-tarifia-payment-method-set-as-default` | `true \| false` | Optional. Default `true`. Pass `"false"` to add the card without overriding the existing default. |
+| `data-tarifia-payment-method-return-url`     | `string`        | Optional. Return URL for redirect-based payment methods. Defaults to the current page.            |
+| `data-tarifia-payment-method-locale`         | `string`        | Optional. BCP47 locale (e.g. `'en'`, `'fr-FR'`). Unsupported locales fall back to English.        |
 
 ## Localization
 
-The embed is fully localized, pass a BCP47 code via the `locale` option (or `data-polar-payment-method-locale` attribute):
+The embed is fully localized, pass a BCP47 code via the `locale` option (or `data-tarifia-payment-method-locale` attribute):
 
 ```ts
-const embed = await PolarEmbedPaymentMethod.create({
+const embed = await TarifiaEmbedPaymentMethod.create({
   sessionToken: session.token,
   locale: "fr-FR",
 });
@@ -184,9 +184,9 @@ Some payment methods authorise on the provider's own site. The browser navigates
 Read the outcome on the returned page with the static `getRedirectResult()`:
 
 ```ts
-import { PolarEmbedPaymentMethod } from "@polar-sh/checkout/payment-method";
+import { TarifiaEmbedPaymentMethod } from "@tarifia-sh/checkout/payment-method";
 
-const result = PolarEmbedPaymentMethod.getRedirectResult();
+const result = TarifiaEmbedPaymentMethod.getRedirectResult();
 // result: { status: 'succeeded' | 'failed' } | null
 
 if (result?.status === "succeeded") {
@@ -197,7 +197,7 @@ if (result?.status === "succeeded") {
 In React, use the `usePaymentMethodRedirectResult` hook to avoid writing your own effect:
 
 ```tsx
-import { usePaymentMethodRedirectResult } from "@polar-sh/checkout/react/payment-method";
+import { usePaymentMethodRedirectResult } from "@tarifia-sh/checkout/react/payment-method";
 
 usePaymentMethodRedirectResult({
   onSuccess: () => console.log("Payment method added"),

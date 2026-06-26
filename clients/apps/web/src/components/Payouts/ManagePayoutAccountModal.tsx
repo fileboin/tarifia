@@ -5,8 +5,8 @@ import {
 } from '@/hooks/queries/payout_accounts'
 import { toast } from '@/components/Toast/use-toast'
 import { api } from '@/utils/client'
-import { schemas, unwrap } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
+import { schemas, unwrap } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
 import { ExternalLink, Plus, Trash2 } from 'lucide-react'
 import React, { useCallback, useState } from 'react'
 import { useOrganization } from '@/hooks/queries'
@@ -133,12 +133,12 @@ const ManagePayoutAccountModal: React.FC<ManagePayoutAccountModalProps> = ({
           {[...Array(2)].map((_, i) => (
             <div
               key={i}
-              className="dark:bg-polar-800 h-20 animate-pulse rounded-2xl bg-gray-100"
+              className="dark:bg-tarifia-800 h-20 animate-pulse rounded-2xl bg-gray-100"
             />
           ))}
         </div>
       ) : accounts.length === 0 ? (
-        <p className="dark:text-polar-500 text-sm text-gray-500">
+        <p className="dark:text-tarifia-500 text-sm text-gray-500">
           No payout accounts found.
         </p>
       ) : (
@@ -149,7 +149,7 @@ const ManagePayoutAccountModal: React.FC<ManagePayoutAccountModalProps> = ({
             return (
               <li
                 key={account.id}
-                className="dark:border-polar-700 dark:bg-polar-800 flex flex-col gap-y-4 rounded-2xl border border-gray-200 bg-white p-4"
+                className="dark:border-tarifia-700 dark:bg-tarifia-800 flex flex-col gap-y-4 rounded-2xl border border-gray-200 bg-white p-4"
               >
                 <div className="flex flex-row items-center justify-between gap-x-4">
                   <div className="flex flex-row items-center gap-x-3">
@@ -157,7 +157,7 @@ const ManagePayoutAccountModal: React.FC<ManagePayoutAccountModalProps> = ({
                       {account.type}
                     </span>
                     {isActive && (
-                      <span className="dark:bg-polar-700 rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-600 dark:text-blue-300">
+                      <span className="dark:bg-tarifia-700 rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-600 dark:text-blue-300">
                         Active
                       </span>
                     )}
@@ -199,8 +199,8 @@ const ManagePayoutAccountModal: React.FC<ManagePayoutAccountModalProps> = ({
                     )}
                   </div>
                 </div>
-                <div className="dark:border-polar-700 flex flex-row items-center gap-x-4 border-t border-gray-100 pt-3">
-                  <span className="dark:text-polar-400 text-xs text-gray-500">
+                <div className="dark:border-tarifia-700 flex flex-row items-center gap-x-4 border-t border-gray-100 pt-3">
+                  <span className="dark:text-tarifia-400 text-xs text-gray-500">
                     {account.country.toUpperCase()} ·{' '}
                     {account.currency.toUpperCase()}
                   </span>

@@ -10,10 +10,10 @@ from rich.progress import Progress
 from sqlalchemy import func, select, update
 from sqlalchemy.dialects.postgresql import insert
 
-from polar.config import settings
-from polar.kit.db.postgres import AsyncSession, create_async_sessionmaker
-from polar.kit.db.postgres import create_async_engine as _create_async_engine
-from polar.models import Event, EventType
+from tarifia.config import settings
+from tarifia.kit.db.postgres import AsyncSession, create_async_sessionmaker
+from tarifia.kit.db.postgres import create_async_engine as _create_async_engine
+from tarifia.models import Event, EventType
 
 cli = typer.Typer()
 

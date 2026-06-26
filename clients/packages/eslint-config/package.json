@@ -1,5 +1,5 @@
 {
-  "name": "@polar-sh/eslint-config",
+  "name": "@tarifia-sh/eslint-config",
   "version": "0.0.0",
   "type": "module",
   "private": true,

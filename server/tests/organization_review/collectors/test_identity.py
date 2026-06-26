@@ -4,9 +4,9 @@ import pytest
 import stripe as stripe_lib
 from pytest_mock import MockerFixture
 
-from polar.models.user import IdentityVerificationStatus
-from polar.organization_review.collectors.identity import collect_identity_data
-from polar.organization_review.schemas import IdentityData
+from tarifia.models.user import IdentityVerificationStatus
+from tarifia.organization_review.collectors.identity import collect_identity_data
+from tarifia.organization_review.schemas import IdentityData
 
 
 def _build_user(
@@ -51,7 +51,7 @@ class TestCollectIdentityData:
             }
         )
         mocker.patch(
-            "polar.organization_review.collectors.identity.stripe_service.get_verification_session",
+            "tarifia.organization_review.collectors.identity.stripe_service.get_verification_session",
             return_value=vs,
         )
 
@@ -81,7 +81,7 @@ class TestCollectIdentityData:
             }
         )
         mocker.patch(
-            "polar.organization_review.collectors.identity.stripe_service.get_verification_session",
+            "tarifia.organization_review.collectors.identity.stripe_service.get_verification_session",
             return_value=vs,
         )
 
@@ -112,7 +112,7 @@ class TestCollectIdentityData:
             }
         )
         mocker.patch(
-            "polar.organization_review.collectors.identity.stripe_service.get_verification_session",
+            "tarifia.organization_review.collectors.identity.stripe_service.get_verification_session",
             return_value=vs,
         )
 
@@ -137,7 +137,7 @@ class TestCollectIdentityData:
             }
         )
         mocker.patch(
-            "polar.organization_review.collectors.identity.stripe_service.get_verification_session",
+            "tarifia.organization_review.collectors.identity.stripe_service.get_verification_session",
             return_value=vs,
         )
 
@@ -149,7 +149,7 @@ class TestCollectIdentityData:
     async def test_stripe_error_handled(self, mocker: MockerFixture) -> None:
         user = _build_user()
         mocker.patch(
-            "polar.organization_review.collectors.identity.stripe_service.get_verification_session",
+            "tarifia.organization_review.collectors.identity.stripe_service.get_verification_session",
             side_effect=stripe_lib.StripeError("API error"),
         )
 

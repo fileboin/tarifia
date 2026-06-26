@@ -17,23 +17,23 @@ import { Events } from '@/components/Events/Events'
 import { ParsedMetricPeriod } from '@/hooks/queries/metrics'
 import { useSubscriptions } from '@/hooks/queries/subscriptions'
 import ArrowBackOutlined from '@mui/icons-material/ArrowBackOutlined'
-import { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
-import FormattedInterval from '@polar-sh/ui/components/atoms/FormattedInterval'
-import ShadowBox from '@polar-sh/ui/components/atoms/ShadowBox'
+import { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
+import FormattedInterval from '@tarifia-sh/ui/components/atoms/FormattedInterval'
+import ShadowBox from '@tarifia-sh/ui/components/atoms/ShadowBox'
 import { UTCDate } from '@date-fns/utc'
 import { endOfMonth, startOfMonth, subMonths } from 'date-fns'
-import { Button } from '@polar-sh/orbit'
+import { Button } from '@tarifia-sh/orbit'
 import {
   Card,
   CardContent,
   CardHeader,
-} from '@polar-sh/ui/components/atoms/Card'
+} from '@tarifia-sh/ui/components/atoms/Card'
 import Link from 'next/link'
 import { parseAsIsoDateTime, parseAsStringLiteral, useQueryState } from 'nuqs'
 import { useInViewport } from '@/hooks/utils'
 import { useCallback, useEffect, useMemo } from 'react'
-import { Avatar } from '@polar-sh/orbit'
+import { Avatar } from '@tarifia-sh/orbit'
 
 interface CustomerMeterPageProps {
   organization: schemas['Organization']
@@ -174,14 +174,14 @@ const CustomerMeterPage = ({
           <div className="flex flex-row items-center gap-4">
             <Link
               href={`/dashboard/${organization.slug}/customers/${customer.id}`}
-              className="dark:text-polar-500 shrink-0 text-gray-400 transition-colors hover:text-gray-900 dark:hover:text-white"
+              className="dark:text-tarifia-500 shrink-0 text-gray-400 transition-colors hover:text-gray-900 dark:hover:text-white"
             >
               <ArrowBackOutlined fontSize="small" />
             </Link>
             <div className="flex flex-row items-center gap-x-4">
               <p className="truncate text-lg font-medium">{meter.name}</p>
               {subscription && (
-                <span className="dark:text-polar-500 text-lg text-gray-500">
+                <span className="dark:text-tarifia-500 text-lg text-gray-500">
                   {subscription.product.name}
                 </span>
               )}
@@ -225,7 +225,7 @@ const CustomerMeterPage = ({
             <p className="text-lg">
               {(customer.name?.length ?? 0) > 0 ? customer.name : '—'}
             </p>
-            <div className="dark:text-polar-500 flex flex-row items-center text-base font-normal text-gray-500">
+            <div className="dark:text-tarifia-500 flex flex-row items-center text-base font-normal text-gray-500">
               <span>{customer.email ?? '—'}</span>
             </div>
           </div>
@@ -258,8 +258,8 @@ const CustomerMeterPage = ({
             </StatisticCard>
           </div>
         )}
-        <ShadowBox className="dark:bg-polar-800 flex flex-col gap-y-0 p-2">
-          <div className="dark:bg-polar-900 rounded-3xl bg-white p-4">
+        <ShadowBox className="dark:bg-tarifia-800 flex flex-col gap-y-0 p-2">
+          <div className="dark:bg-tarifia-900 rounded-3xl bg-white p-4">
             <MetricChart
               data={
                 (quantities?.quantities ??
@@ -279,7 +279,7 @@ const CustomerMeterPage = ({
           <div className="flex flex-row items-center justify-between px-6 py-4">
             <div className="flex flex-row items-center gap-x-2">
               <span className="h-2 w-2 rounded-full bg-blue-500" />
-              <span className="dark:text-polar-500 text-gray-500">Total</span>
+              <span className="dark:text-tarifia-500 text-gray-500">Total</span>
             </div>
             <span className="font-medium">
               <FormattedUnits value={quantities?.total ?? 0} />
@@ -294,7 +294,7 @@ const CustomerMeterPage = ({
           <div className="flex flex-col gap-y-6">
             <div className="flex flex-col gap-y-1">
               <h3 className="text-xl">Events</h3>
-              <p className="dark:text-polar-500 text-gray-500">
+              <p className="dark:text-tarifia-500 text-gray-500">
                 Ingested events for the selected period
               </p>
             </div>
@@ -370,7 +370,7 @@ const CustomerMeterActivityCards = ({
         <Card key={i} className="flex-1 rounded-3xl">
           <CardHeader className="flex flex-col gap-y-0">
             <h3 className="text-lg">{card.title}</h3>
-            <span className="dark:text-polar-500 text-gray-500">
+            <span className="dark:text-tarifia-500 text-gray-500">
               {card.startDate.toLocaleDateString('en-US', {
                 month: 'long',
                 day: 'numeric',

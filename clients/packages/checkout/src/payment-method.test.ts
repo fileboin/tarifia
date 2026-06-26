@@ -1,39 +1,39 @@
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest'
-import { PolarEmbedPaymentMethod } from './payment-method'
+import { TarifiaEmbedPaymentMethod } from './payment-method'
 
 const ALLOWED_ORIGIN = 'http://127.0.0.1:3000'
-const CUSTOMER_SESSION_TOKEN = 'polar_cst_test_token'
+const CUSTOMER_SESSION_TOKEN = 'tarifia_cst_test_token'
 
 beforeAll(() => {
   // @ts-expect-error - Global defined at build time by tsup
-  globalThis.__POLAR_CHECKOUT_EMBED_SCRIPT_ALLOWED_ORIGINS__ = ALLOWED_ORIGIN
+  globalThis.__TARIFIA_CHECKOUT_EMBED_SCRIPT_ALLOWED_ORIGINS__ = ALLOWED_ORIGIN
 })
 
 const cleanupDom = () => {
   document.querySelectorAll('iframe').forEach((el) => el.remove())
   document.querySelectorAll('style').forEach((el) => el.remove())
   document.querySelectorAll('div').forEach((el) => el.remove())
-  document.body.classList.remove('polar-no-scroll')
+  document.body.classList.remove('tarifia-no-scroll')
 }
 
 const dispatchLoaded = () => {
   window.dispatchEvent(
     new MessageEvent('message', {
       origin: ALLOWED_ORIGIN,
-      data: { type: 'POLAR_PAYMENT_METHOD', event: 'loaded' },
+      data: { type: 'TARIFIA_PAYMENT_METHOD', event: 'loaded' },
     }),
   )
 }
 
-describe('PolarEmbedPaymentMethod', () => {
+describe('TarifiaEmbedPaymentMethod', () => {
   describe('postMessage', () => {
     it('posts a message to the parent window with the correct type', () => {
       const postMessageSpy = vi.spyOn(window.parent, 'postMessage')
 
-      PolarEmbedPaymentMethod.postMessage({ event: 'loaded' }, ALLOWED_ORIGIN)
+      TarifiaEmbedPaymentMethod.postMessage({ event: 'loaded' }, ALLOWED_ORIGIN)
 
       expect(postMessageSpy).toHaveBeenCalledWith(
-        { event: 'loaded', type: 'POLAR_PAYMENT_METHOD' },
+        { event: 'loaded', type: 'TARIFIA_PAYMENT_METHOD' },
         ALLOWED_ORIGIN,
       )
 
@@ -43,7 +43,7 @@ describe('PolarEmbedPaymentMethod', () => {
     it('includes event data for success messages', () => {
       const postMessageSpy = vi.spyOn(window.parent, 'postMessage')
 
-      PolarEmbedPaymentMethod.postMessage(
+      TarifiaEmbedPaymentMethod.postMessage(
         { event: 'success', paymentMethodId: 'pm_123' },
         ALLOWED_ORIGIN,
       )
@@ -52,7 +52,7 @@ describe('PolarEmbedPaymentMethod', () => {
         {
           event: 'success',
           paymentMethodId: 'pm_123',
-          type: 'POLAR_PAYMENT_METHOD',
+          type: 'TARIFIA_PAYMENT_METHOD',
         },
         ALLOWED_ORIGIN,
       )
@@ -65,7 +65,7 @@ describe('PolarEmbedPaymentMethod', () => {
     afterEach(cleanupDom)
 
     it('creates an iframe with the correct src and modal mode', async () => {
-      const promise = PolarEmbedPaymentMethod.create({
+      const promise = TarifiaEmbedPaymentMethod.create({
         sessionToken: CUSTOMER_SESSION_TOKEN,
       })
 
@@ -87,7 +87,7 @@ describe('PolarEmbedPaymentMethod', () => {
     })
 
     it('sets theme query parameter when provided', async () => {
-      const promise = PolarEmbedPaymentMethod.create({
+      const promise = TarifiaEmbedPaymentMethod.create({
         sessionToken: CUSTOMER_SESSION_TOKEN,
         theme: 'dark',
       })
@@ -103,7 +103,7 @@ describe('PolarEmbedPaymentMethod', () => {
     })
 
     it('sets set_default=false when setAsDefault is explicitly false', async () => {
-      const promise = PolarEmbedPaymentMethod.create({
+      const promise = TarifiaEmbedPaymentMethod.create({
         sessionToken: CUSTOMER_SESSION_TOKEN,
         setAsDefault: false,
       })
@@ -118,7 +118,7 @@ describe('PolarEmbedPaymentMethod', () => {
     })
 
     it('omits set_default URL param by default', async () => {
-      const promise = PolarEmbedPaymentMethod.create({
+      const promise = TarifiaEmbedPaymentMethod.create({
         sessionToken: CUSTOMER_SESSION_TOKEN,
       })
 
@@ -132,8 +132,8 @@ describe('PolarEmbedPaymentMethod', () => {
     })
 
     it('forwards a member token verbatim — no client-side type sniffing', async () => {
-      const promise = PolarEmbedPaymentMethod.create({
-        sessionToken: 'polar_mst_test_member',
+      const promise = TarifiaEmbedPaymentMethod.create({
+        sessionToken: 'tarifia_mst_test_member',
       })
 
       dispatchLoaded()
@@ -142,18 +142,18 @@ describe('PolarEmbedPaymentMethod', () => {
       const iframe = document.querySelector('iframe')!
       const src = new URL(iframe.src)
       expect(src.searchParams.get('session_token')).toBe(
-        'polar_mst_test_member',
+        'tarifia_mst_test_member',
       )
 
       embed.close()
     })
 
-    it('adds polar-no-scroll class to body', async () => {
-      const promise = PolarEmbedPaymentMethod.create({
+    it('adds tarifia-no-scroll class to body', async () => {
+      const promise = TarifiaEmbedPaymentMethod.create({
         sessionToken: CUSTOMER_SESSION_TOKEN,
       })
 
-      expect(document.body.classList.contains('polar-no-scroll')).toBe(true)
+      expect(document.body.classList.contains('tarifia-no-scroll')).toBe(true)
 
       dispatchLoaded()
       const embed = await promise
@@ -163,7 +163,7 @@ describe('PolarEmbedPaymentMethod', () => {
     it('calls onLoaded callback when the embed loads', async () => {
       const onLoaded = vi.fn()
 
-      const promise = PolarEmbedPaymentMethod.create({
+      const promise = TarifiaEmbedPaymentMethod.create({
         sessionToken: CUSTOMER_SESSION_TOKEN,
         onLoaded,
       })
@@ -180,7 +180,7 @@ describe('PolarEmbedPaymentMethod', () => {
     afterEach(cleanupDom)
 
     it('removes the iframe from the DOM', async () => {
-      const promise = PolarEmbedPaymentMethod.create({
+      const promise = TarifiaEmbedPaymentMethod.create({
         sessionToken: CUSTOMER_SESSION_TOKEN,
       })
 
@@ -192,8 +192,8 @@ describe('PolarEmbedPaymentMethod', () => {
       expect(document.querySelector('iframe')).toBeNull()
     })
 
-    it('removes polar-no-scroll class from body', async () => {
-      const promise = PolarEmbedPaymentMethod.create({
+    it('removes tarifia-no-scroll class from body', async () => {
+      const promise = TarifiaEmbedPaymentMethod.create({
         sessionToken: CUSTOMER_SESSION_TOKEN,
       })
 
@@ -201,7 +201,7 @@ describe('PolarEmbedPaymentMethod', () => {
       const embed = await promise
       embed.close()
 
-      expect(document.body.classList.contains('polar-no-scroll')).toBe(false)
+      expect(document.body.classList.contains('tarifia-no-scroll')).toBe(false)
     })
   })
 
@@ -209,7 +209,7 @@ describe('PolarEmbedPaymentMethod', () => {
     afterEach(cleanupDom)
 
     it('dispatches close event and removes iframe', async () => {
-      const promise = PolarEmbedPaymentMethod.create({
+      const promise = TarifiaEmbedPaymentMethod.create({
         sessionToken: CUSTOMER_SESSION_TOKEN,
       })
 
@@ -219,7 +219,7 @@ describe('PolarEmbedPaymentMethod', () => {
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_PAYMENT_METHOD', event: 'close' },
+          data: { type: 'TARIFIA_PAYMENT_METHOD', event: 'close' },
         }),
       )
 
@@ -228,7 +228,7 @@ describe('PolarEmbedPaymentMethod', () => {
     })
 
     it('prevents close after confirmed event', async () => {
-      const promise = PolarEmbedPaymentMethod.create({
+      const promise = TarifiaEmbedPaymentMethod.create({
         sessionToken: CUSTOMER_SESSION_TOKEN,
       })
 
@@ -238,13 +238,13 @@ describe('PolarEmbedPaymentMethod', () => {
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_PAYMENT_METHOD', event: 'confirmed' },
+          data: { type: 'TARIFIA_PAYMENT_METHOD', event: 'confirmed' },
         }),
       )
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_PAYMENT_METHOD', event: 'close' },
+          data: { type: 'TARIFIA_PAYMENT_METHOD', event: 'close' },
         }),
       )
 
@@ -253,7 +253,7 @@ describe('PolarEmbedPaymentMethod', () => {
     })
 
     it('auto-closes the modal on success', async () => {
-      const promise = PolarEmbedPaymentMethod.create({
+      const promise = TarifiaEmbedPaymentMethod.create({
         sessionToken: CUSTOMER_SESSION_TOKEN,
       })
 
@@ -263,14 +263,14 @@ describe('PolarEmbedPaymentMethod', () => {
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_PAYMENT_METHOD', event: 'confirmed' },
+          data: { type: 'TARIFIA_PAYMENT_METHOD', event: 'confirmed' },
         }),
       )
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
           data: {
-            type: 'POLAR_PAYMENT_METHOD',
+            type: 'TARIFIA_PAYMENT_METHOD',
             event: 'success',
             paymentMethodId: 'pm_123',
           },
@@ -282,7 +282,7 @@ describe('PolarEmbedPaymentMethod', () => {
     })
 
     it('skips the default auto-close when success listener calls preventDefault', async () => {
-      const promise = PolarEmbedPaymentMethod.create({
+      const promise = TarifiaEmbedPaymentMethod.create({
         sessionToken: CUSTOMER_SESSION_TOKEN,
       })
 
@@ -294,7 +294,7 @@ describe('PolarEmbedPaymentMethod', () => {
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
           data: {
-            type: 'POLAR_PAYMENT_METHOD',
+            type: 'TARIFIA_PAYMENT_METHOD',
             event: 'success',
             paymentMethodId: 'pm_123',
           },
@@ -308,7 +308,7 @@ describe('PolarEmbedPaymentMethod', () => {
     it('forwards success event detail to listeners', async () => {
       const successListener = vi.fn()
 
-      const promise = PolarEmbedPaymentMethod.create({
+      const promise = TarifiaEmbedPaymentMethod.create({
         sessionToken: CUSTOMER_SESSION_TOKEN,
       })
 
@@ -320,7 +320,7 @@ describe('PolarEmbedPaymentMethod', () => {
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
           data: {
-            type: 'POLAR_PAYMENT_METHOD',
+            type: 'TARIFIA_PAYMENT_METHOD',
             event: 'success',
             paymentMethodId: 'pm_abc',
           },
@@ -337,7 +337,7 @@ describe('PolarEmbedPaymentMethod', () => {
     it('forwards error event detail to listeners', async () => {
       const errorListener = vi.fn()
 
-      const promise = PolarEmbedPaymentMethod.create({
+      const promise = TarifiaEmbedPaymentMethod.create({
         sessionToken: CUSTOMER_SESSION_TOKEN,
       })
 
@@ -349,7 +349,7 @@ describe('PolarEmbedPaymentMethod', () => {
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
           data: {
-            type: 'POLAR_PAYMENT_METHOD',
+            type: 'TARIFIA_PAYMENT_METHOD',
             event: 'error',
             code: 'unauthorized',
           },
@@ -365,7 +365,7 @@ describe('PolarEmbedPaymentMethod', () => {
     })
 
     it('silently drops resize messages in modal mode', async () => {
-      const promise = PolarEmbedPaymentMethod.create({
+      const promise = TarifiaEmbedPaymentMethod.create({
         sessionToken: CUSTOMER_SESSION_TOKEN,
       })
 
@@ -379,7 +379,7 @@ describe('PolarEmbedPaymentMethod', () => {
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
           data: {
-            type: 'POLAR_PAYMENT_METHOD',
+            type: 'TARIFIA_PAYMENT_METHOD',
             event: 'resize',
             height: 480,
           },
@@ -393,7 +393,7 @@ describe('PolarEmbedPaymentMethod', () => {
     it('ignores messages from disallowed origins', async () => {
       const closeListener = vi.fn()
 
-      const promise = PolarEmbedPaymentMethod.create({
+      const promise = TarifiaEmbedPaymentMethod.create({
         sessionToken: CUSTOMER_SESSION_TOKEN,
       })
 
@@ -404,7 +404,7 @@ describe('PolarEmbedPaymentMethod', () => {
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: 'https://evil.com',
-          data: { type: 'POLAR_PAYMENT_METHOD', event: 'close' },
+          data: { type: 'TARIFIA_PAYMENT_METHOD', event: 'close' },
         }),
       )
 
@@ -417,7 +417,7 @@ describe('PolarEmbedPaymentMethod', () => {
     it('ignores messages with the wrong type', async () => {
       const closeListener = vi.fn()
 
-      const promise = PolarEmbedPaymentMethod.create({
+      const promise = TarifiaEmbedPaymentMethod.create({
         sessionToken: CUSTOMER_SESSION_TOKEN,
       })
 
@@ -428,7 +428,7 @@ describe('PolarEmbedPaymentMethod', () => {
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_CHECKOUT', event: 'close' },
+          data: { type: 'TARIFIA_CHECKOUT', event: 'close' },
         }),
       )
 
@@ -437,7 +437,7 @@ describe('PolarEmbedPaymentMethod', () => {
     })
 
     it('skips the default close action when preventDefault is called', async () => {
-      const promise = PolarEmbedPaymentMethod.create({
+      const promise = TarifiaEmbedPaymentMethod.create({
         sessionToken: CUSTOMER_SESSION_TOKEN,
       })
 
@@ -448,7 +448,7 @@ describe('PolarEmbedPaymentMethod', () => {
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_PAYMENT_METHOD', event: 'close' },
+          data: { type: 'TARIFIA_PAYMENT_METHOD', event: 'close' },
         }),
       )
 
@@ -463,7 +463,7 @@ describe('PolarEmbedPaymentMethod', () => {
     it('removes event listeners', async () => {
       const listener = vi.fn()
 
-      const promise = PolarEmbedPaymentMethod.create({
+      const promise = TarifiaEmbedPaymentMethod.create({
         sessionToken: CUSTOMER_SESSION_TOKEN,
       })
 
@@ -475,7 +475,7 @@ describe('PolarEmbedPaymentMethod', () => {
       window.dispatchEvent(
         new MessageEvent('message', {
           origin: ALLOWED_ORIGIN,
-          data: { type: 'POLAR_PAYMENT_METHOD', event: 'confirmed' },
+          data: { type: 'TARIFIA_PAYMENT_METHOD', event: 'confirmed' },
         }),
       )
 
@@ -487,17 +487,17 @@ describe('PolarEmbedPaymentMethod', () => {
   describe('init', () => {
     afterEach(() => {
       document
-        .querySelectorAll('[data-polar-payment-method]')
+        .querySelectorAll('[data-tarifia-payment-method]')
         .forEach((el) => el.remove())
       cleanupDom()
     })
 
     it('attaches click handlers that open the embed with the token', () => {
       const button = document.createElement('button')
-      button.setAttribute('data-polar-payment-method', CUSTOMER_SESSION_TOKEN)
+      button.setAttribute('data-tarifia-payment-method', CUSTOMER_SESSION_TOKEN)
       document.body.appendChild(button)
 
-      PolarEmbedPaymentMethod.init()
+      TarifiaEmbedPaymentMethod.init()
 
       button.click()
 
@@ -507,13 +507,13 @@ describe('PolarEmbedPaymentMethod', () => {
       expect(src.searchParams.get('session_token')).toBe(CUSTOMER_SESSION_TOKEN)
     })
 
-    it('reads theme from data-polar-payment-method-theme', () => {
+    it('reads theme from data-tarifia-payment-method-theme', () => {
       const button = document.createElement('button')
-      button.setAttribute('data-polar-payment-method', CUSTOMER_SESSION_TOKEN)
-      button.setAttribute('data-polar-payment-method-theme', 'dark')
+      button.setAttribute('data-tarifia-payment-method', CUSTOMER_SESSION_TOKEN)
+      button.setAttribute('data-tarifia-payment-method-theme', 'dark')
       document.body.appendChild(button)
 
-      PolarEmbedPaymentMethod.init()
+      TarifiaEmbedPaymentMethod.init()
       button.click()
 
       const iframe = document.querySelector('iframe')
@@ -523,20 +523,20 @@ describe('PolarEmbedPaymentMethod', () => {
 
     it('does nothing when the data attribute is empty', () => {
       const button = document.createElement('button')
-      button.setAttribute('data-polar-payment-method', '')
+      button.setAttribute('data-tarifia-payment-method', '')
       document.body.appendChild(button)
 
-      PolarEmbedPaymentMethod.init()
+      TarifiaEmbedPaymentMethod.init()
       button.click()
 
       expect(document.querySelector('iframe')).toBeNull()
     })
   })
 
-  describe('window.Polar', () => {
-    it('exposes EmbedPaymentMethod on window.Polar', () => {
-      expect(window.Polar).toBeDefined()
-      expect(window.Polar.EmbedPaymentMethod).toBe(PolarEmbedPaymentMethod)
+  describe('window.Tarifia', () => {
+    it('exposes EmbedPaymentMethod on window.Tarifia', () => {
+      expect(window.Tarifia).toBeDefined()
+      expect(window.Tarifia.EmbedPaymentMethod).toBe(TarifiaEmbedPaymentMethod)
     })
   })
 })

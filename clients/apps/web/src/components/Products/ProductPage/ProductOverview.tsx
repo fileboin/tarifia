@@ -5,12 +5,12 @@ import { useDiscounts } from '@/hooks/queries'
 import { useOrders } from '@/hooks/queries/orders'
 import { useSubscriptions } from '@/hooks/queries/subscriptions'
 import { getDiscountDisplay } from '@/utils/discount'
-import { schemas } from '@polar-sh/client'
-import { formatCurrency } from '@polar-sh/currency'
-import { Avatar } from '@polar-sh/orbit'
-import { Button } from '@polar-sh/orbit'
-import { DataTable, DataTableColumnHeader } from '@polar-sh/orbit'
-import FormattedDateTime from '@polar-sh/ui/components/atoms/FormattedDateTime'
+import { schemas } from '@tarifia-sh/client'
+import { formatCurrency } from '@tarifia-sh/currency'
+import { Avatar } from '@tarifia-sh/orbit'
+import { Button } from '@tarifia-sh/orbit'
+import { DataTable, DataTableColumnHeader } from '@tarifia-sh/orbit'
+import FormattedDateTime from '@tarifia-sh/ui/components/atoms/FormattedDateTime'
 import Link from 'next/link'
 
 export interface ProductOverviewProps {
@@ -98,7 +98,7 @@ export const ProductOverview = ({
           <div className="flex flex-row items-center justify-between gap-x-6">
             <div className="flex flex-col gap-y-1">
               <h2 className="text-lg">Subscriptions</h2>
-              <p className="dark:text-polar-500 text-sm text-gray-500">
+              <p className="dark:text-tarifia-500 text-sm text-gray-500">
                 Showing 10 most recent subscriptions for {product.name}
               </p>
             </div>
@@ -128,7 +128,7 @@ export const ProductOverview = ({
                       />
                       <div className="flex flex-col overflow-hidden">
                         <span className="truncate">{customer.name ?? '—'}</span>
-                        <span className="dark:text-polar-500 truncate text-xs text-gray-500">
+                        <span className="dark:text-tarifia-500 truncate text-xs text-gray-500">
                           {customer.email ?? '—'}
                         </span>
                       </div>
@@ -216,7 +216,7 @@ export const ProductOverview = ({
         <div className="flex flex-row items-center justify-between gap-x-6">
           <div className="flex flex-col gap-y-1">
             <h2 className="text-lg">Orders</h2>
-            <p className="dark:text-polar-500 text-sm text-gray-500">
+            <p className="dark:text-tarifia-500 text-sm text-gray-500">
               Showing last 10 orders for {product.name}
             </p>
           </div>
@@ -246,7 +246,7 @@ export const ProductOverview = ({
                     />
                     <div className="flex flex-col overflow-hidden">
                       <span className="truncate">{customer.name ?? '—'}</span>
-                      <span className="dark:text-polar-500 truncate text-xs text-gray-500">
+                      <span className="dark:text-tarifia-500 truncate text-xs text-gray-500">
                         {customer.email ?? '—'}
                       </span>
                     </div>
@@ -314,7 +314,7 @@ export const ProductOverview = ({
           <div className="flex flex-row items-center justify-between gap-x-6">
             <div className="flex flex-col gap-y-1">
               <h2 className="text-lg">Applicable Discounts</h2>
-              <p className="dark:text-polar-500 text-sm text-gray-500">
+              <p className="dark:text-tarifia-500 text-sm text-gray-500">
                 All Discounts valid for {product.name}
               </p>
             </div>

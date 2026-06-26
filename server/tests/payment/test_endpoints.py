@@ -4,9 +4,9 @@ import pytest
 import pytest_asyncio
 from httpx import AsyncClient
 
-from polar.auth.scope import Scope
-from polar.models import Customer, Organization, Payment, Product, UserOrganization
-from polar.models.payment import PaymentTrigger
+from tarifia.auth.scope import Scope
+from tarifia.models import Customer, Organization, Payment, Product, UserOrganization
+from tarifia.models.payment import PaymentTrigger
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_checkout, create_order, create_payment

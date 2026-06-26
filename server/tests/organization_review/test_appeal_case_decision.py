@@ -11,23 +11,23 @@ from datetime import UTC, datetime
 import pytest
 import pytest_asyncio
 
-from polar.models import OrganizationReview
-from polar.models.organization import Organization, OrganizationStatus
-from polar.models.support_case import (
+from tarifia.models import OrganizationReview
+from tarifia.models.organization import Organization, OrganizationStatus
+from tarifia.models.support_case import (
     ReviewAppealSupportCase,
     SupportCaseAudience,
     SupportCaseMessageType,
 )
-from polar.models.user import User
-from polar.organization.service import organization as organization_service
-from polar.organization_review.appeal_case import (
+from tarifia.models.user import User
+from tarifia.organization.service import organization as organization_service
+from tarifia.organization_review.appeal_case import (
     CaseClosedError,
 )
-from polar.organization_review.appeal_case import (
+from tarifia.organization_review.appeal_case import (
     appeal_case as appeal_case_service,
 )
-from polar.postgres import AsyncSession
-from polar.support_case.repository import SupportCaseMessageRepository
+from tarifia.postgres import AsyncSession
+from tarifia.support_case.repository import SupportCaseMessageRepository
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_organization_review
 

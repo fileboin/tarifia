@@ -4,8 +4,8 @@ from functools import wraps
 import typer
 from sqlalchemy import select, update
 
-from polar.enums import TaxBehavior, TaxBehaviorOption
-from polar.models import (
+from tarifia.enums import TaxBehavior, TaxBehaviorOption
+from tarifia.models import (
     Checkout,
     Order,
     Organization,

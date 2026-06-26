@@ -6,7 +6,7 @@ import { Metadata } from 'next'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Meters', // " | Polar is added by the template"
+    title: 'Meters', // " | Tarifia is added by the template"
   }
 }
 

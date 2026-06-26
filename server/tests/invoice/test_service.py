@@ -1,10 +1,10 @@
 import pytest
 import pytest_asyncio
 
-from polar.invoice.service import invoice as invoice_service
-from polar.kit.address import Address, CountryAlpha2
-from polar.models import Customer, Order, Product
-from polar.tax.tax_id import TaxIDFormat
+from tarifia.invoice.service import invoice as invoice_service
+from tarifia.kit.address import Address, CountryAlpha2
+from tarifia.models import Customer, Order, Product
+from tarifia.tax.tax_id import TaxIDFormat
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_order
 
@@ -38,7 +38,7 @@ async def test_create_order_invoice(
             postal_code="90001",
             country=CountryAlpha2("US"),
         ),
-        invoice_number="POLAR-0001",
+        invoice_number="TARIFIA-0001",
     )
 
     invoice_path = await invoice_service.create_order_invoice(order)

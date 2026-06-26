@@ -1,11 +1,11 @@
 import pytest
 
-from polar.enums import PaymentProcessor
-from polar.models import Customer, Organization, Product
-from polar.models.payment import PaymentStatus, PaymentTrigger
-from polar.models.wallet import WalletType
-from polar.payment.service import payment as payment_service
-from polar.postgres import AsyncSession
+from tarifia.enums import PaymentProcessor
+from tarifia.models import Customer, Organization, Product
+from tarifia.models.payment import PaymentStatus, PaymentTrigger
+from tarifia.models.wallet import WalletType
+from tarifia.payment.service import payment as payment_service
+from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_checkout, create_order, create_wallet
 from tests.fixtures.stripe import build_stripe_charge, build_stripe_payment_intent

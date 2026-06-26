@@ -10,25 +10,25 @@ import pytest_asyncio
 from pydantic import ValidationError
 from pytest_mock import MockerFixture
 
-from polar.auth.models import AuthSubject
-from polar.enums import SubscriptionRecurringInterval
-from polar.event.service import event as event_service
-from polar.event.system import SystemEvent
-from polar.exceptions import PolarRequestValidationError
-from polar.kit.time_queries import TimeInterval
-from polar.kit.utils import utc_now
-from polar.meter.aggregation import (
+from tarifia.auth.models import AuthSubject
+from tarifia.enums import SubscriptionRecurringInterval
+from tarifia.event.service import event as event_service
+from tarifia.event.system import SystemEvent
+from tarifia.exceptions import TarifiaRequestValidationError
+from tarifia.kit.time_queries import TimeInterval
+from tarifia.kit.utils import utc_now
+from tarifia.meter.aggregation import (
     Aggregation,
     AggregationFunction,
     CountAggregation,
     PropertyAggregation,
     UniqueAggregation,
 )
-from polar.meter.filter import Filter, FilterClause, FilterConjunction, FilterOperator
-from polar.meter.schemas import MeterCreate, MeterUpdate
-from polar.meter.service import meter as meter_service
-from polar.meter.unit import MeterUnit
-from polar.models import (
+from tarifia.meter.filter import Filter, FilterClause, FilterConjunction, FilterOperator
+from tarifia.meter.schemas import MeterCreate, MeterUpdate
+from tarifia.meter.service import meter as meter_service
+from tarifia.meter.unit import MeterUnit
+from tarifia.models import (
     Account,
     Customer,
     Event,
@@ -40,10 +40,10 @@ from polar.models import (
     User,
     UserOrganization,
 )
-from polar.models.billing_entry import BillingEntryDirection
-from polar.models.customer_seat import SeatStatus
-from polar.models.event import EventSource
-from polar.postgres import AsyncSession
+from tarifia.models.billing_entry import BillingEntryDirection
+from tarifia.models.customer_seat import SeatStatus
+from tarifia.models.event import EventSource
+from tarifia.postgres import AsyncSession
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
@@ -61,7 +61,7 @@ from tests.fixtures.random_objects import (
 
 @pytest.fixture
 def enqueue_job_mock(mocker: MockerFixture) -> AsyncMock:
-    return mocker.patch("polar.meter.service.enqueue_job")
+    return mocker.patch("tarifia.meter.service.enqueue_job")
 
 
 @pytest.mark.asyncio
@@ -238,7 +238,7 @@ class TestUpdate:
             save_fixture, organization=organization, last_billed_event=event
         )
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await meter_service.update(session, meter, meter_update, auth_subject)
 
     @pytest.mark.parametrize(

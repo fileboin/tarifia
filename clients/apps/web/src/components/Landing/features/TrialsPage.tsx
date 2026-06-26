@@ -29,7 +29,7 @@ export const TrialsPage = () => {
       <FeaturePageGraphic graphic={VectorField} />
 
       <FeaturePageIntro>
-        Trials in Polar collect the payment method up front, defer the charge
+        Trials in Tarifia collect the payment method up front, defer the charge
         until the period ends, and then convert without manual intervention.
       </FeaturePageIntro>
 
@@ -41,7 +41,7 @@ export const TrialsPage = () => {
           yet.
         </p>
         <p>
-          When the trial period ends, Polar charges the saved card and the first
+          When the trial period ends, Tarifia charges the saved card and the first
           regular billing cycle begins, all without your code in the loop. If
           the customer cancels mid-trial, no charge is ever attempted.
         </p>
@@ -66,7 +66,7 @@ export const TrialsPage = () => {
             icon: <NotificationsActiveOutlined fontSize="large" />,
             title: 'Conversion reminders',
             description:
-              'Polar emails the customer before the trial ends so the charge is expected.',
+              'Tarifia emails the customer before the trial ends so the charge is expected.',
           },
           {
             icon: <ShieldOutlined fontSize="large" />,
@@ -107,7 +107,7 @@ export const TrialsPage = () => {
 
       <FeatureRichList
         title="Conversion reminders"
-        description="Polar emails the customer before the trial ends so the conversion charge is expected. Reminder timing is calibrated to the trial length."
+        description="Tarifia emails the customer before the trial ends so the conversion charge is expected. Reminder timing is calibrated to the trial length."
         items={[
           {
             title: 'Trials of 3 days or more',
@@ -134,7 +134,7 @@ export const TrialsPage = () => {
         <p>
           Repeat sign-ups are a common problem with trials, especially for
           products that rely on free evaluation periods to drive conversion.
-          Polar offers an optional layer of detection that tracks redemptions
+          Tarifia offers an optional layer of detection that tracks redemptions
           across your products without any setup beyond a toggle.
         </p>
         <p>
@@ -146,7 +146,7 @@ export const TrialsPage = () => {
           method on file. A match on either blocks the trial.
         </p>
         <p>
-          The customer never hits a dead end. Polar refreshes the session
+          The customer never hits a dead end. Tarifia refreshes the session
           without the trial period and the regular paid checkout continues, so a
           returning user can still convert at full price.
         </p>

@@ -1,24 +1,24 @@
 'use client'
 
-import { type schemas } from '@polar-sh/client'
+import { type schemas } from '@tarifia-sh/client'
 import CloseOutlined from '@mui/icons-material/CloseOutlined'
-import { Alert, Button } from '@polar-sh/orbit'
-import { Input } from '@polar-sh/orbit'
-import MoneyInput from '@polar-sh/ui/components/atoms/MoneyInput'
+import { Alert, Button } from '@tarifia-sh/orbit'
+import { Input } from '@tarifia-sh/orbit'
+import MoneyInput from '@tarifia-sh/ui/components/atoms/MoneyInput'
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
 import React, { useCallback, useState } from 'react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
@@ -226,7 +226,7 @@ export const ProductPriceSeatBasedItem: React.FC<
               'group relative',
               hasSingleTier
                 ? ''
-                : 'dark:bg-polar-900 dark:border-polar-700 rounded-2xl border border-gray-200 bg-white p-4',
+                : 'dark:bg-tarifia-900 dark:border-tarifia-700 rounded-2xl border border-gray-200 bg-white p-4',
             )}
             role="group"
             aria-labelledby={`tier-title-${index}-${tierIndex}`}
@@ -235,7 +235,7 @@ export const ProductPriceSeatBasedItem: React.FC<
               <div className="mb-3 flex items-center justify-between">
                 <span
                   id={`tier-title-${index}-${tierIndex}`}
-                  className="dark:text-polar-500 text-sm font-medium text-gray-500"
+                  className="dark:text-tarifia-500 text-sm font-medium text-gray-500"
                 >
                   {getTierTitle(tierIndex, currentTier)}
                 </span>
@@ -244,7 +244,7 @@ export const ProductPriceSeatBasedItem: React.FC<
                     type="button"
                     size="icon"
                     variant="ghost"
-                    className="dark:text-polar-500 h-7 w-7 text-gray-500"
+                    className="dark:text-tarifia-500 h-7 w-7 text-gray-500"
                     onClick={() => removeTier(tierIndex)}
                     aria-label={`Remove ${getTierTitle(tierIndex, currentTier)}`}
                   >

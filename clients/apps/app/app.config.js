@@ -8,7 +8,7 @@ const plugins = [
       image: './assets/images/splash-icon.png',
       imageWidth: 120,
       resizeMode: 'contain',
-      // eslint-disable-next-line @polar/no-hardcoded-colors
+      // eslint-disable-next-line @tarifia/no-hardcoded-colors
       backgroundColor: '#0D0E10',
     },
   ],
@@ -32,8 +32,8 @@ if (!IS_WIDGET_BUILD) {
     '@sentry/react-native/expo',
     {
       url: 'https://sentry.io/',
-      project: 'polar-app',
-      organization: 'polar-sh',
+      project: 'tarifia-app',
+      organization: 'tarifia-sh',
     },
   ])
 }
@@ -42,19 +42,19 @@ plugins.push('@bacons/apple-targets')
 
 module.exports = {
   expo: {
-    name: 'Polar',
-    slug: 'Polar',
+    name: 'Tarifia',
+    slug: 'Tarifia',
     version: '1.6.0',
     orientation: 'portrait',
     icon: './assets/images/icon.png',
-    scheme: 'polar',
+    scheme: 'tarifia',
     userInterfaceStyle: 'dark',
     newArchEnabled: true,
-    owner: 'polar-sh',
+    owner: 'tarifia-sh',
     ios: {
       appleTeamId: '55U3YA3QTA',
       supportsTablet: false,
-      bundleIdentifier: 'com.polarsource.Polar',
+      bundleIdentifier: 'com.tarifiasource.Tarifia',
       infoPlist: {
         ITSAppUsesNonExemptEncryption: false,
       },
@@ -62,21 +62,21 @@ module.exports = {
       entitlements: {
         'com.apple.developer.applesignin': ['Default'],
         'com.apple.security.application-groups': [
-          'group.com.polarsource.Polar',
+          'group.com.tarifiasource.Tarifia',
         ],
         'keychain-access-groups': [
-          '$(AppIdentifierPrefix)com.polarsource.Polar',
+          '$(AppIdentifierPrefix)com.tarifiasource.Tarifia',
         ],
       },
-      associatedDomains: ['applinks:polar.godetour.link'],
+      associatedDomains: ['applinks:tarifia.godetour.link'],
     },
     android: {
       adaptiveIcon: {
         foregroundImage: './assets/images/adaptive-icon.png',
         backgroundColor: '#0D0E10',
       },
-      package: 'com.polarsource.Polar',
-      scheme: 'polar',
+      package: 'com.tarifiasource.Tarifia',
+      scheme: 'tarifia',
       googleServicesFile: './google-services.json',
       intentFilters: [
         {
@@ -85,7 +85,7 @@ module.exports = {
           data: [
             {
               scheme: 'https',
-              host: 'polar.godetour.link',
+              host: 'tarifia.godetour.link',
               pathPrefix: '/baSjUTJtg8',
             },
           ],

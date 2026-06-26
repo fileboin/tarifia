@@ -1,6 +1,6 @@
 'use client'
 
-import { Box } from '@polar-sh/orbit/Box'
+import { Box } from '@tarifia-sh/orbit/Box'
 
 export function AUPBlocker({ categories }: { categories: string[] }) {
   return (
@@ -18,10 +18,10 @@ export function AUPBlocker({ categories }: { categories: string[] }) {
         Not supported: {categories.join(', ')}
       </p>
       <p className="text-sm text-yellow-700 dark:text-yellow-300">
-        Polar is a Merchant of Record for digital products only. Physical goods,
+        Tarifia is a Merchant of Record for digital products only. Physical goods,
         human services, and marketplaces are not permitted under our{' '}
         <a
-          href="https://polar.sh/legal/acceptable-use-policy"
+          href="https://tarifia.sh/legal/acceptable-use-policy"
           className="underline"
           target="_blank"
           rel="noreferrer"

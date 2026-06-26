@@ -69,11 +69,11 @@ describe('CheckoutFormProvider', () => {
       )
     })
 
-    it('surfaces PolarRequestValidationError as field-level form errors', async () => {
+    it('surfaces TarifiaRequestValidationError as field-level form errors', async () => {
       const getCtx = renderWithCheckout({
         update: vi.fn<CheckoutContextProps['update']>(async () =>
           updateErrorResult({
-            error: 'PolarRequestValidationError',
+            error: 'TarifiaRequestValidationError',
             detail: [
               {
                 type: 'value_error',

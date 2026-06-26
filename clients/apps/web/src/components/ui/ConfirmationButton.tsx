@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@polar-sh/orbit'
+import { Button } from '@tarifia-sh/orbit'
 import React, { useEffect, useState } from 'react'
 
 interface ConfirmationButtonProps {

@@ -4,8 +4,8 @@ import {
 } from '@/components/Benefit/utils'
 import { useBenefit } from '@/hooks/queries'
 import { OrganizationContext } from '@/providers/maintainerOrganization'
-import { schemas } from '@polar-sh/client'
-import { Status, type StatusColor } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Status, type StatusColor } from '@tarifia-sh/orbit'
 import Link from 'next/link'
 import { useContext, useMemo } from 'react'
 import { EventCardBase } from './EventCardBase'
@@ -52,7 +52,7 @@ export const BenefitEventCard = ({ event }: BenefitGrantEventCardProps) => {
               {resolveBenefitIcon(benefit.type, 'h-3 w-3')}
               <span className="">{benefit.description ?? '—'}</span>
             </div>
-            <span className="dark:text-polar-500 text-gray-500">
+            <span className="dark:text-tarifia-500 text-gray-500">
               {benefitsDisplayNames[benefit.type]}
             </span>
           </div>

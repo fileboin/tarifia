@@ -1,21 +1,21 @@
-import { FormField } from '@polar-sh/ui/components/ui/form'
+import { FormField } from '@tarifia-sh/ui/components/ui/form'
 
 import ClearOutlined from '@mui/icons-material/ClearOutlined'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { Input } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { Input } from '@tarifia-sh/orbit'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@polar-sh/orbit'
+} from '@tarifia-sh/orbit'
 import {
   FormControl,
   FormItem,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
+} from '@tarifia-sh/ui/components/ui/form'
 import { useCallback } from 'react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { ProductFormType } from './ProductForm/ProductForm'
@@ -129,7 +129,7 @@ export const ProductMetadataForm = () => {
     <FormItem className="flex flex-col gap-2">
       {fields.length > 0 && (
         <div className="flex flex-col gap-2">
-          <div className="dark:text-polar-500 flex flex-row items-center gap-2 text-sm text-gray-500">
+          <div className="dark:text-tarifia-500 flex flex-row items-center gap-2 text-sm text-gray-500">
             <div className="w-48">Key</div>
             <div className="flex flex-1 flex-row gap-2">
               <div className="w-32 shrink-0">Type</div>
@@ -220,13 +220,13 @@ export const ProductMetadataForm = () => {
       )}
 
       {fields.length === 0 && (
-        <p className="dark:text-polar-500 dark:border-polar-700 flex items-center justify-center rounded-2xl border border-gray-300 p-8 text-center text-sm text-gray-500">
+        <p className="dark:text-tarifia-500 dark:border-tarifia-700 flex items-center justify-center rounded-2xl border border-gray-300 p-8 text-center text-sm text-gray-500">
           No metadata added
         </p>
       )}
 
       <div className="flex flex-row items-center justify-end">
-        <p className="dark:text-polar-500 text-sm text-gray-500">
+        <p className="dark:text-tarifia-500 text-sm text-gray-500">
           <Button
             size="sm"
             variant="secondary"

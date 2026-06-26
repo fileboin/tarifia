@@ -200,7 +200,7 @@ jobs:
         uses: docker/metadata-action@v6
         with:
           images: |
-            ghcr.io/polarsource/polar
+            ghcr.io/tarifiasource/tarifia
           tags: |
             type=ref,event=branch
             type=ref,event=pr
@@ -210,7 +210,7 @@ jobs:
             type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Sync AUP to server
-        run: cp "clients/apps/web/src/app/(main)/(website)/(landing)/(mdx)/legal/acceptable-use-policy/page.mdx" "server/polar/organization_review/acceptable-use-policy.mdx"
+        run: cp "clients/apps/web/src/app/(main)/(website)/(landing)/(mdx)/legal/acceptable-use-policy/page.mdx" "server/tarifia/organization_review/acceptable-use-policy.mdx"
 
       - uses: useblacksmith/build-push-action@v2
         id: push
@@ -221,8 +221,8 @@ jobs:
           context: ./server
           target: production
           platforms: linux/amd64
-          cache-from: type=registry,ref=ghcr.io/polarsource/polar:buildcache
-          cache-to: type=registry,ref=ghcr.io/polarsource/polar:buildcache,mode=max
+          cache-from: type=registry,ref=ghcr.io/tarifiasource/tarifia:buildcache
+          cache-to: type=registry,ref=ghcr.io/tarifiasource/tarifia:buildcache,mode=max
           build-args: |
             RELEASE_VERSION=${{ github.sha }}
           secrets: |
@@ -244,7 +244,7 @@ jobs:
         uses: useblacksmith/setup-docker-builder@v1.9.0
 
       - name: Sync AUP to server
-        run: cp "clients/apps/web/src/app/(main)/(website)/(landing)/(mdx)/legal/acceptable-use-policy/page.mdx" "server/polar/organization_review/acceptable-use-policy.mdx"
+        run: cp "clients/apps/web/src/app/(main)/(website)/(landing)/(mdx)/legal/acceptable-use-policy/page.mdx" "server/tarifia/organization_review/acceptable-use-policy.mdx"
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6.2.0
@@ -261,10 +261,10 @@ jobs:
         with:
           push: true
           # Prod repo — add into the tags block once it exists:
-          #   ${{ steps.login-ecr.outputs.registry }}/polar-production-lambda-worker:sha-${{ github.sha }}
+          #   ${{ steps.login-ecr.outputs.registry }}/tarifia-production-lambda-worker:sha-${{ github.sha }}
           tags: |
-            ${{ steps.login-ecr.outputs.registry }}/polar-sandbox-lambda-worker:sha-${{ github.sha }}
-            ${{ steps.login-ecr.outputs.registry }}/polar-sandbox-lambda-worker:latest
+            ${{ steps.login-ecr.outputs.registry }}/tarifia-sandbox-lambda-worker:sha-${{ github.sha }}
+            ${{ steps.login-ecr.outputs.registry }}/tarifia-sandbox-lambda-worker:latest
           context: ./server
           target: lambda
           platforms: linux/amd64
@@ -295,8 +295,8 @@ jobs:
       - name: Update sandbox Lambda function code
         run: |
           aws lambda update-function-code \
-            --function-name polar-sandbox-worker-dummy \
-            --image-uri "${{ steps.login-ecr.outputs.registry }}/polar-sandbox-lambda-worker:sha-${{ github.sha }}" \
+            --function-name tarifia-sandbox-worker-dummy \
+            --image-uri "${{ steps.login-ecr.outputs.registry }}/tarifia-sandbox-lambda-worker:sha-${{ github.sha }}" \
             --publish
 
   # deploy-lambda-production:
@@ -319,8 +319,8 @@ jobs:
   #     - name: Update production Lambda function code
   #       run: |
   #         aws lambda update-function-code \
-  #           --function-name polar-production-lambda-worker \
-  #           --image-uri "${{ steps.login-ecr.outputs.registry }}/polar-production-lambda-worker:sha-${{ github.sha }}" \
+  #           --function-name tarifia-production-lambda-worker \
+  #           --image-uri "${{ steps.login-ecr.outputs.registry }}/tarifia-production-lambda-worker:sha-${{ github.sha }}" \
   #           --publish
 
   deploy-sandbox:

@@ -1,6 +1,6 @@
 # Agent Instructions
 
-This document provides essential guidance for AI agents contributing to the Polar SDK generator. Imagine this file as a new joiner to the team who needs to understand the coding standards, practices, and conventions used in this repository.
+This document provides essential guidance for AI agents contributing to the Tarifia SDK generator. Imagine this file as a new joiner to the team who needs to understand the coding standards, practices, and conventions used in this repository.
 
 ## General Guidelines
 

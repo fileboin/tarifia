@@ -1,5 +1,5 @@
 // Allowed dashboard paths for assistant deep-links. Each entry is appended to
-// `https://polar.sh/to/dashboard/` — the redirector resolves the active
+// `https://tarifia.sh/to/dashboard/` — the redirector resolves the active
 // organization slug at request time, so we never need to embed it.
 //
 // Only overview / non-detail paths are allowed (no `:id`-bearing routes).

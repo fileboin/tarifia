@@ -3,11 +3,11 @@ from datetime import UTC, datetime
 import pytest
 from pytest_mock import MockerFixture
 
-from polar.kit.address import Address, CountryAlpha2
-from polar.kit.db.postgres import AsyncSession
-from polar.locker import Locker
-from polar.models import Account, Customer, Order
-from polar.receipt.service import receipt as receipt_service
+from tarifia.kit.address import Address, CountryAlpha2
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.locker import Locker
+from tarifia.models import Account, Customer, Order
+from tarifia.receipt.service import receipt as receipt_service
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_customer,
@@ -55,9 +55,9 @@ async def _allocated_order(
 
 
 def _mock_render(mocker: MockerFixture):  # type: ignore[no-untyped-def]
-    mocker.patch("polar.receipt.service.S3Service")
+    mocker.patch("tarifia.receipt.service.S3Service")
     return mocker.patch(
-        "polar.receipt.service.render_receipt_pdf",
+        "tarifia.receipt.service.render_receipt_pdf",
         return_value=b"%PDF-fake",
     )
 
@@ -159,10 +159,10 @@ class TestDoRender:
         assert order.receipt_number is not None
 
         render_mock = mocker.patch(
-            "polar.receipt.service.render_receipt_pdf",
+            "tarifia.receipt.service.render_receipt_pdf",
             return_value=b"%PDF-fake",
         )
-        s3_class_mock = mocker.patch("polar.receipt.service.S3Service")
+        s3_class_mock = mocker.patch("tarifia.receipt.service.S3Service")
         upload_mock = s3_class_mock.return_value.upload
 
         key = await receipt_service._create_order_receipt(session, order)
@@ -206,10 +206,10 @@ class TestDoRender:
         await create_refund(save_fixture, order=order, payment=payment, amount=500)
 
         render_mock = mocker.patch(
-            "polar.receipt.service.render_receipt_pdf",
+            "tarifia.receipt.service.render_receipt_pdf",
             return_value=b"%PDF-fake",
         )
-        mocker.patch("polar.receipt.service.S3Service")
+        mocker.patch("tarifia.receipt.service.S3Service")
 
         await receipt_service._create_order_receipt(session, order)
 
@@ -378,7 +378,7 @@ class TestGenerateOrderReceipt:
             new=mocker.AsyncMock(return_value="org/order/ts.pdf"),
         )
         publish_mock = mocker.patch(
-            "polar.receipt.service.eventstream_publish",
+            "tarifia.receipt.service.eventstream_publish",
             new=mocker.AsyncMock(),
         )
 
@@ -404,7 +404,7 @@ class TestGetPdfUrlOrStatus:
         order.receipt_number = "RCPT-FOO-0001"
         await save_fixture(order)
 
-        enqueue_mock = mocker.patch("polar.receipt.service.enqueue_job")
+        enqueue_mock = mocker.patch("tarifia.receipt.service.enqueue_job")
 
         result = await receipt_service.get_pdf_url_or_status(order)
 
@@ -422,7 +422,7 @@ class TestGetPdfUrlOrStatus:
         order.receipt_path = f"{order.organization_id}/{order.id}/receipt.pdf"
         await save_fixture(order)
 
-        s3_mock = mocker.patch("polar.receipt.service.S3Service")
+        s3_mock = mocker.patch("tarifia.receipt.service.S3Service")
         expires_at = datetime(2030, 1, 1, tzinfo=UTC)
         s3_mock.return_value.generate_presigned_download_url.return_value = (
             "https://example.com/signed-url",

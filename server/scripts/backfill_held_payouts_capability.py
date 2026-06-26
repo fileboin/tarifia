@@ -35,10 +35,10 @@ from rich.table import Table
 from sqlalchemy import ColumnElement, Text, cast, func, select, update
 from sqlalchemy.dialects.postgresql import ARRAY
 
-from polar.kit.db.postgres import AsyncSession, create_async_sessionmaker
-from polar.models import Organization
-from polar.models.organization import OrganizationStatus
-from polar.postgres import create_async_engine
+from tarifia.kit.db.postgres import AsyncSession, create_async_sessionmaker
+from tarifia.models import Organization
+from tarifia.models.organization import OrganizationStatus
+from tarifia.postgres import create_async_engine
 from scripts.helper import (
     configure_script_console_logging,
     limit_bindparam,

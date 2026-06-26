@@ -1,8 +1,8 @@
 import { useMeter, useUpdateMeter } from '@/hooks/queries/meters'
 import { setValidationErrors } from '@/utils/api/errors'
-import { isValidationError, schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import { Form } from '@polar-sh/ui/components/ui/form'
+import { isValidationError, schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import { Form } from '@tarifia-sh/ui/components/ui/form'
 import { useRouter } from 'next/navigation'
 import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
@@ -70,7 +70,7 @@ export const MeterUpdateModal = ({
   return (
     <div className="flex flex-col gap-8 overflow-y-auto px-8 py-12">
       <h2 className="text-xl">Edit Meter</h2>
-      <p className="dark:text-polar-500 text-gray-500">
+      <p className="dark:text-tarifia-500 text-gray-500">
         Meters are aggregations of events. You can create a meter to track
         events that match a filter.
       </p>
@@ -89,7 +89,7 @@ export const MeterUpdateModal = ({
               <Well className="gap-y-2 rounded-2xl p-6">
                 <WellHeader>Updating Meter</WellHeader>
                 <WellContent>
-                  <p className="dark:text-polar-500 text-sm text-gray-500">
+                  <p className="dark:text-tarifia-500 text-sm text-gray-500">
                     Once a meter has processed events, its filters or
                     aggregation function cannot be changed.
                   </p>

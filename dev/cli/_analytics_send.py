@@ -4,7 +4,7 @@ import urllib.request
 import uuid
 from pathlib import Path
 
-_ID_FILE = Path.home() / ".config" / "polar" / "dev_cli_id"
+_ID_FILE = Path.home() / ".config" / "tarifia" / "dev_cli_id"
 
 
 def _distinct_id() -> str:

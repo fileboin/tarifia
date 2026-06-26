@@ -4,44 +4,44 @@ from unittest.mock import AsyncMock, MagicMock
 import pytest
 from pytest_mock import MockerFixture
 
-from polar.auth.models import AuthSubject
-from polar.benefit.grant.service import BenefitGrantService
-from polar.benefit.service import benefit as benefit_service
-from polar.benefit.service import (  # type: ignore[attr-defined]
+from tarifia.auth.models import AuthSubject
+from tarifia.benefit.grant.service import BenefitGrantService
+from tarifia.benefit.service import benefit as benefit_service
+from tarifia.benefit.service import (  # type: ignore[attr-defined]
     benefit_grant_service,
 )
-from polar.benefit.strategies import (
+from tarifia.benefit.strategies import (
     BenefitPropertiesValidationError,
     BenefitServiceProtocol,
 )
-from polar.benefit.strategies.custom.schemas import (
+from tarifia.benefit.strategies.custom.schemas import (
     BenefitCustomCreate,
     BenefitCustomCreateProperties,
     BenefitCustomUpdate,
 )
-from polar.benefit.strategies.discord.schemas import BenefitDiscordUpdate
-from polar.benefit.strategies.downloadables.schemas import (
+from tarifia.benefit.strategies.discord.schemas import BenefitDiscordUpdate
+from tarifia.benefit.strategies.downloadables.schemas import (
     BenefitDownloadablesCreate,
     BenefitDownloadablesCreateProperties,
     BenefitDownloadablesUpdate,
 )
-from polar.benefit.strategies.feature_flag.schemas import BenefitFeatureFlagUpdate
-from polar.benefit.strategies.github_repository.schemas import (
+from tarifia.benefit.strategies.feature_flag.schemas import BenefitFeatureFlagUpdate
+from tarifia.benefit.strategies.github_repository.schemas import (
     BenefitGitHubRepositoryUpdate,
 )
-from polar.benefit.strategies.slack_shared_channel.schemas import (
+from tarifia.benefit.strategies.slack_shared_channel.schemas import (
     BenefitSlackSharedChannelCreate,
     BenefitSlackSharedChannelCreateProperties,
     BenefitSlackSharedChannelUpdate,
 )
-from polar.exceptions import NotPermitted, PolarRequestValidationError
-from polar.kit.pagination import PaginationParams
-from polar.kit.schemas import Schema
-from polar.kit.visibility import Visibility
-from polar.models import Benefit, Organization, SlackApp, User, UserOrganization
-from polar.models.benefit import BenefitType
-from polar.postgres import AsyncSession
-from polar.redis import Redis
+from tarifia.exceptions import NotPermitted, TarifiaRequestValidationError
+from tarifia.kit.pagination import PaginationParams
+from tarifia.kit.schemas import Schema
+from tarifia.kit.visibility import Visibility
+from tarifia.models import Benefit, Organization, SlackApp, User, UserOrganization
+from tarifia.models.benefit import BenefitType
+from tarifia.postgres import AsyncSession
+from tarifia.redis import Redis
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_benefit
@@ -70,7 +70,7 @@ async def create_slack_integration(
 
 @pytest.fixture
 def enqueue_job_mock(mocker: MockerFixture) -> AsyncMock:
-    return mocker.patch("polar.benefit.service.enqueue_job")
+    return mocker.patch("tarifia.benefit.service.enqueue_job")
 
 
 @pytest.mark.asyncio
@@ -263,7 +263,7 @@ class TestUserCreate:
         # then
         session.expunge_all()
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await benefit_service.user_create(
                 session, redis, create_schema, auth_subject
             )
@@ -282,7 +282,7 @@ class TestUserCreate:
         # then
         session.expunge_all()
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await benefit_service.user_create(
                 session, redis, create_schema, auth_subject
             )
@@ -305,7 +305,7 @@ class TestUserCreate:
         # then
         session.expunge_all()
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await benefit_service.user_create(
                 session, redis, create_schema, auth_subject
             )
@@ -360,7 +360,7 @@ class TestUserCreate:
 
         session.expunge_all()
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await benefit_service.user_create(
                 session, redis, create_schema, auth_subject
             )
@@ -422,7 +422,7 @@ class TestUserCreate:
         # then
         session.expunge_all()
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await benefit_service.user_create(
                 session, redis, create_schema, auth_subject
             )
@@ -448,7 +448,7 @@ class TestUserCreate:
                 }
             ]
         )
-        mock = mocker.patch("polar.benefit.service.get_benefit_strategy")
+        mock = mocker.patch("tarifia.benefit.service.get_benefit_strategy")
         mock.return_value = service_mock
 
         create_schema = BenefitCustomCreate(
@@ -479,7 +479,7 @@ class TestUserCreate:
         service_mock = MagicMock(spec=BenefitServiceProtocol)
         service_mock.validate_properties.return_value = {"note": None}
         mocker.patch(
-            "polar.benefit.service.get_benefit_strategy", return_value=service_mock
+            "tarifia.benefit.service.get_benefit_strategy", return_value=service_mock
         )
 
         create_schema = BenefitCustomCreate(
@@ -508,7 +508,7 @@ class TestUserCreate:
         service_mock = MagicMock(spec=BenefitServiceProtocol)
         service_mock.validate_properties.return_value = {"note": None}
         mocker.patch(
-            "polar.benefit.service.get_benefit_strategy", return_value=service_mock
+            "tarifia.benefit.service.get_benefit_strategy", return_value=service_mock
         )
 
         create_schema = BenefitCustomCreate(
@@ -540,7 +540,7 @@ class TestUserCreate:
         service_mock = MagicMock(spec=BenefitServiceProtocol)
         service_mock.validate_properties.return_value = {}
         mocker.patch(
-            "polar.benefit.service.get_benefit_strategy", return_value=service_mock
+            "tarifia.benefit.service.get_benefit_strategy", return_value=service_mock
         )
 
         create_schema = BenefitDownloadablesCreate(
@@ -551,7 +551,7 @@ class TestUserCreate:
             visibility=visibility,
         )
 
-        with pytest.raises(PolarRequestValidationError):
+        with pytest.raises(TarifiaRequestValidationError):
             await benefit_service.user_create(
                 session, redis, create_schema, auth_subject
             )
@@ -569,7 +569,7 @@ class TestUserCreate:
         service_mock = MagicMock(spec=BenefitServiceProtocol)
         service_mock.validate_properties.return_value = {}
         mocker.patch(
-            "polar.benefit.service.get_benefit_strategy", return_value=service_mock
+            "tarifia.benefit.service.get_benefit_strategy", return_value=service_mock
         )
 
         file_id = uuid.uuid4()

@@ -1,7 +1,7 @@
-from polar.invoice.generator import InvoiceItem
-from polar.kit.address import Address, CountryAlpha2
-from polar.kit.utils import utc_now
-from polar.receipt.generator import (
+from tarifia.invoice.generator import InvoiceItem
+from tarifia.kit.address import Address, CountryAlpha2
+from tarifia.kit.utils import utc_now
+from tarifia.receipt.generator import (
     Receipt,
     ReceiptGenerator,
     ReceiptPayment,
@@ -41,7 +41,7 @@ def _build_receipt(
         invoice_number="INV-AB1-0001",
         date=now,
         paid_at=now,
-        seller_name="Polar",
+        seller_name="Tarifia",
         seller_address=addr,
         customer_name="Test Customer",
         customer_address=addr,

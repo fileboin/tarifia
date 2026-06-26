@@ -1,7 +1,7 @@
 import { getQueryClient } from '@/utils/api/query'
 import { api } from '@/utils/client'
 import { toISODate } from '@/utils/metrics'
-import { operations, schemas, unwrap } from '@polar-sh/client'
+import { operations, schemas, unwrap } from '@tarifia-sh/client'
 import { UseQueryResult, useMutation, useQuery } from '@tanstack/react-query'
 import { defaultRetry } from './retry'
 

@@ -1,7 +1,7 @@
 'use client'
 
 import { UTCDate } from '@date-fns/utc'
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { addDays, addMonths, addWeeks, addYears } from 'date-fns'
 import { useMemo, useState } from 'react'
 

@@ -23,15 +23,15 @@ export async function generateMetadata(props: {
   )
 
   return {
-    title: `Customer Portal | ${organization.name}`, // " | Polar is added by the template"
+    title: `Customer Portal | ${organization.name}`, // " | Tarifia is added by the template"
     openGraph: {
-      title: `Customer Portal | ${organization.name} on Polar`,
-      description: `Customer Portal | ${organization.name} on Polar`,
-      siteName: 'Polar',
+      title: `Customer Portal | ${organization.name} on Tarifia`,
+      description: `Customer Portal | ${organization.name} on Tarifia`,
+      siteName: 'Tarifia',
       type: 'website',
       images: [
         {
-          url: `https://polar.sh/og?org=${organization.slug}`,
+          url: `https://tarifia.sh/og?org=${organization.slug}`,
           width: 1200,
           height: 630,
         },
@@ -40,15 +40,15 @@ export async function generateMetadata(props: {
     twitter: {
       images: [
         {
-          url: `https://polar.sh/og?org=${organization.slug}`,
+          url: `https://tarifia.sh/og?org=${organization.slug}`,
           width: 1200,
           height: 630,
-          alt: `${organization.name} on Polar`,
+          alt: `${organization.name} on Tarifia`,
         },
       ],
       card: 'summary_large_image',
-      title: `Customer Portal | ${organization.name} on Polar`,
-      description: `Customer Portal | ${organization.name} on Polar`,
+      title: `Customer Portal | ${organization.name} on Tarifia`,
+      description: `Customer Portal | ${organization.name} on Tarifia`,
     },
   }
 }

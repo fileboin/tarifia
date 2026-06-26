@@ -3,14 +3,14 @@ from datetime import timedelta
 
 import pytest
 
-from polar.auth.models import AuthSubject
-from polar.exceptions import ResourceNotFound
-from polar.kit.pagination import PaginationParams
-from polar.kit.utils import utc_now
-from polar.models import Account, Organization, Transaction, User, UserOrganization
-from polar.models.transaction import PlatformFeeType, TransactionType
-from polar.postgres import AsyncSession
-from polar.transaction.service.transaction import transaction as transaction_service
+from tarifia.auth.models import AuthSubject
+from tarifia.exceptions import ResourceNotFound
+from tarifia.kit.pagination import PaginationParams
+from tarifia.kit.utils import utc_now
+from tarifia.models import Account, Organization, Transaction, User, UserOrganization
+from tarifia.models.transaction import PlatformFeeType, TransactionType
+from tarifia.postgres import AsyncSession
+from tarifia.transaction.service.transaction import transaction as transaction_service
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.transaction.conftest import create_transaction

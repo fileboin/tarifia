@@ -3,9 +3,9 @@ import uuid
 import pytest
 from httpx import AsyncClient
 
-from polar.models import Organization, User
-from polar.models.organization import OrganizationStatus
-from polar.models.user_organization import OrganizationRole, UserOrganization
+from tarifia.models import Organization, User
+from tarifia.models.organization import OrganizationStatus
+from tarifia.models.user_organization import OrganizationRole, UserOrganization
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_account
 

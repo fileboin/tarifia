@@ -1,7 +1,7 @@
-import { schemas } from '@polar-sh/client'
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
-import { Button } from '@polar-sh/orbit'
+import { schemas } from '@tarifia-sh/client'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Button } from '@tarifia-sh/orbit'
 import { AlertTriangleIcon } from 'lucide-react'
 import Link from 'next/link'
 
@@ -26,7 +26,7 @@ export const OffboardingBanner = ({ organization }: OffboardingBannerProps) => {
         </Box>
         <Box maxWidth="45rem">
           <Text color="muted">
-            Your organization is in the process of being offboarded from Polar.
+            Your organization is in the process of being offboarded from Tarifia.
             Some features may be limited. Reach out if you have any questions.
           </Text>
         </Box>

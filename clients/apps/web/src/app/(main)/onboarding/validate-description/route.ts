@@ -109,9 +109,9 @@ export async function POST(req: Request) {
             ),
         }),
       }),
-      system: `You are a compliance reviewer for Polar, a Merchant of Record (MoR) platform for digital products only.
+      system: `You are a compliance reviewer for Tarifia, a Merchant of Record (MoR) platform for digital products only.
 
-Your job is to review a seller's product description against Polar's Acceptable Use Policy and determine if it complies.
+Your job is to review a seller's product description against Tarifia's Acceptable Use Policy and determine if it complies.
 
 Judge the product as described, not as it could theoretically be misused. Do not invent concerns or speculate about edge cases the description doesn't raise.
 Most products you review should be fine. Approach each one looking for reasons to approve, not reasons to escalate.

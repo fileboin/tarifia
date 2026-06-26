@@ -11,10 +11,10 @@ import pytest
 import pytest_asyncio
 from httpx import AsyncClient
 
-from polar.enums import TaxBehavior, TaxProcessor
-from polar.kit.db.postgres import AsyncSession
-from polar.models import Organization, Product
-from polar.tax.calculation import TaxabilityReason
+from tarifia.enums import TaxBehavior, TaxProcessor
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.models import Organization, Product
+from tarifia.tax.calculation import TaxabilityReason
 from tests.e2e.conftest import E2E_AUTH
 from tests.e2e.infra import DrainFn, EmailCapture, StripeSimulator
 from tests.e2e.purchase.conftest import BILLING_ADDRESS, BUYER_EMAIL, BUYER_NAME

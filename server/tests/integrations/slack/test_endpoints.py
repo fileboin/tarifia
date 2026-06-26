@@ -9,16 +9,16 @@ import pytest
 from httpx import AsyncClient
 from pytest_mock import MockerFixture
 
-from polar.auth.scope import Scope
-from polar.config import settings
-from polar.integrations.slack.repository import SlackAppRepository
-from polar.kit import jwt
-from polar.models import (
+from tarifia.auth.scope import Scope
+from tarifia.config import settings
+from tarifia.integrations.slack.repository import SlackAppRepository
+from tarifia.kit import jwt
+from tarifia.models import (
     Organization,
     SlackApp,
     UserOrganization,
 )
-from polar.postgres import AsyncSession
+from tarifia.postgres import AsyncSession
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 
@@ -273,7 +273,7 @@ class TestListWorkspaceUsers:
     ) -> None:
         integration = await _create_integration(save_fixture, organization)
         mocker.patch(
-            "polar.integrations.slack.service.SlackAppService.list_workspace_users",
+            "tarifia.integrations.slack.service.SlackAppService.list_workspace_users",
             new=AsyncMock(
                 return_value=[
                     {
@@ -398,7 +398,7 @@ class TestPostCredentials:
         mocker: MockerFixture,
     ) -> None:
         mocker.patch(
-            "polar.integrations.slack.service.SlackAppService._validate_credentials",
+            "tarifia.integrations.slack.service.SlackAppService._validate_credentials",
             new=AsyncMock(),
         )
         response = await client.post(
@@ -427,7 +427,7 @@ class TestPostCredentials:
     ) -> None:
         await _enable_slack_benefit(save_fixture, organization)
         mocker.patch(
-            "polar.integrations.slack.service.SlackAppService._validate_credentials",
+            "tarifia.integrations.slack.service.SlackAppService._validate_credentials",
             new=AsyncMock(),
         )
         response = await client.post(
@@ -457,7 +457,7 @@ class TestPostCredentials:
         mocker: MockerFixture,
     ) -> None:
         mocker.patch(
-            "polar.integrations.slack.service.SlackAppService._validate_credentials",
+            "tarifia.integrations.slack.service.SlackAppService._validate_credentials",
             new=AsyncMock(),
         )
         response = await client.post(
@@ -554,7 +554,7 @@ class TestCallback:
         )
         complete_install = AsyncMock()
         mocker.patch(
-            "polar.integrations.slack.service.SlackAppService.complete_install",
+            "tarifia.integrations.slack.service.SlackAppService.complete_install",
             new=complete_install,
         )
 

@@ -10,19 +10,19 @@ from rich.progress import Progress
 from sqlalchemy import func, select, tuple_
 from sqlalchemy.orm import selectinload
 
-from polar.config import settings
-from polar.event.repository import EventRepository
-from polar.event.system import SubscriptionCanceledMetadata, SystemEvent
-from polar.integrations.tinybird.client import (
+from tarifia.config import settings
+from tarifia.event.repository import EventRepository
+from tarifia.event.system import SubscriptionCanceledMetadata, SystemEvent
+from tarifia.integrations.tinybird.client import (
     TinybirdClient,
     TinybirdPayloadTooLargeError,
 )
-from polar.integrations.tinybird.service import DATASOURCE_EVENTS, _event_to_tinybird
-from polar.kit.db.postgres import AsyncSession, create_async_sessionmaker
-from polar.kit.db.postgres import create_async_engine as _create_async_engine
-from polar.models import Event, Subscription
-from polar.models.event import EventSource
-from polar.models.subscription import CustomerCancellationReason
+from tarifia.integrations.tinybird.service import DATASOURCE_EVENTS, _event_to_tinybird
+from tarifia.kit.db.postgres import AsyncSession, create_async_sessionmaker
+from tarifia.kit.db.postgres import create_async_engine as _create_async_engine
+from tarifia.models import Event, Subscription
+from tarifia.models.event import EventSource
+from tarifia.models.subscription import CustomerCancellationReason
 
 from .helper import configure_script_logging, typer_async
 

@@ -3,8 +3,8 @@
 import { IdentityVerificationStatusContent } from '@/components/Identity/IdentityVerificationStatusContent'
 import { useStartIdentityVerification } from '@/hooks/identityVerification'
 import { getQueryClient } from '@/utils/api/query'
-import { schemas } from '@polar-sh/client'
-import { Box } from '@polar-sh/orbit/Box'
+import { schemas } from '@tarifia-sh/client'
+import { Box } from '@tarifia-sh/orbit/Box'
 import { useEffect, useRef } from 'react'
 import { PathCardBanner } from './PathCardBanner'
 

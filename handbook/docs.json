@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "maple",
-  "name": "Polar Handbook",
+  "name": "Tarifia Handbook",
   "favicon": "/images/favicon.png",
   "logo": {
     "light": "/images/light.png",
@@ -27,16 +27,16 @@
     "groups": [
       {
         "group": "Company",
-        "pages": ["company/about-polar"]
+        "pages": ["company/about-tarifia"]
       },
       {
-        "group": "Working at Polar",
+        "group": "Working at Tarifia",
         "pages": [
-          "working-at-polar/introduction",
-          "working-at-polar/onboarding",
-          "working-at-polar/how-we-work",
-          "working-at-polar/project-management-workflow",
-          "working-at-polar/recruitment-process"
+          "working-at-tarifia/introduction",
+          "working-at-tarifia/onboarding",
+          "working-at-tarifia/how-we-work",
+          "working-at-tarifia/project-management-workflow",
+          "working-at-tarifia/recruitment-process"
         ]
       },
       {
@@ -86,7 +86,7 @@
               "engineering/design-documents/event-storage",
               "engineering/design-documents/platform-api",
               "engineering/design-documents/rbac",
-              "engineering/design-documents/polar-for-polar",
+              "engineering/design-documents/tarifia-for-tarifia",
               "engineering/design-documents/api-versioning",
               "engineering/design-documents/payout-reviews"
             ]

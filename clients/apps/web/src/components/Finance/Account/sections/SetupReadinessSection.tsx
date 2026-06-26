@@ -1,19 +1,19 @@
 'use client'
 
 import { CheckoutLinkManagementModal } from '@/components/CheckoutLinks/CheckoutLinkManagementModal'
-import { InlineModal } from '@polar-sh/orbit'
-import { Modal } from '@polar-sh/orbit'
+import { InlineModal } from '@tarifia-sh/orbit'
+import { Modal } from '@tarifia-sh/orbit'
 import { useModal } from '@/components/Modal/useModal'
 import { CreateAccessTokenModal } from '@/components/Settings/CreateAccessTokenModal'
 import NewWebhookModal from '@/components/Settings/Webhook/NewWebhookModal'
 import { toast } from '@/components/Toast/use-toast'
 import { getQueryClient } from '@/utils/api/query'
-import { schemas } from '@polar-sh/client'
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
-import { Button } from '@polar-sh/orbit'
-import CopyToClipboardInput from '@polar-sh/ui/components/atoms/CopyToClipboardInput'
-import Banner from '@polar-sh/ui/components/molecules/Banner'
+import { schemas } from '@tarifia-sh/client'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
+import { Button } from '@tarifia-sh/orbit'
+import CopyToClipboardInput from '@tarifia-sh/ui/components/atoms/CopyToClipboardInput'
+import Banner from '@tarifia-sh/ui/components/molecules/Banner'
 import Link from 'next/link'
 import { useState } from 'react'
 import { PathCard } from './PathCard'
@@ -31,7 +31,7 @@ const subStatus = (
   step.sub_checks?.find((s) => s.key === key)?.status
 
 const INLINE_LINK_CLASS =
-  'dark:text-polar-300 dark:hover:text-polar-100 text-gray-700 underline underline-offset-2 hover:text-gray-900'
+  'dark:text-tarifia-300 dark:hover:text-tarifia-100 text-gray-700 underline underline-offset-2 hover:text-gray-900'
 
 export const SetupReadinessSection = ({ organization, step }: Props) => {
   const checkoutLinkStatus = subStatus(step, 'setup_readiness.checkout_link')
@@ -74,7 +74,7 @@ export const SetupReadinessSection = ({ organization, step }: Props) => {
   return (
     <Box flexDirection="column" rowGap="xl">
       <Text variant="default" color="muted">
-        You&rsquo;re not integrated with Polar yet. Pick the option that fits
+        You&rsquo;re not integrated with Tarifia yet. Pick the option that fits
         your setup. You can always switch later.
       </Text>
 
@@ -90,7 +90,7 @@ export const SetupReadinessSection = ({ organization, step }: Props) => {
             onClick={
               checkoutLinkNeedsEdit ? undefined : showCreateCheckoutLinkModal
             }
-            docsUrl="https://polar.sh/docs/features/checkout/links"
+            docsUrl="https://tarifia.sh/docs/features/checkout/links"
             status={checkoutLinkStatus}
             extra={
               checkoutLinkStatus === 'failed' && (
@@ -117,7 +117,7 @@ export const SetupReadinessSection = ({ organization, step }: Props) => {
                       </Link>{' '}
                       with a{' '}
                       <a
-                        href="https://polar.sh/docs/features/checkout/links#success-url"
+                        href="https://tarifia.sh/docs/features/checkout/links#success-url"
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
@@ -163,19 +163,19 @@ export const SetupReadinessSection = ({ organization, step }: Props) => {
 
           <PathCard
             title="Create an API key"
-            description="Integrate your application with the Polar API to manage orders, customers, and subscriptions programmatically."
+            description="Integrate your application with the Tarifia API to manage orders, customers, and subscriptions programmatically."
             onClick={showCreateTokenModal}
-            docsUrl="https://polar.sh/docs/api-reference/introduction"
+            docsUrl="https://tarifia.sh/docs/api-reference/introduction"
             required
             status={accessTokenStatus}
           />
 
           <PathCard
             title="Create a webhook"
-            description="Receive real-time HTTP callbacks for events like new orders, refunds, and subscription changes, keeping data consistent between your app and Polar."
+            description="Receive real-time HTTP callbacks for events like new orders, refunds, and subscription changes, keeping data consistent between your app and Tarifia."
             onClick={showCreateWebhookModal}
             recommended
-            docsUrl="https://polar.sh/docs/integrate/webhooks/endpoints"
+            docsUrl="https://tarifia.sh/docs/integrate/webhooks/endpoints"
             status={webhookStatus}
             extra={
               webhookStatus === 'warning' && (

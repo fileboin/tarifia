@@ -12,7 +12,7 @@ terraform {
 variable "policy_name" {
   description = "Name of the permission boundary managed policy."
   type        = string
-  default     = "PolarPermissionBoundary"
+  default     = "TarifiaPermissionBoundary"
 }
 
 data "aws_caller_identity" "current" {}
@@ -69,13 +69,13 @@ data "aws_iam_policy_document" "boundary" {
   }
 
   statement {
-    sid    = "DenyAssumingOrPassingNonPolarRoles"
+    sid    = "DenyAssumingOrPassingNonTarifiaRoles"
     effect = "Deny"
     actions = [
       "sts:AssumeRole",
       "iam:PassRole",
     ]
-    not_resources = ["arn:${data.aws_partition.current.partition}:iam::*:role/polar-*"]
+    not_resources = ["arn:${data.aws_partition.current.partition}:iam::*:role/tarifia-*"]
   }
 
   statement {

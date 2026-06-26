@@ -1,5 +1,5 @@
-import { Button, Input, Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
+import { Button, Input, Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
 
 interface InlineEditTableRowProps {
   value: string

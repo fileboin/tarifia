@@ -2,7 +2,7 @@
 
 import pytest_asyncio
 
-from polar.models import Organization, Product
+from tarifia.models import Organization, Product
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_product
 

@@ -1,10 +1,10 @@
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 import { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies'
 
 const lastVisitedOrg = 'last_visited_org'
-export const POLAR_ENV_COOKIE = 'polar_env'
+export const TARIFIA_ENV_COOKIE = 'tarifia_env'
 
-export type PolarEnv = 'production' | 'sandbox'
+export type TarifiaEnv = 'production' | 'sandbox'
 
 export const setLastVisitedOrg = (
   organization: string,
@@ -25,11 +25,11 @@ export const getLastVisitedOrg = (
 }
 
 export const setLastVisitedEnv = (
-  env: PolarEnv,
+  env: TarifiaEnv,
   maxAge: number = 30 * 60, // Expires in 30 minutes
 ) => {
   const hostname = window.location.hostname
-  const domainAttr = hostname.endsWith('.polar.sh') ? '; domain=.polar.sh' : ''
+  const domainAttr = hostname.endsWith('.tarifia.sh') ? '; domain=.tarifia.sh' : ''
   const secureAttr = window.location.protocol === 'https:' ? '; secure' : ''
-  document.cookie = `${POLAR_ENV_COOKIE}=${env}; max-age=${maxAge}; path=/; samesite=lax${domainAttr}${secureAttr}`
+  document.cookie = `${TARIFIA_ENV_COOKIE}=${env}; max-age=${maxAge}; path=/; samesite=lax${domainAttr}${secureAttr}`
 }

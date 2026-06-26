@@ -1,7 +1,7 @@
 import typer
 from sqlalchemy import func, select, update
 
-from polar.models.discount import DiscountFixed
+from tarifia.models.discount import DiscountFixed
 from scripts.helper import (
     configure_script_logging,
     limit_bindparam,

@@ -17,8 +17,8 @@ from unittest.mock import MagicMock
 
 import stripe as stripe_lib
 
-from polar.kit.db.postgres import AsyncSession
-from polar.models.external_event import ExternalEventSource
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.models.external_event import ExternalEventSource
 from tests.fixtures.stripe import build_stripe_charge
 
 
@@ -213,7 +213,7 @@ async def simulate_webhook(
         event_type: Stripe event type (e.g. "charge.succeeded").
         data: The Stripe object (e.g. a stripe.Charge).
     """
-    from polar.external_event.service import external_event as external_event_service
+    from tarifia.external_event.service import external_event as external_event_service
 
     task_name = f"stripe.webhook.{event_type}"
     event_id = f"evt_e2e_{uuid.uuid4().hex[:8]}"

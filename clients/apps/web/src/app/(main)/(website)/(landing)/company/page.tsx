@@ -13,13 +13,13 @@ const JOBS = [
         role: 'Senior Platform Engineer',
         location: 'Remote, Europe',
         experience: '5-8+ Years',
-        link: 'https://jobs.ashbyhq.com/polar/8a82633e-e7b9-42f4-92e1-33032a56097a',
+        link: 'https://jobs.ashbyhq.com/tarifia/8a82633e-e7b9-42f4-92e1-33032a56097a',
       },
       {
         role: 'Senior Product Engineer',
         location: 'Remote, Europe',
         experience: '7+ Years',
-        link: 'https://jobs.ashbyhq.com/polar/955c6935-6d03-46e5-b649-a8b958a52962',
+        link: 'https://jobs.ashbyhq.com/tarifia/955c6935-6d03-46e5-b649-a8b958a52962',
       },
     ],
   },
@@ -29,7 +29,7 @@ const JOBS = [
 
 export default function CompanyPage() {
   return (
-    <div className="dark:bg-polar-950 min-h-screen bg-white text-gray-900 dark:text-white">
+    <div className="dark:bg-tarifia-950 min-h-screen bg-white text-gray-900 dark:text-white">
       {/* Hero */}
       <section className="flex flex-col items-center gap-8 pt-12 pb-24 text-center md:px-4">
         <h1 className="font-display leading-tighter max-w-2xl text-5xl font-medium text-balance md:text-7xl">
@@ -65,12 +65,12 @@ export default function CompanyPage() {
             analytics, leading to deterministic and versioned billing as code.
           </p>
           <p>
-            We&apos;re building Polar to become the standard Events → Analytics
+            We&apos;re building Tarifia to become the standard Events → Analytics
             → Billing stack for the next generation of software.
           </p>
           <p>
             We&apos;re a small team with big ambitions, working with high
-            ownership and autonomy. Polar is open source and built in the open
+            ownership and autonomy. Tarifia is open source and built in the open
             with our community.
           </p>
         </div>
@@ -92,13 +92,13 @@ export default function CompanyPage() {
                       key={job.link}
                       href={job.link}
                       target="_blank"
-                      className="dark:border-polar-800 group flex flex-row items-baseline justify-between gap-4 border-t border-gray-100 py-6"
+                      className="dark:border-tarifia-800 group flex flex-row items-baseline justify-between gap-4 border-t border-gray-100 py-6"
                     >
                       <div className="flex flex-1 flex-col gap-1">
                         <span className="font-medium group-hover:underline">
                           {job.role}
                         </span>
-                        <div className="dark:text-polar-500 flex flex-row gap-x-2 text-gray-500">
+                        <div className="dark:text-tarifia-500 flex flex-row gap-x-2 text-gray-500">
                           {job.experience && (
                             <>
                               <span>{job.experience}</span>
@@ -136,7 +136,7 @@ export default function CompanyPage() {
             {investors.map((investor) => (
               <div key={investor.name} className="flex flex-col gap-0.5">
                 <span className="font-medium">{investor.name}</span>
-                <span className="dark:text-polar-500 text-gray-500">
+                <span className="dark:text-tarifia-500 text-gray-500">
                   {investor.company}
                 </span>
               </div>

@@ -23,23 +23,23 @@ export default async function Page(props: {
   const intent = searchParams.intent as 'login' | 'signup' | undefined
 
   return (
-    <div className="dark:bg-polar-950 flex h-screen w-full grow items-center justify-center bg-white">
+    <div className="dark:bg-tarifia-950 flex h-screen w-full grow items-center justify-center bg-white">
       <div className="flex w-80 flex-col items-center">
         <LogoIcon size={60} className="mb-6 text-black dark:text-white" />
         {intent === 'signup' && (
           <h1 className="mb-1 text-xl font-medium text-gray-700 dark:text-white">
-            Welcome to Polar!
+            Welcome to Tarifia!
           </h1>
         )}
-        <div className="dark:text-polar-400 mb-2 text-center text-gray-500">
+        <div className="dark:text-tarifia-400 mb-2 text-center text-gray-500">
           {intent === 'signup'
             ? 'To get started, we sent a verification code to '
             : 'We sent a verification code to '}
-          <span className="dark:text-polar-300 font-medium text-gray-600">
+          <span className="dark:text-tarifia-300 font-medium text-gray-600">
             {email}
           </span>
         </div>
-        <div className="dark:text-polar-400 mb-6 text-center text-sm text-gray-500">
+        <div className="dark:text-tarifia-400 mb-6 text-center text-sm text-gray-500">
           Please enter the 6-character code below
         </div>
         <VerifyPage intent={intent} />

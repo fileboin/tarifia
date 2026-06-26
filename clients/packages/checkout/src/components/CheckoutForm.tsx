@@ -1,16 +1,16 @@
 'use client'
 
-import type { schemas } from '@polar-sh/client'
-import { enums } from '@polar-sh/client'
-import { useTranslations, type AcceptedLocale } from '@polar-sh/i18n'
+import type { schemas } from '@tarifia-sh/client'
+import { enums } from '@tarifia-sh/client'
+import { useTranslations, type AcceptedLocale } from '@tarifia-sh/i18n'
 import { MandateText } from './MandateText'
-import { Button } from '@polar-sh/orbit'
-import CountryPicker from '@polar-sh/ui/components/atoms/CountryPicker'
+import { Button } from '@tarifia-sh/orbit'
+import CountryPicker from '@tarifia-sh/ui/components/atoms/CountryPicker'
 import CountryStatePicker, {
   COUNTRIES_WITH_FIXED_STATE_OPTIONS,
-} from '@polar-sh/ui/components/atoms/CountryStatePicker'
-import { Input } from '@polar-sh/orbit'
-import { Checkbox } from '@polar-sh/ui/components/ui/checkbox'
+} from '@tarifia-sh/ui/components/atoms/CountryStatePicker'
+import { Input } from '@tarifia-sh/orbit'
+import { Checkbox } from '@tarifia-sh/ui/components/ui/checkbox'
 import {
   Form,
   FormControl,
@@ -18,9 +18,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@polar-sh/ui/components/ui/form'
-import { ThemingPresetProps } from '@polar-sh/ui/hooks/theming'
-import { cn } from '@polar-sh/ui/lib/utils'
+} from '@tarifia-sh/ui/components/ui/form'
+import { ThemingPresetProps } from '@tarifia-sh/ui/hooks/theming'
+import { cn } from '@tarifia-sh/ui/lib/utils'
 import {
   Elements,
   ElementsConsumer,
@@ -40,7 +40,7 @@ import { useDebouncedCallback } from '../hooks/debounce'
 import { isDisplayedField, isRequiredField } from '../utils/address'
 import { convertLocaleToStripeElementLocale } from '../utils/locale'
 import CustomFieldInput from './CustomFieldInput'
-import PolarLogo from './PolarLogo'
+import TarifiaLogo from './TarifiaLogo'
 
 const WALLET_PAYMENT_METHODS = ['apple_pay', 'google_pay', 'link']
 
@@ -557,7 +557,7 @@ const BaseCheckoutForm = ({
                           <FormControl>
                             <Checkbox
                               className={cn(
-                                'dark:border-polar-600 cursor-pointer border-gray-300',
+                                'dark:border-tarifia-600 cursor-pointer border-gray-300',
                                 field.value ? 'border-primary' : '',
                               )}
                               checked={field.value ? field.value : false}
@@ -568,7 +568,7 @@ const BaseCheckoutForm = ({
                               }}
                             />
                           </FormControl>
-                          <FormLabel className="dark:text-polar-400 cursor-pointer font-normal">
+                          <FormLabel className="dark:text-tarifia-400 cursor-pointer font-normal">
                             {t('checkout.form.purchasingAsBusiness')}
                           </FormLabel>
                         </div>
@@ -578,7 +578,7 @@ const BaseCheckoutForm = ({
                   />
 
                   {isBusinessCustomer && (
-                    <div className="dark:border-polar-700 flex flex-col gap-y-4 rounded-2xl border border-gray-200 p-4">
+                    <div className="dark:border-tarifia-700 flex flex-col gap-y-4 rounded-2xl border border-gray-200 p-4">
                       <span className="text-sm font-medium">
                         {t('checkout.form.billingDetails')}
                       </span>
@@ -686,7 +686,7 @@ const BaseCheckoutForm = ({
                 {checkoutLabel}
               </Button>
               {loading && loadingLabel && (
-                <p className="dark:text-polar-500 text-sm text-gray-500">
+                <p className="dark:text-tarifia-500 text-sm text-gray-500">
                   {loadingLabel}
                 </p>
               )}
@@ -714,13 +714,13 @@ const BaseCheckoutForm = ({
         </div>
       </div>
       <a
-        href="https://polar.sh?utm_source=checkout"
-        className="dark:text-polar-600 flex w-full flex-row items-center justify-center gap-x-3 text-sm text-gray-400"
+        href="https://tarifia.sh?utm_source=checkout"
+        className="dark:text-tarifia-600 flex w-full flex-row items-center justify-center gap-x-3 text-sm text-gray-400"
         target="_blank"
         rel="noreferrer"
       >
         <span>{t('checkout.footer.poweredBy')}</span>
-        <PolarLogo className="h-5" />
+        <TarifiaLogo className="h-5" />
       </a>
     </div>
   )

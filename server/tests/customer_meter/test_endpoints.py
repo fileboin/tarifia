@@ -5,7 +5,7 @@ import pytest
 import pytest_asyncio
 from httpx import AsyncClient
 
-from polar.models import (
+from tarifia.models import (
     Customer,
     CustomerMeter,
     Organization,

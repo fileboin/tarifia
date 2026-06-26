@@ -1,8 +1,8 @@
-import { Text } from '@polar-sh/orbit'
-import { Box } from '@polar-sh/orbit/Box'
+import { Text } from '@tarifia-sh/orbit'
+import { Box } from '@tarifia-sh/orbit/Box'
 import Link from 'next/link'
 import { StillaAI } from './Logos'
-import { Avatar } from '@polar-sh/orbit'
+import { Avatar } from '@tarifia-sh/orbit'
 import { SectionHeader } from './SectionHeader'
 
 const userTestimonials = [
@@ -15,7 +15,7 @@ const userTestimonials = [
     text: (
       <>
         <Text variant="body" as="p">
-          Polar&apos;s Python SDK and Webhook infrastructure made our billing
+          Tarifia&apos;s Python SDK and Webhook infrastructure made our billing
           integration straightforward.
         </Text>
         <Text variant="body" as="p">
@@ -35,7 +35,7 @@ const userTestimonials = [
     avatar: '/assets/landing/testamonials/rauch.jpg',
     text: (
       <Text variant="body" as="p">
-        The speed at which Polar is executing on the financial infrastructure
+        The speed at which Tarifia is executing on the financial infrastructure
         primitives the new world needs is very impressive.
       </Text>
     ),
@@ -49,7 +49,7 @@ const userTestimonials = [
     text: (
       <>
         <Text variant="body" as="p">
-          I&apos;ve joined Polar as an advisor!
+          I&apos;ve joined Tarifia as an advisor!
         </Text>
         <Text variant="body" as="p">
           I think it benefits everyone for devs to have more options to get paid
@@ -68,7 +68,7 @@ const userTestimonials = [
     avatar: '/assets/landing/testamonials/lee.jpg',
     text: (
       <Text variant="body" as="p">
-        I switched to Polar a few weeks back. Best decision ever.
+        I switched to Tarifia a few weeks back. Best decision ever.
       </Text>
     ),
   },
@@ -80,7 +80,7 @@ const userTestimonials = [
     avatar: '/assets/landing/testamonials/alex.jpg',
     text: (
       <p>
-        We switched to @polar_sh because of their killer API, UX, and product.
+        We switched to @tarifia_sh because of their killer API, UX, and product.
         Also love that it&apos;s Open-Source. Their team cares A LOT as well.
         Worth the minor fee difference.
       </p>
@@ -92,15 +92,15 @@ const userTestimonials = [
     company: 'Midday',
     verified: true,
     avatar: '/assets/landing/testamonials/pontus.jpg',
-    text: <p>You can tell @polar_sh is building DX first</p>,
+    text: <p>You can tell @tarifia_sh is building DX first</p>,
   },
 ]
 
 export const Testimonials = () => (
   <Box flexDirection="column" rowGap="3xl">
     <SectionHeader
-      title="What industry leaders think about Polar"
-      description="From AI startups to infrastructure veterans, the teams building the future ship production billing on Polar in days, not weeks."
+      title="What industry leaders think about Tarifia"
+      description="From AI startups to infrastructure veterans, the teams building the future ship production billing on Tarifia in days, not weeks."
     />
     <Box
       display="grid"
@@ -112,7 +112,7 @@ export const Testimonials = () => (
           key={t.name}
           href={t.link}
           target="_blank"
-          className="dark:bg-polar-900 dark:hover:bg-polar-900 bg-gray-50 transition-colors hover:bg-gray-100"
+          className="dark:bg-tarifia-900 dark:hover:bg-tarifia-900 bg-gray-50 transition-colors hover:bg-gray-100"
         >
           <Box
             flexDirection="column"

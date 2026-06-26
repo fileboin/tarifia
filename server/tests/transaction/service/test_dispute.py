@@ -4,8 +4,8 @@ import pytest
 import pytest_asyncio
 from pytest_mock import MockerFixture
 
-from polar.integrations.stripe.service import StripeService
-from polar.models import (
+from tarifia.integrations.stripe.service import StripeService
+from tarifia.models import (
     Account,
     Customer,
     Order,
@@ -14,24 +14,24 @@ from polar.models import (
     Transaction,
     User,
 )
-from polar.models.dispute import DisputeStatus
-from polar.models.transaction import Processor, TransactionType
-from polar.postgres import AsyncSession
-from polar.transaction.service.balance import BalanceTransactionService
-from polar.transaction.service.balance import (
+from tarifia.models.dispute import DisputeStatus
+from tarifia.models.transaction import Processor, TransactionType
+from tarifia.postgres import AsyncSession
+from tarifia.transaction.service.balance import BalanceTransactionService
+from tarifia.transaction.service.balance import (
     balance_transaction as balance_transaction_service,
 )
-from polar.transaction.service.dispute import (  # type: ignore[attr-defined]
+from tarifia.transaction.service.dispute import (  # type: ignore[attr-defined]
     DisputeNotResolved,
     DisputeTransactionAlreadyExistsError,
     platform_fee_transaction_service,
     processor_fee_transaction_service,
 )
-from polar.transaction.service.dispute import (
+from tarifia.transaction.service.dispute import (
     dispute_transaction as dispute_transaction_service,
 )
-from polar.transaction.service.platform_fee import PlatformFeeTransactionService
-from polar.transaction.service.processor_fee import ProcessorFeeTransactionService
+from tarifia.transaction.service.platform_fee import PlatformFeeTransactionService
+from tarifia.transaction.service.processor_fee import ProcessorFeeTransactionService
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import create_dispute, create_order, create_payment
 from tests.fixtures.stripe import (
@@ -46,7 +46,7 @@ from tests.transaction.conftest import create_transaction
 def balance_transaction_service_mock(mocker: MockerFixture) -> MagicMock:
     mock = MagicMock(spec=BalanceTransactionService)
     mocker.patch(
-        "polar.transaction.service.dispute.balance_transaction_service", new=mock
+        "tarifia.transaction.service.dispute.balance_transaction_service", new=mock
     )
     return mock
 
@@ -74,7 +74,7 @@ def create_dispute_fees_balances_mock(mocker: MockerFixture) -> AsyncMock:
 @pytest.fixture(autouse=True)
 def stripe_service_mock(mocker: MockerFixture) -> MagicMock:
     return mocker.patch(
-        "polar.transaction.service.dispute.stripe_service", spec=StripeService
+        "tarifia.transaction.service.dispute.stripe_service", spec=StripeService
     )
 
 

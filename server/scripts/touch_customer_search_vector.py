@@ -5,9 +5,9 @@ import typer
 from rich.progress import Progress, SpinnerColumn, TextColumn, TimeElapsedColumn
 from sqlalchemy import select, update
 
-from polar.kit.db.postgres import create_async_sessionmaker
-from polar.models import Customer
-from polar.postgres import create_async_engine
+from tarifia.kit.db.postgres import create_async_sessionmaker
+from tarifia.models import Customer
+from tarifia.postgres import create_async_engine
 from scripts.helper import (
     configure_script_logging,
     typer_async,

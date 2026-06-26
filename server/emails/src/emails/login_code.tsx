@@ -1,4 +1,4 @@
-import { Footer, Intro, Text, WrapperPolar } from '../components/foundation'
+import { Footer, Intro, Text, WrapperTarifia } from '../components/foundation'
 import OTPCode from '../components/OTPCode'
 import type { schemas } from '../types'
 
@@ -9,11 +9,11 @@ export function LoginCode({
   domain,
 }: schemas['LoginCodeProps']) {
   return (
-    <WrapperPolar
+    <WrapperTarifia
       preview={`Your code to sign in is ${code}. It is valid for the next ${code_lifetime_minutes.toFixed()} minutes.`}
     >
       <Intro>
-        Here is your code to sign in to Polar.{' '}
+        Here is your code to sign in to Tarifia.{' '}
         <Text as="span" weight="bold">
           This code is only valid for the next {code_lifetime_minutes} minutes.
         </Text>
@@ -23,7 +23,7 @@ export function LoginCode({
         If you didn't request this email, you can safely ignore it.
       </Text>
       <Footer email={email} />
-    </WrapperPolar>
+    </WrapperTarifia>
   )
 }
 
@@ -31,7 +31,7 @@ LoginCode.PreviewProps = {
   email: 'john@example.com',
   code: 'ABC123',
   code_lifetime_minutes: 30,
-  domain: 'polar.sh',
+  domain: 'tarifia.sh',
 }
 
 export default LoginCode

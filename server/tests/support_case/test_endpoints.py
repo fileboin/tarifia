@@ -1,14 +1,14 @@
 import pytest
 from httpx import AsyncClient
 
-from polar.models import Customer, Organization, Product
-from polar.models.support_case import (
+from tarifia.models import Customer, Organization, Product
+from tarifia.models.support_case import (
     SupportCaseAudience,
     SupportCaseMessageAuthorKind,
 )
-from polar.models.user_organization import OrganizationRole, UserOrganization
-from polar.postgres import AsyncSession
-from polar.support_case.service import support_case as support_case_service
+from tarifia.models.user_organization import OrganizationRole, UserOrganization
+from tarifia.postgres import AsyncSession
+from tarifia.support_case.service import support_case as support_case_service
 from tests.fixtures.auth import AuthSubjectFixture
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (

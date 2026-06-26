@@ -1,4 +1,4 @@
-import { schemas } from '@polar-sh/client'
+import { schemas } from '@tarifia-sh/client'
 
 export const platformFeesDisplayNames: {
   [key in schemas['PlatformFeeType']]: string
@@ -11,7 +11,7 @@ export const platformFeesDisplayNames: {
   payout: 'Payout Fee',
   account: 'Active Payout Account Fee',
   dispute: 'Dispute Fee',
-  platform: 'Polar Fee',
+  platform: 'Tarifia Fee',
   fee_credit: 'Fee Credit',
 }
 

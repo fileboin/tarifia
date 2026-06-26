@@ -8,7 +8,7 @@ import ImageOutlined from '@mui/icons-material/ImageOutlined'
 import InsertDriveFileOutlined from '@mui/icons-material/InsertDriveFileOutlined'
 import MoreVertOutlined from '@mui/icons-material/MoreVertOutlined'
 import VideoFileOutlined from '@mui/icons-material/VideoFileOutlined'
-import { Switch } from '@polar-sh/orbit'
+import { Switch } from '@tarifia-sh/orbit'
 import {
   FocusEvent,
   FormEventHandler,
@@ -25,13 +25,13 @@ import { FileObject } from '@/components/FileUpload'
 import { ConfirmModal } from '@/components/Modal/ConfirmModal'
 import { useModal } from '@/components/Modal/useModal'
 import { toast } from '@/components/Toast/use-toast'
-import { Button } from '@polar-sh/orbit'
+import { Button } from '@tarifia-sh/orbit'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@polar-sh/ui/components/ui/dropdown-menu'
+} from '@tarifia-sh/ui/components/ui/dropdown-menu'
 import { useMemo } from 'react'
 
 export const FilePreview = ({ mimeType }: { mimeType: string }) => {
@@ -55,7 +55,7 @@ export const FilePreview = ({ mimeType }: { mimeType: string }) => {
   }, [mimeType])
 
   return (
-    <div className="dark:bg-polar-700 flex h-10 w-10 shrink-0 flex-col items-center justify-center rounded-lg bg-white text-blue-500 dark:text-white">
+    <div className="dark:bg-tarifia-700 flex h-10 w-10 shrink-0 flex-col items-center justify-center rounded-lg bg-white text-blue-500 dark:text-white">
       {icon}
     </div>
   )
@@ -66,7 +66,7 @@ const FileUploadProgress = ({ file }: { file: FileObject }) => {
   return (
     <div className="flex w-full items-center space-x-4">
       <div className="grow">
-        <div className="dark:bg-polar-700 h-2 w-full rounded-sm bg-gray-200">
+        <div className="dark:bg-tarifia-700 h-2 w-full rounded-sm bg-gray-200">
           <div
             className="h-2 rounded-sm bg-blue-400"
             style={{ width: `${pct}%` }}
@@ -168,7 +168,7 @@ const FilenameEditor = ({
 
 const FileUploadDetails = ({ file }: { file: FileObject }) => {
   return (
-    <div className="dark:text-polar-500 text-gray-500">
+    <div className="dark:text-tarifia-500 text-gray-500">
       <p className="text-xs">{file.size_readable}</p>
     </div>
   )
@@ -266,7 +266,7 @@ export const FileListItem = ({
     <div
       ref={sortable ? sortable.setNodeRef : undefined}
       className={twMerge(
-        'dark:bg-polar-800 dark:text-polar-500 mb-2 flex flex-row items-center justify-between gap-x-8 gap-y-2 rounded-xl bg-gray-100 p-3 text-gray-500 transition-colors',
+        'dark:bg-tarifia-800 dark:text-tarifia-500 mb-2 flex flex-row items-center justify-between gap-x-8 gap-y-2 rounded-xl bg-gray-100 p-3 text-gray-500 transition-colors',
         sortable?.isDragging && 'opacity-30',
       )}
       style={
@@ -315,7 +315,7 @@ export const FileListItem = ({
             </DropdownMenuTrigger>
             <DropdownMenuContent
               align="end"
-              className="dark:bg-polar-800 bg-gray-50 shadow-lg"
+              className="dark:bg-tarifia-800 bg-gray-50 shadow-lg"
             >
               {file.checksum_sha256_hex && (
                 <DropdownMenuItem onClick={onCopySHA}>

@@ -4,9 +4,9 @@ import { useSeatClaimFulfillment } from '@/hooks/useSeatClaimFulfillment'
 import { CONFIG } from '@/utils/config'
 import CheckOutlined from '@mui/icons-material/CheckOutlined'
 import ErrorOutlined from '@mui/icons-material/ErrorOutlined'
-import { schemas } from '@polar-sh/client'
-import { Button } from '@polar-sh/orbit'
-import ShadowBox from '@polar-sh/ui/components/atoms/ShadowBox'
+import { schemas } from '@tarifia-sh/client'
+import { Button } from '@tarifia-sh/orbit'
+import ShadowBox from '@tarifia-sh/ui/components/atoms/ShadowBox'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
@@ -147,7 +147,7 @@ export default function ClientPage({
           <ErrorOutlined fontSize="large" />
           <div className="flex flex-col items-center gap-2 text-center">
             <h2 className="text-xl">Missing Invitation Token</h2>
-            <p className="dark:text-polar-500 text-gray-500">
+            <p className="dark:text-tarifia-500 text-gray-500">
               This page requires a valid invitation token in the URL.
             </p>
           </div>
@@ -161,7 +161,7 @@ export default function ClientPage({
       <div className="flex flex-col items-center">
         <ShadowBox className="flex w-full max-w-2xl flex-col items-center gap-6 p-12">
           <Loader2 className="h-8 w-8 animate-spin" />
-          <p className="dark:text-polar-400 text-gray-500">
+          <p className="dark:text-tarifia-400 text-gray-500">
             Loading invitation details...
           </p>
         </ShadowBox>
@@ -176,7 +176,7 @@ export default function ClientPage({
           <ErrorOutlined fontSize="large" />
           <div className="flex flex-col items-center gap-4 text-center">
             <h2 className="text-xl">Invalid Invitation</h2>
-            <p className="dark:text-polar-500 text-gray-500">
+            <p className="dark:text-tarifia-500 text-gray-500">
               This invitation link is invalid, has expired, or has already been
               claimed. Contact the person who invited you to resend the
               invitation.
@@ -198,7 +198,7 @@ export default function ClientPage({
               <CheckOutlined fontSize="large" />
               <div className="flex flex-col items-center gap-2 text-center">
                 <h2 className="text-xl font-medium">Success!</h2>
-                <p className="dark:text-polar-500 text-gray-500">
+                <p className="dark:text-tarifia-500 text-gray-500">
                   Redirecting to your portal...
                 </p>
               </div>
@@ -210,7 +210,7 @@ export default function ClientPage({
                 <h2 className="text-xl">
                   {fulfillmentLabel || 'Claiming benefits...'}
                 </h2>
-                <p className="dark:text-polar-500 text-sm text-gray-500">
+                <p className="dark:text-tarifia-500 text-sm text-gray-500">
                   Please wait while we set up your access
                 </p>
               </div>
@@ -226,7 +226,7 @@ export default function ClientPage({
       <ShadowBox className="flex w-full max-w-2xl flex-col gap-8 p-8 md:p-12">
         <div className="flex flex-col gap-4">
           <h2 className="text-xl">Claim your seat</h2>
-          <p className="dark:text-polar-500 text-gray-500">
+          <p className="dark:text-tarifia-500 text-gray-500">
             You&apos;ve been invited to {claimInfo.product_name} on{' '}
             {claimInfo.organization_name}.
           </p>

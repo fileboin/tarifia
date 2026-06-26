@@ -8,7 +8,7 @@ Create Date: 2026-06-19 12:00:00.000000
 
 from alembic import op
 
-# Polar Custom Imports
+# Tarifia Custom Imports
 
 # revision identifiers, used by Alembic.
 revision = "e3a7c91f4d8b"
