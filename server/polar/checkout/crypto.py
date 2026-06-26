@@ -6,6 +6,8 @@ from polar.kit.currency import get_currency_decimal_factor
 from polar.models import Checkout
 from polar.models.checkout import CheckoutStatus
 
+from .schemas import CheckoutCryptoPaymentURL
+
 
 class CheckoutCryptoPaymentError(PolarError): ...
 
@@ -15,15 +17,10 @@ class CryptoPaymentNotSupported(CheckoutCryptoPaymentError):
         super().__init__(message, 403)
 
 
-class CryptoPaymentURL:
-    def __init__(self, *, payment_url: str) -> None:
-        self.payment_url = payment_url
-
-
 class CheckoutCryptoService:
     async def create_payment_url(
         self, checkout: Checkout, client: SwissBitcoinPayClient
-    ) -> CryptoPaymentURL:
+    ) -> CheckoutCryptoPaymentURL:
         if checkout.status != CheckoutStatus.open:
             raise CryptoPaymentNotSupported("Checkout is not open.")
 
@@ -55,7 +52,9 @@ class CheckoutCryptoService:
             "swissbitcoinpay_invoice_id": invoice.id,
         }
 
-        return CryptoPaymentURL(payment_url=invoice.checkout_url)
+        return CheckoutCryptoPaymentURL.model_validate(
+            {"payment_url": invoice.checkout_url}
+        )
 
 
 checkout_crypto = CheckoutCryptoService()

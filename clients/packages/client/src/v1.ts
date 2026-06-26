@@ -2723,6 +2723,26 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  '/v1/checkouts/client/{client_secret}/crypto-payment-url': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Create Crypto Payment URL from Client
+     * @description Create a Swiss Bitcoin Pay payment URL by client secret.
+     */
+    post: operations['checkouts:client_create_crypto_payment_url']
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   '/v1/cli/listen/{id}': {
     parameters: {
       query?: never
@@ -11593,6 +11613,22 @@ export interface components {
       /** Product Id */
       product_id?: string
     }
+    CheckoutCryptoPaymentError:
+      | components['schemas']['CryptoPaymentNotSupported']
+      | components['schemas']['SwissBitcoinPayConfigurationError']
+      | components['schemas']['SwissBitcoinPayAPIError']
+    /**
+     * CheckoutCryptoPaymentURL
+     * @description Crypto payment URL for a checkout session.
+     */
+    CheckoutCryptoPaymentURL: {
+      /**
+       * Payment Url
+       * Format: uri
+       * @description Swiss Bitcoin Pay checkout URL where the customer can pay.
+       */
+      payment_url: string
+    }
     /**
      * CheckoutCustomerBillingAddressFields
      * @description Deprecated: Use CheckoutBillingAddressFields instead.
@@ -14116,6 +14152,17 @@ export interface components {
       | 'ZA'
       | 'ZM'
       | 'ZW'
+    /** CryptoPaymentNotSupported */
+    CryptoPaymentNotSupported: {
+      /**
+       * Error
+       * @example CryptoPaymentNotSupported
+       * @constant
+       */
+      error: 'CryptoPaymentNotSupported'
+      /** Detail */
+      detail: string
+    }
     /** CursorPagination */
     CursorPagination: {
       /** Has Next Page */
@@ -31530,6 +31577,28 @@ export interface components {
      * @enum {string}
      */
     SupportCaseType: 'review_appeal' | 'dispute'
+    /** SwissBitcoinPayAPIError */
+    SwissBitcoinPayAPIError: {
+      /**
+       * Error
+       * @example SwissBitcoinPayAPIError
+       * @constant
+       */
+      error: 'SwissBitcoinPayAPIError'
+      /** Detail */
+      detail: string
+    }
+    /** SwissBitcoinPayConfigurationError */
+    SwissBitcoinPayConfigurationError: {
+      /**
+       * Error
+       * @example SwissBitcoinPayConfigurationError
+       * @constant
+       */
+      error: 'SwissBitcoinPayConfigurationError'
+      /** Detail */
+      detail: string
+    }
     SystemEvent:
       | components['schemas']['MeterCreditEvent']
       | components['schemas']['MeterResetEvent']
@@ -39935,6 +40004,83 @@ export interface operations {
         }
         content: {
           'application/json': components['schemas']['HTTPValidationError']
+        }
+      }
+    }
+  }
+  'checkouts:client_create_crypto_payment_url': {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        /** @description The checkout session client secret. */
+        client_secret: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Crypto payment URL created. */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['CheckoutCryptoPaymentURL']
+        }
+      }
+      /** @description The crypto payment URL could not be created. */
+      403: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['CheckoutCryptoPaymentError']
+        }
+      }
+      /** @description Checkout session not found. */
+      404: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['ResourceNotFound']
+        }
+      }
+      /** @description The checkout session is expired. */
+      410: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['ExpiredCheckoutError']
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['HTTPValidationError']
+        }
+      }
+      /** @description The crypto payment URL could not be created. */
+      502: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['CheckoutCryptoPaymentError']
+        }
+      }
+      /** @description The crypto payment URL could not be created. */
+      503: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['CheckoutCryptoPaymentError']
         }
       }
     }

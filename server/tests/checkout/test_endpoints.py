@@ -905,8 +905,8 @@ class TestClientCreateCryptoPaymentURL:
                 checkout_url="https://pay.swiss-bitcoin-pay.ch/SBP_INVOICE_ID",
             )
         )
-        app.dependency_overrides[get_swissbitcoinpay_client] = (
-            lambda: swissbitcoinpay_client
+        app.dependency_overrides[get_swissbitcoinpay_client] = lambda: (
+            swissbitcoinpay_client
         )
         expected_amount = Decimal(checkout_open.total_amount) / Decimal(100)
         expected_title = checkout_open.organization.name

@@ -41,8 +41,8 @@ from .crypto import checkout_crypto as checkout_crypto_service
 from .schemas import Checkout as CheckoutSchema
 from .schemas import (
     CheckoutConfirm,
-    CheckoutCryptoPaymentURL,
     CheckoutCreate,
+    CheckoutCryptoPaymentURL,
     CheckoutOpened,
     CheckoutPublic,
     CheckoutPublicConfirmed,
@@ -310,9 +310,7 @@ async def client_confirm(
 async def client_create_crypto_payment_url(
     client_secret: CheckoutClientSecret,
     session: AsyncSession = Depends(get_db_session),
-    swissbitcoinpay_client: SwissBitcoinPayClient = Depends(
-        get_swissbitcoinpay_client
-    ),
+    swissbitcoinpay_client: SwissBitcoinPayClient = Depends(get_swissbitcoinpay_client),
 ) -> CheckoutCryptoPaymentURL:
     """Create a Swiss Bitcoin Pay payment URL by client secret."""
     checkout = await checkout_service.get_by_client_secret(
