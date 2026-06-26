@@ -4,7 +4,11 @@ import structlog
 from fastapi import Depends
 
 from tarifia.auth.models import is_member
-from tarifia.exceptions import NotPermitted, TarifiaRequestValidationError, ResourceNotFound
+from tarifia.exceptions import (
+    NotPermitted,
+    ResourceNotFound,
+    TarifiaRequestValidationError,
+)
 from tarifia.kit.pagination import ListResource, PaginationParamsQuery
 from tarifia.member.repository import MemberRepository
 from tarifia.member.service import member_service

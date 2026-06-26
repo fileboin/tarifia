@@ -3,8 +3,8 @@ from typing import Any
 
 from tarifia_sdk.models import BenefitGrant
 
-from tarifia.models.organization import SupportTier
 from scripts.backfill_support_tiers import resolve_tiers
+from tarifia.models.organization import SupportTier
 
 ORG_ID = uuid.UUID("00000000-0000-0000-0000-00000000000a")
 _CUSTOMER_ID = "00000000-0000-0000-0000-000000000002"

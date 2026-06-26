@@ -3,14 +3,14 @@ from typing import Literal
 import typer
 from sqlalchemy import select, update
 
-from tarifia.enums import TaxProcessor
-from tarifia.models import Checkout, Order, Transaction, WalletTransaction
 from scripts.helper import (
     configure_script_logging,
     limit_bindparam,
     run_batched_update,
     typer_async,
 )
+from tarifia.enums import TaxProcessor
+from tarifia.models import Checkout, Order, Transaction, WalletTransaction
 
 cli = typer.Typer()
 

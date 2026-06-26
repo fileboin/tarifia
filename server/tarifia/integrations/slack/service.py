@@ -7,7 +7,7 @@ import structlog
 from tarifia.benefit.grant.repository import BenefitGrantRepository
 from tarifia.benefit.repository import BenefitRepository
 from tarifia.config import settings
-from tarifia.exceptions import BadRequest, TarifiaError, ResourceNotFound
+from tarifia.exceptions import BadRequest, ResourceNotFound, TarifiaError
 from tarifia.kit import jwt
 from tarifia.kit.db.postgres import AsyncReadSession, AsyncSession
 from tarifia.kit.utils import utc_now

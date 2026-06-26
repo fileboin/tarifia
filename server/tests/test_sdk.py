@@ -58,7 +58,10 @@ class TestSDK:
         assert len(response.result.items) == len(products)
 
     async def test_list_benefits(
-        self, tarifia: Tarifia, benefits: list[Benefit], user_organization: UserOrganization
+        self,
+        tarifia: Tarifia,
+        benefits: list[Benefit],
+        user_organization: UserOrganization,
     ) -> None:
         response = await tarifia.benefits.list_async()
         assert response is not None

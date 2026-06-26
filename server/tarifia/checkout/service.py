@@ -31,7 +31,9 @@ from tarifia.custom_field.data import validate_custom_field_data
 from tarifia.customer.repository import CustomerRepository
 from tarifia.customer_seat.repository import CustomerSeatRepository
 from tarifia.customer_seat.service import seat_service
-from tarifia.customer_session.service import customer_session as customer_session_service
+from tarifia.customer_session.service import (
+    customer_session as customer_session_service,
+)
 from tarifia.discount.service import DiscountNotRedeemableError
 from tarifia.discount.service import discount as discount_service
 from tarifia.enums import PaymentProcessor, TaxBehavior
@@ -44,9 +46,9 @@ from tarifia.event.system import (
 from tarifia.exceptions import (
     NotPermitted,
     PaymentNotReady,
+    ResourceNotFound,
     TarifiaError,
     TarifiaRequestValidationError,
-    ResourceNotFound,
     ValidationError,
 )
 from tarifia.integrations.stripe.service import stripe as stripe_service
@@ -119,7 +121,9 @@ from tarifia.tax.tax_id import (
     to_stripe_tax_id,
     validate_tax_id,
 )
-from tarifia.trial_redemption.service import trial_redemption as trial_redemption_service
+from tarifia.trial_redemption.service import (
+    trial_redemption as trial_redemption_service,
+)
 from tarifia.webhook.service import webhook as webhook_service
 from tarifia.worker import enqueue_job
 
@@ -1208,7 +1212,9 @@ class CheckoutService:
                         # Mark the intent with metadata so we can discard the webhook event associated
                         if intent is not None:
                             trial_intent_metadata = intent.metadata or {}
-                            trial_intent_metadata["tarifia_trial_abuse_detected"] = "true"
+                            trial_intent_metadata["tarifia_trial_abuse_detected"] = (
+                                "true"
+                            )
                             if isinstance(intent, stripe_lib.SetupIntent):
                                 await stripe_service.modify_setup_intent(
                                     intent.id, metadata=trial_intent_metadata

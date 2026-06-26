@@ -1,6 +1,7 @@
 import pytest
 from sqlalchemy import select
 
+from scripts.backfill_tarifia_self_customers import run_backfill
 from tarifia.config import settings
 from tarifia.enums import SubscriptionRecurringInterval
 from tarifia.kit.db.postgres import AsyncSession
@@ -14,7 +15,6 @@ from tarifia.models import (
     UserOrganization,
 )
 from tarifia.worker._enqueue import _job_queue_manager
-from scripts.backfill_tarifia_self_customers import run_backfill
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_account,

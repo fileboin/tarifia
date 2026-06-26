@@ -9,7 +9,7 @@ from sqlalchemy.exc import IntegrityError
 
 import tarifia.integrations.github.client as github
 from tarifia.config import settings
-from tarifia.exceptions import TarifiaError, ResourceAlreadyExists
+from tarifia.exceptions import ResourceAlreadyExists, TarifiaError
 from tarifia.integrations.github.service.user import github_user as github_user_service
 from tarifia.integrations.github_repository_benefit.schemas import (
     GitHubInvitesBenefitOrganization,

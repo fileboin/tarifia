@@ -4,6 +4,11 @@ from functools import wraps
 import typer
 from sqlalchemy import BigInteger, Case, Integer, func, select, update
 
+from scripts.helper import (
+    configure_script_logging,
+    limit_bindparam,
+    run_batched_update,
+)
 from tarifia.models import (
     Checkout,
     Discount,
@@ -12,11 +17,6 @@ from tarifia.models import (
     Subscription,
 )
 from tarifia.models.discount import DiscountFixed, DiscountPercentage, DiscountType
-from scripts.helper import (
-    configure_script_logging,
-    limit_bindparam,
-    run_batched_update,
-)
 
 cli = typer.Typer()
 

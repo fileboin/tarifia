@@ -13,6 +13,12 @@ from sqlalchemy import select
 from sqlalchemy.orm import joinedload, selectinload
 
 import tarifia.tasks  # noqa: F401
+from scripts.seed_tarifia_for_tarifia import (
+    BENEFITS as TARIFIA_SELF_BENEFITS,
+)
+from scripts.seed_tarifia_for_tarifia import (
+    PRODUCTS as TARIFIA_SELF_PRODUCTS,
+)
 from tarifia.auth.models import AuthSubject
 from tarifia.auth.scope import Scope
 from tarifia.benefit.service import benefit as benefit_service
@@ -47,7 +53,9 @@ from tarifia.enums import (
 from tarifia.event.repository import EventRepository
 from tarifia.event.system import SystemEvent as SystemEventEnum
 from tarifia.event_type.repository import EventTypeRepository
-from tarifia.integrations.tinybird.service import ingest_events as tinybird_ingest_events
+from tarifia.integrations.tinybird.service import (
+    ingest_events as tinybird_ingest_events,
+)
 from tarifia.kit.crypto import generate_token, generate_token_hash_pair
 from tarifia.kit.currency import PresentmentCurrency
 from tarifia.kit.db.postgres import create_async_sessionmaker
@@ -114,12 +122,6 @@ from tarifia.support_case.service import support_case as support_case_service
 from tarifia.user.repository import UserRepository
 from tarifia.user.service import user as user_service
 from tarifia.worker import JobQueueManager
-from scripts.seed_tarifia_for_tarifia import (
-    BENEFITS as TARIFIA_SELF_BENEFITS,
-)
-from scripts.seed_tarifia_for_tarifia import (
-    PRODUCTS as TARIFIA_SELF_PRODUCTS,
-)
 from tests.fixtures.database import save_fixture_factory
 from tests.fixtures.random_objects import (
     create_dispute,

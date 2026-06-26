@@ -8,7 +8,11 @@ from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, declared_attr, mapped_column, relationship
 
 from tarifia.kit.db.models import RecordModel
-from tarifia.models.customer import Customer, CustomerOAuthAccount, CustomerOAuthPlatform
+from tarifia.models.customer import (
+    Customer,
+    CustomerOAuthAccount,
+    CustomerOAuthPlatform,
+)
 
 
 class MemberRole(StrEnum):

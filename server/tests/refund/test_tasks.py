@@ -169,7 +169,8 @@ class TestSendChargebackPreventionNotice:
         )
         assert call.kwargs["to_email_addr"] == owner.email
         assert (
-            call.kwargs["subject"] == "Chargeback prevented for order TARIFIA-2026-00042"
+            call.kwargs["subject"]
+            == "Chargeback prevented for order TARIFIA-2026-00042"
         )
 
     async def test_order_number_falls_back_to_id(

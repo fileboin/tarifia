@@ -4,17 +4,17 @@ from functools import wraps
 import typer
 from sqlalchemy import select, update
 
+from scripts.helper import (
+    configure_script_logging,
+    limit_bindparam,
+    run_batched_update,
+)
 from tarifia.enums import TaxBehavior, TaxBehaviorOption
 from tarifia.models import (
     Checkout,
     Order,
     Organization,
     Subscription,
-)
-from scripts.helper import (
-    configure_script_logging,
-    limit_bindparam,
-    run_batched_update,
 )
 
 cli = typer.Typer()

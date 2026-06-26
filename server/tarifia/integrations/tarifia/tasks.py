@@ -201,7 +201,9 @@ async def track_organization_review_usage(
     )
 
 
-@actor(actor_name="tarifia_self.webhook.benefit_grant.created", priority=TaskPriority.LOW)
+@actor(
+    actor_name="tarifia_self.webhook.benefit_grant.created", priority=TaskPriority.LOW
+)
 async def webhook_benefit_grant_created(event_id: uuid.UUID) -> None:
     async with AsyncSessionMaker() as session:
         async with external_event_service.handle(
@@ -211,7 +213,9 @@ async def webhook_benefit_grant_created(event_id: uuid.UUID) -> None:
             await tarifia_self.handle_benefit_grant_event(session, payload)
 
 
-@actor(actor_name="tarifia_self.webhook.benefit_grant.updated", priority=TaskPriority.LOW)
+@actor(
+    actor_name="tarifia_self.webhook.benefit_grant.updated", priority=TaskPriority.LOW
+)
 async def webhook_benefit_grant_updated(event_id: uuid.UUID) -> None:
     async with AsyncSessionMaker() as session:
         async with external_event_service.handle(
@@ -221,7 +225,9 @@ async def webhook_benefit_grant_updated(event_id: uuid.UUID) -> None:
             await tarifia_self.handle_benefit_grant_event(session, payload)
 
 
-@actor(actor_name="tarifia_self.webhook.benefit_grant.revoked", priority=TaskPriority.LOW)
+@actor(
+    actor_name="tarifia_self.webhook.benefit_grant.revoked", priority=TaskPriority.LOW
+)
 async def webhook_benefit_grant_revoked(event_id: uuid.UUID) -> None:
     async with AsyncSessionMaker() as session:
         async with external_event_service.handle(

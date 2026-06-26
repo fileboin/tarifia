@@ -15,8 +15,8 @@ from tarifia.eventstream import tasks as eventstream
 from tarifia.external_event import tasks as external_event
 from tarifia.feedback import tasks as feedback
 from tarifia.integrations.chargeback_stop import tasks as chargeback_stop
-from tarifia.integrations.tarifia import tasks as tarifia_self
 from tarifia.integrations.stripe import tasks as stripe
+from tarifia.integrations.tarifia import tasks as tarifia_self
 from tarifia.integrations.tinybird import tasks as tinybird
 from tarifia.meter import tasks as meter
 from tarifia.notifications import tasks as notifications
@@ -64,7 +64,6 @@ __all__ = [
     "organization_review",
     "payout",
     "personal_access_token",
-    "tarifia_self",
     "processor_transaction",
     "receipt",
     "refund",
@@ -72,6 +71,7 @@ __all__ = [
     "stripe",
     "subscription",
     "support_case",
+    "tarifia_self",
     "tinybird",
     "transaction",
     "user",

@@ -4,8 +4,8 @@ import pytest
 from typer.testing import CliRunner
 
 import scripts.tinybird as tinybird_script
-from tarifia.config import settings
 from scripts.tinybird import build_tb_command, cli, validate_tinybird_target
+from tarifia.config import settings
 
 runner = CliRunner()
 
@@ -150,4 +150,6 @@ class TestTinybirdCLI:
                 False,
             ),
         ]
-        assert "Deploying to workspace tarifia branch preview_pr_123..." in result.stdout
+        assert (
+            "Deploying to workspace tarifia branch preview_pr_123..." in result.stdout
+        )

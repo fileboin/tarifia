@@ -20,7 +20,10 @@ from tarifia.kit.schemas import (
     SetSchemaReference,
     TimestampedSchema,
 )
-from tarifia.kit.trial import TrialConfigurationInputMixin, TrialConfigurationOutputMixin
+from tarifia.kit.trial import (
+    TrialConfigurationInputMixin,
+    TrialConfigurationOutputMixin,
+)
 from tarifia.organization.schemas import OrganizationID
 from tarifia.product.schemas import (
     BenefitPublicList,

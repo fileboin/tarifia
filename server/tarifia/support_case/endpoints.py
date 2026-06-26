@@ -1,7 +1,7 @@
 from fastapi import Depends
 from fastapi.responses import RedirectResponse
 
-from tarifia.exceptions import TarifiaError, ResourceNotFound
+from tarifia.exceptions import ResourceNotFound, TarifiaError
 from tarifia.file.service import file as file_service
 from tarifia.models import File
 from tarifia.models.file import FileServiceTypes

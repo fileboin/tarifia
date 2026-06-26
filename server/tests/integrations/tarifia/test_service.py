@@ -4,6 +4,7 @@ from typing import Any
 from unittest.mock import AsyncMock, MagicMock
 
 import pytest
+from pytest_mock import MockerFixture
 from tarifia_sdk.models import (
     BenefitGrant,
     CustomerIndividual,
@@ -16,10 +17,10 @@ from tarifia_sdk.models import (
     WebhookBenefitGrantUpdatedPayload,
     WebhookOrderCreatedPayload,
 )
-from pytest_mock import MockerFixture
 
 from tarifia.config import settings
 from tarifia.integrations.tarifia.exceptions import (
+    SupportBenefitError,
     TarifiaSelfInvoiceNotReady,
     TarifiaSelfNoActiveSubscription,
     TarifiaSelfNotApproved,
@@ -28,7 +29,6 @@ from tarifia.integrations.tarifia.exceptions import (
     TarifiaSelfOrderNotFound,
     TarifiaSelfPlanNotFound,
     TarifiaSelfWebhookError,
-    SupportBenefitError,
     TransactionFeeBenefitError,
 )
 from tarifia.integrations.tarifia.service import tarifia_self
@@ -450,7 +450,9 @@ class TestResolveFreePlan:
 class TestResolveOrganizationId:
     def test_valid_uuid(self) -> None:
         assert (
-            tarifia_self._resolve_organization_id(_make_customer(external_id=str(ORG_A)))
+            tarifia_self._resolve_organization_id(
+                _make_customer(external_id=str(ORG_A))
+            )
             == ORG_A
         )
 

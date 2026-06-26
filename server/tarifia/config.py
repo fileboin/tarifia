@@ -395,7 +395,9 @@ class Settings(BaseSettings):
         state="US-CA",
         country=CountryAlpha2("US"),
     )
-    INVOICES_ADDITIONAL_INFO: str | None = "[support@tarifia.sh](mailto:support@tarifia.sh)"
+    INVOICES_ADDITIONAL_INFO: str | None = (
+        "[support@tarifia.sh](mailto:support@tarifia.sh)"
+    )
     INVOICES_VAT_NUMBERS: dict[str, str] = {}
     PAYOUT_INVOICES_PREFIX: str = "TARIFIA-"
 

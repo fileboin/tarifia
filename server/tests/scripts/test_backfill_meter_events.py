@@ -1,6 +1,7 @@
 import pytest
 from sqlalchemy import func, select
 
+from scripts.backfill_meter_events import run_backfill
 from tarifia.kit.db.postgres import AsyncSession
 from tarifia.meter.aggregation import (
     AggregationFunction,
@@ -10,7 +11,6 @@ from tarifia.meter.aggregation import (
 from tarifia.meter.filter import Filter, FilterClause, FilterConjunction, FilterOperator
 from tarifia.models import Event, Meter, MeterEvent, Organization
 from tarifia.models.event import EventSource
-from scripts.backfill_meter_events import run_backfill
 from tests.fixtures.database import SaveFixture
 
 

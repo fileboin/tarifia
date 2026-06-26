@@ -26,7 +26,10 @@ from tarifia.exceptions import (
 )
 from tarifia.integrations.tarifia.service import billing_member_role
 from tarifia.integrations.tarifia.service import tarifia_self as tarifia_self_service
-from tarifia.kit.anonymization import anonymize_email_for_deletion, anonymize_for_deletion
+from tarifia.kit.anonymization import (
+    anonymize_email_for_deletion,
+    anonymize_for_deletion,
+)
 from tarifia.kit.currency import PresentmentCurrency
 from tarifia.kit.http import check_url_reachable
 from tarifia.kit.pagination import PaginationParams

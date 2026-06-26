@@ -1,8 +1,8 @@
 import pytest
 
+from scripts.seeds_load import create_seed_data
 from tarifia.kit.db.postgres import AsyncSession
 from tarifia.redis import Redis
-from scripts.seeds_load import create_seed_data
 
 
 @pytest.mark.asyncio

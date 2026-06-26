@@ -8,7 +8,7 @@ from pytest_mock import MockerFixture
 from tarifia.auth.models import AuthSubject
 from tarifia.auth.scope import Scope
 from tarifia.checkout.eventstream import CheckoutEvent
-from tarifia.exceptions import TarifiaRequestValidationError, ResourceNotFound
+from tarifia.exceptions import ResourceNotFound, TarifiaRequestValidationError
 from tarifia.kit.utils import utc_now
 from tarifia.models import (
     Organization,
@@ -19,7 +19,11 @@ from tarifia.models import (
 )
 from tarifia.models.webhook_endpoint import WebhookEventType, WebhookFormat
 from tarifia.postgres import AsyncSession
-from tarifia.webhook.schemas import HttpsUrl, WebhookEndpointCreate, WebhookEndpointUpdate
+from tarifia.webhook.schemas import (
+    HttpsUrl,
+    WebhookEndpointCreate,
+    WebhookEndpointUpdate,
+)
 from tarifia.webhook.service import EventDoesNotExist, EventNotSuccessul
 from tarifia.webhook.service import webhook as webhook_service
 from tarifia.webhook.webhooks import WebhookCheckoutUpdatedPayload

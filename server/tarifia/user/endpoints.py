@@ -10,7 +10,9 @@ from tarifia.authz.dependencies import (
     AuthorizeWebUserRead,
     AuthorizeWebUserWrite,
 )
-from tarifia.customer_portal.endpoints.downloadables import router as downloadables_router
+from tarifia.customer_portal.endpoints.downloadables import (
+    router as downloadables_router,
+)
 from tarifia.customer_portal.endpoints.license_keys import router as license_keys_router
 from tarifia.customer_portal.endpoints.order import router as order_router
 from tarifia.customer_portal.endpoints.subscription import router as subscription_router

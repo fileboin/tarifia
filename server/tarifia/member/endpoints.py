@@ -3,7 +3,7 @@ from uuid import UUID
 from fastapi import Depends, Query
 
 from tarifia.customer.schemas.customer import ExternalCustomerID
-from tarifia.exceptions import TarifiaRequestValidationError, ResourceNotFound
+from tarifia.exceptions import ResourceNotFound, TarifiaRequestValidationError
 from tarifia.kit.pagination import ListResource, PaginationParamsQuery
 from tarifia.models.member import MemberRole
 from tarifia.openapi import APITag

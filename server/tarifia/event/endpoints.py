@@ -11,7 +11,7 @@ from pydantic import UUID4, AwareDatetime, ValidationError
 from pydantic_extra_types.timezone_name import TimeZoneName
 
 from tarifia.customer.schemas.customer import CustomerID
-from tarifia.exceptions import TarifiaRequestValidationError, ResourceNotFound
+from tarifia.exceptions import ResourceNotFound, TarifiaRequestValidationError
 from tarifia.kit.metadata import MetadataQuery, get_metadata_query_openapi_schema
 from tarifia.kit.pagination import (
     ListResource,

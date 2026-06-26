@@ -37,10 +37,10 @@ from rich.table import Table
 from sqlalchemy import CursorResult, text
 from sqlalchemy.ext.asyncio import async_sessionmaker
 
+from scripts.helper import configure_script_console_logging, typer_async
 from tarifia.kit.db.postgres import AsyncSession, create_async_sessionmaker
 from tarifia.models.organization import OrganizationStatus
 from tarifia.postgres import create_async_engine
-from scripts.helper import configure_script_console_logging, typer_async
 
 cli = typer.Typer()
 console = Console()

@@ -12,7 +12,11 @@ from tarifia.auth.models import AuthSubject, Organization, User
 from tarifia.authz.service import get_accessible_org_ids
 from tarifia.customer.repository import CustomerRepository
 from tarifia.customer_seat.repository import CustomerSeatRepository
-from tarifia.exceptions import NotPermitted, TarifiaRequestValidationError, ResourceNotFound
+from tarifia.exceptions import (
+    NotPermitted,
+    ResourceNotFound,
+    TarifiaRequestValidationError,
+)
 from tarifia.kit.pagination import PaginationParams
 from tarifia.kit.sorting import Sorting
 from tarifia.models.customer import Customer, CustomerType

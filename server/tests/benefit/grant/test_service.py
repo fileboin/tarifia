@@ -8,7 +8,10 @@ from pytest_mock import MockerFixture
 
 from tarifia.benefit.grant.repository import BenefitGrantRepository
 from tarifia.benefit.grant.service import benefit_grant as benefit_grant_service
-from tarifia.benefit.strategies import BenefitActionRequiredError, BenefitServiceProtocol
+from tarifia.benefit.strategies import (
+    BenefitActionRequiredError,
+    BenefitServiceProtocol,
+)
 from tarifia.benefit.strategies.base.properties import BenefitGrantProperties
 from tarifia.benefit.strategies.base.service import BenefitRetriableError
 from tarifia.config import settings

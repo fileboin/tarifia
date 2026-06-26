@@ -1,5 +1,9 @@
 import pytest
 
+from scripts.migrate_organizations_members import (
+    find_deleted_oneoff_grants,
+    restore_oneoff_grant_batch,
+)
 from tarifia.kit.db.postgres import AsyncSession
 from tarifia.kit.utils import utc_now
 from tarifia.models import Account, Benefit, Customer, Organization, Product
@@ -7,10 +11,6 @@ from tarifia.models.benefit import BenefitType
 from tarifia.models.benefit_grant import BenefitGrant
 from tarifia.models.license_key import LicenseKey, LicenseKeyStatus
 from tarifia.models.member import Member, MemberRole
-from scripts.migrate_organizations_members import (
-    find_deleted_oneoff_grants,
-    restore_oneoff_grant_batch,
-)
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_benefit,

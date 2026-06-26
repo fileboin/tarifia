@@ -4,7 +4,14 @@ import pytest_asyncio
 from tarifia.auth.models import AuthSubject
 from tarifia.custom_field.schemas import CustomFieldUpdateText
 from tarifia.custom_field.service import custom_field as custom_field_service
-from tarifia.models import Customer, Order, Organization, Product, User, UserOrganization
+from tarifia.models import (
+    Customer,
+    Order,
+    Organization,
+    Product,
+    User,
+    UserOrganization,
+)
 from tarifia.models.custom_field import CustomFieldText, CustomFieldType
 from tarifia.order.repository import OrderRepository
 from tarifia.postgres import AsyncSession

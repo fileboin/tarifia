@@ -8,6 +8,7 @@ import structlog
 import typer
 from sqlalchemy import select
 
+from scripts.helper import typer_async
 from tarifia import tasks  # noqa: F401
 from tarifia.event.service import event as event_service
 from tarifia.event.system import (
@@ -20,7 +21,6 @@ from tarifia.models import Customer, Event, Organization
 from tarifia.postgres import create_async_engine
 from tarifia.redis import create_redis
 from tarifia.worker import JobQueueManager
-from scripts.helper import typer_async
 
 log = structlog.get_logger()
 cli = typer.Typer()

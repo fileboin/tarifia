@@ -331,7 +331,9 @@ class TestPreviewCLI:
             "TARIFIA_PREVIEW_POSTGRES_ADMIN_DSN",
             "postgresql://admin:secret@db.internal:5432/postgres",
         )
-        monkeypatch.setenv("TARIFIA_PREVIEW_POSTGRES_TEMPLATE_DATABASE", "tarifia_template")
+        monkeypatch.setenv(
+            "TARIFIA_PREVIEW_POSTGRES_TEMPLATE_DATABASE", "tarifia_template"
+        )
         monkeypatch.setattr(
             preview_script, "generate_preview_password", lambda: "db-pass"
         )
@@ -391,7 +393,9 @@ class TestPreviewCLI:
             "TARIFIA_PREVIEW_POSTGRES_ADMIN_DSN",
             "postgresql://admin:secret@db.internal:5432/postgres",
         )
-        monkeypatch.setenv("TARIFIA_PREVIEW_POSTGRES_TEMPLATE_DATABASE", "tarifia_template")
+        monkeypatch.setenv(
+            "TARIFIA_PREVIEW_POSTGRES_TEMPLATE_DATABASE", "tarifia_template"
+        )
         monkeypatch.setattr(
             preview_script, "generate_preview_password", lambda: "rotated-pass"
         )
@@ -631,7 +635,9 @@ class TestPreviewCLI:
             )
             return info_responses.pop(0)
 
-        monkeypatch.setenv("TARIFIA_PREVIEW_TINYBIRD_API_URL", "https://api.tinybird.co")
+        monkeypatch.setenv(
+            "TARIFIA_PREVIEW_TINYBIRD_API_URL", "https://api.tinybird.co"
+        )
         monkeypatch.setenv("TARIFIA_PREVIEW_TINYBIRD_ADMIN_TOKEN", "tb-admin-token")
         monkeypatch.setenv("TARIFIA_PREVIEW_TINYBIRD_WORKSPACE", "tarifia")
         monkeypatch.setenv("TARIFIA_PREVIEW_TINYBIRD_LAST_PARTITION", "true")
@@ -727,7 +733,9 @@ class TestPreviewCLI:
                 },
             }
 
-        monkeypatch.setenv("TARIFIA_PREVIEW_TINYBIRD_API_URL", "https://api.tinybird.co")
+        monkeypatch.setenv(
+            "TARIFIA_PREVIEW_TINYBIRD_API_URL", "https://api.tinybird.co"
+        )
         monkeypatch.setenv("TARIFIA_PREVIEW_TINYBIRD_ADMIN_TOKEN", "tb-admin-token")
         monkeypatch.setenv("TARIFIA_PREVIEW_TINYBIRD_WORKSPACE", "tarifia")
         monkeypatch.setattr(
@@ -774,7 +782,9 @@ class TestPreviewCLI:
     ) -> None:
         github_output = tmp_path / "github-output.txt"
 
-        monkeypatch.setenv("TARIFIA_PREVIEW_TINYBIRD_API_URL", "https://api.tinybird.co")
+        monkeypatch.setenv(
+            "TARIFIA_PREVIEW_TINYBIRD_API_URL", "https://api.tinybird.co"
+        )
         monkeypatch.setenv("TARIFIA_PREVIEW_TINYBIRD_ADMIN_TOKEN", "tb-admin-token")
         monkeypatch.setenv("TARIFIA_PREVIEW_TINYBIRD_WORKSPACE", "tarifia")
         monkeypatch.setattr(

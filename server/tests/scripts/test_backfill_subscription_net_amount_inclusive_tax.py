@@ -3,11 +3,11 @@ from datetime import UTC, datetime
 import pytest
 from sqlalchemy import select
 
+from scripts.backfill_subscription_net_amount_inclusive_tax import run_backfill
 from tarifia.enums import TaxBehavior
 from tarifia.kit.db.postgres import AsyncSession
 from tarifia.models import Organization, Product, Subscription
 from tarifia.models.subscription import SubscriptionStatus
-from scripts.backfill_subscription_net_amount_inclusive_tax import run_backfill
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_customer,

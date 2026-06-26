@@ -7,8 +7,8 @@ import structlog
 from sqlalchemy import func, update
 
 from tarifia.exceptions import TarifiaError
-from tarifia.integrations.tarifia.service import tarifia_self as tarifia_self_service
 from tarifia.integrations.stripe.service import stripe as stripe_service
+from tarifia.integrations.tarifia.service import tarifia_self as tarifia_self_service
 from tarifia.kit.anonymization import anonymize_email_for_deletion
 from tarifia.models import NotificationRecipient, User
 from tarifia.models.user import IdentityVerificationStatus

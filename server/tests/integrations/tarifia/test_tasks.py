@@ -5,8 +5,8 @@ from unittest.mock import AsyncMock, MagicMock
 import httpx
 import pytest
 from dramatiq import Retry
-from tarifia_sdk.models.resourcenotfound import ResourceNotFound, ResourceNotFoundData
 from pytest_mock import MockerFixture
+from tarifia_sdk.models.resourcenotfound import ResourceNotFound, ResourceNotFoundData
 
 from tarifia.config import settings
 from tarifia.integrations.tarifia.client import TarifiaSelfClient
@@ -42,7 +42,9 @@ class TestCreateCustomer:
         plain_service_mock: MagicMock,
     ) -> None:
         client = AsyncMock(spec=TarifiaSelfClient)
-        mocker.patch("tarifia.integrations.tarifia.tasks.get_client", return_value=client)
+        mocker.patch(
+            "tarifia.integrations.tarifia.tasks.get_client", return_value=client
+        )
 
         await create_customer(
             external_id="org-123",
@@ -75,7 +77,9 @@ class TestCreateCustomer:
     ) -> None:
         monkeypatch.setattr(settings, "PLAIN_DEFAULT_TIER_EXTERNAL_ID", "free")
         client = AsyncMock(spec=TarifiaSelfClient)
-        mocker.patch("tarifia.integrations.tarifia.tasks.get_client", return_value=client)
+        mocker.patch(
+            "tarifia.integrations.tarifia.tasks.get_client", return_value=client
+        )
 
         await create_customer(
             external_id="org-123",
@@ -103,7 +107,9 @@ class TestAddMember:
         fake_customer = MagicMock(id="tarifia-customer-123")
         client = AsyncMock(spec=TarifiaSelfClient)
         client.get_customer_by_external_id.return_value = fake_customer
-        mocker.patch("tarifia.integrations.tarifia.tasks.get_client", return_value=client)
+        mocker.patch(
+            "tarifia.integrations.tarifia.tasks.get_client", return_value=client
+        )
 
         await add_member(
             external_customer_id="org-123",
@@ -139,7 +145,9 @@ class TestAddMember:
                 ),
             ),
         )
-        mocker.patch("tarifia.integrations.tarifia.tasks.get_client", return_value=client)
+        mocker.patch(
+            "tarifia.integrations.tarifia.tasks.get_client", return_value=client
+        )
         mocker.patch("tarifia.integrations.tarifia.tasks.can_retry", return_value=True)
 
         with pytest.raises(Retry):
@@ -167,7 +175,9 @@ class TestAddMember:
         )
         client = AsyncMock(spec=TarifiaSelfClient)
         client.get_customer_by_external_id.side_effect = not_found
-        mocker.patch("tarifia.integrations.tarifia.tasks.get_client", return_value=client)
+        mocker.patch(
+            "tarifia.integrations.tarifia.tasks.get_client", return_value=client
+        )
         mocker.patch("tarifia.integrations.tarifia.tasks.can_retry", return_value=False)
 
         with pytest.raises(ResourceNotFound):
@@ -188,7 +198,9 @@ class TestRemoveMember:
     ) -> None:
         client = AsyncMock(spec=TarifiaSelfClient)
         client.get_member_by_external_id.return_value = MagicMock(id="member-123")
-        mocker.patch("tarifia.integrations.tarifia.tasks.get_client", return_value=client)
+        mocker.patch(
+            "tarifia.integrations.tarifia.tasks.get_client", return_value=client
+        )
 
         await remove_member(
             external_customer_id="org-123",
@@ -223,7 +235,9 @@ class TestRemoveMember:
                 ),
             ),
         )
-        mocker.patch("tarifia.integrations.tarifia.tasks.get_client", return_value=client)
+        mocker.patch(
+            "tarifia.integrations.tarifia.tasks.get_client", return_value=client
+        )
         mocker.patch("tarifia.integrations.tarifia.tasks.can_retry", return_value=True)
 
         with pytest.raises(Retry):
@@ -249,7 +263,9 @@ class TestRemoveMember:
                 ),
             ),
         )
-        mocker.patch("tarifia.integrations.tarifia.tasks.get_client", return_value=client)
+        mocker.patch(
+            "tarifia.integrations.tarifia.tasks.get_client", return_value=client
+        )
         mocker.patch("tarifia.integrations.tarifia.tasks.can_retry", return_value=False)
 
         await remove_member(
@@ -267,7 +283,9 @@ class TestUpdateMember:
         mocker: MockerFixture,
     ) -> None:
         client = AsyncMock(spec=TarifiaSelfClient)
-        mocker.patch("tarifia.integrations.tarifia.tasks.get_client", return_value=client)
+        mocker.patch(
+            "tarifia.integrations.tarifia.tasks.get_client", return_value=client
+        )
 
         await update_member(
             external_customer_id="org-123",
@@ -292,7 +310,9 @@ class TestUpdateCustomerSlug:
         fake_customer.metadata = {"slug": "old-slug", "other": "keep"}
         client = AsyncMock(spec=TarifiaSelfClient)
         client.get_customer_by_external_id_or_none.return_value = fake_customer
-        mocker.patch("tarifia.integrations.tarifia.tasks.get_client", return_value=client)
+        mocker.patch(
+            "tarifia.integrations.tarifia.tasks.get_client", return_value=client
+        )
 
         await update_customer_slug(external_id="org-123", slug="new-slug")
 
@@ -310,7 +330,9 @@ class TestUpdateCustomerSlug:
         fake_customer.metadata = None
         client = AsyncMock(spec=TarifiaSelfClient)
         client.get_customer_by_external_id_or_none.return_value = fake_customer
-        mocker.patch("tarifia.integrations.tarifia.tasks.get_client", return_value=client)
+        mocker.patch(
+            "tarifia.integrations.tarifia.tasks.get_client", return_value=client
+        )
 
         await update_customer_slug(external_id="org-123", slug="new-slug")
 
@@ -325,7 +347,9 @@ class TestUpdateCustomerSlug:
     ) -> None:
         client = AsyncMock(spec=TarifiaSelfClient)
         client.get_customer_by_external_id_or_none.return_value = None
-        mocker.patch("tarifia.integrations.tarifia.tasks.get_client", return_value=client)
+        mocker.patch(
+            "tarifia.integrations.tarifia.tasks.get_client", return_value=client
+        )
 
         await update_customer_slug(external_id="org-123", slug="new-slug")
 
@@ -339,7 +363,9 @@ class TestDeleteCustomer:
         mocker: MockerFixture,
     ) -> None:
         client = AsyncMock(spec=TarifiaSelfClient)
-        mocker.patch("tarifia.integrations.tarifia.tasks.get_client", return_value=client)
+        mocker.patch(
+            "tarifia.integrations.tarifia.tasks.get_client", return_value=client
+        )
 
         await delete_customer(external_id="org-123")
 
@@ -381,7 +407,9 @@ class TestFlushEventIngestion:
             return_value={},
         )
         client = AsyncMock(spec=TarifiaSelfClient)
-        mocker.patch("tarifia.integrations.tarifia.tasks.get_client", return_value=client)
+        mocker.patch(
+            "tarifia.integrations.tarifia.tasks.get_client", return_value=client
+        )
 
         await track_event_ingestion()
 
@@ -407,7 +435,9 @@ class TestFlushEventIngestion:
             return_value=counts,
         )
         client = AsyncMock(spec=TarifiaSelfClient)
-        mocker.patch("tarifia.integrations.tarifia.tasks.get_client", return_value=client)
+        mocker.patch(
+            "tarifia.integrations.tarifia.tasks.get_client", return_value=client
+        )
 
         await track_event_ingestion()
 
@@ -429,7 +459,9 @@ class TestTrackOrganizationReviewUsage:
         mocker: MockerFixture,
     ) -> None:
         client = AsyncMock(spec=TarifiaSelfClient)
-        mocker.patch("tarifia.integrations.tarifia.tasks.get_client", return_value=client)
+        mocker.patch(
+            "tarifia.integrations.tarifia.tasks.get_client", return_value=client
+        )
 
         await track_organization_review_usage(
             external_customer_id="org-123",

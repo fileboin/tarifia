@@ -7,7 +7,7 @@ resolution-markers = [
 ]
 
 [options]
-exclude-newer = "2026-06-17T07:51:38.371259Z"
+exclude-newer = "0001-01-01T00:00:00Z" # This has no effect and is included for backwards compatibility when using relative exclude-newer values.
 exclude-newer-span = "P1W"
 
 [options.exclude-newer-package]
@@ -1576,15 +1576,6 @@ wheels = [
 ]
 
 [[package]]
-name = "jsonpath-python"
-version = "1.1.5"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/2d/db/2f4ecc24da35c6142b39c353d5b7c16eef955cc94b35a48d3fa47996d7c3/jsonpath_python-1.1.5.tar.gz", hash = "sha256:ceea2efd9e56add09330a2c9631ea3d55297b9619348c1055e5bfb9cb0b8c538", size = 87352, upload-time = "2026-03-17T06:16:40.597Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/28/50/1a313fb700526b134c71eb8a225d8b83be0385dbb0204337b4379c698cef/jsonpath_python-1.1.5-py3-none-any.whl", hash = "sha256:a60315404d70a65e76c9a782c84e50600480221d94a58af47b7b4d437351cb4b", size = 14090, upload-time = "2026-03-17T06:16:39.152Z" },
-]
-
-[[package]]
 name = "justext"
 version = "3.0.2"
 source = { registry = "https://pypi.org/simple" }
@@ -2376,223 +2367,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/f9/e2/3e91f31a7d2b083fe6ef3fa267035b518369d9511ffab804f839851d2779/pluggy-1.6.0.tar.gz", hash = "sha256:7dcc130b76258d33b90f61b658791dede3486c3e6bfb003ee5c9bfb396dd22f3", size = 69412, upload-time = "2025-05-15T12:30:07.975Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/54/20/4d324d65cc6d9205fabedc306948156824eb9f0ee1633355a8f7ec5c66bf/pluggy-1.6.0-py3-none-any.whl", hash = "sha256:e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746", size = 20538, upload-time = "2025-05-15T12:30:06.134Z" },
-]
-
-[[package]]
-name = "tarifia"
-version = "0.0.0"
-source = { virtual = "." }
-dependencies = [
-    { name = "aiocsv" },
-    { name = "alembic" },
-    { name = "alembic-utils" },
-    { name = "anyio" },
-    { name = "apscheduler" },
-    { name = "arabic-reshaper" },
-    { name = "asgi-ratelimit" },
-    { name = "asyncpg" },
-    { name = "authlib" },
-    { name = "babel" },
-    { name = "boto3" },
-    { name = "clickhouse-connect", extra = ["async"] },
-    { name = "cryptography" },
-    { name = "dramatiq", extra = ["redis", "watch"] },
-    { name = "email-validator" },
-    { name = "exponent-server-sdk" },
-    { name = "fastapi" },
-    { name = "firecrawl-py" },
-    { name = "fpdf2" },
-    { name = "genai-prices" },
-    { name = "githubkit" },
-    { name = "greenlet" },
-    { name = "httpx" },
-    { name = "httpx-oauth" },
-    { name = "ipinfo-db" },
-    { name = "itsdangerous" },
-    { name = "logfire", extra = ["fastapi", "httpx", "redis", "sqlalchemy"] },
-    { name = "makefun" },
-    { name = "markdown-it-py" },
-    { name = "plain-client" },
-    { name = "tarifia-sdk" },
-    { name = "posthog" },
-    { name = "prometheus-client" },
-    { name = "psycopg2-binary" },
-    { name = "pycountry" },
-    { name = "pydantic" },
-    { name = "pydantic-ai-slim", extra = ["openai"] },
-    { name = "pydantic-extra-types" },
-    { name = "pydantic-settings" },
-    { name = "pyjwt" },
-    { name = "python-bidi" },
-    { name = "python-dateutil" },
-    { name = "python-multipart" },
-    { name = "python-slugify" },
-    { name = "python-snappy" },
-    { name = "python-stdnum" },
-    { name = "reauth" },
-    { name = "redis" },
-    { name = "safe-redirect-url" },
-    { name = "sentry-sdk", extra = ["fastapi", "sqlalchemy"] },
-    { name = "sqlalchemy", extra = ["asyncio"] },
-    { name = "sqlalchemy-utils" },
-    { name = "sse-starlette" },
-    { name = "standardwebhooks" },
-    { name = "stripe" },
-    { name = "structlog" },
-    { name = "tagflow" },
-    { name = "taskipy" },
-    { name = "trafilatura" },
-    { name = "typer" },
-    { name = "tzdata" },
-    { name = "uvicorn", extra = ["standard"] },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "boto3-stubs", extra = ["lambda", "s3", "sqs"] },
-    { name = "coverage" },
-    { name = "debugpy" },
-    { name = "fakeredis", extra = ["lua"] },
-    { name = "freezegun" },
-    { name = "gepa" },
-    { name = "locust" },
-    { name = "minio" },
-    { name = "mypy" },
-    { name = "pydantic-evals" },
-    { name = "pytest" },
-    { name = "pytest-asyncio" },
-    { name = "pytest-cov" },
-    { name = "pytest-mock" },
-    { name = "pytest-recording" },
-    { name = "pytest-subtests" },
-    { name = "pytest-sugar" },
-    { name = "pytest-xdist", extra = ["psutil"] },
-    { name = "respx" },
-    { name = "ruff" },
-    { name = "sqlalchemy-utils" },
-    { name = "typer" },
-    { name = "types-python-slugify" },
-    { name = "types-redis" },
-    { name = "types-requests" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "aiocsv", specifier = ">=1.4.1" },
-    { name = "alembic", specifier = ">=1.9.2" },
-    { name = "alembic-utils", specifier = ">=0.8.8" },
-    { name = "anyio", specifier = ">=4.13.0" },
-    { name = "apscheduler", specifier = ">=3.10.4" },
-    { name = "arabic-reshaper", specifier = ">=3.0.1" },
-    { name = "asgi-ratelimit", specifier = ">=0.10.0" },
-    { name = "asyncpg", specifier = ">=0.29.0" },
-    { name = "authlib", specifier = ">=1.7.2" },
-    { name = "babel", specifier = ">=2.16.0" },
-    { name = "boto3", specifier = ">=1.43.26" },
-    { name = "clickhouse-connect", extras = ["async"], specifier = ">=1.2.0" },
-    { name = "cryptography", specifier = ">=48.0.1" },
-    { name = "dramatiq", extras = ["redis", "watch"], git = "https://github.com/frankie567/dramatiq?rev=memory-leak-asyncio-ter" },
-    { name = "email-validator", specifier = ">=2.1.0.post1" },
-    { name = "exponent-server-sdk", specifier = ">=2.1.0" },
-    { name = "fastapi", specifier = "==0.136.3" },
-    { name = "firecrawl-py", specifier = ">=4.28.2" },
-    { name = "fpdf2", specifier = ">=2.8.3" },
-    { name = "genai-prices", specifier = ">=0.0.66" },
-    { name = "githubkit", specifier = "==0.15.5" },
-    { name = "greenlet", specifier = ">=3.5.1" },
-    { name = "httpx", specifier = ">=0.23.0" },
-    { name = "httpx-oauth", specifier = ">=0.17.0" },
-    { name = "ipinfo-db", specifier = ">=0.0.4" },
-    { name = "itsdangerous", specifier = ">=2.2.0" },
-    { name = "logfire", extras = ["fastapi", "httpx", "sqlalchemy", "redis"], specifier = ">=4.36.0" },
-    { name = "makefun", specifier = ">=1.15.6" },
-    { name = "markdown-it-py", specifier = ">=4.2.0" },
-    { name = "plain-client", specifier = ">=0.0.3" },
-    { name = "tarifia-sdk", url = "https://files.pythonhosted.org/packages/dc/e0/a88026b9432c7e2c0c096911ddc97cb06f483036a00a8afd5254efe1c16a/tarifia_sdk-0.31.7-py3-none-any.whl" },
-    { name = "posthog", specifier = ">=7.18.0" },
-    { name = "prometheus-client", specifier = ">=0.25.0" },
-    { name = "psycopg2-binary", specifier = ">=2.9.12" },
-    { name = "pycountry", specifier = ">=24.6.1" },
-    { name = "pydantic", specifier = ">=2.13.4" },
-    { name = "pydantic-ai-slim", extras = ["openai"], specifier = ">=1.106.0" },
-    { name = "pydantic-extra-types", specifier = ">=2.9.0" },
-    { name = "pydantic-settings", specifier = ">=2.14.1" },
-    { name = "pyjwt", specifier = ">=2.13.0" },
-    { name = "python-bidi", specifier = ">=0.6.10" },
-    { name = "python-dateutil", specifier = ">=2.9.0.post0" },
-    { name = "python-multipart", specifier = ">=0.0.32" },
-    { name = "python-slugify", specifier = ">=8.0.1" },
-    { name = "python-snappy", specifier = ">=0.7.3" },
-    { name = "python-stdnum", specifier = ">=2.1" },
-    { name = "reauth", specifier = "==0.1.8" },
-    { name = "redis", specifier = ">=5.0.4" },
-    { name = "safe-redirect-url", specifier = ">=0.1.1" },
-    { name = "sentry-sdk", extras = ["fastapi", "sqlalchemy"], specifier = ">=2.62.0" },
-    { name = "sqlalchemy", extras = ["asyncio"], specifier = ">=2.0.50" },
-    { name = "sqlalchemy-utils", specifier = ">=0.41.1" },
-    { name = "sse-starlette", specifier = ">=3.4.4" },
-    { name = "standardwebhooks", specifier = ">=1.0.0" },
-    { name = "stripe", specifier = ">=14,<15" },
-    { name = "structlog", specifier = ">=26.1.0" },
-    { name = "tagflow", specifier = ">=0.7.0" },
-    { name = "taskipy", specifier = ">=1.10.3" },
-    { name = "trafilatura", specifier = ">=2.1.0" },
-    { name = "typer", specifier = ">=0.26.7" },
-    { name = "tzdata", specifier = ">=2026.2" },
-    { name = "uvicorn", extras = ["standard"], specifier = ">=0.49.0" },
-]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "boto3-stubs", extras = ["s3", "sqs", "lambda"], specifier = ">=1.43.26" },
-    { name = "coverage", specifier = ">=7.14.1" },
-    { name = "debugpy", specifier = ">=1.8.21" },
-    { name = "fakeredis", extras = ["lua"], specifier = ">=2.36.1" },
-    { name = "freezegun", specifier = ">=1.5.1" },
-    { name = "gepa", specifier = ">=0.1.0" },
-    { name = "locust", specifier = ">=2.44.1" },
-    { name = "minio", specifier = ">=7.2.9" },
-    { name = "mypy", specifier = ">=2.1.0" },
-    { name = "pydantic-evals", specifier = ">=1.103.0" },
-    { name = "pytest", specifier = "<10" },
-    { name = "pytest-asyncio", specifier = ">=1.4.0" },
-    { name = "pytest-cov", specifier = ">=5.0.0" },
-    { name = "pytest-mock", specifier = ">=3.10.0" },
-    { name = "pytest-recording", specifier = ">=0.13.1" },
-    { name = "pytest-subtests", specifier = ">=0.13.1" },
-    { name = "pytest-sugar", specifier = ">=1.0.0" },
-    { name = "pytest-xdist", extras = ["psutil"], specifier = ">=3.8.0" },
-    { name = "respx", specifier = ">=0.23.1" },
-    { name = "ruff", specifier = ">=0.15.16" },
-    { name = "sqlalchemy-utils", specifier = ">=0.41.2" },
-    { name = "typer", specifier = ">=0.26.7" },
-    { name = "types-python-slugify", specifier = ">=8.0.0.3" },
-    { name = "types-redis", specifier = ">=4.6.0.20240903" },
-    { name = "types-requests", specifier = ">=2.33.0.20260518" },
-]
-
-[[package]]
-name = "tarifia-sdk"
-version = "0.31.7"
-source = { url = "https://files.pythonhosted.org/packages/dc/e0/a88026b9432c7e2c0c096911ddc97cb06f483036a00a8afd5254efe1c16a/tarifia_sdk-0.31.7-py3-none-any.whl" }
-dependencies = [
-    { name = "httpcore" },
-    { name = "httpx" },
-    { name = "jsonpath-python" },
-    { name = "pydantic" },
-    { name = "standardwebhooks" },
-]
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/dc/e0/a88026b9432c7e2c0c096911ddc97cb06f483036a00a8afd5254efe1c16a/tarifia_sdk-0.31.7-py3-none-any.whl", hash = "sha256:acff8f3405046d45fa31130674f269314586fee1d3d2fec221eed21cb8697340" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "httpcore", specifier = ">=1.0.9" },
-    { name = "httpx", specifier = ">=0.28.1" },
-    { name = "jsonpath-python", specifier = ">=1.0.6" },
-    { name = "pydantic", specifier = ">=2.11.2" },
-    { name = "standardwebhooks", specifier = ">=1.0.0,<2.0.0" },
 ]
 
 [[package]]
@@ -3579,6 +3353,216 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/a7/32/2acead5d3e005a4ea052c334db14d16f85a37e1649c776d20dfa07deef99/tagflow-0.12.0.tar.gz", hash = "sha256:f8ea237be494c0a1b9e40e3801d639c23428de5cbf980431607887a34eb92790", size = 42278, upload-time = "2025-04-12T06:54:22.685Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/75/77/0fcd1170a810de78fee338ee9e60b98894c22ae29c6dd612f97394b9faaa/tagflow-0.12.0-py3-none-any.whl", hash = "sha256:b843205d1e5a369f91e80baa160f2331cad6c83d401efd607b56588f80897d29", size = 14661, upload-time = "2025-04-12T06:54:21.127Z" },
+]
+
+[[package]]
+name = "tarifia"
+version = "0.0.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "aiocsv" },
+    { name = "alembic" },
+    { name = "alembic-utils" },
+    { name = "anyio" },
+    { name = "apscheduler" },
+    { name = "arabic-reshaper" },
+    { name = "asgi-ratelimit" },
+    { name = "asyncpg" },
+    { name = "authlib" },
+    { name = "babel" },
+    { name = "boto3" },
+    { name = "clickhouse-connect", extra = ["async"] },
+    { name = "cryptography" },
+    { name = "dramatiq", extra = ["redis", "watch"] },
+    { name = "email-validator" },
+    { name = "exponent-server-sdk" },
+    { name = "fastapi" },
+    { name = "firecrawl-py" },
+    { name = "fpdf2" },
+    { name = "genai-prices" },
+    { name = "githubkit" },
+    { name = "greenlet" },
+    { name = "httpx" },
+    { name = "httpx-oauth" },
+    { name = "ipinfo-db" },
+    { name = "itsdangerous" },
+    { name = "logfire", extra = ["fastapi", "httpx", "redis", "sqlalchemy"] },
+    { name = "makefun" },
+    { name = "markdown-it-py" },
+    { name = "plain-client" },
+    { name = "posthog" },
+    { name = "prometheus-client" },
+    { name = "psycopg2-binary" },
+    { name = "pycountry" },
+    { name = "pydantic" },
+    { name = "pydantic-ai-slim", extra = ["openai"] },
+    { name = "pydantic-extra-types" },
+    { name = "pydantic-settings" },
+    { name = "pyjwt" },
+    { name = "python-bidi" },
+    { name = "python-dateutil" },
+    { name = "python-multipart" },
+    { name = "python-slugify" },
+    { name = "python-snappy" },
+    { name = "python-stdnum" },
+    { name = "reauth" },
+    { name = "redis" },
+    { name = "safe-redirect-url" },
+    { name = "sentry-sdk", extra = ["fastapi", "sqlalchemy"] },
+    { name = "sqlalchemy", extra = ["asyncio"] },
+    { name = "sqlalchemy-utils" },
+    { name = "sse-starlette" },
+    { name = "standardwebhooks" },
+    { name = "stripe" },
+    { name = "structlog" },
+    { name = "tagflow" },
+    { name = "tarifia-sdk" },
+    { name = "taskipy" },
+    { name = "trafilatura" },
+    { name = "typer" },
+    { name = "tzdata" },
+    { name = "uvicorn", extra = ["standard"] },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "boto3-stubs", extra = ["lambda", "s3", "sqs"] },
+    { name = "coverage" },
+    { name = "debugpy" },
+    { name = "fakeredis", extra = ["lua"] },
+    { name = "freezegun" },
+    { name = "gepa" },
+    { name = "locust" },
+    { name = "minio" },
+    { name = "mypy" },
+    { name = "pydantic-evals" },
+    { name = "pytest" },
+    { name = "pytest-asyncio" },
+    { name = "pytest-cov" },
+    { name = "pytest-mock" },
+    { name = "pytest-recording" },
+    { name = "pytest-subtests" },
+    { name = "pytest-sugar" },
+    { name = "pytest-xdist", extra = ["psutil"] },
+    { name = "respx" },
+    { name = "ruff" },
+    { name = "sqlalchemy-utils" },
+    { name = "typer" },
+    { name = "types-python-slugify" },
+    { name = "types-redis" },
+    { name = "types-requests" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "aiocsv", specifier = ">=1.4.1" },
+    { name = "alembic", specifier = ">=1.9.2" },
+    { name = "alembic-utils", specifier = ">=0.8.8" },
+    { name = "anyio", specifier = ">=4.13.0" },
+    { name = "apscheduler", specifier = ">=3.10.4" },
+    { name = "arabic-reshaper", specifier = ">=3.0.1" },
+    { name = "asgi-ratelimit", specifier = ">=0.10.0" },
+    { name = "asyncpg", specifier = ">=0.29.0" },
+    { name = "authlib", specifier = ">=1.7.2" },
+    { name = "babel", specifier = ">=2.16.0" },
+    { name = "boto3", specifier = ">=1.43.26" },
+    { name = "clickhouse-connect", extras = ["async"], specifier = ">=1.2.0" },
+    { name = "cryptography", specifier = ">=48.0.1" },
+    { name = "dramatiq", extras = ["redis", "watch"], git = "https://github.com/frankie567/dramatiq?rev=memory-leak-asyncio-ter" },
+    { name = "email-validator", specifier = ">=2.1.0.post1" },
+    { name = "exponent-server-sdk", specifier = ">=2.1.0" },
+    { name = "fastapi", specifier = "==0.136.3" },
+    { name = "firecrawl-py", specifier = ">=4.28.2" },
+    { name = "fpdf2", specifier = ">=2.8.3" },
+    { name = "genai-prices", specifier = ">=0.0.66" },
+    { name = "githubkit", specifier = "==0.15.5" },
+    { name = "greenlet", specifier = ">=3.5.1" },
+    { name = "httpx", specifier = ">=0.23.0" },
+    { name = "httpx-oauth", specifier = ">=0.17.0" },
+    { name = "ipinfo-db", specifier = ">=0.0.4" },
+    { name = "itsdangerous", specifier = ">=2.2.0" },
+    { name = "logfire", extras = ["fastapi", "httpx", "sqlalchemy", "redis"], specifier = ">=4.36.0" },
+    { name = "makefun", specifier = ">=1.15.6" },
+    { name = "markdown-it-py", specifier = ">=4.2.0" },
+    { name = "plain-client", specifier = ">=0.0.3" },
+    { name = "posthog", specifier = ">=7.18.0" },
+    { name = "prometheus-client", specifier = ">=0.25.0" },
+    { name = "psycopg2-binary", specifier = ">=2.9.12" },
+    { name = "pycountry", specifier = ">=24.6.1" },
+    { name = "pydantic", specifier = ">=2.13.4" },
+    { name = "pydantic-ai-slim", extras = ["openai"], specifier = ">=1.106.0" },
+    { name = "pydantic-extra-types", specifier = ">=2.9.0" },
+    { name = "pydantic-settings", specifier = ">=2.14.1" },
+    { name = "pyjwt", specifier = ">=2.13.0" },
+    { name = "python-bidi", specifier = ">=0.6.10" },
+    { name = "python-dateutil", specifier = ">=2.9.0.post0" },
+    { name = "python-multipart", specifier = ">=0.0.32" },
+    { name = "python-slugify", specifier = ">=8.0.1" },
+    { name = "python-snappy", specifier = ">=0.7.3" },
+    { name = "python-stdnum", specifier = ">=2.1" },
+    { name = "reauth", specifier = "==0.1.8" },
+    { name = "redis", specifier = ">=5.0.4" },
+    { name = "safe-redirect-url", specifier = ">=0.1.1" },
+    { name = "sentry-sdk", extras = ["fastapi", "sqlalchemy"], specifier = ">=2.62.0" },
+    { name = "sqlalchemy", extras = ["asyncio"], specifier = ">=2.0.50" },
+    { name = "sqlalchemy-utils", specifier = ">=0.41.1" },
+    { name = "sse-starlette", specifier = ">=3.4.4" },
+    { name = "standardwebhooks", specifier = ">=1.0.0" },
+    { name = "stripe", specifier = ">=14,<15" },
+    { name = "structlog", specifier = ">=26.1.0" },
+    { name = "tagflow", specifier = ">=0.7.0" },
+    { name = "tarifia-sdk", directory = "../sdk/tarifia-sdk" },
+    { name = "taskipy", specifier = ">=1.10.3" },
+    { name = "trafilatura", specifier = ">=2.1.0" },
+    { name = "typer", specifier = ">=0.26.7" },
+    { name = "tzdata", specifier = ">=2026.2" },
+    { name = "uvicorn", extras = ["standard"], specifier = ">=0.49.0" },
+]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "boto3-stubs", extras = ["s3", "sqs", "lambda"], specifier = ">=1.43.26" },
+    { name = "coverage", specifier = ">=7.14.1" },
+    { name = "debugpy", specifier = ">=1.8.21" },
+    { name = "fakeredis", extras = ["lua"], specifier = ">=2.36.1" },
+    { name = "freezegun", specifier = ">=1.5.1" },
+    { name = "gepa", specifier = ">=0.1.0" },
+    { name = "locust", specifier = ">=2.44.1" },
+    { name = "minio", specifier = ">=7.2.9" },
+    { name = "mypy", specifier = ">=2.1.0" },
+    { name = "pydantic-evals", specifier = ">=1.103.0" },
+    { name = "pytest", specifier = "<10" },
+    { name = "pytest-asyncio", specifier = ">=1.4.0" },
+    { name = "pytest-cov", specifier = ">=5.0.0" },
+    { name = "pytest-mock", specifier = ">=3.10.0" },
+    { name = "pytest-recording", specifier = ">=0.13.1" },
+    { name = "pytest-subtests", specifier = ">=0.13.1" },
+    { name = "pytest-sugar", specifier = ">=1.0.0" },
+    { name = "pytest-xdist", extras = ["psutil"], specifier = ">=3.8.0" },
+    { name = "respx", specifier = ">=0.23.1" },
+    { name = "ruff", specifier = ">=0.15.16" },
+    { name = "sqlalchemy-utils", specifier = ">=0.41.2" },
+    { name = "typer", specifier = ">=0.26.7" },
+    { name = "types-python-slugify", specifier = ">=8.0.0.3" },
+    { name = "types-redis", specifier = ">=4.6.0.20240903" },
+    { name = "types-requests", specifier = ">=2.33.0.20260518" },
+]
+
+[[package]]
+name = "tarifia-sdk"
+version = "0.31.7"
+source = { directory = "../sdk/tarifia-sdk" }
+dependencies = [
+    { name = "httpx" },
+    { name = "pydantic" },
+    { name = "standardwebhooks" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "httpx", specifier = ">=0.28.1" },
+    { name = "pydantic", specifier = ">=2.13.4" },
+    { name = "standardwebhooks", specifier = ">=1.0.0" },
 ]
 
 [[package]]

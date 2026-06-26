@@ -42,6 +42,7 @@ from tarifia.worker import enqueue_job
 
 from .client import get_client
 from .exceptions import (
+    SupportBenefitError,
     TarifiaSelfCustomerNotFound,
     TarifiaSelfInvoiceNotReady,
     TarifiaSelfNoActiveSubscription,
@@ -51,7 +52,6 @@ from .exceptions import (
     TarifiaSelfOrderNotFound,
     TarifiaSelfPlanNotFound,
     TarifiaSelfWebhookError,
-    SupportBenefitError,
     TransactionFeeBenefitError,
 )
 from .schemas import (

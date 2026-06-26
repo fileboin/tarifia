@@ -7,10 +7,10 @@ from fastapi.responses import JSONResponse, RedirectResponse, Response
 
 from tarifia.config import settings
 from tarifia.exceptions import (
+    ResourceNotModified,
     TarifiaError,
     TarifiaRedirectionError,
     TarifiaRequestValidationError,
-    ResourceNotModified,
 )
 
 

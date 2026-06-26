@@ -2,6 +2,10 @@ import uuid
 
 import pytest
 
+from scripts.migrate_organizations_members import (
+    _backfill_downloadables,
+    _backfill_license_keys,
+)
 from tarifia.enums import SubscriptionRecurringInterval
 from tarifia.kit.db.postgres import AsyncSession
 from tarifia.kit.utils import utc_now
@@ -12,10 +16,6 @@ from tarifia.models.file import File, FileServiceTypes
 from tarifia.models.license_key import LicenseKey
 from tarifia.models.member import MemberRole
 from tarifia.models.subscription import SubscriptionStatus
-from scripts.migrate_organizations_members import (
-    _backfill_downloadables,
-    _backfill_license_keys,
-)
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_account,

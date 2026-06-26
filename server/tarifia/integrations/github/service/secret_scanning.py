@@ -10,7 +10,9 @@ from fastapi.exceptions import RequestValidationError
 from pydantic import BeforeValidator, TypeAdapter, ValidationError
 
 from tarifia.auth.service import auth as auth_service
-from tarifia.customer_session.service import customer_session as customer_session_service
+from tarifia.customer_session.service import (
+    customer_session as customer_session_service,
+)
 from tarifia.enums import TokenType
 from tarifia.exceptions import TarifiaError
 from tarifia.kit.schemas import Schema

@@ -6,9 +6,9 @@ import pytest
 from pytest_mock import MockerFixture
 from sqlalchemy.ext.asyncio import AsyncEngine
 
+from scripts.backfill_plain_tenants import run_backfill
 from tarifia.kit.db.postgres import AsyncSession, create_async_sessionmaker
 from tarifia.models import Organization, UserOrganization
-from scripts.backfill_plain_tenants import run_backfill
 
 
 @pytest.mark.asyncio

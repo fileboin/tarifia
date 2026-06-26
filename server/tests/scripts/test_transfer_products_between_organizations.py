@@ -3,15 +3,15 @@ from uuid import UUID
 import pytest
 from sqlalchemy import func, select
 
-from tarifia.kit.db.postgres import AsyncSession
-from tarifia.models import Account, Discount, Organization, ProductBenefit, User
-from tarifia.models.benefit import BenefitType
-from tarifia.models.discount import DiscountDuration, DiscountType
 from scripts.transfer_products_between_organizations import (
     MixedOrganizationError,
     ProductTransferService,
     TransferValidationError,
 )
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.models import Account, Discount, Organization, ProductBenefit, User
+from tarifia.models.benefit import BenefitType
+from tarifia.models.discount import DiscountDuration, DiscountType
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_account,

@@ -35,7 +35,9 @@ from tarifia.checkout.service import (
 from tarifia.checkout.service import checkout as checkout_service
 from tarifia.config import Environment
 from tarifia.customer_seat.service import SeatService
-from tarifia.customer_session.service import customer_session as customer_session_service
+from tarifia.customer_session.service import (
+    customer_session as customer_session_service,
+)
 from tarifia.discount.repository import DiscountRedemptionRepository
 from tarifia.discount.service import discount as discount_service
 from tarifia.enums import (
@@ -45,7 +47,11 @@ from tarifia.enums import (
     TaxProcessor,
 )
 from tarifia.event.system import SystemEvent
-from tarifia.exceptions import NotPermitted, PaymentNotReady, TarifiaRequestValidationError
+from tarifia.exceptions import (
+    NotPermitted,
+    PaymentNotReady,
+    TarifiaRequestValidationError,
+)
 from tarifia.integrations.stripe.service import StripeService
 from tarifia.kit.address import AddressInput
 from tarifia.kit.currency import PresentmentCurrency

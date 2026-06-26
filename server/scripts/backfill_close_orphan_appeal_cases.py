@@ -33,6 +33,7 @@ from rich.console import Console
 from rich.table import Table
 from sqlalchemy import Select, select
 
+from scripts.helper import configure_script_console_logging, typer_async
 from tarifia.kit.db.postgres import create_async_sessionmaker
 from tarifia.models import Organization
 from tarifia.models.organization_review import OrganizationReview
@@ -52,7 +53,6 @@ from tarifia.organization_review.schemas import (
 from tarifia.postgres import create_async_engine
 from tarifia.support_case.repository import SupportCaseMessageRepository
 from tarifia.support_case.service import support_case as support_case_service
-from scripts.helper import configure_script_console_logging, typer_async
 
 cli = typer.Typer()
 console = Console()

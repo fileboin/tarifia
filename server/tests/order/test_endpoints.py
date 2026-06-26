@@ -9,7 +9,14 @@ from pytest_mock import MockerFixture
 
 from tarifia.auth.models import AuthSubject
 from tarifia.auth.scope import Scope
-from tarifia.models import Customer, Order, Organization, Product, User, UserOrganization
+from tarifia.models import (
+    Customer,
+    Order,
+    Organization,
+    Product,
+    User,
+    UserOrganization,
+)
 from tarifia.models.order import OrderStatus
 from tarifia.order.service import PaymentFailed, PaymentFailedReason
 from tests.fixtures.auth import AuthSubjectFixture

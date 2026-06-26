@@ -33,10 +33,10 @@ from tarifia.integrations.github_repository_benefit.endpoints import (
     router as github_repository_benefit_router,
 )
 from tarifia.integrations.plain.endpoints import router as plain_router
-from tarifia.integrations.tarifia.endpoints import router as tarifia_self_router
 from tarifia.integrations.resend.endpoints import router as resend_router
 from tarifia.integrations.slack.endpoints import router as slack_router
 from tarifia.integrations.stripe.endpoints import router as stripe_router
+from tarifia.integrations.tarifia.endpoints import router as tarifia_self_router
 from tarifia.license_key.endpoints import router as license_key_router
 from tarifia.member.endpoints import router as member_router
 from tarifia.meter.endpoints import router as meter_router

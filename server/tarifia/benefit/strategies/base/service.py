@@ -1,7 +1,11 @@
 from typing import Any, Protocol, cast
 
 from tarifia.auth.models import AuthSubject
-from tarifia.exceptions import TarifiaError, TarifiaRequestValidationError, ValidationError
+from tarifia.exceptions import (
+    TarifiaError,
+    TarifiaRequestValidationError,
+    ValidationError,
+)
 from tarifia.models import Benefit, Customer, Member, Organization, User
 from tarifia.postgres import AsyncSession
 from tarifia.redis import Redis

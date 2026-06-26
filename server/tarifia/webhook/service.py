@@ -23,7 +23,11 @@ from tarifia.config import settings
 from tarifia.customer.schemas.state import CustomerState
 from tarifia.email.schemas import EmailAdapter
 from tarifia.email.sender import enqueue_email_template
-from tarifia.exceptions import TarifiaError, TarifiaRequestValidationError, ResourceNotFound
+from tarifia.exceptions import (
+    ResourceNotFound,
+    TarifiaError,
+    TarifiaRequestValidationError,
+)
 from tarifia.kit.crypto import generate_token
 from tarifia.kit.db.postgres import AsyncSession
 from tarifia.kit.pagination import PaginationParams

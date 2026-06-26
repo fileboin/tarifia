@@ -27160,17 +27160,6 @@ export interface components {
       | 'disputed'
       | 'charge_disputed'
       | 'cancelled'
-    /** TarifiaSelfPaymentMethodInUse */
-    TarifiaSelfPaymentMethodInUse: {
-      /**
-       * Error
-       * @example TarifiaSelfPaymentMethodInUse
-       * @constant
-       */
-      error: 'TarifiaSelfPaymentMethodInUse'
-      /** Detail */
-      detail: string
-    }
     /**
      * PortalAuthenticatedUser
      * @description Information about the authenticated portal user.
@@ -31584,6 +31573,17 @@ export interface components {
     TOTPStatus: {
       /** Enabled */
       enabled: boolean
+    }
+    /** TarifiaSelfPaymentMethodInUse */
+    TarifiaSelfPaymentMethodInUse: {
+      /**
+       * Error
+       * @example TarifiaSelfPaymentMethodInUse
+       * @constant
+       */
+      error: 'TarifiaSelfPaymentMethodInUse'
+      /** Detail */
+      detail: string
     }
     /**
      * TaxBehavior

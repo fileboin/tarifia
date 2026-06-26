@@ -52,6 +52,7 @@ from rich.table import Table
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import async_sessionmaker
 
+from scripts.helper import configure_script_console_logging, typer_async
 from tarifia import tasks  # noqa: F401  -- registers dramatiq actors
 from tarifia.kit.db.postgres import AsyncSession, create_async_sessionmaker
 from tarifia.models.organization import OrganizationStatus
@@ -60,7 +61,6 @@ from tarifia.postgres import create_async_engine
 from tarifia.redis import create_redis
 from tarifia.worker import enqueue_job, make_bulk_job_delay_calculator
 from tarifia.worker._enqueue import JobQueueManager
-from scripts.helper import configure_script_console_logging, typer_async
 
 cli = typer.Typer()
 console = Console()

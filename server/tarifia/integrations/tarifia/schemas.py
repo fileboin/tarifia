@@ -2,12 +2,12 @@ from datetime import datetime
 from typing import TYPE_CHECKING, Annotated, Any, Literal
 
 from dateutil.relativedelta import relativedelta
+from pydantic import AfterValidator, Discriminator, EmailStr, Field, Tag
 from tarifia_sdk.models import (
     LegacyRecurringProductPriceFixed,
     PaymentMethodCard,
     ProductPriceFixed,
 )
-from pydantic import AfterValidator, Discriminator, EmailStr, Field, Tag
 
 from tarifia.kit.address import AddressInput
 from tarifia.kit.http import get_safe_return_url

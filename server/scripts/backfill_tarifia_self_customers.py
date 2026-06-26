@@ -180,7 +180,9 @@ async def run_backfill(
             f"Tarifia self organization {settings.TARIFIA_ORGANIZATION_ID} not found"
         )
 
-    free_product = await session.get(Product, uuid.UUID(settings.TARIFIA_FREE_PRODUCT_ID))
+    free_product = await session.get(
+        Product, uuid.UUID(settings.TARIFIA_FREE_PRODUCT_ID)
+    )
     if free_product is None:
         raise RuntimeError(f"Free product {settings.TARIFIA_FREE_PRODUCT_ID} not found")
 

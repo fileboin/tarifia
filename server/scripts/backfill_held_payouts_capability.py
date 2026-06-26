@@ -35,16 +35,16 @@ from rich.table import Table
 from sqlalchemy import ColumnElement, Text, cast, func, select, update
 from sqlalchemy.dialects.postgresql import ARRAY
 
-from tarifia.kit.db.postgres import AsyncSession, create_async_sessionmaker
-from tarifia.models import Organization
-from tarifia.models.organization import OrganizationStatus
-from tarifia.postgres import create_async_engine
 from scripts.helper import (
     configure_script_console_logging,
     limit_bindparam,
     run_batched_update,
     typer_async,
 )
+from tarifia.kit.db.postgres import AsyncSession, create_async_sessionmaker
+from tarifia.models import Organization
+from tarifia.models.organization import OrganizationStatus
+from tarifia.postgres import create_async_engine
 
 cli = typer.Typer()
 console = Console()

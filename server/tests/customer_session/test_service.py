@@ -2,7 +2,9 @@ import pytest
 from sqlalchemy import select
 
 from tarifia.auth.models import AuthSubject
-from tarifia.customer_session.service import customer_session as customer_session_service
+from tarifia.customer_session.service import (
+    customer_session as customer_session_service,
+)
 from tarifia.models import Member, Organization, User, UserOrganization
 from tarifia.models.member import MemberRole
 from tarifia.postgres import AsyncSession

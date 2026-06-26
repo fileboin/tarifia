@@ -16,7 +16,9 @@ from tarifia.config import settings
 from tarifia.customer.repository import CustomerRepository
 from tarifia.customer.schemas.customer import CustomerUpdate
 from tarifia.customer.service import customer as customer_service
-from tarifia.customer_session.service import customer_session as customer_session_service
+from tarifia.customer_session.service import (
+    customer_session as customer_session_service,
+)
 from tarifia.exceptions import TarifiaRequestValidationError
 from tarifia.kit.pagination import PaginationParamsQuery
 from tarifia.member.repository import MemberRepository

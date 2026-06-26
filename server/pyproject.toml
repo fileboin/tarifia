@@ -191,4 +191,4 @@ exclude-newer-package = { reauth = false } # Reauth is brand new, but remember t
 
 [tool.uv.sources]
 dramatiq = { git = "https://github.com/frankie567/dramatiq", rev = "memory-leak-asyncio-ter" }
-tarifia-sdk = { url = "https://files.pythonhosted.org/packages/dc/e0/a88026b9432c7e2c0c096911ddc97cb06f483036a00a8afd5254efe1c16a/tarifia_sdk-0.31.7-py3-none-any.whl" }
+tarifia-sdk = { path = "../sdk/tarifia-sdk" }

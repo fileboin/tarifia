@@ -1,10 +1,10 @@
 import pytest
 from sqlalchemy import func, select, update
 
+from scripts.backfill_event_types import run_backfill
 from tarifia.kit.db.postgres import AsyncSession
 from tarifia.models import Event, EventType, Organization
 from tarifia.models.event import EventSource
-from scripts.backfill_event_types import run_backfill
 from tests.fixtures.database import SaveFixture
 
 

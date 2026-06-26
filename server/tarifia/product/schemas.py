@@ -48,7 +48,10 @@ from tarifia.kit.schemas import (
     StripValidator,
     TimestampedSchema,
 )
-from tarifia.kit.trial import TrialConfigurationInputMixin, TrialConfigurationOutputMixin
+from tarifia.kit.trial import (
+    TrialConfigurationInputMixin,
+    TrialConfigurationOutputMixin,
+)
 from tarifia.kit.visibility import Visibility
 from tarifia.meter.unit import MeterUnit
 from tarifia.models import Benefit as BenefitModel

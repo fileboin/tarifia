@@ -4,13 +4,13 @@ from functools import wraps
 import typer
 from sqlalchemy import or_, select, update
 
-from tarifia.config import settings
-from tarifia.models import Account
 from scripts.helper import (
     configure_script_logging,
     limit_bindparam,
     run_batched_update,
 )
+from tarifia.config import settings
+from tarifia.models import Account
 
 cli = typer.Typer()
 

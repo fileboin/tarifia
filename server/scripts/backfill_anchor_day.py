@@ -4,12 +4,12 @@ from functools import wraps
 import typer
 from sqlalchemy import func, select, update
 
-from tarifia.models import Subscription
 from scripts.helper import (
     configure_script_logging,
     limit_bindparam,
     run_batched_update,
 )
+from tarifia.models import Subscription
 
 cli = typer.Typer()
 

@@ -4,7 +4,9 @@ from tarifia.auth.models import AuthSubject
 from tarifia.customer_portal.service.order import (
     CustomerOrderSortProperty,
 )
-from tarifia.customer_portal.service.order import customer_order as customer_order_service
+from tarifia.customer_portal.service.order import (
+    customer_order as customer_order_service,
+)
 from tarifia.kit.db.postgres import AsyncSession
 from tarifia.kit.pagination import PaginationParams
 from tarifia.kit.sorting import Sorting

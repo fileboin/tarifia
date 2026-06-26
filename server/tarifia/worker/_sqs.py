@@ -131,7 +131,9 @@ def _send_jobs_sync(jobs: list[Job]) -> None:
                     "tarifia.worker.sqs_send_failed", queue=queue_name, failed=failed
                 )
                 raise SQSSendError(queue_name, list(failed))
-            log.debug("tarifia.worker.sqs_jobs_sent", queue=queue_name, count=len(batch))
+            log.debug(
+                "tarifia.worker.sqs_jobs_sent", queue=queue_name, count=len(batch)
+            )
 
 
 __all__ = [

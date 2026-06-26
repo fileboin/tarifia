@@ -5,13 +5,13 @@ import typer
 from rich.progress import Progress, SpinnerColumn, TextColumn, TimeElapsedColumn
 from sqlalchemy import select, update
 
-from tarifia.kit.db.postgres import create_async_sessionmaker
-from tarifia.models import Customer
-from tarifia.postgres import create_async_engine
 from scripts.helper import (
     configure_script_logging,
     typer_async,
 )
+from tarifia.kit.db.postgres import create_async_sessionmaker
+from tarifia.models import Customer
+from tarifia.postgres import create_async_engine
 
 cli = typer.Typer()
 

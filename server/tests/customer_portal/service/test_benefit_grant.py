@@ -8,7 +8,9 @@ from tarifia.benefit.strategies import BenefitActionRequiredError
 from tarifia.customer_portal.schemas.benefit_grant import (
     CustomerBenefitGrantSlackSharedChannelUpdate,
 )
-from tarifia.customer_portal.service.benefit_grant import CustomerBenefitGrantSortProperty
+from tarifia.customer_portal.service.benefit_grant import (
+    CustomerBenefitGrantSortProperty,
+)
 from tarifia.customer_portal.service.benefit_grant import (
     customer_benefit_grant as customer_benefit_grant_service,
 )

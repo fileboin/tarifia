@@ -139,7 +139,9 @@ def get_oauth_login_router(
         except (ExpiredStateException, InvalidStateException) as e:
             raise TarifiaAuthRedirectionError("OAuth2 session expired") from e
         except OAuth2CallbackException as e:
-            raise TarifiaAuthRedirectionError(e.message or "OAuth2 callback error") from e
+            raise TarifiaAuthRedirectionError(
+                e.message or "OAuth2 callback error"
+            ) from e
         except OAuth2TokenException as e:
             raise TarifiaAuthRedirectionError("OAuth2 error") from e
         except OAuth2GetProfileException as e:

@@ -73,11 +73,15 @@ class TestGetTarifiaVatLabel:
 class TestGetTarifiaAdditionalInfo:
     def test_mapped_country(self) -> None:
         info = get_tarifia_additional_info(_address("FR"))
-        assert info == "[support@tarifia.sh](mailto:support@tarifia.sh)\nVAT: EU372061545"
+        assert (
+            info == "[support@tarifia.sh](mailto:support@tarifia.sh)\nVAT: EU372061545"
+        )
 
     def test_uk(self) -> None:
         info = get_tarifia_additional_info(_address("GB"))
-        assert info == "[support@tarifia.sh](mailto:support@tarifia.sh)\nVAT: GB458254961"
+        assert (
+            info == "[support@tarifia.sh](mailto:support@tarifia.sh)\nVAT: GB458254961"
+        )
 
     def test_canada_uses_gst_hst_label(self) -> None:
         info = get_tarifia_additional_info(_address("CA"))
@@ -87,7 +91,9 @@ class TestGetTarifiaAdditionalInfo:
 
     def test_new_zealand_uses_gst_label(self) -> None:
         info = get_tarifia_additional_info(_address("NZ"))
-        assert info == ("[support@tarifia.sh](mailto:support@tarifia.sh)\nGST: 148-410-224")
+        assert info == (
+            "[support@tarifia.sh](mailto:support@tarifia.sh)\nGST: 148-410-224"
+        )
 
     def test_unmapped_country(self) -> None:
         info = get_tarifia_additional_info(_address("US"))

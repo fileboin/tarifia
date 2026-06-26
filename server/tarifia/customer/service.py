@@ -18,7 +18,9 @@ from tarifia.authz.service import (
 from tarifia.benefit.grant.repository import BenefitGrantRepository
 from tarifia.config import settings
 from tarifia.customer_meter.repository import CustomerMeterRepository
-from tarifia.customer_session.service import customer_session as customer_session_service
+from tarifia.customer_session.service import (
+    customer_session as customer_session_service,
+)
 from tarifia.exceptions import TarifiaRequestValidationError, ValidationError
 from tarifia.kit.address import Address
 from tarifia.kit.anonymization import (

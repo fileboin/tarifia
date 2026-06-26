@@ -34,7 +34,11 @@ from tarifia.customer.repository import CustomerRepository
 from tarifia.event.repository import EventRepository
 from tarifia.event.tinybird_repository import TinybirdEventRepository
 from tarifia.exceptions import TarifiaRequestValidationError, ValidationError
-from tarifia.kit.metadata import MetadataQuery, apply_metadata_clause, get_metadata_clause
+from tarifia.kit.metadata import (
+    MetadataQuery,
+    apply_metadata_clause,
+    get_metadata_clause,
+)
 from tarifia.kit.pagination import PaginationParams
 from tarifia.kit.sorting import Sorting
 from tarifia.kit.time_queries import TimeInterval, get_timestamp_series_cte

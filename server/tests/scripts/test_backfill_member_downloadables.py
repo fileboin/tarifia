@@ -1,6 +1,7 @@
 import pytest
 from sqlalchemy import select
 
+from scripts.backfill_member_downloadables import run_backfill
 from tarifia.models import (
     Benefit,
     Customer,
@@ -14,7 +15,6 @@ from tarifia.models.benefit import BenefitType
 from tarifia.models.downloadable import DownloadableStatus
 from tarifia.models.subscription import SubscriptionStatus
 from tarifia.postgres import AsyncSession
-from scripts.backfill_member_downloadables import run_backfill
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_benefit,

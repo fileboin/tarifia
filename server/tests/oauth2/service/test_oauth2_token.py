@@ -6,7 +6,13 @@ from pytest_mock import MockerFixture
 
 from tarifia.email.schemas import OAuth2LeakedTokenEmail
 from tarifia.enums import TokenType
-from tarifia.models import OAuth2Client, OAuth2Token, Organization, User, UserOrganization
+from tarifia.models import (
+    OAuth2Client,
+    OAuth2Token,
+    Organization,
+    User,
+    UserOrganization,
+)
 from tarifia.oauth2.service.oauth2_token import oauth2_token as oauth2_token_service
 from tarifia.postgres import AsyncSession
 from tests.fixtures.database import SaveFixture

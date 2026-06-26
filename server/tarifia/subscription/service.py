@@ -50,9 +50,9 @@ from tarifia.event.system import (
 )
 from tarifia.exceptions import (
     BadRequest,
+    ResourceUnavailable,
     TarifiaError,
     TarifiaRequestValidationError,
-    ResourceUnavailable,
     ValidationError,
 )
 from tarifia.kit.db.postgres import AsyncReadSession, AsyncSession

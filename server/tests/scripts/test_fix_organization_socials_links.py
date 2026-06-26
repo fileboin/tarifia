@@ -1,10 +1,10 @@
 import pytest
 from sqlalchemy import func, select, text
 
+from scripts.fix_organizations_socials_links import fix_links
 from tarifia.kit.db.postgres import AsyncSession
 from tarifia.models import Organization
 from tarifia.models.organization import OrganizationSocials
-from scripts.fix_organizations_socials_links import fix_links
 from tests.fixtures.database import SaveFixture
 
 

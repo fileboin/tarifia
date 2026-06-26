@@ -1,7 +1,13 @@
 from typing import Protocol
 from uuid import UUID
 
-from tarifia.auth.models import AuthSubject, Organization, User, is_organization, is_user
+from tarifia.auth.models import (
+    AuthSubject,
+    Organization,
+    User,
+    is_organization,
+    is_user,
+)
 from tarifia.auth.permission import PERMISSION_DENIED_MESSAGE, OrganizationPermission
 from tarifia.exceptions import NotPermitted
 from tarifia.models.organization import Organization as OrganizationModel

@@ -30,7 +30,9 @@ class DiscordBotService:
             if tags := role.get("tags"):
                 if tags.get("bot_id") == settings.DISCORD_CLIENT_ID:
                     roles.append(
-                        DiscordGuildRole.model_validate({**role, "is_tarifia_bot": True})
+                        DiscordGuildRole.model_validate(
+                            {**role, "is_tarifia_bot": True}
+                        )
                     )
 
         return DiscordGuild(name=guild["name"], roles=roles)

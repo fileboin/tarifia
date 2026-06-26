@@ -1,13 +1,13 @@
 import typer
 from sqlalchemy import func, select, update
 
-from tarifia.models.discount import DiscountFixed
 from scripts.helper import (
     configure_script_logging,
     limit_bindparam,
     run_batched_update,
     typer_async,
 )
+from tarifia.models.discount import DiscountFixed
 
 cli = typer.Typer()
 

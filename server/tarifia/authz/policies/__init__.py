@@ -1,4 +1,10 @@
-from tarifia.auth.models import AuthSubject, Organization, User, is_organization, is_user
+from tarifia.auth.models import (
+    AuthSubject,
+    Organization,
+    User,
+    is_organization,
+    is_user,
+)
 from tarifia.auth.permission import (
     PERMISSION_DENIED_MESSAGE,
     ROLE_PERMISSIONS,

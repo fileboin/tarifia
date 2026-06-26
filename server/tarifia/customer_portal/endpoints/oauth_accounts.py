@@ -14,7 +14,9 @@ from tarifia.benefit.grant.repository import BenefitGrantRepository
 from tarifia.benefit.strategies.base.service import BenefitActionRequiredError
 from tarifia.config import settings
 from tarifia.customer.repository import CustomerRepository
-from tarifia.customer_session.service import customer_session as customer_session_service
+from tarifia.customer_session.service import (
+    customer_session as customer_session_service,
+)
 from tarifia.exceptions import NotPermitted, TarifiaError, Unauthorized
 from tarifia.integrations.discord.oauth import user_client as discord_user_client
 from tarifia.kit import jwt

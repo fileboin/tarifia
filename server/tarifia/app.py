@@ -44,7 +44,10 @@ from tarifia.middlewares import (
     SandboxResponseHeaderMiddleware,
 )
 from tarifia.oauth2.endpoints.well_known import router as well_known_router
-from tarifia.oauth2.exception_handlers import OAuth2Error, oauth2_error_exception_handler
+from tarifia.oauth2.exception_handlers import (
+    OAuth2Error,
+    oauth2_error_exception_handler,
+)
 from tarifia.observability.http_middleware import HttpMetricsMiddleware
 from tarifia.observability.memory_profile import (
     start_memory_profiler,

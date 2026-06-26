@@ -28,8 +28,8 @@ from tarifia.event.repository import EventRepository
 from tarifia.event.system import SystemEvent
 from tarifia.exceptions import (
     BadRequest,
-    TarifiaRequestValidationError,
     ResourceUnavailable,
+    TarifiaRequestValidationError,
 )
 from tarifia.kit.currency import PresentmentCurrency
 from tarifia.kit.pagination import PaginationParams

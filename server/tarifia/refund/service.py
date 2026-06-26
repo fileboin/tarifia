@@ -15,7 +15,11 @@ from tarifia.dispute.repository import DisputeRepository
 from tarifia.enums import PaymentProcessor
 from tarifia.event.service import event as event_service
 from tarifia.event.system import OrderRefundedMetadata, SystemEvent, build_system_event
-from tarifia.exceptions import TarifiaError, TarifiaRequestValidationError, ResourceNotFound
+from tarifia.exceptions import (
+    ResourceNotFound,
+    TarifiaError,
+    TarifiaRequestValidationError,
+)
 from tarifia.integrations.stripe.service import stripe as stripe_service
 from tarifia.integrations.stripe.utils import get_expandable_id
 from tarifia.kit.db.postgres import AsyncSession
@@ -32,7 +36,12 @@ from tarifia.models import (
 )
 from tarifia.models.dispute import DisputeAlertProcessor
 from tarifia.models.order import RefundAmountTooHigh
-from tarifia.models.refund import Refund, RefundFailureReason, RefundReason, RefundStatus
+from tarifia.models.refund import (
+    Refund,
+    RefundFailureReason,
+    RefundReason,
+    RefundStatus,
+)
 from tarifia.models.webhook_endpoint import WebhookEventType
 from tarifia.order.repository import OrderRepository
 from tarifia.order.service import order as order_service

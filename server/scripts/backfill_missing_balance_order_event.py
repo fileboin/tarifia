@@ -5,6 +5,7 @@ import typer
 from sqlalchemy import select
 from sqlalchemy.orm import joinedload
 
+from scripts.helper import typer_async
 from tarifia.event.service import event as event_service
 from tarifia.event.system import (
     BalanceCreditOrderMetadata,
@@ -15,7 +16,6 @@ from tarifia.event.system import (
 from tarifia.kit.db.postgres import create_async_sessionmaker
 from tarifia.models import Event, Order, Transaction
 from tarifia.postgres import create_async_engine
-from scripts.helper import typer_async
 
 log = structlog.get_logger()
 cli = typer.Typer()

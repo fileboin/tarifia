@@ -21,7 +21,11 @@ from tarifia.customer.repository import CustomerRepository
 from tarifia.customer_meter.repository import CustomerMeterRepository
 from tarifia.event.tinybird_repository import TinybirdEventRepository
 from tarifia.event_type.repository import EventTypeRepository
-from tarifia.exceptions import TarifiaError, TarifiaRequestValidationError, ValidationError
+from tarifia.exceptions import (
+    TarifiaError,
+    TarifiaRequestValidationError,
+    ValidationError,
+)
 from tarifia.integrations.tinybird.service import (
     TinybirdTimeseriesStats,
     events_to_tinybird,

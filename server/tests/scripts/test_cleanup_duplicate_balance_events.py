@@ -3,13 +3,13 @@ from uuid import uuid4
 import pytest
 from sqlalchemy import func, select
 
-from tarifia.kit.db.postgres import AsyncSession
-from tarifia.models import Event, Organization
-from tarifia.models.event import EventSource
 from scripts.cleanup_duplicate_balance_events import (
     delete_stale_events,
     find_stale_events,
 )
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.models import Event, Organization
+from tarifia.models.event import EventSource
 from tests.fixtures.database import SaveFixture
 
 

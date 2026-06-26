@@ -8,7 +8,7 @@ from pydantic import UUID4
 from pydantic_extra_types.timezone_name import TimeZoneName
 
 from tarifia.customer.schemas.customer import CustomerID
-from tarifia.exceptions import TarifiaRequestValidationError, ResourceNotFound
+from tarifia.exceptions import ResourceNotFound, TarifiaRequestValidationError
 from tarifia.kit.csv import CSVStreamingResponse, IterableCSVWriter
 from tarifia.kit.schemas import MultipleQueryFilter
 from tarifia.kit.time_queries import (

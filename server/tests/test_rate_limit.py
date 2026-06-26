@@ -169,7 +169,9 @@ class TestAuthenticate:
     async def test_cookie_cache_miss_uses_cookie_hash_pending_auth(
         self, redis: Redis
     ) -> None:
-        header = f"{settings.USER_SESSION_COOKIE_KEY}=tarifia_us_unknown".encode("ascii")
+        header = f"{settings.USER_SESSION_COOKIE_KEY}=tarifia_us_unknown".encode(
+            "ascii"
+        )
         identity = await _authenticate(
             _http_scope(headers=[(b"cookie", header)], client=("9.9.9.9", 1234)),
             redis=redis,
@@ -187,7 +189,9 @@ class TestAuthenticate:
             redis, "tarifia_us_b", ("user:cookie", RateLimitGroup.web)
         )
 
-        cookie_header = f"{settings.USER_SESSION_COOKIE_KEY}=tarifia_us_b".encode("ascii")
+        cookie_header = f"{settings.USER_SESSION_COOKIE_KEY}=tarifia_us_b".encode(
+            "ascii"
+        )
         identity = await _authenticate(
             _http_scope(
                 headers=[

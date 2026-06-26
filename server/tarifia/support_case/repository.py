@@ -6,7 +6,13 @@ from sqlalchemy import ColumnElement, Select, func, select, text
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 from sqlalchemy.orm import joinedload
 
-from tarifia.auth.models import AuthSubject, Organization, User, is_organization, is_user
+from tarifia.auth.models import (
+    AuthSubject,
+    Organization,
+    User,
+    is_organization,
+    is_user,
+)
 from tarifia.auth.permission import OrganizationPermission
 from tarifia.authz.repository import select_accessible_org_ids
 from tarifia.kit.repository.base import (

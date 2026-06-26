@@ -10,8 +10,8 @@ from tarifia.config import settings
 from tarifia.eventstream.service import publish
 from tarifia.exceptions import (
     NotPermitted,
-    TarifiaRedirectionError,
     ResourceAlreadyExists,
+    TarifiaRedirectionError,
     Unauthorized,
 )
 from tarifia.integrations.github_repository_benefit.schemas import (

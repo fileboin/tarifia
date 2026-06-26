@@ -12,7 +12,9 @@ from tarifia.customer.repository import CustomerRepository
 from tarifia.customer_portal.repository.customer_session_code import (
     CustomerSessionCodeRepository,
 )
-from tarifia.customer_session.service import customer_session as customer_session_service
+from tarifia.customer_session.service import (
+    customer_session as customer_session_service,
+)
 from tarifia.email.schemas import CustomerSessionCodeEmail, CustomerSessionCodeProps
 from tarifia.email.sender import enqueue_email_template
 from tarifia.exceptions import TarifiaError

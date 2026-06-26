@@ -6,10 +6,6 @@ import pytest
 from pytest_mock import MockerFixture
 from sqlalchemy import select
 
-from tarifia.enums import SubscriptionRecurringInterval
-from tarifia.kit.db.postgres import AsyncSession
-from tarifia.models import Customer, Event, Order, Organization, Product, Subscription
-from tarifia.models.event import EventSource
 from scripts.cleanup_tarifia_self_free_subscriptions import (
     _delete_events,
     _delete_events_tinybird,
@@ -19,6 +15,10 @@ from scripts.cleanup_tarifia_self_free_subscriptions import (
     _list_free_subscription_ids,
     _list_zero_order_ids,
 )
+from tarifia.enums import SubscriptionRecurringInterval
+from tarifia.kit.db.postgres import AsyncSession
+from tarifia.models import Customer, Event, Order, Organization, Product, Subscription
+from tarifia.models.event import EventSource
 from tests.fixtures.database import SaveFixture
 from tests.fixtures.random_objects import (
     create_order,

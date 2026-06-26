@@ -12,7 +12,9 @@ from tarifia.customer_email_update.service import (
 from tarifia.customer_email_update.service import (
     customer_email_update as customer_email_update_service,
 )
-from tarifia.customer_session.service import customer_session as customer_session_service
+from tarifia.customer_session.service import (
+    customer_session as customer_session_service,
+)
 from tarifia.exceptions import NotPermitted
 from tarifia.openapi import APITag
 from tarifia.postgres import (
