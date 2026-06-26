@@ -189,6 +189,10 @@ def _get_currency_decimal_factor(currency: PresentmentCurrency | str) -> int:
         return 100
 
 
+def get_currency_decimal_factor(currency: PresentmentCurrency | str) -> int:
+    return _get_currency_decimal_factor(currency)
+
+
 def format_currency(
     amount: int | Decimal | float,
     currency: PresentmentCurrency | str,

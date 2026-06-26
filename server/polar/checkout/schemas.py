@@ -744,3 +744,11 @@ class CheckoutPublicConfirmed(CheckoutPublic):
 
     status: Literal[CheckoutStatus.confirmed]
     customer_session_token: str | None
+
+
+class CheckoutCryptoPaymentURL(Schema):
+    """Crypto payment URL for a checkout session."""
+
+    payment_url: HttpUrlToStr = Field(
+        description="Swiss Bitcoin Pay checkout URL where the customer can pay."
+    )
