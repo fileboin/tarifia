@@ -42,6 +42,7 @@ from .schemas import (
 )
 from .service import (
     AlreadyActiveSubscriptionError,
+    BTCPayInvoiceError,
     ExpiredCheckoutError,
     NotOpenCheckout,
     PaymentError,

@@ -1,0 +1,44 @@
+# Caddy reverse proxy for production VPS
+# Handles TLS automatically via Let's Encrypt.
+# Replace api.example.com and app.example.com with your actual domains.
+# Set DOMAIN_API and DOMAIN_WEB in .env.prod, then reference them here.
+
+{
+    email {$CADDY_ACME_EMAIL:admin@example.com}
+}
+
+# API backend
+{$DOMAIN_API:api.example.com} {
+    reverse_proxy api:10000 {
+        header_up X-Forwarded-Proto {scheme}
+        header_up X-Real-IP {remote_host}
+    }
+    encode zstd gzip
+    log {
+        output file /var/log/caddy/api-access.log {
+            roll_size 10mb
+            roll_keep 5
+        }
+    }
+}
+
+# Frontend
+{$DOMAIN_WEB:app.example.com} {
+    reverse_proxy web:3000 {
+        header_up X-Forwarded-Proto {scheme}
+        header_up X-Real-IP {remote_host}
+    }
+    encode zstd gzip
+    log {
+        output file /var/log/caddy/web-access.log {
+            roll_size 10mb
+            roll_keep 5
+        }
+    }
+}
+
+# MinIO public bucket (for file downloads/uploads)
+# Only expose this if you need direct browser access to MinIO
+# {$DOMAIN_S3:s3.example.com} {
+#     reverse_proxy minio:9000
+# }

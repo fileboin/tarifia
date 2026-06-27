@@ -8,7 +8,7 @@ from typing import Annotated, Literal
 from urllib.parse import urlparse
 
 from annotated_types import Ge
-from pydantic import AfterValidator, DirectoryPath, Field, PostgresDsn
+from pydantic import AfterValidator, Field, PostgresDsn
 from pydantic_ai.models import Model, infer_model, parse_model_id
 from pydantic_ai.providers.gateway import gateway_provider
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -158,7 +158,9 @@ class Settings(BaseSettings):
 
     # Checkout
     CHECKOUT_TTL_SECONDS: int = 60 * 60 * 24  # 24 hours
-    IP_GEOLOCATION_DATABASE_DIRECTORY_PATH: DirectoryPath = Path(__file__).parent.parent
+    # When running without the IPInfo database (Dockerfile.noimgdb or VPS without token),
+    # point this to any existing directory; geolocation simply returns None at runtime.
+    IP_GEOLOCATION_DATABASE_DIRECTORY_PATH: Path = Path(__file__).parent.parent
     IP_GEOLOCATION_DATABASE_NAME: str = "ip-geolocation.mmdb"
 
     # Database
@@ -347,6 +349,14 @@ class Settings(BaseSettings):
     MINIO_USER: str = "polar"
     MINIO_PWD: str = "polarpolar"
 
+    # BTCPay Server (no-KYC Bitcoin / Lightning / EVM token payments)
+    # Set DEFAULT_PAYMENT_PROCESSOR=btcpay to route all new checkouts through BTCPay.
+    DEFAULT_PAYMENT_PROCESSOR: str = "stripe"
+    BTCPAY_URL: str = ""
+    BTCPAY_STORE_ID: str = ""
+    BTCPAY_API_KEY: str = ""
+    BTCPAY_WEBHOOK_SECRET: str = ""
+
     # Chargeback Stop
     CHARGEBACK_STOP_WEBHOOK_SECRET: str = ""
 
@@ -533,6 +543,19 @@ class Settings(BaseSettings):
         env_file=env_file,
         extra="allow",
     )
+
+    @property
+    def default_payment_processor(self) -> "PaymentProcessor":
+        from polar.enums import PaymentProcessor
+
+        try:
+            return PaymentProcessor(self.DEFAULT_PAYMENT_PROCESSOR)
+        except ValueError:
+            valid = ", ".join(p.value for p in PaymentProcessor)
+            raise ValueError(
+                f"POLAR_DEFAULT_PAYMENT_PROCESSOR={self.DEFAULT_PAYMENT_PROCESSOR!r} is not valid. "
+                f"Choose one of: {valid}"
+            )
 
     @property
     def redis_url(self) -> str:

@@ -434,7 +434,17 @@ class CheckoutConfirmStripe(CheckoutConfirmBase):
     )
 
 
-CheckoutConfirm = CheckoutConfirmStripe
+class CheckoutConfirmBTCPay(CheckoutConfirmBase):
+    """
+    Confirm a checkout session routed through BTCPay Server.
+
+    No payment token is required — the response will contain a
+    ``btcpay_invoice_url`` in ``payment_processor_metadata`` that the
+    frontend should redirect the customer to.
+    """
+
+
+CheckoutConfirm = CheckoutConfirmStripe | CheckoutConfirmBTCPay
 
 
 class CheckoutOpened(Schema):

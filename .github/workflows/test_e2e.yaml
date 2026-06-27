@@ -65,14 +65,6 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: pnpm exec playwright install-deps chromium
 
-      - name: Connect to Tailscale
-        if: inputs.preview_url
-        uses: tailscale/github-action@v4
-        with:
-          oauth-client-id: ${{ secrets.POLAR_TAILSCALE_OAUTH_CLIENT_ID }}
-          oauth-secret: ${{ secrets.POLAR_TAILSCALE_OAUTH_SECRET }}
-          tags: ${{ vars.POLAR_PREVIEW_TAILSCALE_TAGS || 'tag:ci' }}
-
       - name: Run E2E tests
         id: e2e
         continue-on-error: true

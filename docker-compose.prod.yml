@@ -1,0 +1,275 @@
+###############################################################################
+# Polar – Production VPS docker-compose
+#
+# Usage:
+#   cp server/.env.prod.example .env.prod
+#   # fill in all values in .env.prod
+#   docker compose -f docker-compose.prod.yml --env-file .env.prod up -d
+#
+# Services:
+#   db       – PostgreSQL 15
+#   redis    – Redis (job queue + cache)
+#   minio    – S3-compatible file storage
+#   api      – FastAPI backend (port 8000)
+#   worker   – Dramatiq background worker
+#   web      – Next.js frontend (port 3000)
+#
+# Reverse proxy (Caddy) is included and listens on :80/:443.
+# Set DOMAIN_API and DOMAIN_WEB in .env.prod.
+#
+# To rebuild images:
+#   docker compose -f docker-compose.prod.yml --env-file .env.prod build
+###############################################################################
+
+x-restart: &restart
+  restart: unless-stopped
+
+x-logging: &logging
+  logging:
+    driver: json-file
+    options:
+      max-size: "20m"
+      max-file: "5"
+
+services:
+
+  # ---------------------------------------------------------------------------
+  # Infrastructure
+  # ---------------------------------------------------------------------------
+
+  db:
+    <<: [*restart, *logging]
+    image: postgres:15.1-bullseye
+    command: ["postgres", "-c", "max_locks_per_transaction=256", "-c", "shared_buffers=256MB", "-c", "work_mem=16MB"]
+    environment:
+      POSTGRES_USER: ${POLAR_POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POLAR_POSTGRES_PWD}
+      POSTGRES_DB: ${POLAR_POSTGRES_DATABASE}
+      POLAR_READ_USER: ${POLAR_POSTGRES_READ_USER:-polar_read}
+      POLAR_READ_PASSWORD: ${POLAR_POSTGRES_READ_PWD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+      - ./server/init-readonly-user.sql:/docker-entrypoint-initdb.d/10-readonly-user.sql:ro
+    expose:
+      - "5432"
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "${POLAR_POSTGRES_DATABASE}", "-U", "${POLAR_POSTGRES_USER}"]
+      interval: 5s
+      timeout: 10s
+      retries: 20
+      start_period: 30s
+
+  redis:
+    <<: [*restart, *logging]
+    image: redis:7.4-alpine
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory", "256mb", "--maxmemory-policy", "allkeys-lru"]
+    volumes:
+      - redis_data:/data
+    expose:
+      - "6379"
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  minio:
+    <<: [*restart, *logging]
+    image: minio/minio:RELEASE.2024-05-28T17-19-39Z
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${POLAR_MINIO_USER}
+      MINIO_ROOT_PASSWORD: ${POLAR_MINIO_PWD}
+    volumes:
+      - minio_data:/data
+    expose:
+      - "9000"
+      - "9001"
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 15s
+
+  minio-setup:
+    image: minio/mc:RELEASE.2024-05-24T09-08-49Z
+    depends_on:
+      minio:
+        condition: service_healthy
+    environment:
+      MINIO_HOST: minio
+      MINIO_ROOT_USER: ${POLAR_MINIO_USER}
+      MINIO_ROOT_PASSWORD: ${POLAR_MINIO_PWD}
+      BUCKET_NAME: ${POLAR_S3_FILES_BUCKET_NAME}
+      PUBLIC_BUCKET_NAME: ${POLAR_S3_FILES_PUBLIC_BUCKET_NAME}
+      BUCKET_TESTING_NAME: testing-${POLAR_S3_FILES_BUCKET_NAME}
+      POLICY_FILE: /tmp/config/policy.json
+      ACCESS_KEY: ${POLAR_AWS_ACCESS_KEY_ID}
+      SECRET_ACCESS_KEY: ${POLAR_AWS_SECRET_ACCESS_KEY}
+    volumes:
+      - ./server/.minio:/tmp/config:ro
+    networks:
+      - internal
+    entrypoint: ["bash", "-c", "bash /tmp/config/local.sh /tmp/config/configure.sh"]
+    restart: on-failure
+
+  # ---------------------------------------------------------------------------
+  # Application
+  # ---------------------------------------------------------------------------
+
+  api:
+    <<: [*restart, *logging]
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+      # IPInfo geolocation database (optional — checkout country pre-fill only).
+      # Get a free token at https://ipinfo.io/signup  then pass it as a build secret:
+      #   DOCKER_BUILDKIT=1 docker compose -f docker-compose.prod.yml build \
+      #     --secret id=IPINFO_ACCESS_TOKEN,env=IPINFO_ACCESS_TOKEN api
+      # If IPINFO_ACCESS_TOKEN is not provided the build will fail at Stage 3.
+      # Use Dockerfile.noimgdb instead to skip IP geolocation entirely:
+      #   dockerfile: Dockerfile.noimgdb
+      args:
+        - RELEASE_VERSION=${RELEASE_VERSION:-local}
+    image: tarifia/api:${RELEASE_VERSION:-latest}
+    env_file: .env.prod
+    environment:
+      POLAR_ENV: production
+      POLAR_POSTGRES_HOST: db
+      POLAR_POSTGRES_PORT: "5432"
+      POLAR_REDIS_HOST: redis
+      POLAR_REDIS_PORT: "6379"
+      POLAR_S3_ENDPOINT_URL: http://minio:9000
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    expose:
+      - "10000"
+    ports:
+      - "127.0.0.1:8000:10000"
+    networks:
+      - internal
+      - web
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:10000/v1/"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    command: >
+      uv run uvicorn polar.app:app
+        --host 0.0.0.0 --port 10000
+        --workers ${API_WORKERS:-2}
+        --limit-max-requests 50000
+        --limit-max-requests-jitter 10000
+        --timeout-graceful-shutdown 30
+
+  worker:
+    <<: [*restart, *logging]
+    image: tarifia/api:${RELEASE_VERSION:-latest}
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+      args:
+        - RELEASE_VERSION=${RELEASE_VERSION:-local}
+    env_file: .env.prod
+    environment:
+      POLAR_ENV: production
+      POLAR_POSTGRES_HOST: db
+      POLAR_POSTGRES_PORT: "5432"
+      POLAR_REDIS_HOST: redis
+      POLAR_REDIS_PORT: "6379"
+      POLAR_S3_ENDPOINT_URL: http://minio:9000
+    depends_on:
+      api:
+        condition: service_healthy
+    networks:
+      - internal
+    command: >
+      uv run dramatiq polar.worker:broker
+        --processes ${WORKER_PROCESSES:-2}
+        --threads ${WORKER_THREADS:-2}
+        -Q default high low
+
+  web:
+    <<: [*restart, *logging]
+    build:
+      context: .
+      dockerfile: Dockerfile.web.prod
+      args:
+        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+        - NEXT_PUBLIC_FRONTEND_BASE_URL=${NEXT_PUBLIC_FRONTEND_BASE_URL}
+        - NEXT_PUBLIC_BACKOFFICE_URL=${NEXT_PUBLIC_BACKOFFICE_URL}
+        - NEXT_PUBLIC_STRIPE_KEY=${NEXT_PUBLIC_STRIPE_KEY:-__UNSET__}
+        - NEXT_PUBLIC_GITHUB_APP_NAMESPACE=${NEXT_PUBLIC_GITHUB_APP_NAMESPACE:-__UNSET__}
+        - S3_PUBLIC_IMAGES_BUCKET_PROTOCOL=${S3_PUBLIC_IMAGES_BUCKET_PROTOCOL:-https}
+        - S3_PUBLIC_IMAGES_BUCKET_HOSTNAME=${S3_PUBLIC_IMAGES_BUCKET_HOSTNAME}
+        - S3_PUBLIC_IMAGES_BUCKET_PORT=${S3_PUBLIC_IMAGES_BUCKET_PORT:-}
+        - S3_PUBLIC_IMAGES_BUCKET_PATHNAME=${S3_PUBLIC_IMAGES_BUCKET_PATHNAME:-**}
+        - S3_UPLOAD_ORIGINS=${S3_UPLOAD_ORIGINS}
+    image: tarifia/web:${RELEASE_VERSION:-latest}
+    environment:
+      POLAR_API_URL: http://api:10000
+      NODE_ENV: production
+    expose:
+      - "3000"
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      api:
+        condition: service_healthy
+    networks:
+      - internal
+      - web
+
+  # ---------------------------------------------------------------------------
+  # Reverse Proxy (Caddy – auto HTTPS via Let's Encrypt)
+  # ---------------------------------------------------------------------------
+
+  caddy:
+    <<: [*restart, *logging]
+    image: caddy:2-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile.prod:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - web
+    depends_on:
+      - api
+      - web
+
+# ---------------------------------------------------------------------------
+# Networks
+# ---------------------------------------------------------------------------
+
+networks:
+  internal:
+    internal: true
+  web:
+
+# ---------------------------------------------------------------------------
+# Volumes
+# ---------------------------------------------------------------------------
+
+volumes:
+  postgres_data:
+  redis_data:
+  minio_data:
+  caddy_data:
+  caddy_config:

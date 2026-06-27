@@ -18,6 +18,7 @@ from polar.authz.service import assert_resource_permission, get_accessible_org_i
 from polar.checkout.guard import has_product_checkout
 from polar.checkout.schemas import (
     CheckoutConfirm,
+    CheckoutConfirmBTCPay,
     CheckoutConfirmStripe,
     CheckoutCreate,
     CheckoutPriceCreate,
@@ -49,6 +50,8 @@ from polar.exceptions import (
     ResourceNotFound,
     ValidationError,
 )
+from polar.integrations.btcpay.service import BTCPayServiceError
+from polar.integrations.btcpay.service import btcpay as btcpay_service
 from polar.integrations.stripe.service import stripe as stripe_service
 from polar.integrations.stripe.utils import get_fingerprint
 from polar.kit.address import AddressInput
@@ -168,6 +171,13 @@ class PaymentError(CheckoutError):
             "Please try again with a different payment method."
         )
         super().__init__(message, 400)
+
+
+class BTCPayInvoiceError(CheckoutError):
+    def __init__(self, checkout: Checkout, detail: str) -> None:
+        self.checkout = checkout
+        message = f"Failed to create BTCPay invoice: {detail}"
+        super().__init__(message, 502)
 
 
 class CheckoutDoesNotExist(CheckoutError):
@@ -545,7 +555,7 @@ class CheckoutService:
             require_billing_address = True
 
         checkout = Checkout(
-            payment_processor=PaymentProcessor.stripe,
+            payment_processor=settings.default_payment_processor,
             client_secret=generate_token(prefix=CHECKOUT_CLIENT_SECRET_PREFIX),
             amount=amount,
             currency=currency,
@@ -977,6 +987,27 @@ class CheckoutService:
             session, auth_subject, checkout, checkout_confirm
         )
 
+    async def _confirm_btcpay(
+        self,
+        session: AsyncSession,
+        auth_subject: AuthSubject[User | Anonymous],
+        checkout: Checkout,
+    ) -> None:
+        """
+        Create a BTCPay invoice for *checkout* and store its URL in
+        ``payment_processor_metadata``.  The frontend should redirect the
+        customer to that URL after receiving the confirmed checkout response.
+        """
+        async with self._create_or_update_customer(
+            session, auth_subject, checkout
+        ) as (customer, _):
+            checkout.customer = customer
+
+        try:
+            await btcpay_service.create_invoice_for_checkout(session, checkout)
+        except BTCPayServiceError as e:
+            raise BTCPayInvoiceError(checkout, str(e)) from e
+
     async def _confirm_inner(
         self,
         session: AsyncSession,
@@ -1218,10 +1249,14 @@ class CheckoutService:
                                     intent.id, metadata=trial_intent_metadata
                                 )
                         raise TrialAlreadyRedeemed(checkout)
+        elif checkout.payment_processor == PaymentProcessor.btcpay:
+            await self._confirm_btcpay(session, auth_subject, checkout)
         else:
-            raise NotImplementedError()
+            raise NotImplementedError(
+                f"Payment processor {checkout.payment_processor} is not supported."
+            )
 
-        if not checkout.is_payment_form_required:
+        if not checkout.is_payment_form_required and checkout.payment_processor != PaymentProcessor.btcpay:
             enqueue_job("checkout.handle_free_success", checkout_id=checkout.id)
 
         checkout.status = CheckoutStatus.confirmed

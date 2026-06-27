@@ -12,6 +12,7 @@ class Platforms(StrEnum):
 
 class PaymentProcessor(StrEnum):
     stripe = "stripe"
+    btcpay = "btcpay"
 
 
 class TaxProcessor(StrEnum):
