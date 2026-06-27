@@ -70,6 +70,26 @@ class CheckoutRepository(
 
         return await self.get_one_or_none(statement)
 
+    async def get_by_btcpay_invoice_id(
+        self,
+        invoice_id: str,
+        *,
+        options: Options = (),
+    ) -> Checkout | None:
+        """Find a checkout by its BTCPay invoice id stored in payment_processor_metadata."""
+        from sqlalchemy import cast
+        from sqlalchemy.dialects.postgresql import JSONB
+
+        statement = (
+            self.get_base_statement()
+            .where(
+                Checkout.payment_processor_metadata["btcpay_invoice_id"].astext
+                == invoice_id
+            )
+            .options(*options)
+        )
+        return await self.get_one_or_none(statement)
+
     async def expire_open_checkouts(self) -> list[UUID]:
         statement = (
             update(Checkout)

@@ -197,6 +197,11 @@ class Payment(RecordModel):
     @property
     def is_non_recoverable(self) -> bool:
         """Check if the payment's decline reason indicates a non-recoverable failure."""
+        # Crypto / BTCPay: if an invoice expired or was marked invalid, there is
+        # nothing to retry automatically — the customer must start a new checkout.
+        if self.processor == PaymentProcessor.btcpay:
+            return self.status == PaymentStatus.failed
+
         if self.processor != PaymentProcessor.stripe:
             return True
         if self.status != PaymentStatus.failed:

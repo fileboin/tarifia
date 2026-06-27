@@ -347,6 +347,14 @@ class Settings(BaseSettings):
     MINIO_USER: str = "polar"
     MINIO_PWD: str = "polarpolar"
 
+    # BTCPay Server (no-KYC Bitcoin / Lightning / EVM token payments)
+    # Set DEFAULT_PAYMENT_PROCESSOR=btcpay to route all new checkouts through BTCPay.
+    DEFAULT_PAYMENT_PROCESSOR: str = "stripe"
+    BTCPAY_URL: str = ""
+    BTCPAY_STORE_ID: str = ""
+    BTCPAY_API_KEY: str = ""
+    BTCPAY_WEBHOOK_SECRET: str = ""
+
     # Chargeback Stop
     CHARGEBACK_STOP_WEBHOOK_SECRET: str = ""
 
@@ -533,6 +541,19 @@ class Settings(BaseSettings):
         env_file=env_file,
         extra="allow",
     )
+
+    @property
+    def default_payment_processor(self) -> "PaymentProcessor":
+        from polar.enums import PaymentProcessor
+
+        try:
+            return PaymentProcessor(self.DEFAULT_PAYMENT_PROCESSOR)
+        except ValueError:
+            valid = ", ".join(p.value for p in PaymentProcessor)
+            raise ValueError(
+                f"POLAR_DEFAULT_PAYMENT_PROCESSOR={self.DEFAULT_PAYMENT_PROCESSOR!r} is not valid. "
+                f"Choose one of: {valid}"
+            )
 
     @property
     def redis_url(self) -> str:
