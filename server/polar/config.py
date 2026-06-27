@@ -8,7 +8,7 @@ from typing import Annotated, Literal
 from urllib.parse import urlparse
 
 from annotated_types import Ge
-from pydantic import AfterValidator, DirectoryPath, Field, PostgresDsn
+from pydantic import AfterValidator, Field, PostgresDsn
 from pydantic_ai.models import Model, infer_model, parse_model_id
 from pydantic_ai.providers.gateway import gateway_provider
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -158,7 +158,9 @@ class Settings(BaseSettings):
 
     # Checkout
     CHECKOUT_TTL_SECONDS: int = 60 * 60 * 24  # 24 hours
-    IP_GEOLOCATION_DATABASE_DIRECTORY_PATH: DirectoryPath = Path(__file__).parent.parent
+    # When running without the IPInfo database (Dockerfile.noimgdb or VPS without token),
+    # point this to any existing directory; geolocation simply returns None at runtime.
+    IP_GEOLOCATION_DATABASE_DIRECTORY_PATH: Path = Path(__file__).parent.parent
     IP_GEOLOCATION_DATABASE_NAME: str = "ip-geolocation.mmdb"
 
     # Database
