@@ -1,10 +1,9 @@
 name: Preview Environments
 
+# Automatic PR triggers are disabled — this project uses a self-hosted VPS
+# and has no Render/Vercel/Tailscale preview infrastructure.
+# Keep workflow_dispatch for manual use if preview infra is added later.
 on:
-  pull_request:
-    types: [opened, reopened, synchronize]
-  pull_request_target:
-    types: [closed]
   workflow_dispatch:
     inputs:
       action:
