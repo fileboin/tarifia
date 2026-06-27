@@ -1,10 +1,12 @@
 import uuid
 from datetime import timedelta
+from decimal import Decimal
 from types import SimpleNamespace
 from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 import pytest_asyncio
+from fastapi import FastAPI
 from httpx import AsyncClient
 from pytest_mock import MockerFixture
 
@@ -15,6 +17,10 @@ from polar.checkout.schemas import CheckoutProductCreate
 from polar.checkout.service import checkout as checkout_service
 from polar.enums import SubscriptionRecurringInterval, TaxBehavior, TaxProcessor
 from polar.integrations.stripe.service import StripeService
+from polar.integrations.swissbitcoinpay.client import (
+    SwissBitcoinPayInvoice,
+    get_swissbitcoinpay_client,
+)
 from polar.kit.utils import utc_now
 from polar.kit.visibility import Visibility
 from polar.models import (
@@ -880,6 +886,80 @@ class TestClientUpdate:
         json = response.json()
         assert json["discount"] is not None
         assert json["discount"]["code"] == "TESTDISCOUNT50"
+
+
+@pytest.mark.asyncio
+class TestClientCreateCryptoPaymentURL:
+    async def test_valid(
+        self,
+        api_prefix: str,
+        app: FastAPI,
+        session: AsyncSession,
+        client: AsyncClient,
+        checkout_open: Checkout,
+    ) -> None:
+        swissbitcoinpay_client = MagicMock()
+        swissbitcoinpay_client.create_invoice = AsyncMock(
+            return_value=SwissBitcoinPayInvoice(
+                id="SBP_INVOICE_ID",
+                checkout_url="https://pay.swiss-bitcoin-pay.ch/SBP_INVOICE_ID",
+            )
+        )
+        app.dependency_overrides[get_swissbitcoinpay_client] = lambda: (
+            swissbitcoinpay_client
+        )
+        expected_amount = Decimal(checkout_open.total_amount) / Decimal(100)
+        expected_title = checkout_open.organization.name
+        expected_description = checkout_open.description
+        expected_unit = checkout_open.currency
+        expected_redirect_after_paid = checkout_open.success_url
+        checkout_id = checkout_open.id
+        expected_checkout_id = str(checkout_id)
+
+        try:
+            response = await client.post(
+                f"{api_prefix}/client/{checkout_open.client_secret}/crypto-payment-url"
+            )
+        finally:
+            app.dependency_overrides.pop(get_swissbitcoinpay_client, None)
+
+        assert response.status_code == 200
+        assert response.json() == {
+            "payment_url": "https://pay.swiss-bitcoin-pay.ch/SBP_INVOICE_ID"
+        }
+        swissbitcoinpay_client.create_invoice.assert_awaited_once_with(
+            amount=expected_amount,
+            title=expected_title,
+            description=expected_description,
+            unit=expected_unit,
+            redirect_after_paid=expected_redirect_after_paid,
+            extra={"checkout_id": expected_checkout_id},
+        )
+
+        repository = CheckoutRepository.from_session(session)
+        checkout = await repository.get_by_id(checkout_id)
+        assert checkout is not None
+        assert (
+            checkout.payment_processor_metadata["swissbitcoinpay_invoice_id"]
+            == "SBP_INVOICE_ID"
+        )
+
+    async def test_free_checkout(
+        self,
+        api_prefix: str,
+        client: AsyncClient,
+        save_fixture: SaveFixture,
+        product_one_time_free_price: Product,
+    ) -> None:
+        checkout = await create_checkout(
+            save_fixture, products=[product_one_time_free_price]
+        )
+
+        response = await client.post(
+            f"{api_prefix}/client/{checkout.client_secret}/crypto-payment-url"
+        )
+
+        assert response.status_code == 403
 
 
 @pytest.mark.asyncio

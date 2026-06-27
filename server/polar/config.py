@@ -256,6 +256,10 @@ class Settings(BaseSettings):
     STRIPE_CONNECT_WEBHOOK_SECRET: str = ""
     STRIPE_STATEMENT_DESCRIPTOR: str = "POLAR"
 
+    # Swiss Bitcoin Pay
+    SWISS_BITCOIN_PAY_API_KEY: str | None = None
+    SWISS_BITCOIN_PAY_API_URL: str = "https://api.swiss-bitcoin-pay.ch"
+
     # Numeral
     NUMERAL_API_KEY: str | None = None
 

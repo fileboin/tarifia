@@ -10,6 +10,12 @@ from polar.customer.schemas.customer import CustomerID, ExternalCustomerID
 from polar.eventstream.endpoints import subscribe
 from polar.eventstream.service import Receivers
 from polar.exceptions import PaymentNotReady, ResourceNotFound
+from polar.integrations.swissbitcoinpay.client import (
+    SwissBitcoinPayAPIError,
+    SwissBitcoinPayClient,
+    SwissBitcoinPayConfigurationError,
+    get_swissbitcoinpay_client,
+)
 from polar.kit.pagination import ListResource, PaginationParamsQuery
 from polar.kit.schemas import (
     MultipleQueryFilter,
@@ -30,10 +36,13 @@ from polar.redis import Redis, get_redis
 from polar.routing import APIRouter
 
 from . import auth, ip_geolocation, sorting
+from .crypto import CryptoPaymentNotSupported
+from .crypto import checkout_crypto as checkout_crypto_service
 from .schemas import Checkout as CheckoutSchema
 from .schemas import (
     CheckoutConfirm,
     CheckoutCreate,
+    CheckoutCryptoPaymentURL,
     CheckoutOpened,
     CheckoutPublic,
     CheckoutPublicConfirmed,
@@ -67,6 +76,15 @@ CheckoutExpired = {
 CheckoutPaymentError = {
     "description": "The payment failed.",
     "model": PaymentError.schema(),
+}
+CheckoutCryptoPaymentError = {
+    "description": "The crypto payment URL could not be created.",
+    "model": Annotated[
+        CryptoPaymentNotSupported.schema()
+        | SwissBitcoinPayConfigurationError.schema()
+        | SwissBitcoinPayAPIError.schema(),
+        SetSchemaReference("CheckoutCryptoPaymentError"),
+    ],
 }
 CheckoutForbiddenError = {
     "description": "The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.",
@@ -273,6 +291,34 @@ async def client_confirm(
 
     return await checkout_service.confirm(
         session, auth_subject, checkout, checkout_confirm
+    )
+
+
+@inner_router.post(
+    "/client/{client_secret}/crypto-payment-url",
+    response_model=CheckoutCryptoPaymentURL,
+    summary="Create Crypto Payment URL from Client",
+    responses={
+        200: {"description": "Crypto payment URL created."},
+        403: CheckoutCryptoPaymentError,
+        404: CheckoutNotFound,
+        410: CheckoutExpired,
+        502: CheckoutCryptoPaymentError,
+        503: CheckoutCryptoPaymentError,
+    },
+)
+async def client_create_crypto_payment_url(
+    client_secret: CheckoutClientSecret,
+    session: AsyncSession = Depends(get_db_session),
+    swissbitcoinpay_client: SwissBitcoinPayClient = Depends(get_swissbitcoinpay_client),
+) -> CheckoutCryptoPaymentURL:
+    """Create a Swiss Bitcoin Pay payment URL by client secret."""
+    checkout = await checkout_service.get_by_client_secret(
+        session, client_secret, for_update=True
+    )
+
+    return await checkout_crypto_service.create_payment_url(
+        checkout, swissbitcoinpay_client
     )
 
 
